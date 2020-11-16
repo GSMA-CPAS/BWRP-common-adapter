@@ -13,6 +13,7 @@ index.js
 package.json
 README.md
 config.js
+logger.js
 Dockerfile
 .eslintrc.json
 
