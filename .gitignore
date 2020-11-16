@@ -116,3 +116,9 @@ dist
 
 #Visual Studio files
 .vs/
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
