@@ -175,4 +175,4 @@ class BlockchainAdapterProvider {
     }
 }
 
-module.exports = BlockchainAdapter;
+module.exports = BlockchainAdapterProvider;

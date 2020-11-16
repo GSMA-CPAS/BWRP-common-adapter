@@ -1,5 +1,8 @@
 /* eslint-disable no-unused-vars */
 const Service = require('./Service');
+const BlockchainAdapterProvider = require('../providers/BlockchainAdapterProvider')
+const blockchainAdapterConnection = new BlockchainAdapterProvider();
+
 
 
 /** Show details for a specific MSP
@@ -28,10 +31,8 @@ const getDiscoveryMSP = ({mspid}) => new Promise(
 const getDiscoveryMSPs = () => new Promise(
     async (resolve, reject) => {
         try {
-            resolve(Service.successResponse({
-                contractID,
-                body,
-            }));
+            const getDiscoveryMSPsResponse = await blockchainAdapterConnection.discovery()
+            resolve(Service.successResponse(getDiscoveryMSPsResponse));
         } catch (e) {
             reject(Service.rejectResponse(
                 e.message || 'Invalid input',
