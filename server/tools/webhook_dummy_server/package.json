@@ -1,0 +1,27 @@
+{
+  "name": "dummy-server",
+  "version": "1.0.0",
+  "description": "a dummy webhook server for debugging purposes",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "lint": "eslint ."
+  },
+  "license": "Unlicense",
+  "private": true,
+  "dependencies": {
+    "body": "^5.1.0"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.2.0",
+    "@typescript-eslint/parser": "^4.2.0",
+    "eslint": "^7.9.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-import": "^2.17.2"
+  },
+  "eslintConfig": {
+    "env": {
+      "node": true
+    }
+  }
+}
