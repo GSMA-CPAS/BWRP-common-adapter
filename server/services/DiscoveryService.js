@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 const Service = require('./Service');
-const BlockchainAdapterProvider = require('../providers/BlockchainAdapterProvider')
+const BlockchainAdapterProvider = require('../providers/BlockchainAdapterProvider');
 const blockchainAdapterConnection = new BlockchainAdapterProvider();
 
 
@@ -31,7 +31,7 @@ const getDiscoveryMSP = ({mspid}) => new Promise(
 const getDiscoveryMSPs = () => new Promise(
     async (resolve, reject) => {
         try {
-            const getDiscoveryMSPsResponse = await blockchainAdapterConnection.discovery()
+            const getDiscoveryMSPsResponse = await blockchainAdapterConnection.discovery();
             resolve(Service.successResponse(getDiscoveryMSPsResponse));
         } catch (e) {
             reject(Service.rejectResponse(
