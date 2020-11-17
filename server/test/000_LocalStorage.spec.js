@@ -53,10 +53,24 @@ describe("Tests GET " + route + " API OK", function () {
                     "state": "SENT"
                 };
                 console.log('privateDocument: %s', privateDocument);
-                await localStorageInstance.storeDocument("id",privateDocument);
+
+
+                if (await localStorageInstance.existsDocument(privateDocument.documentId)) {
+                    const data = {
+                        state: 'state'
+                    }
+                    await localStorageInstance.updateDocument(privateDocument.documentId, data);
+                } else {
+                    await localStorageInstance.storeDocument(privateDocument.documentId, privateDocument);
+                }
+
                 documents = await localStorageInstance.getDocuments()
                 console.log('documents: %s', documents);
 
+
+                const localStorageInstance2 = new LocalStorageProvider();
+                documents = await localStorageInstance2.getDocuments()
+                console.log('documents: %s', documents);
                 done();
             }
             setup()

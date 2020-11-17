@@ -37,7 +37,7 @@ class LocalStorageProvider {
         try {
             await this.getDatabase().query('UPDATE documents SET ? WHERE documentId=?', [data, documentId]);
         } catch (error) {
-            this.getLogger().error('[LocalStorageAdapter::updateDocument] failed to update document with documentId %s - %s', documentId, error.message);
+            logger.error('[LocalStorageAdapter::updateDocument] failed to update document with documentId %s - %s', documentId, error.message);
             throw error;
         }
     }
@@ -47,7 +47,7 @@ class LocalStorageProvider {
         try {
             rows = await this.getDatabase().query('SELECT * FROM documents WHERE documentId=?', documentId);
         } catch (error) {
-            this.getLogger().error('[LocalStorageAdapter::getDocument] failed to get document with id %s - %s', documentId, error.message);
+            logger.error('[LocalStorageAdapter::getDocument] failed to get document with id %s - %s', documentId, error.message);
             throw error;
         }
         if (rows.length <= 0) {
@@ -64,7 +64,7 @@ class LocalStorageProvider {
         try {
             rows = await this.getDatabase().query('SELECT documentId FROM documents WHERE fromStorageKey=? or toStorageKey=?', [storageKey, storageKey]);
         } catch (error) {
-            this.getLogger().error('[LocalStorageAdapter::getDocumentIDFromStorageKey] failed to get documentId from storageKey %s - %s', storageKey, error.message);
+            logger.error('[LocalStorageAdapter::getDocumentIDFromStorageKey] failed to get documentId from storageKey %s - %s', storageKey, error.message);
             throw error;
         }
         if (rows.length <= 0) {
@@ -88,7 +88,7 @@ class LocalStorageProvider {
                 return await this.getDatabase().query('SELECT documentId, fromMSP, toMSP, `state`, `type` FROM documents');
             }
         } catch (error) {
-            this.getLogger().error('[LocalStorageAdapter::getDocuments] failed to get documents - %s', error.message);
+            logger.error('[LocalStorageAdapter::getDocuments] failed to get documents - %s', error.message);
             throw error;
         }
     }
@@ -102,7 +102,7 @@ class LocalStorageProvider {
                 return false;
             }
         } catch (error) {
-            this.getLogger().error('[LocalStorageAdapter::existsDocument] failed to get document id - %s', error.message);
+            logger.error('[LocalStorageAdapter::existsDocument] failed to get document id - %s', error.message);
             throw error;
         }
     }
