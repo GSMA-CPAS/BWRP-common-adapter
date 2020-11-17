@@ -1,0 +1,22 @@
+{
+  "usageId" : "",
+  "body":{
+
+  },
+  "header":{
+    "msps":{
+      "DTAG":{
+        "minSignatures":2
+      },
+      "TMUS":{
+        "minSignatures":2
+      }
+    },
+    "type":"usage",
+    "contractId": "",
+    "version":"1.0"
+  },
+  "status" : [ "DRAFT", "SENT", "SIGNED"]
+}
+
+//

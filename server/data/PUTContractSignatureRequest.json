@@ -1,0 +1,9 @@
+ContractID  ( retreive from database) documentBase64
+
+{
+        "signature": "signature",
+        "certificate": "-----BEGIN CERTIFICATE-----\nMIICYjCCAemgAwIBA...",
+        "algorithm": "secp384r1"
+}
+
+// Could revalidate the signature

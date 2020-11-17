@@ -1,0 +1,19 @@
+
+{
+  "body" : {
+    "data" : {
+      "storageKey": "dgsgfsdfgsdfgh",
+      ...
+    }
+  }
+}
+
+
+// Retreive the encoded64 document from blockchain adpter
+// We decode it
+
+// We should check if it is contract | usage | settlement ...
+// We keep everything in localDatabase
+
+// Store document with state 'RECEIVED'
+
