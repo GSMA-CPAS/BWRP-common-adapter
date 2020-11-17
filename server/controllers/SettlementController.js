@@ -8,14 +8,6 @@
 
 const Controller = require('./Controller');
 const service = require('../services/SettlementService');
-const createSettlement = async (request, response) => {
-  await Controller.handleRequest(request, response, service.createSettlement);
-};
-
-const deleteSettlementByID = async (request, response) => {
-  await Controller.handleRequest(request, response, service.deleteSettlementByID);
-};
-
 const getSettlementByID = async (request, response) => {
   await Controller.handleRequest(request, response, service.getSettlementByID);
 };
@@ -24,15 +16,8 @@ const getSettlements = async (request, response) => {
   await Controller.handleRequest(request, response, service.getSettlements);
 };
 
-const updateSettlementByID = async (request, response) => {
-  await Controller.handleRequest(request, response, service.updateSettlementByID);
-};
-
 
 module.exports = {
-  createSettlement,
-  deleteSettlementByID,
   getSettlementByID,
   getSettlements,
-  updateSettlementByID,
 };

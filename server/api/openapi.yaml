@@ -220,6 +220,14 @@ paths:
         schema:
           type: string
         style: simple
+      - description: The return format ( "raw" | "json" )
+        explode: true
+        in: query
+        name: format
+        required: false
+        schema:
+          type: string
+        style: form
       responses:
         "200":
           content:
@@ -239,9 +247,10 @@ paths:
       tags:
       - contract
       x-eov-operation-handler: controllers/ContractController
+  /contracts/{contractID}/send:
     put:
-      description: Update existing Contract
-      operationId: updateContractByID
+      description: Uploads existing Contract to blockchain -> @MSP
+      operationId: sendContractByID
       parameters:
       - description: The contract ID
         explode: false
@@ -251,20 +260,13 @@ paths:
         schema:
           type: string
         style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Contract'
-        description: Contract Object Payload
-        required: true
       responses:
         "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Contract'
-          description: Successful operation, returns updated Contract Object
+          description: Successful operation, returns sent Contract Object
         "400":
           content:
             application/json:
@@ -276,7 +278,6 @@ paths:
           description: Internal Error
       tags:
       - contract
-      x-codegen-request-body-name: body
       x-eov-operation-handler: controllers/ContractController
   /contracts/{contractID}/signatures/:
     get:
@@ -586,6 +587,86 @@ paths:
       - usage
       x-codegen-request-body-name: body
       x-eov-operation-handler: controllers/UsageController
+  /contracts/{contractID}/usages/{usageID}/send:
+    put:
+      description: Uploads the usage data to the blockchain -> @MSP
+      operationId: sendUsageById
+      parameters:
+      - description: The contract ID
+        explode: false
+        in: path
+        name: contractID
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The Usage ID
+        explode: false
+        in: path
+        name: usageID
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Usage'
+          description: Successful operation
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400ErrorResponse'
+          description: Bad Request
+        "500":
+          content: {}
+          description: Internal Error
+      tags:
+      - usage
+      x-eov-operation-handler: controllers/UsageController
+  /contracts/{contractID}/usages/{usageID}/generate:
+    put:
+      description: Trigger the settlement computation
+      operationId: generateSettlementByUsageId
+      parameters:
+      - description: The contract ID
+        explode: false
+        in: path
+        name: contractID
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The Usage ID
+        explode: false
+        in: path
+        name: usageID
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+          description: Successful operation
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400ErrorResponse'
+          description: Bad Request
+        "500":
+          content: {}
+          description: Internal Error
+      tags:
+      - usage
+      x-eov-operation-handler: controllers/UsageController
   /contracts/{contractID}/settlements/:
     get:
       description: Get All Settlement of a given Contract
@@ -613,86 +694,7 @@ paths:
       tags:
       - settlement
       x-eov-operation-handler: controllers/SettlementController
-    post:
-      description: Create a new Settlement
-      operationId: createSettlement
-      parameters:
-      - description: The contract ID
-        explode: false
-        in: path
-        name: contractID
-        required: true
-        schema:
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Settlement'
-        description: Settlement Object Payload
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                type: string
-                x-content-type: application/json
-          description: Successful operation, returns created Settlement Object
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/400ErrorResponse'
-          description: Bad Request
-        "500":
-          content: {}
-          description: Internal Error
-      tags:
-      - settlement
-      x-codegen-request-body-name: body
-      x-eov-operation-handler: controllers/SettlementController
   /contracts/{contractID}/settlements/{settlementID}:
-    delete:
-      description: Delete a Settlement By its ID
-      operationId: deleteSettlementByID
-      parameters:
-      - description: The contract ID
-        explode: false
-        in: path
-        name: contractID
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: The Settlement ID
-        explode: false
-        in: path
-        name: settlementID
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SuccessResponse'
-          description: The status of the service
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/400ErrorResponse'
-          description: Bad Request
-        "500":
-          content: {}
-          description: Internal Error
-      tags:
-      - settlement
-      x-eov-operation-handler: controllers/SettlementController
     get:
       description: Get Settlement Object by its ID
       operationId: getSettlementByID
@@ -731,53 +733,6 @@ paths:
           description: Internal Error
       tags:
       - settlement
-      x-eov-operation-handler: controllers/SettlementController
-    put:
-      description: Update Settlement Object by its ID
-      operationId: updateSettlementByID
-      parameters:
-      - description: The contract ID
-        explode: false
-        in: path
-        name: contractID
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: The Settlement ID
-        explode: false
-        in: path
-        name: settlementID
-        required: true
-        schema:
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Settlement'
-        description: Settlement Object Payload
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Settlement'
-          description: Successful operation, returns updated Settlement Object
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/400ErrorResponse'
-          description: Bad Request
-        "500":
-          content: {}
-          description: Internal Error
-      tags:
-      - settlement
-      x-codegen-request-body-name: body
       x-eov-operation-handler: controllers/SettlementController
 components:
   schemas:
