@@ -4,11 +4,11 @@ All URIs are relative to *http://localhost/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createContract**](ContractApi.md#createContract) | **POST** /contract/ | 
-[**deleteContractByID**](ContractApi.md#deleteContractByID) | **DELETE** /contract/{contractID} | 
-[**getContractByID**](ContractApi.md#getContractByID) | **GET** /contract/{contractID} | 
-[**getContracts**](ContractApi.md#getContracts) | **GET** /contract/ | 
-[**updateContractByID**](ContractApi.md#updateContractByID) | **PUT** /contract/{contractID} | 
+[**createContract**](ContractApi.md#createContract) | **POST** /contracts/ | 
+[**deleteContractByID**](ContractApi.md#deleteContractByID) | **DELETE** /contracts/{contractID} | 
+[**getContractByID**](ContractApi.md#getContractByID) | **GET** /contracts/{contractID} | 
+[**getContracts**](ContractApi.md#getContracts) | **GET** /contracts/ | 
+[**updateContractByID**](ContractApi.md#updateContractByID) | **PUT** /contracts/{contractID} | 
 
 
 <a name="createContract"></a>

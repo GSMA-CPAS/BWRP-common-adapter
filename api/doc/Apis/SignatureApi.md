@@ -4,9 +4,9 @@ All URIs are relative to *http://localhost/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getSignatureByID**](SignatureApi.md#getSignatureByID) | **GET** /contract/{contractID}/signature/{signatureID} | 
-[**getSignatures**](SignatureApi.md#getSignatures) | **GET** /contract/{contractID}/signature/ | 
-[**updateSignatureByID**](SignatureApi.md#updateSignatureByID) | **PUT** /contract/{contractID}/signature/{signatureID} | 
+[**getSignatureByID**](SignatureApi.md#getSignatureByID) | **GET** /contracts/{contractID}/signatures/{signatureID} | 
+[**getSignatures**](SignatureApi.md#getSignatures) | **GET** /contracts/{contractID}/signatures/ | 
+[**updateSignatureByID**](SignatureApi.md#updateSignatureByID) | **PUT** /contracts/{contractID}/signatures/{signatureID} | 
 
 
 <a name="getSignatureByID"></a>

@@ -4,11 +4,11 @@ All URIs are relative to *http://localhost/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createUsage**](UsageApi.md#createUsage) | **POST** /contract/{contractID}/usage/ | 
-[**deleteUsageByID**](UsageApi.md#deleteUsageByID) | **DELETE** /contract/{contractID}/usage/{usageID} | 
-[**getUsageByID**](UsageApi.md#getUsageByID) | **GET** /contract/{contractID}/usage/{usageID} | 
-[**getUsages**](UsageApi.md#getUsages) | **GET** /contract/{contractID}/usage/ | 
-[**updateUsageByID**](UsageApi.md#updateUsageByID) | **PUT** /contract/{contractID}/usage/{usageID} | 
+[**createUsage**](UsageApi.md#createUsage) | **POST** /contracts/{contractID}/usages/ | 
+[**deleteUsageByID**](UsageApi.md#deleteUsageByID) | **DELETE** /contracts/{contractID}/usages/{usageID} | 
+[**getUsageByID**](UsageApi.md#getUsageByID) | **GET** /contracts/{contractID}/usages/{usageID} | 
+[**getUsages**](UsageApi.md#getUsages) | **GET** /contracts/{contractID}/usages/ | 
+[**updateUsageByID**](UsageApi.md#updateUsageByID) | **PUT** /contracts/{contractID}/usages/{usageID} | 
 
 
 <a name="createUsage"></a>

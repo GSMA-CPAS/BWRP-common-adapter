@@ -93,7 +93,7 @@ paths:
       tags:
       - status
       x-eov-operation-handler: controllers/StatusController
-  /contract/event/:
+  /contracts/events/:
     post:
       description: Webhook callback
       operationId: eventReceived
@@ -124,7 +124,7 @@ paths:
       - event
       x-codegen-request-body-name: body
       x-eov-operation-handler: controllers/EventController
-  /contract/:
+  /contracts/:
     get:
       description: Show a list of all Contracts
       operationId: getContracts
@@ -182,7 +182,7 @@ paths:
       - contract
       x-codegen-request-body-name: body
       x-eov-operation-handler: controllers/ContractController
-  /contract/{contractID}:
+  /contracts/{contractID}:
     delete:
       description: Delete a Contract By its ID
       operationId: deleteContractByID
@@ -278,7 +278,7 @@ paths:
       - contract
       x-codegen-request-body-name: body
       x-eov-operation-handler: controllers/ContractController
-  /contract/{contractID}/signature/:
+  /contracts/{contractID}/signatures/:
     get:
       description: Get All signatures of a given Contract
       operationId: getSignatures
@@ -305,7 +305,7 @@ paths:
       tags:
       - signature
       x-eov-operation-handler: controllers/SignatureController
-  /contract/{contractID}/signature/{signatureID}:
+  /contracts/{contractID}/signatures/{signatureID}:
     get:
       description: Get Signature Object by its ID
       operationId: getSignatureByID
@@ -393,7 +393,7 @@ paths:
       - signature
       x-codegen-request-body-name: body
       x-eov-operation-handler: controllers/SignatureController
-  /contract/{contractID}/usage/:
+  /contracts/{contractID}/usages/:
     get:
       description: Get All usage of a given Contract
       operationId: getUsages
@@ -460,7 +460,7 @@ paths:
       - usage
       x-codegen-request-body-name: body
       x-eov-operation-handler: controllers/UsageController
-  /contract/{contractID}/usage/{usageID}:
+  /contracts/{contractID}/usages/{usageID}:
     delete:
       description: Delete a Usage By its ID
       operationId: deleteUsageByID
@@ -586,7 +586,7 @@ paths:
       - usage
       x-codegen-request-body-name: body
       x-eov-operation-handler: controllers/UsageController
-  /contract/{contractID}/settlement/:
+  /contracts/{contractID}/settlements/:
     get:
       description: Get All Settlement of a given Contract
       operationId: getSettlements
@@ -653,7 +653,7 @@ paths:
       - settlement
       x-codegen-request-body-name: body
       x-eov-operation-handler: controllers/SettlementController
-  /contract/{contractID}/settlement/{settlementID}:
+  /contracts/{contractID}/settlements/{settlementID}:
     delete:
       description: Delete a Settlement By its ID
       operationId: deleteSettlementByID

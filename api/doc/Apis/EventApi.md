@@ -4,7 +4,7 @@ All URIs are relative to *http://localhost/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**eventReceived**](EventApi.md#eventReceived) | **POST** /contract/event/ | 
+[**eventReceived**](EventApi.md#eventReceived) | **POST** /contracts/events/ | 
 
 
 <a name="eventReceived"></a>

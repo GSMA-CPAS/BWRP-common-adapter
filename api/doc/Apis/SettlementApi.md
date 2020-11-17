@@ -4,11 +4,11 @@ All URIs are relative to *http://localhost/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createSettlement**](SettlementApi.md#createSettlement) | **POST** /contract/{contractID}/settlement/ | 
-[**deleteSettlementByID**](SettlementApi.md#deleteSettlementByID) | **DELETE** /contract/{contractID}/settlement/{settlementID} | 
-[**getSettlementByID**](SettlementApi.md#getSettlementByID) | **GET** /contract/{contractID}/settlement/{settlementID} | 
-[**getSettlements**](SettlementApi.md#getSettlements) | **GET** /contract/{contractID}/settlement/ | 
-[**updateSettlementByID**](SettlementApi.md#updateSettlementByID) | **PUT** /contract/{contractID}/settlement/{settlementID} | 
+[**createSettlement**](SettlementApi.md#createSettlement) | **POST** /contracts/{contractID}/settlements/ | 
+[**deleteSettlementByID**](SettlementApi.md#deleteSettlementByID) | **DELETE** /contracts/{contractID}/settlements/{settlementID} | 
+[**getSettlementByID**](SettlementApi.md#getSettlementByID) | **GET** /contracts/{contractID}/settlements/{settlementID} | 
+[**getSettlements**](SettlementApi.md#getSettlements) | **GET** /contracts/{contractID}/settlements/ | 
+[**updateSettlementByID**](SettlementApi.md#updateSettlementByID) | **PUT** /contracts/{contractID}/settlements/{settlementID} | 
 
 
 <a name="createSettlement"></a>
