@@ -8,12 +8,13 @@ Method | HTTP request | Description
 [**deleteContractByID**](ContractApi.md#deleteContractByID) | **DELETE** /contracts/{contractID} | 
 [**getContractByID**](ContractApi.md#getContractByID) | **GET** /contracts/{contractID} | 
 [**getContracts**](ContractApi.md#getContracts) | **GET** /contracts/ | 
-[**sendContractByID**](ContractApi.md#sendContractByID) | **PUT** /contracts/{contractID}/send | 
+[**sendContractByID**](ContractApi.md#sendContractByID) | **PUT** /contracts/{contractID}/send/ | 
+[**updateContractByID**](ContractApi.md#updateContractByID) | **PUT** /contracts/{contractID} | 
 
 
 <a name="createContract"></a>
 # **createContract**
-> String createContract(toMSP, body)
+> ContractResponse createContract(body)
 
 
 
@@ -23,12 +24,11 @@ Method | HTTP request | Description
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **toMSP** | **String**| The Destination MSPID | [default to null]
- **body** | **Object**| Contract Object Payload |
+ **body** | [**ContractRequest**](../Models/ContractRequest.md)| Contract Object Payload |
 
 ### Return type
 
-[**String**](../Models/string.md)
+[**ContractResponse**](../Models/ContractResponse.md)
 
 ### Authorization
 
@@ -41,7 +41,7 @@ No authorization required
 
 <a name="deleteContractByID"></a>
 # **deleteContractByID**
-> SuccessResponse deleteContractByID(contractID)
+> ContractResponse deleteContractByID(contractID)
 
 
 
@@ -55,7 +55,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SuccessResponse**](../Models/SuccessResponse.md)
+[**ContractResponse**](../Models/ContractResponse.md)
 
 ### Authorization
 
@@ -68,7 +68,7 @@ No authorization required
 
 <a name="getContractByID"></a>
 # **getContractByID**
-> Object getContractByID(contractID, format)
+> oneOf&lt;ContractResponse,RAWContractResponse&gt; getContractByID(contractID, format)
 
 
 
@@ -79,11 +79,11 @@ No authorization required
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **contractID** | **String**| The contract ID | [default to null]
- **format** | **String**| The return format ( \&quot;raw\&quot; | \&quot;json\&quot; ) | [optional] [default to null]
+ **format** | **String**| Response format, defaults to JSON if not passed. | [optional] [default to null] [enum: JSON, RAW]
 
 ### Return type
 
-[**Object**](../Models/object.md)
+[**oneOf&lt;ContractResponse,RAWContractResponse&gt;**](../Models/oneOf&lt;ContractResponse,RAWContractResponse&gt;.md)
 
 ### Authorization
 
@@ -120,11 +120,11 @@ No authorization required
 
 <a name="sendContractByID"></a>
 # **sendContractByID**
-> Object sendContractByID(contractID)
+> ContractResponse sendContractByID(contractID)
 
 
 
-    Uploads existing Contract to blockchain -&gt; @MSP
+    Set State to \&quot;SEND\&quot; and POST to Blochain adapter towards TargetMSP of the Contract
 
 ### Parameters
 
@@ -134,7 +134,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Object**](../Models/object.md)
+[**ContractResponse**](../Models/ContractResponse.md)
 
 ### Authorization
 
@@ -143,5 +143,33 @@ No authorization required
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="updateContractByID"></a>
+# **updateContractByID**
+> ContractResponse updateContractByID(contractID, body)
+
+
+
+    Update existing Contract
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **contractID** | **String**| The contract ID | [default to null]
+ **body** | [**ContractRequest**](../Models/ContractRequest.md)| Contract Object Payload |
+
+### Return type
+
+[**ContractResponse**](../Models/ContractResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 

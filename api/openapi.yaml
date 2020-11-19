@@ -834,14 +834,23 @@ components:
               type: string
               description: Type of document. MUST be "contract"
               enum: [contract]
-            msp:
+            fromMSP:
               type: object
-              description: "Additonal check properties per msp eg, \"MSPID\": {\"minSignatures\": 2}"
-              additionalProperties: true    
-          additionalProperties: false
+              properties:
+                mspid:
+                  type: string
+                  description: MSP id of the sender
+            toMSP:
+              type: object
+              properties:
+                mspid:
+                  type: string
+                  description: MSP id of the receiver
           required:
             - version
             - type
+            - fromMSP
+            - toMSP
         body:
           additionalProperties: true
         state:

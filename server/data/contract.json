@@ -55,7 +55,14 @@ POST /contracts
     { "timestamp": "00001", "action": "CREATE" }
   ]
 }
+//////  What we return
+response = JSON(rawData),
+response.contractId = contractId
+response.state = "DRAFT"
 
+###############################################
+##############       PUT         #############
+###############################################
 ////////////////////////////
 PUT /contracts/{myContractId}
 
@@ -196,6 +203,8 @@ blockchain-adapter-dtag     | > reply: FetchPrivateDocument(#0fa34b69e77e8d40155
  "dataHash":"c3eddb15c50df07faa2da74435f95bdd6592860f3162e18e404e8248f3ed56c0"}
 
 -> decode data to JSON
+Check id header type is "contract"
+
 Generate a new contractId
 
 

@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 <a name="getSignatureByID"></a>
 # **getSignatureByID**
-> Object getSignatureByID(contractID, signatureID)
+> SignatureResponse getSignatureByID(contractID, signatureID)
 
 
 
@@ -26,7 +26,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Object**](../Models/object.md)
+[**SignatureResponse**](../Models/SignatureResponse.md)
 
 ### Authorization
 
@@ -66,7 +66,7 @@ No authorization required
 
 <a name="updateSignatureByID"></a>
 # **updateSignatureByID**
-> String updateSignatureByID(contractID, signatureID, body)
+> SignatureResponse updateSignatureByID(contractID, signatureID, body)
 
 
 
@@ -78,11 +78,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **contractID** | **String**| The contract ID | [default to null]
  **signatureID** | **String**| The Signature ID | [default to null]
- **body** | **Object**| Signature Object Payload |
+ **body** | [**SignatureRequest**](../Models/SignatureRequest.md)| Signature Object Payload |
 
 ### Return type
 
-[**String**](../Models/string.md)
+[**SignatureResponse**](../Models/SignatureResponse.md)
 
 ### Authorization
 
