@@ -1,0 +1,46 @@
+{
+  "id":   1,         // generated
+  "usageID" : "myUsageId",
+  "fromMSP": "theFromMSP",
+  "toMSP": "theToMSP",
+  "timestamp": "00001",
+  "contractId": "linkedContractId",
+
+
+  "history": [
+  { "timestamp": "00001", "action": "CREATION" },
+  { "timestamp": "00002", "action": "SEND" }
+]
+}
+
+###############################################
+##############       POST         #############
+###############################################
+
+
+POST /contracts/{contractId}/usage
+{
+  "header": {
+  "name": "REF20200120-GSMA-ORANGE-Usage for roaming",
+  "type": "usage",
+"version": "1.0"
+},
+"body": {
+"signatures": "{}"
+}
+}
+
+///////////////////////////
+// What we record:
+
+{
+"id":   1,         // generated
+"contractId" : "myContractId",    //  Generate a UUID
+"fromMSP": "mspid",               // fromMSPID = "body->header->fromMSP->mspid"
+"toMSP": "theToMSP",                   // toMSPID = "body->header->toMSP->mspid"
+"state": "DRAFT",
+"rawData": "{\n  \"header\": {\n    \"name\": \"Contract with XYZ\",\n    \"fromMSP\": {\n      \"mspid\": \"\",\n      \"nbOfsignatures\": \"\"\n    },\n    \"toMSP\": {\n      \"mspid\": \"\",\n      \"nbOfsignatures\": \"\"\n    },\n    \"type\": \"contract\",\n    \"version\": \"1.0\"\n  },\n  \"body\": {\n    \"signatures\": \"{}\"\n  }\n}",
+"history": [
+{ "timestamp": "00001", "action": "CREATE" }
+]
+}

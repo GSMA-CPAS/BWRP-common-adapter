@@ -28,6 +28,10 @@ const sendContractByID = async (request, response) => {
   await Controller.handleRequest(request, response, service.sendContractByID);
 };
 
+const updateContractByID = async (request, response) => {
+  await Controller.handleRequest(request, response, service.updateContractByID);
+};
+
 
 module.exports = {
   createContract,
@@ -35,4 +39,5 @@ module.exports = {
   getContractByID,
   getContracts,
   sendContractByID,
+  updateContractByID,
 };
