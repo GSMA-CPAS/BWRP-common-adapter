@@ -4,7 +4,7 @@ const assert = require('chai').assert;
 const expect = require('chai').expect;
 
 const globalVersion = '/api/v1';
-const route = '/contract/';
+const route = '/contracts/';
 const LocalStorageProvider = require('../providers/LocalStorageProvider');
 
 
@@ -32,7 +32,7 @@ describe("Tests GET " + route + " API OK", function () {
         }
     });
 
-    it('Get LocalStorage', function (done) {
+    xit('Get LocalStorage', function (done) {
         try {
 
             const setup = async() => {
@@ -83,4 +83,17 @@ describe("Tests GET " + route + " API OK", function () {
         }
     });
 
+    it('Should convert from base64 to string', function (done) {
+        base64EncodedString = "SGVsbG8gd29ybGQ=";
+        console.log('base64EncodedString: %s', base64EncodedString);
+        const decodedString = Buffer.from(base64EncodedString, 'base64').toString();
+        console.log('decodedString: %s', decodedString);
+
+
+        for(var i of ["id1", "id2"]) {
+            console.log(i)
+        }
+
+        done();
+    });
 });
