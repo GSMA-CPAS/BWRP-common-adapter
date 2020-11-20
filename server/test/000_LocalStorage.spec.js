@@ -5,8 +5,6 @@ const expect = require('chai').expect;
 
 const globalVersion = '/api/v1';
 const route = '/contracts/';
-const LocalStorageProvider = require('../providers/LocalStorageProvider');
-
 
 describe("Tests GET " + route + " API OK", function () {
 
@@ -25,57 +23,6 @@ describe("Tests GET " + route + " API OK", function () {
                     expect(response.body.length).to.equal(3);
                     done();
                 });
-        } catch (exception) {
-            console.log('exception: %s', exception.stack);
-            assert.ok(false);
-            done();
-        }
-    });
-
-    xit('Get LocalStorage', function (done) {
-        try {
-
-            const setup = async() => {
-                const localStorageInstance = new LocalStorageProvider();
-                try {
-                    await localStorageInstance.initialize();
-                } catch (error) {
-                    throw error;
-                }
-                let documents = await localStorageInstance.getDocuments()
-                console.log('documents: %s', documents);
-                const privateDocument = {
-                    "documentId": "id",
-                    "type": "contract",
-                    "fromMSP": "fromMSP",
-                    "toMSP": "toMSP",
-                    "data": JSON.stringify({ 'state': 'sent'}),
-                    "state": "SENT"
-                };
-                console.log('privateDocument: %s', privateDocument);
-
-
-                if (await localStorageInstance.existsDocument(privateDocument.documentId)) {
-                    const data = {
-                        state: 'state'
-                    }
-                    await localStorageInstance.updateDocument(privateDocument.documentId, data);
-                } else {
-                    await localStorageInstance.storeDocument(privateDocument.documentId, privateDocument);
-                }
-
-                documents = await localStorageInstance.getDocuments()
-                console.log('documents: %s', documents);
-
-
-                const localStorageInstance2 = new LocalStorageProvider();
-                documents = await localStorageInstance2.getDocuments()
-                console.log('documents: %s', documents);
-                done();
-            }
-            setup()
-
-
         } catch (exception) {
             console.log('exception: %s', exception.stack);
             assert.ok(false);

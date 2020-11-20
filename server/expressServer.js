@@ -11,6 +11,7 @@ const bodyParser = require('body-parser');
 const { OpenApiValidator } = require('express-openapi-validator');
 const logger = require('./logger');
 const config = require('./config');
+const DbUtils = require('./utils/dbUtils');
 
 class ExpressServer {
   constructor(port, openApiYaml) {
@@ -49,6 +50,18 @@ class ExpressServer {
   }
 
   launch() {
+    DbUtils.startAndMaintainDbConnection()
+      .then(_neverUsed => {
+        console.log(`Should never happend. DB connection promise should never been resolved!`);
+      })
+      .catch(_err => {
+        console.log(`Closing server for DB connection failed.`);
+        this.close()
+          .then(() => {
+            console.log(`Server closed for DB connection failed.`);
+            process.exit();
+          });
+      });
     new OpenApiValidator({
       apiSpec: this.openApiPath,
       operationHandlers: path.join(__dirname),

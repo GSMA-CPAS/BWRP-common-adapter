@@ -19,16 +19,9 @@ config.LOG_LEVEL = process.env.LOG_LEVEL || "info";
 config.BLOCKCHAIN_ADAPTER_URL = process.env.BLOCKCHAIN_ADAPTER_URL || "http://127.0.0.1:8081";
 config.BLOCKCHAIN_ADAPTER_WEBHOOKS = process.env.BLOCKCHAIN_ADAPTER_WEBHOOKS || [];
 
-// Database configuration
-config.database = {
-    "pooling": true,
-    "connection": {
-        "host": "127.0.0.1",
-        "port": 3376,
-        "user": "userdtag",
-        "password": "userpwd",
-        "database": "roamingdbdtag"
-    }
-}
+config.DB_URL = process.env.DB_URL || "mongodb://userdtag:userpwd@localhost:27017/roamingdbdtag?authSource=roamingdbdtag";
+config.DB_CREATE_CONNECTION_TIMEOUT = process.env.DB_CREATE_CONNECTION_TIMEOUT || 30000;
+config.DB_HEARTBEAT_FREQUENCY = process.env.DB_HEARTBEAT_FREQUENCY || 5000;
+config.DB_POOL_SIZE = process.env.DB_POOL_SIZE || 10;
 
 module.exports = config;
