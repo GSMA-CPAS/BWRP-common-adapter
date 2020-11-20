@@ -122,3 +122,6 @@ dist
 *.iws
 *.iml
 *.ipr
+
+# OS generated files
+.DS_Store
