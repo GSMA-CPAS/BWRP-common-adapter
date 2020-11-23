@@ -834,18 +834,33 @@ components:
               type: string
               description: Type of document. MUST be "contract"
               enum: [contract]
+
             fromMSP:
               type: object
               properties:
                 mspid:
                   type: string
-                  description: MSP id of the sender
+                  description: MSPID of the contract creator.
+                  example: DTAG
+                signatures:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/SignatureBase'
+                  minItems: 1
+              
             toMSP:
               type: object
               properties:
                 mspid:
                   type: string
-                  description: MSP id of the receiver
+                  description: MSPID of the contract creator.
+                  example: TMUS
+                signatures:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/SignatureBase'
+                  minItems: 1
+
           required:
             - version
             - type
@@ -856,7 +871,7 @@ components:
         state:
           type: string
           description: The State of the Contract.
-          enum: [DRAFT, SENT, RECEIVED]
+          enum: [DRAFT, PENDING, SENT, RECEIVED]
       additionalProperties: false
       required:
         - contractID
@@ -879,7 +894,7 @@ components:
         state:
           type: string
           description: The State of the Contract.
-          enum: [DRAFT, SENT, RECEIVED]
+          enum: [DRAFT, PENDING, SENT, RECEIVED]
       additionalProperties: false
       required:
         - contractID
@@ -904,14 +919,39 @@ components:
               type: string
               description: Type of document. MUST be "contract"
               enum: [contract]
-            msp:
+
+            fromMSP:
               type: object
-              description: "Additonal check properties per msp eg, \"MSPID\": {\"minSignatures\": 2}"
-              additionalProperties: true    
+              properties:
+                mspid:
+                  type: string
+                  description: MSPID of the contract creator.
+                  example: DTAG
+                signatures:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/SignatureBase'
+                  minItems: 1
+              
+            toMSP:
+              type: object
+              properties:
+                mspid:
+                  type: string
+                  description: MSPID of the contract creator.
+                  example: TMUS
+                signatures:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/SignatureBase'
+                  minItems: 1
+
           additionalProperties: false
           required:
             - version
             - type
+            - fromMSP
+            - toMSP
         body:
           additionalProperties: true
       additionalProperties: false
@@ -919,6 +959,15 @@ components:
         - header
         - body
 
+    SignatureBase:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        role:
+          type: string
 
 
     SignatureResponse:

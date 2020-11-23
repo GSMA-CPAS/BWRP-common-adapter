@@ -819,14 +819,26 @@ components:
             fromMSP:
               properties:
                 mspid:
-                  description: MSP id of the sender
+                  description: MSPID of the contract creator.
+                  example: DTAG
                   type: string
+                signatures:
+                  items:
+                    $ref: '#/components/schemas/SignatureBase'
+                  minItems: 1
+                  type: array
               type: object
             toMSP:
               properties:
                 mspid:
-                  description: MSP id of the receiver
+                  description: MSPID of the contract creator.
+                  example: TMUS
                   type: string
+                signatures:
+                  items:
+                    $ref: '#/components/schemas/SignatureBase'
+                  minItems: 1
+                  type: array
               type: object
           required:
           - fromMSP
@@ -840,6 +852,7 @@ components:
           description: The State of the Contract.
           enum:
           - DRAFT
+          - PENDING
           - SENT
           - RECEIVED
           type: string
@@ -866,6 +879,7 @@ components:
           description: The State of the Contract.
           enum:
           - DRAFT
+          - PENDING
           - SENT
           - RECEIVED
           type: string
@@ -879,9 +893,25 @@ components:
       additionalProperties: false
       example:
         header:
+          fromMSP:
+            mspid: DTAG
+            signatures:
+            - role: role
+              name: name
+              id: id
+            - role: role
+              name: name
+              id: id
           name: Contract with XYZ
-          msp:
-            key: '{}'
+          toMSP:
+            mspid: TMUS
+            signatures:
+            - role: role
+              name: name
+              id: id
+            - role: role
+              name: name
+              id: id
           type: contract
           version: "1.0"
         body:
@@ -896,6 +926,19 @@ components:
       - body
       - header
       title: Contract JSON for POST/PUT
+      type: object
+    SignatureBase:
+      example:
+        role: role
+        name: name
+        id: id
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        role:
+          type: string
       type: object
     SignatureResponse:
       additionalProperties: false
@@ -1058,11 +1101,69 @@ components:
       - error
       title: 400 Error Response JSON
       type: object
+    ContractRequest_header_fromMSP:
+      example:
+        mspid: DTAG
+        signatures:
+        - role: role
+          name: name
+          id: id
+        - role: role
+          name: name
+          id: id
+      properties:
+        mspid:
+          description: MSPID of the contract creator.
+          example: DTAG
+          type: string
+        signatures:
+          items:
+            $ref: '#/components/schemas/SignatureBase'
+          minItems: 1
+          type: array
+      type: object
+    ContractRequest_header_toMSP:
+      example:
+        mspid: TMUS
+        signatures:
+        - role: role
+          name: name
+          id: id
+        - role: role
+          name: name
+          id: id
+      properties:
+        mspid:
+          description: MSPID of the contract creator.
+          example: TMUS
+          type: string
+        signatures:
+          items:
+            $ref: '#/components/schemas/SignatureBase'
+          minItems: 1
+          type: array
+      type: object
     ContractRequest_header:
       example:
+        fromMSP:
+          mspid: DTAG
+          signatures:
+          - role: role
+            name: name
+            id: id
+          - role: role
+            name: name
+            id: id
         name: Contract with XYZ
-        msp:
-          key: '{}'
+        toMSP:
+          mspid: TMUS
+          signatures:
+          - role: role
+            name: name
+            id: id
+          - role: role
+            name: name
+            id: id
         type: contract
         version: "1.0"
       properties:
@@ -1079,12 +1180,13 @@ components:
           enum:
           - contract
           type: string
-        msp:
-          additionalProperties: true
-          description: 'Additonal check properties per msp eg, "MSPID": {"minSignatures":
-            2}'
-          type: object
+        fromMSP:
+          $ref: '#/components/schemas/ContractRequest_header_fromMSP'
+        toMSP:
+          $ref: '#/components/schemas/ContractRequest_header_toMSP'
       required:
+      - fromMSP
+      - toMSP
       - type
       - version
       type: object
