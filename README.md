@@ -1,4 +1,5 @@
 
+
 # BWRP-common-adapter
 The "Layer 2.5" with all Common functionality APIs
 
@@ -16,6 +17,10 @@ with
     User    : user
     Password: userpwd
 
+to stop the docker.
 
+    docker-compose -f docker-mongo.yaml down
+
+If you need a "fresh" db, Stop the instance, Delete the ./MDB/ and start the instance again.
 
 --
