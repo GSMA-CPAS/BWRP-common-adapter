@@ -1,0 +1,17 @@
+version: '3'
+
+volumes:
+  MDB-local:
+
+services:
+  MDB-local:
+    container_name: MDB-local
+    image: mongo:4.4-bionic
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=user
+      - MONGO_INITDB_ROOT_PASSWORD=userpwd
+    volumes:
+      - ./MDB/:/data/db
+    ports:
+      - 27017:27017
