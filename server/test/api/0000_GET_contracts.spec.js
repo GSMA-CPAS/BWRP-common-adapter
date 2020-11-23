@@ -1,4 +1,7 @@
-const testsUtils = require('./testsUtils');
+const testsUtils = require('../tools/testsUtils');
+const debug = require('debug')('spec:it');
+const debugSetup = require('debug')('spec:setup');
+
 const chai = require('chai');
 const assert = require('chai').assert;
 const expect = require('chai').expect;
@@ -8,39 +11,33 @@ const route = '/contracts/';
 
 describe("Tests GET " + route + " API OK", function () {
 
-    it('Get contracts OK', function (done) {
+  describe("Setup and Test GET " + route + " API without any contract in DB", function () {
+    before(done => {
+      debugSetup('TODO: Erase the database content');
+      done();
+    });
+
+    it('Get contracts OK without any contract in DB', function (done) {
         try {
             let path = globalVersion + route;
             chai.request(testsUtils.getServer())
                 .get(`${path}`)
                 .end((error, response) => {
-                    console.log('response.body: %s', response.body);
+                    debug('response.body: %s', response.body);
                     assert.equal(error, null);
                     expect(response).to.have.status(200);
                     expect(response).to.be.json;
                     assert.exists(response.body);
                     expect(response.body).to.be.an('array');
-                    expect(response.body.length).to.equal(3);
+                    expect(response.body.length).to.equal(0);
                     done();
                 });
         } catch (exception) {
-            console.log('exception: %s', exception.stack);
+            debug('exception: %s', exception.stack);
             assert.ok(false);
             done();
         }
     });
+  });
 
-    it('Should convert from base64 to string', function (done) {
-        base64EncodedString = "SGVsbG8gd29ybGQ=";
-        console.log('base64EncodedString: %s', base64EncodedString);
-        const decodedString = Buffer.from(base64EncodedString, 'base64').toString();
-        console.log('decodedString: %s', decodedString);
-
-
-        for(var i of ["id1", "id2"]) {
-            console.log(i)
-        }
-
-        done();
-    });
 });
