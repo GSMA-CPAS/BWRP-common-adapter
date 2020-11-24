@@ -42,6 +42,15 @@ class ContractMongoRequester {
     });
   }
 
+  static findOneAndUpdate(conditions, updateObject, next) {
+    ContractMongoModel.findOneAndUpdate(conditions, updateObject, { new: true, runValidators: true }, (err, contract) => {
+      if (err) {
+        next(err);
+      }
+      return next(null, contract);
+    });
+  }
+
 }
 
 module.exports = ContractMongoRequester;

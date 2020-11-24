@@ -6,29 +6,29 @@ const { deleteContractByID } = require('../services/ContractService');
 class ContractMapper {
 
   // Map the input POST contracts request to internal contract
-  static getContractFromRequest(req) {
+  static getContractFromPostContractsRequest(body) {
     const returnedContract = {
       state: "DRAFT",
-      name: req.body.header.name,
-      type: req.body.header.type,
-      version: req.body.header.version,
+      name: body.header.name,
+      type: body.header.type,
+      version: body.header.version,
       fromMsp: {
-        mspId: req.body.header.fromMSP.mspid,
-        minSignatures: req.body.header.fromMSP.minSignatures,
-        nbOfsignatures: req.body.header.fromMSP.nbOfsignatures,
+        mspId: body.header.fromMSP.mspid,
+        minSignatures: body.header.fromMSP.minSignatures,
+        nbOfsignatures: body.header.fromMSP.nbOfsignatures,
         signatures: []
       },
       toMsp: {
-        mspId: req.body.header.toMSP.mspid,
-        minSignatures: req.body.header.toMSP.minSignatures,
-        nbOfsignatures: req.body.header.toMSP.nbOfsignatures,
+        mspId: body.header.toMSP.mspid,
+        minSignatures: body.header.toMSP.minSignatures,
+        nbOfsignatures: body.header.toMSP.nbOfsignatures,
         signatures: []
       },
-      body: req.body.body
+      body: body.body
     };
 
-    if ((req.body.header.fromMSP.signatures !== undefined) && (Array.isArray(req.body.header.fromMSP.signatures))) {
-      req.body.header.fromMSP.signatures.forEach(signature => {
+    if ((body.header.fromMSP.signatures !== undefined) && (Array.isArray(body.header.fromMSP.signatures))) {
+      body.header.fromMSP.signatures.forEach(signature => {
         returnedContract.fromMsp.signatures.push({
           id: signature.id,
           name: signature.name,
@@ -37,8 +37,8 @@ class ContractMapper {
       });
     }
     
-    if ((req.body.header.toMSP.signatures !== undefined) && (Array.isArray(req.body.header.toMSP.signatures))) {
-      req.body.header.toMSP.signatures.forEach(signature => {
+    if ((body.header.toMSP.signatures !== undefined) && (Array.isArray(body.header.toMSP.signatures))) {
+      body.header.toMSP.signatures.forEach(signature => {
         returnedContract.toMsp.signatures.push({
           id: signature.id,
           name: signature.name,
@@ -47,6 +47,18 @@ class ContractMapper {
       });
     }
 
+    return returnedContract;
+  }
+
+  // Map the input PUT contracts/id request to internal contract
+  static getContractFromPutContractRequest(id, body) {
+    // By default, use mapper getContractFromPostContractsRequest
+    const returnedContract = ContractMapper.getContractFromPostContractsRequest(body);
+
+    // Define specific mapping for Put Contract
+    returnedContract.id = id;
+    returnedContract.state = body.state ? body.state : 'DRAFT';
+    
     return returnedContract;
   }
 

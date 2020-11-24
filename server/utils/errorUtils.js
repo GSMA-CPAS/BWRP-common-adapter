@@ -38,6 +38,15 @@ class ErrorUtils {
     }
   };
 
+  static ERROR_BUSINESS_CONTRACT_UPDATE_ONLY_ALLOWED_IN_STATE_DRAFT = {
+    code: 422,
+    error: {
+      internalErrorCode: 2000,
+      message: 'Contract modification not allowed',
+      description: 'It\'s not allowed to update this contract or its state.'
+    }
+  };
+
 }
 
 module.exports = ErrorUtils;

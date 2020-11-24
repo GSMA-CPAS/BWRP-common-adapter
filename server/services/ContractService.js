@@ -4,6 +4,7 @@ const ContractMapper = require('../core/ContractMapper');
 
 const LocalStorageProvider = require('../providers/LocalStorageProvider');
 const logger = require('../logger');
+const errorUtils = require('../utils/errorUtils');
 
 /**
 * Create a new Contract
@@ -11,14 +12,14 @@ const logger = require('../logger');
 * req ContractRequest
 * returns ContractResponse
 * */
-const createContract = (req) => new Promise(
+const createContract = ({ url, body }) => new Promise(
   async (resolve, reject) => {
     try {
-      const contractToCreate = ContractMapper.getContractFromRequest(req);
+      const contractToCreate = ContractMapper.getContractFromPostContractsRequest(body);
       const createContractResp = await LocalStorageProvider.createContract(contractToCreate);
       const returnedResponse = ContractMapper.getResponseBodyForGetContract(createContractResp);
       const returnedHeaders = {
-        'Content-Location': `${req.url.replace(/\/$/, '')}/${createContractResp.id}`
+        'Content-Location': `${url.replace(/\/$/, '')}/${createContractResp.id}`
       };
       resolve(Service.successResponse(returnedResponse, 201, returnedHeaders));
     } catch (e) {
@@ -115,16 +116,17 @@ const sendContractByID = ({ contractID }) => new Promise(
 * */
 const updateContractByID = ({ contractID, body }) => new Promise(
   async (resolve, reject) => {
+    if ((body.state !== undefined) && (body.state !== 'DRAFT')) {
+      const MISSING_MANDATORY_PARAM_ERROR = errorUtils.ERROR_BUSINESS_CONTRACT_UPDATE_ONLY_ALLOWED_IN_STATE_DRAFT;
+      reject(Service.rejectResponse(MISSING_MANDATORY_PARAM_ERROR));
+    }
     try {
-      resolve(Service.successResponse({
-        contractID,
-        body,
-      }));
+      const contractToUpdate = ContractMapper.getContractFromPutContractRequest(contractID, body);
+      const updateContractResp = await LocalStorageProvider.updateContract(contractToUpdate);
+      const returnedResponse = ContractMapper.getResponseBodyForGetContract(updateContractResp);
+      resolve(Service.successResponse(returnedResponse, 200));
     } catch (e) {
-      reject(Service.rejectResponse(
-        e.message || 'Invalid input',
-        e.status || 405,
-      ));
+      reject(Service.rejectResponse(e));
     }
   },
 );

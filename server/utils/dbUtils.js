@@ -50,7 +50,7 @@ const connectMongo = (url, createConnectionTimeout, heartbeatFrequency, poolSize
             useNewUrlParser: true,
             useUnifiedTopology: true,
             useCreateIndex: true,
-            useFindAndModify: true,
+            useFindAndModify: false,
 
             serverSelectionTimeoutMS: createConnectionTimeout,
             heartbeatFrequencyMS: heartbeatFrequency,
