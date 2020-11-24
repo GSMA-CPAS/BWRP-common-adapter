@@ -8,6 +8,9 @@ services/DiscoveryService.js
 services/SignatureService.js
 services/UsageService.js
 services/SettlementService.js
+services/Service.js
+
+controllers/Controller.js
 
 expressServer.js
 index.js
