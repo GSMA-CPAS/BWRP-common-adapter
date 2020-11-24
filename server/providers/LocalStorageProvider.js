@@ -21,6 +21,19 @@ class LocalStorageProvider {
     }
   }
 
+  /**
+   *
+   * @returns {Promise<object>}
+   */
+  static async createContract(contract) {
+    try {
+      return await ContractDAO.create(contract);
+    } catch (error) {
+      logger.error('[LocalStorageProvider::createContract] failed to create contract - %s', error.message);
+      throw error;
+    }
+  }
+
 }
 
 module.exports = LocalStorageProvider;

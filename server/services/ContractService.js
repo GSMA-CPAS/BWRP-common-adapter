@@ -1,25 +1,28 @@
 /* eslint-disable no-unused-vars */
 const Service = require('./Service');
+const ContractMapper = require('../core/ContractMapper');
 
 const LocalStorageProvider = require('../providers/LocalStorageProvider');
+const logger = require('../logger');
 
 /**
 * Create a new Contract
 *
-* body ContractRequest Contract Object Payload
+* req ContractRequest
 * returns ContractResponse
 * */
-const createContract = ({ body }) => new Promise(
+const createContract = (req) => new Promise(
   async (resolve, reject) => {
     try {
-      resolve(Service.successResponse({
-        body,
-      }));
+      const contractToCreate = ContractMapper.getContractFromRequest(req);
+      const createContractResp = await LocalStorageProvider.createContract(contractToCreate);
+      const returnedResponse = ContractMapper.getResponseBodyForGetContract(createContractResp);
+      const returnedHeaders = {
+        'Content-Location': `${req.url.replace(/\/$/, '')}/${createContractResp.id}`
+      };
+      resolve(Service.successResponse(returnedResponse, 201, returnedHeaders));
     } catch (e) {
-      reject(Service.rejectResponse(
-        e.message || 'Invalid input',
-        e.status || 405,
-      ));
+      reject(Service.rejectResponse(e));
     }
   },
 );

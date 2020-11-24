@@ -29,6 +29,9 @@ class TestsDbUtils {
       if (contract.state === undefined) {
         contract.state = "DRAFT";
       }
+      if (contract.type === undefined) {
+        contract.type = "contract";
+      }
       if (contract.history === undefined) {
         contract.history = [];
       }

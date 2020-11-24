@@ -29,25 +29,25 @@ describe("Tests GET " + route + " API OK", function () {
     });
 
     it('Get contracts OK without any contract in DB', function (done) {
-        try {
-            let path = globalVersion + route;
-            chai.request(testsUtils.getServer())
-                .get(`${path}`)
-                .end((error, response) => {
-                    debug('response.body: %s', response.body);
-                    assert.equal(error, null);
-                    expect(response).to.have.status(200);
-                    expect(response).to.be.json;
-                    assert.exists(response.body);
-                    expect(response.body).to.be.an('array');
-                    expect(response.body.length).to.equal(0);
-                    done();
-                });
-        } catch (exception) {
-            debug('exception: %s', exception.stack);
-            assert.ok(false);
+      try {
+        let path = globalVersion + route;
+        chai.request(testsUtils.getServer())
+          .get(`${path}`)
+          .end((error, response) => {
+            debug('response.body: %s', response.body);
+            assert.equal(error, null);
+            expect(response).to.have.status(200);
+            expect(response).to.be.json;
+            assert.exists(response.body);
+            expect(response.body).to.be.an('array');
+            expect(response.body.length).to.equal(0);
             done();
-        }
+          });
+      } catch (exception) {
+        debug('exception: %s', exception.stack);
+        assert.ok(false);
+        done();
+      }
     });
   });
 
@@ -56,21 +56,18 @@ describe("Tests GET " + route + " API OK", function () {
 
     const contract1 = {
       name: "Contract name between A1 and B1",
-      fromMspId: "A1",
-      toMspId: "B1",
-      header: {
-        msps: {
-          A1: {
-            minSignatures: 2
-          },
-          B1: {
-            minSignatures: 2
-          }
-        }
+      state: 'DRAFT',
+      type: 'contract',
+      version: '1.1.0',
+      fromMsp: {
+        mspId: "A1"
+      },
+      toMsp: {
+        mspId: "B1"
       },
       body: {
         bankDetails: {
-          A1:{
+          A1: {
             iban: null,
             bankName: null,
             currency: null
@@ -89,26 +86,23 @@ describe("Tests GET " + route + " API OK", function () {
           startDate: "2020-12-01T00:00:00.000Z"
         }
       },
-      rawData: "Ctr_raw-data-1",
+      rawData: "Ctr_raw-data-1"
     };
 
     const contract2 = {
       name: "Contract name between A1 and C1",
-      fromMspId: "A1",
-      toMspId: "C3",
-      header: {
-        msps: {
-          AI: {
-            minSignatures: 2
-          },
-          C3: {
-            minSignatures: 3
-          }
-        }
+      state: 'DRAFT',
+      type: 'contract',
+      version: '1.3.1',
+      fromMsp: {
+        mspId: "A1"
+      },
+      toMsp: {
+        mspId: "C3"
       },
       body: {
         bankDetails: {
-          A1:{
+          A1: {
             iban: null,
             bankName: null,
             currency: null
@@ -127,7 +121,7 @@ describe("Tests GET " + route + " API OK", function () {
           startDate: "2020-12-01T00:00:00.000Z"
         }
       },
-      rawData: "Ctr_raw-data-2",
+      rawData: "Ctr_raw-data-2"
     };
 
     before(done => {
@@ -146,25 +140,25 @@ describe("Tests GET " + route + " API OK", function () {
     });
 
     it('Get contracts OK with 2 contracts in DB', function (done) {
-        try {
-            let path = globalVersion + route;
-            chai.request(testsUtils.getServer())
-                .get(`${path}`)
-                .end((error, response) => {
-                    debug('response.body : ', JSON.stringify(response.body, undefined, 2));
-                    assert.equal(error, null);
-                    expect(response).to.have.status(200);
-                    expect(response).to.be.json;
-                    assert.exists(response.body);
-                    expect(response.body).to.be.an('array');
-                    expect(response.body.length).to.equal(2);
-                    done();
-                });
-        } catch (exception) {
-            debug('exception: %s', exception.stack);
-            assert.ok(false);
+      try {
+        let path = globalVersion + route;
+        chai.request(testsUtils.getServer())
+          .get(`${path}`)
+          .end((error, response) => {
+            debug('response.body : ', JSON.stringify(response.body, undefined, 2));
+            assert.equal(error, null);
+            expect(response).to.have.status(200);
+            expect(response).to.be.json;
+            assert.exists(response.body);
+            expect(response.body).to.be.an('array');
+            expect(response.body.length).to.equal(2);
             done();
-        }
+          });
+      } catch (exception) {
+        debug('exception: %s', exception.stack);
+        assert.ok(false);
+        done();
+      }
     });
   });
 

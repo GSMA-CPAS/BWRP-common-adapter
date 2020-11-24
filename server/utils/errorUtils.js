@@ -29,6 +29,15 @@ class ErrorUtils {
     }
   };
 
+  static ERROR_DAO_MISSING_MANDATORY_PARAM = {
+    code: 500,
+    error: {
+      internalErrorCode: 1,
+      message: 'Internal error',
+      description: 'An internal error occured accessing the resource.'
+    }
+  };
+
 }
 
 module.exports = ErrorUtils;

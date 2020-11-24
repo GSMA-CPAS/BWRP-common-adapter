@@ -1,9 +1,12 @@
 'use strict';
 
 const logger = require('../../logger');
+const errorUtils = require('../../utils/errorUtils');
 
 const DAOErrorManager = require('./DAOErrorManager');
 const ContractMongoRequester = require('./ContractMongoRequester');
+
+const MISSING_MANDATORY_PARAM_ERROR = errorUtils.ERROR_DAO_MISSING_MANDATORY_PARAM;
 
 class ContractDAO {
 
@@ -25,6 +28,38 @@ class ContractDAO {
           })
           .catch(errorReturned => {
             logger.error('[ContractDAO::findAll] [FAILED] errorReturned:'+typeof errorReturned+" = "+JSON.stringify(errorReturned));
+            reject(errorReturned);
+          });
+      });
+    });
+  };
+
+  static create(object) {
+    return new Promise((resolve, reject) => {
+      // Verify parameters
+      if (object === undefined) {
+        logger.error('[ContractDAO::create] [FAILED] : object undefined');
+        reject(MISSING_MANDATORY_PARAM_ERROR);
+      }
+  
+      // Define automatic values
+      object.id = ContractMongoRequester.defineContractId();
+
+      const creationDate = Date.now();
+      object.creationDate = creationDate;
+      object.lastModificationDate = creationDate;
+      object.history = [
+        { date: creationDate, action: "CREATION" }
+      ]
+
+      // Launch database request
+      ContractMongoRequester.create(object, (err, contract) => {
+        DAOErrorManager.handleErrorOrNullObject(err, contract)
+          .then(objectReturned => {
+            resolve(objectReturned);
+          })
+          .catch(errorReturned => {
+            logger.error('[ContractDAO::create] [FAILED] errorReturned:'+typeof errorReturned+" = "+JSON.stringify(errorReturned));
             reject(errorReturned);
           });
       });
