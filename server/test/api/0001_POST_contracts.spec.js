@@ -38,8 +38,7 @@ describe("Tests POST " + route + " API OK", function () {
           .post(`${path}`)
           .send(sentBody)
           .end((error, response) => {
-            // debug('response.body: %s', JSON.stringify(response.body, undefined, 2));
-            // debug('response.headers: %s', JSON.stringify(response.headers, undefined, 2));
+            debug('response.body: %s', JSON.stringify(response.body));
             assert.equal(error, null);
             expect(response).to.have.status(201);
             expect(response).to.be.json;
@@ -75,6 +74,8 @@ describe("Tests POST " + route + " API OK", function () {
             expect(response.body.history[0]).to.have.property('date').that.is.a('string').and.match(DATE_REGEX);
             expect(response.body.history[0]).to.have.property('action', 'CREATION');
             
+            expect(response.headers).to.have.property('content-location', `${path.replace(/\/$/,'')}/${response.body.contractID}`);
+
             done();
           });
       } catch (exception) {

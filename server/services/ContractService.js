@@ -78,7 +78,8 @@ const getContracts = () => new Promise(
   async (resolve, reject) => {
     try {
       const getContractsResp = await LocalStorageProvider.getContracts();
-      resolve(Service.successResponse(getContractsResp, 200));
+      const returnedResponse = ContractMapper.getResponseBodyForGetContracts(getContractsResp);
+      resolve(Service.successResponse(returnedResponse, 200));
     } catch (e) {
       reject(Service.rejectResponse(e));
     }

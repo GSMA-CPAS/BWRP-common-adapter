@@ -5,6 +5,7 @@ const { deleteContractByID } = require('../services/ContractService');
 
 class ContractMapper {
 
+  // Map the input POST contracts request to internal contract
   static getContractFromRequest(req) {
     const returnedContract = {
       state: "DRAFT",
@@ -49,6 +50,7 @@ class ContractMapper {
     return returnedContract;
   }
 
+  // Map the internal contract to POST contracts or GET contract/id response body
   static getResponseBodyForGetContract(contract) {
     const returnedResponseBody = {
       contractID: contract.id,
@@ -88,6 +90,33 @@ class ContractMapper {
       lastModificationDate: contract.lastModificationDate
     };
 
+    return returnedResponseBody;
+  }
+
+  // Map the internal contracts to GET contracts response body
+  static getResponseBodyForGetContracts(contracts) {
+    const returnedResponseBody = [];
+    if ((contracts !== undefined) && (Array.isArray(contracts))) {
+      contracts.forEach(contract => {
+        returnedResponseBody.push({
+          contractID: contract.id,
+          header: {
+            name: contract.name,
+            type: contract.type,
+            version: contract.version,
+            fromMSP: {
+              mspid: contract.fromMsp.mspId
+            },
+            toMSP: {
+              mspid: contract.toMsp.mspId
+            }
+          },
+          state: contract.state,
+          creationDate: contract.creationDate,
+          lastModificationDate: contract.lastModificationDate    
+        })
+      });
+    }
     return returnedResponseBody;
   }
 

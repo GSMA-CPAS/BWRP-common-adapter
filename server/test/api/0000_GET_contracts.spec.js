@@ -10,6 +10,8 @@ const expect = require('chai').expect;
 const globalVersion = '/api/v1';
 const route = '/contracts/';
 
+const DATE_REGEX = new RegExp('^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z$');
+
 describe("Tests GET " + route + " API OK", function () {
 
   describe("Setup and Test GET " + route + " API without any contract in DB", function () {
@@ -34,7 +36,7 @@ describe("Tests GET " + route + " API OK", function () {
         chai.request(testsUtils.getServer())
           .get(`${path}`)
           .end((error, response) => {
-            debug('response.body: %s', response.body);
+            debug('response.body: %s', JSON.stringify(response.body));
             assert.equal(error, null);
             expect(response).to.have.status(200);
             expect(response).to.be.json;
@@ -145,13 +147,42 @@ describe("Tests GET " + route + " API OK", function () {
         chai.request(testsUtils.getServer())
           .get(`${path}`)
           .end((error, response) => {
-            debug('response.body : ', JSON.stringify(response.body, undefined, 2));
+            debug('response.body : ', JSON.stringify(response.body));
             assert.equal(error, null);
             expect(response).to.have.status(200);
             expect(response).to.be.json;
             assert.exists(response.body);
             expect(response.body).to.be.an('array');
             expect(response.body.length).to.equal(2);
+
+            let contract1IsFound = false;
+            let contract2IsFound = false;
+            response.body.forEach(contractInBody => {
+              let contract = undefined;
+              if (contractInBody.contractID === contract1.id) {
+                contract1IsFound = true;
+                contract = contract1;
+              }
+              if (contractInBody.contractID === contract2.id) {
+                contract2IsFound = true;
+                contract = contract2;
+              }
+              expect(contractInBody).to.have.property('contractID', contract.id);
+              expect(contractInBody).to.have.property('state', contract.state);
+              expect(contractInBody).to.have.property('creationDate').that.match(DATE_REGEX);
+              expect(contractInBody).to.have.property('lastModificationDate').that.match(DATE_REGEX);
+              expect(contractInBody).to.have.property('header').that.is.an('object');
+              expect(contractInBody.header).to.have.property('name', contract.name);
+              expect(contractInBody.header).to.have.property('type', contract.type);
+              expect(contractInBody.header).to.have.property('version', contract.version);
+              expect(contractInBody.header).to.have.property('fromMSP').that.is.an('object');
+              expect(contractInBody.header.fromMSP).to.have.property('mspid', contract.fromMsp.mspId);
+              expect(contractInBody.header).to.have.property('toMSP').that.is.an('object');
+              expect(contractInBody.header.toMSP).to.have.property('mspid', contract.toMsp.mspId);  
+            });
+            expect(contract1IsFound).to.be.true;
+            expect(contract2IsFound).to.be.true;
+
             done();
           });
       } catch (exception) {
