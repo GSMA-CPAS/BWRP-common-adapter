@@ -47,6 +47,19 @@ class LocalStorageProvider {
     }
   }
 
+    /**
+     *
+     * @returns {Promise<object>}
+     */
+    static async getContract(id) {
+        try {
+          return await ContractDAO.findOne(id);
+        } catch (error) {
+            logger.error('[LocalStorageProvider::updateContract] failed to update contract - %s', error.message);
+            throw error;
+        }
+    }
+
 }
 
 module.exports = LocalStorageProvider;

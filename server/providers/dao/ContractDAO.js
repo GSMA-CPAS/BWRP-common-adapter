@@ -109,7 +109,7 @@ class ContractDAO {
 
       // Launch database request
       ContractMongoRequester.findOneAndUpdate(condition, updateCommand, (err, contract) => {
-        DAOErrorManager.handleErrorOrNullObject(err, contract)
+          DAOErrorManager.handleErrorOrNullObject(err, contract)
           .then(objectReturned => {
             resolve(objectReturned);
           })
@@ -120,6 +120,38 @@ class ContractDAO {
       });
     });
   };
+
+  static findOne(id) {
+        return new Promise((resolve, reject) => {
+            // Verify parameters
+            if (id === undefined) {
+                logger.error('[ContractDAO::findOne] [FAILED] : id undefined');
+                reject(MISSING_MANDATORY_PARAM_ERROR);
+            }
+
+
+            // Defined update condition and update command
+            const condition = {
+                id: id,
+            };
+
+            // Launch database request
+            ContractMongoRequester.findOne({id}, (err, contract) => {
+                // Use errorManager to return appropriate dao errors
+                DAOErrorManager.handleErrorOrNullObject(err, contract)
+                    .then(objectReturned => {
+
+                        logger.debug('[DAO] [findOne] [OK] objectReturned:'+typeof objectReturned+" = "+JSON.stringify(objectReturned));
+                        return resolve(objectReturned);
+                    })
+                    .catch(errorReturned => {
+                        logger.error('[DAO] [findOne] [FAILED] errorReturned:'+typeof errorReturned+" = "+JSON.stringify(errorReturned));
+                        return reject(errorReturned);
+                    });
+            });
+        });
+    };
+
 
 }
 
