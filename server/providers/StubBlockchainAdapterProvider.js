@@ -91,6 +91,15 @@ const ERROR_NOT_FOUND = {
   }
 };
 
+const defineRawDataFromContract = (c) => {
+  const stringToEncode = JSON.stringify(c);
+  return Buffer.from(stringToEncode).toString('base64');
+} 
+
+const defineContractFromRawData = (d) => {
+  const stringToParse = Buffer.from(d, 'base64').toString();
+  return JSON.parse(stringToParse);
+} 
 
 class BlockchainAdapterProvider {
 
@@ -191,6 +200,29 @@ class BlockchainAdapterProvider {
         return response;
       } catch (error) {
           logger.error('[StubBlockchainAdapterProvider::uploadPrivateDocument] failed to upload document - %s', error.message);
+          throw error;
+      }
+    }
+
+    /**
+     *
+     * @param contract
+     * @returns {Promise<object>}
+     */
+    async uploadContract(contract) {
+      try {
+        const rawData = defineRawDataFromContract(contract);
+        const randomValue = ((Math.random() * 65535) | 1).toString(16);
+        const formatedRandomValue = ('000' + randomValue).slice(-4).toLowerCase();    
+        const blockchainResp = {
+          "documentID": "1d5dde7bf9d52cc804ac89ca93c0143282386b6328e074e7ea209b16ed8d" + formatedRandomValue
+        };        
+        return {
+          rawData,
+          documentID: blockchainResp.documentID
+        };
+      } catch (error) {
+          logger.error('[StubBlockchainAdapterProvider::uploadContract] failed to upload contract - %s', error.message);
           throw error;
       }
     }

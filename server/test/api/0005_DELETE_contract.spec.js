@@ -112,7 +112,7 @@ describe("Tests DELETE " + route + " API OK", function () {
           .delete(`${path}`)
           .send()
           .end((error, response) => {
-            assert.equal(error, null);
+            expect(error).to.be.null;
             expect(response).to.have.status(200);
 
             debug('response.status: %s', JSON.stringify(response.status));
@@ -172,19 +172,23 @@ describe("Tests DELETE " + route + " API OK", function () {
         let path = globalVersion + '/contracts/' + "id_" + randomValue;
         debug("path : ", path);
 
-
         chai.request(testsUtils.getServer())
           .delete(`${path}`)
           .send()
           .end((error, response) => {
             debug('response.status: %s', JSON.stringify(response.status));
-            debug('response.body: %s', JSON.stringify(response));
+            debug('response.body: %s', JSON.stringify(response.body));
 
-            assert.equal(error, null);
-            expect(response).to.have.status(500);
-            expect(response).to.have.property('text', 'Resource not found');
+            expect(error).to.be.null;
+            expect(response).to.have.status(404);
+            expect(response.body).to.exist;
+            expect(response.body).to.be.an('object');
+
+            expect(response.body).to.have.property('internalErrorCode', 60);
+            expect(response.body).to.have.property('message', "Resource not found");
+            expect(response.body).to.have.property('description', "The requested URI or the requested resource does not exist.");
+
             done();
-
           });
       } catch (exception) {
         debug('exception: %s', exception.stack);

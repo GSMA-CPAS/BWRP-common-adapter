@@ -99,7 +99,6 @@ class ContractDAO {
           fromMsp: object.fromMsp,
           toMsp: object.toMsp,
           body: object.body,
-          rawData: object.rawData,
           lastModificationDate: object.lastModificationDate
         },
         $push: {
@@ -129,18 +128,11 @@ class ContractDAO {
         reject(MISSING_MANDATORY_PARAM_ERROR);
       }
 
-
-      // Defined update condition and update command
-      const condition = {
-        id: id,
-      };
-
       // Launch database request
       ContractMongoRequester.findOne({id}, (err, contract) => {
         // Use errorManager to return appropriate dao errors
         DAOErrorManager.handleErrorOrNullObject(err, contract)
           .then(objectReturned => {
-
             logger.debug('[DAO] [findOne] [OK] objectReturned:' + typeof objectReturned + " = " + JSON.stringify(objectReturned));
             return resolve(objectReturned);
           })
@@ -165,7 +157,6 @@ class ContractDAO {
         // Use errorManager to return appropriate dao errors
         DAOErrorManager.handleErrorOrNullObject(err, contract)
           .then(objectReturned => {
-
             logger.debug('[DAO] [findOneAndRemove] [OK] objectReturned:' + typeof objectReturned + " = " + JSON.stringify(objectReturned));
             return resolve(objectReturned);
           })
@@ -176,6 +167,58 @@ class ContractDAO {
       });
     });
   };
+
+  static findOneAndUpdateToSentContract(contractId, rawData, documentId) {
+    return new Promise((resolve, reject) => {
+      // Verify parameters
+      if (contractId === undefined) {
+        logger.error('[ContractDAO::findOneAndUpdateToSentContract] [FAILED] : contractId undefined');
+        reject(MISSING_MANDATORY_PARAM_ERROR);
+      }
+      if (rawData === undefined) {
+        logger.error('[ContractDAO::findOneAndUpdateToSentContract] [FAILED] : rawData undefined');
+        reject(MISSING_MANDATORY_PARAM_ERROR);
+      }
+      if (documentId === undefined) {
+        logger.error('[ContractDAO::findOneAndUpdateToSentContract] [FAILED] : documentId undefined');
+        reject(MISSING_MANDATORY_PARAM_ERROR);
+      }
+  
+      // Define automatic values
+      const lastModificationDate = Date.now();
+
+      // Defined update condition and update command
+      const condition = {
+        id: contractId,
+        state: 'DRAFT'
+      };
+
+      const updateCommand = {
+        $set: {
+          rawData: rawData,
+          documentId: documentId,
+          state: 'SENT',
+          lastModificationDate: lastModificationDate
+        },
+        $push: {
+          history: { date: lastModificationDate, action: "SENT" }
+        }
+      };      
+
+      // Launch database request
+      ContractMongoRequester.findOneAndUpdate(condition, updateCommand, (err, contract) => {
+        DAOErrorManager.handleErrorOrNullObject(err, contract)
+          .then(objectReturned => {
+            resolve(objectReturned);
+          })
+          .catch(errorReturned => {
+            logger.error('[ContractDAO::findOneAndUpdateToSentContract] [FAILED] errorReturned:'+typeof errorReturned+" = "+JSON.stringify(errorReturned));
+            reject(errorReturned);
+          });
+      });
+    });
+  };
+
 }
 
 module.exports = ContractDAO;
