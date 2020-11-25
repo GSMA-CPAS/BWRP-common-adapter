@@ -1,0 +1,33 @@
+version: '3'
+
+volumes:
+  CADB-local:
+
+services:
+  CADB-local:
+    container_name: CADB-local
+    image: mongo:${MONGO_VERSION}
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_ROOT}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_ROOTPW}
+      - MONGO_INITDB_DATABASE=commondb
+    volumes:
+      - ${MONGO_PV_PATH}/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - ${MONGO_PV_PATH}:/data/db
+    ports:
+      - ${MONGO_PORT}:27017
+
+  common-adapter-local:
+    container_name: common-adapter-local
+    build: ./server
+    image: common-adapter
+    restart: always
+    environment:
+      - LOG_LEVEL=${LOG_LEVEL}
+      - DB_URL=mongodb://${MONGO_USER}:${MONGO_USERPW}@${MONGO_DB_HOST}/commondb?authSource=commondb
+      - BLOCKCHAIN_ADAPTER_URL=${BLOCKCHAIN_ADAPTER_URL}
+    depends_on:
+      - CADB-local
+    ports:
+      - ${COMMON_ADAPTER_PORT}:3000
