@@ -46,6 +46,7 @@ Class | Method | HTTP request | Description
  - [SignatureResponse](./Models/SignatureResponse.md)
  - [SuccessResponse](./Models/SuccessResponse.md)
  - [UsageRequest](./Models/UsageRequest.md)
+ - [UsageRequestHeader](./Models/UsageRequestHeader.md)
  - [UsageResponse](./Models/UsageResponse.md)
  - [UsageResponseHeader](./Models/UsageResponseHeader.md)
 

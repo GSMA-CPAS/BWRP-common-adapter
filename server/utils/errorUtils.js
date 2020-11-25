@@ -101,6 +101,15 @@ class ErrorUtils {
     }
   };
 
+  static ERROR_BUSINESS_CREATE_USAGE_ON_CONTRACT_ONLY_ALLOWED_IN_STATE_SENT_AND_RECEIVED = {
+    code: 422,
+    error: {
+      internalErrorCode: 2002,
+      message: 'Create usage not allowed',
+      description: 'It\'s not allowed to create usage on this contract.'
+    }
+  };
+
 }
 
 module.exports = ErrorUtils;

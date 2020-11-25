@@ -4,6 +4,7 @@ const config = require('../config');
 const logger = require('../logger');
 
 const ContractDAO = require('./dao/ContractDAO');
+const UsageDAO = require('./dao/UsageDAO');
 
 
 class LocalStorageProvider {
@@ -86,6 +87,32 @@ class LocalStorageProvider {
     }
   }
 
+
+  /**
+   *
+   * @returns {Promise<[string]>}
+   */
+  static async getUsages(contractID) {
+    try {
+      return await UsageDAO.findAll(contractID);
+    } catch (error) {
+      logger.error('[LocalStorageProvider::getUsages] failed to get usages - %s', error.message);
+      throw error;
+    }
+  }
+
+  /**
+   *
+   * @returns {Promise<object>}
+   */
+  static async createUsage(usage) {
+    try {
+      return await UsageDAO.create(usage);
+    } catch (error) {
+      logger.error('[LocalStorageProvider::createUsage] failed to create usage - %s', error.message);
+      throw error;
+    }
+  }
 }
 
 module.exports = LocalStorageProvider;

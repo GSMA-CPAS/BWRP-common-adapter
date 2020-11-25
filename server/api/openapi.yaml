@@ -1013,9 +1013,9 @@ components:
       example:
         usageID: 05552c4c-e52f-4bb5-83d2-f50c86115bc8
         header:
-          name: Usage, from ABC to XYZ
-          msp:
+          mspOwner:
             key: '{}'
+          name: Usage, from ABC to XYZ
           type: usage
           version: "1.0"
         state: DRAFT
@@ -1040,24 +1040,22 @@ components:
           type: string
       required:
       - body
-      - contractID
       - header
       - state
+      - usageID
       title: Usage JSON
       type: object
     UsageRequest:
       example:
         header:
           name: Usage, from ABC to XYZ
-          msp:
-            key: '{}'
           type: usage
           version: "1.0"
         body:
           key: '{}'
       properties:
         header:
-          $ref: '#/components/schemas/UsageResponse_header'
+          $ref: '#/components/schemas/UsageRequest_header'
         body:
           additionalProperties: true
           type: object
@@ -1192,9 +1190,9 @@ components:
       type: object
     UsageResponse_header:
       example:
-        name: Usage, from ABC to XYZ
-        msp:
+        mspOwner:
           key: '{}'
+        name: Usage, from ABC to XYZ
         type: usage
         version: "1.0"
       properties:
@@ -1211,11 +1209,33 @@ components:
           enum:
           - usage
           type: string
-        msp:
+        mspOwner:
           additionalProperties: true
-          description: 'Additonal check properties per msp eg, "MSPID": {"minSignatures":
-            2}'
+          description: the MSP which gives the Inbound traffic data
           type: object
+      required:
+      - type
+      - version
+      type: object
+    UsageRequest_header:
+      example:
+        name: Usage, from ABC to XYZ
+        type: usage
+        version: "1.0"
+      properties:
+        name:
+          description: Human readable name for the usage.
+          example: Usage, from ABC to XYZ
+          type: string
+        version:
+          description: Version of the usage
+          example: "1.0"
+          type: string
+        type:
+          description: Type of document. MUST be "usage"
+          enum:
+          - usage
+          type: string
       required:
       - type
       - version

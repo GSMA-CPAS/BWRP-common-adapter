@@ -3,7 +3,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**usageID** | [**String**](string.md) | usageID in GUID format | [optional] [default to null]
+**usageID** | [**String**](string.md) | usageID in GUID format | [default to null]
 **header** | [**UsageResponse_header**](UsageResponse_header.md) |  | [default to null]
 **body** | [**Map**](object.md) |  | [default to null]
 **state** | [**String**](string.md) | The State of the Usage. | [default to null]

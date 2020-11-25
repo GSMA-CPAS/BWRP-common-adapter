@@ -1050,9 +1050,9 @@ components:
               type: string
               description: Type of document. MUST be "usage"
               enum: [usage]
-            msp:
-              type: object
-              description: "Additonal check properties per msp eg, \"MSPID\": {\"minSignatures\": 2}"
+            mspOwner:
+              type: string
+              description: the MSP which gives the Inbound traffic data
               additionalProperties: true    
           additionalProperties: false
           required:
@@ -1065,7 +1065,7 @@ components:
           description: The State of the Usage.
           enum: [DRAFT, SENT, RECEIVED]
       required:
-        - contractID
+        - usageID
         - header
         - body
         - state
@@ -1089,10 +1089,6 @@ components:
               type: string
               description: Type of document. MUST be "usage"
               enum: [usage]
-            msp:
-              type: object
-              description: "Additonal check properties per msp eg, \"MSPID\": {\"minSignatures\": 2}"
-              additionalProperties: true    
           additionalProperties: false
           required:
             - version

@@ -13,6 +13,131 @@
 ]
 }
 
+{
+  usageId: usage.id,
+  contractId : usage.contractId,
+  header: {
+    name: contract.name,
+    type: contract.type,
+    version: contract.version,
+    fromMspId: usage.fromMspId,
+    toMspId: usage.toMspId
+  },
+  state: usage.state,
+  body: {
+    "data": [ {
+      year: { type: Number, required: false },
+      month: { type: Number, required: false },
+      hpmn: { type: String, required: false},
+      vpmn: { type: String, required: false },
+      service: { type: String, required: false },
+      value: { type: Number, required: false },
+      units: { type: String, required: false },
+      charges: { type: String, required: false },
+      taxes: { type: String, required: false }
+    }, ...]
+  },
+  history: usage.history,
+  creationDate: usage.creationDate,
+  lastModificationDate: usage.lastModificationDate
+}
+
+
+
+
+var HistorySchema = new Schema({
+  date: { type: Date, required: true },
+  action: { type: String, required: true }
+}, { _id: false });
+
+var UsageDataSchema = new Schema({
+    year: { type: Number, required: false },
+    month: { type: Number, required: false },
+    hpmn: { type: String, required: false},
+    vpmn: { type: String, required: false },
+    service: { type: String, required: false },
+    value: { type: Number, required: false },
+    units: { type: String, required: false },
+    charges: { type: String, required: false },
+    taxes: { type: String, required: false },
+}, { _id: false });
+
+var UsageBodySchema = new Schema({
+data: { type: [UsageDataSchema], required: false }
+}, { _id: false });
+
+
+
+var UsageSchema = new Schema({
+    id: { type: String, required: true },
+    type: { type: String, required: true },
+    version: { type: String, required: true },
+    name: { type: String, required: true },
+    contractId: { type: String, required: true },
+    mspOwner: { type: String, required: true },
+    body: { type: UsageBodySchema, required: true },
+    history: { type: [HistorySchema], required: true },
+    creationDate: { type: Date, required: true },
+    lastModificationDate: { type: Date, required: true, default: Date.now },
+    state: { type: String, required: true }
+});
+
+
+
+REQUEST:
+{
+  header: {
+    name: usage.name,
+    type: usage.type,
+    version: usage.version,
+ // mspOwner: ->  the MSP which gives the Inbound traffic data   Could be the contract->fromMSP
+  },
+  body: {
+    "data": [ {
+        year: { type: Number, required: false },
+        month: { type: Number, required: false },
+        hpmn: { type: String, required: false},
+        vpmn: { type: String, required: false },
+        service: { type: String, required: false },
+        value: { type: Number, required: false },
+        units: { type: String, required: false },
+        charges: { type: String, required: false },
+        taxes: { type: String, required: false }
+        }, ...]
+  },
+}
+
+RESPONSE:
+  {
+  usageId: usage.id,
+
+  header: {
+    name: contract.name,
+    type: contract.type,
+    version: contract.version,
+    mspOwner: ->  the MSP which gives the Inbound trafic data
+  },
+  state: usage.state,
+  body: {
+    "data": [ {
+          year: { type: Number, required: false },
+          month: { type: Number, required: false },
+          hpmn: { type: String, required: false},
+          vpmn: { type: String, required: false },
+          service: { type: String, required: false },
+          value: { type: Number, required: false },
+          units: { type: String, required: false },
+          charges: { type: String, required: false },
+          taxes: { type: String, required: false }
+          }, ...]
+  },
+  history: usage.history,
+  creationDate: usage.creationDate,
+  lastModificationDate: usage.lastModificationDate
+  }
+
+
+
 ###############################################
 ##############       POST         #############
 ###############################################
