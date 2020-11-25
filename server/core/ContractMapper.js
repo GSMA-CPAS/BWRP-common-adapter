@@ -1,7 +1,6 @@
 'use strict';
 
 const logger = require('../logger');
-const { deleteContractByID } = require('../services/ContractService');
 
 class ContractMapper {
 

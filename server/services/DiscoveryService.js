@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 const Service = require('./Service');
-const BlockchainAdapterProvider = require('../providers/BlockchainAdapterProvider');
+const BlockchainAdapterProvider = require('../providers/StubBlockchainAdapterProvider');
 const blockchainAdapterConnection = new BlockchainAdapterProvider();
 
 
