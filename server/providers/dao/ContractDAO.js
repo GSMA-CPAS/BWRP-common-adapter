@@ -13,13 +13,13 @@ class ContractDAO {
   static findAll(state) {
     return new Promise((resolve, reject) => {
       // Verify parameters
-  
+
       // Define find condition
       const condition = {};
       if (state !== undefined) {
-          condition.state = state;
+        condition.state = state;
       }
-  
+
       // Launch database request
       ContractMongoRequester.findAll(condition, (err, contracts) => {
         DAOErrorManager.handleErrorOrNullObject(err, contracts)
@@ -27,7 +27,7 @@ class ContractDAO {
             resolve(objectReturned);
           })
           .catch(errorReturned => {
-            logger.error('[ContractDAO::findAll] [FAILED] errorReturned:'+typeof errorReturned+" = "+JSON.stringify(errorReturned));
+            logger.error('[ContractDAO::findAll] [FAILED] errorReturned:' + typeof errorReturned + " = " + JSON.stringify(errorReturned));
             reject(errorReturned);
           });
       });
@@ -41,7 +41,7 @@ class ContractDAO {
         logger.error('[ContractDAO::create] [FAILED] : object undefined');
         reject(MISSING_MANDATORY_PARAM_ERROR);
       }
-  
+
       // Define automatic values
       object.id = ContractMongoRequester.defineContractId();
 
@@ -49,7 +49,7 @@ class ContractDAO {
       object.creationDate = creationDate;
       object.lastModificationDate = creationDate;
       object.history = [
-        { date: creationDate, action: "CREATION" }
+        {date: creationDate, action: "CREATION"}
       ]
 
       // Launch database request
@@ -59,7 +59,7 @@ class ContractDAO {
             resolve(objectReturned);
           })
           .catch(errorReturned => {
-            logger.error('[ContractDAO::create] [FAILED] errorReturned:'+typeof errorReturned+" = "+JSON.stringify(errorReturned));
+            logger.error('[ContractDAO::create] [FAILED] errorReturned:' + typeof errorReturned + " = " + JSON.stringify(errorReturned));
             reject(errorReturned);
           });
       });
@@ -81,7 +81,7 @@ class ContractDAO {
         logger.error('[ContractDAO::update] [FAILED] : object.state undefined');
         reject(MISSING_MANDATORY_PARAM_ERROR);
       }
-  
+
       // Define automatic values
       object.lastModificationDate = Date.now();
 
@@ -103,18 +103,18 @@ class ContractDAO {
           lastModificationDate: object.lastModificationDate
         },
         $push: {
-          history: { date: object.lastModificationDate, action: "UPDATE" }
+          history: {date: object.lastModificationDate, action: "UPDATE"}
         }
-      };      
+      };
 
       // Launch database request
       ContractMongoRequester.findOneAndUpdate(condition, updateCommand, (err, contract) => {
-          DAOErrorManager.handleErrorOrNullObject(err, contract)
+        DAOErrorManager.handleErrorOrNullObject(err, contract)
           .then(objectReturned => {
             resolve(objectReturned);
           })
           .catch(errorReturned => {
-            logger.error('[ContractDAO::update] [FAILED] errorReturned:'+typeof errorReturned+" = "+JSON.stringify(errorReturned));
+            logger.error('[ContractDAO::update] [FAILED] errorReturned:' + typeof errorReturned + " = " + JSON.stringify(errorReturned));
             reject(errorReturned);
           });
       });
@@ -122,37 +122,60 @@ class ContractDAO {
   };
 
   static findOne(id) {
-        return new Promise((resolve, reject) => {
-            // Verify parameters
-            if (id === undefined) {
-                logger.error('[ContractDAO::findOne] [FAILED] : id undefined');
-                reject(MISSING_MANDATORY_PARAM_ERROR);
-            }
+    return new Promise((resolve, reject) => {
+      // Verify parameters
+      if (id === undefined) {
+        logger.error('[ContractDAO::findOne] [FAILED] : id undefined');
+        reject(MISSING_MANDATORY_PARAM_ERROR);
+      }
 
 
-            // Defined update condition and update command
-            const condition = {
-                id: id,
-            };
+      // Defined update condition and update command
+      const condition = {
+        id: id,
+      };
 
-            // Launch database request
-            ContractMongoRequester.findOne({id}, (err, contract) => {
-                // Use errorManager to return appropriate dao errors
-                DAOErrorManager.handleErrorOrNullObject(err, contract)
-                    .then(objectReturned => {
+      // Launch database request
+      ContractMongoRequester.findOne({id}, (err, contract) => {
+        // Use errorManager to return appropriate dao errors
+        DAOErrorManager.handleErrorOrNullObject(err, contract)
+          .then(objectReturned => {
 
-                        logger.debug('[DAO] [findOne] [OK] objectReturned:'+typeof objectReturned+" = "+JSON.stringify(objectReturned));
-                        return resolve(objectReturned);
-                    })
-                    .catch(errorReturned => {
-                        logger.error('[DAO] [findOne] [FAILED] errorReturned:'+typeof errorReturned+" = "+JSON.stringify(errorReturned));
-                        return reject(errorReturned);
-                    });
-            });
-        });
-    };
+            logger.debug('[DAO] [findOne] [OK] objectReturned:' + typeof objectReturned + " = " + JSON.stringify(objectReturned));
+            return resolve(objectReturned);
+          })
+          .catch(errorReturned => {
+            logger.error('[DAO] [findOne] [FAILED] errorReturned:' + typeof errorReturned + " = " + JSON.stringify(errorReturned));
+            return reject(errorReturned);
+          });
+      });
+    });
+  };
 
+  static findOneAndRemove(id) {
+    return new Promise((resolve, reject) => {
+      // Verify parameters
+      if (id === undefined) {
+        logger.error('[ContractDAO::findOneAndRemove] [FAILED] : id undefined');
+        reject(MISSING_MANDATORY_PARAM_ERROR);
+      }
 
+      // Launch database request
+      ContractMongoRequester.findOneAndRemove({id}, (err, contract) => {
+        // Use errorManager to return appropriate dao errors
+        DAOErrorManager.handleErrorOrNullObject(err, contract)
+          .then(objectReturned => {
+
+            logger.debug('[DAO] [findOneAndRemove] [OK] objectReturned:' + typeof objectReturned + " = " + JSON.stringify(objectReturned));
+            return resolve(objectReturned);
+          })
+          .catch(errorReturned => {
+            logger.error('[DAO] [findOneAndRemove] [FAILED] errorReturned:' + typeof errorReturned + " = " + JSON.stringify(errorReturned));
+            return reject(errorReturned);
+          });
+      });
+    });
+  };
 }
 
 module.exports = ContractDAO;

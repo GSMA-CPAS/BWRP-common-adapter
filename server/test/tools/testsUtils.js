@@ -34,5 +34,9 @@ class TestsUtils {
     return app;
   }
 
+  static defineRandomValue() {
+    return String(Date.now()) + ((Math.random() * 100) | 1);
+  };
+
 }
 module.exports = TestsUtils;

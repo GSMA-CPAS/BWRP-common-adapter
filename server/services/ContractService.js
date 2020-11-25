@@ -36,16 +36,18 @@ const createContract = ({url, body}) => new Promise(
  * */
 const deleteContractByID = ({contractID}) => new Promise(
     async (resolve, reject) => {
-        try {
-            resolve(Service.successResponse({
-                contractID,
-            }));
-        } catch (e) {
-            reject(Service.rejectResponse(
-                e.message || 'Invalid input',
-                e.status || 405,
-            ));
-        }
+      try {
+        const deleteContractByIdResp = await LocalStorageProvider.deleteContract(contractID);
+        const returnedResponse = ContractMapper.getResponseBodyForGetContract(deleteContractByIdResp);
+
+        resolve(Service.successResponse(returnedResponse));
+      } catch (e) {
+        logger.error( e)
+        reject(Service.rejectResponse(
+          e.error.message || 'Invalid input',
+          e.status || 500,
+        ));
+      }
     },
 );
 /**
