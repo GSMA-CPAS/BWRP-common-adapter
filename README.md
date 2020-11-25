@@ -1,7 +1,7 @@
 # BWRP-common-adapter
 The "Layer 2.5" with all Common functionality APIs
 
-Start Local Mongo Instance via docker-compose (kube version coming soon)
+Start Common-Adapter Instance (with mongoDB) via docker-compose (kube version coming soon)
 
  edit '.env' file to suit your needs
    | Variable | Value | Description |
@@ -27,5 +27,7 @@ To start, please run.
     ./setup.sh build
     ./setup.sh up
 
+Once its up and running, you can access the API via
+    http://<yourhost>:<COMMON_ADAPTER_PORT>/api-docs/
 
 --
