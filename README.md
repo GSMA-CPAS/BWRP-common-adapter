@@ -1,3 +1,4 @@
+
 # BWRP-common-adapter
 The "Layer 2.5" with all Common functionality APIs
 
@@ -28,6 +29,7 @@ To start, please run.
     ./setup.sh up
 
 Once its up and running, you can access the API via
-    http://<yourhost>:<COMMON_ADAPTER_PORT>/api-docs/
+
+     http://<yourhost>:<COMMON_ADAPTER_PORT>/api-docs/
 
 --
