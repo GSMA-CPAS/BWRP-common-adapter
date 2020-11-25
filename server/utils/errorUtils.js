@@ -47,6 +47,15 @@ class ErrorUtils {
     }
   };
 
+  static ERROR_BUSINESS_SEND_CONTRACT_ONLY_ALLOWED_IN_STATE_DRAFT = {
+    code: 422,
+    error: {
+      internalErrorCode: 2001,
+      message: 'Send contract not allowed',
+      description: 'It\'s not allowed to send this contract.'
+    }
+  };
+
 }
 
 module.exports = ErrorUtils;

@@ -47,18 +47,44 @@ class LocalStorageProvider {
     }
   }
 
-    /**
-     *
-     * @returns {Promise<object>}
-     */
-    static async getContract(id) {
-        try {
-          return await ContractDAO.findOne(id);
-        } catch (error) {
-            logger.error('[LocalStorageProvider::updateContract] failed to update contract - %s', error.message);
-            throw error;
-        }
+  /**
+   *
+   * @returns {Promise<object>}
+   */
+  static async getContract(id) {
+    try {
+      return await ContractDAO.findOne(id);
+    } catch (error) {
+      logger.error('[LocalStorageProvider::getContract] failed to get contract - %s', error.message);
+      throw error;
     }
+  }
+
+  /**
+   *
+   * @returns {Promise<object>}
+   */
+  static async deleteContract(id) {
+    try {
+      return await ContractDAO.findOneAndRemove(id);
+    } catch (error) {
+      logger.error('[LocalStorageProvider::deleteContract] failed to delete contract - %s', error.message);
+      throw error;
+    }
+  }
+
+  /**
+   *
+   * @returns {Promise<object>}
+   */
+  static async updateSentContract(contractId, rawData, documentId) {
+    try {
+      return await ContractDAO.findOneAndUpdateToSentContract(contractId, rawData, documentId);
+    } catch (error) {
+      logger.error('[LocalStorageProvider::updateSentContract] failed to update sent contract - %s', error.message);
+      throw error;
+    }
+  }
 
 }
 

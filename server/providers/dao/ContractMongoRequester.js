@@ -62,6 +62,19 @@ class ContractMongoRequester {
             return next({code:404, name:"NotFound"}, null);
         });
     }
+
+  static findOneAndRemove(conditions, next) {
+    ContractMongoModel.findOneAndRemove(conditions, (err, contract) => {
+      if (err) {
+        next(err);
+      }
+      if (contract) {
+        return next(null, contract);
+      }
+      return next({code:404, name:"NotFound"}, null);
+    });
+  }
+
 }
 
 module.exports = ContractMongoRequester;

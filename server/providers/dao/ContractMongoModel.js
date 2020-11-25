@@ -32,6 +32,7 @@ var ContractSchema = new Schema({
   toMsp: { type: MspSchema, required: true },
   body: { type: ContractBodySchema, required: true },
   rawData: { type: String, required: false },
+  documentId: { type: String, required: false },
   state: { type: String, required: true },
   history: { type: [HistorySchema], required: true },
   creationDate: { type: Date, required: true },
