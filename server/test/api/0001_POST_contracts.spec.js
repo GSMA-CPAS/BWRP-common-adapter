@@ -4,7 +4,6 @@ const debug = require('debug')('spec:it');
 const debugSetup = require('debug')('spec:setup');
 
 const chai = require('chai');
-const assert = require('chai').assert;
 const expect = require('chai').expect;
 
 const globalVersion = '/api/v1';
@@ -39,11 +38,12 @@ describe("Tests POST " + route + " API OK", function () {
           .send(sentBody)
           .end((error, response) => {
             debug('response.body: %s', JSON.stringify(response.body));
-            assert.equal(error, null);
+            expect(error).to.be.null;
             expect(response).to.have.status(201);
             expect(response).to.be.json;
-            assert.exists(response.body);
+            expect(response.body).to.exist;
             expect(response.body).to.be.an('object');
+            expect(Object.keys(response.body)).have.members(["contractID", "state", "creationDate", "lastModificationDate", "header", "body", "history"]);
 
             expect(response.body).to.have.property('contractID').that.is.a("string");
             expect(response.body).to.have.property('state', 'DRAFT');
@@ -51,26 +51,29 @@ describe("Tests POST " + route + " API OK", function () {
             expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
 
             expect(response.body).to.have.property('header').that.is.an('object');
+            expect(Object.keys(response.body.header)).have.members(["name", "type", "version", "fromMSP", "toMSP"]);
             expect(response.body.header).to.have.property('name', sentBody.header.name);
             expect(response.body.header).to.have.property('type', sentBody.header.type);
             expect(response.body.header).to.have.property('version', sentBody.header.version);
             
             expect(response.body.header).to.have.property('fromMSP').that.is.an('object');
+            expect(Object.keys(response.body.header.fromMSP)).have.members(["mspid", "signatures"]);
             expect(response.body.header.fromMSP).to.have.property('mspid', sentBody.header.fromMSP.mspid);
             expect(response.body.header.fromMSP).to.have.property('signatures').that.is.an('array');
             expect(response.body.header.fromMSP.signatures.length).to.equal(0);
             
             expect(response.body.header).to.have.property('toMSP').that.is.an('object');
+            expect(Object.keys(response.body.header.toMSP)).have.members(["mspid", "signatures"]);
             expect(response.body.header.toMSP).to.have.property('mspid', sentBody.header.toMSP.mspid);
             expect(response.body.header.toMSP).to.have.property('signatures').that.is.an('array');
             expect(response.body.header.toMSP.signatures.length).to.equal(0);
             
             expect(response.body).to.have.property('body').that.is.an('object');
-            expect(response.body.body).to.have.property('taps').that.is.an('array');
-            expect(response.body.body.taps.length).to.equal(0);
+            expect(Object.keys(response.body.body)).have.members([]);
             
             expect(response.body).to.have.property('history').that.is.an('array');
             expect(response.body.history.length).to.equal(1);
+            expect(Object.keys(response.body.history[0])).have.members(["date", "action"]);
             expect(response.body.history[0]).to.have.property('date').that.is.a('string').and.match(DATE_REGEX);
             expect(response.body.history[0]).to.have.property('action', 'CREATION');
             
@@ -80,7 +83,7 @@ describe("Tests POST " + route + " API OK", function () {
           });
       } catch (exception) {
         debug('exception: %s', exception.stack);
-        assert.ok(false);
+        expect.fail('it test throws an exception');
         done();
       }
     });

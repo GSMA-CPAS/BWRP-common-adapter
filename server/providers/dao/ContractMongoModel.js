@@ -8,24 +8,7 @@ var HistorySchema = new Schema({
   action: { type: String, required: true }
 }, { _id: false });
 
-var BankDetails = Schema.Types.Mixed;
-
-var DiscountModelsSchema = Schema.Types.Mixed;
-
-var GeneralInformationSchema = new Schema({ 
-  name: { type: String, required: false },
-  type: { type: String, required: false },
-  startDate: { type: Date, required: false },
-  endDate: { type: Date, required: false },
-  prolongationLength: { type: String, required: false }
-}, { _id: false });
-
-var ContractBodySchema = new Schema({ 
-  taps: { type: [String], required: false },
-  bankDetails: { type: Map, of: BankDetails, required: false },
-  discountModels: { type: DiscountModelsSchema, required: false },
-  generalInformation: { type: GeneralInformationSchema, required: false }
-}, { _id: false });
+var ContractBodySchema = Schema.Types.Mixed;
 
 var SignatureSchema = new Schema({ 
   id: { type: String, required: true },
