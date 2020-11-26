@@ -90,15 +90,15 @@ const generateUsageByID = ({contractID, usageID, mode}) => new Promise(
 const getUsageByID = ({contractID, usageID}) => new Promise(
   async (resolve, reject) => {
     try {
-      resolve(Service.successResponse({
-        contractID,
-        usageID,
-      }));
+      const getUsageByIdResp = await LocalStorageProvider.getUsage(usageID);
+      if (getUsageByIdResp.contractId != contractID) {
+        reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_CREATE_USAGE_ON_CONTRACT_ONLY_ALLOWED_IN_STATE_SENT_AND_RECEIVED));
+      }
+      const returnedResponse = UsageMapper.getResponseBodyForGetUsage(getUsageByIdResp);
+      resolve(Service.successResponse(returnedResponse));
+
     } catch (e) {
-      reject(Service.rejectResponse(
-        e.message || 'Invalid input',
-        e.status || 405,
-      ));
+      reject(Service.rejectResponse(e));
     }
   },
 );

@@ -42,6 +42,17 @@ class UsageMongoRequester {
     });
   }
 
+  static findOne(conditions, next) {
+    UsageMongoModel.findOne(conditions, (err, usage) => {
+      if (err) {
+        next(err);
+      }
+      if (usage) {
+        return next(null, usage);
+      }
+      return next({code:404, name:"NotFound"}, null);
+    });
+  }
 
 }
 

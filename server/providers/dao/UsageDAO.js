@@ -66,6 +66,29 @@ class UsageDAO {
     });
   };
 
+  static findOne(id) {
+    return new Promise((resolve, reject) => {
+      // Verify parameters
+      if (id === undefined) {
+        logger.error('[UsageDAO::findOne] [FAILED] : id undefined');
+        reject(MISSING_MANDATORY_PARAM_ERROR);
+      }
+
+      // Launch database request
+      UsageMongoRequester.findOne({id}, (err, usage) => {
+        // Use errorManager to return appropriate dao errors
+        DAOErrorManager.handleErrorOrNullObject(err, usage)
+          .then(objectReturned => {
+            logger.debug('[DAO] [findOne] [OK] objectReturned:' + typeof objectReturned + " = " + JSON.stringify(objectReturned));
+            return resolve(objectReturned);
+          })
+          .catch(errorReturned => {
+            logger.error('[DAO] [findOne] [FAILED] errorReturned:' + typeof errorReturned + " = " + JSON.stringify(errorReturned));
+            return reject(errorReturned);
+          });
+      });
+    });
+  };
 
 }
 

@@ -110,6 +110,15 @@ class ErrorUtils {
     }
   };
 
+  static ERROR_BUSINESS_GET_USAGE_ON_NOT_LINKED_CONTRACT_RECEIVED = {
+    code: 422,
+    error: {
+      internalErrorCode: 2003,
+      message: 'Get usage not allowed',
+      description: 'It\'s not allowed to get usage on wrong contract.'
+    }
+  };
+
 }
 
 module.exports = ErrorUtils;

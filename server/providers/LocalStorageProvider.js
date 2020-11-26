@@ -113,6 +113,20 @@ class LocalStorageProvider {
       throw error;
     }
   }
+
+  /**
+   *
+   * @returns {Promise<object>}
+   */
+  static async getUsage(id) {
+    try {
+      return await UsageDAO.findOne(id);
+    } catch (error) {
+      logger.error('[LocalStorageProvider::getUsage] failed to get usage - ' + error.message);
+      throw error;
+    }
+  }
+
 }
 
 module.exports = LocalStorageProvider;
