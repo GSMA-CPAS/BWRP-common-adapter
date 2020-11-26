@@ -126,4 +126,4 @@ dist
 .DS_Store
 
 #local Mongo DB Docker
-./CADB/
+CADB/
