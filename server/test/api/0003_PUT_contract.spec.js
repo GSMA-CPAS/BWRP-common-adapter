@@ -134,7 +134,7 @@ describe("Tests PUT " + route + " API OK", function () {
             expect(response).to.be.json;
             expect(response.body).to.exist;
             expect(response.body).to.be.an('object');
-            expect(Object.keys(response.body)).have.members(["contractID", "state", "creationDate", "lastModificationDate", "header", "body", "history"]);
+            expect(Object.keys(response.body)).have.members(["contractID", "state", "creationDate", "lastModificationDate", "header", "body"]);
 
             expect(response.body).to.have.property('contractID', contract1.id);
             expect(response.body).to.have.property('state', sentBody.header.state);
@@ -162,14 +162,14 @@ describe("Tests PUT " + route + " API OK", function () {
             expect(response.body).to.have.property('body').that.is.an('object');
             expect(Object.keys(response.body.body)).have.members([]);
             
-            expect(response.body).to.have.property('history').that.is.an('array');
-            expect(response.body.history.length).to.equal(2);
-            expect(Object.keys(response.body.history[0])).have.members(["date", "action"]);
-            expect(response.body.history[0]).to.have.property('date').that.is.a('string').and.match(DATE_REGEX);
-            expect(response.body.history[0]).to.have.property('action', 'CREATION');
-            expect(Object.keys(response.body.history[1])).have.members(["date", "action"]);
-            expect(response.body.history[1]).to.have.property('date').that.is.a('string').and.match(DATE_REGEX);
-            expect(response.body.history[1]).to.have.property('action', 'UPDATE');
+            // expect(response.body).to.have.property('history').that.is.an('array');
+            // expect(response.body.history.length).to.equal(2);
+            // expect(Object.keys(response.body.history[0])).have.members(["date", "action"]);
+            // expect(response.body.history[0]).to.have.property('date').that.is.a('string').and.match(DATE_REGEX);
+            // expect(response.body.history[0]).to.have.property('action', 'CREATION');
+            // expect(Object.keys(response.body.history[1])).have.members(["date", "action"]);
+            // expect(response.body.history[1]).to.have.property('date').that.is.a('string').and.match(DATE_REGEX);
+            // expect(response.body.history[1]).to.have.property('action', 'UPDATE');
             
             done();
           });
@@ -252,7 +252,7 @@ describe("Tests PUT " + route + " API OK", function () {
             expect(response).to.be.json;
             expect(response.body).to.exist;
             expect(response.body).to.be.an('object');
-            expect(Object.keys(response.body)).have.members(["contractID", "state", "creationDate", "lastModificationDate", "header", "body", "history"]);
+            expect(Object.keys(response.body)).have.members(["contractID", "state", "creationDate", "lastModificationDate", "header", "body"]);
 
             expect(response.body).to.have.property('contractID', contract2.id);
             expect(response.body).to.have.property('state', sentBody.header.state);
@@ -293,14 +293,14 @@ describe("Tests PUT " + route + " API OK", function () {
             expect(Object.keys(response.body.body)).have.members(["randomBodyContent", "bankDetails", "discountModels", "generalInformation"]);
             expect(response.body.body).to.deep.include(sentBody.body);
             
-            expect(response.body).to.have.property('history').that.is.an('array');
-            expect(response.body.history.length).to.equal(2);
-            expect(Object.keys(response.body.history[0])).have.members(["date", "action"]);
-            expect(response.body.history[0]).to.have.property('date').that.is.a('string').and.match(DATE_REGEX);
-            expect(response.body.history[0]).to.have.property('action', 'CREATION');
-            expect(Object.keys(response.body.history[1])).have.members(["date", "action"]);
-            expect(response.body.history[1]).to.have.property('date').that.is.a('string').and.match(DATE_REGEX);
-            expect(response.body.history[1]).to.have.property('action', 'UPDATE');
+            // expect(response.body).to.have.property('history').that.is.an('array');
+            // expect(response.body.history.length).to.equal(2);
+            // expect(Object.keys(response.body.history[0])).have.members(["date", "action"]);
+            // expect(response.body.history[0]).to.have.property('date').that.is.a('string').and.match(DATE_REGEX);
+            // expect(response.body.history[0]).to.have.property('action', 'CREATION');
+            // expect(Object.keys(response.body.history[1])).have.members(["date", "action"]);
+            // expect(response.body.history[1]).to.have.property('date').that.is.a('string').and.match(DATE_REGEX);
+            // expect(response.body.history[1]).to.have.property('action', 'UPDATE');
             
             done();
           });
