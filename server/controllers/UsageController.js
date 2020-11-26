@@ -16,12 +16,20 @@ const deleteUsageByID = async (request, response) => {
   await Controller.handleRequest(request, response, service.deleteUsageByID);
 };
 
+const generateUsageByID = async (request, response) => {
+  await Controller.handleRequest(request, response, service.generateUsageByID);
+};
+
 const getUsageByID = async (request, response) => {
   await Controller.handleRequest(request, response, service.getUsageByID);
 };
 
 const getUsages = async (request, response) => {
   await Controller.handleRequest(request, response, service.getUsages);
+};
+
+const sendUsageByID = async (request, response) => {
+  await Controller.handleRequest(request, response, service.sendUsageByID);
 };
 
 const updateUsageByID = async (request, response) => {
@@ -32,7 +40,9 @@ const updateUsageByID = async (request, response) => {
 module.exports = {
   createUsage,
   deleteUsageByID,
+  generateUsageByID,
   getUsageByID,
   getUsages,
+  sendUsageByID,
   updateUsageByID,
 };

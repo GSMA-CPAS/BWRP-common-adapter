@@ -1,19 +1,5 @@
 const logger = require('./logger');
 const ExpressServer = require('./expressServer');
-
-
-//if (process.env.BSA_CONFIG_DIR == undefined) {
-//    console.log('> config directory not defined, please set env var BSA_CONFIG_DIR');
-//    process.exit(1);
-//}
-
-
-//if (process.env.BSA_PORT == undefined) {
-//    console.log('> port not defined, please set env var BSA_PORT');
-//    process.exit(1);
-//}
-
-//const serverPort = process.env.BSA_PORT;
 const serverPort = 3000;
 
 const launchServer = async () => {
@@ -28,3 +14,6 @@ const launchServer = async () => {
 };
 
 launchServer().catch((e) => logger.error(e));
+
+// for tests
+module.exports = this.expressServer.app;

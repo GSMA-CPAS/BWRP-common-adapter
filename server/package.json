@@ -1,11 +1,12 @@
 {
-  "name":  "blockchain-adapter",
+  "name": "blockchain-adapter",
   "version": "0.0.6",
   "description": "This is the REST api specification for the blockchain-adapter",
   "main": "index.js",
   "scripts": {
     "prestart": "npm install",
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "DEBUG=spec* mocha ./test/**/*.spec.js --file test/tools/startServer.js --timeout 12000 --exit"
   },
   "keywords": [
     "openapi-generator",
@@ -20,7 +21,9 @@
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "express-openapi-validator": "^3.9.1",
+    "got": "11.6.2",
     "js-yaml": "^3.3.0",
+    "mongoose": "^5.10.15",
     "ono": "^5.0.1",
     "openapi-sampler": "^1.0.0-beta.15",
     "swagger-ui-express": "^4.0.2",
@@ -30,6 +33,8 @@
     "axios": "^0.19.0",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
+    "chai-http": "^4.3.0",
+    "debug": "^4.3.1",
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.17.2",

@@ -1,197 +1,140 @@
+/* eslint-disable no-unused-vars */
 const Service = require('./Service');
+const ContractMapper = require('../core/ContractMapper');
 
-/** Fetch a private document from the database, identified by its id
-   * @param {string} id - The document ID
-   * @return {PrivateDocumentResponse}
-  */
-const fetchPrivateDocument = ({id}) => new Promise(
-    async (resolve, reject) => {
-      const blockchainConnection = new BlockchainService(process.env.BSA_CCP);
+const LocalStorageProvider = require('../providers/LocalStorageProvider');
 
-      blockchainConnection.fetchPrivateDocument(id)
-          .then( (document) => {
-            resolve(Service.successResponse(document, 200));
-          }).catch((error) => {
-            console.log('ERROR: ' + error);
-            reject(Service.rejectResponse({'message': error.toString()}, 500));
-          }).finally( () => {
-            blockchainConnection.disconnect();
-          });
-    },
-);
+const BlockchainAdapterProvider = require('../providers/StubBlockchainAdapterProvider');
+const blockchainAdapterConnection = new BlockchainAdapterProvider();
 
-/** show last n private documents
-   * @return {PrivateDocumentResponse[]}
-  */
-const fetchPrivateDocuments = () => new Promise(
-    async (resolve, reject) => {
-      const blockchainConnection = new BlockchainService(process.env.BSA_CCP);
+const logger = require('../logger');
+const errorUtils = require('../utils/errorUtils');
 
-      blockchainConnection.fetchPrivateDocuments()
-          .then( (documents) => {
-            resolve(Service.successResponse(documents, 200));
-          }).catch((error) => {
-            console.log('ERROR: ' + error);
-            reject(Service.rejectResponse({'message': error.toString()}, 500));
-          }).finally( () => {
-            blockchainConnection.disconnect();
-          });
-    },
-);
-
-/** Fetch all signatures for a given msp and a given document id from the ledger
-   * @param {string} id - The document ID
-   * @param {string} msp - A MSP name
-   * @return {string}
-  */
-const fetchSignatures = ({id, msp}) => new Promise(
-    async (resolve, reject) => {
-      const blockchainConnection = new BlockchainService(process.env.BSA_CCP);
-
-      blockchainConnection.fetchSignatures(msp, id)
-          .then( (signatures) => {
-            resolve(Service.successResponse(signatures, 200));
-          }).catch((error) => {
-            console.log('ERROR: ' + error);
-            reject(Service.rejectResponse( {'message': error.toString()}, 500));
-          }).finally( () => {
-            blockchainConnection.disconnect();
-          });
-    },
-);
-
-/** Upload a private document, shared between our own organization and a partner MSP
-   * @param {PrivateDocument} body - A document that should be uploaded
-   * @return {string}
-  */
-const uploadPrivateDocument = ({body}) => new Promise(
-    async (resolve, reject) => {
-      const blockchainConnection = new BlockchainService(process.env.BSA_CCP);
-
-      blockchainConnection.addDocument(body['toMSP'], body['data'])
-          .then( (documentID) => {
-            const resJSON = {};
-            resJSON['documentID'] = documentID;
-            console.log('> both parties stored data with ID ' + documentID);
-            resolve(Service.successResponse(resJSON, 200));
-          }).catch((error) => {
-            console.log('ERROR: ' + error);
-            reject(Service.rejectResponse({'message': error.toString()}, 500));
-          }).finally( () => {
-            blockchainConnection.disconnect();
-          });
-    },
-);
-
-/** Store a signature for the document identified by id on the ledger
-   * @param {string} id - The document ID
-   * @param {DocumentSignature} body - a document signature that should be uploaded
-   * @return {string}
-  */
-const uploadSignature = ({id, body}) => new Promise(
-    async (resolve, reject) => {
-      const blockchainConnection = new BlockchainService(process.env.BSA_CCP);
-
-      // for security reasons, rewrite the json here:
-      const signature = {
-        'algorithm': body['algorithm'],
-        'certificate': body['certificate'],
-        'signature': body['signature'],
+/**
+ * Create a new Contract
+ *
+ * req ContractRequest
+ * returns ContractResponse
+ * */
+const createContract = ({url, body}) => new Promise(
+  async (resolve, reject) => {
+    try {
+      const contractToCreate = ContractMapper.getContractFromPostContractsRequest(body);
+      const createContractResp = await LocalStorageProvider.createContract(contractToCreate);
+      const returnedResponse = ContractMapper.getResponseBodyForGetContract(createContractResp);
+      const returnedHeaders = {
+        'Content-Location': `${url.replace(/\/$/, '')}/${createContractResp.id}`
       };
-      const signatureJSON = JSON.stringify(signature);
-
-      blockchainConnection.signDocument(id, signatureJSON)
-          .then( (txID) => {
-            const resJSON = {};
-            resJSON['txID'] = txID;
-            console.log('> stored signature with txID ' + txID);
-            resolve(Service.successResponse(resJSON, 200))
-            ;
-          }).catch((error) => {
-            console.log('ERROR: ' + error);
-            reject(Service.rejectResponse({'message': error.toString()}, 500));
-          }).finally( () => {
-            blockchainConnection.disconnect();
-          });
-    },
+      resolve(Service.successResponse(returnedResponse, 201, returnedHeaders));
+    } catch (e) {
+      reject(Service.rejectResponse(e));
+    }
+  },
 );
 
-
-
-
+/**
+ * Delete a Contract By its ID
+ *
+ * contractID String The contract ID
+ * returns ContractResponse
+ * */
+const deleteContractByID = ({contractID}) => new Promise(
+  async (resolve, reject) => {
+    try {
+      const deleteContractByIdResp = await LocalStorageProvider.deleteContract(contractID);
+      const returnedResponse = ContractMapper.getResponseBodyForGetContract(deleteContractByIdResp);
+      resolve(Service.successResponse(returnedResponse));
+    } catch (e) {
+      reject(Service.rejectResponse(e));
+    }
+  },
+);
+/**
+ * Get a Contract By its ID
+ *
+ * contractID String The contract ID
+ * format String Response format, defaults to JSON if not passed. (optional)
+ * returns oneOf<ContractResponse,RAWContractResponse>
+ * */
+const getContractByID = ({contractID, format}) => new Promise(
+    async (resolve, reject) => {
+      // TODO: if format == raw
+      try {
+        const getContractByIdResp = await LocalStorageProvider.getContract(contractID);
+        const returnedResponse = ContractMapper.getResponseBodyForGetContract(getContractByIdResp);
+        resolve(Service.successResponse(returnedResponse));
+      } catch (e) {
+        reject(Service.rejectResponse(e));
+      }
+    },
+);
+/**
+ * Show a list of all Contracts
+ *
+ * returns String
+ * */
 const getContracts = () => new Promise(
-    async (resolve, _) => {
-        const stub_response = [
-            { 'contract_id': '12345' },
-            { 'contract_id': '23456' },
-            { 'contract_id': '34567' },
-        ];
-        resolve(Service.successResponse(stub_response));
-    },
+  async (resolve, reject) => {
+    try {
+      const getContractsResp = await LocalStorageProvider.getContracts();
+      const returnedResponse = ContractMapper.getResponseBodyForGetContracts(getContractsResp);
+      resolve(Service.successResponse(returnedResponse, 200));
+    } catch (e) {
+      reject(Service.rejectResponse(e));
+    }
+  },
 );
 
-
-const getContractByID = ({ contractID }) => new Promise(
-    async (resolve, _) => {
-        const stub_response = 
-            { 'contract_id': contractID };
-        resolve(Service.successResponse(stub_response));
-    },
+/**
+ * Set State to \"SEND\" and POST to Blochain adapter towards TargetMSP of the Contract
+ *
+ * contractID String The contract ID
+ * returns ContractResponse
+ * */
+const sendContractByID = ({contractID}) => new Promise(
+  async (resolve, reject) => {
+    try {
+      const getContractByIdResp = await LocalStorageProvider.getContract(contractID);
+      if (getContractByIdResp.state !== 'DRAFT') {
+        reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_SEND_CONTRACT_ONLY_ALLOWED_IN_STATE_DRAFT));
+      }
+      const uploadContractResp = await blockchainAdapterConnection.uploadContract(getContractByIdResp);
+      const updateContractResp = await LocalStorageProvider.updateSentContract(contractID, uploadContractResp.rawData, uploadContractResp.documentID);
+      const returnedResponse = ContractMapper.getResponseBodyForSendContract(updateContractResp);
+      resolve(Service.successResponse(returnedResponse, 200));
+    } catch (e) {
+      reject(Service.rejectResponse(e));
+    }
+  },
 );
-
-const createContract = ({ toMSP, body }) => new Promise(
-    async (resolve, reject) => {
-        try {
-            console.log('toMSP:' + toMSP);
-            console.log('body:' + JSON.stringify(body));
-            const stub_response =
-                { 'contract_id': toMSP };
-            resolve(Service.successResponse(stub_response));
-        } catch (error ) {
-            console.log('ERROR: ' + error);
-            reject(Service.rejectResponse({ 'message': error.toString() }, 500));
-        }
-    },
+/**
+ * Update existing Contract
+ *
+ * contractID String The contract ID
+ * body ContractRequest Contract Object Payload
+ * returns ContractResponse
+ * */
+const updateContractByID = ({contractID, body}) => new Promise(
+  async (resolve, reject) => {
+    if ((body.state !== undefined) && (body.state !== 'DRAFT')) {
+      reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_CONTRACT_UPDATE_ONLY_ALLOWED_IN_STATE_DRAFT));
+    }
+    try {
+      const contractToUpdate = ContractMapper.getContractFromPutContractRequest(contractID, body);
+      const updateContractResp = await LocalStorageProvider.updateContract(contractToUpdate);
+      const returnedResponse = ContractMapper.getResponseBodyForGetContract(updateContractResp);
+      resolve(Service.successResponse(returnedResponse, 200));
+    } catch (e) {
+      reject(Service.rejectResponse(e));
+    }
+  },
 );
-
-const updateContractByID = ({ contractID, body }) => new Promise(
-    async (resolve, reject) => {
-        try {
-            console.log('contractID:' + contractID);
-            console.log('body:' + JSON.stringify(body));
-            const stub_response =
-                { 'contract_id': contractID };
-            resolve(Service.successResponse(stub_response));
-        } catch (error) {
-            console.log('ERROR: ' + error);
-            reject(Service.rejectResponse({ 'message': error.toString() }, 500));
-        }
-    },
-);
-
-const deleteContractByID = ({ contractID }) => new Promise(
-    async (resolve, reject) => {
-        try {
-            console.log('contractID:' + contractID);
-            const stub_response = { 'status': 'OK', 'description': 'Contract Deleted.' };
-            resolve(Service.successResponse(stub_response));
-        } catch (error) {
-            console.log('ERROR: ' + error);
-            reject(Service.rejectResponse({ 'message': error.toString() }, 500));
-        }
-    },
-);
-
 
 module.exports = {
-  fetchPrivateDocument,
-  fetchPrivateDocuments,
-  fetchSignatures,
-  uploadPrivateDocument,
-  uploadSignature,
-  getContracts,
-  getContractByID,
-  createContract,
-  updateContractByID,
-  deleteContractByID
+    createContract,
+    deleteContractByID,
+    getContractByID,
+    getContracts,
+    sendContractByID,
+    updateContractByID,
 };

@@ -4,14 +4,14 @@ All URIs are relative to *http://localhost/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getSignatureByID**](SignatureApi.md#getSignatureByID) | **GET** /contract/{contractID}/signature/{signatureID} | 
-[**getSignatures**](SignatureApi.md#getSignatures) | **GET** /contract/{contractID}/signature/ | 
-[**updateSignatureByID**](SignatureApi.md#updateSignatureByID) | **PUT** /contract/{contractID}/signature/{signatureID} | 
+[**getSignatureByID**](SignatureApi.md#getSignatureByID) | **GET** /contracts/{contractID}/signatures/{signatureID} | 
+[**getSignatures**](SignatureApi.md#getSignatures) | **GET** /contracts/{contractID}/signatures/ | 
+[**updateSignatureByID**](SignatureApi.md#updateSignatureByID) | **PUT** /contracts/{contractID}/signatures/{signatureID} | 
 
 
 <a name="getSignatureByID"></a>
 # **getSignatureByID**
-> Object getSignatureByID(contractID, signatureID)
+> SignatureResponse getSignatureByID(contractID, signatureID)
 
 
 
@@ -26,7 +26,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Object**](../Models/object.md)
+[**SignatureResponse**](../Models/SignatureResponse.md)
 
 ### Authorization
 
@@ -66,7 +66,7 @@ No authorization required
 
 <a name="updateSignatureByID"></a>
 # **updateSignatureByID**
-> String updateSignatureByID(contractID, signatureID, body)
+> SignatureResponse updateSignatureByID(contractID, signatureID, body)
 
 
 
@@ -78,11 +78,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **contractID** | **String**| The contract ID | [default to null]
  **signatureID** | **String**| The Signature ID | [default to null]
- **body** | **Object**| Signature Object Payload |
+ **body** | [**SignatureRequest**](../Models/SignatureRequest.md)| Signature Object Payload |
 
 ### Return type
 
-[**String**](../Models/string.md)
+[**SignatureResponse**](../Models/SignatureResponse.md)
 
 ### Authorization
 

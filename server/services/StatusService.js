@@ -2,9 +2,9 @@
 const Service = require('./Service');
 
 const statusInfo = {
-  'commitHash': 'haha',
-  'apiHash': 'hehe',
-  'apiVersion': '1.2.3',
+    'commitHash': 'unknown',
+    'apiHash': 'unknown',
+    'apiVersion': '?.?.?',
 };
 
 try {
@@ -22,7 +22,7 @@ try {
   */
 const getApiStatus = () => new Promise(
     async (resolve, _) => {
-      resolve(Service.successResponse(JSON.stringify(statusInfo)));
+      resolve(Service.successResponse(statusInfo));
     },
 );
 

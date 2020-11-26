@@ -93,7 +93,7 @@ paths:
       tags:
       - status
       x-eov-operation-handler: controllers/StatusController
-  /contract/event/:
+  /contracts/event/:
     post:
       description: Webhook callback
       operationId: eventReceived
@@ -124,7 +124,7 @@ paths:
       - event
       x-codegen-request-body-name: body
       x-eov-operation-handler: controllers/EventController
-  /contract/:
+  /contracts/:
     get:
       description: Show a list of all Contracts
       operationId: getContracts
@@ -145,20 +145,11 @@ paths:
     post:
       description: Create a new Contract
       operationId: createContract
-      parameters:
-      - description: The Destination MSPID
-        explode: true
-        in: query
-        name: toMSP
-        required: true
-        schema:
-          type: string
-        style: form
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Contract'
+              $ref: '#/components/schemas/ContractRequest'
         description: Contract Object Payload
         required: true
       responses:
@@ -166,8 +157,7 @@ paths:
           content:
             application/json:
               schema:
-                type: string
-                x-content-type: application/json
+                $ref: '#/components/schemas/ContractResponse'
           description: Successful operation, returns created Contract Object
         "400":
           content:
@@ -182,7 +172,7 @@ paths:
       - contract
       x-codegen-request-body-name: body
       x-eov-operation-handler: controllers/ContractController
-  /contract/{contractID}:
+  /contracts/{contractID}:
     delete:
       description: Delete a Contract By its ID
       operationId: deleteContractByID
@@ -200,8 +190,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SuccessResponse'
-          description: The status of the service
+                $ref: '#/components/schemas/ContractResponse'
+          description: The Deleted Conctact Object
         "500":
           content: {}
           description: Internal Error
@@ -220,12 +210,26 @@ paths:
         schema:
           type: string
         style: simple
+      - description: Response format, defaults to JSON if not passed.
+        explode: true
+        in: query
+        name: format
+        required: false
+        schema:
+          enum:
+          - JSON
+          - RAW
+          type: string
+        style: form
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Contract'
+                oneOf:
+                - $ref: '#/components/schemas/ContractResponse'
+                - $ref: '#/components/schemas/RAWContractResponse'
+                x-content-type: application/json
           description: The Selected Contract Object
         "400":
           content:
@@ -255,7 +259,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Contract'
+              $ref: '#/components/schemas/ContractRequest'
         description: Contract Object Payload
         required: true
       responses:
@@ -263,7 +267,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Contract'
+                $ref: '#/components/schemas/ContractResponse'
           description: Successful operation, returns updated Contract Object
         "400":
           content:
@@ -278,7 +282,40 @@ paths:
       - contract
       x-codegen-request-body-name: body
       x-eov-operation-handler: controllers/ContractController
-  /contract/{contractID}/signature/:
+  /contracts/{contractID}/send/:
+    put:
+      description: Set State to "SEND" and POST to Blochain adapter towards TargetMSP
+        of the Contract
+      operationId: sendContractByID
+      parameters:
+      - description: The contract ID
+        explode: false
+        in: path
+        name: contractID
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContractResponse'
+          description: Successful operation, returns sent Contract Object
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400ErrorResponse'
+          description: Bad Request
+        "500":
+          content: {}
+          description: Internal Error
+      tags:
+      - contract
+      x-eov-operation-handler: controllers/ContractController
+  /contracts/{contractID}/signatures/:
     get:
       description: Get All signatures of a given Contract
       operationId: getSignatures
@@ -305,7 +342,7 @@ paths:
       tags:
       - signature
       x-eov-operation-handler: controllers/SignatureController
-  /contract/{contractID}/signature/{signatureID}:
+  /contracts/{contractID}/signatures/{signatureID}:
     get:
       description: Get Signature Object by its ID
       operationId: getSignatureByID
@@ -331,7 +368,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Signature'
+                $ref: '#/components/schemas/SignatureResponse'
           description: The Selected Signature Object
         "400":
           content:
@@ -369,7 +406,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Signature'
+              $ref: '#/components/schemas/SignatureRequest'
         description: Signature Object Payload
         required: true
       responses:
@@ -377,8 +414,7 @@ paths:
           content:
             application/json:
               schema:
-                type: string
-                x-content-type: application/json
+                $ref: '#/components/schemas/SignatureResponse'
           description: Successful operation, returns updated Signature Object
         "400":
           content:
@@ -393,7 +429,7 @@ paths:
       - signature
       x-codegen-request-body-name: body
       x-eov-operation-handler: controllers/SignatureController
-  /contract/{contractID}/usage/:
+  /contracts/{contractID}/usages/:
     get:
       description: Get All usage of a given Contract
       operationId: getUsages
@@ -436,7 +472,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Usage'
+              $ref: '#/components/schemas/UsageRequest'
         description: Usage Object Payload
         required: true
       responses:
@@ -444,8 +480,7 @@ paths:
           content:
             application/json:
               schema:
-                type: string
-                x-content-type: application/json
+                $ref: '#/components/schemas/UsageResponse'
           description: Successful operation, returns created Usage Object
         "400":
           content:
@@ -460,7 +495,7 @@ paths:
       - usage
       x-codegen-request-body-name: body
       x-eov-operation-handler: controllers/UsageController
-  /contract/{contractID}/usage/{usageID}:
+  /contracts/{contractID}/usages/{usageID}:
     delete:
       description: Delete a Usage By its ID
       operationId: deleteUsageByID
@@ -486,8 +521,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SuccessResponse'
-          description: The status of the service
+                $ref: '#/components/schemas/UsageResponse'
+          description: The Deleted Usage Object
         "400":
           content:
             application/json:
@@ -525,7 +560,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Usage'
+                $ref: '#/components/schemas/UsageResponse'
           description: The Usage Object
         "400":
           content:
@@ -563,7 +598,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Usage'
+              $ref: '#/components/schemas/UsageRequest'
         description: Usage Object Payload
         required: true
       responses:
@@ -571,7 +606,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Usage'
+                $ref: '#/components/schemas/UsageResponse'
           description: Successful operation, returns updated Usage Object
         "400":
           content:
@@ -586,7 +621,102 @@ paths:
       - usage
       x-codegen-request-body-name: body
       x-eov-operation-handler: controllers/UsageController
-  /contract/{contractID}/settlement/:
+  /contracts/{contractID}/usages/{usageID}/send/:
+    put:
+      description: Set State to "SEND" and POST to Blochain adapter towards TargetMSP
+        of the Usage
+      operationId: sendUsageByID
+      parameters:
+      - description: The contract ID
+        explode: false
+        in: path
+        name: contractID
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The Usage ID
+        explode: false
+        in: path
+        name: usageID
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsageResponse'
+          description: Successful operation, returns sent Usage Object
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400ErrorResponse'
+          description: Bad Request
+        "500":
+          content: {}
+          description: Internal Error
+      tags:
+      - usage
+      x-eov-operation-handler: controllers/UsageController
+  /contracts/{contractID}/usages/{usageID}/generate/:
+    put:
+      description: Generate the "Settlement" with local calculator and POST to Blochain
+        adapter towards TargetMSP of the calculated response.
+      operationId: generateUsageByID
+      parameters:
+      - description: The contract ID
+        explode: false
+        in: path
+        name: contractID
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The Usage ID
+        explode: false
+        in: path
+        name: usageID
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Defaults to "preview" if not selected. Preview will only performs
+          "calculation" and return the calculated settlement in response. if "commit",
+          will create the settlement and Send it live to the Blockchain to the targetMSP.
+        explode: true
+        in: query
+        name: mode
+        required: false
+        schema:
+          enum:
+          - preview
+          - commit
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Settlement'
+          description: Successful operation, returns sent Usage Object
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400ErrorResponse'
+          description: Bad Request
+        "500":
+          content: {}
+          description: Internal Error
+      tags:
+      - usage
+      x-eov-operation-handler: controllers/UsageController
+  /contracts/{contractID}/settlements/:
     get:
       description: Get All Settlement of a given Contract
       operationId: getSettlements
@@ -613,86 +743,7 @@ paths:
       tags:
       - settlement
       x-eov-operation-handler: controllers/SettlementController
-    post:
-      description: Create a new Settlement
-      operationId: createSettlement
-      parameters:
-      - description: The contract ID
-        explode: false
-        in: path
-        name: contractID
-        required: true
-        schema:
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Settlement'
-        description: Settlement Object Payload
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                type: string
-                x-content-type: application/json
-          description: Successful operation, returns created Settlement Object
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/400ErrorResponse'
-          description: Bad Request
-        "500":
-          content: {}
-          description: Internal Error
-      tags:
-      - settlement
-      x-codegen-request-body-name: body
-      x-eov-operation-handler: controllers/SettlementController
-  /contract/{contractID}/settlement/{settlementID}:
-    delete:
-      description: Delete a Settlement By its ID
-      operationId: deleteSettlementByID
-      parameters:
-      - description: The contract ID
-        explode: false
-        in: path
-        name: contractID
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: The Settlement ID
-        explode: false
-        in: path
-        name: settlementID
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SuccessResponse'
-          description: The status of the service
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/400ErrorResponse'
-          description: Bad Request
-        "500":
-          content: {}
-          description: Internal Error
-      tags:
-      - settlement
-      x-eov-operation-handler: controllers/SettlementController
+  /contracts/{contractID}/settlements/{settlementID}:
     get:
       description: Get Settlement Object by its ID
       operationId: getSettlementByID
@@ -732,66 +783,288 @@ paths:
       tags:
       - settlement
       x-eov-operation-handler: controllers/SettlementController
-    put:
-      description: Update Settlement Object by its ID
-      operationId: updateSettlementByID
-      parameters:
-      - description: The contract ID
-        explode: false
-        in: path
-        name: contractID
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: The Settlement ID
-        explode: false
-        in: path
-        name: settlementID
-        required: true
-        schema:
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Settlement'
-        description: Settlement Object Payload
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Settlement'
-          description: Successful operation, returns updated Settlement Object
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/400ErrorResponse'
-          description: Bad Request
-        "500":
-          content: {}
-          description: Internal Error
-      tags:
-      - settlement
-      x-codegen-request-body-name: body
-      x-eov-operation-handler: controllers/SettlementController
 components:
   schemas:
     Event:
       title: Event JSON
       type: object
-    Contract:
+    ContractResponse:
+      additionalProperties: false
+      example:
+        contractID: 05552c4c-e52f-4bb5-83d2-f50c86115bc8
+        header: '{}'
+        state: DRAFT
+        body:
+          key: '{}'
+      properties:
+        contractID:
+          description: ContractID in GUID format
+          example: 05552c4c-e52f-4bb5-83d2-f50c86115bc8
+          type: string
+        header:
+          properties:
+            name:
+              description: Human readable name for the contract.
+              example: Contract with XYZ
+              type: string
+            version:
+              description: Version of the contract
+              example: "1.0"
+              type: string
+            type:
+              description: Type of document. MUST be "contract"
+              enum:
+              - contract
+              type: string
+            fromMSP:
+              properties:
+                mspid:
+                  description: MSPID of the contract creator.
+                  example: DTAG
+                  type: string
+                signatures:
+                  items:
+                    $ref: '#/components/schemas/SignatureBase'
+                  minItems: 1
+                  type: array
+              type: object
+            toMSP:
+              properties:
+                mspid:
+                  description: MSPID of the contract creator.
+                  example: TMUS
+                  type: string
+                signatures:
+                  items:
+                    $ref: '#/components/schemas/SignatureBase'
+                  minItems: 1
+                  type: array
+              type: object
+          required:
+          - fromMSP
+          - toMSP
+          - type
+          - version
+        body:
+          additionalProperties: true
+          type: object
+        state:
+          description: The State of the Contract.
+          enum:
+          - DRAFT
+          - PENDING
+          - SENT
+          - RECEIVED
+          type: string
+      required:
+      - body
+      - contractID
+      - header
+      - state
       title: Contract JSON
       type: object
-    Signature:
+    RAWContractResponse:
+      additionalProperties: false
+      properties:
+        contractID:
+          description: ContractID in GUID format
+          example: 05552c4c-e52f-4bb5-83d2-f50c86115bc8
+          type: string
+        raw:
+          description: Original Base64 encoded RAW payload, Used for Hash calculation
+            or Signing.
+          example: eyJoZWFkZXIiOnsidmVyc2lvbiI6IjEuM....
+          type: string
+        state:
+          description: The State of the Contract.
+          enum:
+          - DRAFT
+          - PENDING
+          - SENT
+          - RECEIVED
+          type: string
+      required:
+      - contractID
+      - raw
+      - state
+      title: Contract RAW
+      type: object
+    ContractRequest:
+      additionalProperties: false
+      example:
+        header:
+          fromMSP:
+            mspid: DTAG
+            signatures:
+            - role: role
+              name: name
+              id: id
+            - role: role
+              name: name
+              id: id
+          name: Contract with XYZ
+          toMSP:
+            mspid: TMUS
+            signatures:
+            - role: role
+              name: name
+              id: id
+            - role: role
+              name: name
+              id: id
+          type: contract
+          version: "1.0"
+        body:
+          key: '{}'
+      properties:
+        header:
+          $ref: '#/components/schemas/ContractRequest_header'
+        body:
+          additionalProperties: true
+          type: object
+      required:
+      - body
+      - header
+      title: Contract JSON for POST/PUT
+      type: object
+    SignatureBase:
+      example:
+        role: role
+        name: name
+        id: id
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        role:
+          type: string
+      type: object
+    SignatureResponse:
+      additionalProperties: false
+      example:
+        signature: signature
+        extra: '{"name":"john doe", "role":"manager"}'
+        certificate: |-
+          -----BEGIN CERTIFICATE-----
+          MIICYjCCAemgAwIBA...
+        signatureID: XXXXXX
+        algorithm: secp384r1
+      properties:
+        signatureID:
+          description: signatureID from \"contract"->\"signature\"->\"\<MSPID\>\"[X]->\"id\"
+          example: XXXXXX
+          type: string
+        algorithm:
+          description: The algorithm used to sign
+          example: secp384r1
+          type: string
+        certificate:
+          description: The certificate of the signer in pem format
+          example: |-
+            -----BEGIN CERTIFICATE-----
+            MIICYjCCAemgAwIBA...
+          type: string
+        signature:
+          description: The digital signature over the document
+          type: string
+        extra:
+          description: Additional Key/Value from \"contract"->\"signature\"->\"\<MSPID\>\"[X]->XXX,
+            eg name, role
+          example: '{"name":"john doe", "role":"manager"}'
+          type: object
+      required:
+      - algorithm
+      - certificate
+      - extra
+      - signature
+      - signatureID
       title: Signature JSON
       type: object
-    Usage:
+    SignatureRequest:
+      additionalProperties: false
+      example:
+        signature: signature
+        certificate: |-
+          -----BEGIN CERTIFICATE-----
+          MIICYjCCAemgAwIBA...
+        algorithm: secp384r1
+      properties:
+        algorithm:
+          description: The algorithm used to sign
+          example: secp384r1
+          type: string
+        certificate:
+          description: The certificate of the signer in pem format
+          example: |-
+            -----BEGIN CERTIFICATE-----
+            MIICYjCCAemgAwIBA...
+          type: string
+        signature:
+          description: The digital signature over the document
+          type: string
+      required:
+      - algorithm
+      - certificate
+      - signature
+      title: Signature JSON for PUT
+      type: object
+    UsageResponse:
+      example:
+        usageID: 05552c4c-e52f-4bb5-83d2-f50c86115bc8
+        header:
+          name: Usage, from ABC to XYZ
+          msp:
+            key: '{}'
+          type: usage
+          version: "1.0"
+        state: DRAFT
+        body:
+          key: '{}'
+      properties:
+        usageID:
+          description: usageID in GUID format
+          example: 05552c4c-e52f-4bb5-83d2-f50c86115bc8
+          type: string
+        header:
+          $ref: '#/components/schemas/UsageResponse_header'
+        body:
+          additionalProperties: true
+          type: object
+        state:
+          description: The State of the Usage.
+          enum:
+          - DRAFT
+          - SENT
+          - RECEIVED
+          type: string
+      required:
+      - body
+      - contractID
+      - header
+      - state
       title: Usage JSON
+      type: object
+    UsageRequest:
+      example:
+        header:
+          name: Usage, from ABC to XYZ
+          msp:
+            key: '{}'
+          type: usage
+          version: "1.0"
+        body:
+          key: '{}'
+      properties:
+        header:
+          $ref: '#/components/schemas/UsageResponse_header'
+        body:
+          additionalProperties: true
+          type: object
+      required:
+      - body
+      - header
+      title: Usage JSON for POST/PUT
       type: object
     Settlement:
       title: Settlement JSON
@@ -827,4 +1100,123 @@ components:
       - description
       - error
       title: 400 Error Response JSON
+      type: object
+    ContractRequest_header_fromMSP:
+      example:
+        mspid: DTAG
+        signatures:
+        - role: role
+          name: name
+          id: id
+        - role: role
+          name: name
+          id: id
+      properties:
+        mspid:
+          description: MSPID of the contract creator.
+          example: DTAG
+          type: string
+        signatures:
+          items:
+            $ref: '#/components/schemas/SignatureBase'
+          minItems: 1
+          type: array
+      type: object
+    ContractRequest_header_toMSP:
+      example:
+        mspid: TMUS
+        signatures:
+        - role: role
+          name: name
+          id: id
+        - role: role
+          name: name
+          id: id
+      properties:
+        mspid:
+          description: MSPID of the contract creator.
+          example: TMUS
+          type: string
+        signatures:
+          items:
+            $ref: '#/components/schemas/SignatureBase'
+          minItems: 1
+          type: array
+      type: object
+    ContractRequest_header:
+      example:
+        fromMSP:
+          mspid: DTAG
+          signatures:
+          - role: role
+            name: name
+            id: id
+          - role: role
+            name: name
+            id: id
+        name: Contract with XYZ
+        toMSP:
+          mspid: TMUS
+          signatures:
+          - role: role
+            name: name
+            id: id
+          - role: role
+            name: name
+            id: id
+        type: contract
+        version: "1.0"
+      properties:
+        name:
+          description: Human readable name for the contract.
+          example: Contract with XYZ
+          type: string
+        version:
+          description: Version of the contract
+          example: "1.0"
+          type: string
+        type:
+          description: Type of document. MUST be "contract"
+          enum:
+          - contract
+          type: string
+        fromMSP:
+          $ref: '#/components/schemas/ContractRequest_header_fromMSP'
+        toMSP:
+          $ref: '#/components/schemas/ContractRequest_header_toMSP'
+      required:
+      - fromMSP
+      - toMSP
+      - type
+      - version
+      type: object
+    UsageResponse_header:
+      example:
+        name: Usage, from ABC to XYZ
+        msp:
+          key: '{}'
+        type: usage
+        version: "1.0"
+      properties:
+        name:
+          description: Human readable name for the usage.
+          example: Usage, from ABC to XYZ
+          type: string
+        version:
+          description: Version of the usage
+          example: "1.0"
+          type: string
+        type:
+          description: Type of document. MUST be "usage"
+          enum:
+          - usage
+          type: string
+        msp:
+          additionalProperties: true
+          description: 'Additonal check properties per msp eg, "MSPID": {"minSignatures":
+            2}'
+          type: object
+      required:
+      - type
+      - version
       type: object

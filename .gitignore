@@ -80,7 +80,6 @@ typings/
 .yarn-integrity
 
 # dotenv environment variables file
-.env
 .env.test
 
 # parcel-bundler cache (https://parceljs.org/)
@@ -116,3 +115,15 @@ dist
 
 #Visual Studio files
 .vs/
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+# OS generated files
+.DS_Store
+
+#local Mongo DB Docker
+CADB/

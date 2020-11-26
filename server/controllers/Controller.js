@@ -103,12 +103,30 @@ class Controller {
 
   static async handleRequest(request, response, serviceOperation) {
     try {
-      const serviceResponse = await serviceOperation(this.collectRequestParams(request));
-      Controller.sendResponse(response, serviceResponse);
+      const serviceResponse = await serviceOperation(this.collectRequestParamsIncludingRequestUrl(request));
+      Controller.sendResponseIncludingHeaders(response, serviceResponse);
     } catch (error) {
       Controller.sendError(response, error);
     }
   }
+
+  static sendResponseIncludingHeaders(response, payload) {
+    if (payload.headers !== undefined) {
+      for (let headerName in payload.headers) {
+        if (payload.headers.hasOwnProperty(headerName)) {
+          response.set(headerName, payload.headers[headerName]);
+        }
+      }
+    }
+    Controller.sendResponse(response, payload);
+  }
+  
+  static collectRequestParamsIncludingRequestUrl(request) {
+    const returnRequestParams = this.collectRequestParams(request);
+    returnRequestParams.url = request.url;
+    return returnRequestParams;
+  }
+
 }
 
 module.exports = Controller;

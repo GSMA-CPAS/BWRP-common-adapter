@@ -1,0 +1,233 @@
+THERE is currently some gaps int the blockchain-adapter layer where we cannot "associate" an "signature" Object with our "signature".
+we will be just doing "assumptions" for now, and fix later.
+
+
+
+###############################################
+##############       GET         #############
+###############################################
+////////////////////////////////////////////////
+
+GET /contracts/{contractID}/signatures/
+
+read object from "Contract" Collection.
+{
+  "id":   1,         // generated
+  "contractId" : "myContractId",
+  "fromMSP": "theFromMSP",
+  "toMSP": "theToMSP",
+  "state": "DRAFT",
+
+  "rawData": "{\"body\": {\"taps\": null, \"signatures\": {\"DTAG\": [{\"id\": \"signature-0\", \"name\": \"abc\", \"role\": \"aaa\"}], \"TMUS\": [{\"id\": \"signature-0\", \"name\": \"def\", \"role\": \"aaa\"}]}, \"bankDetails\": {\"DTAG\": {\"iban\": null, \"bankName\": null, \"currency\": null, \"swiftBic\": null, \"bankAddress\": null, \"bankAccountName\": null, \"contactNameContract\": null, \"contactEmailContract\": null, \"contactPhoneContract\": null, \"contactNameAccounting\": null, \"contactEmailAccounting\": null, \"contactPhoneAccounting\": null}, \"TMUS\": {\"iban\": null, \"bankName\": null, \"currency\": null, \"swiftBic\": null, \"bankAddress\": null, \"bankAccountName\": null, \"contactNameContract\": null, \"contactEmailContract\": null, \"contactPhoneContract\": null, \"contactNameAccounting\": null, \"contactEmailAccounting\": null, \"contactPhoneAccounting\": null}}, \"discountModels\": \"someData\", \"generalInformation\": {\"name\": \"test1\", \"type\": \"Normal\", \"endDate\": \"2021-01-01T00:00:00.000Z\", \"startDate\": \"2020-12-01T00:00:00.000Z\", \"prolongationLength\": null}}, \"header\": {\"msps\": {\"DTAG\": {\"minSignatures\": 2}, \"TMUS\": {\"minSignatures\": 2}}, \"type\": \"contract\", \"version\": \"1.0\"}}",
+
+  // only exists if state = SENT | RECEIVED
+  "documentId": "12bbfbc58c8f1aab28098673d33d99ce9df9004f4d8f9b25d45153892d5c0736",
+
+
+  "history": [
+  { "timestamp": "00001", "action": "CREATION" },
+  { "timestamp": "00002", "action": "SEND" }
+]
+}
+
+We JSON Parse "RawDATA"
+{
+   "header":{
+      "name":"Contract with XYZ",
+      "fromMSP":{
+         "mspid":"DTAG",
+         "signatures":[
+            {
+               "id":"signature-0",
+               "name":"abc",
+               "role":"aaa"
+            }
+         ]
+      },
+      "toMSP":{
+         "mspid":"TMUS",
+         "signatures":[
+            {
+               "id":"signature-0",
+               "name":"def",
+               "role":"aaa"
+            }
+         ]
+      },
+      "type":"contract",
+      "version":"1.0"
+   },
+   "body":{
+      
+   }
+}
+
+Create empty "list"
+"Read"
+header->fromMSP->signatures
+
+{
+  "signatureId": header->fromMSP->signatures[X]->id, 
+  "contractID": (from path or from Conract object), 
+  "msp": header->fromMSP->mspid, 
+  "name": header->fromMSP->signatures[X]->name, 
+  "role": header->fromMSP->signatures[X]->role, 
+  "signature": "SIGNED|NOTSIGNED"
+}
+
+fetchSignatures	GET /signatures/{id}/{msp}	Fetch all signatures for a given msp and a given document id from the ledger
+Perform a 
+"GET signatures/<DocumentID from Contract>/<header->fromMSP->mspid>/"
+
+If return JSON String Parsed Array lenght is > 0
+we set "Signature": "SIGNED" or else set "NOTSIGNED"
+
+Add this to the "Return list."
+
+Repeat for "toMSP"
+
+and we return the "LIST" which looks something like below.
+[
+{"signatureId":"XXXXXX", "contractID":"YYYYYY", "msp":"DTAG", "name":"XXXXX", "role": "XXXXX", "signature": "SIGNED|NOTSIGNED",
+{"signatureId":"XXXXXX", "contractID":"YYYYYY", "msp":"TMUS", "name":"XXXXX", "role": "XXXXX", "signature": "SIGNED|NOTSIGNED",
+]
+
+//We just need to make sure when they POST/Create a contract.
+we must have 1.
+header->fromMSP->signatures[X]
+and
+header->toMSP->signatures[X]
+
+and "header->fromMSP->signatures[X]->id" and "header->toMSP->signatures[X]->id" its unique (do not match.)
+
+
+###############################################
+##############       GET         #############
+###############################################
+////////////////////////////////////////////////
+
+GET /contracts/{contractID}/signatures/{signatureID}
+
+We Select "Contract" with "ContractID."
+
+We JSON Parse (rawData)
+
+We Loop between 
+header->fromMSP->signatures[X]->id and header->toMSP->signatures[X]->id
+
+to find out which "object".
+
+We create the "return Signature Object"
+{
+  "signatureId": header->[fromMSP/toMSP]->signatures[X]->id, 
+  "contractID": (from path or from Conract object), 
+  "msp": header->[fromMSP/toMSP]->mspid, 
+  "name": header->[fromMSP/toMSP]->signatures[X]->name, 
+  "role": header->[fromMSP/toMSP]->signatures[X]->role, 
+}
+
+
+we Perform 
+fetchSignatures	GET /signatures/{id}/{msp}	Fetch all signatures for a given msp and a given document id from the ledger
+Perform a 
+
+"GET signatures/<DocumentID from Contract>/<header->fromMSP->mspid>/"
+If return JSON String Parsed Array lenght is > 0
+we parse the "JSON String". This will be in an "array"
+[
+   {
+      "<TXID>":{
+         "algorithm":"XXXXX",
+         "certificate":"XXXXX",
+         "signature":"XXXXX"
+      }
+   }
+]
+we then append
+signature->algorithm = response[<TXID>]->algorithm
+signature->certificate = response[<TXID>]->certificate
+signature->signature = response[<TXID>]->signature
+
+so it will look like
+{
+   "signatureId":"XXXXXX",
+   "contractID":"YYYYYY",
+   "msp":"DTAG",
+   "name":"XXXXX",
+   "role":"XXXXX",
+   "certificate":"XXXXX",  //empty if not signed.
+   "signature":"XXXXXXX",  //empty if not signed.
+   "algorithm":"RSA"       //empty if not signed.
+}
+
+
+
+
+
+###############################################
+##############       PUT         #############
+###############################################
+////////////////////////////////////////////////
+
+PUT /contracts/{contractID}/signatures/{signatureID}
+recevives.
+REQUEST BODY
+{
+         "algorithm":"XXXXX",
+         "certificate":"XXXXX",
+         "signature":"XXXXX"
+}
+
+
+
+Select "Conract" Object with "ContractID"
+We Make sure "contract->state" == "SENT/RECEIVED"
+or else throw error.
+
+//Since we have a "Gap" on "signatureID". we will skip below part. but will be in use when we fix problem.
+We JSON Parse (rawData)
+If "conttact->state" == "SENT", we look for "header->fromMSP->signatures[X]->id" == {signatureID}
+
+We check the "received" Certificate contains Required Extensions. 
+1. /CN = name
+2. /EXT_ROLEs = role
+3. /EXT_canSIGN = true                   https://github.com/GSMA-CPAS/BWRP-chaincode/blob/5c04d709907d2b67fcc49dcadf37973893dd530e/hybrid/offchain.go#L285
+
+we then  https://stackoverflow.com/questions/25006460/cant-verify-signature-witn-node-js-crypto-using-key-pairs
+
+
+crypto.createHmac("SHA256", secret).update(string).digest('base64'),
+
+var signer = crypto.createSign(<algorithm>);
+signer.update(Base64Encode(<rawData>));
+
+
+var verifier = crypto.createVerify(<algorithm>);
+verifier.update(Base64Encode(<rawData>));
+var ver = verifier.verify(<Certificate>, <Signature>);
+
+ver should be "true"
+
+
+and if we pass all above test.
+
+(if any of the test failes, we/should return different error codes.)
+
+we finally
+uploadSignature	PUT /signatures/{id}	store a signature for the document identified by id on the ledger
+
+PUT  /signatures/{DocumentID}
+Same Request Body Received.
+{
+         "algorithm":"XXXXX",
+         "certificate":"XXXXX",
+         "signature":"XXXXX"
+}
+
+
+
+
+
+
+
+

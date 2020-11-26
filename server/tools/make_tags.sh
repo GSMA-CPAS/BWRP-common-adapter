@@ -9,7 +9,7 @@ else
 fi;
 
 API_HASH=$(md5sum api/openapi.yaml | cut -d ' ' -f 1)
-API_VERSION=$(cat api/openapi.yaml | grep "version:" | tr -s ' '| cut  -d ' ' -f3)
+API_VERSION=$(head api/openapi.yaml | grep "version:" | tr -s ' '| cut  -d ' ' -f3)
 
 OUT=".status_info"
 

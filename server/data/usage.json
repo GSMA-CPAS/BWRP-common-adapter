@@ -1,0 +1,145 @@
+{
+  "id":   1,         // generated
+  "usageID" : "myUsageId",
+  "fromMSP": "theFromMSP",
+  "toMSP": "theToMSP",
+  "timestamp": "00001",
+  "contractId": "linkedContractId",
+
+
+  "history": [
+  { "timestamp": "00001", "action": "CREATION" },
+  { "timestamp": "00002", "action": "SEND" }
+]
+}
+
+###############################################
+##############       POST         #############
+###############################################
+
+
+POST /contracts/{contractId}/usage
+
+// We only allow usage creation if contract.state = SENT | RECEIVED | SIGNED
+
+{
+  "header": {
+    "name": "REF20200120-GSMA-ORANGE-Usage for roaming",
+    "type": "usage",
+    "version": "1.0"},
+  "body": {}
+
+}
+
+///////////////////////////
+// What we record:
+We add the contractDocumentId to the POST object ("contractDocumentId":      retreive the documentId of the contract)
+
+{
+  "id":   1,         // generated
+  "documentId": None
+  "usageId" :  "kjh",  //  Generate a UUID
+  "fromMSP": "theFromMSP",
+  "toMSP": "theToMSP",
+  "state": "DRAFT",
+  "rawData": stringify(  POST object (including contractDocumentId) ),
+  "contractDocumentId":      retreive the documentId of the contract,
+  "contractId": from path
+  "history": [ { "timestamp": "00001", "action": "CREATE" }]
+}
+
+//////  What we return
+
+response = JSON(rawData),
+response.usageId = usageId
+response.contractId = contractId
+response.state = "DRAFT"
+
+###############################################
+##############       PUT         #############
+###############################################
+PUT /contracts/{contractId}/usage/{usageId}
+
+// We only allow PUT if usage.state = DRAFT
+
+{
+"header": {
+"name": "REF20200120-GSMA-ORANGE-Usage for roaming",
+"type": "usage",
+"version": "1.0"},
+"body": {}
+
+}
+
+///////////////////////////
+// What we update: only the rawData part
+
+{
+
+"rawData": stringify(  POST object ),
+
+}
+
+//////  What we return
+
+response = JSON(rawData),
+response.usageId = usageId
+response.contractId = contractId
+response.state = "DRAFT"
+
+###############################################
+##############       Send         #############
+###############################################
+//   PUT  /contracts/{contractId}/usage/{usageId}/send
+
+We update the state to PENDING
+
+
+
+We construct the payload
+{
+"data": base64 encoding of rawData | + contractDocumentId
+"toMSP": // toMSID = toMSP
+}
+
+POST /private-document
+
+Receive documentId -> update usage object with doc ID
+We update the state to SENT
+
+###############################################
+##############       event         #############
+###############################################
+# Orange receives a webhook event on /contrats/event      with  storageKey  and documentHash
+
+?? What is the best way to get documentId when we receive the storageKey in the webhook from the blockchain-adapter ?
+
+blockchain-adapter-dtag     | > reply: FetchPrivateDocument(#0fa34b69e77e8d40155117833bff6fbdae1d196cc080707e687b712391a8e094) =
+{"id":"0fa34b69e77e8d40155117833bff6fbdae1d196cc080707e687b712391a8e094",
+"timeStamp":"2020-11-12 14:24:11",
+"fromMSP":"DTAG",
+"toMSP":"TMUS",
+"data":"eyJoZWFkZXIiOnsidmVyc2lvbiI6IjEuMCIsInR5cGUiOiJjb250cmFjdCIsIm1zcHMiOnsiRFRBRyI6eyJtaW5TaW
+duYXR1cmVzIjoyfSwiVE1VUyI6eyJtaW5TaWduYXR1cmVzIjoyfX19LCJib2R5Ijp7ImdlbmVyYWxJbmZvcm1hdGlvbiI6eyJu|contractDocumentId",
+"dataHash":"c3eddb15c50df07faa2da74435f95bdd6592860f3162e18e404e8248f3ed56c0"}
+
+-> decode data to JSON
+Check id header type is "usage"
+
+Create usageId
+{
+"id":   1,         // generated
+"documentId": id
+"usageId" :  usageId
+"contractId":  find it localy using contractDocumentId
+"fromMSP": fromMsp,
+"toMSP": toMSP
+"state": "RECEIVED",
+"rawData": base64Decode(  data[0] ).toString(),
+"contractDocumentId":      data[1],          retreive the documentId of the contract
+"history": [ { "timestamp": "00001", "action": "CREATE" }]
+}
+
+storageKey = HASH256( fromMSP + documentId)
+HASH256( base64Encode( rawData ) + | + contractDocumentId )
+

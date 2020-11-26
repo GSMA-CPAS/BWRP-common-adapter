@@ -24,6 +24,10 @@ const getContracts = async (request, response) => {
   await Controller.handleRequest(request, response, service.getContracts);
 };
 
+const sendContractByID = async (request, response) => {
+  await Controller.handleRequest(request, response, service.sendContractByID);
+};
+
 const updateContractByID = async (request, response) => {
   await Controller.handleRequest(request, response, service.updateContractByID);
 };
@@ -34,5 +38,6 @@ module.exports = {
   deleteContractByID,
   getContractByID,
   getContracts,
+  sendContractByID,
   updateContractByID,
 };

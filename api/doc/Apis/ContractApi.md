@@ -4,16 +4,17 @@ All URIs are relative to *http://localhost/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createContract**](ContractApi.md#createContract) | **POST** /contract/ | 
-[**deleteContractByID**](ContractApi.md#deleteContractByID) | **DELETE** /contract/{contractID} | 
-[**getContractByID**](ContractApi.md#getContractByID) | **GET** /contract/{contractID} | 
-[**getContracts**](ContractApi.md#getContracts) | **GET** /contract/ | 
-[**updateContractByID**](ContractApi.md#updateContractByID) | **PUT** /contract/{contractID} | 
+[**createContract**](ContractApi.md#createContract) | **POST** /contracts/ | 
+[**deleteContractByID**](ContractApi.md#deleteContractByID) | **DELETE** /contracts/{contractID} | 
+[**getContractByID**](ContractApi.md#getContractByID) | **GET** /contracts/{contractID} | 
+[**getContracts**](ContractApi.md#getContracts) | **GET** /contracts/ | 
+[**sendContractByID**](ContractApi.md#sendContractByID) | **PUT** /contracts/{contractID}/send/ | 
+[**updateContractByID**](ContractApi.md#updateContractByID) | **PUT** /contracts/{contractID} | 
 
 
 <a name="createContract"></a>
 # **createContract**
-> String createContract(toMSP, body)
+> ContractResponse createContract(body)
 
 
 
@@ -23,12 +24,11 @@ Method | HTTP request | Description
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **toMSP** | **String**| The Destination MSPID | [default to null]
- **body** | **Object**| Contract Object Payload |
+ **body** | [**ContractRequest**](../Models/ContractRequest.md)| Contract Object Payload |
 
 ### Return type
 
-[**String**](../Models/string.md)
+[**ContractResponse**](../Models/ContractResponse.md)
 
 ### Authorization
 
@@ -41,7 +41,7 @@ No authorization required
 
 <a name="deleteContractByID"></a>
 # **deleteContractByID**
-> SuccessResponse deleteContractByID(contractID)
+> ContractResponse deleteContractByID(contractID)
 
 
 
@@ -55,7 +55,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SuccessResponse**](../Models/SuccessResponse.md)
+[**ContractResponse**](../Models/ContractResponse.md)
 
 ### Authorization
 
@@ -68,7 +68,7 @@ No authorization required
 
 <a name="getContractByID"></a>
 # **getContractByID**
-> Object getContractByID(contractID)
+> oneOf&lt;ContractResponse,RAWContractResponse&gt; getContractByID(contractID, format)
 
 
 
@@ -79,10 +79,11 @@ No authorization required
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **contractID** | **String**| The contract ID | [default to null]
+ **format** | **String**| Response format, defaults to JSON if not passed. | [optional] [default to null] [enum: JSON, RAW]
 
 ### Return type
 
-[**Object**](../Models/object.md)
+[**oneOf&lt;ContractResponse,RAWContractResponse&gt;**](../Models/oneOf&lt;ContractResponse,RAWContractResponse&gt;.md)
 
 ### Authorization
 
@@ -117,9 +118,36 @@ No authorization required
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
+<a name="sendContractByID"></a>
+# **sendContractByID**
+> ContractResponse sendContractByID(contractID)
+
+
+
+    Set State to \&quot;SEND\&quot; and POST to Blochain adapter towards TargetMSP of the Contract
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **contractID** | **String**| The contract ID | [default to null]
+
+### Return type
+
+[**ContractResponse**](../Models/ContractResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
 <a name="updateContractByID"></a>
 # **updateContractByID**
-> Object updateContractByID(contractID, body)
+> ContractResponse updateContractByID(contractID, body)
 
 
 
@@ -130,11 +158,11 @@ No authorization required
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **contractID** | **String**| The contract ID | [default to null]
- **body** | **Object**| Contract Object Payload |
+ **body** | [**ContractRequest**](../Models/ContractRequest.md)| Contract Object Payload |
 
 ### Return type
 
-[**Object**](../Models/object.md)
+[**ContractResponse**](../Models/ContractResponse.md)
 
 ### Authorization
 

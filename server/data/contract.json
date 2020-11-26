@@ -1,0 +1,232 @@
+{
+  "id":   1,         // generated
+  "contractId" : "myContractId",
+  "fromMSP": "theFromMSP",
+  "toMSP": "theToMSP",
+  "state": "DRAFT",
+
+  "rawData": "{\"body\": {\"taps\": null, \"signatures\": {\"DTAG\": [{\"id\": \"signature-0\", \"name\": \"abc\", \"role\": \"aaa\"}], \"TMUS\": [{\"id\": \"signature-0\", \"name\": \"def\", \"role\": \"aaa\"}]}, \"bankDetails\": {\"DTAG\": {\"iban\": null, \"bankName\": null, \"currency\": null, \"swiftBic\": null, \"bankAddress\": null, \"bankAccountName\": null, \"contactNameContract\": null, \"contactEmailContract\": null, \"contactPhoneContract\": null, \"contactNameAccounting\": null, \"contactEmailAccounting\": null, \"contactPhoneAccounting\": null}, \"TMUS\": {\"iban\": null, \"bankName\": null, \"currency\": null, \"swiftBic\": null, \"bankAddress\": null, \"bankAccountName\": null, \"contactNameContract\": null, \"contactEmailContract\": null, \"contactPhoneContract\": null, \"contactNameAccounting\": null, \"contactEmailAccounting\": null, \"contactPhoneAccounting\": null}}, \"discountModels\": \"someData\", \"generalInformation\": {\"name\": \"test1\", \"type\": \"Normal\", \"endDate\": \"2021-01-01T00:00:00.000Z\", \"startDate\": \"2020-12-01T00:00:00.000Z\", \"prolongationLength\": null}}, \"header\": {\"msps\": {\"DTAG\": {\"minSignatures\": 2}, \"TMUS\": {\"minSignatures\": 2}}, \"type\": \"contract\", \"version\": \"1.0\"}}",
+
+  // only exists if state = SENT | RECEIVED
+  "documentId": "12bbfbc58c8f1aab28098673d33d99ce9df9004f4d8f9b25d45153892d5c0736",
+
+
+  "history": [
+  { "timestamp": "00001", "action": "CREATION" },
+  { "timestamp": "00002", "action": "SEND" }
+]
+}
+
+###############################################
+##############       POST         #############
+###############################################
+////////////////////////////////////////////////
+POST /contracts
+{
+  "header": {
+    "name": "REF20200120-GSMA-ORANGE-Contract for roaming",
+    "fromMSP": {
+      "mspid": "",
+      "nbOfsignatures": ""
+    },
+    "toMSP": {
+      "mspid": "",
+      "nbOfsignatures": ""
+    },
+    "type": "contract",
+    "version": "1.0"
+  },
+  "body": {
+    "signatures": "{}"
+  }
+}
+
+///////////////////////////
+// What we record:
+
+{
+  "id":   1,         // generated
+  "contractId" : "myContractId",    //  Generate a UUID
+  "fromMSP": "mspid",               // fromMSPID = "body->header->fromMSP->mspid"
+  "toMSP": "theToMSP",                   // toMSPID = "body->header->toMSP->mspid"
+  "state": "DRAFT",
+  "rawData": "{\n  \"header\": {\n    \"name\": \"Contract with XYZ\",\n    \"fromMSP\": {\n      \"mspid\": \"\",\n      \"nbOfsignatures\": \"\"\n    },\n    \"toMSP\": {\n      \"mspid\": \"\",\n      \"nbOfsignatures\": \"\"\n    },\n    \"type\": \"contract\",\n    \"version\": \"1.0\"\n  },\n  \"body\": {\n    \"signatures\": \"{}\"\n  }\n}",
+  "history": [
+    { "timestamp": "00001", "action": "CREATE" }
+  ]
+}
+//////  What we return
+response = JSON(rawData),
+response.contractId = contractId
+response.state = "DRAFT"
+
+###############################################
+##############       PUT         #############
+###############################################
+////////////////////////////
+PUT /contracts/{myContractId}
+
+First make sure the State is DRAFT  -> 404
+
+{
+  "header": {
+    "name": "Contract with XYZ",
+    "fromMSP": {
+      "mspid": "",
+      "nbOfsignatures": ""
+    },
+    "toMSP": {
+      "mspid": "",
+      "nbOfsignatures": ""
+    },
+    "type": "contract",
+    "version": "1.0"
+  },
+  "body": {
+    "signatures": "{}"
+  }
+}
+
+// Replace fromMSP  and toMSP
+// Add history PUT
+// Replace raw data
+
+{
+  "id":   1,         // generated
+  "contractId" : "myContractId",
+  "fromMSP": "theFromMSP",
+  "toMSP": "theToMSP",
+  "state": "DRAFT",
+
+  "rawData": "{\"body\": {\"taps\": null, \"signatures\": {\"DTAG\": [{\"id\": \"signature-0\", \"name\": \"abc\", \"role\": \"aaa\"}], \"TMUS\": [{\"id\": \"signature-0\", \"name\": \"def\", \"role\": \"aaa\"}]}, \"bankDetails\": {\"DTAG\": {\"iban\": null, \"bankName\": null, \"currency\": null, \"swiftBic\": null, \"bankAddress\": null, \"bankAccountName\": null, \"contactNameContract\": null, \"contactEmailContract\": null, \"contactPhoneContract\": null, \"contactNameAccounting\": null, \"contactEmailAccounting\": null, \"contactPhoneAccounting\": null}, \"TMUS\": {\"iban\": null, \"bankName\": null, \"currency\": null, \"swiftBic\": null, \"bankAddress\": null, \"bankAccountName\": null, \"contactNameContract\": null, \"contactEmailContract\": null, \"contactPhoneContract\": null, \"contactNameAccounting\": null, \"contactEmailAccounting\": null, \"contactPhoneAccounting\": null}}, \"discountModels\": \"someData\", \"generalInformation\": {\"name\": \"test1\", \"type\": \"Normal\", \"endDate\": \"2021-01-01T00:00:00.000Z\", \"startDate\": \"2020-12-01T00:00:00.000Z\", \"prolongationLength\": null}}, \"header\": {\"msps\": {\"DTAG\": {\"minSignatures\": 2}, \"TMUS\": {\"minSignatures\": 2}}, \"type\": \"contract\", \"version\": \"1.0\"}}",
+
+
+  "history": [
+    { "timestamp": "00001", "action": "CREATE" },
+    { "timestamp": "00002", "action": "PUT" }
+  ]
+}
+
+
+###############################################
+##############       Send         #############
+###############################################
+//   PUT  /contracts/{} /send
+ContractApi	uploadPrivateDocument	POST /private-documents	Upload a private document, shared between our own organization and a partner MSP
+
+We need to construct the payload
+{
+"data": base64 encoding of rawData
+"toMSP": // toMSID = toMSP
+}
+
+We update the state to PENDING
+
+POST /private-document
+if we receive an error -> DRAFT
+else:
+We receive a documentID
+We update the state to SENT
+{
+"id":   1,         // generated
+"contractId" : "myContractId",
+"fromMSP": "theFromMSP",
+"toMSP": "theToMSP",
+"state": "SENT",
+// only exists if state = DRAFT
+"content": {"body": {"taps": null,
+"signatures": {"DTAG": [{"id": "signature-0", "name": "abc", "role": "aaa"}], "TMUS": [{"id": "signature-0", "name": "def", "role": "aaa"}]}, "bankDetails": {"DTAG": {"iban": null, "bankName": null, "currency": null, "swiftBic": null, "bankAddress": null, "bankAccountName": null, "contactNameContract": null, "contactEmailContract": null, "contactPhoneContract": null, "contactNameAccounting": null, "contactEmailAccounting": null, "contactPhoneAccounting": null}, "TMUS": {"iban": null, "bankName": null, "currency": null, "swiftBic": null, "bankAddress": null, "bankAccountName": null, "contactNameContract": null, "contactEmailContract": null, "contactPhoneContract": null, "contactNameAccounting": null, "contactEmailAccounting": null, "contactPhoneAccounting": null}}, "discountModels": "someData", "generalInformation": {"name": "test1", "type": "Normal", "endDate": "2021-01-01T00:00:00.000Z", "startDate": "2020-12-01T00:00:00.000Z", "prolongationLength": null}}, "header": {"msps": {"DTAG": {"minSignatures": 2}, "TMUS": {"minSignatures": 2}}, "type": "contract", "version": "1.0"}},
+
+// only exists if state = SENT | RECEIVED
+"documentId": "12bbfbc58c8f1aab28098673d33d99ce9df9004f4d8f9b25d45153892d5c0736",
+"rawData": "{\"body\": {\"taps\": null, \"signatures\": {\"DTAG\": [{\"id\": \"signature-0\", \"name\": \"abc\", \"role\": \"aaa\"}], \"TMUS\": [{\"id\": \"signature-0\", \"name\": \"def\", \"role\": \"aaa\"}]}, \"bankDetails\": {\"DTAG\": {\"iban\": null, \"bankName\": null, \"currency\": null, \"swiftBic\": null, \"bankAddress\": null, \"bankAccountName\": null, \"contactNameContract\": null, \"contactEmailContract\": null, \"contactPhoneContract\": null, \"contactNameAccounting\": null, \"contactEmailAccounting\": null, \"contactPhoneAccounting\": null}, \"TMUS\": {\"iban\": null, \"bankName\": null, \"currency\": null, \"swiftBic\": null, \"bankAddress\": null, \"bankAccountName\": null, \"contactNameContract\": null, \"contactEmailContract\": null, \"contactPhoneContract\": null, \"contactNameAccounting\": null, \"contactEmailAccounting\": null, \"contactPhoneAccounting\": null}}, \"discountModels\": \"someData\", \"generalInformation\": {\"name\": \"test1\", \"type\": \"Normal\", \"endDate\": \"2021-01-01T00:00:00.000Z\", \"startDate\": \"2020-12-01T00:00:00.000Z\", \"prolongationLength\": null}}, \"header\": {\"msps\": {\"DTAG\": {\"minSignatures\": 2}, \"TMUS\": {\"minSignatures\": 2}}, \"type\": \"contract\", \"version\": \"1.0\"}}",
+
+
+"history": [
+{ "timestamp": "00001", "action": "CREATE" },
+{ "timestamp": "00002", "action": "PUT" }
+{ "timestamp": "00003", "action": "PENDING" }
+{ "timestamp": "00003", "action": "SENT" }
+]
+}
+
+
+# What happens here is:
+The blockchain adapter creates random documentId
+and stores the document with storageKey = SHA256(documentId + toMSP=)
+
+First we store the document in local offchain storage ( threw offchain-db-adapter )
+First we store the document in remote offchain storage ( threw offchain-db-adapter )
+Then we generate the storageKey
+Then we put state on the network: { storageKey , value: documentHash}
+
+
+#######   SENT from GSMA to ORANGE #############   What is the best way to get documentId when we receive the storageKey in the webhook from the blockchain-adapter ?
+# Orange receives a webhook event on /contrats/event      with  storageKey  and documentHash
+
+'`fromStorageKey` VARCHAR(64) AS (SHA2(CONCAT(fromMSP, documentId), 256)) STORED NOT NULL, ' +
+'`toStorageKey` VARCHAR(64) AS (SHA2(CONCAT(toMSP, documentId), 256)) STORED NOT NULL, '
+
+
+const availableDocumendIDs = await this.getBackendAdapter("blockchain").getPrivateDocumentIDs();
+
+// Retreive all docs in their mysql local storage  and remove from offchain storage
+for (var i in availableDocumendIDs) {
+  const document = await this.getBackendAdapter("blockchain").getPrivateDocument(availableDocumendIDs[i]);
+  if (document) {
+  const privateDocument = this.converToPrivateDocument(document);
+  await this.processPrivateDocument(privateDocument);
+  const documentIsStored = await this.getBackendAdapter("localStorage").existsDocument(privateDocument.documentId);
+  if(documentIsStored) {
+    await this.getBackendAdapter("blockchain").deletePrivateDocument(privateDocument.documentId);
+  }
+}
+
+const documentId = await this.getBackendAdapter("localStorage").getDocumentIDFromStorageKey(storageKey);
+
+const privateDocument = await this.getBackendAdapter("localStorage").getDocument(documentId);
+
+if (privateDocument) {
+await this.processPrivateDocument(privateDocument);
+this.getLogger().info("[DocumentService::/event] Stored document with id %s successfully", documentId);
+} else {
+this.getLogger().error("[DocumentService::/event] Failed to get private document with id - %s", documentId);
+}
+########################################################################################@@@@
+
+blockchain-adapter-dtag     | > reply: FetchPrivateDocument(#0fa34b69e77e8d40155117833bff6fbdae1d196cc080707e687b712391a8e094) =
+{"id":"0fa34b69e77e8d40155117833bff6fbdae1d196cc080707e687b712391a8e094",
+ "timeStamp":"2020-11-12 14:24:11",
+ "fromMSP":"DTAG",
+ "toMSP":"TMUS",
+ "data":"eyJoZWFkZXIiOnsidmVyc2lvbiI6IjEuMCIsInR5cGUiOiJjb250cmFjdCIsIm1zcHMiOnsiRFRBRyI6eyJtaW5TaWduYXR1cmVzIjoyfSwiVE1VUyI6eyJtaW5TaWduYXR1cmVzIjoyfX19LCJib2R5Ijp7ImdlbmVyYWxJbmZvcm1hdGlvbiI6eyJuYW1lIjoidGVzdDEiLCJ0eXBlIjoiTm9ybWFsIiwic3RhcnREYXRlIjoiMjAyMC0xMi0wMVQwMDowMDowMC4wMDBaIiwiZW5kRGF0ZSI6IjIwMjEtMDEtMDFUMDA6MDA6MDAuMDAwWiIsInByb2xvbmdhdGlvbkxlbmd0aCI6bnVsbH0sImJhbmtEZXRhaWxzIjp7IkRUQUciOnsiY3VycmVuY3kiOm51bGwsImNvbnRhY3ROYW1lQWNjb3VudGluZyI6bnVsbCwiY29udGFjdFBob25lQWNjb3VudGluZyI6bnVsbCwiY29udGFjdEVtYWlsQWNjb3VudGluZyI6bnVsbCwiY29udGFjdE5hbWVDb250cmFjdCI6bnVsbCwiY29udGFjdFBob25lQ29udHJhY3QiOm51bGwsImNvbnRhY3RFbWFpbENvbnRyYWN0IjpudWxsLCJpYmFuIjpudWxsLCJzd2lmdEJpYyI6bnVsbCwiYmFua05hbWUiOm51bGwsImJhbmtBZGRyZXNzIjpudWxsLCJiYW5rQWNjb3VudE5hbWUiOm51bGx9LCJUTVVTIjp7ImN1cnJlbmN5IjpudWxsLCJjb250YWN0TmFtZUFjY291bnRpbmciOm51bGwsImNvbnRhY3RQaG9uZUFjY291bnRpbmciOm51bGwsImNvbnRhY3RFbWFpbEFjY291bnRpbmciOm51bGwsImNvbnRhY3ROYW1lQ29udHJhY3QiOm51bGwsImNvbnRhY3RQaG9uZUNvbnRyYWN0IjpudWxsLCJjb250YWN0RW1haWxDb250cmFjdCI6bnVsbCwiaWJhbiI6bnVsbCwic3dpZnRCaWMiOm51bGwsImJhbmtOYW1lIjpudWxsLCJiYW5rQWRkcmVzcyI6bnVsbCwiYmFua0FjY291bnROYW1lIjpudWxsfX0sInNpZ25hdHVyZXMiOnsiRFRBRyI6W3siaWQiOiJzaWduYXR1cmUtMCIsIm5hbWUiOiJhYmMiLCJyb2xlIjoiYWFhIn1dLCJUTVVTIjpbeyJpZCI6InNpZ25hdHVyZS0wIiwibmFtZSI6ImRlZiIsInJvbGUiOiJhYWEifV19LCJkaXNjb3VudE1vZGVscyI6InNvbWVEYXRhIiwidGFwcyI6bnVsbH19",
+ "dataHash":"c3eddb15c50df07faa2da74435f95bdd6592860f3162e18e404e8248f3ed56c0"}
+
+-> decode data to JSON
+Check id header type is "contract"
+
+Generate a new contractId
+
+
+{
+"id":   1,         // generated
+"contractId" : "myContractId",   UUID
+"fromMSP":  fromMSP
+"toMSP": toMSP,
+"state": "RECEIVED",
+
+"rawData": base64Decode(data)
+
+// only exists if state = SENT | RECEIVED
+"documentId": id,
+
+
+"history": [
+{ "timestamp": "00001", "action": "RECEIVED" },
+
+]
+}
+
+###############################################
+##############       Sign         #############
+###############################################
