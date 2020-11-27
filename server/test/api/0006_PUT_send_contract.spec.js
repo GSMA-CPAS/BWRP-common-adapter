@@ -139,12 +139,10 @@ describe("Tests PUT " + route + " API OK", function () {
             expect(response).to.be.json;
             expect(response.body).to.exist;
             expect(response.body).to.be.an('object');
-            expect(Object.keys(response.body)).have.members(["contractId", "state", "creationDate", "lastModificationDate", "header", "documentId", "rawData"]);
+            expect(Object.keys(response.body)).have.members(["contractId", "state", "creationDate", "lastModificationDate", "header", "body"]);
 
             expect(response.body).to.have.property('contractId', contract1.id);
             expect(response.body).to.have.property('state', 'SENT');
-            expect(response.body).to.have.property('documentId').that.is.a('string');
-            expect(response.body).to.have.property('rawData').that.is.a('string');
             expect(response.body).to.have.property('creationDate').that.is.a('string').and.match(DATE_REGEX);
             expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
 
@@ -166,6 +164,10 @@ describe("Tests PUT " + route + " API OK", function () {
             expect(response.body.header.toMsp).to.have.property('signatures').that.is.an('array');
             expect(response.body.header.toMsp.signatures.length).to.equal(0);
             
+            expect(response.body).to.have.property('body').that.is.an('object');
+            expect(Object.keys(response.body.body)).have.members(["bankDetails", "discountModels", "generalInformation"]);
+            expect(response.body.body).to.deep.include(contract1.body);
+
             // expect(response.body).to.have.property('history').that.is.an('array');
             // expect(response.body.history.length).to.equal(2);
             // expect(Object.keys(response.body.history[0])).have.members(["date", "action"]);
@@ -202,12 +204,10 @@ describe("Tests PUT " + route + " API OK", function () {
             expect(response).to.be.json;
             expect(response.body).to.exist;
             expect(response.body).to.be.an('object');
-            expect(Object.keys(response.body)).have.members(["contractId", "state", "creationDate", "lastModificationDate", "header", "documentId", "rawData"]);
+            expect(Object.keys(response.body)).have.members(["contractId", "state", "creationDate", "lastModificationDate", "header", "body"]);
 
             expect(response.body).to.have.property('contractId', contract2.id);
             expect(response.body).to.have.property('state', 'SENT');
-            expect(response.body).to.have.property('documentId').that.is.a('string');
-            expect(response.body).to.have.property('rawData').that.is.a('string');
             expect(response.body).to.have.property('creationDate').that.is.a('string').and.match(DATE_REGEX);
             expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
 
@@ -240,7 +240,11 @@ describe("Tests PUT " + route + " API OK", function () {
             expect(response.body.header.toMsp.signatures[1]).to.have.property('id', contract2.toMsp.signatures[1].id);
             expect(response.body.header.toMsp.signatures[1]).to.have.property('name', contract2.toMsp.signatures[1].name);
             expect(response.body.header.toMsp.signatures[1]).to.have.property('role', contract2.toMsp.signatures[1].role);
-            
+
+            expect(response.body).to.have.property('body').that.is.an('object');
+            expect(Object.keys(response.body.body)).have.members(["bankDetails", "discountModels", "generalInformation"]);
+            expect(response.body.body).to.deep.include(contract2.body);
+
             // expect(response.body).to.have.property('history').that.is.an('array');
             // expect(response.body.history.length).to.equal(2);
             // expect(Object.keys(response.body.history[0])).have.members(["date", "action"]);

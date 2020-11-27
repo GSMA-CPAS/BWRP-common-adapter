@@ -62,10 +62,22 @@ class ContractMapper {
   }
 
   // Map the internal contract to POST contracts or GET contract/id response body
-  static getResponseBodyForGetContract(contract, format = 'body') {
+  static getResponseBodyForGetContract(contract, format = 'JSON') {
     const returnedResponseBody = {
       contractId: contract.id,
-      header: {
+      state: contract.state,
+      // history: contract.history,
+      creationDate: contract.creationDate,
+      lastModificationDate: contract.lastModificationDate
+    };
+
+    if (format === 'RAW') {
+      returnedResponseBody.raw = contract.rawData;
+    }
+
+    if (format === 'JSON') {
+      returnedResponseBody.body = contract.body;
+      returnedResponseBody.header = {
         name: contract.name,
         type: contract.type,
         version: contract.version,
@@ -93,20 +105,7 @@ class ContractMapper {
             }
           })
         }
-      },
-      state: contract.state,
-      documentId: contract.documentId,
-      // history: contract.history,
-      creationDate: contract.creationDate,
-      lastModificationDate: contract.lastModificationDate
-    };
-
-    if (format === 'rawData') {
-      returnedResponseBody.rawData = contract.rawData;
-    }
-
-    if (format === 'body') {
-      returnedResponseBody.body = contract.body;
+      };
     }
 
     return returnedResponseBody;
@@ -114,7 +113,7 @@ class ContractMapper {
 
   static getResponseBodyForSendContract(contract) {
     // By default, use mapper getResponseBodyForGetContract
-    const returnedResponseBody = ContractMapper.getResponseBodyForGetContract(contract, 'rawData');
+    const returnedResponseBody = ContractMapper.getResponseBodyForGetContract(contract, 'JSON');
     return returnedResponseBody;
   }
 

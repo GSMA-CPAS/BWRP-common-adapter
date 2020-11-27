@@ -56,6 +56,15 @@ class ErrorUtils {
     }
   };
 
+  static ERROR_BUSINESS_CONTRACT_RAW_FORMAT_UNAVAILABLE = {
+    code: 422,
+    error: {
+      internalErrorCode: 2002,
+      message: 'Unvailable RAW format',
+      description: 'The RAW format of this contract is unavailable.'
+    }
+  };
+
   static ERROR_BLOCKCHAIN_ADAPTER_RESPONSE_PARSING_ERROR = {
     code: 500,
     error: {
