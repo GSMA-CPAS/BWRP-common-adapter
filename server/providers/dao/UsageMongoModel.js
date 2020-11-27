@@ -24,6 +24,7 @@ var UsageBodySchema = new Schema({
   data: { type: [UsageDataSchema], required: false }
 }, { _id: false });
 
+var MixUsageBodySchema = Schema.Types.Mixed;
 
 
 
@@ -34,7 +35,7 @@ var UsageSchema = new Schema({
   name: { type: String, required: true },
   contractId: { type: String, required: true },
   mspOwner: { type: String, required: true },
-  body: { type: UsageBodySchema, required: true },
+  body: { type: MixUsageBodySchema, required: true },
   history: { type: [HistorySchema], required: true },
   creationDate: { type: Date, required: true },
   lastModificationDate: { type: Date, required: true, default: Date.now },
