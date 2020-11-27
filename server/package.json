@@ -1,7 +1,7 @@
 {
-  "name": "blockchain-adapter",
-  "version": "0.0.6",
-  "description": "This is the REST api specification for the blockchain-adapter",
+  "name": "common-adapter",
+  "version": "0.0.1",
+  "description": "This is the REST api specification for the common-adapter",
   "main": "index.js",
   "scripts": {
     "prestart": "npm install",
