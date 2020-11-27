@@ -13,7 +13,7 @@ function printHelp() {
 
 function build() {
 #  HASH=$(cat .git/modules/common-adapter/HEAD || echo "NO_HEAD" | head -1 | cut -f1)
-  HASH=$(cat .git/ORIG_HEAD || echo "NO_HEAD" | head -1 | cut -f1)
+  HASH=$(cat .git/packed-refs |grep master | awk '{ print $1 }')
   docker-compose build --build-arg COMMIT_HASH="$HASH" $1 || exit 1
   mkdir -p ${MONGO_PV_PATH}
   echo "db.createUser( 
