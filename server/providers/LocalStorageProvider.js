@@ -118,6 +118,19 @@ class LocalStorageProvider {
    *
    * @returns {Promise<object>}
    */
+  static async updateUsage(usage) {
+    try {
+      return await UsageDAO.update(usage);
+    } catch (error) {
+      logger.error('[LocalStorageProvider::updateUsage] failed to update usage - '+  error.message);
+      throw error;
+    }
+  }
+
+  /**
+   *
+   * @returns {Promise<object>}
+   */
   static async getUsage(id) {
     try {
       return await UsageDAO.findOne(id);

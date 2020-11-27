@@ -16,7 +16,7 @@ describe("Tests GET " + route + " API OK", function () {
   describe("Setup and Test GET " + route + " API with minimum contract details", function () {
     const contract1 = {
       name: "Contract name between A1 and B1",
-      state: 'DRAFT',
+      state: 'SENT',
       type: 'contract',
       version: '1.1.0',
       fromMsp: {
@@ -50,7 +50,7 @@ describe("Tests GET " + route + " API OK", function () {
     };
     const contract2 = {
       name: "Contract name between B1 and C1",
-      state: 'DRAFT',
+      state: 'SIGNED',
       type: 'contract',
       version: '1.1.0',
       fromMsp: {
@@ -154,7 +154,7 @@ describe("Tests GET " + route + " API OK", function () {
         });
     });
 
-    it.only('GET usage OK', function (done) {
+    it('GET usage OK', function (done) {
       try {
         let path = globalVersion + '/contracts/' + contract1.id + '/usages/' + usage1.id;
         debug("GET path : ", path);

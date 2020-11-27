@@ -7,14 +7,13 @@ const chai = require('chai');
 const expect = require('chai').expect;
 
 const globalVersion = '/api/v1';
-const route = '/contracts/{contractId}/usages/';
+const route = '/contracts/{contractID}/usages/{usageId}';
 
 const DATE_REGEX = new RegExp('^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z$');
 
-describe("Tests POST " + route + " API OK", function () {
+describe("Tests PUT " + route + " API OK", function () {
 
-  describe("Setup and Test POST " + route + " API with a usage document", function () {
-
+  describe("Setup and Test PUT " + route + " API", function () {
     const contract_draft = {
       name: "Contract name between A1 and B1",
       state: 'DRAFT',
@@ -117,6 +116,38 @@ describe("Tests POST " + route + " API OK", function () {
       },
       rawData: "Ctr_raw-data-1"
     };
+    const usage_minimum_data = {
+      type: 'usage',
+      version: '1.1.0',
+      name: 'Usage data',
+      contractId: undefined,
+      mspOwner: undefined,
+      body: {
+        data: []
+      },
+      state: 'DRAFT'
+    };
+    const usage_more_data = {
+      type: 'usage',
+      version: '1.1.0',
+      name: 'Usage with data',
+      contractId: undefined,
+      mspOwner: undefined,
+      body: {
+        data: [{
+          year: 2020,
+          month: 1,
+          hpmn: 'HPMN',
+          vpmn: 'VPMN',
+          service: 'service',
+          value: 1,
+          units: 'unit',
+          charges: 'charge',
+          taxes: 'taxes'
+        }]
+      },
+      state: 'DRAFT'
+    };
 
     before(done => {
       debugSetup('==> remove all contracts in db');
@@ -128,15 +159,28 @@ describe("Tests POST " + route + " API OK", function () {
             .then(removeAllUsagesResp => {
               debugSetup('All usages in db are removed : ', removeAllUsagesResp);
 
-              testsDbUtils.initDbWithContracts([contract_draft,contract_sent,contract_received])
+              testsDbUtils.initDbWithContracts([contract_draft, contract_sent, contract_received])
                 .then(initDbWithContractsResp => {
                   debugSetup('Three contracts where added in db ', removeAllUsagesResp);
                   contract_draft.id = initDbWithContractsResp[0].id;
                   contract_sent.id = initDbWithContractsResp[1].id;
                   contract_received.id = initDbWithContractsResp[2].id;
+                  usage_minimum_data.contractId = contract_sent.id;
+                  usage_minimum_data.mspOwner = contract_sent.fromMsp.mspId;
+                  usage_more_data.contractId = contract_received.id;
+                  usage_more_data.mspOwner = contract_received.fromMsp.mspId;
+                  testsDbUtils.initDbWithUsages([usage_minimum_data, usage_more_data])
+                    .then(initDbWithUsagesResp => {
+                      debugSetup('The db is initialized with 2 usages : ', initDbWithUsagesResp.map(c => c.id));
 
-                  debugSetup('==> done!');
-                  done();
+                      debugSetup('==> done!');
+                      done();
+                    })
+                    .catch(initDbWithUsagesError => {
+                      debugSetup('Error initializing the db content : ', initDbWithUsagesError);
+                      debugSetup('==> failed!');
+                      done(initDbWithUsagesError);
+                    });
 
                 })
                 .catch(initDbWithContractsError => {
@@ -158,39 +202,51 @@ describe("Tests POST " + route + " API OK", function () {
         });
     });
 
-    it('POST usages OK on DRAFT Contract with a Usage document', function (done) {
+
+    it('Put usage OK', function (done) {
       try {
-        let path = globalVersion + '/contracts/' + contract_draft.id + '/usages/';
+        let path = globalVersion + '/contracts/' + contract_sent.id + '/usages/' + usage_minimum_data.id;
+        debug("PUT path : ", path);
 
         let sentBody = {
           header: {
-            name: 'name',
-            type: 'usage',
-            version: '1.1.0',
-            // mspOwner: ->  the MSP which gives the Inbound traffic data   Could be the contract->fromMSP
+            name: "Usage data name changed",
+            type: "usage",
+            version: "1.2.0",
+            mspOwner: "B1"
           },
-          body: {
-            "data": [ {
-              year: 2020,
-              month: 1,
-              hpmn: 'HPMN',
-              vpmn: 'VPMN',
-              service: 'service',
-              value: 1,
-              units: 'unit',
-              charges: 'charge',
-              taxes: 'taxes'
-            }]
-          },
-        };
-
+          state: "DRAFT",
+          body: {"data": []}
+        }
         chai.request(testsUtils.getServer())
-          .post(`${path}`)
+          .put(`${path}`)
           .send(sentBody)
           .end((error, response) => {
-            debug('response: %s', JSON.stringify(response));
+            debug('response.status: %s', JSON.stringify(response.status));
+            debug('response.body: %s', JSON.stringify(response.body));
             expect(error).to.be.null;
-            expect(response).to.have.status(422);
+            expect(response).to.have.status(200);
+            expect(response).to.be.json;
+            expect(response.body).to.exist;
+            expect(response.body).to.be.an('object');
+            expect(Object.keys(response.body)).have.members(["usageId", "header", "state", "body", "history", "creationDate", "lastModificationDate"]);
+
+            expect(response.body).to.have.property('usageId', usage_minimum_data.id);
+            expect(response.body).to.have.property('state', usage_minimum_data.state);
+            expect(response.body).to.have.property('creationDate').that.is.a('string').and.match(DATE_REGEX);
+            expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
+
+            expect(response.body).to.have.property('header').that.is.an('object');
+            expect(Object.keys(response.body.header)).have.members(["name", "type", "version", "mspOwner"]);
+            expect(response.body.header).to.have.property('name', "Usage data name changed");
+            expect(response.body.header).to.have.property('type', usage_minimum_data.type);
+            expect(response.body.header).to.have.property('version', '1.2.0');
+            expect(response.body.header).to.have.property('mspOwner', usage_minimum_data.mspOwner);
+
+
+            expect(response.body).to.have.property('body').that.is.an('object');
+            expect(Object.keys(response.body.body)).have.members(["data"]);
+            expect(response.body.body).to.deep.include(usage_minimum_data.body);
 
             done();
           });
@@ -201,19 +257,20 @@ describe("Tests POST " + route + " API OK", function () {
       }
     });
 
-    it('POST usages OK on SENT Contract with a Usage document', function (done) {
+    it('Put contract OK with maximum contract details', function (done) {
       try {
-        let path = globalVersion + '/contracts/' + contract_sent.id + '/usages/';
+        let path = globalVersion + '/contracts/' + contract_received.id + '/usages/' + usage_more_data.id;
 
-        let sentBody = {
+        let sentBody  =  {
           header: {
-            name: 'name',
-            type: 'usage',
-            version: '1.1.0',
-            // mspOwner: ->  the MSP which gives the Inbound traffic data   Could be the contract->fromMSP
+            name: "Usage data name changed",
+            type: "usage",
+            version: "1.2.0",
+            mspOwner: "B1"
           },
+          state: "DRAFT",
           body: {
-            "data": [ {
+            data: [{
               year: 2020,
               month: 1,
               hpmn: 'HPMN',
@@ -225,43 +282,41 @@ describe("Tests POST " + route + " API OK", function () {
               taxes: 'taxes'
             }]
           },
-        };
+        }
 
+
+
+
+        debug("PUT path : ", path);
         chai.request(testsUtils.getServer())
-          .post(`${path}`)
+          .put(`${path}`)
           .send(sentBody)
           .end((error, response) => {
+            debug('response.status: %s', JSON.stringify(response.status));
             debug('response.body: %s', JSON.stringify(response.body));
             expect(error).to.be.null;
-            expect(response).to.have.status(201);
+            expect(response).to.have.status(200);
             expect(response).to.be.json;
             expect(response.body).to.exist;
             expect(response.body).to.be.an('object');
-            expect(Object.keys(response.body)).have.members(["usageId", "state", "creationDate", "lastModificationDate", "header", "body", "history"]);
+            expect(Object.keys(response.body)).have.members(["usageId", "header", "state", "body", "history", "creationDate", "lastModificationDate"]);
 
-            expect(response.body).to.have.property('usageId').that.is.a("string");
-            expect(response.body).to.have.property('state', 'DRAFT');
+            expect(response.body).to.have.property('usageId', usage_more_data.id);
+            expect(response.body).to.have.property('state', usage_more_data.state);
             expect(response.body).to.have.property('creationDate').that.is.a('string').and.match(DATE_REGEX);
             expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
 
             expect(response.body).to.have.property('header').that.is.an('object');
             expect(Object.keys(response.body.header)).have.members(["name", "type", "version", "mspOwner"]);
-            expect(response.body.header).to.have.property('name', sentBody.header.name);
-            expect(response.body.header).to.have.property('type', sentBody.header.type);
-            expect(response.body.header).to.have.property('version', sentBody.header.version);
-            expect(response.body.header).to.have.property('mspOwner', contract_sent.fromMsp.mspId);
+            expect(response.body.header).to.have.property('name', "Usage data name changed");
+            expect(response.body.header).to.have.property('type', usage_more_data.type);
+            expect(response.body.header).to.have.property('version', "1.2.0");
+            expect(response.body.header).to.have.property('mspOwner', usage_more_data.mspOwner);
 
 
             expect(response.body).to.have.property('body').that.is.an('object');
-            expect(Object.keys(response.body.body)).have.members(['data']);
-
-            expect(response.body).to.have.property('history').that.is.an('array');
-            expect(response.body.history.length).to.equal(1);
-            expect(Object.keys(response.body.history[0])).have.members(["date", "action"]);
-            expect(response.body.history[0]).to.have.property('date').that.is.a('string').and.match(DATE_REGEX);
-            expect(response.body.history[0]).to.have.property('action', 'CREATION');
-
-            expect(response.headers).to.have.property('content-location', `${path.replace(/\/$/,'')}/${response.body.usageId}`);
+            expect(Object.keys(response.body.body)).have.members(["data"]);
+            expect(response.body.body).to.deep.include(usage_more_data.body);
 
             done();
           });
@@ -272,76 +327,19 @@ describe("Tests POST " + route + " API OK", function () {
       }
     });
 
-    it('POST usages OK on RECEIVED Contract with a Usage document', function (done) {
 
-      try {
-        let path = globalVersion + '/contracts/' + contract_received.id + '/usages/';
+    it('Put usage NOK on wrong contractId', function (done) {
+      done()
+    });
 
-        let sentBody = {
-          header: {
-            name: 'name',
-            type: 'usage',
-            version: '1.1.0',
-            // mspOwner: ->  the MSP which gives the Inbound traffic data   Could be the contract->fromMSP
-          },
-          body: {
-            "data": [ {
-              year: 2020,
-              month: 1,
-              hpmn: 'HPMN',
-              vpmn: 'VPMN',
-              service: 'service',
-              value: 1,
-              units: 'unit',
-              charges: 'charge',
-              taxes: 'taxes'
-            }]
-          },
-        };
+    it('Put usage NOK if request body state is not DRAFT', function (done) {
+      done()
 
-        chai.request(testsUtils.getServer())
-          .post(`${path}`)
-          .send(sentBody)
-          .end((error, response) => {
-            debug('response.body: %s', JSON.stringify(response.body));
-            expect(error).to.be.null;
-            expect(response).to.have.status(201);
-            expect(response).to.be.json;
-            expect(response.body).to.exist;
-            expect(response.body).to.be.an('object');
-            expect(Object.keys(response.body)).have.members(["usageId", "state", "creationDate", "lastModificationDate", "header", "body", "history"]);
+    });
 
-            expect(response.body).to.have.property('usageId').that.is.a("string");
-            expect(response.body).to.have.property('state', 'DRAFT');
-            expect(response.body).to.have.property('creationDate').that.is.a('string').and.match(DATE_REGEX);
-            expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
+    it('Put usage NOK if usage in db is not DRAFT', function (done) {
+      done()
 
-            expect(response.body).to.have.property('header').that.is.an('object');
-            expect(Object.keys(response.body.header)).have.members(["name", "type", "version", "mspOwner"]);
-            expect(response.body.header).to.have.property('name', sentBody.header.name);
-            expect(response.body.header).to.have.property('type', sentBody.header.type);
-            expect(response.body.header).to.have.property('version', sentBody.header.version);
-            expect(response.body.header).to.have.property('mspOwner', contract_sent.fromMsp.mspId);
-
-
-            expect(response.body).to.have.property('body').that.is.an('object');
-            expect(Object.keys(response.body.body)).have.members(['data']);
-
-            expect(response.body).to.have.property('history').that.is.an('array');
-            expect(response.body.history.length).to.equal(1);
-            expect(Object.keys(response.body.history[0])).have.members(["date", "action"]);
-            expect(response.body.history[0]).to.have.property('date').that.is.a('string').and.match(DATE_REGEX);
-            expect(response.body.history[0]).to.have.property('action', 'CREATION');
-
-            expect(response.headers).to.have.property('content-location', `${path.replace(/\/$/,'')}/${response.body.usageId}`);
-
-            done();
-          });
-      } catch (exception) {
-        debug('exception: %s', exception.stack);
-        expect.fail('it test throws an exception');
-        done();
-      }
     });
 
   });

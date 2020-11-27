@@ -90,6 +90,59 @@ class UsageDAO {
     });
   };
 
+  static update(object) {
+    return new Promise((resolve, reject) => {
+      // Verify parameters
+      if (object === undefined) {
+        logger.error('[UsageDAO::update] [FAILED] : object undefined');
+        reject(MISSING_MANDATORY_PARAM_ERROR);
+      }
+      if (object.id === undefined) {
+        logger.error('[UsageDAO::update] [FAILED] : object.id undefined');
+        reject(MISSING_MANDATORY_PARAM_ERROR);
+      }
+      if (object.state === undefined) {
+        logger.error('[UsageDAO::update] [FAILED] : object.state undefined');
+        reject(MISSING_MANDATORY_PARAM_ERROR);
+      }
+
+      // Define automatic values
+      object.lastModificationDate = Date.now();
+
+      // Defined update condition and update command
+      const condition = {
+        id: object.id,
+        state: object.state
+      };
+
+      const updateCommand = {
+        $set: {
+          name: object.name,
+          type: object.type,
+          version: object.version,
+          mspOwner: object.mspOwner,
+          body: object.body,
+          lastModificationDate: object.lastModificationDate
+        },
+        $push: {
+          history: {date: object.lastModificationDate, action: "UPDATE"}
+        }
+      };
+
+      // Launch database request
+      UsageMongoRequester.findOneAndUpdate(condition, updateCommand, (err, usage) => {
+        DAOErrorManager.handleErrorOrNullObject(err, usage)
+          .then(objectReturned => {
+            resolve(objectReturned);
+          })
+          .catch(errorReturned => {
+            logger.error('[UsageDAO::update] [FAILED] errorReturned:' + typeof errorReturned + " = " + JSON.stringify(errorReturned));
+            reject(errorReturned);
+          });
+      });
+    });
+  };
+
 }
 
 module.exports = UsageDAO;

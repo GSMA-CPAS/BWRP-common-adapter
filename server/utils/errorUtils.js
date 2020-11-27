@@ -101,7 +101,7 @@ class ErrorUtils {
     }
   };
 
-  static ERROR_BUSINESS_CREATE_USAGE_ON_CONTRACT_ONLY_ALLOWED_IN_STATE_SENT_AND_RECEIVED = {
+  static ERROR_BUSINESS_CREATE_USAGE_ON_CONTRACT_ONLY_ALLOWED_IN_STATE_SENT_SIGNED_OR_RECEIVED = {
     code: 422,
     error: {
       internalErrorCode: 2002,
@@ -116,6 +116,24 @@ class ErrorUtils {
       internalErrorCode: 2003,
       message: 'Get usage not allowed',
       description: 'It\'s not allowed to get usage on wrong contract.'
+    }
+  };
+
+  static ERROR_BUSINESS_USAGE_UPDATE_ONLY_ALLOWED_IN_STATE_DRAFT = {
+    code: 422,
+    error: {
+      internalErrorCode: 2004,
+      message: 'Usage modification not allowed',
+      description: 'It\'s not allowed to update this usage or its state.'
+    }
+  };
+
+  static ERROR_BUSINESS_PUT_USAGE_ON_NOT_LINKED_CONTRACT_RECEIVED = {
+    code: 422,
+    error: {
+      internalErrorCode: 2003,
+      message: 'Put usage not allowed',
+      description: 'It\'s not allowed to put usage on wrong contract.'
     }
   };
 

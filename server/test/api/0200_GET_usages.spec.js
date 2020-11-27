@@ -17,7 +17,7 @@ describe("Tests GET " + route + " API OK", function () {
 
     const contract1 = {
       name: "Contract name between A1 and B1",
-      state: 'DRAFT',
+      state: 'SIGNED',
       type: 'contract',
       version: '1.1.0',
       fromMsp: {
@@ -51,7 +51,7 @@ describe("Tests GET " + route + " API OK", function () {
     };
     const contract2 = {
       name: "Contract name between B1 and C1",
-      state: 'DRAFT',
+      state: 'SENT',
       type: 'contract',
       version: '1.1.0',
       fromMsp: {
@@ -87,7 +87,7 @@ describe("Tests GET " + route + " API OK", function () {
       type: 'usage',
       version: '1.1.0',
       name: 'Usage data',
-      contractId: contract1.id,
+      contractId: undefined,
       mspOwner: 'mspOwner',
       body: {
         data: []

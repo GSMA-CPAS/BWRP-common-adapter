@@ -54,6 +54,14 @@ class UsageMongoRequester {
     });
   }
 
+  static findOneAndUpdate(conditions, updateObject, next) {
+    UsageMongoModel.findOneAndUpdate(conditions, updateObject, { new: true, runValidators: true }, (err, usage) => {
+      if (err) {
+        next(err);
+      }
+      return next(null, usage);
+    });
+  }
 }
 
 module.exports = UsageMongoRequester;

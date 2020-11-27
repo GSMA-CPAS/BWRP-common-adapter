@@ -16,8 +16,8 @@ const createUsage = ({url, contractID, body}) => new Promise(
   async (resolve, reject) => {
     try {
       const getContractByIdResp = await LocalStorageProvider.getContract(contractID);
-      if (!((getContractByIdResp.state == 'SENT') || (getContractByIdResp.state == 'RECEIVED'))) {
-        reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_CREATE_USAGE_ON_CONTRACT_ONLY_ALLOWED_IN_STATE_SENT_AND_RECEIVED));
+      if (!((getContractByIdResp.state == 'SENT') || (getContractByIdResp.state == 'RECEIVED')|| (getContractByIdResp.state == 'SIGNED'))) {
+        reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_CREATE_USAGE_ON_CONTRACT_ONLY_ALLOWED_IN_STATE_SENT_SIGNED_OR_RECEIVED));
       }
       const mspOwner = getContractByIdResp.fromMsp.mspId;
       const usageToCreate = UsageMapper.getUsageFromPostUsagesRequest(contractID, body, mspOwner);
@@ -92,7 +92,7 @@ const getUsageByID = ({contractID, usageID}) => new Promise(
     try {
       const getUsageByIdResp = await LocalStorageProvider.getUsage(usageID);
       if (getUsageByIdResp.contractId != contractID) {
-        reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_CREATE_USAGE_ON_CONTRACT_ONLY_ALLOWED_IN_STATE_SENT_AND_RECEIVED));
+        reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_GET_USAGE_ON_NOT_LINKED_CONTRACT_RECEIVED));
       }
       const returnedResponse = UsageMapper.getResponseBodyForGetUsage(getUsageByIdResp);
       resolve(Service.successResponse(returnedResponse));
@@ -151,6 +151,37 @@ const sendUsageByID = ({contractID, usageID}) => new Promise(
  * */
 const updateUsageByID = ({contractID, usageID, body}) => new Promise(
   async (resolve, reject) => {
+
+    try {
+      const getUsageByIdResp = await LocalStorageProvider.getUsage(usageID);
+      if (getUsageByIdResp.contractId != contractID) {
+        reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_PUT_USAGE_ON_NOT_LINKED_CONTRACT_RECEIVED));
+      }
+      if ( (body.state !== undefined) && !((getUsageByIdResp.state == 'DRAFT') && (body.state == 'DRAFT')) ) {
+        reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_USAGE_UPDATE_ONLY_ALLOWED_IN_STATE_DRAFT));
+      }
+
+      const usageToUpdate = UsageMapper.getUsageFromPutUsagesRequest(getUsageByIdResp,body)
+      const updateUsageResp = await LocalStorageProvider.updateUsage(usageToUpdate);
+
+      const returnedResponse = UsageMapper.getResponseBodyForGetUsage(updateUsageResp);
+      resolve(Service.successResponse(returnedResponse, 200));
+
+    } catch (e) {
+      reject(Service.rejectResponse(e));
+    }
+
+
+
+
+
+
+
+
+    if ((body.state !== undefined) && (body.state !== 'DRAFT')) {
+      reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_USAGE_UPDATE_ONLY_ALLOWED_IN_STATE_DRAFT));
+    }
+
     try {
       resolve(Service.successResponse({
         contractID,

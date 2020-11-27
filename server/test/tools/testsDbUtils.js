@@ -131,26 +131,26 @@ class TestsDbUtils {
 
   static initDbWithUsages(usages) {
     return new Promise((resolve, reject) => {
-      TestsDbUtils.removeAllContracts({})
-        .then(removeAllContractsResp => {
-          const contractsCreationPromises = [];
-          if ((contracts !== undefined) && (Array.isArray(contracts))) {
-            contracts.forEach(contract => {
-              contractsCreationPromises.push(TestsDbUtils.createContract(contract));
+      TestsDbUtils.removeAllUsages({})
+        .then(removeAllUsagesResp => {
+          const usagesCreationPromises = [];
+          if ((usages !== undefined) && (Array.isArray(usages))) {
+            usages.forEach(usage => {
+              usagesCreationPromises.push(TestsDbUtils.createUsage(usage));
             })
           }
-          Promise.all(contractsCreationPromises)
-            .then(contractsCreationPromisesResp => {
-              debug("initDbWithContracts done with success");
-              resolve(contractsCreationPromisesResp);
+          Promise.all(usagesCreationPromises)
+            .then(usagesCreationPromisesResp => {
+              debug("initDbWithUsages done with success");
+              resolve(usagesCreationPromisesResp);
             })
-            .catch(contractsCreationPromisesError => {
-              debug("initDbWithContracts failure : ", contractsCreationPromisesError);
-              reject(contractsCreationPromisesError);
+            .catch(usagesCreationPromisesError => {
+              debug("initDbWithUsages failure : ", usagesCreationPromisesError);
+              reject(usagesCreationPromisesError);
             });
         })
-        .catch(removeAllContractsError => {
-          reject(removeAllContractsError);
+        .catch(removeAllUsagesError => {
+          reject(removeAllUsagesError);
         });
     });
   }
