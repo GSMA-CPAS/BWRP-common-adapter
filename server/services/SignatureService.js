@@ -2,18 +2,18 @@
 const Service = require('./Service');
 
 /**
-* Get Signature Object by its ID
+* Get Signature Object by its Id
 *
-* contractID String The contract ID
-* signatureID String The Signature ID
+* contractId String The contract Id
+* signatureId String The Signature Id
 * returns SignatureResponse
 * */
-const getSignatureByID = ({ contractID, signatureID }) => new Promise(
+const getSignatureById = ({ contractId, signatureId }) => new Promise(
   async (resolve, reject) => {
     try {
       resolve(Service.successResponse({
-        contractID,
-        signatureID,
+        contractId,
+        signatureId,
       }));
     } catch (e) {
       reject(Service.rejectResponse(
@@ -26,14 +26,14 @@ const getSignatureByID = ({ contractID, signatureID }) => new Promise(
 /**
 * Get All signatures of a given Contract
 *
-* contractID String The contract ID
+* contractId String The contract Id
 * returns String
 * */
-const getSignatures = ({ contractID }) => new Promise(
+const getSignatures = ({ contractId }) => new Promise(
   async (resolve, reject) => {
     try {
       resolve(Service.successResponse({
-        contractID,
+        contractId,
       }));
     } catch (e) {
       reject(Service.rejectResponse(
@@ -44,19 +44,19 @@ const getSignatures = ({ contractID }) => new Promise(
   },
 );
 /**
-* Update Signature Object by its ID
+* Update Signature Object by its Id
 *
-* contractID String The contract ID
-* signatureID String The Signature ID
+* contractId String The contract Id
+* signatureId String The Signature Id
 * body SignatureRequest Signature Object Payload
 * returns SignatureResponse
 * */
-const updateSignatureByID = ({ contractID, signatureID, body }) => new Promise(
+const updateSignatureById = ({ contractId, signatureId, body }) => new Promise(
   async (resolve, reject) => {
     try {
       resolve(Service.successResponse({
-        contractID,
-        signatureID,
+        contractId,
+        signatureId,
         body,
       }));
     } catch (e) {
@@ -69,7 +69,7 @@ const updateSignatureByID = ({ contractID, signatureID, body }) => new Promise(
 );
 
 module.exports = {
-  getSignatureByID,
+  getSignatureById,
   getSignatures,
-  updateSignatureByID,
+  updateSignatureById,
 };

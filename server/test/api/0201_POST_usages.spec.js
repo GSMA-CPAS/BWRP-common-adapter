@@ -167,7 +167,7 @@ describe("Tests POST " + route + " API OK", function () {
             name: 'name',
             type: 'usage',
             version: '1.1.0',
-            // mspOwner: ->  the MSP which gives the Inbound traffic data   Could be the contract->fromMSP
+            // mspOwner: ->  the MSP which gives the Inbound traffic data   Could be the contract->fromMsp
           },
           body: {
             "data": [ {
@@ -210,7 +210,7 @@ describe("Tests POST " + route + " API OK", function () {
             name: 'name',
             type: 'usage',
             version: '1.1.0',
-            // mspOwner: ->  the MSP which gives the Inbound traffic data   Could be the contract->fromMSP
+            // mspOwner: ->  the MSP which gives the Inbound traffic data   Could be the contract->fromMsp
           },
           body: {
             "data": [ {
@@ -282,7 +282,7 @@ describe("Tests POST " + route + " API OK", function () {
             name: 'name',
             type: 'usage',
             version: '1.1.0',
-            // mspOwner: ->  the MSP which gives the Inbound traffic data   Could be the contract->fromMSP
+            // mspOwner: ->  the MSP which gives the Inbound traffic data   Could be the contract->fromMsp
           },
           body: {
             "data": [ {

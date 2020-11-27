@@ -23,11 +23,11 @@ describe("Tests POST " + route + " API OK", function () {
             name: "Contract name between A1 and B1",
             version: "1.1",
             type: "contract",
-            fromMSP: {
-              mspid: "A1"
+            fromMsp: {
+              mspId: "A1"
             },
-            toMSP: {
-              mspid: "B1"
+            toMsp: {
+              mspId: "B1"
             }
           },
           body: {}
@@ -43,30 +43,30 @@ describe("Tests POST " + route + " API OK", function () {
             expect(response).to.be.json;
             expect(response.body).to.exist;
             expect(response.body).to.be.an('object');
-            expect(Object.keys(response.body)).have.members(["contractID", "state", "creationDate", "lastModificationDate", "header", "body"]);
+            expect(Object.keys(response.body)).have.members(["contractId", "state", "creationDate", "lastModificationDate", "header", "body"]);
 
-            expect(response.body).to.have.property('contractID').that.is.a("string");
+            expect(response.body).to.have.property('contractId').that.is.a("string");
             expect(response.body).to.have.property('state', 'DRAFT');
             expect(response.body).to.have.property('creationDate').that.is.a('string').and.match(DATE_REGEX);
             expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
 
             expect(response.body).to.have.property('header').that.is.an('object');
-            expect(Object.keys(response.body.header)).have.members(["name", "type", "version", "fromMSP", "toMSP"]);
+            expect(Object.keys(response.body.header)).have.members(["name", "type", "version", "fromMsp", "toMsp"]);
             expect(response.body.header).to.have.property('name', sentBody.header.name);
             expect(response.body.header).to.have.property('type', sentBody.header.type);
             expect(response.body.header).to.have.property('version', sentBody.header.version);
             
-            expect(response.body.header).to.have.property('fromMSP').that.is.an('object');
-            expect(Object.keys(response.body.header.fromMSP)).have.members(["mspid", "signatures"]);
-            expect(response.body.header.fromMSP).to.have.property('mspid', sentBody.header.fromMSP.mspid);
-            expect(response.body.header.fromMSP).to.have.property('signatures').that.is.an('array');
-            expect(response.body.header.fromMSP.signatures.length).to.equal(0);
+            expect(response.body.header).to.have.property('fromMsp').that.is.an('object');
+            expect(Object.keys(response.body.header.fromMsp)).have.members(["mspId", "signatures"]);
+            expect(response.body.header.fromMsp).to.have.property('mspId', sentBody.header.fromMsp.mspId);
+            expect(response.body.header.fromMsp).to.have.property('signatures').that.is.an('array');
+            expect(response.body.header.fromMsp.signatures.length).to.equal(0);
             
-            expect(response.body.header).to.have.property('toMSP').that.is.an('object');
-            expect(Object.keys(response.body.header.toMSP)).have.members(["mspid", "signatures"]);
-            expect(response.body.header.toMSP).to.have.property('mspid', sentBody.header.toMSP.mspid);
-            expect(response.body.header.toMSP).to.have.property('signatures').that.is.an('array');
-            expect(response.body.header.toMSP.signatures.length).to.equal(0);
+            expect(response.body.header).to.have.property('toMsp').that.is.an('object');
+            expect(Object.keys(response.body.header.toMsp)).have.members(["mspId", "signatures"]);
+            expect(response.body.header.toMsp).to.have.property('mspId', sentBody.header.toMsp.mspId);
+            expect(response.body.header.toMsp).to.have.property('signatures').that.is.an('array');
+            expect(response.body.header.toMsp.signatures.length).to.equal(0);
             
             expect(response.body).to.have.property('body').that.is.an('object');
             expect(Object.keys(response.body.body)).have.members([]);
@@ -77,7 +77,7 @@ describe("Tests POST " + route + " API OK", function () {
             // expect(response.body.history[0]).to.have.property('date').that.is.a('string').and.match(DATE_REGEX);
             // expect(response.body.history[0]).to.have.property('action', 'CREATION');
             
-            expect(response.headers).to.have.property('content-location', `${path.replace(/\/$/,'')}/${response.body.contractID}`);
+            expect(response.headers).to.have.property('content-location', `${path.replace(/\/$/,'')}/${response.body.contractId}`);
 
             done();
           });

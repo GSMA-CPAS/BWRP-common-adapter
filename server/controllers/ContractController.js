@@ -12,32 +12,32 @@ const createContract = async (request, response) => {
   await Controller.handleRequest(request, response, service.createContract);
 };
 
-const deleteContractByID = async (request, response) => {
-  await Controller.handleRequest(request, response, service.deleteContractByID);
+const deleteContractById = async (request, response) => {
+  await Controller.handleRequest(request, response, service.deleteContractById);
 };
 
-const getContractByID = async (request, response) => {
-  await Controller.handleRequest(request, response, service.getContractByID);
+const getContractById = async (request, response) => {
+  await Controller.handleRequest(request, response, service.getContractById);
 };
 
 const getContracts = async (request, response) => {
   await Controller.handleRequest(request, response, service.getContracts);
 };
 
-const sendContractByID = async (request, response) => {
-  await Controller.handleRequest(request, response, service.sendContractByID);
+const sendContractById = async (request, response) => {
+  await Controller.handleRequest(request, response, service.sendContractById);
 };
 
-const updateContractByID = async (request, response) => {
-  await Controller.handleRequest(request, response, service.updateContractByID);
+const updateContractById = async (request, response) => {
+  await Controller.handleRequest(request, response, service.updateContractById);
 };
 
 
 module.exports = {
   createContract,
-  deleteContractByID,
-  getContractByID,
+  deleteContractById,
+  getContractById,
   getContracts,
-  sendContractByID,
-  updateContractByID,
+  sendContractById,
+  updateContractById,
 };

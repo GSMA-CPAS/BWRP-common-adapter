@@ -4,25 +4,25 @@ All URIs are relative to *http://localhost/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getSignatureByID**](SignatureApi.md#getSignatureByID) | **GET** /contracts/{contractID}/signatures/{signatureID} | 
-[**getSignatures**](SignatureApi.md#getSignatures) | **GET** /contracts/{contractID}/signatures/ | 
-[**updateSignatureByID**](SignatureApi.md#updateSignatureByID) | **PUT** /contracts/{contractID}/signatures/{signatureID} | 
+[**getSignatureById**](SignatureApi.md#getSignatureById) | **GET** /contracts/{contractId}/signatures/{signatureId} | 
+[**getSignatures**](SignatureApi.md#getSignatures) | **GET** /contracts/{contractId}/signatures/ | 
+[**updateSignatureById**](SignatureApi.md#updateSignatureById) | **PUT** /contracts/{contractId}/signatures/{signatureId} | 
 
 
-<a name="getSignatureByID"></a>
-# **getSignatureByID**
-> SignatureResponse getSignatureByID(contractID, signatureID)
+<a name="getSignatureById"></a>
+# **getSignatureById**
+> SignatureResponse getSignatureById(contractId, signatureId)
 
 
 
-    Get Signature Object by its ID
+    Get Signature Object by its Id
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **contractID** | **String**| The contract ID | [default to null]
- **signatureID** | **String**| The Signature ID | [default to null]
+ **contractId** | **String**| The contract Id | [default to null]
+ **signatureId** | **String**| The Signature Id | [default to null]
 
 ### Return type
 
@@ -39,7 +39,7 @@ No authorization required
 
 <a name="getSignatures"></a>
 # **getSignatures**
-> String getSignatures(contractID)
+> String getSignatures(contractId)
 
 
 
@@ -49,7 +49,7 @@ No authorization required
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **contractID** | **String**| The contract ID | [default to null]
+ **contractId** | **String**| The contract Id | [default to null]
 
 ### Return type
 
@@ -64,20 +64,20 @@ No authorization required
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="updateSignatureByID"></a>
-# **updateSignatureByID**
-> SignatureResponse updateSignatureByID(contractID, signatureID, body)
+<a name="updateSignatureById"></a>
+# **updateSignatureById**
+> SignatureResponse updateSignatureById(contractId, signatureId, body)
 
 
 
-    Update Signature Object by its ID
+    Update Signature Object by its Id
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **contractID** | **String**| The contract ID | [default to null]
- **signatureID** | **String**| The Signature ID | [default to null]
+ **contractId** | **String**| The contract Id | [default to null]
+ **signatureId** | **String**| The Signature Id | [default to null]
  **body** | [**SignatureRequest**](../Models/SignatureRequest.md)| Signature Object Payload |
 
 ### Return type

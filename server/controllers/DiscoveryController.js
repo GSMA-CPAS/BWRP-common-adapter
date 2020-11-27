@@ -8,16 +8,16 @@
 
 const Controller = require('./Controller');
 const service = require('../services/DiscoveryService');
-const getDiscoveryMSP = async (request, response) => {
-  await Controller.handleRequest(request, response, service.getDiscoveryMSP);
+const getDiscoveryMsp = async (request, response) => {
+  await Controller.handleRequest(request, response, service.getDiscoveryMsp);
 };
 
-const getDiscoveryMSPs = async (request, response) => {
-  await Controller.handleRequest(request, response, service.getDiscoveryMSPs);
+const getDiscoveryMsps = async (request, response) => {
+  await Controller.handleRequest(request, response, service.getDiscoveryMsps);
 };
 
 
 module.exports = {
-  getDiscoveryMSP,
-  getDiscoveryMSPs,
+  getDiscoveryMsp,
+  getDiscoveryMsps,
 };

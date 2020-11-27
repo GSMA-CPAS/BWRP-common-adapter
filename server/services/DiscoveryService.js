@@ -4,26 +4,28 @@ const BlockchainAdapterProvider = require('../providers/BlockchainAdapterProvide
 const blockchainAdapterConnection = new BlockchainAdapterProvider();
 
 
-
-/** Show details for a specific MSP
-   * @param {string} mspid - Name of a MSP
-   * @return {string}
-  */
- const getDiscoveryMSP = ({ mspid }) => new Promise(
+/**
+* Show details for a specific Msp
+*
+* mspId String Name of a Msp
+* returns String
+* */
+const getDiscoveryMsp = ({ mspId }) => new Promise(
   async (resolve, reject) => {
     try {
-      const getDiscoveryMSPsResponse = await blockchainAdapterConnection.discovery(mspid);
+      const getDiscoveryMSPsResponse = await blockchainAdapterConnection.discovery(mspId);
       resolve(Service.successResponse(getDiscoveryMSPsResponse));
     } catch (e) {
       reject(Service.rejectResponse(e));
     }
   },
 );
-
-/** Show a list of all MSPs
-  * @return {string}
-  */
- const getDiscoveryMSPs = () => new Promise(
+/**
+* Show a list of all Msps
+*
+* returns String
+* */
+const getDiscoveryMsps = () => new Promise(
   async (resolve, reject) => {
     try {
       const getDiscoveryMSPsResponse = await blockchainAdapterConnection.discovery();
@@ -35,6 +37,6 @@ const blockchainAdapterConnection = new BlockchainAdapterProvider();
 );
 
 module.exports = {
-  getDiscoveryMSP,
-  getDiscoveryMSPs,
+  getDiscoveryMsp,
+  getDiscoveryMsps,
 };

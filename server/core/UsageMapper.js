@@ -62,10 +62,10 @@ class UsageMapper {
   }
 
   // Map the input PUT usage request to internal usage
-  static getUsageFromPutUsagesRequest(curent, body) {
-    const returnedUsage = UsageMapper.getUsageFromPostUsagesRequest(curent.contractId, body, curent.mspOwner);
+  static getUsageFromPutUsagesRequest(current, body) {
+    const returnedUsage = UsageMapper.getUsageFromPostUsagesRequest(current.contractId, body, current.mspOwner);
 
-    returnedUsage.id = curent.id;
+    returnedUsage.id = current.id;
 
     return returnedUsage;
   }

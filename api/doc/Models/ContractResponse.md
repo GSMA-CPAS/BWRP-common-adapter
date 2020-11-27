@@ -3,7 +3,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**contractID** | [**String**](string.md) | ContractID in GUID format | [default to null]
+**contractId** | [**String**](string.md) | ContractId in GUID format | [default to null]
 **header** | [**Object**](object.md) |  | [default to null]
 **body** | [**Map**](object.md) |  | [default to null]
 **state** | [**String**](string.md) | The State of the Contract. | [default to null]

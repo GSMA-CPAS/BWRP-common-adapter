@@ -26,8 +26,8 @@ tags:
 paths:
   /discovery/msps:
     get:
-      description: Show a list of all MSPs
-      operationId: getDiscoveryMSPs
+      description: Show a list of all Msps
+      operationId: getDiscoveryMsps
       responses:
         "200":
           content:
@@ -35,22 +35,22 @@ paths:
               schema:
                 type: string
                 x-content-type: application/json
-          description: A list of all discovered MSPs
+          description: A list of all discovered Msps
         "500":
           content: {}
           description: Internal Error
       tags:
       - discovery
       x-eov-operation-handler: controllers/DiscoveryController
-  /discovery/msps/{mspid}:
+  /discovery/msps/{mspId}:
     get:
-      description: Show details for a specific MSP
-      operationId: getDiscoveryMSP
+      description: Show details for a specific Msp
+      operationId: getDiscoveryMsp
       parameters:
-      - description: Name of a MSP
+      - description: Name of a Msp
         explode: false
         in: path
-        name: mspid
+        name: mspId
         required: true
         schema:
           type: string
@@ -62,7 +62,7 @@ paths:
               schema:
                 type: string
                 x-content-type: application/json
-          description: Details about the requested MSP
+          description: Details about the requested Msp
         "400":
           content:
             application/json:
@@ -172,15 +172,15 @@ paths:
       - contract
       x-codegen-request-body-name: body
       x-eov-operation-handler: controllers/ContractController
-  /contracts/{contractID}:
+  /contracts/{contractId}:
     delete:
-      description: Delete a Contract By its ID
-      operationId: deleteContractByID
+      description: Delete a Contract By its Id
+      operationId: deleteContractById
       parameters:
-      - description: The contract ID
+      - description: The contract Id
         explode: false
         in: path
-        name: contractID
+        name: contractId
         required: true
         schema:
           type: string
@@ -199,13 +199,13 @@ paths:
       - contract
       x-eov-operation-handler: controllers/ContractController
     get:
-      description: Get a Contract By its ID
-      operationId: getContractByID
+      description: Get a Contract By its Id
+      operationId: getContractById
       parameters:
-      - description: The contract ID
+      - description: The contract Id
         explode: false
         in: path
-        name: contractID
+        name: contractId
         required: true
         schema:
           type: string
@@ -245,12 +245,12 @@ paths:
       x-eov-operation-handler: controllers/ContractController
     put:
       description: Update existing Contract
-      operationId: updateContractByID
+      operationId: updateContractById
       parameters:
-      - description: The contract ID
+      - description: The contract Id
         explode: false
         in: path
-        name: contractID
+        name: contractId
         required: true
         schema:
           type: string
@@ -282,16 +282,16 @@ paths:
       - contract
       x-codegen-request-body-name: body
       x-eov-operation-handler: controllers/ContractController
-  /contracts/{contractID}/send/:
+  /contracts/{contractId}/send/:
     put:
-      description: Set State to "SEND" and POST to Blochain adapter towards TargetMSP
+      description: Set State to "SEND" and POST to Blochain adapter towards TargetMsp
         of the Contract
-      operationId: sendContractByID
+      operationId: sendContractById
       parameters:
-      - description: The contract ID
+      - description: The contract Id
         explode: false
         in: path
-        name: contractID
+        name: contractId
         required: true
         schema:
           type: string
@@ -315,15 +315,15 @@ paths:
       tags:
       - contract
       x-eov-operation-handler: controllers/ContractController
-  /contracts/{contractID}/signatures/:
+  /contracts/{contractId}/signatures/:
     get:
       description: Get All signatures of a given Contract
       operationId: getSignatures
       parameters:
-      - description: The contract ID
+      - description: The contract Id
         explode: false
         in: path
-        name: contractID
+        name: contractId
         required: true
         schema:
           type: string
@@ -342,23 +342,23 @@ paths:
       tags:
       - signature
       x-eov-operation-handler: controllers/SignatureController
-  /contracts/{contractID}/signatures/{signatureID}:
+  /contracts/{contractId}/signatures/{signatureId}:
     get:
-      description: Get Signature Object by its ID
-      operationId: getSignatureByID
+      description: Get Signature Object by its Id
+      operationId: getSignatureById
       parameters:
-      - description: The contract ID
+      - description: The contract Id
         explode: false
         in: path
-        name: contractID
+        name: contractId
         required: true
         schema:
           type: string
         style: simple
-      - description: The Signature ID
+      - description: The Signature Id
         explode: false
         in: path
-        name: signatureID
+        name: signatureId
         required: true
         schema:
           type: string
@@ -383,21 +383,21 @@ paths:
       - signature
       x-eov-operation-handler: controllers/SignatureController
     put:
-      description: Update Signature Object by its ID
-      operationId: updateSignatureByID
+      description: Update Signature Object by its Id
+      operationId: updateSignatureById
       parameters:
-      - description: The contract ID
+      - description: The contract Id
         explode: false
         in: path
-        name: contractID
+        name: contractId
         required: true
         schema:
           type: string
         style: simple
-      - description: The Signature ID
+      - description: The Signature Id
         explode: false
         in: path
-        name: signatureID
+        name: signatureId
         required: true
         schema:
           type: string
@@ -429,15 +429,15 @@ paths:
       - signature
       x-codegen-request-body-name: body
       x-eov-operation-handler: controllers/SignatureController
-  /contracts/{contractID}/usages/:
+  /contracts/{contractId}/usages/:
     get:
       description: Get All usage of a given Contract
       operationId: getUsages
       parameters:
-      - description: The contract ID
+      - description: The contract Id
         explode: false
         in: path
-        name: contractID
+        name: contractId
         required: true
         schema:
           type: string
@@ -460,10 +460,10 @@ paths:
       description: Create a new Usage
       operationId: createUsage
       parameters:
-      - description: The contract ID
+      - description: The contract Id
         explode: false
         in: path
-        name: contractID
+        name: contractId
         required: true
         schema:
           type: string
@@ -495,23 +495,23 @@ paths:
       - usage
       x-codegen-request-body-name: body
       x-eov-operation-handler: controllers/UsageController
-  /contracts/{contractID}/usages/{usageID}:
+  /contracts/{contractId}/usages/{usageId}:
     delete:
-      description: Delete a Usage By its ID
-      operationId: deleteUsageByID
+      description: Delete a Usage By its Id
+      operationId: deleteUsageById
       parameters:
-      - description: The contract ID
+      - description: The contract Id
         explode: false
         in: path
-        name: contractID
+        name: contractId
         required: true
         schema:
           type: string
         style: simple
-      - description: The Usage ID
+      - description: The Usage Id
         explode: false
         in: path
-        name: usageID
+        name: usageId
         required: true
         schema:
           type: string
@@ -536,21 +536,21 @@ paths:
       - usage
       x-eov-operation-handler: controllers/UsageController
     get:
-      description: Get Usage Object by its ID
-      operationId: getUsageByID
+      description: Get Usage Object by its Id
+      operationId: getUsageById
       parameters:
-      - description: The contract ID
+      - description: The contract Id
         explode: false
         in: path
-        name: contractID
+        name: contractId
         required: true
         schema:
           type: string
         style: simple
-      - description: The Usage ID
+      - description: The Usage Id
         explode: false
         in: path
-        name: usageID
+        name: usageId
         required: true
         schema:
           type: string
@@ -575,21 +575,21 @@ paths:
       - usage
       x-eov-operation-handler: controllers/UsageController
     put:
-      description: Update Usage Object by its ID
-      operationId: updateUsageByID
+      description: Update Usage Object by its Id
+      operationId: updateUsageById
       parameters:
-      - description: The contract ID
+      - description: The contract Id
         explode: false
         in: path
-        name: contractID
+        name: contractId
         required: true
         schema:
           type: string
         style: simple
-      - description: The Usage ID
+      - description: The Usage Id
         explode: false
         in: path
-        name: usageID
+        name: usageId
         required: true
         schema:
           type: string
@@ -621,24 +621,24 @@ paths:
       - usage
       x-codegen-request-body-name: body
       x-eov-operation-handler: controllers/UsageController
-  /contracts/{contractID}/usages/{usageID}/send/:
+  /contracts/{contractId}/usages/{usageId}/send/:
     put:
-      description: Set State to "SEND" and POST to Blochain adapter towards TargetMSP
+      description: Set State to "SEND" and POST to Blochain adapter towards TargetMsp
         of the Usage
-      operationId: sendUsageByID
+      operationId: sendUsageById
       parameters:
-      - description: The contract ID
+      - description: The contract Id
         explode: false
         in: path
-        name: contractID
+        name: contractId
         required: true
         schema:
           type: string
         style: simple
-      - description: The Usage ID
+      - description: The Usage Id
         explode: false
         in: path
-        name: usageID
+        name: usageId
         required: true
         schema:
           type: string
@@ -662,31 +662,31 @@ paths:
       tags:
       - usage
       x-eov-operation-handler: controllers/UsageController
-  /contracts/{contractID}/usages/{usageID}/generate/:
+  /contracts/{contractId}/usages/{usageId}/generate/:
     put:
       description: Generate the "Settlement" with local calculator and POST to Blochain
-        adapter towards TargetMSP of the calculated response.
-      operationId: generateUsageByID
+        adapter towards TargetMsp of the calculated response.
+      operationId: generateUsageById
       parameters:
-      - description: The contract ID
+      - description: The contract Id
         explode: false
         in: path
-        name: contractID
+        name: contractId
         required: true
         schema:
           type: string
         style: simple
-      - description: The Usage ID
+      - description: The Usage Id
         explode: false
         in: path
-        name: usageID
+        name: usageId
         required: true
         schema:
           type: string
         style: simple
       - description: Defaults to "preview" if not selected. Preview will only performs
           "calculation" and return the calculated settlement in response. if "commit",
-          will create the settlement and Send it live to the Blockchain to the targetMSP.
+          will create the settlement and Send it live to the Blockchain to the targetMsp.
         explode: true
         in: query
         name: mode
@@ -716,15 +716,15 @@ paths:
       tags:
       - usage
       x-eov-operation-handler: controllers/UsageController
-  /contracts/{contractID}/settlements/:
+  /contracts/{contractId}/settlements/:
     get:
       description: Get All Settlement of a given Contract
       operationId: getSettlements
       parameters:
-      - description: The contract ID
+      - description: The contract Id
         explode: false
         in: path
-        name: contractID
+        name: contractId
         required: true
         schema:
           type: string
@@ -743,23 +743,23 @@ paths:
       tags:
       - settlement
       x-eov-operation-handler: controllers/SettlementController
-  /contracts/{contractID}/settlements/{settlementID}:
+  /contracts/{contractId}/settlements/{settlementId}:
     get:
-      description: Get Settlement Object by its ID
-      operationId: getSettlementByID
+      description: Get Settlement Object by its Id
+      operationId: getSettlementById
       parameters:
-      - description: The contract ID
+      - description: The contract Id
         explode: false
         in: path
-        name: contractID
+        name: contractId
         required: true
         schema:
           type: string
         style: simple
-      - description: The Settlement ID
+      - description: The Settlement Id
         explode: false
         in: path
-        name: settlementID
+        name: settlementId
         required: true
         schema:
           type: string
@@ -791,14 +791,14 @@ components:
     ContractResponse:
       additionalProperties: false
       example:
-        contractID: 05552c4c-e52f-4bb5-83d2-f50c86115bc8
+        contractId: 05552c4c-e52f-4bb5-83d2-f50c86115bc8
         header: '{}'
         state: DRAFT
         body:
           key: '{}'
       properties:
-        contractID:
-          description: ContractID in GUID format
+        contractId:
+          description: ContractId in GUID format
           example: 05552c4c-e52f-4bb5-83d2-f50c86115bc8
           type: string
         header:
@@ -816,10 +816,10 @@ components:
               enum:
               - contract
               type: string
-            fromMSP:
+            fromMsp:
               properties:
-                mspid:
-                  description: MSPID of the contract creator.
+                mspId:
+                  description: mspId of the contract creator.
                   example: DTAG
                   type: string
                 signatures:
@@ -828,10 +828,10 @@ components:
                   minItems: 1
                   type: array
               type: object
-            toMSP:
+            toMsp:
               properties:
-                mspid:
-                  description: MSPID of the contract creator.
+                mspId:
+                  description: mspId of the contract creator.
                   example: TMUS
                   type: string
                 signatures:
@@ -841,8 +841,8 @@ components:
                   type: array
               type: object
           required:
-          - fromMSP
-          - toMSP
+          - fromMsp
+          - toMsp
           - type
           - version
         body:
@@ -858,7 +858,7 @@ components:
           type: string
       required:
       - body
-      - contractID
+      - contractId
       - header
       - state
       title: Contract JSON
@@ -866,8 +866,8 @@ components:
     RAWContractResponse:
       additionalProperties: false
       properties:
-        contractID:
-          description: ContractID in GUID format
+        contractId:
+          description: ContractId in GUID format
           example: 05552c4c-e52f-4bb5-83d2-f50c86115bc8
           type: string
         raw:
@@ -884,7 +884,7 @@ components:
           - RECEIVED
           type: string
       required:
-      - contractID
+      - contractId
       - raw
       - state
       title: Contract RAW
@@ -893,8 +893,8 @@ components:
       additionalProperties: false
       example:
         header:
-          fromMSP:
-            mspid: DTAG
+          fromMsp:
+            mspId: DTAG
             signatures:
             - role: role
               name: name
@@ -903,8 +903,8 @@ components:
               name: name
               id: id
           name: Contract with XYZ
-          toMSP:
-            mspid: TMUS
+          toMsp:
+            mspId: TMUS
             signatures:
             - role: role
               name: name
@@ -948,11 +948,11 @@ components:
         certificate: |-
           -----BEGIN CERTIFICATE-----
           MIICYjCCAemgAwIBA...
-        signatureID: XXXXXX
+        signatureId: XXXXXX
         algorithm: secp384r1
       properties:
-        signatureID:
-          description: signatureID from \"contract"->\"signature\"->\"\<MSPID\>\"[X]->\"id\"
+        signatureId:
+          description: signatureId from \"contract"->\"signature\"->\"\<mspId\>\"[X]->\"id\"
           example: XXXXXX
           type: string
         algorithm:
@@ -969,7 +969,7 @@ components:
           description: The digital signature over the document
           type: string
         extra:
-          description: Additional Key/Value from \"contract"->\"signature\"->\"\<MSPID\>\"[X]->XXX,
+          description: Additional Key/Value from \"contract"->\"signature\"->\"\<mspId\>\"[X]->XXX,
             eg name, role
           example: '{"name":"john doe", "role":"manager"}'
           type: object
@@ -978,7 +978,7 @@ components:
       - certificate
       - extra
       - signature
-      - signatureID
+      - signatureId
       title: Signature JSON
       type: object
     SignatureRequest:
@@ -1011,7 +1011,7 @@ components:
       type: object
     UsageResponse:
       example:
-        usageID: 05552c4c-e52f-4bb5-83d2-f50c86115bc8
+        usageId: 05552c4c-e52f-4bb5-83d2-f50c86115bc8
         header:
           mspOwner:
             key: '{}'
@@ -1022,8 +1022,8 @@ components:
         body:
           key: '{}'
       properties:
-        usageID:
-          description: usageID in GUID format
+        usageId:
+          description: usageId in GUID format
           example: 05552c4c-e52f-4bb5-83d2-f50c86115bc8
           type: string
         header:
@@ -1042,7 +1042,7 @@ components:
       - body
       - header
       - state
-      - usageID
+      - usageId
       title: Usage JSON
       type: object
     UsageRequest:
@@ -1099,9 +1099,9 @@ components:
       - error
       title: 400 Error Response JSON
       type: object
-    ContractRequest_header_fromMSP:
+    ContractRequest_header_fromMsp:
       example:
-        mspid: DTAG
+        mspId: DTAG
         signatures:
         - role: role
           name: name
@@ -1110,8 +1110,8 @@ components:
           name: name
           id: id
       properties:
-        mspid:
-          description: MSPID of the contract creator.
+        mspId:
+          description: mspId of the contract creator.
           example: DTAG
           type: string
         signatures:
@@ -1120,9 +1120,9 @@ components:
           minItems: 1
           type: array
       type: object
-    ContractRequest_header_toMSP:
+    ContractRequest_header_toMsp:
       example:
-        mspid: TMUS
+        mspId: TMUS
         signatures:
         - role: role
           name: name
@@ -1131,8 +1131,8 @@ components:
           name: name
           id: id
       properties:
-        mspid:
-          description: MSPID of the contract creator.
+        mspId:
+          description: mspId of the contract creator.
           example: TMUS
           type: string
         signatures:
@@ -1143,8 +1143,8 @@ components:
       type: object
     ContractRequest_header:
       example:
-        fromMSP:
-          mspid: DTAG
+        fromMsp:
+          mspId: DTAG
           signatures:
           - role: role
             name: name
@@ -1153,8 +1153,8 @@ components:
             name: name
             id: id
         name: Contract with XYZ
-        toMSP:
-          mspid: TMUS
+        toMsp:
+          mspId: TMUS
           signatures:
           - role: role
             name: name
@@ -1178,13 +1178,13 @@ components:
           enum:
           - contract
           type: string
-        fromMSP:
-          $ref: '#/components/schemas/ContractRequest_header_fromMSP'
-        toMSP:
-          $ref: '#/components/schemas/ContractRequest_header_toMSP'
+        fromMsp:
+          $ref: '#/components/schemas/ContractRequest_header_fromMsp'
+        toMsp:
+          $ref: '#/components/schemas/ContractRequest_header_toMsp'
       required:
-      - fromMSP
-      - toMSP
+      - fromMsp
+      - toMsp
       - type
       - version
       type: object
@@ -1211,7 +1211,7 @@ components:
           type: string
         mspOwner:
           additionalProperties: true
-          description: the MSP which gives the Inbound traffic data
+          description: the Msp which gives the Inbound traffic data
           type: object
       required:
       - type

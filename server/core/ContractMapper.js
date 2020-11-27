@@ -12,22 +12,22 @@ class ContractMapper {
       type: body.header.type,
       version: body.header.version,
       fromMsp: {
-        mspId: body.header.fromMSP.mspid,
-        minSignatures: body.header.fromMSP.minSignatures,
-        nbOfsignatures: body.header.fromMSP.nbOfsignatures,
+        mspId: body.header.fromMsp.mspId,
+        minSignatures: body.header.fromMsp.minSignatures,
+        nbOfsignatures: body.header.fromMsp.nbOfsignatures,
         signatures: []
       },
       toMsp: {
-        mspId: body.header.toMSP.mspid,
-        minSignatures: body.header.toMSP.minSignatures,
-        nbOfsignatures: body.header.toMSP.nbOfsignatures,
+        mspId: body.header.toMsp.mspId,
+        minSignatures: body.header.toMsp.minSignatures,
+        nbOfsignatures: body.header.toMsp.nbOfsignatures,
         signatures: []
       },
       body: body.body
     };
 
-    if ((body.header.fromMSP.signatures !== undefined) && (Array.isArray(body.header.fromMSP.signatures))) {
-      body.header.fromMSP.signatures.forEach(signature => {
+    if ((body.header.fromMsp.signatures !== undefined) && (Array.isArray(body.header.fromMsp.signatures))) {
+      body.header.fromMsp.signatures.forEach(signature => {
         returnedContract.fromMsp.signatures.push({
           id: signature.id,
           name: signature.name,
@@ -36,8 +36,8 @@ class ContractMapper {
       });
     }
     
-    if ((body.header.toMSP.signatures !== undefined) && (Array.isArray(body.header.toMSP.signatures))) {
-      body.header.toMSP.signatures.forEach(signature => {
+    if ((body.header.toMsp.signatures !== undefined) && (Array.isArray(body.header.toMsp.signatures))) {
+      body.header.toMsp.signatures.forEach(signature => {
         returnedContract.toMsp.signatures.push({
           id: signature.id,
           name: signature.name,
@@ -64,13 +64,13 @@ class ContractMapper {
   // Map the internal contract to POST contracts or GET contract/id response body
   static getResponseBodyForGetContract(contract, format = 'body') {
     const returnedResponseBody = {
-      contractID: contract.id,
+      contractId: contract.id,
       header: {
         name: contract.name,
         type: contract.type,
         version: contract.version,
-        fromMSP: {
-          mspid: contract.fromMsp.mspId,
+        fromMsp: {
+          mspId: contract.fromMsp.mspId,
           minSignatures: contract.fromMsp.minSignatures,
           nbOfsignatures: contract.fromMsp.nbOfsignatures,
           signatures: contract.fromMsp.signatures.map(signature => {
@@ -81,8 +81,8 @@ class ContractMapper {
             }
           })
         },
-        toMSP: {
-          mspid: contract.toMsp.mspId,
+        toMsp: {
+          mspId: contract.toMsp.mspId,
           minSignatures: contract.toMsp.minSignatures,
           nbOfsignatures: contract.toMsp.nbOfsignatures,
           signatures: contract.toMsp.signatures.map(signature => {
@@ -124,16 +124,16 @@ class ContractMapper {
     if ((contracts !== undefined) && (Array.isArray(contracts))) {
       contracts.forEach(contract => {
         returnedResponseBody.push({
-          contractID: contract.id,
+          contractId: contract.id,
           header: {
             name: contract.name,
             type: contract.type,
             version: contract.version,
-            fromMSP: {
-              mspid: contract.fromMsp.mspId
+            fromMsp: {
+              mspId: contract.fromMsp.mspId
             },
-            toMSP: {
-              mspid: contract.toMsp.mspId
+            toMsp: {
+              mspId: contract.toMsp.mspId
             }
           },
           state: contract.state,

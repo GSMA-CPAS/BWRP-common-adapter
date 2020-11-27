@@ -7,7 +7,7 @@ const chai = require('chai');
 const expect = require('chai').expect;
 
 const globalVersion = '/api/v1';
-const route = '/contracts/{contractID}/usages/{usageId}';
+const route = '/contracts/{contractId}/usages/{usageId}';
 
 const DATE_REGEX = new RegExp('^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z$');
 

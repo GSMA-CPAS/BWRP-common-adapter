@@ -4,23 +4,23 @@ All URIs are relative to *http://localhost/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getDiscoveryMSP**](DiscoveryApi.md#getDiscoveryMSP) | **GET** /discovery/msps/{mspid} | 
-[**getDiscoveryMSPs**](DiscoveryApi.md#getDiscoveryMSPs) | **GET** /discovery/msps | 
+[**getDiscoveryMsp**](DiscoveryApi.md#getDiscoveryMsp) | **GET** /discovery/msps/{mspId} | 
+[**getDiscoveryMsps**](DiscoveryApi.md#getDiscoveryMsps) | **GET** /discovery/msps | 
 
 
-<a name="getDiscoveryMSP"></a>
-# **getDiscoveryMSP**
-> String getDiscoveryMSP(mspid)
+<a name="getDiscoveryMsp"></a>
+# **getDiscoveryMsp**
+> String getDiscoveryMsp(mspId)
 
 
 
-    Show details for a specific MSP
+    Show details for a specific Msp
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **mspid** | **String**| Name of a MSP | [default to null]
+ **mspId** | **String**| Name of a Msp | [default to null]
 
 ### Return type
 
@@ -35,13 +35,13 @@ No authorization required
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="getDiscoveryMSPs"></a>
-# **getDiscoveryMSPs**
-> String getDiscoveryMSPs()
+<a name="getDiscoveryMsps"></a>
+# **getDiscoveryMsps**
+> String getDiscoveryMsps()
 
 
 
-    Show a list of all MSPs
+    Show a list of all Msps
 
 ### Parameters
 This endpoint does not need any parameter.

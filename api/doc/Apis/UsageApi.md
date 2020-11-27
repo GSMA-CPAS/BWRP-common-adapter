@@ -4,18 +4,18 @@ All URIs are relative to *http://localhost/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createUsage**](UsageApi.md#createUsage) | **POST** /contracts/{contractID}/usages/ | 
-[**deleteUsageByID**](UsageApi.md#deleteUsageByID) | **DELETE** /contracts/{contractID}/usages/{usageID} | 
-[**generateUsageByID**](UsageApi.md#generateUsageByID) | **PUT** /contracts/{contractID}/usages/{usageID}/generate/ | 
-[**getUsageByID**](UsageApi.md#getUsageByID) | **GET** /contracts/{contractID}/usages/{usageID} | 
-[**getUsages**](UsageApi.md#getUsages) | **GET** /contracts/{contractID}/usages/ | 
-[**sendUsageByID**](UsageApi.md#sendUsageByID) | **PUT** /contracts/{contractID}/usages/{usageID}/send/ | 
-[**updateUsageByID**](UsageApi.md#updateUsageByID) | **PUT** /contracts/{contractID}/usages/{usageID} | 
+[**createUsage**](UsageApi.md#createUsage) | **POST** /contracts/{contractId}/usages/ | 
+[**deleteUsageById**](UsageApi.md#deleteUsageById) | **DELETE** /contracts/{contractId}/usages/{usageId} | 
+[**generateUsageById**](UsageApi.md#generateUsageById) | **PUT** /contracts/{contractId}/usages/{usageId}/generate/ | 
+[**getUsageById**](UsageApi.md#getUsageById) | **GET** /contracts/{contractId}/usages/{usageId} | 
+[**getUsages**](UsageApi.md#getUsages) | **GET** /contracts/{contractId}/usages/ | 
+[**sendUsageById**](UsageApi.md#sendUsageById) | **PUT** /contracts/{contractId}/usages/{usageId}/send/ | 
+[**updateUsageById**](UsageApi.md#updateUsageById) | **PUT** /contracts/{contractId}/usages/{usageId} | 
 
 
 <a name="createUsage"></a>
 # **createUsage**
-> UsageResponse createUsage(contractID, body)
+> UsageResponse createUsage(contractId, body)
 
 
 
@@ -25,7 +25,7 @@ Method | HTTP request | Description
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **contractID** | **String**| The contract ID | [default to null]
+ **contractId** | **String**| The contract Id | [default to null]
  **body** | [**UsageRequest**](../Models/UsageRequest.md)| Usage Object Payload |
 
 ### Return type
@@ -41,20 +41,20 @@ No authorization required
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-<a name="deleteUsageByID"></a>
-# **deleteUsageByID**
-> UsageResponse deleteUsageByID(contractID, usageID)
+<a name="deleteUsageById"></a>
+# **deleteUsageById**
+> UsageResponse deleteUsageById(contractId, usageId)
 
 
 
-    Delete a Usage By its ID
+    Delete a Usage By its Id
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **contractID** | **String**| The contract ID | [default to null]
- **usageID** | **String**| The Usage ID | [default to null]
+ **contractId** | **String**| The contract Id | [default to null]
+ **usageId** | **String**| The Usage Id | [default to null]
 
 ### Return type
 
@@ -69,21 +69,21 @@ No authorization required
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="generateUsageByID"></a>
-# **generateUsageByID**
-> Object generateUsageByID(contractID, usageID, mode)
+<a name="generateUsageById"></a>
+# **generateUsageById**
+> Object generateUsageById(contractId, usageId, mode)
 
 
 
-    Generate the \&quot;Settlement\&quot; with local calculator and POST to Blochain adapter towards TargetMSP of the calculated response.
+    Generate the \&quot;Settlement\&quot; with local calculator and POST to Blochain adapter towards TargetMsp of the calculated response.
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **contractID** | **String**| The contract ID | [default to null]
- **usageID** | **String**| The Usage ID | [default to null]
- **mode** | **String**| Defaults to \&quot;preview\&quot; if not selected. Preview will only performs \&quot;calculation\&quot; and return the calculated settlement in response. if \&quot;commit\&quot;, will create the settlement and Send it live to the Blockchain to the targetMSP. | [optional] [default to null] [enum: preview, commit]
+ **contractId** | **String**| The contract Id | [default to null]
+ **usageId** | **String**| The Usage Id | [default to null]
+ **mode** | **String**| Defaults to \&quot;preview\&quot; if not selected. Preview will only performs \&quot;calculation\&quot; and return the calculated settlement in response. if \&quot;commit\&quot;, will create the settlement and Send it live to the Blockchain to the targetMsp. | [optional] [default to null] [enum: preview, commit]
 
 ### Return type
 
@@ -98,20 +98,20 @@ No authorization required
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="getUsageByID"></a>
-# **getUsageByID**
-> UsageResponse getUsageByID(contractID, usageID)
+<a name="getUsageById"></a>
+# **getUsageById**
+> UsageResponse getUsageById(contractId, usageId)
 
 
 
-    Get Usage Object by its ID
+    Get Usage Object by its Id
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **contractID** | **String**| The contract ID | [default to null]
- **usageID** | **String**| The Usage ID | [default to null]
+ **contractId** | **String**| The contract Id | [default to null]
+ **usageId** | **String**| The Usage Id | [default to null]
 
 ### Return type
 
@@ -128,7 +128,7 @@ No authorization required
 
 <a name="getUsages"></a>
 # **getUsages**
-> String getUsages(contractID)
+> String getUsages(contractId)
 
 
 
@@ -138,7 +138,7 @@ No authorization required
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **contractID** | **String**| The contract ID | [default to null]
+ **contractId** | **String**| The contract Id | [default to null]
 
 ### Return type
 
@@ -153,20 +153,20 @@ No authorization required
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="sendUsageByID"></a>
-# **sendUsageByID**
-> UsageResponse sendUsageByID(contractID, usageID)
+<a name="sendUsageById"></a>
+# **sendUsageById**
+> UsageResponse sendUsageById(contractId, usageId)
 
 
 
-    Set State to \&quot;SEND\&quot; and POST to Blochain adapter towards TargetMSP of the Usage
+    Set State to \&quot;SEND\&quot; and POST to Blochain adapter towards TargetMsp of the Usage
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **contractID** | **String**| The contract ID | [default to null]
- **usageID** | **String**| The Usage ID | [default to null]
+ **contractId** | **String**| The contract Id | [default to null]
+ **usageId** | **String**| The Usage Id | [default to null]
 
 ### Return type
 
@@ -181,20 +181,20 @@ No authorization required
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="updateUsageByID"></a>
-# **updateUsageByID**
-> UsageResponse updateUsageByID(contractID, usageID, body)
+<a name="updateUsageById"></a>
+# **updateUsageById**
+> UsageResponse updateUsageById(contractId, usageId, body)
 
 
 
-    Update Usage Object by its ID
+    Update Usage Object by its Id
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **contractID** | **String**| The contract ID | [default to null]
- **usageID** | **String**| The Usage ID | [default to null]
+ **contractId** | **String**| The contract Id | [default to null]
+ **usageId** | **String**| The Usage Id | [default to null]
  **body** | [**UsageRequest**](../Models/UsageRequest.md)| Usage Object Payload |
 
 ### Return type

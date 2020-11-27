@@ -12,37 +12,37 @@ const createUsage = async (request, response) => {
   await Controller.handleRequest(request, response, service.createUsage);
 };
 
-const deleteUsageByID = async (request, response) => {
-  await Controller.handleRequest(request, response, service.deleteUsageByID);
+const deleteUsageById = async (request, response) => {
+  await Controller.handleRequest(request, response, service.deleteUsageById);
 };
 
-const generateUsageByID = async (request, response) => {
-  await Controller.handleRequest(request, response, service.generateUsageByID);
+const generateUsageById = async (request, response) => {
+  await Controller.handleRequest(request, response, service.generateUsageById);
 };
 
-const getUsageByID = async (request, response) => {
-  await Controller.handleRequest(request, response, service.getUsageByID);
+const getUsageById = async (request, response) => {
+  await Controller.handleRequest(request, response, service.getUsageById);
 };
 
 const getUsages = async (request, response) => {
   await Controller.handleRequest(request, response, service.getUsages);
 };
 
-const sendUsageByID = async (request, response) => {
-  await Controller.handleRequest(request, response, service.sendUsageByID);
+const sendUsageById = async (request, response) => {
+  await Controller.handleRequest(request, response, service.sendUsageById);
 };
 
-const updateUsageByID = async (request, response) => {
-  await Controller.handleRequest(request, response, service.updateUsageByID);
+const updateUsageById = async (request, response) => {
+  await Controller.handleRequest(request, response, service.updateUsageById);
 };
 
 
 module.exports = {
   createUsage,
-  deleteUsageByID,
-  generateUsageByID,
-  getUsageByID,
+  deleteUsageById,
+  generateUsageById,
+  getUsageById,
   getUsages,
-  sendUsageByID,
-  updateUsageByID,
+  sendUsageById,
+  updateUsageById,
 };
