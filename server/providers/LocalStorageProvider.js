@@ -4,6 +4,7 @@ const config = require('../config');
 const logger = require('../logger');
 
 const ContractDAO = require('./dao/ContractDAO');
+const UsageDAO = require('./dao/UsageDAO');
 
 
 class LocalStorageProvider {
@@ -82,6 +83,59 @@ class LocalStorageProvider {
       return await ContractDAO.findOneAndUpdateToSentContract(contractId, rawData, documentId);
     } catch (error) {
       logger.error('[LocalStorageProvider::updateSentContract] failed to update sent contract - %s', error.message);
+      throw error;
+    }
+  }
+
+
+  /**
+   *
+   * @returns {Promise<[string]>}
+   */
+  static async getUsages(contractID) {
+    try {
+      return await UsageDAO.findAll(contractID);
+    } catch (error) {
+      logger.error('[LocalStorageProvider::getUsages] failed to get usages - %s', error.message);
+      throw error;
+    }
+  }
+
+  /**
+   *
+   * @returns {Promise<object>}
+   */
+  static async createUsage(usage) {
+    try {
+      return await UsageDAO.create(usage);
+    } catch (error) {
+      logger.error('[LocalStorageProvider::createUsage] failed to create usage - %s', error.message);
+      throw error;
+    }
+  }
+
+  /**
+   *
+   * @returns {Promise<object>}
+   */
+  static async updateUsage(usage) {
+    try {
+      return await UsageDAO.update(usage);
+    } catch (error) {
+      logger.error('[LocalStorageProvider::updateUsage] failed to update usage - '+  error.message);
+      throw error;
+    }
+  }
+
+  /**
+   *
+   * @returns {Promise<object>}
+   */
+  static async getUsage(id) {
+    try {
+      return await UsageDAO.findOne(id);
+    } catch (error) {
+      logger.error('[LocalStorageProvider::getUsage] failed to get usage - ' + error.message);
       throw error;
     }
   }

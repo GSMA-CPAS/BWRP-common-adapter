@@ -4,24 +4,24 @@ All URIs are relative to *http://localhost/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getSettlementByID**](SettlementApi.md#getSettlementByID) | **GET** /contracts/{contractID}/settlements/{settlementID} | 
-[**getSettlements**](SettlementApi.md#getSettlements) | **GET** /contracts/{contractID}/settlements/ | 
+[**getSettlementById**](SettlementApi.md#getSettlementById) | **GET** /contracts/{contractId}/settlements/{settlementId} | 
+[**getSettlements**](SettlementApi.md#getSettlements) | **GET** /contracts/{contractId}/settlements/ | 
 
 
-<a name="getSettlementByID"></a>
-# **getSettlementByID**
-> Object getSettlementByID(contractID, settlementID)
+<a name="getSettlementById"></a>
+# **getSettlementById**
+> Object getSettlementById(contractId, settlementId)
 
 
 
-    Get Settlement Object by its ID
+    Get Settlement Object by its Id
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **contractID** | **String**| The contract ID | [default to null]
- **settlementID** | **String**| The Settlement ID | [default to null]
+ **contractId** | **String**| The contract Id | [default to null]
+ **settlementId** | **String**| The Settlement Id | [default to null]
 
 ### Return type
 
@@ -38,7 +38,7 @@ No authorization required
 
 <a name="getSettlements"></a>
 # **getSettlements**
-> String getSettlements(contractID)
+> String getSettlements(contractId)
 
 
 
@@ -48,7 +48,7 @@ No authorization required
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **contractID** | **String**| The contract ID | [default to null]
+ **contractId** | **String**| The contract Id | [default to null]
 
 ### Return type
 

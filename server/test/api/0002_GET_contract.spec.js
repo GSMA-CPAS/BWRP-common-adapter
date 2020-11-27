@@ -7,7 +7,7 @@ const chai = require('chai');
 const expect = require('chai').expect;
 
 const globalVersion = '/api/v1';
-const route = '/contracts/{contractID}';
+const route = '/contracts/{contractId}';
 
 const DATE_REGEX = new RegExp('^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z$');
 
@@ -117,30 +117,30 @@ describe("Tests GET " + route + " API OK", function () {
             expect(response).to.be.json;
             expect(response.body).to.exist;
             expect(response.body).to.be.an('object');
-            expect(Object.keys(response.body)).have.members(["contractID", "state", "creationDate", "lastModificationDate", "header", "body"]);
+            expect(Object.keys(response.body)).have.members(["contractId", "state", "creationDate", "lastModificationDate", "header", "body"]);
 
-            expect(response.body).to.have.property('contractID', contract1.id);
+            expect(response.body).to.have.property('contractId', contract1.id);
             expect(response.body).to.have.property('state', contract1.state);
             expect(response.body).to.have.property('creationDate').that.is.a('string').and.match(DATE_REGEX);
             expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
 
             expect(response.body).to.have.property('header').that.is.an('object');
-            expect(Object.keys(response.body.header)).have.members(["name", "type", "version", "fromMSP", "toMSP"]);
+            expect(Object.keys(response.body.header)).have.members(["name", "type", "version", "fromMsp", "toMsp"]);
             expect(response.body.header).to.have.property('name', contract1.name);
             expect(response.body.header).to.have.property('type', contract1.type);
             expect(response.body.header).to.have.property('version', contract1.version);
 
-            expect(response.body.header).to.have.property('fromMSP').that.is.an('object');
-            expect(Object.keys(response.body.header.fromMSP)).have.members(["mspid", "signatures"]);
-            expect(response.body.header.fromMSP).to.have.property('mspid', contract1.fromMsp.mspId);
-            expect(response.body.header.fromMSP).to.have.property('signatures').that.is.an('array');
-            expect(response.body.header.fromMSP.signatures.length).to.equal(0);
+            expect(response.body.header).to.have.property('fromMsp').that.is.an('object');
+            expect(Object.keys(response.body.header.fromMsp)).have.members(["mspId", "signatures"]);
+            expect(response.body.header.fromMsp).to.have.property('mspId', contract1.fromMsp.mspId);
+            expect(response.body.header.fromMsp).to.have.property('signatures').that.is.an('array');
+            expect(response.body.header.fromMsp.signatures.length).to.equal(0);
 
-            expect(response.body.header).to.have.property('toMSP').that.is.an('object');
-            expect(Object.keys(response.body.header.toMSP)).have.members(["mspid", "signatures"]);
-            expect(response.body.header.toMSP).to.have.property('mspid', contract1.toMsp.mspId);
-            expect(response.body.header.toMSP).to.have.property('signatures').that.is.an('array');
-            expect(response.body.header.toMSP.signatures.length).to.equal(0);
+            expect(response.body.header).to.have.property('toMsp').that.is.an('object');
+            expect(Object.keys(response.body.header.toMsp)).have.members(["mspId", "signatures"]);
+            expect(response.body.header.toMsp).to.have.property('mspId', contract1.toMsp.mspId);
+            expect(response.body.header.toMsp).to.have.property('signatures').that.is.an('array');
+            expect(response.body.header.toMsp.signatures.length).to.equal(0);
 
             expect(response.body).to.have.property('body').that.is.an('object');
             expect(Object.keys(response.body.body)).have.members(["bankDetails", "discountModels", "generalInformation"]);

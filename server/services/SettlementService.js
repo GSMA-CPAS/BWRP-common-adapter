@@ -2,18 +2,18 @@
 const Service = require('./Service');
 
 /**
-* Get Settlement Object by its ID
+* Get Settlement Object by its Id
 *
-* contractID String The contract ID
-* settlementID String The Settlement ID
+* contractId String The contract Id
+* settlementId String The Settlement Id
 * returns Object
 * */
-const getSettlementByID = ({ contractID, settlementID }) => new Promise(
+const getSettlementById = ({ contractId, settlementId }) => new Promise(
   async (resolve, reject) => {
     try {
       resolve(Service.successResponse({
-        contractID,
-        settlementID,
+        contractId,
+        settlementId,
       }));
     } catch (e) {
       reject(Service.rejectResponse(
@@ -26,14 +26,14 @@ const getSettlementByID = ({ contractID, settlementID }) => new Promise(
 /**
 * Get All Settlement of a given Contract
 *
-* contractID String The contract ID
+* contractId String The contract Id
 * returns String
 * */
-const getSettlements = ({ contractID }) => new Promise(
+const getSettlements = ({ contractId }) => new Promise(
   async (resolve, reject) => {
     try {
       resolve(Service.successResponse({
-        contractID,
+        contractId,
       }));
     } catch (e) {
       reject(Service.rejectResponse(
@@ -45,6 +45,6 @@ const getSettlements = ({ contractID }) => new Promise(
 );
 
 module.exports = {
-  getSettlementByID,
+  getSettlementById,
   getSettlements,
 };

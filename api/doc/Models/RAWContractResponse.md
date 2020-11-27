@@ -3,7 +3,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**contractID** | [**String**](string.md) | ContractID in GUID format | [default to null]
+**contractId** | [**String**](string.md) | ContractId in GUID format | [default to null]
 **raw** | [**String**](string.md) | Original Base64 encoded RAW payload, Used for Hash calculation or Signing. | [default to null]
 **state** | [**String**](string.md) | The State of the Contract. | [default to null]
 

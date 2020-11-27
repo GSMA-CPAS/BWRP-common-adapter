@@ -158,30 +158,30 @@ describe("Tests GET " + route + " API OK", function () {
             let contract2IsFound = false;
             response.body.forEach(contractInBody => {
               let contract = undefined;
-              if (contractInBody.contractID === contract1.id) {
+              if (contractInBody.contractId === contract1.id) {
                 contract1IsFound = true;
                 contract = contract1;
               }
-              if (contractInBody.contractID === contract2.id) {
+              if (contractInBody.contractId === contract2.id) {
                 contract2IsFound = true;
                 contract = contract2;
               }
-              expect(Object.keys(contractInBody)).have.members(["contractID", "state", "creationDate", "lastModificationDate", "header"]);
-              expect(contractInBody).to.have.property('contractID', contract.id);
+              expect(Object.keys(contractInBody)).have.members(["contractId", "state", "creationDate", "lastModificationDate", "header"]);
+              expect(contractInBody).to.have.property('contractId', contract.id);
               expect(contractInBody).to.have.property('state', contract.state);
               expect(contractInBody).to.have.property('creationDate').that.match(DATE_REGEX);
               expect(contractInBody).to.have.property('lastModificationDate').that.match(DATE_REGEX);
               expect(contractInBody).to.have.property('header').that.is.an('object');
-              expect(Object.keys(contractInBody.header)).have.members(["name", "type", "version", "fromMSP", "toMSP"]);
+              expect(Object.keys(contractInBody.header)).have.members(["name", "type", "version", "fromMsp", "toMsp"]);
               expect(contractInBody.header).to.have.property('name', contract.name);
               expect(contractInBody.header).to.have.property('type', contract.type);
               expect(contractInBody.header).to.have.property('version', contract.version);
-              expect(contractInBody.header).to.have.property('fromMSP').that.is.an('object');
-              expect(Object.keys(contractInBody.header.fromMSP)).have.members(["mspid"]);
-              expect(contractInBody.header.fromMSP).to.have.property('mspid', contract.fromMsp.mspId);
-              expect(contractInBody.header).to.have.property('toMSP').that.is.an('object');
-              expect(Object.keys(contractInBody.header.toMSP)).have.members(["mspid"]);
-              expect(contractInBody.header.toMSP).to.have.property('mspid', contract.toMsp.mspId);  
+              expect(contractInBody.header).to.have.property('fromMsp').that.is.an('object');
+              expect(Object.keys(contractInBody.header.fromMsp)).have.members(["mspId"]);
+              expect(contractInBody.header.fromMsp).to.have.property('mspId', contract.fromMsp.mspId);
+              expect(contractInBody.header).to.have.property('toMsp').that.is.an('object');
+              expect(Object.keys(contractInBody.header.toMsp)).have.members(["mspId"]);
+              expect(contractInBody.header.toMsp).to.have.property('mspId', contract.toMsp.mspId);  
             });
             expect(contract1IsFound).to.be.true;
             expect(contract2IsFound).to.be.true;

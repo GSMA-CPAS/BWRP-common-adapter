@@ -5,11 +5,11 @@ All URIs are relative to *http://localhost/api/v1*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**createContract**](ContractApi.md#createContract) | **POST** /contracts/ | 
-[**deleteContractByID**](ContractApi.md#deleteContractByID) | **DELETE** /contracts/{contractID} | 
-[**getContractByID**](ContractApi.md#getContractByID) | **GET** /contracts/{contractID} | 
+[**deleteContractById**](ContractApi.md#deleteContractById) | **DELETE** /contracts/{contractId} | 
+[**getContractById**](ContractApi.md#getContractById) | **GET** /contracts/{contractId} | 
 [**getContracts**](ContractApi.md#getContracts) | **GET** /contracts/ | 
-[**sendContractByID**](ContractApi.md#sendContractByID) | **PUT** /contracts/{contractID}/send/ | 
-[**updateContractByID**](ContractApi.md#updateContractByID) | **PUT** /contracts/{contractID} | 
+[**sendContractById**](ContractApi.md#sendContractById) | **PUT** /contracts/{contractId}/send/ | 
+[**updateContractById**](ContractApi.md#updateContractById) | **PUT** /contracts/{contractId} | 
 
 
 <a name="createContract"></a>
@@ -39,19 +39,19 @@ No authorization required
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-<a name="deleteContractByID"></a>
-# **deleteContractByID**
-> ContractResponse deleteContractByID(contractID)
+<a name="deleteContractById"></a>
+# **deleteContractById**
+> ContractResponse deleteContractById(contractId)
 
 
 
-    Delete a Contract By its ID
+    Delete a Contract By its Id
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **contractID** | **String**| The contract ID | [default to null]
+ **contractId** | **String**| The contract Id | [default to null]
 
 ### Return type
 
@@ -66,19 +66,19 @@ No authorization required
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="getContractByID"></a>
-# **getContractByID**
-> oneOf&lt;ContractResponse,RAWContractResponse&gt; getContractByID(contractID, format)
+<a name="getContractById"></a>
+# **getContractById**
+> oneOf&lt;ContractResponse,RAWContractResponse&gt; getContractById(contractId, format)
 
 
 
-    Get a Contract By its ID
+    Get a Contract By its Id
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **contractID** | **String**| The contract ID | [default to null]
+ **contractId** | **String**| The contract Id | [default to null]
  **format** | **String**| Response format, defaults to JSON if not passed. | [optional] [default to null] [enum: JSON, RAW]
 
 ### Return type
@@ -118,19 +118,19 @@ No authorization required
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="sendContractByID"></a>
-# **sendContractByID**
-> ContractResponse sendContractByID(contractID)
+<a name="sendContractById"></a>
+# **sendContractById**
+> ContractResponse sendContractById(contractId)
 
 
 
-    Set State to \&quot;SEND\&quot; and POST to Blochain adapter towards TargetMSP of the Contract
+    Set State to \&quot;SEND\&quot; and POST to Blochain adapter towards TargetMsp of the Contract
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **contractID** | **String**| The contract ID | [default to null]
+ **contractId** | **String**| The contract Id | [default to null]
 
 ### Return type
 
@@ -145,9 +145,9 @@ No authorization required
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="updateContractByID"></a>
-# **updateContractByID**
-> ContractResponse updateContractByID(contractID, body)
+<a name="updateContractById"></a>
+# **updateContractById**
+> ContractResponse updateContractById(contractId, body)
 
 
 
@@ -157,7 +157,7 @@ No authorization required
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **contractID** | **String**| The contract ID | [default to null]
+ **contractId** | **String**| The contract Id | [default to null]
  **body** | [**ContractRequest**](../Models/ContractRequest.md)| Contract Object Payload |
 
 ### Return type

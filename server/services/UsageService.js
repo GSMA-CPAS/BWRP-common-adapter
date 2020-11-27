@@ -1,41 +1,54 @@
 /* eslint-disable no-unused-vars */
 const Service = require('./Service');
+const UsageMapper = require('../core/UsageMapper');
+
+const LocalStorageProvider = require('../providers/LocalStorageProvider');
+const errorUtils = require('../utils/errorUtils');
 
 /**
 * Create a new Usage
 *
-* contractID String The contract ID
+* contractId String The contract Id
 * body UsageRequest Usage Object Payload
 * returns UsageResponse
 * */
-const createUsage = ({ contractID, body }) => new Promise(
+const createUsage = ({ url, contractId, body }) => new Promise(
   async (resolve, reject) => {
     try {
-      resolve(Service.successResponse({
-        contractID,
-        body,
-      }));
+
+      const getContractByIdResp = await LocalStorageProvider.getContract(contractId);
+      if (!((getContractByIdResp.state == 'SENT') || (getContractByIdResp.state == 'RECEIVED')|| (getContractByIdResp.state == 'SIGNED'))) {
+        reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_CREATE_USAGE_ON_CONTRACT_ONLY_ALLOWED_IN_STATE_SENT_SIGNED_OR_RECEIVED));
+      }
+      const mspOwner = getContractByIdResp.fromMsp.mspId;
+      const usageToCreate = UsageMapper.getUsageFromPostUsagesRequest(contractId, body, mspOwner);
+
+      const createUsageResp = await LocalStorageProvider.createUsage(usageToCreate);
+      const returnedResponse = UsageMapper.getResponseBodyForGetUsage(createUsageResp);
+      const returnedHeaders = {
+        'Content-Location': `${url.replace(/\/$/, '')}/${createUsageResp.id}`
+      };
+      resolve(Service.successResponse(returnedResponse, 201, returnedHeaders));
+
     } catch (e) {
-      reject(Service.rejectResponse(
-        e.message || 'Invalid input',
-        e.status || 405,
-      ));
+      reject(Service.rejectResponse(e));
     }
+
   },
 );
 /**
-* Delete a Usage By its ID
+* Delete a Usage By its Id
 *
-* contractID String The contract ID
-* usageID String The Usage ID
+* contractId String The contract Id
+* usageId String The Usage Id
 * returns UsageResponse
 * */
-const deleteUsageByID = ({ contractID, usageID }) => new Promise(
+const deleteUsageById = ({ contractId, usageId }) => new Promise(
   async (resolve, reject) => {
     try {
       resolve(Service.successResponse({
-        contractID,
-        usageID,
+        contractId,
+        usageId,
       }));
     } catch (e) {
       reject(Service.rejectResponse(
@@ -46,19 +59,19 @@ const deleteUsageByID = ({ contractID, usageID }) => new Promise(
   },
 );
 /**
-* Generate the \"Settlement\" with local calculator and POST to Blochain adapter towards TargetMSP of the calculated response.
+* Generate the \"Settlement\" with local calculator and POST to Blochain adapter towards TargetMsp of the calculated response.
 *
-* contractID String The contract ID
-* usageID String The Usage ID
-* mode String Defaults to \"preview\" if not selected. Preview will only performs \"calculation\" and return the calculated settlement in response. if \"commit\", will create the settlement and Send it live to the Blockchain to the targetMSP. (optional)
+* contractId String The contract Id
+* usageId String The Usage Id
+* mode String Defaults to \"preview\" if not selected. Preview will only performs \"calculation\" and return the calculated settlement in response. if \"commit\", will create the settlement and Send it live to the Blockchain to the targetMsp. (optional)
 * returns Object
 * */
-const generateUsageByID = ({ contractID, usageID, mode }) => new Promise(
+const generateUsageById = ({ contractId, usageId, mode }) => new Promise(
   async (resolve, reject) => {
     try {
       resolve(Service.successResponse({
-        contractID,
-        usageID,
+        contractId,
+        usageId,
         mode,
       }));
     } catch (e) {
@@ -70,60 +83,57 @@ const generateUsageByID = ({ contractID, usageID, mode }) => new Promise(
   },
 );
 /**
-* Get Usage Object by its ID
+* Get Usage Object by its Id
 *
-* contractID String The contract ID
-* usageID String The Usage ID
+* contractId String The contract Id
+* usageId String The Usage Id
 * returns UsageResponse
 * */
-const getUsageByID = ({ contractID, usageID }) => new Promise(
+const getUsageById = ({ contractId, usageId }) => new Promise(
   async (resolve, reject) => {
     try {
-      resolve(Service.successResponse({
-        contractID,
-        usageID,
-      }));
+      const getUsageByIdResp = await LocalStorageProvider.getUsage(usageId);
+      if (getUsageByIdResp.contractId != contractId) {
+        reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_GET_USAGE_ON_NOT_LINKED_CONTRACT_RECEIVED));
+      }
+      const returnedResponse = UsageMapper.getResponseBodyForGetUsage(getUsageByIdResp);
+      resolve(Service.successResponse(returnedResponse));
+
     } catch (e) {
-      reject(Service.rejectResponse(
-        e.message || 'Invalid input',
-        e.status || 405,
-      ));
+      reject(Service.rejectResponse(e));
     }
   },
 );
 /**
 * Get All usage of a given Contract
 *
-* contractID String The contract ID
+* contractId String The contract Id
 * returns String
 * */
-const getUsages = ({ contractID }) => new Promise(
+const getUsages = ({ contractId }) => new Promise(
   async (resolve, reject) => {
     try {
-      resolve(Service.successResponse({
-        contractID,
-      }));
+      const getUsagesResp = await LocalStorageProvider.getUsages(contractId);
+      const returnedResponse = UsageMapper.getResponseBodyForGetUsages(getUsagesResp);
+      resolve(Service.successResponse(returnedResponse, 200));
     } catch (e) {
-      reject(Service.rejectResponse(
-        e.message || 'Invalid input',
-        e.status || 405,
-      ));
+      reject(Service.rejectResponse(e));
     }
   },
 );
 /**
-* Set State to \"SEND\" and POST to Blochain adapter towards TargetMSP of the Usage
+* Set State to \"SEND\" and POST to Blochain adapter towards TargetMsp of the Usage
 *
-* contractID String The contract ID
-* usageID String The Usage ID
+* contractId String The contract Id
+* usageId String The Usage Id
 * returns UsageResponse
 * */
-const sendUsageByID = ({ contractID, usageID }) => new Promise(
+const sendUsageById = ({ contractId, usageId }) => new Promise(
   async (resolve, reject) => {
     try {
       resolve(Service.successResponse({
-        contractID,
-        usageID,
+        contractId,
+        usageId,
       }));
     } catch (e) {
       reject(Service.rejectResponse(
@@ -134,36 +144,43 @@ const sendUsageByID = ({ contractID, usageID }) => new Promise(
   },
 );
 /**
-* Update Usage Object by its ID
+* Update Usage Object by its Id
 *
-* contractID String The contract ID
-* usageID String The Usage ID
+* contractId String The contract Id
+* usageId String The Usage Id
 * body UsageRequest Usage Object Payload
 * returns UsageResponse
 * */
-const updateUsageByID = ({ contractID, usageID, body }) => new Promise(
+const updateUsageById = ({ contractId, usageId, body }) => new Promise(
   async (resolve, reject) => {
+
     try {
-      resolve(Service.successResponse({
-        contractID,
-        usageID,
-        body,
-      }));
+      const getUsageByIdResp = await LocalStorageProvider.getUsage(usageId);
+      if (getUsageByIdResp.contractId != contractId) {
+        reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_PUT_USAGE_ON_NOT_LINKED_CONTRACT_RECEIVED));
+      }
+      if ( (body.state !== undefined) && !((getUsageByIdResp.state == 'DRAFT') && (body.state == 'DRAFT')) ) {
+        reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_USAGE_UPDATE_ONLY_ALLOWED_IN_STATE_DRAFT));
+      }
+
+      const usageToUpdate = UsageMapper.getUsageFromPutUsagesRequest(getUsageByIdResp,body)
+      const updateUsageResp = await LocalStorageProvider.updateUsage(usageToUpdate);
+
+      const returnedResponse = UsageMapper.getResponseBodyForGetUsage(updateUsageResp);
+      resolve(Service.successResponse(returnedResponse, 200));
+
     } catch (e) {
-      reject(Service.rejectResponse(
-        e.message || 'Invalid input',
-        e.status || 405,
-      ));
+      reject(Service.rejectResponse(e));
     }
   },
 );
 
 module.exports = {
   createUsage,
-  deleteUsageByID,
-  generateUsageByID,
-  getUsageByID,
+  deleteUsageById,
+  generateUsageById,
+  getUsageById,
   getUsages,
-  sendUsageByID,
-  updateUsageByID,
+  sendUsageById,
+  updateUsageById,
 };

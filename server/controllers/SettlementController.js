@@ -8,8 +8,8 @@
 
 const Controller = require('./Controller');
 const service = require('../services/SettlementService');
-const getSettlementByID = async (request, response) => {
-  await Controller.handleRequest(request, response, service.getSettlementByID);
+const getSettlementById = async (request, response) => {
+  await Controller.handleRequest(request, response, service.getSettlementById);
 };
 
 const getSettlements = async (request, response) => {
@@ -18,6 +18,6 @@ const getSettlements = async (request, response) => {
 
 
 module.exports = {
-  getSettlementByID,
+  getSettlementById,
   getSettlements,
 };

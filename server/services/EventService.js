@@ -5,7 +5,7 @@ const Service = require('./Service');
 * Webhook callback
 *
 * body Object Webhook event Object Payload
-* returns String
+* returns SuccessResponse
 * */
 const eventReceived = ({ body }) => new Promise(
   async (resolve, reject) => {

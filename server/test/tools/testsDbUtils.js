@@ -1,6 +1,7 @@
 const debug = require('debug')('spec:testsDbUtils');
 
 const ContractMongoRequester = require('../../providers/dao/ContractMongoRequester');
+const UsageMongoRequester = require('../../providers/dao/UsageMongoRequester');
 
 class TestsDbUtils {
 
@@ -13,6 +14,20 @@ class TestsDbUtils {
         } else {
           debug("deleteMany contracts done with success");
           resolve(contracts);  
+        }
+      });
+    });
+  }
+
+  static removeAllUsages(conditions) {
+    return new Promise((resolve, reject) => {
+      UsageMongoRequester.deleteMany(conditions, (err, usages) => {
+        if (err) {
+          debug("deleteMany usages failure : ", err);
+          reject(err);
+        } else {
+          debug("deleteMany usages done with success");
+          resolve(usages);
         }
       });
     });
@@ -47,7 +62,7 @@ class TestsDbUtils {
           reject(err);
         } else {
           debug("create contract done with success");
-          resolve(createdContract);  
+          resolve(createdContract);
         }
       });
     });
@@ -77,7 +92,67 @@ class TestsDbUtils {
           reject(removeAllContractsError);
         });
     });
-  }  
+  }
 
+  static createUsage(usage) {
+    return new Promise((resolve, reject) => {
+
+      // Define automatic values
+      usage.id = UsageMongoRequester.defineUsageId();
+      if (usage.creationDate === undefined) {
+        usage.creationDate = Date.now();
+      }
+      if (usage.state === undefined) {
+        usage.state = "DRAFT";
+      }
+      if (usage.type === undefined) {
+        usage.type = "usage";
+      }
+      if (usage.history === undefined) {
+        usage.history = [];
+      }
+      usage.history.push({
+        date: usage.creationDate,
+        action: "CREATION"
+      });
+
+      // Launch db request
+      UsageMongoRequester.create(usage, (err, createdUsage) => {
+        if (err) {
+          debug("create usage failure : ", err);
+          reject(err);
+        } else {
+          debug("create usage done with success");
+          resolve(createdUsage);
+        }
+      });
+    });
+  }
+
+  static initDbWithUsages(usages) {
+    return new Promise((resolve, reject) => {
+      TestsDbUtils.removeAllUsages({})
+        .then(removeAllUsagesResp => {
+          const usagesCreationPromises = [];
+          if ((usages !== undefined) && (Array.isArray(usages))) {
+            usages.forEach(usage => {
+              usagesCreationPromises.push(TestsDbUtils.createUsage(usage));
+            })
+          }
+          Promise.all(usagesCreationPromises)
+            .then(usagesCreationPromisesResp => {
+              debug("initDbWithUsages done with success");
+              resolve(usagesCreationPromisesResp);
+            })
+            .catch(usagesCreationPromisesError => {
+              debug("initDbWithUsages failure : ", usagesCreationPromisesError);
+              reject(usagesCreationPromisesError);
+            });
+        })
+        .catch(removeAllUsagesError => {
+          reject(removeAllUsagesError);
+        });
+    });
+  }
 }
 module.exports = TestsDbUtils;
