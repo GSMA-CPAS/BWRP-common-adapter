@@ -148,6 +148,27 @@ describe("Tests PUT " + route + " API OK", function () {
       },
       state: 'DRAFT'
     };
+    const usage_sent = {
+      type: 'usage',
+      version: '1.1.0',
+      name: 'Usage with data',
+      contractId: undefined,
+      mspOwner: undefined,
+      body: {
+        data: [{
+          year: 2020,
+          month: 1,
+          hpmn: 'HPMN',
+          vpmn: 'VPMN',
+          service: 'service',
+          value: 1,
+          units: 'unit',
+          charges: 'charge',
+          taxes: 'taxes'
+        }]
+      },
+      state: 'SENT'
+    };
 
     before(done => {
       debugSetup('==> remove all contracts in db');
@@ -169,10 +190,11 @@ describe("Tests PUT " + route + " API OK", function () {
                   usage_minimum_data.mspOwner = contract_sent.fromMsp.mspId;
                   usage_more_data.contractId = contract_received.id;
                   usage_more_data.mspOwner = contract_received.fromMsp.mspId;
-                  testsDbUtils.initDbWithUsages([usage_minimum_data, usage_more_data])
+                  usage_sent.contractId = contract_received.id;
+                  usage_sent.mspOwner = contract_received.fromMsp.mspId;
+                  testsDbUtils.initDbWithUsages([usage_minimum_data, usage_more_data,usage_sent])
                     .then(initDbWithUsagesResp => {
-                      debugSetup('The db is initialized with 2 usages : ', initDbWithUsagesResp.map(c => c.id));
-
+                      debugSetup('The db is initialized with 3 usages : ', initDbWithUsagesResp.map(c => c.id));
                       debugSetup('==> done!');
                       done();
                     })
@@ -329,17 +351,112 @@ describe("Tests PUT " + route + " API OK", function () {
 
 
     it('Put usage NOK on wrong contractId', function (done) {
-      done()
+      try {
+        const randomValue = testsUtils.defineRandomValue();
+
+        let path = globalVersion + '/contracts/' + "id_" + randomValue + '/usages/' + usage_minimum_data.id;
+        debug("PUT path : ", path);
+
+        let sentBody = {
+          header: {
+            name: "Usage data name changed",
+            type: "usage",
+            version: "1.2.0",
+            mspOwner: "B1"
+          },
+          state: "DRAFT",
+          body: {"data": []}
+        }
+        chai.request(testsUtils.getServer())
+          .put(`${path}`)
+          .send(sentBody)
+          .end((error, response) => {
+            debug('response.body: %s', JSON.stringify(response.body));
+            expect(error).to.be.null;
+            expect(response).to.have.status(422);
+            expect(response).to.be.json;
+            expect(response.body).to.exist;
+
+            expect(response.body.message).to.equal("Put usage not allowed");
+            done();
+          });
+      } catch (exception) {
+        debug('exception: %s', exception.stack);
+        expect.fail('it test throws an exception');
+        done();
+      }
     });
 
     it('Put usage NOK if request body state is not DRAFT', function (done) {
-      done()
+      try {
 
+        let path = globalVersion + '/contracts/'  + contract_sent.id + '/usages/' + usage_minimum_data.id;
+        debug("PUT path : ", path);
+
+        let sentBody = {
+          header: {
+            name: "Usage data name changed",
+            type: "usage",
+            version: "1.2.0",
+            mspOwner: "B1"
+          },
+          state: "SENT",
+          body: {"data": []}
+        }
+        chai.request(testsUtils.getServer())
+          .put(`${path}`)
+          .send(sentBody)
+          .end((error, response) => {
+            debug('response.body: %s', JSON.stringify(response.body));
+            expect(error).to.be.null;
+            expect(response).to.have.status(422);
+            expect(response).to.be.json;
+            expect(response.body).to.exist;
+
+            expect(response.body.message).to.equal("Usage modification not allowed");
+            done();
+          });
+      } catch (exception) {
+        debug('exception: %s', exception.stack);
+        expect.fail('it test throws an exception');
+        done();
+      }
     });
 
     it('Put usage NOK if usage in db is not DRAFT', function (done) {
-      done()
+      try {
 
+        let path = globalVersion + '/contracts/'  + contract_received.id + '/usages/' + usage_sent.id;
+        debug("PUT path : ", path);
+
+        let sentBody = {
+          header: {
+            name: "Usage data name changed",
+            type: "usage",
+            version: "1.2.0",
+            mspOwner: "B1"
+          },
+          state: "SENT",
+          body: {"data": []}
+        }
+        chai.request(testsUtils.getServer())
+          .put(`${path}`)
+          .send(sentBody)
+          .end((error, response) => {
+            debug('response.body: %s', JSON.stringify(response.body));
+            expect(error).to.be.null;
+            expect(response).to.have.status(422);
+            expect(response).to.be.json;
+            expect(response.body).to.exist;
+
+            expect(response.body.message).to.equal("Usage modification not allowed");
+            done();
+          });
+      } catch (exception) {
+        debug('exception: %s', exception.stack);
+        expect.fail('it test throws an exception');
+        done();
+      }
     });
 
   });
