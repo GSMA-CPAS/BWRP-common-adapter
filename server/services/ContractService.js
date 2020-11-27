@@ -61,8 +61,13 @@ const getContractById = ({ contractId, format }) => new Promise(
     // TODO: if format == raw
     try {
       const getContractByIdResp = await LocalStorageProvider.getContract(contractId);
-      const returnedResponse = ContractMapper.getResponseBodyForGetContract(getContractByIdResp);
-      resolve(Service.successResponse(returnedResponse));
+      const returnedFormat = (format === 'RAW') ? format : 'JSON';
+      if ((returnedFormat === 'RAW') && ((getContractByIdResp.state === 'DRAFT') || (getContractByIdResp.rawData === undefined))) {
+        reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_CONTRACT_RAW_FORMAT_UNAVAILABLE));
+      } else {
+        const returnedResponse = ContractMapper.getResponseBodyForGetContract(getContractByIdResp, returnedFormat);
+        resolve(Service.successResponse(returnedResponse));
+      }
     } catch (e) {
       reject(Service.rejectResponse(e));
     }
