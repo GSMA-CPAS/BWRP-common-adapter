@@ -38,5 +38,9 @@ class TestsUtils {
     return String(Date.now()) + ((Math.random() * 100) | 1);
   };
 
+  static getBlockchainAdapterUrl() {
+    return "http://127.0.0.1:8081";
+  }
+
 }
 module.exports = TestsUtils;

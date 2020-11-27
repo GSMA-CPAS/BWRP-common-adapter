@@ -56,6 +56,51 @@ class ErrorUtils {
     }
   };
 
+  static ERROR_BLOCKCHAIN_ADAPTER_RESPONSE_PARSING_ERROR = {
+    code: 500,
+    error: {
+      internalErrorCode: 3000,
+      message: 'Blockchain response parsing error',
+      description: 'It\'s not possible to parse the blockchain response.'
+    }
+  };
+
+  static ERROR_BLOCKCHAIN_ADAPTER_NO_RESPONSE = {
+    code: 500,
+    error: {
+      internalErrorCode: 3001,
+      message: 'No response received from Blockchain',
+      description: 'The Blochain does not respond.'
+    }
+  };
+
+  static ERROR_BLOCKCHAIN_ADAPTER_REQUEST_ERROR = {
+    code: 500,
+    error: {
+      internalErrorCode: 3002,
+      message: 'Blockchain request error',
+      description: 'Something happened in setting up the Blockchain request.'
+    }
+  };
+
+  static ERROR_BLOCKCHAIN_ADAPTER_RESPONSE_NOT_FOUND_ERROR = {
+    code: 404,
+    error: {
+      internalErrorCode: 3003,
+      message: 'Blockchain resource not found',
+      description: 'The requested URI or the requested Blockchain resource does not exist.'
+    }
+  };
+
+  static ERROR_BLOCKCHAIN_ADAPTER_RESPONSE_UNEXPECTED_ERROR = {
+    code: 404,
+    error: {
+      internalErrorCode: 3004,
+      message: 'Blockchain response error',
+      description: 'An unexpected response has been received from the Blockchain.'
+    }
+  };
+
 }
 
 module.exports = ErrorUtils;
