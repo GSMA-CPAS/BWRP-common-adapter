@@ -1,5 +1,34 @@
 const path = require('path');
 
+const getAsObject = (envVar) => {
+  let returnedObject = undefined;
+  if (envVar !== undefined) {
+    try {
+      returnedObject = JSON.parse(envVar);
+    } catch(e) {
+      console.log(`[config::getAsObject] The env var ${envVar} can't be parsed as an object!`);
+    }
+  }
+  return returnedObject;
+}
+
+const getAsInt = (envVar) => {
+  let returnedInt = undefined;
+  if (envVar !== undefined) {
+    try {
+      const parsedValue = parseInt(envVar, 10);
+      if (!isNaN(parsedValue)) {
+        returnedInt = parsedValue;
+      } else {
+        console.log(`[config::getAsObject] The env var ${envVar} can't be parsed as an int!`);
+      }
+    } catch(e) {
+      console.log(`[config::getAsObject] The env var ${envVar} can't be parsed as an int!`);
+    }
+  }
+  return returnedInt;
+}
+
 const config = {
   ROOT_DIR: __dirname,
   URL_PORT: 8080,
@@ -17,11 +46,11 @@ config.LOG_LEVEL = process.env.LOG_LEVEL || "info";
 
 // BlockchainAdapter configuration
 config.BLOCKCHAIN_ADAPTER_URL = process.env.BLOCKCHAIN_ADAPTER_URL || "http://127.0.0.1:8081";
-config.BLOCKCHAIN_ADAPTER_WEBHOOKS = process.env.BLOCKCHAIN_ADAPTER_WEBHOOKS || [];
+config.BLOCKCHAIN_ADAPTER_WEBHOOKS = getAsObject(process.env.BLOCKCHAIN_ADAPTER_WEBHOOKS) || [];
 
 config.DB_URL = process.env.DB_URL || "mongodb://userdtag:userpwd@localhost:27017/roamingdbdtag?authSource=roamingdbdtag";
-config.DB_CREATE_CONNECTION_TIMEOUT = process.env.DB_CREATE_CONNECTION_TIMEOUT || 30000;
-config.DB_HEARTBEAT_FREQUENCY = process.env.DB_HEARTBEAT_FREQUENCY || 5000;
-config.DB_POOL_SIZE = process.env.DB_POOL_SIZE || 10;
+config.DB_CREATE_CONNECTION_TIMEOUT = getAsInt(process.env.DB_CREATE_CONNECTION_TIMEOUT) || 30000;
+config.DB_HEARTBEAT_FREQUENCY = getAsInt(process.env.DB_HEARTBEAT_FREQUENCY) || 5000;
+config.DB_POOL_SIZE = getAsInt(process.env.DB_POOL_SIZE) || 10;
 
 module.exports = config;

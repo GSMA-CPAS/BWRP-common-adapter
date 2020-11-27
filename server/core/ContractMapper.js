@@ -96,7 +96,7 @@ class ContractMapper {
       },
       state: contract.state,
       documentId: contract.documentId,
-      history: contract.history,
+      // history: contract.history,
       creationDate: contract.creationDate,
       lastModificationDate: contract.lastModificationDate
     };
