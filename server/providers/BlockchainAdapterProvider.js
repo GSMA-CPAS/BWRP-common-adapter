@@ -236,6 +236,46 @@ class BlockchainAdapterProvider {
       throw error;
     }
   }
+
+  /**
+   *
+   * @returns {Promise<void>}
+   */
+  async subscribe() {
+    if (config.SELF_HOST.length <= 0){
+      logger.info('[BlockchainAdapterProvider::subscribe] env SELF_HOST not set. Not subscribing');
+      return;
+    }
+
+    if (config.BLOCKCHAIN_ADAPTER_URL.length <= 0){
+      logger.info('[BlockchainAdapterProvider::subscribe] env BLOCKCHAIN_ADAPTER_URL not set. Not subscribing');
+      return;
+    }
+
+    const callback_url = config.SELF_HOST  + "/api/v1/contracts/event/";
+    const webhooks = [
+      {
+        "eventName": "STORE:DOCUMENTHASH",
+        "callbackUrl": callback_url
+      },
+      {
+        "eventName": "STORE:SIGNATURE",
+        "callbackUrl": callback_url
+      }
+    ];
+
+    try {
+      for (const webhook of webhooks) {
+        await axios.post(config.BLOCKCHAIN_ADAPTER_URL + '/webhooks/subscribe', webhook);
+        logger.info('[BlockchainAdapterProvider::subscribe] webhook subscribe: %s -> %s', webhook.eventName, webhook.callbackUrl);
+      }
+    } catch (error) {
+      console.log(error);
+      logger.error('[BlockchainAdapterProvider::subscribe] failed to subscribe to blockchain-adapter - %s', error.message);
+      throw error;
+    }
+  }
+
 }
 
 module.exports = BlockchainAdapterProvider;

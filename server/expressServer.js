@@ -69,6 +69,18 @@ class ExpressServer {
     }).install(this.app)
       .catch(e => console.log(e))
       .then(() => {
+        const BlockchainAdapterProvider = require('./providers/BlockchainAdapterProvider');
+        const blockchainAdapterConnection = new BlockchainAdapterProvider();
+        return blockchainAdapterConnection.subscribe();
+      }).catch((e) => {
+        console.log("Closing server for blockchain-adapter connection failed.");
+        this.close()
+        .then(() => {
+          console.log(`Server closed for blockchain-adapter connection failed.`);
+          process.exit();
+        });
+      })
+      .then(() => {
         // eslint-disable-next-line no-unused-vars
         this.app.use((err, req, res, next) => {
           // format errors
