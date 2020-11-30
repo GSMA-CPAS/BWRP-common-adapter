@@ -9,7 +9,6 @@ const ContractMongoRequester = require('./ContractMongoRequester');
 const MISSING_MANDATORY_PARAM_ERROR = errorUtils.ERROR_DAO_MISSING_MANDATORY_PARAM;
 
 class ContractDAO {
-
   static findAll(state) {
     return new Promise((resolve, reject) => {
       // Verify parameters
@@ -23,16 +22,16 @@ class ContractDAO {
       // Launch database request
       ContractMongoRequester.findAll(condition, (err, contracts) => {
         DAOErrorManager.handleErrorOrNullObject(err, contracts)
-          .then(objectReturned => {
+          .then((objectReturned) => {
             resolve(objectReturned);
           })
-          .catch(errorReturned => {
-            logger.error('[ContractDAO::findAll] [FAILED] errorReturned:' + typeof errorReturned + " = " + JSON.stringify(errorReturned));
+          .catch((errorReturned) => {
+            logger.error('[ContractDAO::findAll] [FAILED] errorReturned:' + typeof errorReturned + ' = ' + JSON.stringify(errorReturned));
             reject(errorReturned);
           });
       });
     });
-  };
+  }
 
   static create(object) {
     return new Promise((resolve, reject) => {
@@ -49,22 +48,22 @@ class ContractDAO {
       object.creationDate = creationDate;
       object.lastModificationDate = creationDate;
       object.history = [
-        {date: creationDate, action: "CREATION"}
-      ]
+        {date: creationDate, action: 'CREATION'}
+      ];
 
       // Launch database request
       ContractMongoRequester.create(object, (err, contract) => {
         DAOErrorManager.handleErrorOrNullObject(err, contract)
-          .then(objectReturned => {
+          .then((objectReturned) => {
             resolve(objectReturned);
           })
-          .catch(errorReturned => {
-            logger.error('[ContractDAO::create] [FAILED] errorReturned:' + typeof errorReturned + " = " + JSON.stringify(errorReturned));
+          .catch((errorReturned) => {
+            logger.error('[ContractDAO::create] [FAILED] errorReturned:' + typeof errorReturned + ' = ' + JSON.stringify(errorReturned));
             reject(errorReturned);
           });
       });
     });
-  };
+  }
 
   static update(object) {
     return new Promise((resolve, reject) => {
@@ -102,23 +101,23 @@ class ContractDAO {
           lastModificationDate: object.lastModificationDate
         },
         $push: {
-          history: {date: object.lastModificationDate, action: "UPDATE"}
+          history: {date: object.lastModificationDate, action: 'UPDATE'}
         }
       };
 
       // Launch database request
       ContractMongoRequester.findOneAndUpdate(condition, updateCommand, (err, contract) => {
         DAOErrorManager.handleErrorOrNullObject(err, contract)
-          .then(objectReturned => {
+          .then((objectReturned) => {
             resolve(objectReturned);
           })
-          .catch(errorReturned => {
-            logger.error('[ContractDAO::update] [FAILED] errorReturned:' + typeof errorReturned + " = " + JSON.stringify(errorReturned));
+          .catch((errorReturned) => {
+            logger.error('[ContractDAO::update] [FAILED] errorReturned:' + typeof errorReturned + ' = ' + JSON.stringify(errorReturned));
             reject(errorReturned);
           });
       });
     });
-  };
+  }
 
   static findOne(id) {
     return new Promise((resolve, reject) => {
@@ -132,17 +131,17 @@ class ContractDAO {
       ContractMongoRequester.findOne({id}, (err, contract) => {
         // Use errorManager to return appropriate dao errors
         DAOErrorManager.handleErrorOrNullObject(err, contract)
-          .then(objectReturned => {
-            logger.debug('[DAO] [findOne] [OK] objectReturned:' + typeof objectReturned + " = " + JSON.stringify(objectReturned));
+          .then((objectReturned) => {
+            logger.debug('[DAO] [findOne] [OK] objectReturned:' + typeof objectReturned + ' = ' + JSON.stringify(objectReturned));
             return resolve(objectReturned);
           })
-          .catch(errorReturned => {
-            logger.error('[DAO] [findOne] [FAILED] errorReturned:' + typeof errorReturned + " = " + JSON.stringify(errorReturned));
+          .catch((errorReturned) => {
+            logger.error('[DAO] [findOne] [FAILED] errorReturned:' + typeof errorReturned + ' = ' + JSON.stringify(errorReturned));
             return reject(errorReturned);
           });
       });
     });
-  };
+  }
 
   static findOneAndRemove(id) {
     return new Promise((resolve, reject) => {
@@ -156,17 +155,17 @@ class ContractDAO {
       ContractMongoRequester.findOneAndRemove({id}, (err, contract) => {
         // Use errorManager to return appropriate dao errors
         DAOErrorManager.handleErrorOrNullObject(err, contract)
-          .then(objectReturned => {
-            logger.debug('[DAO] [findOneAndRemove] [OK] objectReturned:' + typeof objectReturned + " = " + JSON.stringify(objectReturned));
+          .then((objectReturned) => {
+            logger.debug('[DAO] [findOneAndRemove] [OK] objectReturned:' + typeof objectReturned + ' = ' + JSON.stringify(objectReturned));
             return resolve(objectReturned);
           })
-          .catch(errorReturned => {
-            logger.error('[DAO] [findOneAndRemove] [FAILED] errorReturned:' + typeof errorReturned + " = " + JSON.stringify(errorReturned));
+          .catch((errorReturned) => {
+            logger.error('[DAO] [findOneAndRemove] [FAILED] errorReturned:' + typeof errorReturned + ' = ' + JSON.stringify(errorReturned));
             return reject(errorReturned);
           });
       });
     });
-  };
+  }
 
   static findOneAndUpdateToSentContract(contractId, rawData, documentId) {
     return new Promise((resolve, reject) => {
@@ -183,7 +182,7 @@ class ContractDAO {
         logger.error('[ContractDAO::findOneAndUpdateToSentContract] [FAILED] : documentId undefined');
         reject(MISSING_MANDATORY_PARAM_ERROR);
       }
-  
+
       // Define automatic values
       const lastModificationDate = Date.now();
 
@@ -201,24 +200,23 @@ class ContractDAO {
           lastModificationDate: lastModificationDate
         },
         $push: {
-          history: { date: lastModificationDate, action: "SENT" }
+          history: {date: lastModificationDate, action: 'SENT'}
         }
-      };      
+      };
 
       // Launch database request
       ContractMongoRequester.findOneAndUpdate(condition, updateCommand, (err, contract) => {
         DAOErrorManager.handleErrorOrNullObject(err, contract)
-          .then(objectReturned => {
+          .then((objectReturned) => {
             resolve(objectReturned);
           })
-          .catch(errorReturned => {
-            logger.error('[ContractDAO::findOneAndUpdateToSentContract] [FAILED] errorReturned:'+typeof errorReturned+" = "+JSON.stringify(errorReturned));
+          .catch((errorReturned) => {
+            logger.error('[ContractDAO::findOneAndUpdateToSentContract] [FAILED] errorReturned:' + typeof errorReturned + ' = ' + JSON.stringify(errorReturned));
             reject(errorReturned);
           });
       });
     });
-  };
-
+  }
 }
 
 module.exports = ContractDAO;

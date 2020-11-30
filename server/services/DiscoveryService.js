@@ -5,12 +5,12 @@ const blockchainAdapterConnection = new BlockchainAdapterProvider();
 
 
 /**
-* Show details for a specific Msp
-*
-* mspId String Name of a Msp
-* returns String
-* */
-const getDiscoveryMsp = ({ mspId }) => new Promise(
+ * Show details for a specific Msp
+ *
+ * @param {String} mspId Id of the MSP to return
+ * @return {Promise<ServiceResponse>}
+ */
+const getDiscoveryMsp = ({mspId}) => new Promise(
   async (resolve, reject) => {
     try {
       const getDiscoveryMSPsResponse = await blockchainAdapterConnection.discovery(mspId);
@@ -20,11 +20,12 @@ const getDiscoveryMsp = ({ mspId }) => new Promise(
     }
   },
 );
+
 /**
-* Show a list of all Msps
-*
-* returns String
-* */
+ * Show a list of all Msps
+ *
+ * @return {Promise<ServiceResponse>}
+ */
 const getDiscoveryMsps = () => new Promise(
   async (resolve, reject) => {
     try {

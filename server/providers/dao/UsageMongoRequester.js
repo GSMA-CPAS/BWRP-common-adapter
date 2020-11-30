@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 const UsageMongoModel = require('./UsageMongoModel');
 
 class UsageMongoRequester {
-
   static defineUsageId() {
     return UsageMongoRequester.defineRandomizedObjectId();
   }
@@ -34,7 +33,7 @@ class UsageMongoRequester {
   }
 
   static findAll(conditions, next) {
-    UsageMongoModel.find(conditions, { _id: false, __v: false, body: false, rawData: false, history: false }, { sort:{creationDate: -1}},(err, usages) => {
+    UsageMongoModel.find(conditions, {_id: false, __v: false, body: false, rawData: false, history: false}, {sort: {creationDate: -1}}, (err, usages) => {
       if (err) {
         next(err);
       }
@@ -50,12 +49,12 @@ class UsageMongoRequester {
       if (usage) {
         return next(null, usage);
       }
-      return next({code:404, name:"NotFound"}, null);
+      return next({code: 404, name: 'NotFound'}, null);
     });
   }
 
   static findOneAndUpdate(conditions, updateObject, next) {
-    UsageMongoModel.findOneAndUpdate(conditions, updateObject, { new: true, runValidators: true }, (err, usage) => {
+    UsageMongoModel.findOneAndUpdate(conditions, updateObject, {new: true, runValidators: true}, (err, usage) => {
       if (err) {
         next(err);
       }

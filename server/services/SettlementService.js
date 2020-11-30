@@ -2,13 +2,13 @@
 const Service = require('./Service');
 
 /**
-* Get Settlement Object by its Id
-*
-* contractId String The contract Id
-* settlementId String The Settlement Id
-* returns Object
-* */
-const getSettlementById = ({ contractId, settlementId }) => new Promise(
+ * Get Settlement Object by its Id
+ *
+ * @param {String} contractId The contract Id
+ * @param {String} settlementId The Settlement Id
+ * @return {Promise<ServiceResponse>}
+ */
+const getSettlementById = ({contractId, settlementId}) => new Promise(
   async (resolve, reject) => {
     try {
       resolve(Service.successResponse({
@@ -23,13 +23,14 @@ const getSettlementById = ({ contractId, settlementId }) => new Promise(
     }
   },
 );
+
 /**
-* Get All Settlement of a given Contract
-*
-* contractId String The contract Id
-* returns String
-* */
-const getSettlements = ({ contractId }) => new Promise(
+ * Get All Settlement of a given Contract
+ *
+ * @param {String} contractId The contract Id
+ * @return {Promise<ServiceResponse>}
+ */
+const getSettlements = ({contractId}) => new Promise(
   async (resolve, reject) => {
     try {
       resolve(Service.successResponse({

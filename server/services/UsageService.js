@@ -8,14 +8,14 @@ const errorUtils = require('../utils/errorUtils');
 /**
  * Create a new Usage
  *
- * contractId String The contract Id
- * body UsageRequest Usage Object Payload
- * returns UsageResponse
- * */
+ * @param {String} url The endpoint url
+ * @param {String} contractId The contract Id
+ * @param {Object} body The Usage Object Payload
+ * @return {Promise<ServiceResponse>}
+ */
 const createUsage = ({url, contractId, body}) => new Promise(
   async (resolve, reject) => {
     try {
-
       const getContractByIdResp = await LocalStorageProvider.getContract(contractId);
       if (!((getContractByIdResp.state == 'SENT') || (getContractByIdResp.state == 'RECEIVED') || (getContractByIdResp.state == 'SIGNED'))) {
         reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_CREATE_USAGE_ON_CONTRACT_ONLY_ALLOWED_IN_STATE_SENT_SIGNED_OR_RECEIVED));
@@ -29,20 +29,19 @@ const createUsage = ({url, contractId, body}) => new Promise(
         'Content-Location': `${url.replace(/\/$/, '')}/${createUsageResp.id}`
       };
       resolve(Service.successResponse(returnedResponse, 201, returnedHeaders));
-
     } catch (e) {
       reject(Service.rejectResponse(e));
     }
-
   },
 );
+
 /**
  * Delete a Usage By its Id
  *
- * contractId String The contract Id
- * usageId String The Usage Id
- * returns UsageResponse
- * */
+ * @param {String} contractId The contract Id
+ * @param {String} usageId The Usage Id
+ * @return {Promise<ServiceResponse>}
+ */
 const deleteUsageById = ({contractId, usageId}) => new Promise(
   async (resolve, reject) => {
     try {
@@ -58,14 +57,17 @@ const deleteUsageById = ({contractId, usageId}) => new Promise(
     }
   },
 );
+
 /**
  * Generate the \"Settlement\" with local calculator and POST to Blochain adapter towards TargetMsp of the calculated response.
  *
- * contractId String The contract Id
- * usageId String The Usage Id
- * mode String Defaults to \"preview\" if not selected. Preview will only performs \"calculation\" and return the calculated settlement in response. if \"commit\", will create the settlement and Send it live to the Blockchain to the targetMsp. (optional)
- * returns Object
- * */
+ * @param {String} contractId The contract Id
+ * @param {String} usageId The Usage Id
+ * @param {String} mode Defaults to \"preview\" if not selected.
+ * Preview will only performs \"calculation\" and return the calculated settlement in response.
+ * if \"commit\", will create the settlement and Send it live to the Blockchain to the targetMsp. (optional)
+ * @return {Promise<ServiceResponse>}
+ */
 const generateUsageById = ({contractId, usageId, mode}) => new Promise(
   async (resolve, reject) => {
     try {
@@ -82,13 +84,14 @@ const generateUsageById = ({contractId, usageId, mode}) => new Promise(
     }
   },
 );
+
 /**
  * Get Usage Object by its Id
  *
- * contractId String The contract Id
- * usageId String The Usage Id
- * returns UsageResponse
- * */
+ * @param {String} contractId The contract Id
+ * @param {String} usageId The Usage Id
+ * @return {Promise<ServiceResponse>}
+ */
 const getUsageById = ({contractId, usageId}) => new Promise(
   async (resolve, reject) => {
     try {
@@ -98,7 +101,6 @@ const getUsageById = ({contractId, usageId}) => new Promise(
       }
       const returnedResponse = UsageMapper.getResponseBodyForGetUsage(getUsageByIdResp);
       resolve(Service.successResponse(returnedResponse));
-
     } catch (e) {
       reject(Service.rejectResponse(e));
     }
@@ -107,9 +109,9 @@ const getUsageById = ({contractId, usageId}) => new Promise(
 /**
  * Get All usage of a given Contract
  *
- * contractId String The contract Id
- * returns String
- * */
+ * @param {String} contractId The contract Id
+ * @return {Promise<ServiceResponse>}
+ */
 const getUsages = ({contractId}) => new Promise(
   async (resolve, reject) => {
     try {
@@ -121,13 +123,14 @@ const getUsages = ({contractId}) => new Promise(
     }
   },
 );
+
 /**
  * Set State to \"SEND\" and POST to Blochain adapter towards TargetMsp of the Usage
  *
- * contractId String The contract Id
- * usageId String The Usage Id
- * returns UsageResponse
- * */
+ * @param {String} contractId The contract Id
+ * @param {String} usageId The Usage Id
+ * @return {Promise<ServiceResponse>}
+ */
 const sendUsageById = ({contractId, usageId}) => new Promise(
   async (resolve, reject) => {
     try {
@@ -143,17 +146,17 @@ const sendUsageById = ({contractId, usageId}) => new Promise(
     }
   },
 );
+
 /**
  * Update Usage Object by its Id
  *
- * contractId String The contract Id
- * usageId String The Usage Id
- * body UsageRequest Usage Object Payload
- * returns UsageResponse
- * */
+ * @param {String} contractId The contract Id
+ * @param {String} usageId The Usage Id
+ * @param {String} body The Usage Object Payload
+ * @return {Promise<ServiceResponse>}
+ */
 const updateUsageById = ({contractId, usageId, body}) => new Promise(
   async (resolve, reject) => {
-
     try {
       const getUsageByIdResp = await LocalStorageProvider.getUsage(usageId);
       if (getUsageByIdResp.contractId != contractId) {
@@ -161,14 +164,11 @@ const updateUsageById = ({contractId, usageId, body}) => new Promise(
       } else if ((body.state !== undefined) && !((getUsageByIdResp.state == 'DRAFT') && (body.state == 'DRAFT'))) {
         reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_USAGE_UPDATE_ONLY_ALLOWED_IN_STATE_DRAFT));
       } else {
-        const usageToUpdate = UsageMapper.getUsageFromPutUsagesRequest(getUsageByIdResp, body)
+        const usageToUpdate = UsageMapper.getUsageFromPutUsagesRequest(getUsageByIdResp, body);
         const updateUsageResp = await LocalStorageProvider.updateUsage(usageToUpdate);
-
         const returnedResponse = UsageMapper.getResponseBodyForGetUsage(updateUsageResp);
         resolve(Service.successResponse(returnedResponse, 200));
       }
-
-
     } catch (e) {
       reject(Service.rejectResponse(e));
     }

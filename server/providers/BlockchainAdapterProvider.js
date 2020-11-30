@@ -6,7 +6,9 @@ const logger = require('../logger');
 const errorUtils = require('../utils/errorUtils');
 
 const BLOCKCHAIN_ADAPTER_AXIOS_CONFIG = {
-  transformResponse: [(data) => {return getAsObject(data);}]
+  transformResponse: [(data) => {
+    return getAsObject(data);
+  }]
 };
 
 const axiosInstance = axios.create(BLOCKCHAIN_ADAPTER_AXIOS_CONFIG);
@@ -18,16 +20,16 @@ const getAsObject = (value) => {
   } else {
     try {
       returnedObject = JSON.parse(value);
-    } catch(e) {
+    } catch (e) {
       throw errorUtils.ERROR_BLOCKCHAIN_ADAPTER_RESPONSE_PARSING_ERROR;
     }
   }
   return returnedObject;
-}
+};
 
-const throwDefaultCommonInternalError = (error, loggerHeader = "[BlockchainAdapterProvider::throwDefaultCommonInternalError]") => {
+const throwDefaultCommonInternalError = (error, loggerHeader = '[BlockchainAdapterProvider::throwDefaultCommonInternalError]') => {
   if (error.response) {
-    logger.error(`${loggerHeader} response in error : `, { status: error.response.status, data: error.response.data, headers: error.response.headers});
+    logger.error(`${loggerHeader} response in error : `, {status: error.response.status, data: error.response.data, headers: error.response.headers});
     throw errorUtils.ERROR_BLOCKCHAIN_ADAPTER_RESPONSE_UNEXPECTED_ERROR;
   } else if (error.request) {
     logger.error(`${loggerHeader} request in error: `, error.request);
@@ -39,17 +41,16 @@ const throwDefaultCommonInternalError = (error, loggerHeader = "[BlockchainAdapt
     logger.error(`${loggerHeader} error: `, error);
     throw errorUtils.ERROR_BLOCKCHAIN_ADAPTER_REQUEST_ERROR;
   }
-}
+};
 
 class BlockchainAdapterProvider {
-
   constructor() {
   }
 
   /**
    *
-   * @param msp
-   * @returns {Promise<string>}
+   * @param {String} msp
+   * @return {Promise<[string]|object>}
    */
   async discovery(msp) {
     try {
@@ -63,7 +64,7 @@ class BlockchainAdapterProvider {
       return response.data;
     } catch (error) {
       if (msp && error.response && error.response.data && (error.response.data.message === `MSP '${msp}' not found.`)) {
-        logger.error('[BlockchainAdapterProvider::discovery] response not found : ', { status: error.response.status, data: error.response.data, headers: error.response.headers});
+        logger.error('[BlockchainAdapterProvider::discovery] response not found : ', {status: error.response.status, data: error.response.data, headers: error.response.headers});
         throw errorUtils.ERROR_BLOCKCHAIN_ADAPTER_RESPONSE_NOT_FOUND_ERROR;
       } else {
         throwDefaultCommonInternalError(error, '[BlockchainAdapterProvider::discovery]');
@@ -73,13 +74,13 @@ class BlockchainAdapterProvider {
 
   /**
    *
-   * @returns {Promise<string>}
+   * @return {Promise<string>}
    */
   async getPrivateDocumentIDs() {
     try {
-        const response = await axiosInstance.get(config.BLOCKCHAIN_ADAPTER_URL + '/private-documents');
-        logger.debug(`[BlockchainAdapterProvider::getPrivateDocumentIDs] response data:${typeof response.data} = ${JSON.stringify(response.data)}`);
-        return response.data;
+      const response = await axiosInstance.get(config.BLOCKCHAIN_ADAPTER_URL + '/private-documents');
+      logger.debug(`[BlockchainAdapterProvider::getPrivateDocumentIDs] response data:${typeof response.data} = ${JSON.stringify(response.data)}`);
+      return response.data;
     } catch (error) {
       throwDefaultCommonInternalError(error, '[BlockchainAdapterProvider::getPrivateDocumentIDs]');
     }
@@ -87,14 +88,14 @@ class BlockchainAdapterProvider {
 
   /**
    *
-   * @param documentId
-   * @returns {Promise<string>}
+   * @param {String} documentId
+   * @return {Promise<string>}
    */
   async getPrivateDocument(documentId) {
     try {
       const response = await axiosInstance.get(config.BLOCKCHAIN_ADAPTER_URL + '/private-documents/' + documentId);
       logger.debug(`[BlockchainAdapterProvider::getPrivateDocument] response data:${typeof response.data} = ${JSON.stringify(response.data)}`);
-      return response.data;    
+      return response.data;
     } catch (error) {
       if (documentId && error.response && error.response.data && (error.response.data.message === `DOCUMENT '${documentId}' not found.`)) {
         throw errorUtils.ERROR_BLOCKCHAIN_ADAPTER_RESPONSE_NOT_FOUND_ERROR;
@@ -106,8 +107,8 @@ class BlockchainAdapterProvider {
 
   /**
    *
-   * @param documentId
-   * @returns {Promise<string>}
+   * @param {String} documentId
+   * @return {Promise<string>}
    */
   async deletePrivateDocument(documentId) {
     try {
@@ -125,9 +126,9 @@ class BlockchainAdapterProvider {
 
   /**
    *
-   * @param toMSP
-   * @param dataBase64
-   * @returns {Promise<string>}
+   * @param {String} toMSP
+   * @param {String} dataBase64
+   * @return {Promise<string>}
    */
   async uploadPrivateDocument(toMSP, dataBase64) {
     try {
@@ -151,9 +152,9 @@ class BlockchainAdapterProvider {
 
   /**
    *
-   * @param documentId
-   * @param msp
-   * @returns {Promise<string>}
+   * @param {String} documentId
+   * @param {String} msp
+   * @return {Promise<string>}
    */
   async getSignatures(documentId, msp) {
     try {
@@ -171,11 +172,11 @@ class BlockchainAdapterProvider {
 
   /**
    *
-   * @param documentId
-   * @param certificate
-   * @param algorithm
-   * @param signature
-   * @returns {Promise<string>}
+   * @param {String} documentId
+   * @param {String} certificate
+   * @param {String} algorithm
+   * @param {String} signature
+   * @return {Promise<string>}
    */
   async uploadSignature(documentId, certificate, algorithm, signature) {
     try {
@@ -200,16 +201,16 @@ class BlockchainAdapterProvider {
 
   /**
    *
-   * @param callbackUrl
-   * @param eventName
-   * @returns {Promise<string>}
+   * @param {String} eventName
+   * @param {String} callbackUrl
+   * @return {Promise<string>}
    */
   async webhookSubscribe(eventName, callbackUrl) {
     try {
       const response = await axiosInstance.post(config.BLOCKCHAIN_ADAPTER_URL + '/webhooks/subscribe', {
         json: {
-          "eventName": eventName,
-          "callbackUrl": callbackUrl
+          'eventName': eventName,
+          'callbackUrl': callbackUrl
         },
         responseType: 'text'
       });
@@ -222,7 +223,7 @@ class BlockchainAdapterProvider {
 
   /**
    *
-   * @returns {Promise<void>}
+   * @return {Promise<void>}
    */
   async initialize() {
     try {
