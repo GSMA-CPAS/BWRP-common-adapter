@@ -11,12 +11,13 @@ const logger = require('../logger');
 const errorUtils = require('../utils/errorUtils');
 
 /**
-* Create a new Contract
-*
-* body ContractRequest Contract Object Payload
-* returns ContractResponse
-* */
-const createContract = ({ url, body }) => new Promise(
+ * Create a new Contract
+ *
+ * @param {String} url
+ * @param {Object} body
+ * @return {Promise<ServiceResponse>}
+ */
+const createContract = ({url, body}) => new Promise(
   async (resolve, reject) => {
     try {
       const contractToCreate = ContractMapper.getContractFromPostContractsRequest(body);
@@ -33,12 +34,12 @@ const createContract = ({ url, body }) => new Promise(
 );
 
 /**
-* Delete a Contract By its Id
-*
-* contractId String The contract Id
-* returns ContractResponse
-* */
-const deleteContractById = ({ contractId }) => new Promise(
+ * Delete a Contract By its Id
+ *
+ * @param {String} contractId The contract Id
+ * @return {Promise<ServiceResponse>}
+ */
+const deleteContractById = ({contractId}) => new Promise(
   async (resolve, reject) => {
     try {
       const deleteContractByIdResp = await LocalStorageProvider.deleteContract(contractId);
@@ -49,14 +50,15 @@ const deleteContractById = ({ contractId }) => new Promise(
     }
   },
 );
+
 /**
-* Get a Contract By its Id
-*
-* contractId String The contract Id
-* format String Response format, defaults to JSON if not passed. (optional)
-* returns oneOf<ContractResponse,RAWContractResponse>
-* */
-const getContractById = ({ contractId, format }) => new Promise(
+ * Get a Contract By its Id
+ *
+ * @param {String} contractId The contract Id
+ * @param {String} format Response format, defaults to JSON if not passed. (optional)
+ * @return {Promise<ServiceResponse>}
+ */
+const getContractById = ({contractId, format}) => new Promise(
   async (resolve, reject) => {
     // TODO: if format == raw
     try {
@@ -73,11 +75,12 @@ const getContractById = ({ contractId, format }) => new Promise(
     }
   },
 );
+
 /**
-* Show a list of all Contracts
-*
-* returns String
-* */
+ * Show a list of all Contracts
+ *
+ * @return {Promise<ServiceResponse>}
+ */
 const getContracts = () => new Promise(
   async (resolve, reject) => {
     try {
@@ -89,13 +92,14 @@ const getContracts = () => new Promise(
     }
   },
 );
+
 /**
-* Set State to \"SEND\" and POST to Blochain adapter towards TargetMsp of the Contract
-*
-* contractId String The contract Id
-* returns ContractResponse
-* */
-const sendContractById = ({ contractId }) => new Promise(
+ * Set State to \"SEND\" and POST to Blochain adapter towards TargetMsp of the Contract
+ *
+ * @param {String} contractId The contract Id
+ * @return {Promise<ServiceResponse>}
+ */
+const sendContractById = ({contractId}) => new Promise(
   async (resolve, reject) => {
     try {
       const getContractByIdResp = await LocalStorageProvider.getContract(contractId);
@@ -111,14 +115,15 @@ const sendContractById = ({ contractId }) => new Promise(
     }
   },
 );
+
 /**
-* Update existing Contract
-*
-* contractId String The contract Id
-* body ContractRequest Contract Object Payload
-* returns ContractResponse
-* */
-const updateContractById = ({ contractId, body }) => new Promise(
+ * Update existing Contract
+ *
+ * @param {String} contractId The contract Id
+ * @param {Object} body The Contract Object Payload
+ * @return {Promise<ServiceResponse>}
+ */
+const updateContractById = ({contractId, body}) => new Promise(
   async (resolve, reject) => {
     if ((body.state !== undefined) && (body.state !== 'DRAFT')) {
       reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_CONTRACT_UPDATE_ONLY_ALLOWED_IN_STATE_DRAFT));

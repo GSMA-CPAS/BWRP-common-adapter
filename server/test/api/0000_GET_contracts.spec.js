@@ -1,7 +1,9 @@
+/* eslint-disable no-unused-vars */
 const testsUtils = require('../tools/testsUtils');
 const testsDbUtils = require('../tools/testsDbUtils');
 const debug = require('debug')('spec:it');
 const debugSetup = require('debug')('spec:setup');
+/* eslint-enable no-unused-vars */
 
 const chai = require('chai');
 const expect = require('chai').expect;
@@ -9,29 +11,28 @@ const expect = require('chai').expect;
 const globalVersion = '/api/v1';
 const route = '/contracts/';
 
-const DATE_REGEX = new RegExp('^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z$');
+const DATE_REGEX = testsUtils.getDateRegexp();
 
-describe("Tests GET " + route + " API OK", function () {
-
-  describe("Setup and Test GET " + route + " API without any contract in DB", function () {
-    before(done => {
+describe(`Tests GET ${route} API OK`, function() {
+  describe(`Setup and Test GET ${route} API without any contract in DB`, function() {
+    before((done) => {
       debugSetup('==> remove all contracts in db');
       testsDbUtils.removeAllContracts({})
-        .then(removeAllContractsResp => {
+        .then((removeAllContractsResp) => {
           debugSetup('All contracts in db are removed : ', removeAllContractsResp);
           debugSetup('==> done!');
           done();
         })
-        .catch(removeAllContractsError => {
+        .catch((removeAllContractsError) => {
           debugSetup('Error removing contracts in db : ', removeAllContractsError);
           debugSetup('==> failed!');
           done(removeAllContractsError);
         });
     });
 
-    it('Get contracts OK without any contract in DB', function (done) {
+    it(`Get contracts OK without any contract in DB`, function(done) {
       try {
-        let path = globalVersion + route;
+        const path = globalVersion + route;
         chai.request(testsUtils.getServer())
           .get(`${path}`)
           .end((error, response) => {
@@ -52,19 +53,17 @@ describe("Tests GET " + route + " API OK", function () {
     });
   });
 
-
-  describe("Setup and Test GET " + route + " API with 2 contracts in DB", function () {
-
+  describe(`Setup and Test GET ${route} API with 2 contracts in DB`, function() {
     const contract1 = {
-      name: "Contract name between A1 and B1",
+      name: 'Contract name between A1 and B1',
       state: 'DRAFT',
       type: 'contract',
       version: '1.1.0',
       fromMsp: {
-        mspId: "A1"
+        mspId: 'A1'
       },
       toMsp: {
-        mspId: "B1"
+        mspId: 'B1'
       },
       body: {
         bankDetails: {
@@ -79,27 +78,27 @@ describe("Tests GET " + route + " API OK", function () {
             currency: null
           }
         },
-        discountModels: "someData",
+        discountModels: 'someData',
         generalInformation: {
-          name: "test1",
-          type: "Normal",
-          endDate: "2021-01-01T00:00:00.000Z",
-          startDate: "2020-12-01T00:00:00.000Z"
+          name: 'test1',
+          type: 'Normal',
+          endDate: '2021-01-01T00:00:00.000Z',
+          startDate: '2020-12-01T00:00:00.000Z'
         }
       },
-      rawData: "Ctr_raw-data-1"
+      rawData: 'Ctr_raw-data-1'
     };
 
     const contract2 = {
-      name: "Contract name between A1 and C1",
+      name: 'Contract name between A1 and C1',
       state: 'DRAFT',
       type: 'contract',
       version: '1.3.1',
       fromMsp: {
-        mspId: "A1"
+        mspId: 'A1'
       },
       toMsp: {
-        mspId: "C3"
+        mspId: 'C3'
       },
       body: {
         bankDetails: {
@@ -114,35 +113,35 @@ describe("Tests GET " + route + " API OK", function () {
             currency: null
           }
         },
-        discountModels: "someData",
+        discountModels: 'someData',
         generalInformation: {
-          name: "test1",
-          type: "Normal",
-          endDate: "2021-01-01T00:00:00.000Z",
-          startDate: "2020-12-01T00:00:00.000Z"
+          name: 'test1',
+          type: 'Normal',
+          endDate: '2021-01-01T00:00:00.000Z',
+          startDate: '2020-12-01T00:00:00.000Z'
         }
       },
-      rawData: "Ctr_raw-data-2"
+      rawData: 'Ctr_raw-data-2'
     };
 
-    before(done => {
+    before((done) => {
       debugSetup('==> init db with 2 contracts');
       testsDbUtils.initDbWithContracts([contract1, contract2])
-        .then(initDbWithContractsResp => {
-          debugSetup('The db is initialized with 2 contracts : ', initDbWithContractsResp.map(c => c.id));
+        .then((initDbWithContractsResp) => {
+          debugSetup('The db is initialized with 2 contracts : ', initDbWithContractsResp.map((c) => c.id));
           debugSetup('==> done!');
           done();
         })
-        .catch(initDbWithContractsError => {
+        .catch((initDbWithContractsError) => {
           debugSetup('Error initializing the db content : ', initDbWithContractsError);
           debugSetup('==> failed!');
           done(initDbWithContractsError);
         });
     });
 
-    it('Get contracts OK with 2 contracts in DB', function (done) {
+    it('Get contracts OK with 2 contracts in DB', function(done) {
       try {
-        let path = globalVersion + route;
+        const path = globalVersion + route;
         chai.request(testsUtils.getServer())
           .get(`${path}`)
           .end((error, response) => {
@@ -156,7 +155,7 @@ describe("Tests GET " + route + " API OK", function () {
 
             let contract1IsFound = false;
             let contract2IsFound = false;
-            response.body.forEach(contractInBody => {
+            response.body.forEach((contractInBody) => {
               let contract = undefined;
               if (contractInBody.contractId === contract1.id) {
                 contract1IsFound = true;
@@ -166,22 +165,22 @@ describe("Tests GET " + route + " API OK", function () {
                 contract2IsFound = true;
                 contract = contract2;
               }
-              expect(Object.keys(contractInBody)).have.members(["contractId", "state", "creationDate", "lastModificationDate", "header"]);
+              expect(Object.keys(contractInBody)).have.members(['contractId', 'state', 'creationDate', 'lastModificationDate', 'header']);
               expect(contractInBody).to.have.property('contractId', contract.id);
               expect(contractInBody).to.have.property('state', contract.state);
               expect(contractInBody).to.have.property('creationDate').that.match(DATE_REGEX);
               expect(contractInBody).to.have.property('lastModificationDate').that.match(DATE_REGEX);
               expect(contractInBody).to.have.property('header').that.is.an('object');
-              expect(Object.keys(contractInBody.header)).have.members(["name", "type", "version", "fromMsp", "toMsp"]);
+              expect(Object.keys(contractInBody.header)).have.members(['name', 'type', 'version', 'fromMsp', 'toMsp']);
               expect(contractInBody.header).to.have.property('name', contract.name);
               expect(contractInBody.header).to.have.property('type', contract.type);
               expect(contractInBody.header).to.have.property('version', contract.version);
               expect(contractInBody.header).to.have.property('fromMsp').that.is.an('object');
-              expect(Object.keys(contractInBody.header.fromMsp)).have.members(["mspId"]);
+              expect(Object.keys(contractInBody.header.fromMsp)).have.members(['mspId']);
               expect(contractInBody.header.fromMsp).to.have.property('mspId', contract.fromMsp.mspId);
               expect(contractInBody.header).to.have.property('toMsp').that.is.an('object');
-              expect(Object.keys(contractInBody.header.toMsp)).have.members(["mspId"]);
-              expect(contractInBody.header.toMsp).to.have.property('mspId', contract.toMsp.mspId);  
+              expect(Object.keys(contractInBody.header.toMsp)).have.members(['mspId']);
+              expect(contractInBody.header.toMsp).to.have.property('mspId', contract.toMsp.mspId);
             });
             expect(contract1IsFound).to.be.true;
             expect(contract2IsFound).to.be.true;
@@ -195,6 +194,4 @@ describe("Tests GET " + route + " API OK", function () {
       }
     });
   });
-
-
 });

@@ -2,13 +2,13 @@
 const Service = require('./Service');
 
 /**
-* Get Signature Object by its Id
-*
-* contractId String The contract Id
-* signatureId String The Signature Id
-* returns SignatureResponse
-* */
-const getSignatureById = ({ contractId, signatureId }) => new Promise(
+ * Get Signature Object by its Id
+ *
+ * @param {String} contractId The contract Id
+ * @param {String} signatureId The Signature Id
+ * @return {Promise<ServiceResponse>}
+ */
+const getSignatureById = ({contractId, signatureId}) => new Promise(
   async (resolve, reject) => {
     try {
       resolve(Service.successResponse({
@@ -23,13 +23,14 @@ const getSignatureById = ({ contractId, signatureId }) => new Promise(
     }
   },
 );
+
 /**
-* Get All signatures of a given Contract
-*
-* contractId String The contract Id
-* returns String
-* */
-const getSignatures = ({ contractId }) => new Promise(
+ * Get All signatures of a given Contract
+ *
+ * @param {String} contractId The contract Id
+ * @return {Promise<ServiceResponse>}
+ */
+const getSignatures = ({contractId}) => new Promise(
   async (resolve, reject) => {
     try {
       resolve(Service.successResponse({
@@ -43,15 +44,16 @@ const getSignatures = ({ contractId }) => new Promise(
     }
   },
 );
+
 /**
-* Update Signature Object by its Id
-*
-* contractId String The contract Id
-* signatureId String The Signature Id
-* body SignatureRequest Signature Object Payload
-* returns SignatureResponse
-* */
-const updateSignatureById = ({ contractId, signatureId, body }) => new Promise(
+ * Update Signature Object by its Id
+ *
+ * @param {String} contractId The contract Id
+ * @param {String} signatureId The Signature Id
+ * @param {Object} body The Signature Object Payload
+ * @return {Promise<ServiceResponse>}
+ */
+const updateSignatureById = ({contractId, signatureId, body}) => new Promise(
   async (resolve, reject) => {
     try {
       resolve(Service.successResponse({

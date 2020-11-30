@@ -5,28 +5,27 @@ const logger = require('../../logger');
 const errorUtils = require('../../utils/errorUtils');
 
 class DAOErrorManager {
-
-  static handleErrorOrNullObject = function(err, object) {
+  static handleErrorOrNullObject(err, object) {
     return new Promise((resolve, reject) => {
       DAOErrorManager.handleError(err, object)
-        .then(objectReturned => {
+        .then((objectReturned) => {
           if (!objectReturned) {
             logger.error('[DAO] [handleErrorOrNullObject] returned object is null');
             reject(errorUtils.ERROR_DAO_NOT_FOUND);
           } else {
-            resolve(objectReturned);    
+            resolve(objectReturned);
           }
         })
-        .catch(errorReturned => {
+        .catch((errorReturned) => {
           reject(errorReturned);
-        })
+        });
     });
-  };
-    
-  static handleError = function(err, object) {
+  }
+
+  static handleError(err, object) {
     return new Promise((resolve, reject) => {
       if (err) {
-        logger.error('[DAO] [handleError] err:'+typeof err+" = "+JSON.stringify(err));
+        logger.error('[DAO] [handleError] err:' + typeof err + ' = ' + JSON.stringify(err));
         if (err.name === 'NotFound' && err.code === 404) {
           reject(errorUtils.ERROR_DAO_NOT_FOUND);
         } else if (err.name === 'MongoError' && err.code === 11000) {
@@ -38,8 +37,7 @@ class DAOErrorManager {
         resolve(object);
       }
     });
-  };
-
+  }
 }
 
 module.exports = DAOErrorManager;

@@ -1,6 +1,5 @@
 'use strict';
 
-const config = require('../config');
 const logger = require('../logger');
 
 const ContractDAO = require('./dao/ContractDAO');
@@ -8,10 +7,9 @@ const UsageDAO = require('./dao/UsageDAO');
 
 
 class LocalStorageProvider {
-
   /**
    *
-   * @returns {Promise<[string]>}
+   * @return {Promise<[string]>}
    */
   static async getContracts() {
     try {
@@ -24,7 +22,8 @@ class LocalStorageProvider {
 
   /**
    *
-   * @returns {Promise<object>}
+   * @param {Object} contract
+   * @return {Promise<object>}
    */
   static async createContract(contract) {
     try {
@@ -37,7 +36,8 @@ class LocalStorageProvider {
 
   /**
    *
-   * @returns {Promise<object>}
+   * @param {Object} contract
+   * @return {Promise<object>}
    */
   static async updateContract(contract) {
     try {
@@ -50,7 +50,8 @@ class LocalStorageProvider {
 
   /**
    *
-   * @returns {Promise<object>}
+   * @param {String} id
+   * @return {Promise<object>}
    */
   static async getContract(id) {
     try {
@@ -63,7 +64,8 @@ class LocalStorageProvider {
 
   /**
    *
-   * @returns {Promise<object>}
+   * @param {String} id
+   * @return {Promise<object>}
    */
   static async deleteContract(id) {
     try {
@@ -76,7 +78,10 @@ class LocalStorageProvider {
 
   /**
    *
-   * @returns {Promise<object>}
+   * @param {String} contractId
+   * @param {String} rawData
+   * @param {String} documentId
+   * @return {Promise<object>}
    */
   static async updateSentContract(contractId, rawData, documentId) {
     try {
@@ -87,14 +92,14 @@ class LocalStorageProvider {
     }
   }
 
-
   /**
    *
-   * @returns {Promise<[string]>}
+   * @param {String} contractId
+   * @return {Promise<[string]>}
    */
-  static async getUsages(contractID) {
+  static async getUsages(contractId) {
     try {
-      return await UsageDAO.findAll(contractID);
+      return await UsageDAO.findAll(contractId);
     } catch (error) {
       logger.error('[LocalStorageProvider::getUsages] failed to get usages - %s', error.message);
       throw error;
@@ -103,7 +108,8 @@ class LocalStorageProvider {
 
   /**
    *
-   * @returns {Promise<object>}
+   * @param {Object} usage
+   * @return {Promise<object>}
    */
   static async createUsage(usage) {
     try {
@@ -116,20 +122,22 @@ class LocalStorageProvider {
 
   /**
    *
-   * @returns {Promise<object>}
+   * @param {Object} usage
+   * @return {Promise<object>}
    */
   static async updateUsage(usage) {
     try {
       return await UsageDAO.update(usage);
     } catch (error) {
-      logger.error('[LocalStorageProvider::updateUsage] failed to update usage - '+  error.message);
+      logger.error('[LocalStorageProvider::updateUsage] failed to update usage - ', error.message);
       throw error;
     }
   }
 
   /**
    *
-   * @returns {Promise<object>}
+   * @param {String} id
+   * @return {Promise<object>}
    */
   static async getUsage(id) {
     try {
@@ -139,7 +147,6 @@ class LocalStorageProvider {
       throw error;
     }
   }
-
 }
 
 module.exports = LocalStorageProvider;
