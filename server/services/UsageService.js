@@ -45,15 +45,16 @@ const createUsage = ({url, contractId, body}) => new Promise(
 const deleteUsageById = ({contractId, usageId}) => new Promise(
   async (resolve, reject) => {
     try {
-      resolve(Service.successResponse({
-        contractId,
-        usageId,
-      }));
+      const getUsageByIdResp = await LocalStorageProvider.getUsage(usageId);
+      if (getUsageByIdResp.contractId != contractId) {
+        reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_PUT_USAGE_ON_NOT_LINKED_CONTRACT_RECEIVED));
+      } else {
+        const deleteUsageByIdResp = await LocalStorageProvider.deleteUsage(usageId);
+        const returnedResponse = UsageMapper.getResponseBodyForGetUsage(deleteUsageByIdResp);
+        resolve(Service.successResponse(returnedResponse));
+      }
     } catch (e) {
-      reject(Service.rejectResponse(
-        e.message || 'Invalid input',
-        e.status || 405,
-      ));
+      reject(Service.rejectResponse(e));
     }
   },
 );

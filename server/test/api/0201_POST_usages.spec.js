@@ -236,9 +236,12 @@ describe(`Tests POST ${route} API OK`, function() {
             expect(response).to.be.json;
             expect(response.body).to.exist;
             expect(response.body).to.be.an('object');
-            expect(Object.keys(response.body)).have.members(['usageId', 'state', 'creationDate', 'lastModificationDate', 'header', 'body', 'history']);
+
+            expect(Object.keys(response.body)).have.members(['usageId', 'contractId', 'state', 'creationDate', 'lastModificationDate', 'header', 'body']);
 
             expect(response.body).to.have.property('usageId').that.is.a('string');
+            expect(response.body).to.have.property('contractId').that.is.a('string');
+
             expect(response.body).to.have.property('state', 'DRAFT');
             expect(response.body).to.have.property('creationDate').that.is.a('string').and.match(DATE_REGEX);
             expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
@@ -254,11 +257,12 @@ describe(`Tests POST ${route} API OK`, function() {
             expect(response.body).to.have.property('body').that.is.an('object');
             expect(Object.keys(response.body.body)).have.members(['data']);
 
-            expect(response.body).to.have.property('history').that.is.an('array');
-            expect(response.body.history.length).to.equal(1);
-            expect(Object.keys(response.body.history[0])).have.members(['date', 'action']);
-            expect(response.body.history[0]).to.have.property('date').that.is.a('string').and.match(DATE_REGEX);
-            expect(response.body.history[0]).to.have.property('action', 'CREATION');
+
+            // expect(response.body).to.have.property('history').that.is.an('array');
+            // expect(response.body.history.length).to.equal(1);
+            // expect(Object.keys(response.body.history[0])).have.members(["date", "action"]);
+            // expect(response.body.history[0]).to.have.property('date').that.is.a('string').and.match(DATE_REGEX);
+            // expect(response.body.history[0]).to.have.property('action', 'CREATION');
 
             expect(response.headers).to.have.property('content-location', `${path.replace(/\/$/, '')}/${response.body.usageId}`);
 
@@ -307,7 +311,8 @@ describe(`Tests POST ${route} API OK`, function() {
             expect(response).to.be.json;
             expect(response.body).to.exist;
             expect(response.body).to.be.an('object');
-            expect(Object.keys(response.body)).have.members(['usageId', 'state', 'creationDate', 'lastModificationDate', 'header', 'body', 'history']);
+
+            expect(Object.keys(response.body)).have.members(['usageId', 'contractId', 'state', 'creationDate', 'lastModificationDate', 'header', 'body']);
 
             expect(response.body).to.have.property('usageId').that.is.a('string');
             expect(response.body).to.have.property('state', 'DRAFT');
@@ -324,11 +329,12 @@ describe(`Tests POST ${route} API OK`, function() {
             expect(response.body).to.have.property('body').that.is.an('object');
             expect(Object.keys(response.body.body)).have.members(['data']);
 
-            expect(response.body).to.have.property('history').that.is.an('array');
-            expect(response.body.history.length).to.equal(1);
-            expect(Object.keys(response.body.history[0])).have.members(['date', 'action']);
-            expect(response.body.history[0]).to.have.property('date').that.is.a('string').and.match(DATE_REGEX);
-            expect(response.body.history[0]).to.have.property('action', 'CREATION');
+
+            // expect(response.body).to.have.property('history').that.is.an('array');
+            // expect(response.body.history.length).to.equal(1);
+            // expect(Object.keys(response.body.history[0])).have.members(["date", "action"]);
+            // expect(response.body.history[0]).to.have.property('date').that.is.a('string').and.match(DATE_REGEX);
+            // expect(response.body.history[0]).to.have.property('action', 'CREATION');
 
             expect(response.headers).to.have.property('content-location', `${path.replace(/\/$/, '')}/${response.body.usageId}`);
 

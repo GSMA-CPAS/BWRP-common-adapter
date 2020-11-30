@@ -147,6 +147,21 @@ class LocalStorageProvider {
       throw error;
     }
   }
+
+
+  /**
+   *
+   * @param {String} id
+   * @return {Promise<object>}
+   */
+  static async deleteUsage(id) {
+    try {
+      return await UsageDAO.findOneAndRemove(id);
+    } catch (error) {
+      logger.error('[LocalStorageProvider::deleteUsage] failed to delete usage - ' + error.message);
+      throw error;
+    }
+  }
 }
 
 module.exports = LocalStorageProvider;

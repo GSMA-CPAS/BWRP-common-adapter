@@ -141,6 +141,30 @@ class UsageDAO {
       });
     });
   }
+
+  static findOneAndRemove(id) {
+    return new Promise((resolve, reject) => {
+      // Verify parameters
+      if (id === undefined) {
+        logger.error('[UsageDAO::findOneAndRemove] [FAILED] : id undefined');
+        reject(MISSING_MANDATORY_PARAM_ERROR);
+      }
+
+      // Launch database request
+      UsageMongoRequester.findOneAndRemove({id}, (err, usage) => {
+        // Use errorManager to return appropriate dao errors
+        DAOErrorManager.handleErrorOrNullObject(err, usage)
+          .then((objectReturned) => {
+            logger.debug('[DAO] [findOneAndRemove] [OK] objectReturned:' + typeof objectReturned + ' = ' + JSON.stringify(objectReturned));
+            return resolve(objectReturned);
+          })
+          .catch((errorReturned) => {
+            logger.error('[DAO] [findOneAndRemove] [FAILED] errorReturned:' + typeof errorReturned + ' = ' + JSON.stringify(errorReturned));
+            return reject(errorReturned);
+          });
+      });
+    });
+  }
 }
 
 module.exports = UsageDAO;

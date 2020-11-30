@@ -61,6 +61,18 @@ class UsageMongoRequester {
       return next(null, usage);
     });
   }
+
+  static findOneAndRemove(conditions, next) {
+    UsageMongoModel.findOneAndRemove(conditions, (err, usage) => {
+      if (err) {
+        next(err);
+      }
+      if (usage) {
+        return next(null, usage);
+      }
+      return next({code: 404, name: 'NotFound'}, null);
+    });
+  }
 }
 
 module.exports = UsageMongoRequester;

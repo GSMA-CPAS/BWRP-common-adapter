@@ -21,6 +21,7 @@ class UsageMapper {
   static getResponseBodyForGetUsage(usage) {
     const returnedResponseBody = {
       usageId: usage.id,
+      contractId: usage.contractId,
       header: {
         name: usage.name,
         type: usage.type,
@@ -29,7 +30,7 @@ class UsageMapper {
       },
       state: usage.state,
       body: usage.body,
-      history: usage.history,
+      // history: usage.history,
       creationDate: usage.creationDate,
       lastModificationDate: usage.lastModificationDate
     };
@@ -44,6 +45,7 @@ class UsageMapper {
       usages.forEach((usage) => {
         returnedResponseBody.push({
           usageId: usage.id,
+          contractId: usage.contractId,
           header: {
             name: usage.name,
             type: usage.type,

@@ -170,7 +170,7 @@ describe(`Tests GET ${route} API OK`, function() {
             expect(response).to.be.json;
             expect(response.body).to.exist;
             expect(response.body).to.be.an('object');
-            expect(Object.keys(response.body)).have.members(['usageId', 'header', 'state', 'body', 'history', 'creationDate', 'lastModificationDate']);
+            expect(Object.keys(response.body)).have.members(['usageId', 'contractId', 'header', 'state', 'body', 'creationDate', 'lastModificationDate']);
 
             expect(response.body).to.have.property('usageId', usage1.id);
             expect(response.body).to.have.property('state', usage1.state);

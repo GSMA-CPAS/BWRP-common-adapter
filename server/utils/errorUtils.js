@@ -140,9 +140,18 @@ class ErrorUtils {
   static ERROR_BUSINESS_PUT_USAGE_ON_NOT_LINKED_CONTRACT_RECEIVED = {
     code: 422,
     error: {
-      internalErrorCode: 2003,
+      internalErrorCode: 2005,
       message: 'Put usage not allowed',
       description: 'It\'s not allowed to put usage on wrong contract.'
+    }
+  };
+
+  static ERROR_BUSINESS_DELETE_USAGE_ON_NOT_LINKED_CONTRACT_RECEIVED = {
+    code: 422,
+    error: {
+      internalErrorCode: 2006,
+      message: 'Delete usage not allowed',
+      description: 'It\'s not allowed to delete usage on wrong contract.'
     }
   };
 
