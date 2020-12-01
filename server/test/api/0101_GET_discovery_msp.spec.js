@@ -20,7 +20,6 @@ describe(`Tests GET ${route} API OK`, function() {
       try {
         const mspId = 'TMUS';
 
-        nock.cleanAll();
         blockchainAdapterNock.get('/discovery/msps/'+mspId)
           .times(1)
           .reply((pathReceived, bodyReceived) => {
@@ -82,7 +81,6 @@ describe(`Tests GET ${route} API OK`, function() {
       try {
         const mspId = 'TMUSS';
 
-        nock.cleanAll();
         blockchainAdapterNock.get('/discovery/msps/'+mspId)
           .times(1)
           .reply((pathReceived, bodyReceived) => {
@@ -127,7 +125,6 @@ describe(`Tests GET ${route} API OK`, function() {
       try {
         const mspId = 'TMUS';
 
-        nock.cleanAll();
         blockchainAdapterNock.get('/discovery/msps/'+mspId)
           .times(1)
           .reply((pathReceived, bodyReceived) => {

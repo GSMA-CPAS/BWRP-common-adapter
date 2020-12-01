@@ -137,6 +137,15 @@ class ErrorUtils {
     }
   };
 
+  static ERROR_BLOCKCHAIN_ADAPTER_DOCUMENT_TYPE_ERROR = {
+    code: 500,
+    error: {
+      internalErrorCode: 3008,
+      message: 'Mandatory private document type is not valid',
+      description: 'The received private document does not contain a valid type.'
+    }
+  };
+
   static ERROR_BUSINESS_CREATE_USAGE_ON_CONTRACT_ONLY_ALLOWED_IN_STATE_SENT_SIGNED_OR_RECEIVED = {
     code: 422,
     error: {

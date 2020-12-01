@@ -14,4 +14,18 @@ describe('Unit Tests for base64 converter', function() {
 
     done();
   });
+  it('Should convert from string to base64', function(done) {
+    const stringToEncode = `{
+      "type": "contract",
+      "version": "2.1",
+      "body": {
+        "name": "StRiNg-${Date.now().toString()}"
+      }
+    }`;
+    debug('stringToEncode: %s', stringToEncode);
+    const encodedString = Buffer.from(stringToEncode).toString('base64');
+    debug('encodedString: %s', encodedString);
+
+    done();
+  });
 });

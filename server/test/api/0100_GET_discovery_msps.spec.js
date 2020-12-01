@@ -18,7 +18,6 @@ describe(`Tests GET ${route} API OK`, function() {
   describe(`Setup and Test GET ${route} API OK`, function() {
     it('Get msps OK without any msps in Blockchain', function(done) {
       try {
-        nock.cleanAll();
         blockchainAdapterNock.get('/discovery/msps')
           .times(1)
           .reply((pathReceived, bodyReceived) => {
@@ -58,7 +57,6 @@ describe(`Tests GET ${route} API OK`, function() {
 
     it('Get msps OK with 4 msps in Blockchain', function(done) {
       try {
-        nock.cleanAll();
         blockchainAdapterNock.get('/discovery/msps')
           .times(1)
           .reply((pathReceived, bodyReceived) => {
@@ -100,7 +98,6 @@ describe(`Tests GET ${route} API OK`, function() {
   describe(`Setup and Test GET ${route} API FAILED`, function() {
     it('Get msps FAILED with Blockchain response parsing error', function(done) {
       try {
-        nock.cleanAll();
         blockchainAdapterNock.get('/discovery/msps')
           .times(1)
           .reply((pathReceived, bodyReceived) => {

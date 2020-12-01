@@ -39,6 +39,20 @@ class LocalStorageProvider {
    * @param {Object} contract
    * @return {Promise<object>}
    */
+  static async saveReceivedContract(contract) {
+    try {
+      return await ContractDAO.create(contract, 'RECEIVED');
+    } catch (error) {
+      logger.error('[LocalStorageProvider::saveReceivedContract] failed to save received contract - %s', error.message);
+      throw error;
+    }
+  }
+
+  /**
+   *
+   * @param {Object} contract
+   * @return {Promise<object>}
+   */
   static async updateContract(contract) {
     try {
       return await ContractDAO.update(contract);

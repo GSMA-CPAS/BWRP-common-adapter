@@ -16,7 +16,6 @@ const selfHostUrl = testsUtils.getSelfHostUrl();
 
 describe('Unit Tests for events subscription', function() {
   it('Should send subscription to events in the Blockchain', function(done) {
-    nock.cleanAll();
     blockchainAdapterNock.post('/webhooks/subscribe')
       .times(2)
       .reply((pathReceived, bodyReceived) => {

@@ -8,8 +8,11 @@ const testEnv = require('../env.json');
 
 let app = undefined;
 
+const nock = require('nock');
+
 beforeEach(() => {
   console.log('  --  --  --  --  --  --  --  --  --  ');
+  nock.cleanAll();
 });
 
 class TestsUtils {
