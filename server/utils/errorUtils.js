@@ -102,11 +102,38 @@ class ErrorUtils {
   };
 
   static ERROR_BLOCKCHAIN_ADAPTER_RESPONSE_UNEXPECTED_ERROR = {
-    code: 404,
+    code: 500,
     error: {
       internalErrorCode: 3004,
       message: 'Blockchain response error',
       description: 'An unexpected response has been received from the Blockchain.'
+    }
+  };
+
+  static ERROR_BLOCKCHAIN_ADAPTER_SELF_HOST_UNDEFINED_ERROR = {
+    code: 500,
+    error: {
+      internalErrorCode: 3005,
+      message: 'Mandatory SELF_HOST configuration missing',
+      description: 'Environnement variable SELF_HOST is not defined.'
+    }
+  };
+
+  static ERROR_BLOCKCHAIN_ADAPTER_BLOCKCHAIN_ADAPTER_URL_UNDEFINED_ERROR = {
+    code: 500,
+    error: {
+      internalErrorCode: 3006,
+      message: 'Mandatory BLOCKCHAIN_ADAPTER_URL configuration missing',
+      description: 'Environnement variable BLOCKCHAIN_ADAPTER_URL is not defined.'
+    }
+  };
+
+  static ERROR_BLOCKCHAIN_ADAPTER_BLOCKCHAIN_ADAPTER_WEBHOOKS_INVALID_ERROR = {
+    code: 500,
+    error: {
+      internalErrorCode: 3007,
+      message: 'Mandatory BLOCKCHAIN_ADAPTER_WEBHOOK_EVENTS configuration not valid',
+      description: 'Environnement variable BLOCKCHAIN_ADAPTER_WEBHOOK_EVENTS is not valid.'
     }
   };
 

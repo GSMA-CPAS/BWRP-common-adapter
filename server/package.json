@@ -7,7 +7,7 @@
     "eslint": "./node_modules/.bin/eslint .",
     "prestart": "npm install",
     "start": "node index.js",
-    "test": "DEBUG=spec* mocha ./test/**/*.spec.js --file test/tools/startServer.js --timeout 12000 --exit"
+    "test": "env-cmd -f ./test/env.json --use-shell \"DEBUG=spec* mocha ./test/**/*.spec.js --file test/tools/startServer.js --timeout 12000 --exit\""
   },
   "keywords": [
     "openapi-generator",
@@ -35,6 +35,7 @@
     "chai-as-promised": "^7.1.1",
     "chai-http": "^4.3.0",
     "debug": "^4.3.1",
+    "env-cmd": "^10.1.0",
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-config-google": "^0.14.0",

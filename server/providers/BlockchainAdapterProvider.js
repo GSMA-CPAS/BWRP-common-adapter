@@ -207,12 +207,9 @@ class BlockchainAdapterProvider {
    */
   async webhookSubscribe(eventName, callbackUrl) {
     try {
-      const response = await axiosInstance.post(config.BLOCKCHAIN_ADAPTER_URL + '/webhooks/subscribe', {
-        json: {
-          'eventName': eventName,
-          'callbackUrl': callbackUrl
-        },
-        responseType: 'text'
+      const response = await axios.post(config.BLOCKCHAIN_ADAPTER_URL + '/webhooks/subscribe', {
+        'eventName': eventName,
+        'callbackUrl': callbackUrl
       });
       logger.debug(`[BlockchainAdapterProvider::webhookSubscribe] response data:${typeof response.data} = ${JSON.stringify(response.data)}`);
       return response.data;
@@ -223,60 +220,41 @@ class BlockchainAdapterProvider {
 
   /**
    *
-   * @return {Promise<void>}
-   */
-  async initialize() {
-    try {
-      const webhooks = config.BLOCKCHAIN_ADAPTER_WEBHOOKS;
-      for (const webhook of webhooks) {
-        await this.webhookSubscribe(webhook.eventName, webhook.callbackUrl);
-        logger.info('[BlockchainAdapterProvider::initialize] webhook subscribe: %s -> %s', webhook.eventName, webhook.callbackUrl);
-      }
-    } catch (error) {
-      logger.error('[BlockchainAdapterProvider::initialize] failed to initialize adapter - %s', error.message);
-      throw error;
-    }
-  }
-
-  /**
-   *
-   * @returns {Promise<void>}
+   * @return {Promise<[string]>}
    */
   async subscribe() {
-    if (config.SELF_HOST.length <= 0){
+    if (config.SELF_HOST.length <= 0) {
       logger.info('[BlockchainAdapterProvider::subscribe] env SELF_HOST not set. Not subscribing');
-      return;
+      throw errorUtils.ERROR_BLOCKCHAIN_ADAPTER_SELF_HOST_UNDEFINED_ERROR;
     }
 
-    if (config.BLOCKCHAIN_ADAPTER_URL.length <= 0){
+    if (config.BLOCKCHAIN_ADAPTER_URL.length <= 0) {
       logger.info('[BlockchainAdapterProvider::subscribe] env BLOCKCHAIN_ADAPTER_URL not set. Not subscribing');
-      return;
+      throw errorUtils.ERROR_BLOCKCHAIN_ADAPTER_BLOCKCHAIN_ADAPTER_URL_UNDEFINED_ERROR;
     }
 
-    const callback_url = config.SELF_HOST  + "/api/v1/contracts/event/";
-    const webhooks = [
-      {
-        "eventName": "STORE:DOCUMENTHASH",
-        "callbackUrl": callback_url
-      },
-      {
-        "eventName": "STORE:SIGNATURE",
-        "callbackUrl": callback_url
-      }
-    ];
+    if (!Array.isArray(config.BLOCKCHAIN_ADAPTER_WEBHOOK_EVENTS)) {
+      logger.info('[BlockchainAdapterProvider::subscribe] env BLOCKCHAIN_ADAPTER_WEBHOOK_EVENTS not an array. Not subscribing');
+      throw errorUtils.ERROR_BLOCKCHAIN_ADAPTER_BLOCKCHAIN_ADAPTER_WEBHOOK_EVENTS_INVALID_ERROR;
+    }
+
+    const callbackUrl = config.SELF_HOST + '/api/v1/contracts/event/';
 
     try {
-      for (const webhook of webhooks) {
-        await axios.post(config.BLOCKCHAIN_ADAPTER_URL + '/webhooks/subscribe', webhook);
-        logger.info('[BlockchainAdapterProvider::subscribe] webhook subscribe: %s -> %s', webhook.eventName, webhook.callbackUrl);
+      const webhookIds = [];
+      const webhookEvents = config.BLOCKCHAIN_ADAPTER_WEBHOOK_EVENTS;
+      for (const webhookEvent of webhookEvents) {
+        const webhookSubscribeResponse = await this.webhookSubscribe(webhookEvent, callbackUrl);
+        logger.info('[BlockchainAdapterProvider::subscribe] webhook subscribe: %s -> %s', webhookEvent, callbackUrl);
+        const webhookId = webhookSubscribeResponse;
+        webhookIds.push(webhookId);
       }
+      return webhookIds;
     } catch (error) {
-      console.log(error);
-      logger.error('[BlockchainAdapterProvider::subscribe] failed to subscribe to blockchain-adapter - %s', error.message);
+      logger.error('[BlockchainAdapterProvider::subscribe] failed to subscribe to events - %s', JSON.stringify(error));
       throw error;
     }
   }
-
 }
 
 module.exports = BlockchainAdapterProvider;

@@ -46,8 +46,8 @@ config.LOG_LEVEL = process.env.LOG_LEVEL || 'info';
 
 // BlockchainAdapter configuration
 config.BLOCKCHAIN_ADAPTER_URL = process.env.BLOCKCHAIN_ADAPTER_URL || 'http://127.0.0.1:8081';
-config.BLOCKCHAIN_ADAPTER_WEBHOOKS = getAsObject(process.env.BLOCKCHAIN_ADAPTER_WEBHOOKS) || [];
-config.SELF_HOST = process.env.SELF_HOST || "";
+config.BLOCKCHAIN_ADAPTER_WEBHOOK_EVENTS = getAsObject(process.env.BLOCKCHAIN_ADAPTER_WEBHOOK_EVENTS) || [];
+config.SELF_HOST = process.env.SELF_HOST || '';
 
 config.DB_URL = process.env.DB_URL || 'mongodb://userdtag:userpwd@localhost:27017/roamingdbdtag?authSource=roamingdbdtag';
 config.DB_CREATE_CONNECTION_TIMEOUT = getAsInt(process.env.DB_CREATE_CONNECTION_TIMEOUT) || 30000;
