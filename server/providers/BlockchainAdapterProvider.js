@@ -197,28 +197,28 @@ class BlockchainAdapterProvider {
     }
   }
 
-  // /**
-  //  *
-  //  * @param {Object} contract
-  //  * @return {Promise<object>}
-  //  */
-  // async uploadContract(contract) {
-  //   try {
-  //     const rawData = defineRawDataFromContract(contract);
-  //     const response = await axiosInstance.post(config.BLOCKCHAIN_ADAPTER_URL + '/private-documents', {
-  //       toMSP: contract.toMsp.mspId,
-  //       data: rawData
-  //     });
-  //     logger.debug(`[BlockchainAdapterProvider::uploadContract] response data:${typeof response.data} = ${JSON.stringify(response.data)}`);
-  //     return {
-  //       rawData,
-  //       documentId: response.data.documentID
-  //     };
-  //   } catch (error) {
-  //     logger.error('[StubBlockchainAdapterProvider::uploadContract] failed to upload contract - %s', error.message);
-  //     throw error;
-  //   }
-  // }
+  /**
+   *
+   * @param {Object} contract
+   * @return {Promise<object>}
+   */
+  async uploadContract(contract) {
+    try {
+      const rawData = defineRawDataFromContract(contract);
+      const response = await axiosInstance.post(config.BLOCKCHAIN_ADAPTER_URL + '/private-documents', {
+        toMSP: contract.toMsp.mspId,
+        data: rawData
+      });
+      logger.debug(`[BlockchainAdapterProvider::uploadContract] response data:${typeof response.data} = ${JSON.stringify(response.data)}`);
+      return {
+        rawData,
+        documentId: response.data.documentID
+      };
+    } catch (error) {
+      logger.error('[BlockchainAdapterProvider::uploadContract] failed to upload contract - %s', error.message);
+      throw error;
+    }
+  }
 
 
   /**

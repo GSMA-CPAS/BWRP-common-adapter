@@ -4,7 +4,7 @@ const ContractMapper = require('../core/ContractMapper');
 
 const LocalStorageProvider = require('../providers/LocalStorageProvider');
 
-const BlockchainAdapterProvider = require('../providers/StubBlockchainAdapterProvider');
+const BlockchainAdapterProvider = require('../providers/BlockchainAdapterProvider');
 const blockchainAdapterConnection = new BlockchainAdapterProvider();
 
 const logger = require('../logger');
@@ -107,7 +107,7 @@ const sendContractById = ({contractId}) => new Promise(
         reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_SEND_CONTRACT_ONLY_ALLOWED_IN_STATE_DRAFT));
       }
       const uploadContractResp = await blockchainAdapterConnection.uploadContract(getContractByIdResp);
-      const updateContractResp = await LocalStorageProvider.updateSentContract(contractId, uploadContractResp.rawData, uploadContractResp.documentID);
+      const updateContractResp = await LocalStorageProvider.updateSentContract(contractId, uploadContractResp.rawData, uploadContractResp.documentId);
       const returnedResponse = ContractMapper.getResponseBodyForSendContract(updateContractResp);
       resolve(Service.successResponse(returnedResponse, 200));
     } catch (e) {

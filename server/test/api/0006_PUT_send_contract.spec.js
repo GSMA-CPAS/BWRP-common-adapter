@@ -8,6 +8,9 @@ const debugSetup = require('debug')('spec:setup');
 const chai = require('chai');
 const expect = require('chai').expect;
 
+const nock = require('nock');
+const blockchainAdapterNock = nock(testsUtils.getBlockchainAdapterUrl());
+
 const globalVersion = '/api/v1';
 const route = '/contracts/{contractId}/send';
 
@@ -21,10 +24,10 @@ describe(`Tests PUT ${route} API OK`, function() {
       type: 'contract',
       version: '1.1.0',
       fromMsp: {
-        mspId: 'A1'
+        mspId: 'DTAG'
       },
       toMsp: {
-        mspId: 'B1'
+        mspId: 'TMUS'
       },
       body: {
         bankDetails: {
@@ -56,7 +59,7 @@ describe(`Tests PUT ${route} API OK`, function() {
       type: 'contract',
       version: '1.3.1',
       fromMsp: {
-        mspId: 'A1',
+        mspId: 'DTAG',
         signatures: [
           {
             id: 'signatureId_1_InString',
@@ -66,7 +69,7 @@ describe(`Tests PUT ${route} API OK`, function() {
         ]
       },
       toMsp: {
-        mspId: 'C3',
+        mspId: 'TMUS',
         signatures: [
           {
             id: 'signatureId_C1_1_InString',
@@ -122,6 +125,20 @@ describe(`Tests PUT ${route} API OK`, function() {
     });
 
     it('Put send contract OK with minimum contract details', function(done) {
+      blockchainAdapterNock.post('/private-documents')
+        .times(1)
+        .reply((pathReceived, bodyReceived) => {
+          // Only for exemple
+          expect(pathReceived).to.equals('/private-documents');
+          // expect(bodyReceived).to.be.empty;
+          return [
+            200,
+            {
+              documentID: 'bec1ef2dbce73b6ae9841cf2edfa56de1f16d5a33d8a657de258e85c5f2e1bcb'
+            },
+            undefined
+          ];
+        });
       try {
         const path = globalVersion + '/contracts/' + contract1.id + '/send/';
         debug('path : ', path);
@@ -186,7 +203,50 @@ describe(`Tests PUT ${route} API OK`, function() {
       }
     });
 
+    it('Put send contract NOK if status is SENT', function(done) {
+      try {
+        const path = globalVersion + '/contracts/' + contract1.id + '/send/';
+        debug('path : ', path);
+
+        const sentBody = {};
+
+        chai.request(testsUtils.getServer())
+          .put(`${path}`)
+          .send(sentBody)
+          .end((error, response) => {
+            debug('response.status: %s', JSON.stringify(response.status));
+            debug('response.body: %s', JSON.stringify(response.body));
+            expect(error).to.be.null;
+            expect(response).to.have.status(422);
+            expect(response).to.be.json;
+            expect(response.body).to.exist;
+            expect(response.body.message).to.equal('Send contract not allowed');
+
+
+            done();
+          });
+      } catch (exception) {
+        debug('exception: %s', exception.stack);
+        expect.fail('it test throws an exception');
+        done();
+      }
+    });
+
     it('Put send contract OK with maximum contract details', function(done) {
+      blockchainAdapterNock.post('/private-documents')
+        .times(1)
+        .reply((pathReceived, bodyReceived) => {
+          // Only for exemple
+          expect(pathReceived).to.equals('/private-documents');
+          // expect(bodyReceived).to.be.empty;
+          return [
+            200,
+            {
+              documentID: 'db441b0559d3f1f8144f1dc2da378a0abe0124325b6024b20a9e22de8809eca4'
+            },
+            undefined
+          ];
+        });
       try {
         const path = globalVersion + '/contracts/' + contract2.id + '/send/';
         debug('path : ', path);

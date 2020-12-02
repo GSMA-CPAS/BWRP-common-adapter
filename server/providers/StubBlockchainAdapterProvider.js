@@ -218,7 +218,7 @@ class BlockchainAdapterProvider {
       };
       return {
         rawData,
-        documentID: blockchainResp.documentID
+        documentId: blockchainResp.documentID
       };
     } catch (error) {
       logger.error('[StubBlockchainAdapterProvider::uploadContract] failed to upload contract - %s', error.message);
