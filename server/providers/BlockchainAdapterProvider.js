@@ -45,7 +45,15 @@ const throwDefaultCommonInternalError = (error, loggerHeader = '[BlockchainAdapt
 
 // eslint-disable-next-line no-unused-vars
 const defineRawDataFromContract = (c) => {
+  const rawDataObject = {};
+  rawDataObject.type = c.type;
+  rawDataObject.version = c.version;
+  rawDataObject.name = c.name;
+  rawDataObject.fromMsp = c.fromMsp ? c.fromMsp : {}; // to keep signatures if specified
+  rawDataObject.toMsp = c.toMsp ? c.toMsp : {}; // to keep signatures if specified
+  rawDataObject.body = c.body;
   const stringToEncode = JSON.stringify(c);
+
   return Buffer.from(stringToEncode).toString('base64');
 };
 
@@ -56,6 +64,7 @@ const defineRawDataObjectFromRawData = (d) => {
 
 const defineContractFromRawDataObject = (rawDataObject, fromMSP, toMSP, id) => {
   const contract = rawDataObject;
+
   contract.fromMsp = contract.fromMsp ? contract.fromMsp : {};
   contract.fromMsp.mspId = fromMSP;
   contract.toMsp = contract.toMsp ? contract.toMsp : {};
