@@ -21,7 +21,7 @@ services:
   common-adapter-local:
     container_name: common-adapter-local
     build: ./server
-    image: common-adapter
+    image: common-adapter:${COMMON_ADAPTER_TAG}
     restart: always
     environment:
       - LOG_LEVEL=${LOG_LEVEL}
