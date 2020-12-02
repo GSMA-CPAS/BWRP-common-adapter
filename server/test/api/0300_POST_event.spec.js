@@ -105,7 +105,7 @@ describe(`Tests POST ${route} API OK`, function() {
             expect(bodyReceived).to.be.empty;
             return [
               200,
-              `{}`,
+              ``,
               undefined
             ];
           });
@@ -118,7 +118,7 @@ describe(`Tests POST ${route} API OK`, function() {
             expect(bodyReceived).to.be.empty;
             return [
               200,
-              `{}`,
+              ``,
               undefined
             ];
           });

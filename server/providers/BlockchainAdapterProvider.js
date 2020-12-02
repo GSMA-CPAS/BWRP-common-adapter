@@ -159,7 +159,7 @@ class BlockchainAdapterProvider {
    */
   async deletePrivateDocument(documentId) {
     try {
-      const response = await axiosInstance.delete(config.BLOCKCHAIN_ADAPTER_URL + '/private-documents/' + documentId);
+      const response = await axios.delete(config.BLOCKCHAIN_ADAPTER_URL + '/private-documents/' + documentId);
       logger.debug(`[BlockchainAdapterProvider::deletePrivateDocument] response data:${typeof response.data} = ${JSON.stringify(response.data)}`);
       return response.data;
     } catch (error) {
