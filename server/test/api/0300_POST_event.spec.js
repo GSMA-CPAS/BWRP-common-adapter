@@ -70,7 +70,7 @@ describe(`Tests POST ${route} API OK`, function() {
                 "toMSP":"TMUS",
                 "data":"${encodedDocument1}",
                 "dataHash":"notUsed",
-                "timeStamp":"1606828827767664800",
+                "timeStamp":"1606828827767664802",
                 "id":"${idDocument1}"
               }`,
               undefined
@@ -154,6 +154,9 @@ describe(`Tests POST ${route} API OK`, function() {
 
             expect(blockchainAdapterNock.isDone(), 'Unconsumed nock error').to.be.true;
 
+            // idDocument1 timestamp is bigger than idDocument2 timestamp
+            // so the first response.body array document is the document2
+            // and the second response.body array document is the document1
             chai.request(testsUtils.getServer())
               .get(`${globalVersion}/contracts/${response.body[0].id}`)
               .send()
@@ -178,7 +181,33 @@ describe(`Tests POST ${route} API OK`, function() {
                     expect(getResponse2.body).to.be.an('object');
                     expect(getResponse2.body).to.have.property('state', 'RECEIVED');
 
-                    done();
+                    chai.request(testsUtils.getServer())
+                      .get(`${globalVersion}/contracts/${response.body[0].id}?format=RAW`)
+                      .send()
+                      .end((getError1, getResponse1) => {
+                        debug('response.body: %s', JSON.stringify(getResponse1.body));
+                        expect(getError1).to.be.null;
+                        expect(getResponse1).to.have.status(200);
+                        expect(getResponse1).to.be.json;
+                        expect(getResponse1.body).to.exist;
+                        expect(getResponse1.body).to.be.an('object');
+                        expect(getResponse1.body).to.have.property('raw', encodedDocument2);
+
+                        chai.request(testsUtils.getServer())
+                          .get(`${globalVersion}/contracts/${response.body[1].id}?format=RAW`)
+                          .send()
+                          .end((getError2, getResponse2) => {
+                            debug('response.body: %s', JSON.stringify(getResponse2.body));
+                            expect(getError2).to.be.null;
+                            expect(getResponse2).to.have.status(200);
+                            expect(getResponse2).to.be.json;
+                            expect(getResponse2.body).to.exist;
+                            expect(getResponse2.body).to.be.an('object');
+                            expect(getResponse2.body).to.have.property('raw', encodedDocument1);
+
+                            done();
+                          });
+                      });
                   });
               });
           });

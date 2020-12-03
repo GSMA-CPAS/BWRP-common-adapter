@@ -19,11 +19,15 @@ const errorUtils = require('../utils/errorUtils');
  */
 const compareTimestamp = (a, b) => {
   try {
-    const aTimestampInt = parseInt(a.timestamp);
-    const bTimestampInt = parseInt(b.timestamp);
-    if (aTimestampInt > bTimestampInt) {
+    /* eslint-disable new-cap */
+    /* eslint-disable no-undef */
+    const aTimestamp = BigInt(a.timestamp);
+    const bTimestamp = BigInt(b.timestamp);
+    /* eslint-enable no-undef */
+    /* eslint-enable new-cap */
+    if (aTimestamp > bTimestamp) {
       return 1;
-    } else if (aTimestampInt < bTimestampInt) {
+    } else if (aTimestamp < bTimestamp) {
       return -1;
     } else {
       return 0;
@@ -94,7 +98,7 @@ const eventDocumentReceived = ({body}) => new Promise(
       logger.info(`[EventService::eventDocumentReceived] documentIds = ${JSON.stringify(documentIds)}`);
       const documentsStoredInDbAndDeleteFromBlockchain = [];
       if (documentIds && Array.isArray(documentIds)) {
-        const documents = [];
+        let documents = [];
         for (const documentId of documentIds) {
           try {
             const document = await blockchainAdapterConnection.getPrivateDocument(documentId);
@@ -104,7 +108,9 @@ const eventDocumentReceived = ({body}) => new Promise(
             // Do not reject. If there is an exception for a documentId, the document will not be removed of the blockchain.
           }
         }
-        documents.sort(compareTimestamp);
+        console.log(`[EventService::eventDocumentReceived] documents before sort = ${JSON.stringify(documents)}`);
+        documents = documents.sort(compareTimestamp);
+        console.log(`[EventService::eventDocumentReceived] document after sort = ${JSON.stringify(documents)}`);
         for (const document of documents) {
           try {
             const storedDocument = await storeBlockchainDocumentInLocalStorage(document);
