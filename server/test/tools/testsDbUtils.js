@@ -81,6 +81,19 @@ class TestsDbUtils {
     });
   }
 
+  static getIndexes() {
+    return new Promise((resolve, reject) => {
+      // Launch db request
+      ContractMongoRequester.getIndexes((err, indexes) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(indexes);
+        }
+      });
+    });
+  }
+
   static initDbWithContracts(contracts) {
     return new Promise((resolve, reject) => {
       TestsDbUtils.removeAllContracts({})

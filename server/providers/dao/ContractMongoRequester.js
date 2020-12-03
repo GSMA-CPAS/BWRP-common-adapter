@@ -14,6 +14,16 @@ class ContractMongoRequester {
     return (new mongoose.mongo.ObjectId().toHexString()) + formatedRandomValue;
   }
 
+  static getIndexes(next) {
+    ContractMongoModel.collection.getIndexes()
+      .then((indexes) => {
+        return next(null, indexes);
+      })
+      .catch((err) => {
+        next(err);
+      });
+  }
+
   static create(object, next) {
     ContractMongoModel.create(object, (err, createdContract) => {
       if (err) {

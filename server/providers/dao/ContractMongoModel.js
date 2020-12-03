@@ -41,4 +41,6 @@ const ContractSchema = new Schema({
 
 ContractSchema.index({id: 1}, {unique: true});
 
+ContractSchema.index({documentId: 1}, {unique: true, partialFilterExpression: {documentId: {$type: 'string'}}});
+
 module.exports = mongoose.model('contracts', ContractSchema, 'contracts');
