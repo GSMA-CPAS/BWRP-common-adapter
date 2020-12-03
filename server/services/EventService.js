@@ -7,6 +7,32 @@ const LocalStorageProvider = require('../providers/LocalStorageProvider');
 const BlockchainAdapterProvider = require('../providers/BlockchainAdapterProvider');
 const blockchainAdapterConnection = new BlockchainAdapterProvider();
 
+const logger = require('../logger');
+const errorUtils = require('../utils/errorUtils');
+
+/**
+ * Compare objects timestamps
+ *
+ * @param {Object} a The first object to compare
+ * @param {Object} b The second object to compare
+ * @return {Promise<number>}
+ */
+const compareTimestamp = (a, b) => {
+  try {
+    const aTimestampInt = parseInt(a.timestamp);
+    const bTimestampInt = parseInt(b.timestamp);
+    if (aTimestampInt > bTimestampInt) {
+      return 1;
+    } else if (aTimestampInt < bTimestampInt) {
+      return -1;
+    } else {
+      return 0;
+    }
+  } catch (sortException) {
+    return -1;
+  }
+};
+
 /**
  * Define the list of blockchain document Ids to download from the storageKey of a received event
  *
@@ -25,73 +51,32 @@ const getBlockchainDocumentIds = (eventStorageKey) => new Promise(
 );
 
 /**
- * Get the blockchain documents from the documentIds
+ * Store document in LocalStorage
  *
- * @param {Object} documentIds The documentIds to download
- * @return {Promise<[Object]>}
- */
-const getBlockchainDocuments = (documentIds) => new Promise(
-  async (resolve, reject) => {
-    try {
-      const downloadPromises = [];
-      documentIds.forEach((documentId) => {
-        downloadPromises.push(blockchainAdapterConnection.getPrivateDocument(documentId));
-      });
-
-      const downloadPromisesResponses = await Promise.all(downloadPromises);
-      resolve(downloadPromisesResponses);
-    } catch (e) {
-      reject(e);
-    }
-  },
-);
-
-/**
- * Delete the blockchain documents from the documentIds
- *
- * @param {Object} documentIds The documentIds to download
- * @return {Promise<[Object]>}
- */
-const deleteBlockchainDocuments = (documentIds) => new Promise(
-  async (resolve, reject) => {
-    try {
-      const deletePromises = [];
-      documentIds.forEach((documentId) => {
-        deletePromises.push(blockchainAdapterConnection.deletePrivateDocument(documentId));
-      });
-
-      const deletePromisesResponses = await Promise.all(deletePromises);
-      resolve(deletePromisesResponses);
-    } catch (e) {
-      reject(e);
-    }
-  },
-);
-
-/**
- * Store documents in LocalStorage
- *
- * @param {[Object]} documents Documents to store
+ * @param {Object} document Document to store
  * @return {Promise<[String]>}
  */
-const storeBlockchainDocumentsInLocalStorage = (documents) => new Promise(
+const storeBlockchainDocumentInLocalStorage = (document) => new Promise(
   async (resolve, reject) => {
     try {
-      const storePromises = [];
-      documents.forEach((document) => {
-        if (document.type === 'contract') {
-          storePromises.push(LocalStorageProvider.saveReceivedContract(document));
-        } else if (document.type === 'usage') {
-          storePromises.push(LocalStorageProvider.createUsage(document));
-        } else if (document.type === 'settlement') {
-          // storePromises.push(LocalStorageProvider.createSettlement(document));
-        }
-      });
-
-      const storePromisesResponses = await Promise.all(storePromises);
-      resolve(storePromisesResponses);
+      let returnedResponse = undefined;
+      if (document.type === 'contract') {
+        returnedResponse = await LocalStorageProvider.saveReceivedContract(document);
+      } else if (document.type === 'usage') {
+        returnedResponse = await LocalStorageProvider.createUsage(document);
+      } else if (document.type === 'settlement') {
+        // storePromises.push(LocalStorageProvider.createSettlement(document));
+      }
+      if (returnedResponse !== undefined) {
+        // STATE = something in DB represents this document
+        resolve(returnedResponse);
+      } else {
+        // STATE = the document is not in the DB
+        reject(errorUtils.ERROR_BUSINESS_DOCUMENT_UPSERT_FAILURE);
+      }
     } catch (e) {
-      reject(e);
+      // STATE = the document is not in the DB
+      reject(errorUtils.ERROR_BUSINESS_DOCUMENT_UPSERT_FAILURE);
     }
   },
 );
@@ -106,17 +91,40 @@ const eventDocumentReceived = ({body}) => new Promise(
   async (resolve, reject) => {
     try {
       const documentIds = await getBlockchainDocumentIds(body.data.storageKey);
-      const documents = await getBlockchainDocuments(documentIds);
-      console.log('documents = ', documents);
-      const storedDocuments = await storeBlockchainDocumentsInLocalStorage(documents);
-      const eventReceivedResp = storedDocuments.map((storedDocument) => {
+      logger.info(`[EventService::eventDocumentReceived] documentIds = ${JSON.stringify(documentIds)}`);
+      const documentsStoredInDbAndDeleteFromBlockchain = [];
+      if (documentIds && Array.isArray(documentIds)) {
+        const documents = [];
+        for (const documentId of documentIds) {
+          try {
+            const document = await blockchainAdapterConnection.getPrivateDocument(documentId);
+            documents.push(document);
+          } catch (exceptionInGetDocumentById) {
+            logger.error(`[EventService::eventDocumentReceived] non-blocking error exceptionInGetDocumentById for documentId ${documentId} = ${JSON.stringify(exceptionInGetDocumentById)}`);
+            // Do not reject. If there is an exception for a documentId, the document will not be removed of the blockchain.
+          }
+        }
+        documents.sort(compareTimestamp);
+        for (const document of documents) {
+          try {
+            const storedDocument = await storeBlockchainDocumentInLocalStorage(document);
+            const documentId = (storedDocument.type === 'contract') ? storedDocument.documentId : undefined;
+            const storedDocumentDeletedInBlockchain = await blockchainAdapterConnection.deletePrivateDocument(documentId);
+            documentsStoredInDbAndDeleteFromBlockchain.push(storedDocument);
+            logger.info(`[EventService::eventDocumentReceived] document stored in DB successfully deleted in Blockchain = ${JSON.stringify(storedDocument)}`);
+          } catch (exceptionInStoreAndDeleteDocument) {
+            logger.error(`[EventService::eventDocumentReceived] non-blocking error exceptionInStoreAndDeleteDocument for document = ${JSON.stringify(document)}`);
+            // Do not reject. If there is an exception for a document, the document will not be removed of the blockchain.
+          }
+        }
+      }
+      const eventReceivedResp = documentsStoredInDbAndDeleteFromBlockchain.map((documentStoredInDbAndDeleteFromBlockchain) => {
         return {
-          id: storedDocument.id,
-          type: storedDocument.type,
-          documentId: storedDocument.documentId
+          id: documentStoredInDbAndDeleteFromBlockchain.id,
+          type: documentStoredInDbAndDeleteFromBlockchain.type,
+          documentId: documentStoredInDbAndDeleteFromBlockchain.documentId
         };
       });
-      await deleteBlockchainDocuments(documentIds);
       resolve(Service.successResponse(eventReceivedResp, 200));
     } catch (e) {
       reject(Service.rejectResponse(e));

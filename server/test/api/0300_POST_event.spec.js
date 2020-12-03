@@ -71,7 +71,7 @@ describe(`Tests POST ${route} API OK`, function() {
                 "data":"${encodedDocument1}",
                 "dataHash":"notUsed",
                 "timeStamp":"1606828827767664800",
-                "id":"d22bafe6e5b661e9f7b992889c6602638c885793a81226943618ecf1aa19d486"
+                "id":"${idDocument1}"
               }`,
               undefined
             ];
@@ -91,7 +91,7 @@ describe(`Tests POST ${route} API OK`, function() {
                 "data":"${encodedDocument2}",
                 "dataHash":"notUsed",
                 "timeStamp":"1606828827767664800",
-                "id":"dezzedzegzxzaxgzuxzeuxgzecgecezdgscgze"
+                "id":"${idDocument2}"
               }`,
               undefined
             ];

@@ -65,6 +65,15 @@ class ErrorUtils {
     }
   };
 
+  static ERROR_BUSINESS_DOCUMENT_UPSERT_FAILURE = {
+    code: 422,
+    error: {
+      internalErrorCode: 2003,
+      message: 'Blockchain document can\'t be upserted in DB',
+      description: 'It\'s not possible to upsert this document.'
+    }
+  };
+
   static ERROR_BLOCKCHAIN_ADAPTER_RESPONSE_PARSING_ERROR = {
     code: 500,
     error: {

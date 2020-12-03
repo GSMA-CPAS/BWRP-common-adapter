@@ -59,10 +59,12 @@ const defineRawDataFromContract = (c) => {
 
 const defineRawDataObjectFromRawData = (d) => {
   const stringToParse = Buffer.from(d, 'base64').toString();
-  return JSON.parse(stringToParse);
+  const returnedObject = JSON.parse(stringToParse);
+  returnedObject.rawData = d;
+  return returnedObject;
 };
 
-const defineContractFromRawDataObject = (rawDataObject, fromMSP, toMSP, id) => {
+const defineContractFromRawDataObject = (rawDataObject, fromMSP, toMSP, id, timestamp) => {
   const contract = rawDataObject;
 
   contract.fromMsp = contract.fromMsp ? contract.fromMsp : {};
@@ -70,17 +72,20 @@ const defineContractFromRawDataObject = (rawDataObject, fromMSP, toMSP, id) => {
   contract.toMsp = contract.toMsp ? contract.toMsp : {};
   contract.toMsp.mspId = toMSP;
   contract.documentId = id;
+  contract.timestamp = timestamp;
   contract.state = 'RECEIVED';
   return contract;
 };
 
-const defineUsageFromRawDataObject = (rawDataObject, fromMSP, toMSP, id) => {
+const defineUsageFromRawDataObject = (rawDataObject, fromMSP, toMSP, id, timestamp) => {
   const usage = rawDataObject;
+  usage.timestamp = timestamp;
   return usage;
 };
 
-const defineSettlementFromRawDataObject = (rawDataObject, fromMSP, toMSP, id) => {
+const defineSettlementFromRawDataObject = (rawDataObject, fromMSP, toMSP, id, timestamp) => {
   const settlement = rawDataObject;
+  settlement.timestamp = timestamp;
   return settlement;
 };
 
@@ -140,13 +145,13 @@ class BlockchainAdapterProvider {
       if (!rawDataObject.type) {
         throw errorUtils.ERROR_BLOCKCHAIN_ADAPTER_DOCUMENT_TYPE_ERROR;
       } else if (rawDataObject.type === 'contract') {
-        const contract = defineContractFromRawDataObject(rawDataObject, response.data.fromMSP, response.data.toMSP, response.data.id);
+        const contract = defineContractFromRawDataObject(rawDataObject, response.data.fromMSP, response.data.toMSP, response.data.id, response.data.timeStamp);
         return contract;
       } else if (rawDataObject.type === 'usage') {
-        const usage = defineUsageFromRawDataObject(rawDataObject, response.data.fromMSP, response.data.toMSP, response.data.id);
+        const usage = defineUsageFromRawDataObject(rawDataObject, response.data.fromMSP, response.data.toMSP, response.data.id, response.data.timeStamp);
         return usage;
       } else if (rawDataObject.type === 'settlement') {
-        const settlement = defineSettlementFromRawDataObject(rawDataObject, response.data.fromMSP, response.data.toMSP, response.data.id);
+        const settlement = defineSettlementFromRawDataObject(rawDataObject, response.data.fromMSP, response.data.toMSP, response.data.id, response.data.timeStamp);
         return settlement;
       } else {
         throw errorUtils.ERROR_BLOCKCHAIN_ADAPTER_DOCUMENT_TYPE_ERROR;
