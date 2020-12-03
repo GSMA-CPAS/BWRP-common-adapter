@@ -1,6 +1,13 @@
 /* eslint-disable no-unused-vars */
 const Service = require('./Service');
 
+const SettlementMapper = require('../core/SettlementMapper');
+
+const LocalStorageProvider = require('../providers/LocalStorageProvider');
+const errorUtils = require('../utils/errorUtils');
+
+
+
 /**
  * Get Settlement Object by its Id
  *
@@ -11,15 +18,14 @@ const Service = require('./Service');
 const getSettlementById = ({contractId, settlementId}) => new Promise(
   async (resolve, reject) => {
     try {
-      resolve(Service.successResponse({
-        contractId,
-        settlementId,
-      }));
+      const getSettlementByIdResp = await LocalStorageProvider.getSettlement(settlementId);
+      if (getSettlementByIdResp.contractId != contractId) {
+        reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_GET_SETTLEMENT_ON_NOT_LINKED_CONTRACT_RECEIVED));
+      }
+      const returnedResponse = SettlementMapper.getResponseBodyForGetSettlement(getSettlementByIdResp);
+      resolve(Service.successResponse(returnedResponse));
     } catch (e) {
-      reject(Service.rejectResponse(
-        e.message || 'Invalid input',
-        e.status || 405,
-      ));
+      reject(Service.rejectResponse(e));
     }
   },
 );
@@ -33,14 +39,11 @@ const getSettlementById = ({contractId, settlementId}) => new Promise(
 const getSettlements = ({contractId}) => new Promise(
   async (resolve, reject) => {
     try {
-      resolve(Service.successResponse({
-        contractId,
-      }));
+      const getSettlementsResp = await LocalStorageProvider.getSettlements(contractId);
+      const returnedResponse = SettlementMapper.getResponseBodyForGetSettlements(getSettlementsResp);
+      resolve(Service.successResponse(returnedResponse, 200));
     } catch (e) {
-      reject(Service.rejectResponse(
-        e.message || 'Invalid input',
-        e.status || 405,
-      ));
+      reject(Service.rejectResponse(e));
     }
   },
 );

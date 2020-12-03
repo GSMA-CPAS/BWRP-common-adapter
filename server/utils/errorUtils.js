@@ -200,6 +200,14 @@ class ErrorUtils {
     }
   };
 
+  static ERROR_BUSINESS_GET_SETTLEMENT_ON_NOT_LINKED_CONTRACT_RECEIVED = {
+    code: 422,
+    error: {
+      internalErrorCode: 2007,
+      message: 'Get settlement not allowed',
+      description: 'It\'s not allowed to get settlement on wrong contract.'
+    }
+  };
 }
 
 module.exports = ErrorUtils;

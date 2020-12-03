@@ -4,6 +4,7 @@ const logger = require('../logger');
 
 const ContractDAO = require('./dao/ContractDAO');
 const UsageDAO = require('./dao/UsageDAO');
+const SettlementDAO = require('./dao/SettlementDAO');
 
 
 class LocalStorageProvider {
@@ -173,6 +174,34 @@ class LocalStorageProvider {
       return await UsageDAO.findOneAndRemove(id);
     } catch (error) {
       logger.error('[LocalStorageProvider::deleteUsage] failed to delete usage - ' + error.message);
+      throw error;
+    }
+  }
+
+  /**
+   *
+   * @param {String} contractId
+   * @return {Promise<[string]>}
+   */
+  static async getSettlements(contractId) {
+    try {
+      return await SettlementDAO.findAll(contractId);
+    } catch (error) {
+      logger.error('[LocalStorageProvider::getSettlements] failed to get settlements - %s', error.message);
+      throw error;
+    }
+  }
+
+  /**
+   *
+   * @param {String} id
+   * @return {Promise<object>}
+   */
+  static async getSettlement(id) {
+    try {
+      return await SettlementDAO.findOne(id);
+    } catch (error) {
+      logger.error('[LocalStorageProvider::getSettlement] failed to get settlement - ' + error.message);
       throw error;
     }
   }

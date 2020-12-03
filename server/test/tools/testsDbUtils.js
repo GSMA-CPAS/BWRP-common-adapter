@@ -2,6 +2,7 @@ const debug = require('debug')('spec:testsDbUtils');
 
 const ContractMongoRequester = require('../../providers/dao/ContractMongoRequester');
 const UsageMongoRequester = require('../../providers/dao/UsageMongoRequester');
+const SettlementMongoRequester = require('../../providers/dao/SettlementMongoRequester');
 
 class TestsDbUtils {
   static removeAllContracts(conditions) {
@@ -27,6 +28,20 @@ class TestsDbUtils {
         } else {
           debug('deleteMany usages done with success');
           resolve(usages);
+        }
+      });
+    });
+  }
+
+  static removeAllSettlements(conditions) {
+    return new Promise((resolve, reject) => {
+      SettlementMongoRequester.deleteMany(conditions, (err, settlements) => {
+        if (err) {
+          debug('deleteMany settlements failure : ', err);
+          reject(err);
+        } else {
+          debug('deleteMany settlements done with success');
+          resolve(settlements);
         }
       });
     });
@@ -148,6 +163,66 @@ class TestsDbUtils {
         })
         .catch((removeAllUsagesError) => {
           reject(removeAllUsagesError);
+        });
+    });
+  }
+
+  static createSettlement(settlement) {
+    return new Promise((resolve, reject) => {
+      // Define automatic values
+      settlement.id = SettlementMongoRequester.defineSettlementId();
+      if (settlement.creationDate === undefined) {
+        settlement.creationDate = Date.now();
+      }
+      if (settlement.state === undefined) {
+        settlement.state = 'DRAFT';
+      }
+      if (settlement.type === undefined) {
+        settlement.type = 'settlement';
+      }
+      if (settlement.history === undefined) {
+        settlement.history = [];
+      }
+      settlement.history.push({
+        date: settlement.creationDate,
+        action: 'CREATION'
+      });
+
+      // Launch db request
+      SettlementMongoRequester.create(settlement, (err, createdSettlement) => {
+        if (err) {
+          debug('create settlement failure : ', err);
+          reject(err);
+        } else {
+          debug('create settlement done with success');
+          resolve(createdSettlement);
+        }
+      });
+    });
+  }
+
+  static initDbWithSettlements(settlements) {
+    return new Promise((resolve, reject) => {
+      TestsDbUtils.removeAllSettlements({})
+        .then((removeAllSettlementsResp) => {
+          const settlementsCreationPromises = [];
+          if ((settlements !== undefined) && (Array.isArray(settlements))) {
+            settlements.forEach((settlement) => {
+              settlementsCreationPromises.push(TestsDbUtils.createSettlement(settlement));
+            });
+          }
+          Promise.all(settlementsCreationPromises)
+            .then((settlementsCreationPromisesResp) => {
+              debug('initDbWithSettlements done with success');
+              resolve(settlementsCreationPromisesResp);
+            })
+            .catch((settlementsCreationPromisesError) => {
+              debug('initDbWithSettlements failure : ', settlementsCreationPromisesError);
+              reject(settlementsCreationPromisesError);
+            });
+        })
+        .catch((removeAllSettlementsError) => {
+          reject(removeAllSettlementsError);
         });
     });
   }
