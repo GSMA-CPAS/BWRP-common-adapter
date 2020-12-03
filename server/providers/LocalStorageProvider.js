@@ -235,6 +235,21 @@ class LocalStorageProvider {
       throw error;
     }
   }
+
+  /**
+   *
+   * @param {Object} settlement
+   * @return {Promise<object>}
+   */
+  static async createSettlement(settlement) {
+    try {
+      return await SettlementDAO.create(settlement);
+    } catch (error) {
+      logger.error('[LocalStorageProvider::createSettlement] failed to create settlement - %s', error.message);
+      throw error;
+    }
+  }
+
 }
 
 module.exports = LocalStorageProvider;

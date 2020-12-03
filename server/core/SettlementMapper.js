@@ -42,6 +42,24 @@ class SettlementMapper {
     }
     return returnedResponseBody;
   }
+
+  // Map the input calculation result usage and contract  to internal usage
+  static getSettlementForGenerateUsageById(usage, contract, getCalculateResultResp) {
+    const returnedSettlement = {
+      state: 'DRAFT',
+      contractId: contract.contractId,
+      name: 'Settlement for contract ' + contract.contractId +' and usage ' + usage.usageId,
+      type: 'settlement',
+      version: '1.0.0',
+      body: {
+        generatedResult: getCalculateResultResp,
+        contract: contract,
+        usage: usage
+      }
+    };
+
+    return returnedSettlement;
+  }
 }
 
 module.exports = SettlementMapper;

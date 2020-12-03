@@ -183,7 +183,7 @@ describe(`Tests PUT ${route} API OK`, function() {
 
               testsDbUtils.initDbWithContracts([contractDraft, contractSent, contractReceived])
                 .then((initDbWithContractsResp) => {
-                  debugSetup('Three contracts where added in db ', removeAllUsagesResp);
+                  debugSetup('Three contracts where added in db ', initDbWithContractsResp);
                   contractDraft.id = initDbWithContractsResp[0].id;
                   contractSent.id = initDbWithContractsResp[1].id;
                   contractReceived.id = initDbWithContractsResp[2].id;

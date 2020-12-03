@@ -33,6 +33,40 @@ class SettlementDAO {
     });
   }
 
+
+  static create(object) {
+    return new Promise((resolve, reject) => {
+      // Verify parameters
+      if (object === undefined) {
+        logger.error('[SettlementDAO::create] [FAILED] : object undefined');
+        reject(MISSING_MANDATORY_PARAM_ERROR);
+      }
+
+      // Define automatic values
+      object.id = SettlementMongoRequester.defineSettlementId();
+
+      const creationDate = Date.now();
+      object.creationDate = creationDate;
+      object.lastModificationDate = creationDate;
+      object.history = [
+        {date: creationDate, action: 'CREATION'}
+      ];
+
+      // Launch database request
+      SettlementMongoRequester.create(object, (err, settlement) => {
+        DAOErrorManager.handleErrorOrNullObject(err, settlement)
+          .then((objectReturned) => {
+            resolve(objectReturned);
+          })
+          .catch((errorReturned) => {
+            logger.error('[UsageDAO::create] [FAILED] errorReturned:' + typeof errorReturned + ' = ' + JSON.stringify(errorReturned));
+            reject(errorReturned);
+          });
+      });
+    });
+  }
+
+
   static findOne(id) {
     return new Promise((resolve, reject) => {
       // Verify parameters

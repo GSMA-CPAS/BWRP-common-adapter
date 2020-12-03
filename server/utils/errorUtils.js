@@ -208,6 +208,24 @@ class ErrorUtils {
       description: 'It\'s not allowed to get settlement on wrong contract.'
     }
   };
+
+  static ERROR_BUSINESS_GENERATE_SETTLEMENT_AND_COMMIT_NOT_SUPPORTED = {
+    code: 422,
+    error: {
+      internalErrorCode: 2008,
+      message: 'commit is not implemented yet',
+      description: 'It\'s not allowed to commit the settlement yet.'
+    }
+  };
+
+  static ERROR_BUSINESS_GENERATE_SETTLEMENT_ON_NOT_LINKED_CONTRACT_RECEIVED = {
+    code: 422,
+    error: {
+      internalErrorCode: 2008,
+      message: 'Calculate settlement not allowed',
+      description: 'It\'s not allowed to calculate settlement on wrong contract.'
+    }
+  };
 }
 
 module.exports = ErrorUtils;
