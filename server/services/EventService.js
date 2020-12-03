@@ -65,7 +65,12 @@ const storeBlockchainDocumentInLocalStorage = (document) => new Promise(
     try {
       let returnedResponse = undefined;
       if (document.type === 'contract') {
-        returnedResponse = await LocalStorageProvider.saveReceivedContract(document);
+        const existsContract = await LocalStorageProvider.existsContract({documentId: document.documentId});
+        if (existsContract) {
+          returnedResponse = await LocalStorageProvider.findContractByDocumentId(document.documentId, {rawData: document.rawData});
+        } else {
+          returnedResponse = await LocalStorageProvider.saveReceivedContract(document);
+        }
       } else if (document.type === 'usage') {
         returnedResponse = await LocalStorageProvider.createUsage(document);
       } else if (document.type === 'settlement') {

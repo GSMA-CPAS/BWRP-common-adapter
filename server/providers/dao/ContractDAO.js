@@ -14,7 +14,9 @@ class ContractDAO {
       // Verify parameters
 
       // Define find condition
-      const condition = {};
+      const condition = {
+        type: 'contract'
+      };
       if (state !== undefined) {
         condition.state = state;
       }
@@ -43,6 +45,7 @@ class ContractDAO {
 
       // Define automatic values
       object.id = ContractMongoRequester.defineContractId();
+      object.type = 'contract';
 
       const creationDate = Date.now();
       object.creationDate = creationDate;
@@ -87,13 +90,13 @@ class ContractDAO {
       // Defined update condition and update command
       const condition = {
         id: object.id,
+        type: 'contract',
         state: object.state
       };
 
       const updateCommand = {
         $set: {
           name: object.name,
-          type: object.type,
           version: object.version,
           fromMsp: object.fromMsp,
           toMsp: object.toMsp,
@@ -119,7 +122,7 @@ class ContractDAO {
     });
   }
 
-  static findOne(id) {
+  static findOne(id, matchingConditions = {}) {
     return new Promise((resolve, reject) => {
       // Verify parameters
       if (id === undefined) {
@@ -127,8 +130,23 @@ class ContractDAO {
         reject(MISSING_MANDATORY_PARAM_ERROR);
       }
 
+      // Define find condition
+      const condition = {
+        id: id,
+        type: 'contract'
+      };
+      if (matchingConditions.state !== undefined) {
+        condition.state = matchingConditions.state;
+      }
+      if (matchingConditions.rawData !== undefined) {
+        condition.rawData = matchingConditions.rawData;
+      }
+      if (matchingConditions.documentId !== undefined) {
+        condition.documentId = matchingConditions.documentId;
+      }
+
       // Launch database request
-      ContractMongoRequester.findOne({id}, (err, contract) => {
+      ContractMongoRequester.findOne(condition, (err, contract) => {
         // Use errorManager to return appropriate dao errors
         DAOErrorManager.handleErrorOrNullObject(err, contract)
           .then((objectReturned) => {
@@ -143,6 +161,45 @@ class ContractDAO {
     });
   }
 
+  static findOneByDocumentId(documentId, matchingConditions = {}) {
+    return new Promise((resolve, reject) => {
+      // Verify parameters
+      if (documentId === undefined) {
+        logger.error('[ContractDAO::findOneByDocumentId] [FAILED] : documentId undefined');
+        reject(MISSING_MANDATORY_PARAM_ERROR);
+      }
+
+      // Define find condition
+      const condition = {
+        documentId: documentId,
+        type: 'contract'
+      };
+      if (matchingConditions.state !== undefined) {
+        condition.state = matchingConditions.state;
+      }
+      if (matchingConditions.rawData !== undefined) {
+        condition.rawData = matchingConditions.rawData;
+      }
+      if (matchingConditions.id !== undefined) {
+        condition.id = matchingConditions.id;
+      }
+
+      // Launch database request
+      ContractMongoRequester.findOne(condition, (err, contract) => {
+        // Use errorManager to return appropriate dao errors
+        DAOErrorManager.handleErrorOrNullObject(err, contract)
+          .then((objectReturned) => {
+            logger.debug('[DAO] [findOneByDocumentId] [OK] objectReturned:' + typeof objectReturned + ' = ' + JSON.stringify(objectReturned));
+            return resolve(objectReturned);
+          })
+          .catch((errorReturned) => {
+            logger.error('[DAO] [findOneByDocumentId] [FAILED] errorReturned:' + typeof errorReturned + ' = ' + JSON.stringify(errorReturned));
+            return reject(errorReturned);
+          });
+      });
+    });
+  }
+
   static findOneAndRemove(id) {
     return new Promise((resolve, reject) => {
       // Verify parameters
@@ -151,8 +208,14 @@ class ContractDAO {
         reject(MISSING_MANDATORY_PARAM_ERROR);
       }
 
+      // Define find condition
+      const condition = {
+        id: id,
+        type: 'contract'
+      };
+
       // Launch database request
-      ContractMongoRequester.findOneAndRemove({id}, (err, contract) => {
+      ContractMongoRequester.findOneAndRemove(condition, (err, contract) => {
         // Use errorManager to return appropriate dao errors
         DAOErrorManager.handleErrorOrNullObject(err, contract)
           .then((objectReturned) => {
@@ -189,6 +252,7 @@ class ContractDAO {
       // Defined update condition and update command
       const condition = {
         id: contractId,
+        type: 'contract',
         state: 'DRAFT'
       };
 
@@ -217,6 +281,50 @@ class ContractDAO {
       });
     });
   }
+
+  static exists(object) {
+    return new Promise((resolve, reject) => {
+      // Verify parameters
+      if (object === undefined) {
+        logger.error('[ContractDAO::exists] [FAILED] : object undefined');
+        reject(MISSING_MANDATORY_PARAM_ERROR);
+      }
+
+      // Defined update condition and update command
+      const condition = {
+        type: 'contract'
+      };
+
+      if (object.id) {
+        condition.id = object.id;
+      }
+
+      if (object.state) {
+        condition.state = object.state;
+      }
+
+      if (object.documentId) {
+        condition.documentId = object.documentId;
+      }
+
+      if (object.rawData !== undefined) {
+        condition.rawData = object.rawData;
+      }
+
+      // Launch database request
+      ContractMongoRequester.exists(condition, (err, exists) => {
+        DAOErrorManager.handleError(err, exists)
+          .then((objectReturned) => {
+            resolve(objectReturned);
+          })
+          .catch((errorReturned) => {
+            logger.error('[ContractDAO::exists] [FAILED] errorReturned:' + typeof errorReturned + ' = ' + JSON.stringify(errorReturned));
+            reject(errorReturned);
+          });
+      });
+    });
+  }
+
 }
 
 module.exports = ContractDAO;

@@ -65,14 +65,44 @@ class LocalStorageProvider {
 
   /**
    *
-   * @param {String} id
+   * @param {String} documentId
+   * @param {Object} matchingConditions
    * @return {Promise<object>}
    */
-  static async getContract(id) {
+  static async findContractByDocumentId(documentId, matchingConditions = {}) {
     try {
-      return await ContractDAO.findOne(id);
+      return await ContractDAO.findOneByDocumentId(documentId, matchingConditions);
+    } catch (error) {
+      logger.error('[LocalStorageProvider::findContractByDocumentId] failed to get contract from documentId - %s', error.message);
+      throw error;
+    }
+  }
+
+  /**
+   *
+   * @param {String} id
+   * @param {Object} matchingConditions
+   * @return {Promise<object>}
+   */
+  static async getContract(id, matchingConditions = {}) {
+    try {
+      return await ContractDAO.findOne(id, matchingConditions);
     } catch (error) {
       logger.error('[LocalStorageProvider::getContract] failed to get contract - %s', error.message);
+      throw error;
+    }
+  }
+
+  /**
+   *
+   * @param {Object} conditions
+   * @return {Promise<object>}
+   */
+  static async existsContract(conditions) {
+    try {
+      return await ContractDAO.exists(conditions);
+    } catch (error) {
+      logger.error('[LocalStorageProvider::existsContract] failed to find if a contract exists - %s', error.message);
       throw error;
     }
   }

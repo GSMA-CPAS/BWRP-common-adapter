@@ -16,6 +16,21 @@ const route = '/contracts/event/';
 
 describe(`Tests POST ${route} API OK`, function() {
   describe(`Setup and Test POST ${route} API with minimum event details`, function() {
+    before((done) => {
+      debugSetup('==> remove all contracts in db');
+      testsDbUtils.removeAllContracts({})
+        .then((removeAllContractsResp) => {
+          debugSetup('All contracts in db are removed : ', removeAllContractsResp);
+          debugSetup('==> done!');
+          done();
+        })
+        .catch((removeAllContractsError) => {
+          debugSetup('Error removing contracts in db : ', removeAllContractsError);
+          debugSetup('==> failed!');
+          done(removeAllContractsError);
+        });
+    });
+
     it('Post event OK with minimum event details and only contracts in blockchain', function(done) {
       try {
         const path = globalVersion + route;
