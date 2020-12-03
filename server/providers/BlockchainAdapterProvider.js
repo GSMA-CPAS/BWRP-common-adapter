@@ -52,7 +52,7 @@ const defineRawDataFromContract = (c) => {
   rawDataObject.fromMsp = c.fromMsp ? c.fromMsp : {}; // to keep signatures if specified
   rawDataObject.toMsp = c.toMsp ? c.toMsp : {}; // to keep signatures if specified
   rawDataObject.body = c.body;
-  const stringToEncode = JSON.stringify(c);
+  const stringToEncode = JSON.stringify(rawDataObject);
 
   return Buffer.from(stringToEncode).toString('base64');
 };
