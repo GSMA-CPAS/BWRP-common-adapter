@@ -4,6 +4,7 @@ const axios = require('axios');
 const config = require('../config');
 const logger = require('../logger');
 const errorUtils = require('../utils/errorUtils');
+const rawDataUtils = require('./utils/rawDataUtils');
 
 const BLOCKCHAIN_ADAPTER_AXIOS_CONFIG = {
   transformResponse: [(data) => {
@@ -41,52 +42,6 @@ const throwDefaultCommonInternalError = (error, loggerHeader = '[BlockchainAdapt
     logger.error(`${loggerHeader} error: `, error);
     throw errorUtils.ERROR_BLOCKCHAIN_ADAPTER_REQUEST_ERROR;
   }
-};
-
-// eslint-disable-next-line no-unused-vars
-const defineRawDataFromContract = (c) => {
-  const rawDataObject = {};
-  rawDataObject.type = c.type;
-  rawDataObject.version = c.version;
-  rawDataObject.name = c.name;
-  rawDataObject.fromMsp = c.fromMsp ? c.fromMsp : {}; // to keep signatures if specified
-  rawDataObject.toMsp = c.toMsp ? c.toMsp : {}; // to keep signatures if specified
-  rawDataObject.body = c.body;
-  const stringToEncode = JSON.stringify(rawDataObject);
-
-  return Buffer.from(stringToEncode).toString('base64');
-};
-
-const defineRawDataObjectFromRawData = (d) => {
-  const stringToParse = Buffer.from(d, 'base64').toString();
-  const returnedObject = JSON.parse(stringToParse);
-  returnedObject.rawData = d;
-  return returnedObject;
-};
-
-const defineContractFromRawDataObject = (rawDataObject, fromMSP, toMSP, id, timestamp) => {
-  const contract = rawDataObject;
-
-  contract.fromMsp = contract.fromMsp ? contract.fromMsp : {};
-  contract.fromMsp.mspId = fromMSP;
-  contract.toMsp = contract.toMsp ? contract.toMsp : {};
-  contract.toMsp.mspId = toMSP;
-  contract.documentId = id;
-  contract.timestamp = timestamp;
-  contract.state = 'RECEIVED';
-  return contract;
-};
-
-const defineUsageFromRawDataObject = (rawDataObject, fromMSP, toMSP, id, timestamp) => {
-  const usage = rawDataObject;
-  usage.timestamp = timestamp;
-  return usage;
-};
-
-const defineSettlementFromRawDataObject = (rawDataObject, fromMSP, toMSP, id, timestamp) => {
-  const settlement = rawDataObject;
-  settlement.timestamp = timestamp;
-  return settlement;
 };
 
 class BlockchainAdapterProvider {
@@ -141,17 +96,17 @@ class BlockchainAdapterProvider {
     try {
       const response = await axiosInstance.get(config.BLOCKCHAIN_ADAPTER_URL + '/private-documents/' + documentId);
       logger.debug(`[BlockchainAdapterProvider::getPrivateDocument] response data:${typeof response.data} = ${JSON.stringify(response.data)}`);
-      const rawDataObject = defineRawDataObjectFromRawData(response.data.data);
+      const rawDataObject = rawDataUtils.defineRawDataObjectFromRawData(response.data.data);
       if (!rawDataObject.type) {
         throw errorUtils.ERROR_BLOCKCHAIN_ADAPTER_DOCUMENT_TYPE_ERROR;
       } else if (rawDataObject.type === 'contract') {
-        const contract = defineContractFromRawDataObject(rawDataObject, response.data.fromMSP, response.data.toMSP, response.data.id, response.data.timeStamp);
+        const contract = rawDataUtils.defineContractFromRawDataObject(rawDataObject, response.data.fromMSP, response.data.toMSP, response.data.id, response.data.timeStamp);
         return contract;
       } else if (rawDataObject.type === 'usage') {
-        const usage = defineUsageFromRawDataObject(rawDataObject, response.data.fromMSP, response.data.toMSP, response.data.id, response.data.timeStamp);
+        const usage = rawDataUtils.defineUsageFromRawDataObject(rawDataObject, response.data.fromMSP, response.data.toMSP, response.data.id, response.data.timeStamp);
         return usage;
       } else if (rawDataObject.type === 'settlement') {
-        const settlement = defineSettlementFromRawDataObject(rawDataObject, response.data.fromMSP, response.data.toMSP, response.data.id, response.data.timeStamp);
+        const settlement = rawDataUtils.defineSettlementFromRawDataObject(rawDataObject, response.data.fromMSP, response.data.toMSP, response.data.id, response.data.timeStamp);
         return settlement;
       } else {
         throw errorUtils.ERROR_BLOCKCHAIN_ADAPTER_DOCUMENT_TYPE_ERROR;
@@ -218,7 +173,7 @@ class BlockchainAdapterProvider {
    */
   async uploadContract(contract) {
     try {
-      const rawData = defineRawDataFromContract(contract);
+      const rawData = rawDataUtils.defineRawDataFromContract(contract);
       const response = await axiosInstance.post(config.BLOCKCHAIN_ADAPTER_URL + '/private-documents', {
         toMSP: contract.toMsp.mspId,
         data: rawData
