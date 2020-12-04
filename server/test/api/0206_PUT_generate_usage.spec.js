@@ -8,11 +8,8 @@ const debugSetup = require('debug')('spec:setup');
 const chai = require('chai');
 const expect = require('chai').expect;
 
-const nock = require('nock');
-const blockchainAdapterNock = nock(testsUtils.getBlockchainAdapterUrl());
-
 const globalVersion = '/api/v1';
-const route = '/contracts/{contractId}/send';
+const route = '/contracts/{contractId}/usages/{usageId}/generate';
 
 const DATE_REGEX = testsUtils.getDateRegexp();
 
@@ -148,8 +145,8 @@ describe(`Tests PUT ${route} API OK`, function() {
 
 
             expect(response.body).to.have.property('body').that.is.an('object');
-            expect(Object.keys(response.body.body)).have.members(['generatedResult', 'contract', 'usage']);
-            expect(response.body.body.contract.body).to.deep.include(contractSent.body);
+            expect(Object.keys(response.body.body)).have.members(['generatedResult', 'usage']);
+            expect(response.body.body.usage.body).to.deep.include(usageMinimumData.body);
 
 
             done();

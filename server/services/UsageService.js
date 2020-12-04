@@ -79,25 +79,25 @@ const generateUsageById = ({contractId, usageId, mode}) => new Promise(
     try {
       if (mode == 'commit') {
         reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_GENERATE_SETTLEMENT_AND_COMMIT_NOT_SUPPORTED));
+      } else {
+        const usage = await LocalStorageProvider.getUsage(usageId);
+
+        if (usage.contractId != contractId) {
+          reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_GENERATE_SETTLEMENT_ON_NOT_LINKED_CONTRACT_RECEIVED));
+        } else {
+          const contract = await LocalStorageProvider.getContract(contractId);
+
+          const getCalculateResultResp = await calculationServiceConnection.getCalculateResult(usage, contract);
+
+          const settlement = SettlementMapper.getSettlementForGenerateUsageById(usage, contract, getCalculateResultResp);
+          const createSettlementResp = await LocalStorageProvider.createSettlement(settlement);
+          console.log(createSettlementResp);
+
+          const returnedResponse = SettlementMapper.getResponseBodyForGetSettlement(createSettlementResp);
+          console.log(returnedResponse);
+          resolve(Service.successResponse(returnedResponse));
+        }
       }
-      const getUsageByIdResp = await LocalStorageProvider.getUsage(usageId);
-      const usage = UsageMapper.getResponseBodyForGetUsage(getUsageByIdResp);
-
-      if (getUsageByIdResp.contractId != contractId) {
-        reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_GENERATE_SETTLEMENT_ON_NOT_LINKED_CONTRACT_RECEIVED));
-      }
-      const getContractByIdResp = await LocalStorageProvider.getContract(contractId);
-      const contract = ContractMapper.getResponseBodyForGetContract(getContractByIdResp);
-
-      const getCalculateResultResp = await calculationServiceConnection.getCalculateResult(usage, contract);
-
-      const settlement = SettlementMapper.getSettlementForGenerateUsageById(usage, contract, getCalculateResultResp);
-      const createSettlementResp = await LocalStorageProvider.createSettlement(settlement);
-      console.log(createSettlementResp)
-
-      const returnedResponse = SettlementMapper.getResponseBodyForGetSettlement(createSettlementResp);
-      console.log(returnedResponse)
-      resolve(Service.successResponse(returnedResponse));
     } catch (e) {
       reject(Service.rejectResponse(e));
     }

@@ -47,14 +47,19 @@ class SettlementMapper {
   static getSettlementForGenerateUsageById(usage, contract, getCalculateResultResp) {
     const returnedSettlement = {
       state: 'DRAFT',
-      contractId: contract.contractId,
-      name: 'Settlement for contract ' + contract.contractId +' and usage ' + usage.usageId,
+      contractId: contract.id,
+      name: 'Settlement for contract ' + contract.id,
       type: 'settlement',
       version: '1.0.0',
       body: {
         generatedResult: getCalculateResultResp,
-        contract: contract,
-        usage: usage
+        usage: {
+          name: usage.name,
+          version: usage.version,
+          state: usage.state,
+          mspOwner: usage.mspOwner,
+          body: usage.body,
+        }
       }
     };
 
