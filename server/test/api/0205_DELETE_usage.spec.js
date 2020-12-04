@@ -1,20 +1,18 @@
-/* eslint-disable no-unused-vars */
 const testsUtils = require('../tools/testsUtils');
 const testsDbUtils = require('../tools/testsDbUtils');
 const debug = require('debug')('spec:it');
 const debugSetup = require('debug')('spec:setup');
-/* eslint-enable no-unused-vars */
 
 const chai = require('chai');
 const expect = require('chai').expect;
 
 const globalVersion = '/api/v1';
-const route = '/contracts/{contractId}/usages/{usageId}';
+const route = '/usages/{contractId}/usages/{usageId}';
 
 const DATE_REGEX = testsUtils.getDateRegexp();
 
-describe(`Tests PUT ${route} API OK`, function() {
-  describe(`Setup and Test PUT ${route} API`, function() {
+describe('Tests DELETE ' + route + ' API OK', function() {
+  describe('Setup and Test DELETE ' + route + ' API with minimum contract details', function() {
     const contractDraft = {
       name: 'Contract name between A1 and B1',
       state: 'DRAFT',
@@ -183,7 +181,7 @@ describe(`Tests PUT ${route} API OK`, function() {
 
               testsDbUtils.initDbWithContracts([contractDraft, contractSent, contractReceived])
                 .then((initDbWithContractsResp) => {
-                  debugSetup('Three contracts where added in db ', initDbWithContractsResp);
+                  debugSetup('Three contracts where added in db ', removeAllUsagesResp);
                   contractDraft.id = initDbWithContractsResp[0].id;
                   contractSent.id = initDbWithContractsResp[1].id;
                   contractReceived.id = initDbWithContractsResp[2].id;
@@ -225,27 +223,18 @@ describe(`Tests PUT ${route} API OK`, function() {
     });
 
 
-    it('Put usage OK', function(done) {
+    it('Delete usage OK with existing usageId', function(done) {
       try {
         const path = globalVersion + '/contracts/' + contractSent.id + '/usages/' + usageMinimumData.id;
-        debug('PUT path : ', path);
+        debug('path : ', path);
 
-        const sentBody = {
-          header: {
-            name: 'Usage data name changed',
-            type: 'usage',
-            version: '1.2.0',
-            mspOwner: 'B1'
-          },
-          state: 'DRAFT',
-          body: {
-            data: []
-          }
-        };
         chai.request(testsUtils.getServer())
-          .put(`${path}`)
-          .send(sentBody)
+          .delete(`${path}`)
+          .send()
           .end((error, response) => {
+            expect(error).to.be.null;
+            expect(response).to.have.status(200);
+
             debug('response.status: %s', JSON.stringify(response.status));
             debug('response.body: %s', JSON.stringify(response.body));
             expect(error).to.be.null;
@@ -253,7 +242,6 @@ describe(`Tests PUT ${route} API OK`, function() {
             expect(response).to.be.json;
             expect(response.body).to.exist;
             expect(response.body).to.be.an('object');
-
             expect(Object.keys(response.body)).have.members(['usageId', 'contractId', 'header', 'state', 'body', 'creationDate', 'lastModificationDate']);
 
             expect(response.body).to.have.property('usageId', usageMinimumData.id);
@@ -264,14 +252,15 @@ describe(`Tests PUT ${route} API OK`, function() {
 
             expect(response.body).to.have.property('header').that.is.an('object');
             expect(Object.keys(response.body.header)).have.members(['name', 'type', 'version', 'mspOwner']);
-            expect(response.body.header).to.have.property('name', 'Usage data name changed');
+            expect(response.body.header).to.have.property('name', usageMinimumData.name);
             expect(response.body.header).to.have.property('type', usageMinimumData.type);
-            expect(response.body.header).to.have.property('version', '1.2.0');
+            expect(response.body.header).to.have.property('version', usageMinimumData.version);
+
             expect(response.body.header).to.have.property('mspOwner', usageMinimumData.mspOwner);
 
             expect(response.body).to.have.property('body').that.is.an('object');
             expect(Object.keys(response.body.body)).have.members(['data']);
-            expect(response.body.body).to.deep.include(usageMinimumData.body);
+
 
             done();
           });
@@ -282,179 +271,30 @@ describe(`Tests PUT ${route} API OK`, function() {
       }
     });
 
-
-    it('Put usage OK with maximum usage details', function(done) {
+    it('Delete usage NOK with unexisting usage entry id', function(done) {
       try {
-        const path = globalVersion + '/contracts/' + contractReceived.id + '/usages/' + usageMoreData.id;
-        debug('PUT path : ', path);
+        const randomValue = testsUtils.defineRandomValue();
+        const path = globalVersion + '/contracts/' + contractSent.id + '/usages/' + 'id_' + randomValue;
 
-        const sentBody = {
-          header: {
-            name: 'Usage data name changed',
-            type: 'usage',
-            version: '1.2.0',
-            mspOwner: 'B1'
-          },
-          state: 'DRAFT',
-          body: {
-            data: [{
-              year: 2020,
-              month: 1,
-              hpmn: 'HPMN',
-              vpmn: 'VPMN',
-              service: 'service',
-              value: 1,
-              units: 'unit',
-              charges: 'charge',
-              taxes: 'taxes'
-            }]
-          },
-        };
+
+        debug('path : ', path);
 
         chai.request(testsUtils.getServer())
-          .put(`${path}`)
-          .send(sentBody)
+          .delete(`${path}`)
+          .send()
           .end((error, response) => {
             debug('response.status: %s', JSON.stringify(response.status));
             debug('response.body: %s', JSON.stringify(response.body));
+
             expect(error).to.be.null;
-            expect(response).to.have.status(200);
-            expect(response).to.be.json;
+            expect(response).to.have.status(404);
             expect(response.body).to.exist;
             expect(response.body).to.be.an('object');
 
-            expect(Object.keys(response.body)).have.members(['usageId', 'contractId', 'header', 'state', 'body', 'creationDate', 'lastModificationDate']);
+            expect(response.body).to.have.property('internalErrorCode', 60);
+            expect(response.body).to.have.property('message', 'Resource not found');
+            expect(response.body).to.have.property('description', 'The requested URI or the requested resource does not exist.');
 
-            expect(response.body).to.have.property('usageId', usageMoreData.id);
-            expect(response.body).to.have.property('state', usageMoreData.state);
-            expect(response.body).to.have.property('creationDate').that.is.a('string').and.match(DATE_REGEX);
-            expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
-
-            expect(response.body).to.have.property('header').that.is.an('object');
-            expect(Object.keys(response.body.header)).have.members(['name', 'type', 'version', 'mspOwner']);
-            expect(response.body.header).to.have.property('name', 'Usage data name changed');
-            expect(response.body.header).to.have.property('type', usageMoreData.type);
-            expect(response.body.header).to.have.property('version', '1.2.0');
-            expect(response.body.header).to.have.property('mspOwner', usageMoreData.mspOwner);
-
-
-            expect(response.body).to.have.property('body').that.is.an('object');
-            expect(Object.keys(response.body.body)).have.members(['data']);
-            expect(response.body.body).to.deep.include(usageMoreData.body);
-
-            done();
-          });
-      } catch (exception) {
-        debug('exception: %s', exception.stack);
-        expect.fail('it test throws an exception');
-        done();
-      }
-    });
-
-    it('Put usage NOK on wrong contractId', function(done) {
-      try {
-        const randomValue = testsUtils.defineRandomValue();
-
-        const path = globalVersion + '/contracts/' + 'id_' + randomValue + '/usages/' + usageMinimumData.id;
-        debug('PUT path : ', path);
-
-        const sentBody = {
-          header: {
-            name: 'Usage data name changed',
-            type: 'usage',
-            version: '1.2.0',
-            mspOwner: 'B1'
-          },
-          state: 'DRAFT',
-          body: {
-            data: []
-          }
-        };
-        chai.request(testsUtils.getServer())
-          .put(`${path}`)
-          .send(sentBody)
-          .end((error, response) => {
-            debug('response.body: %s', JSON.stringify(response.body));
-            expect(error).to.be.null;
-            expect(response).to.have.status(422);
-            expect(response).to.be.json;
-            expect(response.body).to.exist;
-
-            expect(response.body.message).to.equal('Put usage not allowed');
-            done();
-          });
-      } catch (exception) {
-        debug('exception: %s', exception.stack);
-        expect.fail('it test throws an exception');
-        done();
-      }
-    });
-
-    it('Put usage NOK if request body state is not DRAFT', function(done) {
-      try {
-        const path = globalVersion + '/contracts/' + contractSent.id + '/usages/' + usageMinimumData.id;
-        debug('PUT path : ', path);
-
-        const sentBody = {
-          header: {
-            name: 'Usage data name changed',
-            type: 'usage',
-            version: '1.2.0',
-            mspOwner: 'B1'
-          },
-          state: 'SENT',
-          body: {
-            data: []
-          }
-        };
-        chai.request(testsUtils.getServer())
-          .put(`${path}`)
-          .send(sentBody)
-          .end((error, response) => {
-            debug('response.body: %s', JSON.stringify(response.body));
-            expect(error).to.be.null;
-            expect(response).to.have.status(422);
-            expect(response).to.be.json;
-            expect(response.body).to.exist;
-
-            expect(response.body.message).to.equal('Usage modification not allowed');
-            done();
-          });
-      } catch (exception) {
-        debug('exception: %s', exception.stack);
-        expect.fail('it test throws an exception');
-        done();
-      }
-    });
-
-    it('Put usage NOK if usage in db is not DRAFT', function(done) {
-      try {
-        const path = globalVersion + '/contracts/' + contractReceived.id + '/usages/' + usageSent.id;
-        debug('PUT path : ', path);
-
-        const sentBody = {
-          header: {
-            name: 'Usage data name changed',
-            type: 'usage',
-            version: '1.2.0',
-            mspOwner: 'B1'
-          },
-          state: 'SENT',
-          body: {
-            data: []
-          }
-        };
-        chai.request(testsUtils.getServer())
-          .put(`${path}`)
-          .send(sentBody)
-          .end((error, response) => {
-            debug('response.body: %s', JSON.stringify(response.body));
-            expect(error).to.be.null;
-            expect(response).to.have.status(422);
-            expect(response).to.be.json;
-            expect(response.body).to.exist;
-
-            expect(response.body.message).to.equal('Usage modification not allowed');
             done();
           });
       } catch (exception) {

@@ -9,13 +9,15 @@ const chai = require('chai');
 const expect = require('chai').expect;
 
 const globalVersion = '/api/v1';
-const route = '/contracts/{contractId}/usages/';
+const route = '/contracts/{contractId}/settlements/{settlementId}';
+
+const DATE_REGEX = testsUtils.getDateRegexp();
 
 describe(`Tests GET ${route} API OK`, function() {
-  describe(`Setup and Test GET ${route} `, function() {
+  describe(`Setup and Test GET ${route} API with minimum contract details`, function() {
     const contract1 = {
       name: 'Contract name between A1 and B1',
-      state: 'SIGNED',
+      state: 'SENT',
       type: 'contract',
       version: '1.1.0',
       fromMsp: {
@@ -49,7 +51,7 @@ describe(`Tests GET ${route} API OK`, function() {
     };
     const contract2 = {
       name: 'Contract name between B1 and C1',
-      state: 'SENT',
+      state: 'SIGNED',
       type: 'contract',
       version: '1.1.0',
       fromMsp: {
@@ -81,12 +83,11 @@ describe(`Tests GET ${route} API OK`, function() {
       },
       rawData: 'Ctr_raw-data-1'
     };
-    const usage1 = {
-      type: 'usage',
+    const settlement1 = {
+      type: 'settlement',
       version: '1.1.0',
-      name: 'Usage data',
+      name: 'Settlement data',
       contractId: undefined,
-      mspOwner: 'mspOwner',
       body: {
         data: []
       },
@@ -99,29 +100,28 @@ describe(`Tests GET ${route} API OK`, function() {
         .then((removeAllContractsResp) => {
           debugSetup('All contracts in db are removed : ', removeAllContractsResp);
 
-          testsDbUtils.removeAllUsages({})
-            .then((removeAllUsagesResp) => {
-              debugSetup('All usages in db are removed : ', removeAllUsagesResp);
+          testsDbUtils.removeAllSettlements({})
+            .then((removeAllSettlementsResp) => {
+              debugSetup('All settlements in db are removed : ', removeAllSettlementsResp);
 
               testsDbUtils.initDbWithContracts([contract1, contract2])
                 .then((initDbWithContractsResp) => {
-                  debugSetup('Two contracts in db ', removeAllUsagesResp);
+                  debugSetup('Two contracts in db ', initDbWithContractsResp);
                   contract1.id = initDbWithContractsResp[0].id;
                   contract2.id = initDbWithContractsResp[1].id;
-                  usage1.contractId = contract1.id;
-                  usage1.mspOwner = contract1.fromMsp.mspId;
-                  testsDbUtils.createUsage(usage1)
-                    .then((createUsageResp) => {
-                      debugSetup('One usage document linked to contract ', createUsageResp.contractId);
+                  settlement1.contractId = contract1.id;
+                  testsDbUtils.createSettlement(settlement1)
+                    .then((createSettlementResp) => {
+                      debugSetup('One settlement document linked to contract ', createSettlementResp.contractId);
 
-                      usage1.id = createUsageResp.id;
+                      settlement1.id = createSettlementResp.id;
                       debugSetup('==> done!');
                       done();
                     })
-                    .catch((createUsageError) => {
-                      debugSetup('Error initializing the db content : ', createUsageError);
+                    .catch((createSettlementError) => {
+                      debugSetup('Error initializing the db content : ', createSettlementError);
                       debugSetup('==> failed!');
-                      done(createUsageError);
+                      done(createSettlementError);
                     });
                 })
                 .catch((initDbWithContractsError) => {
@@ -130,10 +130,10 @@ describe(`Tests GET ${route} API OK`, function() {
                   done(initDbWithContractsError);
                 });
             })
-            .catch((removeAllUsagesError) => {
-              debugSetup('Error removing usages in db : ', removeAllUsagesError);
+            .catch((removeAllSettlementsError) => {
+              debugSetup('Error removing settlements in db : ', removeAllSettlementsError);
               debugSetup('==> failed!');
-              done(removeAllUsagesError);
+              done(removeAllSettlementsError);
             });
         })
         .catch((removeAllContractsError) => {
@@ -143,67 +143,37 @@ describe(`Tests GET ${route} API OK`, function() {
         });
     });
 
-    it('Get usages OK without contractId in DB', function(done) {
+    it('GET settlement OK', function(done) {
       try {
-        const randomValue = testsUtils.defineRandomValue();
-        const path = globalVersion + '/contracts/' + 'id_' + randomValue + '/usages/';
-        debug('GET path : %s', path);
-        chai.request(testsUtils.getServer())
-          .get(`${path}`)
-          .end((error, response) => {
-            debug('response.body: %s', JSON.stringify(response.body));
-            expect(error).to.be.null;
-            expect(response).to.have.status(200);
-            expect(response).to.be.json;
-            expect(response.body).to.exist;
-            expect(response.body).to.be.an('array');
-            expect(response.body.length).to.equal(0);
-            done();
-          });
-      } catch (exception) {
-        debug('exception: %s', exception.stack);
-        expect.fail('it test throws an exception');
-        done();
-      }
-    });
+        const path = globalVersion + '/contracts/' + contract1.id + '/settlements/' + settlement1.id;
+        debug('GET path : ', path);
 
-    it('Get usages OK without any usage for contractId in DB', function(done) {
-      try {
-        const path = globalVersion + '/contracts/' + contract2.id + '/usages/';
-        debug('GET path : %s', path);
         chai.request(testsUtils.getServer())
           .get(`${path}`)
           .end((error, response) => {
+            debug('response.status: %s', JSON.stringify(response.status));
             debug('response.body: %s', JSON.stringify(response.body));
             expect(error).to.be.null;
             expect(response).to.have.status(200);
             expect(response).to.be.json;
             expect(response.body).to.exist;
-            expect(response.body).to.be.an('array');
-            expect(response.body.length).to.equal(0);
-            done();
-          });
-      } catch (exception) {
-        debug('exception: %s', exception.stack);
-        expect.fail('it test throws an exception');
-        done();
-      }
-    });
+            expect(response.body).to.be.an('object');
+            expect(Object.keys(response.body)).have.members(['settlementId', 'contractId', 'header', 'state', 'body', 'creationDate', 'lastModificationDate']);
 
-    it('Get usages OK with 1 usage for contractId in DB', function(done) {
-      try {
-        const path = globalVersion + '/contracts/' + contract1.id + '/usages/';
-        debug('GET path : ' + path);
-        chai.request(testsUtils.getServer())
-          .get(`${path}`)
-          .end((error, response) => {
-            debug('response.body: %s', JSON.stringify(response.body));
-            expect(error).to.be.null;
-            expect(response).to.have.status(200);
-            expect(response).to.be.json;
-            expect(response.body).to.exist;
-            expect(response.body).to.be.an('array');
-            expect(response.body.length).to.equal(1);
+            expect(response.body).to.have.property('settlementId', settlement1.id);
+            expect(response.body).to.have.property('state', settlement1.state);
+            expect(response.body).to.have.property('creationDate').that.is.a('string').and.match(DATE_REGEX);
+            expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
+
+            expect(response.body).to.have.property('header').that.is.an('object');
+            expect(response.body.header).to.have.property('name', settlement1.name);
+            expect(response.body.header).to.have.property('type', settlement1.type);
+            expect(response.body.header).to.have.property('version', settlement1.version);
+
+            expect(response.body).to.have.property('body').that.is.an('object');
+            expect(Object.keys(response.body.body)).have.members(['data']);
+            expect(response.body.body).to.deep.include(settlement1.body);
+
             done();
           });
       } catch (exception) {

@@ -65,6 +65,15 @@ class ErrorUtils {
     }
   };
 
+  static ERROR_BUSINESS_DOCUMENT_UPSERT_FAILURE = {
+    code: 422,
+    error: {
+      internalErrorCode: 2003,
+      message: 'Blockchain document can\'t be upserted in DB',
+      description: 'It\'s not possible to upsert this document.'
+    }
+  };
+
   static ERROR_BLOCKCHAIN_ADAPTER_RESPONSE_PARSING_ERROR = {
     code: 500,
     error: {
@@ -102,11 +111,47 @@ class ErrorUtils {
   };
 
   static ERROR_BLOCKCHAIN_ADAPTER_RESPONSE_UNEXPECTED_ERROR = {
-    code: 404,
+    code: 500,
     error: {
       internalErrorCode: 3004,
       message: 'Blockchain response error',
       description: 'An unexpected response has been received from the Blockchain.'
+    }
+  };
+
+  static ERROR_BLOCKCHAIN_ADAPTER_SELF_HOST_UNDEFINED_ERROR = {
+    code: 500,
+    error: {
+      internalErrorCode: 3005,
+      message: 'Mandatory SELF_HOST configuration missing',
+      description: 'Environnement variable SELF_HOST is not defined.'
+    }
+  };
+
+  static ERROR_BLOCKCHAIN_ADAPTER_BLOCKCHAIN_ADAPTER_URL_UNDEFINED_ERROR = {
+    code: 500,
+    error: {
+      internalErrorCode: 3006,
+      message: 'Mandatory BLOCKCHAIN_ADAPTER_URL configuration missing',
+      description: 'Environnement variable BLOCKCHAIN_ADAPTER_URL is not defined.'
+    }
+  };
+
+  static ERROR_BLOCKCHAIN_ADAPTER_BLOCKCHAIN_ADAPTER_WEBHOOKS_INVALID_ERROR = {
+    code: 500,
+    error: {
+      internalErrorCode: 3007,
+      message: 'Mandatory BLOCKCHAIN_ADAPTER_WEBHOOK_EVENTS configuration not valid',
+      description: 'Environnement variable BLOCKCHAIN_ADAPTER_WEBHOOK_EVENTS is not valid.'
+    }
+  };
+
+  static ERROR_BLOCKCHAIN_ADAPTER_DOCUMENT_TYPE_ERROR = {
+    code: 500,
+    error: {
+      internalErrorCode: 3008,
+      message: 'Mandatory private document type is not valid',
+      description: 'The received private document does not contain a valid type.'
     }
   };
 
@@ -140,12 +185,47 @@ class ErrorUtils {
   static ERROR_BUSINESS_PUT_USAGE_ON_NOT_LINKED_CONTRACT_RECEIVED = {
     code: 422,
     error: {
-      internalErrorCode: 2003,
+      internalErrorCode: 2005,
       message: 'Put usage not allowed',
       description: 'It\'s not allowed to put usage on wrong contract.'
     }
   };
 
+  static ERROR_BUSINESS_DELETE_USAGE_ON_NOT_LINKED_CONTRACT_RECEIVED = {
+    code: 422,
+    error: {
+      internalErrorCode: 2006,
+      message: 'Delete usage not allowed',
+      description: 'It\'s not allowed to delete usage on wrong contract.'
+    }
+  };
+
+  static ERROR_BUSINESS_GET_SETTLEMENT_ON_NOT_LINKED_CONTRACT_RECEIVED = {
+    code: 422,
+    error: {
+      internalErrorCode: 2007,
+      message: 'Get settlement not allowed',
+      description: 'It\'s not allowed to get settlement on wrong contract.'
+    }
+  };
+
+  static ERROR_BUSINESS_GENERATE_SETTLEMENT_AND_COMMIT_NOT_SUPPORTED = {
+    code: 422,
+    error: {
+      internalErrorCode: 2008,
+      message: 'commit is not implemented yet',
+      description: 'It\'s not allowed to commit the settlement yet.'
+    }
+  };
+
+  static ERROR_BUSINESS_GENERATE_SETTLEMENT_ON_NOT_LINKED_CONTRACT_RECEIVED = {
+    code: 422,
+    error: {
+      internalErrorCode: 2008,
+      message: 'Calculate settlement not allowed',
+      description: 'It\'s not allowed to calculate settlement on wrong contract.'
+    }
+  };
 }
 
 module.exports = ErrorUtils;

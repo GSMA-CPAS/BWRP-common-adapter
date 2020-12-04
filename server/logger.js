@@ -4,6 +4,8 @@ const config = require('./config');
 const logger = createLogger({
   level: config.LOG_LEVEL,
   format: format.combine(
+    format.splat(),
+    format.simple(),
     format.timestamp(),
     format.json(),
   ),

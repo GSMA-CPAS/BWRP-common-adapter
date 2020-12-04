@@ -9,7 +9,7 @@ const chai = require('chai');
 const expect = require('chai').expect;
 
 const globalVersion = '/api/v1';
-const route = '/contracts/{contractId}/usages/';
+const route = '/contracts/{contractId}/settlements/';
 
 describe(`Tests GET ${route} API OK`, function() {
   describe(`Setup and Test GET ${route} `, function() {
@@ -81,12 +81,11 @@ describe(`Tests GET ${route} API OK`, function() {
       },
       rawData: 'Ctr_raw-data-1'
     };
-    const usage1 = {
-      type: 'usage',
+    const settlement1 = {
+      type: 'settlement',
       version: '1.1.0',
-      name: 'Usage data',
+      name: 'Settlement data',
       contractId: undefined,
-      mspOwner: 'mspOwner',
       body: {
         data: []
       },
@@ -99,29 +98,28 @@ describe(`Tests GET ${route} API OK`, function() {
         .then((removeAllContractsResp) => {
           debugSetup('All contracts in db are removed : ', removeAllContractsResp);
 
-          testsDbUtils.removeAllUsages({})
-            .then((removeAllUsagesResp) => {
-              debugSetup('All usages in db are removed : ', removeAllUsagesResp);
+          testsDbUtils.removeAllSettlements({})
+            .then((removeAllSettlementsResp) => {
+              debugSetup('All settlements in db are removed : ', removeAllSettlementsResp);
 
               testsDbUtils.initDbWithContracts([contract1, contract2])
                 .then((initDbWithContractsResp) => {
-                  debugSetup('Two contracts in db ', removeAllUsagesResp);
+                  debugSetup('Two contracts in db ', initDbWithContractsResp);
                   contract1.id = initDbWithContractsResp[0].id;
                   contract2.id = initDbWithContractsResp[1].id;
-                  usage1.contractId = contract1.id;
-                  usage1.mspOwner = contract1.fromMsp.mspId;
-                  testsDbUtils.createUsage(usage1)
-                    .then((createUsageResp) => {
-                      debugSetup('One usage document linked to contract ', createUsageResp.contractId);
+                  settlement1.contractId = contract1.id;
+                  testsDbUtils.createSettlement(settlement1)
+                    .then((createSettlementResp) => {
+                      debugSetup('One settlement document linked to contract ', createSettlementResp.contractId);
 
-                      usage1.id = createUsageResp.id;
+                      settlement1.id = createSettlementResp.id;
                       debugSetup('==> done!');
                       done();
                     })
-                    .catch((createUsageError) => {
-                      debugSetup('Error initializing the db content : ', createUsageError);
+                    .catch((createSettlementError) => {
+                      debugSetup('Error initializing the db content : ', createSettlementError);
                       debugSetup('==> failed!');
-                      done(createUsageError);
+                      done(createSettlementError);
                     });
                 })
                 .catch((initDbWithContractsError) => {
@@ -130,10 +128,10 @@ describe(`Tests GET ${route} API OK`, function() {
                   done(initDbWithContractsError);
                 });
             })
-            .catch((removeAllUsagesError) => {
-              debugSetup('Error removing usages in db : ', removeAllUsagesError);
+            .catch((removeAllSettlementsError) => {
+              debugSetup('Error removing settlements in db : ', removeAllSettlementsError);
               debugSetup('==> failed!');
-              done(removeAllUsagesError);
+              done(removeAllSettlementsError);
             });
         })
         .catch((removeAllContractsError) => {
@@ -143,10 +141,10 @@ describe(`Tests GET ${route} API OK`, function() {
         });
     });
 
-    it('Get usages OK without contractId in DB', function(done) {
+    it('Get settlements OK without contractId in DB', function(done) {
       try {
         const randomValue = testsUtils.defineRandomValue();
-        const path = globalVersion + '/contracts/' + 'id_' + randomValue + '/usages/';
+        const path = globalVersion + '/contracts/' + 'id_' + randomValue + '/settlements/';
         debug('GET path : %s', path);
         chai.request(testsUtils.getServer())
           .get(`${path}`)
@@ -167,9 +165,9 @@ describe(`Tests GET ${route} API OK`, function() {
       }
     });
 
-    it('Get usages OK without any usage for contractId in DB', function(done) {
+    it('Get settlements OK without any settlement for contractId in DB', function(done) {
       try {
-        const path = globalVersion + '/contracts/' + contract2.id + '/usages/';
+        const path = globalVersion + '/contracts/' + contract2.id + '/settlements/';
         debug('GET path : %s', path);
         chai.request(testsUtils.getServer())
           .get(`${path}`)
@@ -190,9 +188,9 @@ describe(`Tests GET ${route} API OK`, function() {
       }
     });
 
-    it('Get usages OK with 1 usage for contractId in DB', function(done) {
+    it('Get settlements OK with 1 settlement for contractId in DB', function(done) {
       try {
-        const path = globalVersion + '/contracts/' + contract1.id + '/usages/';
+        const path = globalVersion + '/contracts/' + contract1.id + '/settlements/';
         debug('GET path : ' + path);
         chai.request(testsUtils.getServer())
           .get(`${path}`)

@@ -1,11 +1,10 @@
 'use strict';
 
 class UsageMapper {
-
   // Map the input POST usages request to internal usage
   static getUsageFromPostUsagesRequest(contractId, body, mspOwner) {
     const returnedUsage = {
-      state: "DRAFT",
+      state: 'DRAFT',
       contractId: contractId,
       name: body.header.name,
       type: body.header.type,
@@ -22,6 +21,7 @@ class UsageMapper {
   static getResponseBodyForGetUsage(usage) {
     const returnedResponseBody = {
       usageId: usage.id,
+      contractId: usage.contractId,
       header: {
         name: usage.name,
         type: usage.type,
@@ -30,7 +30,7 @@ class UsageMapper {
       },
       state: usage.state,
       body: usage.body,
-      history: usage.history,
+      // history: usage.history,
       creationDate: usage.creationDate,
       lastModificationDate: usage.lastModificationDate
     };
@@ -42,9 +42,10 @@ class UsageMapper {
   static getResponseBodyForGetUsages(usages) {
     const returnedResponseBody = [];
     if ((usages !== undefined) && (Array.isArray(usages))) {
-      usages.forEach(usage => {
+      usages.forEach((usage) => {
         returnedResponseBody.push({
           usageId: usage.id,
+          contractId: usage.contractId,
           header: {
             name: usage.name,
             type: usage.type,
@@ -55,7 +56,7 @@ class UsageMapper {
           state: usage.state,
           creationDate: usage.creationDate,
           lastModificationDate: usage.lastModificationDate
-        })
+        });
       });
     }
     return returnedResponseBody;
@@ -69,8 +70,6 @@ class UsageMapper {
 
     return returnedUsage;
   }
-
-
 }
 
 module.exports = UsageMapper;

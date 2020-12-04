@@ -1,7 +1,9 @@
+/* eslint-disable no-unused-vars */
 const testsUtils = require('../tools/testsUtils');
 const testsDbUtils = require('../tools/testsDbUtils');
 const debug = require('debug')('spec:it');
 const debugSetup = require('debug')('spec:setup');
+/* eslint-enable no-unused-vars */
 
 const chai = require('chai');
 const expect = require('chai').expect;
@@ -12,14 +14,10 @@ const blockchainAdapterNock = nock(testsUtils.getBlockchainAdapterUrl());
 const globalVersion = '/api/v1';
 const route = '/discovery/msps/';
 
-const DATE_REGEX = new RegExp('^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z$');
-
-describe("Tests GET " + route + " API OK", function () {
-
-  describe("Setup and Test GET " + route + " API OK", function () {
-    it('Get msps OK without any msps in Blockchain', function (done) {
+describe(`Tests GET ${route} API OK`, function() {
+  describe(`Setup and Test GET ${route} API OK`, function() {
+    it('Get msps OK without any msps in Blockchain', function(done) {
       try {
-        nock.cleanAll();
         blockchainAdapterNock.get('/discovery/msps')
           .times(1)
           .reply((pathReceived, bodyReceived) => {
@@ -28,12 +26,12 @@ describe("Tests GET " + route + " API OK", function () {
             expect(bodyReceived).to.be.empty;
             return [
               200,
-              "[]",
+              '[]',
               undefined
-            ]
-          })
+            ];
+          });
 
-        let path = globalVersion + route;
+        const path = globalVersion + route;
         chai.request(testsUtils.getServer())
           .get(`${path}`)
           .end((error, response) => {
@@ -57,9 +55,8 @@ describe("Tests GET " + route + " API OK", function () {
       }
     });
 
-    it('Get msps OK with 4 msps in Blockchain', function (done) {
+    it('Get msps OK with 4 msps in Blockchain', function(done) {
       try {
-        nock.cleanAll();
         blockchainAdapterNock.get('/discovery/msps')
           .times(1)
           .reply((pathReceived, bodyReceived) => {
@@ -68,12 +65,12 @@ describe("Tests GET " + route + " API OK", function () {
             expect(bodyReceived).to.be.empty;
             return [
               200,
-              "[\"TMUS\",\"OrdererMSP\",\"GSMA\",\"DTAG\"]",
+              '["TMUS","OrdererMSP","GSMA","DTAG"]',
               undefined
-            ]
-          })
+            ];
+          });
 
-        let path = globalVersion + route;
+        const path = globalVersion + route;
         chai.request(testsUtils.getServer())
           .get(`${path}`)
           .end((error, response) => {
@@ -84,7 +81,7 @@ describe("Tests GET " + route + " API OK", function () {
             expect(response).to.be.json;
             expect(response.body).to.exist;
             expect(response.body).to.be.an('array');
-            expect(response.body).have.members(["TMUS", "OrdererMSP", "GSMA", "DTAG"]);
+            expect(response.body).have.members(['TMUS', 'OrdererMSP', 'GSMA', 'DTAG']);
 
             expect(blockchainAdapterNock.isDone(), 'Unconsumed nock error').to.be.true;
 
@@ -98,10 +95,9 @@ describe("Tests GET " + route + " API OK", function () {
     });
   });
 
-  describe("Setup and Test GET " + route + " API FAILED", function () {
-    it('Get msps FAILED with Blockchain response parsing error', function (done) {
+  describe(`Setup and Test GET ${route} API FAILED`, function() {
+    it('Get msps FAILED with Blockchain response parsing error', function(done) {
       try {
-        nock.cleanAll();
         blockchainAdapterNock.get('/discovery/msps')
           .times(1)
           .reply((pathReceived, bodyReceived) => {
@@ -110,12 +106,12 @@ describe("Tests GET " + route + " API OK", function () {
             expect(bodyReceived).to.be.empty;
             return [
               200,
-              "[\"TMUS\"\"]",
+              '["TMUS""]',
               undefined
-            ]
-          })
+            ];
+          });
 
-        let path = globalVersion + route;
+        const path = globalVersion + route;
         chai.request(testsUtils.getServer())
           .get(`${path}`)
           .end((error, response) => {
@@ -126,10 +122,10 @@ describe("Tests GET " + route + " API OK", function () {
             expect(response).to.be.json;
             expect(response.body).to.exist;
             expect(response.body).to.be.an('object');
-            expect(Object.keys(response.body)).have.members(["internalErrorCode", "message", "description"]);
+            expect(Object.keys(response.body)).have.members(['internalErrorCode', 'message', 'description']);
             expect(response.body).to.have.property('internalErrorCode', 3000);
-            expect(response.body).to.have.property('message', "Blockchain response parsing error");
-            expect(response.body).to.have.property('description', "It's not possible to parse the blockchain response.");
+            expect(response.body).to.have.property('message', 'Blockchain response parsing error');
+            expect(response.body).to.have.property('description', 'It\'s not possible to parse the blockchain response.');
 
             expect(blockchainAdapterNock.isDone(), 'Unconsumed nock error').to.be.true;
 
@@ -142,6 +138,4 @@ describe("Tests GET " + route + " API OK", function () {
       }
     });
   });
-
-
 });

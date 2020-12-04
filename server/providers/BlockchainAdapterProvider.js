@@ -6,7 +6,9 @@ const logger = require('../logger');
 const errorUtils = require('../utils/errorUtils');
 
 const BLOCKCHAIN_ADAPTER_AXIOS_CONFIG = {
-  transformResponse: [(data) => {return getAsObject(data);}]
+  transformResponse: [(data) => {
+    return getAsObject(data);
+  }]
 };
 
 const axiosInstance = axios.create(BLOCKCHAIN_ADAPTER_AXIOS_CONFIG);
@@ -18,16 +20,16 @@ const getAsObject = (value) => {
   } else {
     try {
       returnedObject = JSON.parse(value);
-    } catch(e) {
+    } catch (e) {
       throw errorUtils.ERROR_BLOCKCHAIN_ADAPTER_RESPONSE_PARSING_ERROR;
     }
   }
   return returnedObject;
-}
+};
 
-const throwDefaultCommonInternalError = (error, loggerHeader = "[BlockchainAdapterProvider::throwDefaultCommonInternalError]") => {
+const throwDefaultCommonInternalError = (error, loggerHeader = '[BlockchainAdapterProvider::throwDefaultCommonInternalError]') => {
   if (error.response) {
-    logger.error(`${loggerHeader} response in error : `, { status: error.response.status, data: error.response.data, headers: error.response.headers});
+    logger.error(`${loggerHeader} response in error : `, {status: error.response.status, data: error.response.data, headers: error.response.headers});
     throw errorUtils.ERROR_BLOCKCHAIN_ADAPTER_RESPONSE_UNEXPECTED_ERROR;
   } else if (error.request) {
     logger.error(`${loggerHeader} request in error: `, error.request);
@@ -39,17 +41,62 @@ const throwDefaultCommonInternalError = (error, loggerHeader = "[BlockchainAdapt
     logger.error(`${loggerHeader} error: `, error);
     throw errorUtils.ERROR_BLOCKCHAIN_ADAPTER_REQUEST_ERROR;
   }
-}
+};
+
+// eslint-disable-next-line no-unused-vars
+const defineRawDataFromContract = (c) => {
+  const rawDataObject = {};
+  rawDataObject.type = c.type;
+  rawDataObject.version = c.version;
+  rawDataObject.name = c.name;
+  rawDataObject.fromMsp = c.fromMsp ? c.fromMsp : {}; // to keep signatures if specified
+  rawDataObject.toMsp = c.toMsp ? c.toMsp : {}; // to keep signatures if specified
+  rawDataObject.body = c.body;
+  const stringToEncode = JSON.stringify(rawDataObject);
+
+  return Buffer.from(stringToEncode).toString('base64');
+};
+
+const defineRawDataObjectFromRawData = (d) => {
+  const stringToParse = Buffer.from(d, 'base64').toString();
+  const returnedObject = JSON.parse(stringToParse);
+  returnedObject.rawData = d;
+  return returnedObject;
+};
+
+const defineContractFromRawDataObject = (rawDataObject, fromMSP, toMSP, id, timestamp) => {
+  const contract = rawDataObject;
+
+  contract.fromMsp = contract.fromMsp ? contract.fromMsp : {};
+  contract.fromMsp.mspId = fromMSP;
+  contract.toMsp = contract.toMsp ? contract.toMsp : {};
+  contract.toMsp.mspId = toMSP;
+  contract.documentId = id;
+  contract.timestamp = timestamp;
+  contract.state = 'RECEIVED';
+  return contract;
+};
+
+const defineUsageFromRawDataObject = (rawDataObject, fromMSP, toMSP, id, timestamp) => {
+  const usage = rawDataObject;
+  usage.timestamp = timestamp;
+  return usage;
+};
+
+const defineSettlementFromRawDataObject = (rawDataObject, fromMSP, toMSP, id, timestamp) => {
+  const settlement = rawDataObject;
+  settlement.timestamp = timestamp;
+  return settlement;
+};
 
 class BlockchainAdapterProvider {
-
   constructor() {
   }
 
   /**
    *
-   * @param msp
-   * @returns {Promise<string>}
+   * @param {String} msp
+   * @return {Promise<[string]|object>}
    */
   async discovery(msp) {
     try {
@@ -63,7 +110,7 @@ class BlockchainAdapterProvider {
       return response.data;
     } catch (error) {
       if (msp && error.response && error.response.data && (error.response.data.message === `MSP '${msp}' not found.`)) {
-        logger.error('[BlockchainAdapterProvider::discovery] response not found : ', { status: error.response.status, data: error.response.data, headers: error.response.headers});
+        logger.error('[BlockchainAdapterProvider::discovery] response not found : ', {status: error.response.status, data: error.response.data, headers: error.response.headers});
         throw errorUtils.ERROR_BLOCKCHAIN_ADAPTER_RESPONSE_NOT_FOUND_ERROR;
       } else {
         throwDefaultCommonInternalError(error, '[BlockchainAdapterProvider::discovery]');
@@ -73,13 +120,13 @@ class BlockchainAdapterProvider {
 
   /**
    *
-   * @returns {Promise<string>}
+   * @return {Promise<string>}
    */
   async getPrivateDocumentIDs() {
     try {
-        const response = await axiosInstance.get(config.BLOCKCHAIN_ADAPTER_URL + '/private-documents');
-        logger.debug(`[BlockchainAdapterProvider::getPrivateDocumentIDs] response data:${typeof response.data} = ${JSON.stringify(response.data)}`);
-        return response.data;
+      const response = await axiosInstance.get(config.BLOCKCHAIN_ADAPTER_URL + '/private-documents');
+      logger.debug(`[BlockchainAdapterProvider::getPrivateDocumentIDs] response data:${typeof response.data} = ${JSON.stringify(response.data)}`);
+      return response.data;
     } catch (error) {
       throwDefaultCommonInternalError(error, '[BlockchainAdapterProvider::getPrivateDocumentIDs]');
     }
@@ -87,16 +134,31 @@ class BlockchainAdapterProvider {
 
   /**
    *
-   * @param documentId
-   * @returns {Promise<string>}
+   * @param {String} documentId
+   * @return {Promise<string>}
    */
   async getPrivateDocument(documentId) {
     try {
       const response = await axiosInstance.get(config.BLOCKCHAIN_ADAPTER_URL + '/private-documents/' + documentId);
       logger.debug(`[BlockchainAdapterProvider::getPrivateDocument] response data:${typeof response.data} = ${JSON.stringify(response.data)}`);
-      return response.data;    
+      const rawDataObject = defineRawDataObjectFromRawData(response.data.data);
+      if (!rawDataObject.type) {
+        throw errorUtils.ERROR_BLOCKCHAIN_ADAPTER_DOCUMENT_TYPE_ERROR;
+      } else if (rawDataObject.type === 'contract') {
+        const contract = defineContractFromRawDataObject(rawDataObject, response.data.fromMSP, response.data.toMSP, response.data.id, response.data.timeStamp);
+        return contract;
+      } else if (rawDataObject.type === 'usage') {
+        const usage = defineUsageFromRawDataObject(rawDataObject, response.data.fromMSP, response.data.toMSP, response.data.id, response.data.timeStamp);
+        return usage;
+      } else if (rawDataObject.type === 'settlement') {
+        const settlement = defineSettlementFromRawDataObject(rawDataObject, response.data.fromMSP, response.data.toMSP, response.data.id, response.data.timeStamp);
+        return settlement;
+      } else {
+        throw errorUtils.ERROR_BLOCKCHAIN_ADAPTER_DOCUMENT_TYPE_ERROR;
+      }
     } catch (error) {
-      if (documentId && error.response && error.response.data && (error.response.data.message === `DOCUMENT '${documentId}' not found.`)) {
+      if (documentId && error.response && error.response.data && (error.response.data.message === `Error: failed to query document. documentID '${documentId}' unknown status 404 - not found`)) {
+        logger.error('[BlockchainAdapterProvider::getPrivateDocument] response not found : ', {status: error.response.status, data: error.response.data, headers: error.response.headers});
         throw errorUtils.ERROR_BLOCKCHAIN_ADAPTER_RESPONSE_NOT_FOUND_ERROR;
       } else {
         throwDefaultCommonInternalError(error, '[BlockchainAdapterProvider::getPrivateDocument]');
@@ -106,12 +168,12 @@ class BlockchainAdapterProvider {
 
   /**
    *
-   * @param documentId
-   * @returns {Promise<string>}
+   * @param {String} documentId
+   * @return {Promise<string>}
    */
   async deletePrivateDocument(documentId) {
     try {
-      const response = await axiosInstance.delete(config.BLOCKCHAIN_ADAPTER_URL + '/private-documents/' + documentId);
+      const response = await axios.delete(config.BLOCKCHAIN_ADAPTER_URL + '/private-documents/' + documentId);
       logger.debug(`[BlockchainAdapterProvider::deletePrivateDocument] response data:${typeof response.data} = ${JSON.stringify(response.data)}`);
       return response.data;
     } catch (error) {
@@ -125,9 +187,9 @@ class BlockchainAdapterProvider {
 
   /**
    *
-   * @param toMSP
-   * @param dataBase64
-   * @returns {Promise<string>}
+   * @param {String} toMSP
+   * @param {String} dataBase64
+   * @return {Promise<string>}
    */
   async uploadPrivateDocument(toMSP, dataBase64) {
     try {
@@ -151,9 +213,33 @@ class BlockchainAdapterProvider {
 
   /**
    *
-   * @param documentId
-   * @param msp
-   * @returns {Promise<string>}
+   * @param {Object} contract
+   * @return {Promise<object>}
+   */
+  async uploadContract(contract) {
+    try {
+      const rawData = defineRawDataFromContract(contract);
+      const response = await axiosInstance.post(config.BLOCKCHAIN_ADAPTER_URL + '/private-documents', {
+        toMSP: contract.toMsp.mspId,
+        data: rawData
+      });
+      logger.debug(`[BlockchainAdapterProvider::uploadContract] response data:${typeof response.data} = ${JSON.stringify(response.data)}`);
+      return {
+        rawData,
+        documentId: response.data.documentID
+      };
+    } catch (error) {
+      logger.error('[BlockchainAdapterProvider::uploadContract] failed to upload contract - %s', error.message);
+      throw error;
+    }
+  }
+
+
+  /**
+   *
+   * @param {String} documentId
+   * @param {String} msp
+   * @return {Promise<string>}
    */
   async getSignatures(documentId, msp) {
     try {
@@ -171,11 +257,11 @@ class BlockchainAdapterProvider {
 
   /**
    *
-   * @param documentId
-   * @param certificate
-   * @param algorithm
-   * @param signature
-   * @returns {Promise<string>}
+   * @param {String} documentId
+   * @param {String} certificate
+   * @param {String} algorithm
+   * @param {String} signature
+   * @return {Promise<string>}
    */
   async uploadSignature(documentId, certificate, algorithm, signature) {
     try {
@@ -200,18 +286,15 @@ class BlockchainAdapterProvider {
 
   /**
    *
-   * @param callbackUrl
-   * @param eventName
-   * @returns {Promise<string>}
+   * @param {String} eventName
+   * @param {String} callbackUrl
+   * @return {Promise<string>}
    */
   async webhookSubscribe(eventName, callbackUrl) {
     try {
-      const response = await axiosInstance.post(config.BLOCKCHAIN_ADAPTER_URL + '/webhooks/subscribe', {
-        json: {
-          "eventName": eventName,
-          "callbackUrl": callbackUrl
-        },
-        responseType: 'text'
+      const response = await axios.post(config.BLOCKCHAIN_ADAPTER_URL + '/webhooks/subscribe', {
+        'eventName': eventName,
+        'callbackUrl': callbackUrl
       });
       logger.debug(`[BlockchainAdapterProvider::webhookSubscribe] response data:${typeof response.data} = ${JSON.stringify(response.data)}`);
       return response.data;
@@ -222,17 +305,38 @@ class BlockchainAdapterProvider {
 
   /**
    *
-   * @returns {Promise<void>}
+   * @return {Promise<[string]>}
    */
-  async initialize() {
+  async subscribe() {
+    if (config.SELF_HOST.length <= 0) {
+      logger.info('[BlockchainAdapterProvider::subscribe] env SELF_HOST not set. Not subscribing');
+      throw errorUtils.ERROR_BLOCKCHAIN_ADAPTER_SELF_HOST_UNDEFINED_ERROR;
+    }
+
+    if (config.BLOCKCHAIN_ADAPTER_URL.length <= 0) {
+      logger.info('[BlockchainAdapterProvider::subscribe] env BLOCKCHAIN_ADAPTER_URL not set. Not subscribing');
+      throw errorUtils.ERROR_BLOCKCHAIN_ADAPTER_BLOCKCHAIN_ADAPTER_URL_UNDEFINED_ERROR;
+    }
+
+    if (!Array.isArray(config.BLOCKCHAIN_ADAPTER_WEBHOOK_EVENTS)) {
+      logger.info('[BlockchainAdapterProvider::subscribe] env BLOCKCHAIN_ADAPTER_WEBHOOK_EVENTS not an array. Not subscribing');
+      throw errorUtils.ERROR_BLOCKCHAIN_ADAPTER_BLOCKCHAIN_ADAPTER_WEBHOOK_EVENTS_INVALID_ERROR;
+    }
+
+    const callbackUrl = config.SELF_HOST + '/api/v1/contracts/event/';
+
     try {
-      const webhooks = config.BLOCKCHAIN_ADAPTER_WEBHOOKS;
-      for (const webhook of webhooks) {
-        await this.webhookSubscribe(webhook.eventName, webhook.callbackUrl);
-        logger.info('[BlockchainAdapterProvider::initialize] webhook subscribe: %s -> %s', webhook.eventName, webhook.callbackUrl);
+      const webhookIds = [];
+      const webhookEvents = config.BLOCKCHAIN_ADAPTER_WEBHOOK_EVENTS;
+      for (const webhookEvent of webhookEvents) {
+        const webhookSubscribeResponse = await this.webhookSubscribe(webhookEvent, callbackUrl);
+        logger.info('[BlockchainAdapterProvider::subscribe] webhook subscribe: %s -> %s', webhookEvent, callbackUrl);
+        const webhookId = webhookSubscribeResponse;
+        webhookIds.push(webhookId);
       }
+      return webhookIds;
     } catch (error) {
-      logger.error('[BlockchainAdapterProvider::initialize] failed to initialize adapter - %s', error.message);
+      logger.error('[BlockchainAdapterProvider::subscribe] failed to subscribe to events - %s', JSON.stringify(error));
       throw error;
     }
   }

@@ -4,27 +4,30 @@ const chaiHttp = require('chai-http');
 
 chai.use(chaiHttp);
 
+const testEnv = require('../env.json');
 
 let app = undefined;
 
+const nock = require('nock');
+
 beforeEach(() => {
-  console.log("  --  --  --  --  --  --  --  --  --  ");
-})
+  console.log('  --  --  --  --  --  --  --  --  --  ');
+  nock.cleanAll();
+});
 
 class TestsUtils {
-
   static startServer() {
     return new Promise((resolve, reject) => {
       if (app === undefined) {
-        debug("app never started. Start the app.");
+        debug('app never started. Start the app.');
         app = require('../../index.js');
-        debug("Wait server starting");
+        debug('Wait server starting');
         setTimeout(() => {
-          debug("Server started");
+          debug('Server started');
           resolve(app);
         }, 4000);
       } else {
-        debug("app already started. Return the app.");
+        debug('app already started. Return the app.');
         resolve(app);
       }
     });
@@ -36,11 +39,20 @@ class TestsUtils {
 
   static defineRandomValue() {
     return String(Date.now()) + ((Math.random() * 100) | 1);
-  };
-
-  static getBlockchainAdapterUrl() {
-    return "http://127.0.0.1:8081";
   }
 
+  static getBlockchainAdapterUrl() {
+    return testEnv.BLOCKCHAIN_ADAPTER_URL;
+  }
+
+  static getSelfHostUrl() {
+    return testEnv.SELF_HOST;
+  }
+
+  static getDateRegexp() {
+    // eslint-disable-next-line no-useless-escape
+    return new RegExp('^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z$');
+  }
 }
+
 module.exports = TestsUtils;

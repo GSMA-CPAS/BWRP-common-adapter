@@ -1,7 +1,9 @@
+/* eslint-disable no-unused-vars */
 const testsUtils = require('../tools/testsUtils');
 const testsDbUtils = require('../tools/testsDbUtils');
 const debug = require('debug')('spec:it');
 const debugSetup = require('debug')('spec:setup');
+/* eslint-enable no-unused-vars */
 
 const chai = require('chai');
 const expect = require('chai').expect;
@@ -9,21 +11,20 @@ const expect = require('chai').expect;
 const globalVersion = '/api/v1';
 const route = '/contracts/{contractId}/usages/{usageId}';
 
-const DATE_REGEX = new RegExp('^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z$');
+const DATE_REGEX = testsUtils.getDateRegexp();
 
-describe("Tests GET " + route + " API OK", function () {
-
-  describe("Setup and Test GET " + route + " API with minimum contract details", function () {
+describe(`Tests GET ${route} API OK`, function() {
+  describe(`Setup and Test GET ${route} API with minimum contract details`, function() {
     const contract1 = {
-      name: "Contract name between A1 and B1",
+      name: 'Contract name between A1 and B1',
       state: 'SENT',
       type: 'contract',
       version: '1.1.0',
       fromMsp: {
-        mspId: "A1"
+        mspId: 'A1'
       },
       toMsp: {
-        mspId: "B1"
+        mspId: 'B1'
       },
       body: {
         bankDetails: {
@@ -38,26 +39,26 @@ describe("Tests GET " + route + " API OK", function () {
             currency: null
           }
         },
-        discountModels: "someData",
+        discountModels: 'someData',
         generalInformation: {
-          name: "test1",
-          type: "Normal",
-          endDate: "2021-01-01T00:00:00.000Z",
-          startDate: "2020-12-01T00:00:00.000Z"
+          name: 'test1',
+          type: 'Normal',
+          endDate: '2021-01-01T00:00:00.000Z',
+          startDate: '2020-12-01T00:00:00.000Z'
         }
       },
-      rawData: "Ctr_raw-data-1"
+      rawData: 'Ctr_raw-data-1'
     };
     const contract2 = {
-      name: "Contract name between B1 and C1",
+      name: 'Contract name between B1 and C1',
       state: 'SIGNED',
       type: 'contract',
       version: '1.1.0',
       fromMsp: {
-        mspId: "B1"
+        mspId: 'B1'
       },
       toMsp: {
-        mspId: "C1"
+        mspId: 'C1'
       },
       body: {
         bankDetails: {
@@ -72,15 +73,15 @@ describe("Tests GET " + route + " API OK", function () {
             currency: null
           }
         },
-        discountModels: "someData",
+        discountModels: 'someData',
         generalInformation: {
-          name: "test1",
-          type: "Normal",
-          endDate: "2021-01-01T00:00:00.000Z",
-          startDate: "2020-12-01T00:00:00.000Z"
+          name: 'test1',
+          type: 'Normal',
+          endDate: '2021-01-01T00:00:00.000Z',
+          startDate: '2020-12-01T00:00:00.000Z'
         }
       },
-      rawData: "Ctr_raw-data-1"
+      rawData: 'Ctr_raw-data-1'
     };
     const usage1 = {
       type: 'usage',
@@ -89,7 +90,7 @@ describe("Tests GET " + route + " API OK", function () {
       contractId: contract1.id,
       mspOwner: 'mspOwner',
       body: {
-        "data": [ {
+        data: [{
           year: 2020,
           month: 1,
           hpmn: 'HPMN',
@@ -104,60 +105,60 @@ describe("Tests GET " + route + " API OK", function () {
       state: 'DRAFT'
     };
 
-    before(done => {
+    before((done) => {
       debugSetup('==> remove all contracts in db');
       testsDbUtils.removeAllContracts({})
-        .then(removeAllContractsResp => {
+        .then((removeAllContractsResp) => {
           debugSetup('All contracts in db are removed : ', removeAllContractsResp);
 
           testsDbUtils.removeAllUsages({})
-            .then(removeAllUsagesResp => {
+            .then((removeAllUsagesResp) => {
               debugSetup('All usages in db are removed : ', removeAllUsagesResp);
 
-              testsDbUtils.initDbWithContracts([contract1,contract2])
-                .then(initDbWithContractsResp => {
+              testsDbUtils.initDbWithContracts([contract1, contract2])
+                .then((initDbWithContractsResp) => {
                   debugSetup('Two contracts in db ', removeAllUsagesResp);
                   contract1.id = initDbWithContractsResp[0].id;
                   contract2.id = initDbWithContractsResp[1].id;
                   usage1.contractId = contract1.id;
                   usage1.mspOwner = contract1.fromMsp.mspId;
                   testsDbUtils.createUsage(usage1)
-                    .then(createUsageResp => {
+                    .then((createUsageResp) => {
                       debugSetup('One usage document linked to contract ', createUsageResp.contractId);
 
                       usage1.id = createUsageResp.id;
                       debugSetup('==> done!');
                       done();
                     })
-                    .catch(createUsageError => {
+                    .catch((createUsageError) => {
                       debugSetup('Error initializing the db content : ', createUsageError);
                       debugSetup('==> failed!');
                       done(createUsageError);
                     });
                 })
-                .catch(initDbWithContractsError => {
+                .catch((initDbWithContractsError) => {
                   debugSetup('Error initializing the db content : ', initDbWithContractsError);
                   debugSetup('==> failed!');
                   done(initDbWithContractsError);
                 });
             })
-            .catch(removeAllUsagesError => {
+            .catch((removeAllUsagesError) => {
               debugSetup('Error removing usages in db : ', removeAllUsagesError);
               debugSetup('==> failed!');
               done(removeAllUsagesError);
             });
         })
-        .catch(removeAllContractsError => {
+        .catch((removeAllContractsError) => {
           debugSetup('Error removing contracts in db : ', removeAllContractsError);
           debugSetup('==> failed!');
           done(removeAllContractsError);
         });
     });
 
-    it('GET usage OK', function (done) {
+    it('GET usage OK', function(done) {
       try {
-        let path = globalVersion + '/contracts/' + contract1.id + '/usages/' + usage1.id;
-        debug("GET path : ", path);
+        const path = globalVersion + '/contracts/' + contract1.id + '/usages/' + usage1.id;
+        debug('GET path : ', path);
 
         chai.request(testsUtils.getServer())
           .get(`${path}`)
@@ -169,7 +170,7 @@ describe("Tests GET " + route + " API OK", function () {
             expect(response).to.be.json;
             expect(response.body).to.exist;
             expect(response.body).to.be.an('object');
-            expect(Object.keys(response.body)).have.members(["usageId", "header", "state",  "body", "history", "creationDate", "lastModificationDate"]);
+            expect(Object.keys(response.body)).have.members(['usageId', 'contractId', 'header', 'state', 'body', 'creationDate', 'lastModificationDate']);
 
             expect(response.body).to.have.property('usageId', usage1.id);
             expect(response.body).to.have.property('state', usage1.state);
@@ -177,15 +178,14 @@ describe("Tests GET " + route + " API OK", function () {
             expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
 
             expect(response.body).to.have.property('header').that.is.an('object');
-            expect(Object.keys(response.body.header)).have.members(["name", "type", "version", "mspOwner"]);
+            expect(Object.keys(response.body.header)).have.members(['name', 'type', 'version', 'mspOwner']);
             expect(response.body.header).to.have.property('name', usage1.name);
             expect(response.body.header).to.have.property('type', usage1.type);
             expect(response.body.header).to.have.property('version', usage1.version);
             expect(response.body.header).to.have.property('mspOwner', usage1.mspOwner);
 
-
             expect(response.body).to.have.property('body').that.is.an('object');
-            expect(Object.keys(response.body.body)).have.members(["data"]);
+            expect(Object.keys(response.body.body)).have.members(['data']);
             expect(response.body.body).to.deep.include(usage1.body);
 
             done();
@@ -196,6 +196,5 @@ describe("Tests GET " + route + " API OK", function () {
         done();
       }
     });
-
   });
 });
