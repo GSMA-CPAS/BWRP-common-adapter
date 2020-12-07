@@ -54,6 +54,18 @@ class ContractDAO {
         {date: creationDate, action: action}
       ];
 
+      if (action == 'RECEIVED') {
+        const signatureLinks = [];
+        for (let i = 0; i < object.fromMsp.signatures.length; i++) {
+          signatureLinks.push({id: ContractMongoRequester.defineContractId(), msp: 'fromMsp', index: i});
+        }
+        for (let i = 0; i < object.toMsp.signatures.length; i++) {
+          signatureLinks.push({id: ContractMongoRequester.defineContractId(), msp: 'toMsp', index: i});
+        }
+        console.log(signatureLinks);
+        object.signatureLink = signatureLinks;
+      }
+
       // Launch database request
       ContractMongoRequester.create(object, (err, contract) => {
         DAOErrorManager.handleErrorOrNullObject(err, contract)
