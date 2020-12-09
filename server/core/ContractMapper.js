@@ -65,7 +65,8 @@ class ContractMapper {
       state: contract.state,
       // history: contract.history,
       creationDate: contract.creationDate,
-      lastModificationDate: contract.lastModificationDate
+      lastModificationDate: contract.lastModificationDate,
+      documentId: contract.documentId
     };
 
     if (format === 'RAW') {
@@ -105,7 +106,7 @@ class ContractMapper {
       };
     }
 
-    return returnedResponseBody;
+    return this.sortResponse(returnedResponseBody);
   }
 
   static getResponseBodyForSendContract(contract) {
@@ -119,7 +120,7 @@ class ContractMapper {
     const returnedResponseBody = [];
     if ((contracts !== undefined) && (Array.isArray(contracts))) {
       contracts.forEach((contract) => {
-        returnedResponseBody.push({
+        returnedResponseBody.push(this.sortResponse({
           contractId: contract.id,
           header: {
             name: contract.name,
@@ -134,10 +135,53 @@ class ContractMapper {
           },
           state: contract.state,
           creationDate: contract.creationDate,
-          lastModificationDate: contract.lastModificationDate
-        });
+          lastModificationDate: contract.lastModificationDate,
+          documentId: contract.documentId
+        }));
       });
     }
+    return returnedResponseBody;
+  }
+
+  static sortResponse(payload) {
+    // make sure response object sort in the same manner.
+    const returnedHeader = {};
+    if (payload.header.name!=undefined) {
+      returnedHeader.name = payload.header.name;
+    }
+    if (payload.header.type!=undefined) {
+      returnedHeader.type = payload.header.type;
+    }
+    if (payload.header.version!=undefined) {
+      returnedHeader.version = payload.header.version;
+    }
+    if (payload.header.fromMsp!=undefined) {
+      returnedHeader.fromMsp = payload.header.fromMsp;
+    }
+    if (payload.header.toMsp!=undefined) {
+      returnedHeader.toMsp = payload.header.toMsp;
+    }
+
+    const returnedResponseBody = {contractId: payload.contractId};
+    if (payload.header!=undefined) {
+      returnedResponseBody.header = returnedHeader;
+    }
+    if (payload.body!=undefined) {
+      returnedResponseBody.body = payload.body;
+    }
+    if (payload.state!=undefined) {
+      returnedResponseBody.state = payload.state;
+    }
+    if (payload.documentId!=undefined) {
+      returnedResponseBody.documentId = payload.documentId;
+    }
+    if (payload.creationDate!=undefined) {
+      returnedResponseBody.creationDate = payload.creationDate;
+    }
+    if (payload.lastModificationDate!=undefined) {
+      returnedResponseBody.lastModificationDate = payload.lastModificationDate;
+    }
+
     return returnedResponseBody;
   }
 }
