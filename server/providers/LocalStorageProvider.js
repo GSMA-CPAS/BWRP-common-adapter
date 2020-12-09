@@ -249,7 +249,6 @@ class LocalStorageProvider {
       throw error;
     }
   }
-
 }
 
 module.exports = LocalStorageProvider;

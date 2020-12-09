@@ -324,7 +324,6 @@ class ContractDAO {
       });
     });
   }
-
 }
 
 module.exports = ContractDAO;

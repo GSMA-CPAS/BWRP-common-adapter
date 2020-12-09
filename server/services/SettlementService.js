@@ -6,8 +6,6 @@ const SettlementMapper = require('../core/SettlementMapper');
 const LocalStorageProvider = require('../providers/LocalStorageProvider');
 const errorUtils = require('../utils/errorUtils');
 
-
-
 /**
  * Get Settlement Object by its Id
  *

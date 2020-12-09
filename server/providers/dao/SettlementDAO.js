@@ -59,7 +59,7 @@ class SettlementDAO {
             resolve(objectReturned);
           })
           .catch((errorReturned) => {
-            logger.error('[UsageDAO::create] [FAILED] errorReturned:' + typeof errorReturned + ' = ' + JSON.stringify(errorReturned));
+            logger.error('[SettlementDAO::create] [FAILED] errorReturned:' + typeof errorReturned + ' = ' + JSON.stringify(errorReturned));
             reject(errorReturned);
           });
       });
