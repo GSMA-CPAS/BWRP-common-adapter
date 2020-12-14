@@ -9,6 +9,7 @@ const blockchainAdapterConnection = new BlockchainAdapterProvider();
 
 const logger = require('../logger');
 const errorUtils = require('../utils/errorUtils');
+const crypto = require('crypto');
 
 /**
  * Compare objects timestamps
@@ -143,6 +144,57 @@ const eventDocumentReceived = ({body}) => new Promise(
   },
 );
 
+const eventSignatureReceived = ({body}) => new Promise(
+  async (resolve, reject) => {
+    try {
+      console.log(body);
+      const getContractsResp = await LocalStorageProvider.getContracts();
+      for (const contract of getContractsResp) {
+        const hash = crypto.createHash('sha256').update(body.msp + contract.documentId).digest('hex').toString('utf8');
+
+        if (hash==body.data.storageKey) {
+          const mycontract = await LocalStorageProvider.getContract(contract.id);
+          const bcSignatures = await blockchainAdapterConnection.getSignatures( contract.documentId, body.msp);
+          const bcSignaturesindex = [];
+
+          // build the index
+          for (var bcSignature in bcSignatures) {
+            bcSignaturesindex.push(bcSignature);
+          }
+
+          //console.log(bcSignatures);
+          const signatureLink = mycontract.signatureLink;
+          let update = false;
+          let j = 0;
+          for (let i = 0; i < signatureLink.length; i++) {
+            if(mycontract[signatureLink[i]['msp']]['mspId'] == body.msp) {
+              // TODO: some additioanl checks to see if this is "self" event". If its self, drop. Else, update SignatureLink
+              console.log(bcSignaturesindex[j]);
+              if (signatureLink[i]['txId'] == undefined) {
+                signatureLink[i]['txId'] = bcSignaturesindex[j];
+                update = true;
+              }
+              j++;
+            }
+          }
+          if (update) {
+            console.log("yes!");
+            const contractToUpdate = mycontract;
+            contractToUpdate.signatureLink = signatureLink;
+            const updateContractResp = await LocalStorageProvider.updateContract(contractToUpdate);
+          }
+          break;
+        }
+      }
+
+      resolve(Service.successResponse({}, 200));
+    } catch (e) {
+      reject(Service.rejectResponse(e));
+    }
+  },
+);
+
+
 /**
  * Webhook callback
  *
@@ -155,8 +207,7 @@ const eventReceived = ({body}) => new Promise(
       if (body.eventName === 'STORE:DOCUMENTHASH') {
         resolve(await eventDocumentReceived({body}));
       } else if (body.eventName === 'STORE:SIGNATURE') {
-        // resolve(await eventDocumentReceived({body}));
-        reject(Service.rejectResponse({}));
+        resolve(await eventSignatureReceived({body}));
       } else {
         // resolve(await eventDocumentReceived({body}));
         reject(Service.rejectResponse({}));

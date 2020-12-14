@@ -221,13 +221,12 @@ class BlockchainAdapterProvider {
   async uploadSignature(documentId, certificate, algorithm, signature) {
     try {
       const response = await axiosInstance.put(config.BLOCKCHAIN_ADAPTER_URL + '/signatures/' + documentId, {
-        json: {
-          certificate: certificate,
-          algorithm: algorithm,
-          signature: signature,
-        },
-        responseType: 'json'
+        certificate: certificate,
+        algorithm: algorithm,
+        signature: signature
       });
+      logger.debug(`[BlockchainAdapterProvider::uploadContract] response data:${typeof response.data} = ${JSON.stringify(response.data)}`);
+
       logger.debug(`[BlockchainAdapterProvider::uploadSignature] response data:${typeof response.data} = ${JSON.stringify(response.data)}`);
       return response.data;
     } catch (error) {
