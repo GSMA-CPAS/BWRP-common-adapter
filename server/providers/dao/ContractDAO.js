@@ -56,11 +56,15 @@ class ContractDAO {
 
       if (action == 'RECEIVED') {
         const signatureLinks = [];
-        for (let i = 0; i < object.fromMsp.signatures.length; i++) {
-          signatureLinks.push({id: ContractMongoRequester.defineContractId(), msp: 'fromMsp', index: i});
+        if (object.fromMsp.signatures !== undefined) {
+          for (let i = 0; i < object.fromMsp.signatures.length; i++) {
+            signatureLinks.push({id: ContractMongoRequester.defineSignatureId(), msp: 'fromMsp', index: i});
+          }
         }
-        for (let i = 0; i < object.toMsp.signatures.length; i++) {
-          signatureLinks.push({id: ContractMongoRequester.defineContractId(), msp: 'toMsp', index: i});
+        if (object.toMsp.signatures !== undefined) {
+          for (let i = 0; i < object.toMsp.signatures.length; i++) {
+            signatureLinks.push({id: ContractMongoRequester.defineSignatureId(), msp: 'toMsp', index: i});
+          }
         }
         console.log(signatureLinks);
         object.signatureLink = signatureLinks;
@@ -275,10 +279,10 @@ class ContractDAO {
 
         const signatureLinks = [];
         for (let i = 0; i < contract.fromMsp.signatures.length; i++) {
-          signatureLinks.push({id: ContractMongoRequester.defineContractId(), msp: 'fromMsp', index: i});
+          signatureLinks.push({id: ContractMongoRequester.defineSignatureId(), msp: 'fromMsp', index: i});
         }
         for (let i = 0; i < contract.toMsp.signatures.length; i++) {
-          signatureLinks.push({id: ContractMongoRequester.defineContractId(), msp: 'toMsp', index: i});
+          signatureLinks.push({id: ContractMongoRequester.defineSignatureId(), msp: 'toMsp', index: i});
         }
         console.log(signatureLinks);
 
