@@ -33,3 +33,27 @@ Once its up and running, you can access the API via
      http://<yourhost>:<COMMON_ADAPTER_PORT>/api-docs/
 
 --
+
+# For local dev
+
+```
+cd server
+```
+
+## Start local mongodb on 27917
+
+```
+npm run startTestDB
+```
+
+## Run tests
+
+```
+npm run test
+```
+
+## Start local mongodb on 27917
+
+```
+npm run stopTestDB
+```
