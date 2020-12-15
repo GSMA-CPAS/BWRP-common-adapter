@@ -54,6 +54,22 @@ class ContractDAO {
         {date: creationDate, action: action}
       ];
 
+      if (action == 'RECEIVED') {
+        const signatureLinks = [];
+        if (object.fromMsp.signatures !== undefined) {
+          for (let i = 0; i < object.fromMsp.signatures.length; i++) {
+            signatureLinks.push({id: ContractMongoRequester.defineSignatureId(), msp: 'fromMsp', index: i});
+          }
+        }
+        if (object.toMsp.signatures !== undefined) {
+          for (let i = 0; i < object.toMsp.signatures.length; i++) {
+            signatureLinks.push({id: ContractMongoRequester.defineSignatureId(), msp: 'toMsp', index: i});
+          }
+        }
+        console.log(signatureLinks);
+        object.signatureLink = signatureLinks;
+      }
+
       // Launch database request
       ContractMongoRequester.create(object, (err, contract) => {
         DAOErrorManager.handleErrorOrNullObject(err, contract)
@@ -101,7 +117,8 @@ class ContractDAO {
           fromMsp: object.fromMsp,
           toMsp: object.toMsp,
           body: object.body,
-          lastModificationDate: object.lastModificationDate
+          lastModificationDate: object.lastModificationDate,
+          signatureLink: object.signatureLink
         },
         $push: {
           history: {date: object.lastModificationDate, action: 'UPDATE'}
@@ -256,28 +273,43 @@ class ContractDAO {
         state: 'DRAFT'
       };
 
-      const updateCommand = {
-        $set: {
-          rawData: rawData,
-          documentId: documentId,
-          state: 'SENT',
-          lastModificationDate: lastModificationDate
-        },
-        $push: {
-          history: {date: lastModificationDate, action: 'SENT'}
-        }
-      };
+      // Convert "header->from/toMSP->signatures to signatureLink
+      ContractMongoRequester.findOne(condition, (err, contract) => {
+        console.log(contract);
 
-      // Launch database request
-      ContractMongoRequester.findOneAndUpdate(condition, updateCommand, (err, contract) => {
-        DAOErrorManager.handleErrorOrNullObject(err, contract)
-          .then((objectReturned) => {
-            resolve(objectReturned);
-          })
-          .catch((errorReturned) => {
-            logger.error('[ContractDAO::findOneAndUpdateToSentContract] [FAILED] errorReturned:' + typeof errorReturned + ' = ' + JSON.stringify(errorReturned));
-            reject(errorReturned);
-          });
+        const signatureLinks = [];
+        for (let i = 0; i < contract.fromMsp.signatures.length; i++) {
+          signatureLinks.push({id: ContractMongoRequester.defineSignatureId(), msp: 'fromMsp', index: i});
+        }
+        for (let i = 0; i < contract.toMsp.signatures.length; i++) {
+          signatureLinks.push({id: ContractMongoRequester.defineSignatureId(), msp: 'toMsp', index: i});
+        }
+        console.log(signatureLinks);
+
+        const updateCommand = {
+          $set: {
+            rawData: rawData,
+            documentId: documentId,
+            state: 'SENT',
+            lastModificationDate: lastModificationDate,
+            signatureLink: signatureLinks
+          },
+          $push: {
+            history: {date: lastModificationDate, action: 'SENT'}
+          }
+        };
+
+        // Launch database request
+        ContractMongoRequester.findOneAndUpdate(condition, updateCommand, (err, contract) => {
+          DAOErrorManager.handleErrorOrNullObject(err, contract)
+            .then((objectReturned) => {
+              resolve(objectReturned);
+            })
+            .catch((errorReturned) => {
+              logger.error('[ContractDAO::findOneAndUpdateToSentContract] [FAILED] errorReturned:' + typeof errorReturned + ' = ' + JSON.stringify(errorReturned));
+              reject(errorReturned);
+            });
+        });
       });
     });
   }

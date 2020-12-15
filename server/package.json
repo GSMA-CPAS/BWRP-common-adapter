@@ -7,7 +7,9 @@
     "eslint": "./node_modules/.bin/eslint .",
     "prestart": "npm install",
     "start": "node index.js",
-    "test": "env-cmd -f ./test/env.json --use-shell \"DEBUG=spec* mocha ./test/**/*.spec.js --file test/tools/startServer.js --timeout 12000 --exit\""
+    "test": "env-cmd -f ./test/env.json --use-shell \"DEBUG=spec* mocha ./test/**/*.spec.js --file test/tools/startServer.js --timeout 12000 --exit\"",
+    "startTestDB": "cd .. && docker-compose -f docker-compose-for-tests.yaml up -d",
+    "stopTestDB": "cd .. && docker-compose -f docker-compose-for-tests.yaml down"
   },
   "keywords": [
     "openapi-generator",

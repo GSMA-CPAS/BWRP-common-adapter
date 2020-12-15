@@ -49,7 +49,7 @@ config.BLOCKCHAIN_ADAPTER_URL = process.env.BLOCKCHAIN_ADAPTER_URL || 'http://12
 config.BLOCKCHAIN_ADAPTER_WEBHOOK_EVENTS = getAsObject(process.env.BLOCKCHAIN_ADAPTER_WEBHOOK_EVENTS) || [];
 config.SELF_HOST = process.env.SELF_HOST || '';
 
-config.DB_URL = process.env.DB_URL || 'mongodb://userdtag:userpwd@localhost:27017/roamingdbdtag?authSource=roamingdbdtag';
+config.DB_URL = process.env.DB_URL || 'mongodb://user:userpw@127.0.0.1:27917/commondb?authSource=commondb';
 config.DB_CREATE_CONNECTION_TIMEOUT = getAsInt(process.env.DB_CREATE_CONNECTION_TIMEOUT) || 30000;
 config.DB_HEARTBEAT_FREQUENCY = getAsInt(process.env.DB_HEARTBEAT_FREQUENCY) || 5000;
 config.DB_POOL_SIZE = getAsInt(process.env.DB_POOL_SIZE) || 10;

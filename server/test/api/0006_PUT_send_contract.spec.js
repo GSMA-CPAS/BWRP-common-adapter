@@ -156,10 +156,11 @@ describe(`Tests PUT ${route} API OK`, function() {
             expect(response).to.be.json;
             expect(response.body).to.exist;
             expect(response.body).to.be.an('object');
-            expect(Object.keys(response.body)).have.members(['contractId', 'state', 'creationDate', 'lastModificationDate', 'header', 'body']);
+            expect(Object.keys(response.body)).have.members(['contractId', 'state', 'documentId', 'creationDate', 'lastModificationDate', 'header', 'body']);
 
             expect(response.body).to.have.property('contractId', contract1.id);
             expect(response.body).to.have.property('state', 'SENT');
+            expect(response.body).to.have.property('documentId').that.is.a('string');
             expect(response.body).to.have.property('creationDate').that.is.a('string').and.match(DATE_REGEX);
             expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
 
@@ -264,10 +265,11 @@ describe(`Tests PUT ${route} API OK`, function() {
             expect(response).to.be.json;
             expect(response.body).to.exist;
             expect(response.body).to.be.an('object');
-            expect(Object.keys(response.body)).have.members(['contractId', 'state', 'creationDate', 'lastModificationDate', 'header', 'body']);
+            expect(Object.keys(response.body)).have.members(['contractId', 'state', 'documentId', 'creationDate', 'lastModificationDate', 'header', 'body']);
 
             expect(response.body).to.have.property('contractId', contract2.id);
             expect(response.body).to.have.property('state', 'SENT');
+            expect(response.body).to.have.property('documentId').that.is.a('string');
             expect(response.body).to.have.property('creationDate').that.is.a('string').and.match(DATE_REGEX);
             expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
 

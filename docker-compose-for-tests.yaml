@@ -1,0 +1,19 @@
+version: '3'
+
+volumes:
+  CADB-for-test:
+
+services:
+  CADB-for-test:
+    container_name: CADB-for-test
+    image: mongo:${MONGO_VERSION}
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_ROOT}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_ROOTPW}
+      - MONGO_INITDB_DATABASE=commondb
+    volumes:
+      - ./CATestDB/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - ./CATestDB/data/db:/data/db
+    ports:
+      - 27917:27017

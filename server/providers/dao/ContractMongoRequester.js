@@ -8,6 +8,10 @@ class ContractMongoRequester {
     return ContractMongoRequester.defineRandomizedObjectId();
   }
 
+  static defineSignatureId() {
+    return ContractMongoRequester.defineRandomizedObjectId();
+  }
+
   static defineRandomizedObjectId() {
     const randomValue = ((Math.random() * 65535) | 1).toString(16);
     const formatedRandomValue = ('000' + randomValue).slice(-4);
