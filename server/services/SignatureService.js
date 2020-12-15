@@ -27,7 +27,7 @@ const getSignatureById = ({contractId, signatureId}) => new Promise(
           console.log(signature);
 
           // get signatures from blockchain
-          const bcSignatures = await blockchainAdapterConnection.getSignatures( contract.documentId, contract[signature.msp].mspId);
+          const bcSignatures = await blockchainAdapterConnection.getSignatures(contract.documentId, contract[signature.msp].mspId);
           console.log(bcSignatures);
           let state = 'UNSIGNED';
 
@@ -36,9 +36,9 @@ const getSignatureById = ({contractId, signatureId}) => new Promise(
             contractId: contract.id,
             msp: contract[signature.msp].mspId,
             name: contract[signature.msp]['signatures'][signature.index].name,
-            role: contract[signature.msp]['signatures'][signature.index].role 
-          }
-          if (signature.txId!=undefined && bcSignatures[signature.txId] != undefined) {
+            role: contract[signature.msp]['signatures'][signature.index].role
+          };
+          if (signature.txId != undefined && bcSignatures[signature.txId] != undefined) {
             state = 'SIGNED';
             mySignature.algorithm = bcSignatures[signature.txId]['algorithm'];
             mySignature.certificate = bcSignatures[signature.txId]['certificate'];
@@ -71,16 +71,26 @@ const getSignatureById = ({contractId, signatureId}) => new Promise(
 const getSignatures = ({contractId}) => new Promise(
   async (resolve, reject) => {
     try {
-      const contract = await LocalStorageProvider.getContract(contractId);
-      const signatures = [];
-      for (const signature of contract.signatureLink) {
-        let state = 'UNSIGNED';
-        if (signature.txId!=undefined) {
-          state = 'SIGNED';
+      const getContractByIdResp = await LocalStorageProvider.getContract(contractId);
+      if ((getContractByIdResp.state !== 'SENT') && (getContractByIdResp.state !== 'RECEIVED')) {
+        reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_GET_SIGNATURES_ONLY_ALLOWED_IN_STATE_SENT_OR_RECEIVED));
+      } else {
+        const signatures = [];
+        for (const signature of getContractByIdResp.signatureLink) {
+          let state = 'UNSIGNED';
+          if (signature.txId != undefined) {
+            state = 'SIGNED';
+          }
+          signatures.push({
+            signatureId: signature.id,
+            contractId: getContractByIdResp.id,
+            msp: getContractByIdResp[signature.msp].mspId,
+            name: getContractByIdResp[signature.msp]['signatures'][signature.index].name,
+            state: state
+          });
         }
-        signatures.push({signatureId: signature.id, contractId: contract.id, msp: contract[signature.msp].mspId, name: contract[signature.msp]['signatures'][signature.index].name, state: state});
+        resolve(Service.successResponse(signatures));
       }
-      resolve(Service.successResponse(signatures));
     } catch (e) {
       reject(Service.rejectResponse(e));
     }
@@ -114,7 +124,7 @@ const updateSignatureById = ({contractId, signatureId, body}) => new Promise(
 
       for (let i = 0; i < signatureLink.length; i++) {
         if (signatureLink[i]['id'] == signatureId) {
-          const bcSignatures = await blockchainAdapterConnection.uploadSignature( contract.documentId, body.certificate, body.algorithm, body.signature);
+          const bcSignatures = await blockchainAdapterConnection.uploadSignature(contract.documentId, body.certificate, body.algorithm, body.signature);
           signatureLink[i]['txId'] = bcSignatures.txID;
 
           const contractToUpdate = contract;
@@ -135,7 +145,6 @@ const updateSignatureById = ({contractId, signatureId, body}) => new Promise(
           }
 
           resolve(Service.successResponse(mySignature));
-
 
 
         }

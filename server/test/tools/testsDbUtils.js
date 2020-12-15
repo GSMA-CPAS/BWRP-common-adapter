@@ -62,12 +62,11 @@ class TestsDbUtils {
       }
       if (contract.history === undefined) {
         contract.history = [];
+        contract.history.push({
+          date: contract.creationDate,
+          action: 'CREATION'
+        });
       }
-      contract.history.push({
-        date: contract.creationDate,
-        action: 'CREATION'
-      });
-
       // Launch db request
       ContractMongoRequester.create(contract, (err, createdContract) => {
         if (err) {
@@ -135,11 +134,12 @@ class TestsDbUtils {
       }
       if (usage.history === undefined) {
         usage.history = [];
+        usage.history.push({
+          date: usage.creationDate,
+          action: 'CREATION'
+        });
       }
-      usage.history.push({
-        date: usage.creationDate,
-        action: 'CREATION'
-      });
+
 
       // Launch db request
       UsageMongoRequester.create(usage, (err, createdUsage) => {
@@ -195,11 +195,12 @@ class TestsDbUtils {
       }
       if (settlement.history === undefined) {
         settlement.history = [];
+        settlement.history.push({
+          date: settlement.creationDate,
+          action: 'CREATION'
+        });
       }
-      settlement.history.push({
-        date: settlement.creationDate,
-        action: 'CREATION'
-      });
+
 
       // Launch db request
       SettlementMongoRequester.create(settlement, (err, createdSettlement) => {

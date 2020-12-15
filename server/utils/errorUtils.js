@@ -226,6 +226,16 @@ class ErrorUtils {
       description: 'It\'s not allowed to calculate settlement on wrong contract.'
     }
   };
+
+  static ERROR_BUSINESS_GET_SIGNATURES_ONLY_ALLOWED_IN_STATE_SENT_OR_RECEIVED = {
+    code: 422,
+    error: {
+      internalErrorCode: 2009,
+      message: 'Get signatures not allowed',
+      description: 'It\'s only allowed to get signatures on contracts SENT or RECEIVED.'
+    }
+  };
+
 }
 
 module.exports = ErrorUtils;

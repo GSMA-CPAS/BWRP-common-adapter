@@ -9,52 +9,28 @@ const chai = require('chai');
 const expect = require('chai').expect;
 
 const globalVersion = '/api/v1';
-const route = '/contracts/{contractId}/usages/{usageId}';
+const route = '/contracts/{contractId}/signatures/{signatureId}';
 
 const DATE_REGEX = testsUtils.getDateRegexp();
 
 describe(`Tests PUT ${route} API OK`, function() {
   describe(`Setup and Test PUT ${route} API`, function() {
-    const contractDraft = {
-      name: 'Contract name between A1 and B1',
+    const sentContract = {
+      name: 'Contract name between MSP1 and MSP2',
       state: 'DRAFT',
       type: 'contract',
       version: '1.1.0',
       fromMsp: {
-        mspId: 'A1'
+        mspId: 'A1',
+        signatures: [
+          {
+            role: 'role',
+            name: 'name',
+            id: 'id'
+          }
+        ]
       },
       toMsp: {
-        mspId: 'B1'
-      },
-      body: {
-        bankDetails: {
-          A1: {
-            iban: null,
-            bankName: null,
-            currency: null
-          },
-          B1: {
-            iban: null,
-            bankName: null,
-            currency: null
-          }
-        },
-        discountModels: 'someData',
-        generalInformation: {
-          name: 'test1',
-          type: 'Normal',
-          endDate: '2021-01-01T00:00:00.000Z',
-          startDate: '2020-12-01T00:00:00.000Z'
-        }
-      },
-      rawData: 'Ctr_raw-data-1'
-    };
-    const contractSent = {
-      name: 'Contract name between B1 and C1',
-      state: 'SENT',
-      type: 'contract',
-      version: '1.1.0',
-      fromMsp: {
         mspId: 'B1',
         signatures: [
           {
@@ -64,16 +40,6 @@ describe(`Tests PUT ${route} API OK`, function() {
           }
         ]
       },
-      toMsp: {
-        mspId: 'C1',
-        signatures: [
-          {
-            role: 'role',
-            name: 'name',
-            id: 'id'
-          }
-        ]
-      },
       body: {
         bankDetails: {
           A1: {
@@ -94,96 +60,9 @@ describe(`Tests PUT ${route} API OK`, function() {
           endDate: '2021-01-01T00:00:00.000Z',
           startDate: '2020-12-01T00:00:00.000Z'
         }
-      },
-      rawData: 'Ctr_raw-data-1'
+      }
     };
-    const contractReceived = {
-      name: 'Contract name between B1 and C1',
-      state: 'RECEIVED',
-      type: 'contract',
-      version: '1.1.0',
-      fromMsp: {
-        mspId: 'B1'
-      },
-      toMsp: {
-        mspId: 'C1'
-      },
-      body: {
-        bankDetails: {
-          A1: {
-            iban: null,
-            bankName: null,
-            currency: null
-          },
-          B1: {
-            iban: null,
-            bankName: null,
-            currency: null
-          }
-        },
-        discountModels: 'someData',
-        generalInformation: {
-          name: 'test1',
-          type: 'Normal',
-          endDate: '2021-01-01T00:00:00.000Z',
-          startDate: '2020-12-01T00:00:00.000Z'
-        }
-      },
-      rawData: 'Ctr_raw-data-1'
-    };
-    const usageMinimumData = {
-      type: 'usage',
-      version: '1.1.0',
-      name: 'Usage data',
-      contractId: undefined,
-      mspOwner: undefined,
-      body: {
-        data: []
-      },
-      state: 'DRAFT'
-    };
-    const usageMoreData = {
-      type: 'usage',
-      version: '1.1.0',
-      name: 'Usage with data',
-      contractId: undefined,
-      mspOwner: undefined,
-      body: {
-        data: [{
-          year: 2020,
-          month: 1,
-          hpmn: 'HPMN',
-          vpmn: 'VPMN',
-          service: 'service',
-          value: 1,
-          units: 'unit',
-          charges: 'charge',
-          taxes: 'taxes'
-        }]
-      },
-      state: 'DRAFT'
-    };
-    const usageSent = {
-      type: 'usage',
-      version: '1.1.0',
-      name: 'Usage with data',
-      contractId: undefined,
-      mspOwner: undefined,
-      body: {
-        data: [{
-          year: 2020,
-          month: 1,
-          hpmn: 'HPMN',
-          vpmn: 'VPMN',
-          service: 'service',
-          value: 1,
-          units: 'unit',
-          charges: 'charge',
-          taxes: 'taxes'
-        }]
-      },
-      state: 'SENT'
-    };
+
 
     before((done) => {
       debugSetup('==> remove all contracts in db');
@@ -195,29 +74,11 @@ describe(`Tests PUT ${route} API OK`, function() {
             .then((removeAllUsagesResp) => {
               debugSetup('All usages in db are removed : ', removeAllUsagesResp);
 
-              testsDbUtils.initDbWithContracts([contractDraft, contractSent, contractReceived])
+              testsDbUtils.initDbWithContracts([draftContract])
                 .then((initDbWithContractsResp) => {
-                  debugSetup('Three contracts where added in db ', initDbWithContractsResp);
-                  contractDraft.id = initDbWithContractsResp[0].id;
-                  contractSent.id = initDbWithContractsResp[1].id;
-                  contractReceived.id = initDbWithContractsResp[2].id;
-                  usageMinimumData.contractId = contractSent.id;
-                  usageMinimumData.mspOwner = contractSent.fromMsp.mspId;
-                  usageMoreData.contractId = contractReceived.id;
-                  usageMoreData.mspOwner = contractReceived.fromMsp.mspId;
-                  usageSent.contractId = contractReceived.id;
-                  usageSent.mspOwner = contractReceived.fromMsp.mspId;
-                  testsDbUtils.initDbWithUsages([usageMinimumData, usageMoreData, usageSent])
-                    .then((initDbWithUsagesResp) => {
-                      debugSetup('The db is initialized with 3 usages : ', initDbWithUsagesResp.map((c) => c.id));
-                      debugSetup('==> done!');
-                      done();
-                    })
-                    .catch((initDbWithUsagesError) => {
-                      debugSetup('Error initializing the db content : ', initDbWithUsagesError);
-                      debugSetup('==> failed!');
-                      done(initDbWithUsagesError);
-                    });
+                  debugSetup('One contract in db ', removeAllUsagesResp);
+                  draftContract.id = initDbWithContractsResp[0].id;
+                  done();
                 })
                 .catch((initDbWithContractsError) => {
                   debugSetup('Error initializing the db content : ', initDbWithContractsError);
@@ -238,8 +99,7 @@ describe(`Tests PUT ${route} API OK`, function() {
         });
     });
 
-
-    it('Put usage OK', function(done) {
+    it.skip('Put usage OK', function(done) {
       try {
         const path = globalVersion + '/contracts/' + contractSent.id + '/usages/' + usageMinimumData.id;
         debug('PUT path : ', path);
@@ -297,7 +157,7 @@ describe(`Tests PUT ${route} API OK`, function() {
     });
 
 
-    it('Put usage OK with maximum usage details', function(done) {
+    it.skip('Put usage OK with maximum usage details', function(done) {
       try {
         const path = globalVersion + '/contracts/' + contractReceived.id + '/usages/' + usageMoreData.id;
         debug('PUT path : ', path);
@@ -365,7 +225,7 @@ describe(`Tests PUT ${route} API OK`, function() {
       }
     });
 
-    it('Put usage NOK on wrong contractId', function(done) {
+    it.skip('Put usage NOK on wrong contractId', function(done) {
       try {
         const randomValue = testsUtils.defineRandomValue();
 
@@ -404,7 +264,7 @@ describe(`Tests PUT ${route} API OK`, function() {
       }
     });
 
-    it('Put usage NOK if request body state is not DRAFT', function(done) {
+    it.skip('Put usage NOK if request body state is not DRAFT', function(done) {
       try {
         const path = globalVersion + '/contracts/' + contractSent.id + '/usages/' + usageMinimumData.id;
         debug('PUT path : ', path);
@@ -441,7 +301,7 @@ describe(`Tests PUT ${route} API OK`, function() {
       }
     });
 
-    it('Put usage NOK if usage in db is not DRAFT', function(done) {
+    it.skip('Put usage NOK if usage in db is not DRAFT', function(done) {
       try {
         const path = globalVersion + '/contracts/' + contractReceived.id + '/usages/' + usageSent.id;
         debug('PUT path : ', path);
