@@ -86,11 +86,11 @@ COPY . /app
 WORKDIR /app
 
 RUN mkdir -p /app/config \
-    && chown -R $SERVICE_USER /app/config \
     && mkdir -p /app/uploaded_files \
     && chown -R $SERVICE_USER /app/uploaded_files \
     && /app/tools/make_tags.sh $COMMIT_HASH \
-    && npm install
+    && npm install \
+    && chown -R $SERVICE_USER /app
 
 USER $SERVICE_USER
 
