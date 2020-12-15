@@ -1,7 +1,6 @@
 'use strict';
 
 const mongoose = require('mongoose');
-const { interfaces } = require('mocha');
 const Schema = mongoose.Schema;
 
 const HistorySchema = new Schema({
