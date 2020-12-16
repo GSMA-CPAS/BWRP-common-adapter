@@ -20,23 +20,29 @@ const errorUtils = require('../utils/errorUtils');
 const getSignatureById = ({contractId, signatureId}) => new Promise(
   async (resolve, reject) => {
     try {
-      const contract = await LocalStorageProvider.getContract(contractId);
-
-      for (const signature of contract.signatureLink) {
-        if (signature.id == signatureId) {
-          console.log(signature);
-
-          // get signatures from blockchain
-          const bcSignatures = await blockchainAdapterConnection.getSignatures(contract.documentId, contract[signature.msp].mspId);
-          console.log(bcSignatures);
+      const getContractByIdResp = await LocalStorageProvider.getContract(contractId);
+      if ((getContractByIdResp.state !== 'SENT') && (getContractByIdResp.state !== 'RECEIVED')) {
+        reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_GET_SIGNATURES_ONLY_ALLOWED_IN_STATE_SENT_OR_RECEIVED));
+      } else {
+        let indexOfSignatureToGet = -1;
+        for (let i = 0; i < getContractByIdResp.signatureLink.length; i++) {
+          if (getContractByIdResp.signatureLink[i]['id'] == signatureId) {
+            indexOfSignatureToGet = i;
+          }
+        }
+        if (indexOfSignatureToGet == -1) {
+          reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_GET_SIGNATURE_WITH_WRONG_SIGNATURE_ID));
+        } else {
+          const signature = getContractByIdResp.signatureLink[indexOfSignatureToGet];
+          const bcSignatures = await blockchainAdapterConnection.getSignatures(getContractByIdResp.documentId, getContractByIdResp[signature.msp].mspId);
           let state = 'UNSIGNED';
 
           const mySignature = {
             signatureId: signatureId,
-            contractId: contract.id,
-            msp: contract[signature.msp].mspId,
-            name: contract[signature.msp]['signatures'][signature.index].name,
-            role: contract[signature.msp]['signatures'][signature.index].role
+            contractId: getContractByIdResp.id,
+            msp: getContractByIdResp[signature.msp].mspId,
+            name: getContractByIdResp[signature.msp]['signatures'][signature.index].name,
+            role: getContractByIdResp[signature.msp]['signatures'][signature.index].role
           };
           if (signature.txId != undefined && bcSignatures[signature.txId] != undefined) {
             state = 'SIGNED';
@@ -49,18 +55,10 @@ const getSignatureById = ({contractId, signatureId}) => new Promise(
           resolve(Service.successResponse(mySignature));
         }
       }
-
-      // reject properlly
-      reject(Service.rejectResponse(
-        e.message || 'Invalid SignatureId',
-        e.status || 405,
-      ));
-
     } catch (e) {
       reject(Service.rejectResponse(e));
     }
-  },
-);
+  });
 
 /**
  * Get All signatures of a given Contract

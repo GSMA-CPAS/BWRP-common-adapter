@@ -271,6 +271,15 @@ class ErrorUtils {
       description: 'This signature Id doesn\'t exist'
     }
   };
+
+  static ERROR_BUSINESS_GET_SIGNATURE_WITH_WRONG_SIGNATURE_ID = {
+    code: 404,
+    error: {
+      internalErrorCode: 2015,
+      message: 'Get signatures not allowed',
+      description: 'This signature Id doesn\'t exist'
+    }
+  };
 }
 
 module.exports = ErrorUtils;

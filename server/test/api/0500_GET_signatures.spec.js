@@ -283,7 +283,6 @@ describe(`Tests GET ${route} API OK`, function() {
           .end((error, response) => {
             debug('response.body: %s', JSON.stringify(response.body));
             expect(error).to.be.null;
-            expect(error).to.be.null;
             expect(response).to.have.status(422);
             expect(response.body).to.exist;
             expect(response.body).to.be.an('object');
