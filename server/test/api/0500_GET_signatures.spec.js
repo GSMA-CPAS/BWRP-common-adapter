@@ -247,7 +247,7 @@ describe(`Tests GET ${route} API OK`, function() {
         });
     });
 
-    it('Get signatures KO without contractId in DB', function (done) {
+    it('Get signatures KO without contractId in DB', function(done) {
       try {
         const randomValue = testsUtils.defineRandomValue();
         const path = globalVersion + '/contracts/' + 'id_' + randomValue + '/signatures/';
@@ -274,7 +274,7 @@ describe(`Tests GET ${route} API OK`, function() {
       }
     });
 
-    it('Get signatures on DRAFT contract should return an error', function (done) {
+    it('Get signatures on DRAFT contract should return an error', function(done) {
       try {
         const path = globalVersion + '/contracts/' + draftContract.id + '/signatures/';
         debug('GET path : %s', path);
@@ -299,7 +299,7 @@ describe(`Tests GET ${route} API OK`, function() {
       }
     });
 
-    it('Get signatures OK after a SEND on draft contract with one signature in from and toMsp ', function (done) {
+    it('Get signatures OK after a SEND on draft contract with one signature in from and toMsp ', function(done) {
       const randomValue = testsUtils.defineRandomValue();
       blockchainAdapterNock.post('/private-documents')
         .times(1)
@@ -341,15 +341,15 @@ describe(`Tests GET ${route} API OK`, function() {
                 expect(response.body).to.be.an('array');
                 expect(response.body.length).to.equal(2);
                 expect(response.body[0]).to.have.property('signatureId').that.is.a('string');
-                expect(response.body[0]).to.have.property('contractId', draftContract.id)
-                expect(response.body[0]).to.have.property('msp', draftContract.fromMsp.mspId)
-                expect(response.body[0]).to.have.property('name', draftContract.fromMsp.signatures[0].name)
-                expect(response.body[0]).to.have.property('state', 'UNSIGNED')
+                expect(response.body[0]).to.have.property('contractId', draftContract.id);
+                expect(response.body[0]).to.have.property('msp', draftContract.fromMsp.mspId);
+                expect(response.body[0]).to.have.property('name', draftContract.fromMsp.signatures[0].name);
+                expect(response.body[0]).to.have.property('state', 'UNSIGNED');
                 expect(response.body[1]).to.have.property('signatureId').that.is.a('string');
-                expect(response.body[1]).to.have.property('contractId', draftContract.id)
-                expect(response.body[1]).to.have.property('msp', draftContract.toMsp.mspId)
-                expect(response.body[1]).to.have.property('name', draftContract.toMsp.signatures[0].name)
-                expect(response.body[1]).to.have.property('state', 'UNSIGNED')
+                expect(response.body[1]).to.have.property('contractId', draftContract.id);
+                expect(response.body[1]).to.have.property('msp', draftContract.toMsp.mspId);
+                expect(response.body[1]).to.have.property('name', draftContract.toMsp.signatures[0].name);
+                expect(response.body[1]).to.have.property('state', 'UNSIGNED');
                 done();
               });
           });
@@ -360,7 +360,7 @@ describe(`Tests GET ${route} API OK`, function() {
       }
     });
 
-    it('Get signatures OK on a SENT contract with one signature in from and toMsp ', function (done) {
+    it('Get signatures OK on a SENT contract with one signature in from and toMsp ', function(done) {
       try {
         const path = globalVersion + '/contracts/' + sentContract.id + '/signatures/';
         debug('GET path : ' + path);
@@ -375,15 +375,15 @@ describe(`Tests GET ${route} API OK`, function() {
             expect(response.body).to.be.an('array');
             expect(response.body.length).to.equal(2);
             expect(response.body[0]).to.have.property('signatureId').that.is.a('string');
-            expect(response.body[0]).to.have.property('contractId', sentContract.id)
-            expect(response.body[0]).to.have.property('msp', sentContract.fromMsp.mspId)
-            expect(response.body[0]).to.have.property('name', sentContract.fromMsp.signatures[0].name)
-            expect(response.body[0]).to.have.property('state', 'UNSIGNED')
+            expect(response.body[0]).to.have.property('contractId', sentContract.id);
+            expect(response.body[0]).to.have.property('msp', sentContract.fromMsp.mspId);
+            expect(response.body[0]).to.have.property('name', sentContract.fromMsp.signatures[0].name);
+            expect(response.body[0]).to.have.property('state', 'UNSIGNED');
             expect(response.body[1]).to.have.property('signatureId').that.is.a('string');
-            expect(response.body[1]).to.have.property('contractId', sentContract.id)
-            expect(response.body[1]).to.have.property('msp', sentContract.toMsp.mspId)
-            expect(response.body[1]).to.have.property('name', sentContract.toMsp.signatures[0].name)
-            expect(response.body[1]).to.have.property('state', 'UNSIGNED')
+            expect(response.body[1]).to.have.property('contractId', sentContract.id);
+            expect(response.body[1]).to.have.property('msp', sentContract.toMsp.mspId);
+            expect(response.body[1]).to.have.property('name', sentContract.toMsp.signatures[0].name);
+            expect(response.body[1]).to.have.property('state', 'UNSIGNED');
             done();
           });
       } catch (exception) {
@@ -393,7 +393,7 @@ describe(`Tests GET ${route} API OK`, function() {
       }
     });
 
-    it('Get signatures OK on a RECEIVED contract with one signature in from and toMsp ', function (done) {
+    it('Get signatures OK on a RECEIVED contract with one signature in from and toMsp ', function(done) {
       try {
         const path = globalVersion + '/contracts/' + receivedContract.id + '/signatures/';
         debug('GET path : ' + path);

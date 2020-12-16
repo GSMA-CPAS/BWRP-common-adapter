@@ -511,6 +511,5 @@ describe(`Tests PUT ${route} API OK`, function() {
         done();
       }
     });
-
   });
 });

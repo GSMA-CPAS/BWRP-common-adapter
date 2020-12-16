@@ -150,7 +150,7 @@ const updateSignatureById = ({contractId, signatureId, body}) => new Promise(
                 certificate: body.certificate,
                 signature: body.signature,
                 state: 'SIGNED'
-              }
+              };
 
               resolve(Service.successResponse(mySignature));
             }
@@ -180,7 +180,7 @@ const updateSignatureById = ({contractId, signatureId, body}) => new Promise(
                 certificate: body.certificate,
                 signature: body.signature,
                 state: 'SIGNED'
-              }
+              };
 
               resolve(Service.successResponse(mySignature));
             }
