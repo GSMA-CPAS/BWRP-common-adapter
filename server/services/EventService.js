@@ -9,7 +9,6 @@ const blockchainAdapterConnection = new BlockchainAdapterProvider();
 
 const logger = require('../logger');
 const errorUtils = require('../utils/errorUtils');
-const crypto = require('crypto');
 
 /**
  * Compare objects timestamps
@@ -70,6 +69,7 @@ const storeBlockchainDocumentInLocalStorage = (document) => new Promise(
         if (existsContract) {
           returnedResponse = await LocalStorageProvider.findContractByDocumentId(document.documentId, {rawData: document.rawData});
         } else {
+          document.storageKeys = await blockchainAdapterConnection.getStorageKeys(document.documentId, [document.fromMsp.mspId, document.toMsp.mspId]);
           returnedResponse = await LocalStorageProvider.saveReceivedContract(document);
         }
       } else if (document.type === 'usage') {
@@ -147,40 +147,31 @@ const eventDocumentReceived = ({body}) => new Promise(
 const eventSignatureReceived = ({body}) => new Promise(
   async (resolve, reject) => {
     try {
-      const getContractsResp = await LocalStorageProvider.getContracts();
-      for (const contract of getContractsResp) {
-        if ( contract.state == 'RECEIVED') {
-          const contractStorageKey = crypto
-            .createHash('sha256')
-            .update(body.msp + contract.documentId)
-            .digest('hex')
-            .toString('utf8');
-          if (contractStorageKey == body.data.storageKey) {
-            const getContractByIdResp = await LocalStorageProvider.getContract(contract.id);
-            const getSignaturesByIdAndMspResp = await blockchainAdapterConnection.getSignatures(contract.documentId, body.msp);
-            const bcSignaturesIndex = Object.keys(getSignaturesByIdAndMspResp);
-            const signatureLink = getContractByIdResp.signatureLink;
-            let update = false;
-            let j = 0;
-            for (let i = 0; i < signatureLink.length; i++) {
-              if (getContractByIdResp[signatureLink[i]['msp']]['mspId'] == body.msp) {
-                if (signatureLink[i]['txId'] == undefined) {
-                  signatureLink[i]['txId'] = bcSignaturesIndex[j];
-                  update = true;
-                }
-                j++;
-              }
+      const getContractsResp = await LocalStorageProvider.getContracts({state: 'RECEIVED', storageKey: body.data.storageKey});
+      if ((getContractsResp !== undefined) && (Array.isArray(getContractsResp)) && (getContractsResp.length === 1)) {
+        // only one contract should be found from the storageKey
+        const contract = getContractsResp[0];
+        const getContractByIdResp = await LocalStorageProvider.getContract(contract.id);
+        const getSignaturesByIdAndMspResp = await blockchainAdapterConnection.getSignatures(contract.documentId, body.msp);
+        const bcSignaturesIndex = Object.keys(getSignaturesByIdAndMspResp);
+        const signatureLink = getContractByIdResp.signatureLink;
+        let update = false;
+        let j = 0;
+        for (let i = 0; i < signatureLink.length; i++) {
+          if (getContractByIdResp[signatureLink[i]['msp']]['mspId'] == body.msp) {
+            if (signatureLink[i]['txId'] == undefined) {
+              signatureLink[i]['txId'] = bcSignaturesIndex[j];
+              update = true;
             }
-            if (update) {
-              const contractToUpdate = getContractByIdResp;
-              contractToUpdate.signatureLink = signatureLink;
-              const updateContractResp = await LocalStorageProvider.updateContract(contractToUpdate);
-            }
-            break;
+            j++;
           }
         }
+        if (update) {
+          const contractToUpdate = getContractByIdResp;
+          contractToUpdate.signatureLink = signatureLink;
+          const updateContractResp = await LocalStorageProvider.updateContract(contractToUpdate);
+        }
       }
-
       resolve(Service.successResponse({}, 200));
     } catch (e) {
       reject(Service.rejectResponse(e));

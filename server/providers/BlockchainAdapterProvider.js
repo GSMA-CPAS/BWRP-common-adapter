@@ -6,6 +6,8 @@ const logger = require('../logger');
 const errorUtils = require('../utils/errorUtils');
 const rawDataUtils = require('./utils/rawDataUtils');
 
+const crypto = require('crypto');
+
 const BLOCKCHAIN_ADAPTER_AXIOS_CONFIG = {
   transformResponse: [(data) => {
     return getAsObject(data);
@@ -189,6 +191,30 @@ class BlockchainAdapterProvider {
     }
   }
 
+  /**
+   *
+   * @param {string} documentId
+   * @param {Array<string>} mspIds
+   * @return {Promise<Array<string>>}
+   */
+  async getStorageKeys(documentId, mspIds) {
+    try {
+      const returnedContractStorageKeys = [];
+      if ((mspIds !== undefined) && (Array.isArray(mspIds))) {
+        mspIds.forEach((mspId) => {
+          returnedContractStorageKeys.push(crypto
+            .createHash('sha256')
+            .update(mspId + documentId)
+            .digest('hex')
+            .toString('utf8'));
+        });
+      }
+      return returnedContractStorageKeys;
+    } catch (error) {
+      logger.error('[BlockchainAdapterProvider::getStorageKeys] failed to get storage keys - %s', error.message);
+      throw error;
+    }
+  }
 
   /**
    *

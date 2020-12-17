@@ -10,11 +10,12 @@ const SettlementDAO = require('./dao/SettlementDAO');
 class LocalStorageProvider {
   /**
    *
+   * @param {Object} matchingConditions
    * @return {Promise<[string]>}
    */
-  static async getContracts() {
+  static async getContracts(matchingConditions = {}) {
     try {
-      return await ContractDAO.findAll();
+      return await ContractDAO.findAll(matchingConditions);
     } catch (error) {
       logger.error('[LocalStorageProvider::getContracts] failed to get contracts - %s', error.message);
       throw error;
@@ -126,11 +127,12 @@ class LocalStorageProvider {
    * @param {String} contractId
    * @param {String} rawData
    * @param {String} documentId
+   * @param {Array<String>} storageKeys
    * @return {Promise<object>}
    */
-  static async updateSentContract(contractId, rawData, documentId) {
+  static async updateSentContract(contractId, rawData, documentId, storageKeys) {
     try {
-      return await ContractDAO.findOneAndUpdateToSentContract(contractId, rawData, documentId);
+      return await ContractDAO.findOneAndUpdateToSentContract(contractId, rawData, documentId, storageKeys);
     } catch (error) {
       logger.error('[LocalStorageProvider::updateSentContract] failed to update sent contract - %s', error.message);
       throw error;
