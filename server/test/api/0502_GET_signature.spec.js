@@ -225,7 +225,7 @@ describe(`Tests GET ${route} API OK`, function() {
 
               testsDbUtils.initDbWithContracts([sentContract, draftContract, receivedContract])
                 .then((initDbWithContractsResp) => {
-                  debugSetup('3 contracts in db ', removeAllUsagesResp);
+                  debugSetup('3 contracts in db ', initDbWithContractsResp);
                   sentContract.id = initDbWithContractsResp[0].id;
                   draftContract.id = initDbWithContractsResp[1].id;
                   receivedContract.id = initDbWithContractsResp[2].id;

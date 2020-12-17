@@ -147,40 +147,37 @@ const eventDocumentReceived = ({body}) => new Promise(
 const eventSignatureReceived = ({body}) => new Promise(
   async (resolve, reject) => {
     try {
-      console.log(body);
       const getContractsResp = await LocalStorageProvider.getContracts();
       for (const contract of getContractsResp) {
-        const hash = crypto.createHash('sha256').update(body.msp + contract.documentId).digest('hex').toString('utf8');
-
-        if (hash == body.data.storageKey) {
-          const mycontract = await LocalStorageProvider.getContract(contract.id);
-          const bcSignatures = await blockchainAdapterConnection.getSignatures(contract.documentId, body.msp);
-          const bcSignaturesindex = [];
-
-          // build the index
-          for (const bcSignature in bcSignatures) {
-            bcSignaturesindex.push(bcSignature);
-          }
-
-          const signatureLink = mycontract.signatureLink;
-          let update = false;
-          let j = 0;
-          for (let i = 0; i < signatureLink.length; i++) {
-            if (mycontract[signatureLink[i]['msp']]['mspId'] == body.msp) {
-              // TODO: some additioanl checks to see if this is "self" event". If its self, drop. Else, update SignatureLink
-              if (signatureLink[i]['txId'] == undefined) {
-                signatureLink[i]['txId'] = bcSignaturesindex[j];
-                update = true;
+        if ( contract.state == 'RECEIVED') {
+          const contractStorageKey = crypto
+            .createHash('sha256')
+            .update(body.msp + contract.documentId)
+            .digest('hex')
+            .toString('utf8');
+          if (contractStorageKey == body.data.storageKey) {
+            const getContractByIdResp = await LocalStorageProvider.getContract(contract.id);
+            const getSignaturesByIdAndMspResp = await blockchainAdapterConnection.getSignatures(contract.documentId, body.msp);
+            const bcSignaturesIndex = Object.keys(getSignaturesByIdAndMspResp);
+            const signatureLink = getContractByIdResp.signatureLink;
+            let update = false;
+            let j = 0;
+            for (let i = 0; i < signatureLink.length; i++) {
+              if (getContractByIdResp[signatureLink[i]['msp']]['mspId'] == body.msp) {
+                if (signatureLink[i]['txId'] == undefined) {
+                  signatureLink[i]['txId'] = bcSignaturesIndex[j];
+                  update = true;
+                }
+                j++;
               }
-              j++;
             }
+            if (update) {
+              const contractToUpdate = getContractByIdResp;
+              contractToUpdate.signatureLink = signatureLink;
+              const updateContractResp = await LocalStorageProvider.updateContract(contractToUpdate);
+            }
+            break;
           }
-          if (update) {
-            const contractToUpdate = mycontract;
-            contractToUpdate.signatureLink = signatureLink;
-            const updateContractResp = await LocalStorageProvider.updateContract(contractToUpdate);
-          }
-          break;
         }
       }
 
