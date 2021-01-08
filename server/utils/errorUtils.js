@@ -226,6 +226,60 @@ class ErrorUtils {
       description: 'It\'s not allowed to calculate settlement on wrong contract.'
     }
   };
+
+  static ERROR_BUSINESS_GET_SIGNATURES_ONLY_ALLOWED_IN_STATE_SENT_OR_RECEIVED = {
+    code: 422,
+    error: {
+      internalErrorCode: 2009,
+      message: 'Get signatures not allowed',
+      description: 'It\'s only allowed to get signatures on contracts SENT or RECEIVED.'
+    }
+  };
+
+  static ERROR_BUSINESS_UPDATE_SIGNATURES_ONLY_ALLOWED_IN_STATE_SENT_OR_RECEIVED = {
+    code: 422,
+    error: {
+      internalErrorCode: 2010,
+      message: 'Update signatures not allowed',
+      description: 'It\'s only allowed to update signatures on contracts SENT or RECEIVED.'
+    }
+  };
+
+  static ERROR_BUSINESS_UPDATE_SIGNATURES_ON_SENT_CONTRACT = {
+    code: 422,
+    error: {
+      internalErrorCode: 2012,
+      message: 'Update signatures not allowed',
+      description: 'For SENT contract update signature only allowed on fromMsp'
+    }
+  };
+
+  static ERROR_BUSINESS_UPDATE_SIGNATURES_ON_RECEIVED_CONTRACT = {
+    code: 422,
+    error: {
+      internalErrorCode: 2013,
+      message: 'Update signatures not allowed',
+      description: 'For RECEIVED contract update signature only allowed on toMsp'
+    }
+  };
+
+  static ERROR_BUSINESS_UPDATE_SIGNATURES_WITH_WRONG_SIGNATURE_ID = {
+    code: 404,
+    error: {
+      internalErrorCode: 2014,
+      message: 'Update signatures not allowed',
+      description: 'This signature Id doesn\'t exist'
+    }
+  };
+
+  static ERROR_BUSINESS_GET_SIGNATURE_WITH_WRONG_SIGNATURE_ID = {
+    code: 404,
+    error: {
+      internalErrorCode: 2015,
+      message: 'Get signatures not allowed',
+      description: 'This signature Id doesn\'t exist'
+    }
+  };
 }
 
 module.exports = ErrorUtils;

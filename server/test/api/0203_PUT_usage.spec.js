@@ -55,10 +55,24 @@ describe(`Tests PUT ${route} API OK`, function() {
       type: 'contract',
       version: '1.1.0',
       fromMsp: {
-        mspId: 'B1'
+        mspId: 'B1',
+        signatures: [
+          {
+            role: 'role',
+            name: 'name',
+            id: 'id'
+          }
+        ]
       },
       toMsp: {
-        mspId: 'C1'
+        mspId: 'C1',
+        signatures: [
+          {
+            role: 'role',
+            name: 'name',
+            id: 'id'
+          }
+        ]
       },
       body: {
         bankDetails: {

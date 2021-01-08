@@ -10,11 +10,12 @@ const SettlementDAO = require('./dao/SettlementDAO');
 class LocalStorageProvider {
   /**
    *
+   * @param {Object} matchingConditions
    * @return {Promise<[string]>}
    */
-  static async getContracts() {
+  static async getContracts(matchingConditions = {}) {
     try {
-      return await ContractDAO.findAll();
+      return await ContractDAO.findAll(matchingConditions);
     } catch (error) {
       logger.error('[LocalStorageProvider::getContracts] failed to get contracts - %s', error.message);
       throw error;
@@ -65,15 +66,15 @@ class LocalStorageProvider {
 
   /**
    *
-   * @param {String} documentId
+   * @param {String} referenceId
    * @param {Object} matchingConditions
    * @return {Promise<object>}
    */
-  static async findContractByDocumentId(documentId, matchingConditions = {}) {
+  static async findContractByReferenceId(referenceId, matchingConditions = {}) {
     try {
-      return await ContractDAO.findOneByDocumentId(documentId, matchingConditions);
+      return await ContractDAO.findOneByReferenceId(referenceId, matchingConditions);
     } catch (error) {
-      logger.error('[LocalStorageProvider::findContractByDocumentId] failed to get contract from documentId - %s', error.message);
+      logger.error('[LocalStorageProvider::findContractByReferenceId] failed to get contract from referenceId - %s', error.message);
       throw error;
     }
   }
@@ -125,12 +126,13 @@ class LocalStorageProvider {
    *
    * @param {String} contractId
    * @param {String} rawData
-   * @param {String} documentId
+   * @param {String} referenceId
+   * @param {Array<String>} storageKeys
    * @return {Promise<object>}
    */
-  static async updateSentContract(contractId, rawData, documentId) {
+  static async updateSentContract(contractId, rawData, referenceId, storageKeys) {
     try {
-      return await ContractDAO.findOneAndUpdateToSentContract(contractId, rawData, documentId);
+      return await ContractDAO.findOneAndUpdateToSentContract(contractId, rawData, referenceId, storageKeys);
     } catch (error) {
       logger.error('[LocalStorageProvider::updateSentContract] failed to update sent contract - %s', error.message);
       throw error;

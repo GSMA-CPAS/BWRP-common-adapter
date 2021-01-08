@@ -9,7 +9,8 @@ const blockchainAdapterConnection = new BlockchainAdapterProvider();
 
 const logger = require('../logger');
 const errorUtils = require('../utils/errorUtils');
-const crypto = require('crypto');
+
+const config = require('../config');
 
 /**
  * Compare objects timestamps
@@ -39,16 +40,16 @@ const compareTimestamp = (a, b) => {
 };
 
 /**
- * Define the list of blockchain document Ids to download from the storageKey of a received event
+ * Define the list of blockchain reference Ids to download from the storageKey of a received event
  *
  * @param {String} eventStorageKey The storage key of the received event
  * @return {Promise<[String]>}
  */
-const getBlockchainDocumentIds = (eventStorageKey) => new Promise(
+const getBlockchainReferenceIds = (eventStorageKey) => new Promise(
   async (resolve, reject) => {
     try {
-      const getPrivateDocumentIDsResp = await blockchainAdapterConnection.getPrivateDocumentIDs();
-      resolve(getPrivateDocumentIDsResp);
+      const getPrivateReferenceIDsResp = await blockchainAdapterConnection.getPrivateReferenceIDs();
+      resolve(getPrivateReferenceIDsResp);
     } catch (e) {
       reject(e);
     }
@@ -66,10 +67,11 @@ const storeBlockchainDocumentInLocalStorage = (document) => new Promise(
     try {
       let returnedResponse = undefined;
       if (document.type === 'contract') {
-        const existsContract = await LocalStorageProvider.existsContract({documentId: document.documentId});
+        const existsContract = await LocalStorageProvider.existsContract({referenceId: document.referenceId});
         if (existsContract) {
-          returnedResponse = await LocalStorageProvider.findContractByDocumentId(document.documentId, {rawData: document.rawData});
+          returnedResponse = await LocalStorageProvider.findContractByReferenceId(document.referenceId, {rawData: document.rawData});
         } else {
+          document.storageKeys = await blockchainAdapterConnection.getStorageKeys(document.referenceId, [document.fromMsp.mspId, document.toMsp.mspId]);
           returnedResponse = await LocalStorageProvider.saveReceivedContract(document);
         }
       } else if (document.type === 'usage') {
@@ -100,18 +102,18 @@ const storeBlockchainDocumentInLocalStorage = (document) => new Promise(
 const eventDocumentReceived = ({body}) => new Promise(
   async (resolve, reject) => {
     try {
-      const documentIds = await getBlockchainDocumentIds(body.data.storageKey);
-      logger.info(`[EventService::eventDocumentReceived] documentIds = ${JSON.stringify(documentIds)}`);
-      const documentsStoredInDbAndDeleteFromBlockchain = [];
-      if (documentIds && Array.isArray(documentIds)) {
+      const referenceIds = await getBlockchainReferenceIds(body.data.storageKey);
+      logger.info(`[EventService::eventDocumentReceived] referenceIds = ${JSON.stringify(referenceIds)}`);
+      const documentsStoredInDb = [];
+      if (referenceIds && Array.isArray(referenceIds)) {
         let documents = [];
-        for (const documentId of documentIds) {
+        for (const referenceId of referenceIds) {
           try {
-            const document = await blockchainAdapterConnection.getPrivateDocument(documentId);
+            const document = await blockchainAdapterConnection.getPrivateDocument(referenceId);
             documents.push(document);
           } catch (exceptionInGetDocumentById) {
-            logger.error(`[EventService::eventDocumentReceived] non-blocking error exceptionInGetDocumentById for documentId ${documentId} = ${JSON.stringify(exceptionInGetDocumentById)}`);
-            // Do not reject. If there is an exception for a documentId, the document will not be removed of the blockchain.
+            logger.error(`[EventService::eventDocumentReceived] non-blocking error exceptionInGetDocumentById for referenceId ${referenceId} = ${JSON.stringify(exceptionInGetDocumentById)}`);
+            // Do not reject. If there is an exception for a referenceId, the document will not be removed of the blockchain.
           }
         }
         console.log(`[EventService::eventDocumentReceived] documents before sort = ${JSON.stringify(documents)}`);
@@ -120,21 +122,27 @@ const eventDocumentReceived = ({body}) => new Promise(
         for (const document of documents) {
           try {
             const storedDocument = await storeBlockchainDocumentInLocalStorage(document);
-            const documentId = (storedDocument.type === 'contract') ? storedDocument.documentId : undefined;
-            const storedDocumentDeletedInBlockchain = await blockchainAdapterConnection.deletePrivateDocument(documentId);
-            documentsStoredInDbAndDeleteFromBlockchain.push(storedDocument);
-            logger.info(`[EventService::eventDocumentReceived] document stored in DB successfully deleted in Blockchain = ${JSON.stringify(storedDocument)}`);
+            const referenceId = (storedDocument.type === 'contract') ? storedDocument.referenceId : undefined;
+            logger.info(`[EventService::eventDocumentReceived] config.DEACTIVATE_BLOCKCHAIN_DOCUMENT_DELETE = ${JSON.stringify(config.DEACTIVATE_BLOCKCHAIN_DOCUMENT_DELETE)}`);
+            if (config.DEACTIVATE_BLOCKCHAIN_DOCUMENT_DELETE) {
+              // Do not delete private document in blockchain
+              logger.info(`[EventService::eventDocumentReceived] document stored in DB but not deleted in Blockchain = ${JSON.stringify(storedDocument)}`);
+            } else {
+              const storedDocumentDeletedInBlockchain = await blockchainAdapterConnection.deletePrivateDocument(referenceId);
+              logger.info(`[EventService::eventDocumentReceived] document stored in DB successfully deleted in Blockchain = ${JSON.stringify(storedDocument)}`);
+            }
+            documentsStoredInDb.push(storedDocument);
           } catch (exceptionInStoreAndDeleteDocument) {
             logger.error(`[EventService::eventDocumentReceived] non-blocking error exceptionInStoreAndDeleteDocument for document = ${JSON.stringify(document)}`);
             // Do not reject. If there is an exception for a document, the document will not be removed of the blockchain.
           }
         }
       }
-      const eventReceivedResp = documentsStoredInDbAndDeleteFromBlockchain.map((documentStoredInDbAndDeleteFromBlockchain) => {
+      const eventReceivedResp = documentsStoredInDb.map((documentStoredInDb) => {
         return {
-          id: documentStoredInDbAndDeleteFromBlockchain.id,
-          type: documentStoredInDbAndDeleteFromBlockchain.type,
-          documentId: documentStoredInDbAndDeleteFromBlockchain.documentId
+          id: documentStoredInDb.id,
+          type: documentStoredInDb.type,
+          referenceId: documentStoredInDb.referenceId
         };
       });
       resolve(Service.successResponse(eventReceivedResp, 200));
@@ -147,46 +155,31 @@ const eventDocumentReceived = ({body}) => new Promise(
 const eventSignatureReceived = ({body}) => new Promise(
   async (resolve, reject) => {
     try {
-      console.log(body);
-      const getContractsResp = await LocalStorageProvider.getContracts();
-      for (const contract of getContractsResp) {
-        const hash = crypto.createHash('sha256').update(body.msp + contract.documentId).digest('hex').toString('utf8');
-
-        if (hash==body.data.storageKey) {
-          const mycontract = await LocalStorageProvider.getContract(contract.id);
-          const bcSignatures = await blockchainAdapterConnection.getSignatures( contract.documentId, body.msp);
-          const bcSignaturesindex = [];
-
-          // build the index
-          for (var bcSignature in bcSignatures) {
-            bcSignaturesindex.push(bcSignature);
-          }
-
-          //console.log(bcSignatures);
-          const signatureLink = mycontract.signatureLink;
-          let update = false;
-          let j = 0;
-          for (let i = 0; i < signatureLink.length; i++) {
-            if(mycontract[signatureLink[i]['msp']]['mspId'] == body.msp) {
-              // TODO: some additioanl checks to see if this is "self" event". If its self, drop. Else, update SignatureLink
-              console.log(bcSignaturesindex[j]);
-              if (signatureLink[i]['txId'] == undefined) {
-                signatureLink[i]['txId'] = bcSignaturesindex[j];
-                update = true;
-              }
-              j++;
+      const getContractsResp = await LocalStorageProvider.getContracts({state: 'RECEIVED', storageKey: body.data.storageKey});
+      if ((getContractsResp !== undefined) && (Array.isArray(getContractsResp)) && (getContractsResp.length === 1)) {
+        // only one contract should be found from the storageKey
+        const contract = getContractsResp[0];
+        const getContractByIdResp = await LocalStorageProvider.getContract(contract.id);
+        const getSignaturesByIdAndMspResp = await blockchainAdapterConnection.getSignatures(contract.referenceId, body.msp);
+        const bcSignaturesIndex = Object.keys(getSignaturesByIdAndMspResp);
+        const signatureLink = getContractByIdResp.signatureLink;
+        let update = false;
+        let j = 0;
+        for (let i = 0; i < signatureLink.length; i++) {
+          if (getContractByIdResp[signatureLink[i]['msp']]['mspId'] == body.msp) {
+            if (signatureLink[i]['txId'] == undefined) {
+              signatureLink[i]['txId'] = bcSignaturesIndex[j];
+              update = true;
             }
+            j++;
           }
-          if (update) {
-            console.log("yes!");
-            const contractToUpdate = mycontract;
-            contractToUpdate.signatureLink = signatureLink;
-            const updateContractResp = await LocalStorageProvider.updateContract(contractToUpdate);
-          }
-          break;
+        }
+        if (update) {
+          const contractToUpdate = getContractByIdResp;
+          contractToUpdate.signatureLink = signatureLink;
+          const updateContractResp = await LocalStorageProvider.updateContract(contractToUpdate);
         }
       }
-
       resolve(Service.successResponse({}, 200));
     } catch (e) {
       reject(Service.rejectResponse(e));

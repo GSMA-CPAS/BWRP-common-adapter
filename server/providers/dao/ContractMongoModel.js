@@ -39,7 +39,8 @@ const ContractSchema = new Schema({
   toMsp: {type: MspSchema, required: true},
   body: {type: ContractBodySchema, required: true},
   rawData: {type: String, required: false},
-  documentId: {type: String, required: false},
+  referenceId: {type: String, required: false},
+  storageKeys: {type: [String], required: false},
   state: {type: String, required: true},
   history: {type: [HistorySchema], required: true},
   creationDate: {type: Date, required: true},
@@ -49,6 +50,6 @@ const ContractSchema = new Schema({
 
 ContractSchema.index({id: 1}, {unique: true});
 
-ContractSchema.index({documentId: 1}, {unique: true, partialFilterExpression: {documentId: {$type: 'string'}}});
+ContractSchema.index({referenceId: 1}, {unique: true, partialFilterExpression: {referenceId: {$type: 'string'}}});
 
 module.exports = mongoose.model('contracts', ContractSchema, 'contracts');

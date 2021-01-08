@@ -8,7 +8,7 @@
   "rawData": "{\"body\": {\"taps\": null, \"signatures\": {\"DTAG\": [{\"id\": \"signature-0\", \"name\": \"abc\", \"role\": \"aaa\"}], \"TMUS\": [{\"id\": \"signature-0\", \"name\": \"def\", \"role\": \"aaa\"}]}, \"bankDetails\": {\"DTAG\": {\"iban\": null, \"bankName\": null, \"currency\": null, \"swiftBic\": null, \"bankAddress\": null, \"bankAccountName\": null, \"contactNameContract\": null, \"contactEmailContract\": null, \"contactPhoneContract\": null, \"contactNameAccounting\": null, \"contactEmailAccounting\": null, \"contactPhoneAccounting\": null}, \"TMUS\": {\"iban\": null, \"bankName\": null, \"currency\": null, \"swiftBic\": null, \"bankAddress\": null, \"bankAccountName\": null, \"contactNameContract\": null, \"contactEmailContract\": null, \"contactPhoneContract\": null, \"contactNameAccounting\": null, \"contactEmailAccounting\": null, \"contactPhoneAccounting\": null}}, \"discountModels\": \"someData\", \"generalInformation\": {\"name\": \"test1\", \"type\": \"Normal\", \"endDate\": \"2021-01-01T00:00:00.000Z\", \"startDate\": \"2020-12-01T00:00:00.000Z\", \"prolongationLength\": null}}, \"header\": {\"msps\": {\"DTAG\": {\"minSignatures\": 2}, \"TMUS\": {\"minSignatures\": 2}}, \"type\": \"contract\", \"version\": \"1.0\"}}",
 
   // only exists if state = SENT | RECEIVED
-  "documentId": "12bbfbc58c8f1aab28098673d33d99ce9df9004f4d8f9b25d45153892d5c0736",
+  "referenceId": "12bbfbc58c8f1aab28098673d33d99ce9df9004f4d8f9b25d45153892d5c0736",
 
 
   "history": [
@@ -125,7 +125,7 @@ We update the state to PENDING
 POST /private-document
 if we receive an error -> DRAFT
 else:
-We receive a documentID
+We receive a referenceId
 We update the state to SENT
 {
 "id":   1,         // generated
@@ -138,7 +138,7 @@ We update the state to SENT
 "signatures": {"DTAG": [{"id": "signature-0", "name": "abc", "role": "aaa"}], "TMUS": [{"id": "signature-0", "name": "def", "role": "aaa"}]}, "bankDetails": {"DTAG": {"iban": null, "bankName": null, "currency": null, "swiftBic": null, "bankAddress": null, "bankAccountName": null, "contactNameContract": null, "contactEmailContract": null, "contactPhoneContract": null, "contactNameAccounting": null, "contactEmailAccounting": null, "contactPhoneAccounting": null}, "TMUS": {"iban": null, "bankName": null, "currency": null, "swiftBic": null, "bankAddress": null, "bankAccountName": null, "contactNameContract": null, "contactEmailContract": null, "contactPhoneContract": null, "contactNameAccounting": null, "contactEmailAccounting": null, "contactPhoneAccounting": null}}, "discountModels": "someData", "generalInformation": {"name": "test1", "type": "Normal", "endDate": "2021-01-01T00:00:00.000Z", "startDate": "2020-12-01T00:00:00.000Z", "prolongationLength": null}}, "header": {"msps": {"DTAG": {"minSignatures": 2}, "TMUS": {"minSignatures": 2}}, "type": "contract", "version": "1.0"}},
 
 // only exists if state = SENT | RECEIVED
-"documentId": "12bbfbc58c8f1aab28098673d33d99ce9df9004f4d8f9b25d45153892d5c0736",
+"referenceId": "12bbfbc58c8f1aab28098673d33d99ce9df9004f4d8f9b25d45153892d5c0736",
 "rawData": "{\"body\": {\"taps\": null, \"signatures\": {\"DTAG\": [{\"id\": \"signature-0\", \"name\": \"abc\", \"role\": \"aaa\"}], \"TMUS\": [{\"id\": \"signature-0\", \"name\": \"def\", \"role\": \"aaa\"}]}, \"bankDetails\": {\"DTAG\": {\"iban\": null, \"bankName\": null, \"currency\": null, \"swiftBic\": null, \"bankAddress\": null, \"bankAccountName\": null, \"contactNameContract\": null, \"contactEmailContract\": null, \"contactPhoneContract\": null, \"contactNameAccounting\": null, \"contactEmailAccounting\": null, \"contactPhoneAccounting\": null}, \"TMUS\": {\"iban\": null, \"bankName\": null, \"currency\": null, \"swiftBic\": null, \"bankAddress\": null, \"bankAccountName\": null, \"contactNameContract\": null, \"contactEmailContract\": null, \"contactPhoneContract\": null, \"contactNameAccounting\": null, \"contactEmailAccounting\": null, \"contactPhoneAccounting\": null}}, \"discountModels\": \"someData\", \"generalInformation\": {\"name\": \"test1\", \"type\": \"Normal\", \"endDate\": \"2021-01-01T00:00:00.000Z\", \"startDate\": \"2020-12-01T00:00:00.000Z\", \"prolongationLength\": null}}, \"header\": {\"msps\": {\"DTAG\": {\"minSignatures\": 2}, \"TMUS\": {\"minSignatures\": 2}}, \"type\": \"contract\", \"version\": \"1.0\"}}",
 
 
@@ -152,8 +152,8 @@ We update the state to SENT
 
 
 # What happens here is:
-The blockchain adapter creates random documentId
-and stores the document with storageKey = SHA256(documentId + toMSP=)
+The blockchain adapter creates random referenceId
+and stores the document with storageKey = SHA256(referenceId + toMSP=)
 
 First we store the document in local offchain storage ( threw offchain-db-adapter )
 First we store the document in remote offchain storage ( threw offchain-db-adapter )
@@ -161,14 +161,14 @@ Then we generate the storageKey
 Then we put state on the network: { storageKey , value: documentHash}
 
 
-#######   SENT from GSMA to ORANGE #############   What is the best way to get documentId when we receive the storageKey in the webhook from the blockchain-adapter ?
+#######   SENT from GSMA to ORANGE #############   What is the best way to get referenceId when we receive the storageKey in the webhook from the blockchain-adapter ?
 # Orange receives a webhook event on /contrats/event      with  storageKey  and documentHash
 
-'`fromStorageKey` VARCHAR(64) AS (SHA2(CONCAT(fromMSP, documentId), 256)) STORED NOT NULL, ' +
-'`toStorageKey` VARCHAR(64) AS (SHA2(CONCAT(toMSP, documentId), 256)) STORED NOT NULL, '
+'`fromStorageKey` VARCHAR(64) AS (SHA2(CONCAT(fromMSP, referenceId), 256)) STORED NOT NULL, ' +
+'`toStorageKey` VARCHAR(64) AS (SHA2(CONCAT(toMSP, referenceId), 256)) STORED NOT NULL, '
 
 
-const availableDocumendIDs = await this.getBackendAdapter("blockchain").getPrivateDocumentIDs();
+const availableDocumendIDs = await this.getBackendAdapter("blockchain").getPrivateReferenceIDs();
 
 // Retreive all docs in their mysql local storage  and remove from offchain storage
 for (var i in availableDocumendIDs) {
@@ -176,21 +176,21 @@ for (var i in availableDocumendIDs) {
   if (document) {
   const privateDocument = this.converToPrivateDocument(document);
   await this.processPrivateDocument(privateDocument);
-  const documentIsStored = await this.getBackendAdapter("localStorage").existsDocument(privateDocument.documentId);
+  const documentIsStored = await this.getBackendAdapter("localStorage").existsDocument(privateDocument.referenceId);
   if(documentIsStored) {
-    await this.getBackendAdapter("blockchain").deletePrivateDocument(privateDocument.documentId);
+    await this.getBackendAdapter("blockchain").deletePrivateDocument(privateDocument.referenceId);
   }
 }
 
-const documentId = await this.getBackendAdapter("localStorage").getDocumentIDFromStorageKey(storageKey);
+const referenceId = await this.getBackendAdapter("localStorage").getReferenceIDFromStorageKey(storageKey);
 
-const privateDocument = await this.getBackendAdapter("localStorage").getDocument(documentId);
+const privateDocument = await this.getBackendAdapter("localStorage").getDocument(referenceId);
 
 if (privateDocument) {
 await this.processPrivateDocument(privateDocument);
-this.getLogger().info("[DocumentService::/event] Stored document with id %s successfully", documentId);
+this.getLogger().info("[DocumentService::/event] Stored document with id %s successfully", referenceId);
 } else {
-this.getLogger().error("[DocumentService::/event] Failed to get private document with id - %s", documentId);
+this.getLogger().error("[DocumentService::/event] Failed to get private document with id - %s", referenceId);
 }
 ########################################################################################@@@@
 
@@ -218,7 +218,7 @@ Generate a new contractId
 "rawData": base64Decode(data)
 
 // only exists if state = SENT | RECEIVED
-"documentId": id,
+"referenceId": id,
 
 
 "history": [

@@ -21,7 +21,7 @@ describe('DB indexes validation', function() {
     },
     body: {},
     rawData: 'Ctr_raw-data-1',
-    documentId: 'sazuisazuishauzshauzdhzadhzadhzadbsqxqs'
+    referenceId: 'sazuisazuishauzshauzdhzadhzadhzadbsqxqs'
   };
 
   const contract2 = {
@@ -57,7 +57,7 @@ describe('DB indexes validation', function() {
       });
   });
 
-  it('Should reject a contract creation with an already existing documentId', function(done) {
+  it('Should reject a contract creation with an already existing referenceId', function(done) {
     const newContractWithSameDocumetId = {
       name: 'New Contract Name',
       state: 'DRAFT',
@@ -71,17 +71,17 @@ describe('DB indexes validation', function() {
       },
       body: {},
       rawData: 'Ctr_raw-data-2',
-      documentId: contract1.documentId
+      referenceId: contract1.referenceId
     };
 
     testsDbUtils.createContract(newContractWithSameDocumetId)
       .then((createContractResp) => {
         debugSetup('Should not be resolved!', createContractResp);
-        done('The creation of a contract with an existing documentId should be rejected!');
+        done('The creation of a contract with an existing referenceId should be rejected!');
       })
       .catch((createContractError) => {
         try {
-          expect(JSON.stringify(createContractError)).to.equal(`{"driver":true,"name":"MongoError","index":0,"code":11000,"keyPattern":{"documentId":1},"keyValue":{"documentId":"${contract1.documentId}"}}`);
+          expect(JSON.stringify(createContractError)).to.equal(`{"driver":true,"name":"MongoError","index":0,"code":11000,"keyPattern":{"referenceId":1},"keyValue":{"referenceId":"${contract1.referenceId}"}}`);
           done();
         } catch (expectError) {
           // throw expectError;
@@ -90,7 +90,7 @@ describe('DB indexes validation', function() {
       });
   });
 
-  it('Should accept a contract creation with an undefined documentId', function(done) {
+  it('Should accept a contract creation with an undefined referenceId', function(done) {
     const newContractWithUndefinedDocumetId = {
       name: 'New Contract Name',
       state: 'DRAFT',
@@ -113,7 +113,7 @@ describe('DB indexes validation', function() {
         expect(createContractResp).to.have.property('state', newContractWithUndefinedDocumetId.state);
         expect(createContractResp).to.have.property('type', newContractWithUndefinedDocumetId.type);
         expect(createContractResp).to.have.property('version', newContractWithUndefinedDocumetId.version);
-        expect(createContractResp).to.have.property('documentId', undefined);
+        expect(createContractResp).to.have.property('referenceId', undefined);
         done();
       })
       .catch((createContractError) => {

@@ -18,7 +18,7 @@ const DATE_REGEX = testsUtils.getDateRegexp();
 
 describe(`Tests PUT ${route} API OK`, function() {
   describe(`Setup and Test PUT ${route} API with minimum contract details`, function() {
-    const contract1 = {
+    const contractWithNoSignatures = {
       name: 'Contract name between A1 and B1',
       state: 'DRAFT',
       type: 'contract',
@@ -53,7 +53,7 @@ describe(`Tests PUT ${route} API OK`, function() {
       rawData: 'Ctr_raw-data-1'
     };
 
-    const contract2 = {
+    const contractWithSignatures = {
       name: 'Contract name between A1 and C1',
       state: 'DRAFT',
       type: 'contract',
@@ -109,10 +109,10 @@ describe(`Tests PUT ${route} API OK`, function() {
 
     before((done) => {
       debugSetup('==> init db with 2 contracts');
-      testsDbUtils.initDbWithContracts([contract1, contract2])
+      testsDbUtils.initDbWithContracts([contractWithNoSignatures, contractWithSignatures])
         .then((initDbWithContractsResp) => {
-          contract1.id = initDbWithContractsResp[0].id;
-          contract2.id = initDbWithContractsResp[1].id;
+          contractWithNoSignatures.id = initDbWithContractsResp[0].id;
+          contractWithSignatures.id = initDbWithContractsResp[1].id;
           debugSetup('The db is initialized with 2 contracts : ', initDbWithContractsResp.map((c) => c.id));
           debugSetup('==> done!');
           done();
@@ -140,7 +140,7 @@ describe(`Tests PUT ${route} API OK`, function() {
           ];
         });
       try {
-        const path = globalVersion + '/contracts/' + contract1.id + '/send/';
+        const path = globalVersion + '/contracts/' + contractWithNoSignatures.id + '/send/';
         debug('path : ', path);
 
         const sentBody = {};
@@ -156,35 +156,35 @@ describe(`Tests PUT ${route} API OK`, function() {
             expect(response).to.be.json;
             expect(response.body).to.exist;
             expect(response.body).to.be.an('object');
-            expect(Object.keys(response.body)).have.members(['contractId', 'state', 'documentId', 'creationDate', 'lastModificationDate', 'header', 'body']);
+            expect(Object.keys(response.body)).have.members(['contractId', 'state', 'referenceId', 'creationDate', 'lastModificationDate', 'header', 'body']);
 
-            expect(response.body).to.have.property('contractId', contract1.id);
+            expect(response.body).to.have.property('contractId', contractWithNoSignatures.id);
             expect(response.body).to.have.property('state', 'SENT');
-            expect(response.body).to.have.property('documentId').that.is.a('string');
+            expect(response.body).to.have.property('referenceId').that.is.a('string');
             expect(response.body).to.have.property('creationDate').that.is.a('string').and.match(DATE_REGEX);
             expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
 
             expect(response.body).to.have.property('header').that.is.an('object');
             expect(Object.keys(response.body.header)).have.members(['name', 'type', 'version', 'fromMsp', 'toMsp']);
-            expect(response.body.header).to.have.property('name', contract1.name);
-            expect(response.body.header).to.have.property('type', contract1.type);
-            expect(response.body.header).to.have.property('version', contract1.version);
+            expect(response.body.header).to.have.property('name', contractWithNoSignatures.name);
+            expect(response.body.header).to.have.property('type', contractWithNoSignatures.type);
+            expect(response.body.header).to.have.property('version', contractWithNoSignatures.version);
 
             expect(response.body.header).to.have.property('fromMsp').that.is.an('object');
             expect(Object.keys(response.body.header.fromMsp)).have.members(['mspId', 'signatures']);
-            expect(response.body.header.fromMsp).to.have.property('mspId', contract1.fromMsp.mspId);
+            expect(response.body.header.fromMsp).to.have.property('mspId', contractWithNoSignatures.fromMsp.mspId);
             expect(response.body.header.fromMsp).to.have.property('signatures').that.is.an('array');
             expect(response.body.header.fromMsp.signatures.length).to.equal(0);
 
             expect(response.body.header).to.have.property('toMsp').that.is.an('object');
             expect(Object.keys(response.body.header.toMsp)).have.members(['mspId', 'signatures']);
-            expect(response.body.header.toMsp).to.have.property('mspId', contract1.toMsp.mspId);
+            expect(response.body.header.toMsp).to.have.property('mspId', contractWithNoSignatures.toMsp.mspId);
             expect(response.body.header.toMsp).to.have.property('signatures').that.is.an('array');
             expect(response.body.header.toMsp.signatures.length).to.equal(0);
 
             expect(response.body).to.have.property('body').that.is.an('object');
             expect(Object.keys(response.body.body)).have.members(['bankDetails', 'discountModels', 'generalInformation']);
-            expect(response.body.body).to.deep.include(contract1.body);
+            expect(response.body.body).to.deep.include(contractWithNoSignatures.body);
 
             // expect(response.body).to.have.property('history').that.is.an('array');
             // expect(response.body.history.length).to.equal(2);
@@ -206,7 +206,7 @@ describe(`Tests PUT ${route} API OK`, function() {
 
     it('Put send contract NOK if status is SENT', function(done) {
       try {
-        const path = globalVersion + '/contracts/' + contract1.id + '/send/';
+        const path = globalVersion + '/contracts/' + contractWithNoSignatures.id + '/send/';
         debug('path : ', path);
 
         const sentBody = {};
@@ -249,7 +249,7 @@ describe(`Tests PUT ${route} API OK`, function() {
           ];
         });
       try {
-        const path = globalVersion + '/contracts/' + contract2.id + '/send/';
+        const path = globalVersion + '/contracts/' + contractWithSignatures.id + '/send/';
         debug('path : ', path);
 
         const sentBody = {};
@@ -265,47 +265,47 @@ describe(`Tests PUT ${route} API OK`, function() {
             expect(response).to.be.json;
             expect(response.body).to.exist;
             expect(response.body).to.be.an('object');
-            expect(Object.keys(response.body)).have.members(['contractId', 'state', 'documentId', 'creationDate', 'lastModificationDate', 'header', 'body']);
+            expect(Object.keys(response.body)).have.members(['contractId', 'state', 'referenceId', 'creationDate', 'lastModificationDate', 'header', 'body']);
 
-            expect(response.body).to.have.property('contractId', contract2.id);
+            expect(response.body).to.have.property('contractId', contractWithSignatures.id);
             expect(response.body).to.have.property('state', 'SENT');
-            expect(response.body).to.have.property('documentId').that.is.a('string');
+            expect(response.body).to.have.property('referenceId').that.is.a('string');
             expect(response.body).to.have.property('creationDate').that.is.a('string').and.match(DATE_REGEX);
             expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
 
             expect(response.body).to.have.property('header').that.is.an('object');
             expect(Object.keys(response.body.header)).have.members(['name', 'type', 'version', 'fromMsp', 'toMsp']);
-            expect(response.body.header).to.have.property('name', contract2.name);
-            expect(response.body.header).to.have.property('type', contract2.type);
-            expect(response.body.header).to.have.property('version', contract2.version);
+            expect(response.body.header).to.have.property('name', contractWithSignatures.name);
+            expect(response.body.header).to.have.property('type', contractWithSignatures.type);
+            expect(response.body.header).to.have.property('version', contractWithSignatures.version);
 
             expect(response.body.header).to.have.property('fromMsp').that.is.an('object');
             expect(Object.keys(response.body.header.fromMsp)).have.members(['mspId', 'signatures']);
-            expect(response.body.header.fromMsp).to.have.property('mspId', contract2.fromMsp.mspId);
+            expect(response.body.header.fromMsp).to.have.property('mspId', contractWithSignatures.fromMsp.mspId);
             expect(response.body.header.fromMsp).to.have.property('signatures').that.is.an('array');
             expect(response.body.header.fromMsp.signatures.length).to.equal(1);
             expect(Object.keys(response.body.header.fromMsp.signatures[0])).have.members(['id', 'name', 'role']);
-            expect(response.body.header.fromMsp.signatures[0]).to.have.property('id', contract2.fromMsp.signatures[0].id);
-            expect(response.body.header.fromMsp.signatures[0]).to.have.property('name', contract2.fromMsp.signatures[0].name);
-            expect(response.body.header.fromMsp.signatures[0]).to.have.property('role', contract2.fromMsp.signatures[0].role);
+            expect(response.body.header.fromMsp.signatures[0]).to.have.property('id', contractWithSignatures.fromMsp.signatures[0].id);
+            expect(response.body.header.fromMsp.signatures[0]).to.have.property('name', contractWithSignatures.fromMsp.signatures[0].name);
+            expect(response.body.header.fromMsp.signatures[0]).to.have.property('role', contractWithSignatures.fromMsp.signatures[0].role);
 
             expect(response.body.header).to.have.property('toMsp').that.is.an('object');
             expect(Object.keys(response.body.header.toMsp)).have.members(['mspId', 'signatures']);
-            expect(response.body.header.toMsp).to.have.property('mspId', contract2.toMsp.mspId);
+            expect(response.body.header.toMsp).to.have.property('mspId', contractWithSignatures.toMsp.mspId);
             expect(response.body.header.toMsp).to.have.property('signatures').that.is.an('array');
             expect(response.body.header.toMsp.signatures.length).to.equal(2);
             expect(Object.keys(response.body.header.toMsp.signatures[0])).have.members(['id', 'name', 'role']);
-            expect(response.body.header.toMsp.signatures[0]).to.have.property('id', contract2.toMsp.signatures[0].id);
-            expect(response.body.header.toMsp.signatures[0]).to.have.property('name', contract2.toMsp.signatures[0].name);
-            expect(response.body.header.toMsp.signatures[0]).to.have.property('role', contract2.toMsp.signatures[0].role);
+            expect(response.body.header.toMsp.signatures[0]).to.have.property('id', contractWithSignatures.toMsp.signatures[0].id);
+            expect(response.body.header.toMsp.signatures[0]).to.have.property('name', contractWithSignatures.toMsp.signatures[0].name);
+            expect(response.body.header.toMsp.signatures[0]).to.have.property('role', contractWithSignatures.toMsp.signatures[0].role);
             expect(Object.keys(response.body.header.toMsp.signatures[1])).have.members(['id', 'name', 'role']);
-            expect(response.body.header.toMsp.signatures[1]).to.have.property('id', contract2.toMsp.signatures[1].id);
-            expect(response.body.header.toMsp.signatures[1]).to.have.property('name', contract2.toMsp.signatures[1].name);
-            expect(response.body.header.toMsp.signatures[1]).to.have.property('role', contract2.toMsp.signatures[1].role);
+            expect(response.body.header.toMsp.signatures[1]).to.have.property('id', contractWithSignatures.toMsp.signatures[1].id);
+            expect(response.body.header.toMsp.signatures[1]).to.have.property('name', contractWithSignatures.toMsp.signatures[1].name);
+            expect(response.body.header.toMsp.signatures[1]).to.have.property('role', contractWithSignatures.toMsp.signatures[1].role);
 
             expect(response.body).to.have.property('body').that.is.an('object');
             expect(Object.keys(response.body.body)).have.members(['bankDetails', 'discountModels', 'generalInformation']);
-            expect(response.body.body).to.deep.include(contract2.body);
+            expect(response.body.body).to.deep.include(contractWithSignatures.body);
 
             // expect(response.body).to.have.property('history').that.is.an('array');
             // expect(response.body.history.length).to.equal(2);

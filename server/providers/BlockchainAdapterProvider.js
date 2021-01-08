@@ -6,6 +6,8 @@ const logger = require('../logger');
 const errorUtils = require('../utils/errorUtils');
 const rawDataUtils = require('./utils/rawDataUtils');
 
+const crypto = require('crypto');
+
 const BLOCKCHAIN_ADAPTER_AXIOS_CONFIG = {
   transformResponse: [(data) => {
     return getAsObject(data);
@@ -77,24 +79,24 @@ class BlockchainAdapterProvider {
    *
    * @return {Promise<string>}
    */
-  async getPrivateDocumentIDs() {
+  async getPrivateReferenceIDs() {
     try {
       const response = await axiosInstance.get(config.BLOCKCHAIN_ADAPTER_URL + '/private-documents');
-      logger.debug(`[BlockchainAdapterProvider::getPrivateDocumentIDs] response data:${typeof response.data} = ${JSON.stringify(response.data)}`);
+      logger.debug(`[BlockchainAdapterProvider::getPrivateReferenceIDs] response data:${typeof response.data} = ${JSON.stringify(response.data)}`);
       return response.data;
     } catch (error) {
-      throwDefaultCommonInternalError(error, '[BlockchainAdapterProvider::getPrivateDocumentIDs]');
+      throwDefaultCommonInternalError(error, '[BlockchainAdapterProvider::getPrivateReferenceIDs]');
     }
   }
 
   /**
    *
-   * @param {String} documentId
+   * @param {String} referenceId
    * @return {Promise<string>}
    */
-  async getPrivateDocument(documentId) {
+  async getPrivateDocument(referenceId) {
     try {
-      const response = await axiosInstance.get(config.BLOCKCHAIN_ADAPTER_URL + '/private-documents/' + documentId);
+      const response = await axiosInstance.get(config.BLOCKCHAIN_ADAPTER_URL + '/private-documents/' + referenceId);
       logger.debug(`[BlockchainAdapterProvider::getPrivateDocument] response data:${typeof response.data} = ${JSON.stringify(response.data)}`);
       const rawDataObject = rawDataUtils.defineRawDataObjectFromRawData(response.data.data);
       if (!rawDataObject.type) {
@@ -112,7 +114,7 @@ class BlockchainAdapterProvider {
         throw errorUtils.ERROR_BLOCKCHAIN_ADAPTER_DOCUMENT_TYPE_ERROR;
       }
     } catch (error) {
-      if (documentId && error.response && error.response.data && (error.response.data.message === `Error: failed to query document. documentID '${documentId}' unknown status 404 - not found`)) {
+      if (referenceId && error.response && error.response.data && (error.response.data.message === `Error: failed to query document. referenceId '${referenceId}' unknown status 404 - not found`)) {
         logger.error('[BlockchainAdapterProvider::getPrivateDocument] response not found : ', {status: error.response.status, data: error.response.data, headers: error.response.headers});
         throw errorUtils.ERROR_BLOCKCHAIN_ADAPTER_RESPONSE_NOT_FOUND_ERROR;
       } else {
@@ -123,16 +125,16 @@ class BlockchainAdapterProvider {
 
   /**
    *
-   * @param {String} documentId
+   * @param {String} referenceId
    * @return {Promise<string>}
    */
-  async deletePrivateDocument(documentId) {
+  async deletePrivateDocument(referenceId) {
     try {
-      const response = await axios.delete(config.BLOCKCHAIN_ADAPTER_URL + '/private-documents/' + documentId);
+      const response = await axios.delete(config.BLOCKCHAIN_ADAPTER_URL + '/private-documents/' + referenceId);
       logger.debug(`[BlockchainAdapterProvider::deletePrivateDocument] response data:${typeof response.data} = ${JSON.stringify(response.data)}`);
       return response.data;
     } catch (error) {
-      if (documentId && error.response && error.response.data && (error.response.data.message === `DOCUMENT '${documentId}' not found.`)) {
+      if (referenceId && error.response && error.response.data && (error.response.data.message === `DOCUMENT '${referenceId}' not found.`)) {
         throw errorUtils.ERROR_BLOCKCHAIN_ADAPTER_RESPONSE_NOT_FOUND_ERROR;
       } else {
         throwDefaultCommonInternalError(error, '[BlockchainAdapterProvider::deletePrivateDocument]');
@@ -181,7 +183,7 @@ class BlockchainAdapterProvider {
       logger.debug(`[BlockchainAdapterProvider::uploadContract] response data:${typeof response.data} = ${JSON.stringify(response.data)}`);
       return {
         rawData,
-        documentId: response.data.documentID
+        referenceId: response.data.documentID
       };
     } catch (error) {
       logger.error('[BlockchainAdapterProvider::uploadContract] failed to upload contract - %s', error.message);
@@ -189,16 +191,40 @@ class BlockchainAdapterProvider {
     }
   }
 
+  /**
+   *
+   * @param {string} referenceId
+   * @param {Array<string>} mspIds
+   * @return {Promise<Array<string>>}
+   */
+  async getStorageKeys(referenceId, mspIds) {
+    try {
+      const returnedContractStorageKeys = [];
+      if ((mspIds !== undefined) && (Array.isArray(mspIds))) {
+        mspIds.forEach((mspId) => {
+          returnedContractStorageKeys.push(crypto
+            .createHash('sha256')
+            .update(mspId + referenceId)
+            .digest('hex')
+            .toString('utf8'));
+        });
+      }
+      return returnedContractStorageKeys;
+    } catch (error) {
+      logger.error('[BlockchainAdapterProvider::getStorageKeys] failed to get storage keys - %s', error.message);
+      throw error;
+    }
+  }
 
   /**
    *
-   * @param {String} documentId
+   * @param {String} referenceId
    * @param {String} msp
    * @return {Promise<string>}
    */
-  async getSignatures(documentId, msp) {
+  async getSignatures(referenceId, msp) {
     try {
-      const response = await axiosInstance.get(config.BLOCKCHAIN_ADAPTER_URL + '/signatures/' + documentId + '/' + msp);
+      const response = await axiosInstance.get(config.BLOCKCHAIN_ADAPTER_URL + '/signatures/' + referenceId + '/' + msp);
       logger.debug(`[BlockchainAdapterProvider::getSignatures] response data:${typeof response.data} = ${JSON.stringify(response.data)}`);
       return response.data;
     } catch (error) {
@@ -212,15 +238,15 @@ class BlockchainAdapterProvider {
 
   /**
    *
-   * @param {String} documentId
+   * @param {String} referenceId
    * @param {String} certificate
    * @param {String} algorithm
    * @param {String} signature
    * @return {Promise<string>}
    */
-  async uploadSignature(documentId, certificate, algorithm, signature) {
+  async uploadSignature(referenceId, certificate, algorithm, signature) {
     try {
-      const response = await axiosInstance.put(config.BLOCKCHAIN_ADAPTER_URL + '/signatures/' + documentId, {
+      const response = await axiosInstance.put(config.BLOCKCHAIN_ADAPTER_URL + '/signatures/' + referenceId, {
         certificate: certificate,
         algorithm: algorithm,
         signature: signature
@@ -230,7 +256,7 @@ class BlockchainAdapterProvider {
       logger.debug(`[BlockchainAdapterProvider::uploadSignature] response data:${typeof response.data} = ${JSON.stringify(response.data)}`);
       return response.data;
     } catch (error) {
-      if (documentId && error.response && error.response.data && (error.response.data.message === `DOCUMENT '${documentId}' not found.`)) {
+      if (referenceId && error.response && error.response.data && (error.response.data.message === `DOCUMENT '${referenceId}' not found.`)) {
         throw errorUtils.ERROR_BLOCKCHAIN_ADAPTER_RESPONSE_NOT_FOUND_ERROR;
       } else {
         throwDefaultCommonInternalError(error, '[BlockchainAdapterProvider::uploadSignature]');

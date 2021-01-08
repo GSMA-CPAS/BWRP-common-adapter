@@ -19,6 +19,23 @@ class TestsDbUtils {
     });
   }
 
+  static verifyContract(contractId, conditions) {
+    return new Promise((resolve, reject) => {
+      const requestConditions = conditions;
+      requestConditions.id = contractId;
+      // Launch database request
+      ContractMongoRequester.findOne(requestConditions, (err, contract) => {
+        if (err) {
+          debug('verify contract failed : ', err);
+          reject(err);
+        } else {
+          debug('verify contract done with success');
+          resolve(contract);
+        }
+      });
+    });
+  }
+
   static removeAllUsages(conditions) {
     return new Promise((resolve, reject) => {
       UsageMongoRequester.deleteMany(conditions, (err, usages) => {
@@ -62,12 +79,11 @@ class TestsDbUtils {
       }
       if (contract.history === undefined) {
         contract.history = [];
+        contract.history.push({
+          date: contract.creationDate,
+          action: 'CREATION'
+        });
       }
-      contract.history.push({
-        date: contract.creationDate,
-        action: 'CREATION'
-      });
-
       // Launch db request
       ContractMongoRequester.create(contract, (err, createdContract) => {
         if (err) {
@@ -135,11 +151,12 @@ class TestsDbUtils {
       }
       if (usage.history === undefined) {
         usage.history = [];
+        usage.history.push({
+          date: usage.creationDate,
+          action: 'CREATION'
+        });
       }
-      usage.history.push({
-        date: usage.creationDate,
-        action: 'CREATION'
-      });
+
 
       // Launch db request
       UsageMongoRequester.create(usage, (err, createdUsage) => {
@@ -195,11 +212,12 @@ class TestsDbUtils {
       }
       if (settlement.history === undefined) {
         settlement.history = [];
+        settlement.history.push({
+          date: settlement.creationDate,
+          action: 'CREATION'
+        });
       }
-      settlement.history.push({
-        date: settlement.creationDate,
-        action: 'CREATION'
-      });
+
 
       // Launch db request
       SettlementMongoRequester.create(settlement, (err, createdSettlement) => {

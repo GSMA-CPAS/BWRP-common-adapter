@@ -61,7 +61,7 @@ describe(`Tests GET ${route} API OK`, function() {
       toMsp: {
         mspId: 'C3'
       },
-      documentId: 'AZRAGGSHJIAJAOJSNJNSSNNAIS',
+      referenceId: 'AZRAGGSHJIAJAOJSNJNSSNNAIS',
       body: {
         bankDetails: {
           A1: {
@@ -177,11 +177,11 @@ describe(`Tests GET ${route} API OK`, function() {
             expect(response).to.be.json;
             expect(response.body).to.exist;
             expect(response.body).to.be.an('object');
-            expect(Object.keys(response.body)).have.members(['contractId', 'state', 'documentId', 'creationDate', 'lastModificationDate', 'raw']);
+            expect(Object.keys(response.body)).have.members(['contractId', 'state', 'referenceId', 'creationDate', 'lastModificationDate', 'raw']);
 
             expect(response.body).to.have.property('contractId', contract2.id);
             expect(response.body).to.have.property('state', contract2.state);
-            expect(response.body).to.have.property('documentId', contract2.documentId);
+            expect(response.body).to.have.property('referenceId', contract2.referenceId);
             expect(response.body).to.have.property('raw', contract2.rawData);
             expect(response.body).to.have.property('creationDate').that.is.a('string').and.match(DATE_REGEX);
             expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
@@ -245,7 +245,7 @@ describe(`Tests GET ${route} API FAILED`, function() {
       toMsp: {
         mspId: 'C3'
       },
-      documentId: 'AZRAGGSHJIAJAOJSNJNSSNNAIS',
+      referenceId: 'AZRAGGSHJIAJAOJSNJNSSNNAIS',
       body: {
         bankDetails: {
           A1: {

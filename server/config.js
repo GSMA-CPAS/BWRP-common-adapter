@@ -1,7 +1,7 @@
 const path = require('path');
 
-const getAsObject = (envVar) => {
-  let returnedObject = undefined;
+const getAsObject = (envVar, defaultValue) => {
+  let returnedObject = defaultValue;
   if (envVar !== undefined) {
     try {
       returnedObject = JSON.parse(envVar);
@@ -12,8 +12,8 @@ const getAsObject = (envVar) => {
   return returnedObject;
 };
 
-const getAsInt = (envVar) => {
-  let returnedInt = undefined;
+const getAsInt = (envVar, defaultValue) => {
+  let returnedInt = defaultValue;
   if (envVar !== undefined) {
     try {
       const parsedValue = parseInt(envVar, 10);
@@ -27,6 +27,18 @@ const getAsInt = (envVar) => {
     }
   }
   return returnedInt;
+};
+
+const getAsBoolean = (envVar, defaultValue) => {
+  let returnedBoolean = defaultValue;
+  if (envVar !== undefined) {
+    if (['true', 'True', 'TRUE'].includes(envVar)) {
+      returnedBoolean = true;
+    } else if (['false', 'False', 'FALSE'].includes(envVar)) {
+      returnedBoolean = false;
+    }
+  }
+  return returnedBoolean;
 };
 
 const config = {
@@ -46,12 +58,14 @@ config.LOG_LEVEL = process.env.LOG_LEVEL || 'info';
 
 // BlockchainAdapter configuration
 config.BLOCKCHAIN_ADAPTER_URL = process.env.BLOCKCHAIN_ADAPTER_URL || 'http://127.0.0.1:8081';
-config.BLOCKCHAIN_ADAPTER_WEBHOOK_EVENTS = getAsObject(process.env.BLOCKCHAIN_ADAPTER_WEBHOOK_EVENTS) || [];
+config.BLOCKCHAIN_ADAPTER_WEBHOOK_EVENTS = getAsObject(process.env.BLOCKCHAIN_ADAPTER_WEBHOOK_EVENTS, []);
 config.SELF_HOST = process.env.SELF_HOST || '';
 
 config.DB_URL = process.env.DB_URL || 'mongodb://user:userpw@127.0.0.1:27917/commondb?authSource=commondb';
-config.DB_CREATE_CONNECTION_TIMEOUT = getAsInt(process.env.DB_CREATE_CONNECTION_TIMEOUT) || 30000;
-config.DB_HEARTBEAT_FREQUENCY = getAsInt(process.env.DB_HEARTBEAT_FREQUENCY) || 5000;
-config.DB_POOL_SIZE = getAsInt(process.env.DB_POOL_SIZE) || 10;
+config.DB_CREATE_CONNECTION_TIMEOUT = getAsInt(process.env.DB_CREATE_CONNECTION_TIMEOUT, 30000);
+config.DB_HEARTBEAT_FREQUENCY = getAsInt(process.env.DB_HEARTBEAT_FREQUENCY, 5000);
+config.DB_POOL_SIZE = getAsInt(process.env.DB_POOL_SIZE, 10);
+
+config.DEACTIVATE_BLOCKCHAIN_DOCUMENT_DELETE = getAsBoolean(process.env.DEACTIVATE_BLOCKCHAIN_DOCUMENT_DELETE, false);
 
 module.exports = config;

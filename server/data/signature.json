@@ -21,7 +21,7 @@ read object from "Contract" Collection.
   "rawData": "{\"body\": {\"taps\": null, \"signatures\": {\"DTAG\": [{\"id\": \"signature-0\", \"name\": \"abc\", \"role\": \"aaa\"}], \"TMUS\": [{\"id\": \"signature-0\", \"name\": \"def\", \"role\": \"aaa\"}]}, \"bankDetails\": {\"DTAG\": {\"iban\": null, \"bankName\": null, \"currency\": null, \"swiftBic\": null, \"bankAddress\": null, \"bankAccountName\": null, \"contactNameContract\": null, \"contactEmailContract\": null, \"contactPhoneContract\": null, \"contactNameAccounting\": null, \"contactEmailAccounting\": null, \"contactPhoneAccounting\": null}, \"TMUS\": {\"iban\": null, \"bankName\": null, \"currency\": null, \"swiftBic\": null, \"bankAddress\": null, \"bankAccountName\": null, \"contactNameContract\": null, \"contactEmailContract\": null, \"contactPhoneContract\": null, \"contactNameAccounting\": null, \"contactEmailAccounting\": null, \"contactPhoneAccounting\": null}}, \"discountModels\": \"someData\", \"generalInformation\": {\"name\": \"test1\", \"type\": \"Normal\", \"endDate\": \"2021-01-01T00:00:00.000Z\", \"startDate\": \"2020-12-01T00:00:00.000Z\", \"prolongationLength\": null}}, \"header\": {\"msps\": {\"DTAG\": {\"minSignatures\": 2}, \"TMUS\": {\"minSignatures\": 2}}, \"type\": \"contract\", \"version\": \"1.0\"}}",
 
   // only exists if state = SENT | RECEIVED
-  "documentId": "12bbfbc58c8f1aab28098673d33d99ce9df9004f4d8f9b25d45153892d5c0736",
+  "referenceId": "12bbfbc58c8f1aab28098673d33d99ce9df9004f4d8f9b25d45153892d5c0736",
 
 
   "history": [
@@ -75,9 +75,9 @@ header->fromMSP->signatures
   "signature": "SIGNED|NOTSIGNED"
 }
 
-fetchSignatures	GET /signatures/{id}/{msp}	Fetch all signatures for a given msp and a given document id from the ledger
+fetchSignatures	GET /signatures/{id}/{msp}	Fetch all signatures for a given msp and a given reference id from the ledger
 Perform a 
-"GET signatures/<DocumentID from Contract>/<header->fromMSP->mspid>/"
+"GET signatures/<ReferenceID from Contract>/<header->fromMSP->mspid>/"
 
 If return JSON String Parsed Array lenght is > 0
 we set "Signature": "SIGNED" or else set "NOTSIGNED"
@@ -128,10 +128,10 @@ We create the "return Signature Object"
 
 
 we Perform 
-fetchSignatures	GET /signatures/{id}/{msp}	Fetch all signatures for a given msp and a given document id from the ledger
+fetchSignatures	GET /signatures/{id}/{msp}	Fetch all signatures for a given msp and a given reference id from the ledger
 Perform a 
 
-"GET signatures/<DocumentID from Contract>/<header->fromMSP->mspid>/"
+"GET signatures/<ReferenceID from Contract>/<header->fromMSP->mspid>/"
 If return JSON String Parsed Array lenght is > 0
 we parse the "JSON String". This will be in an "array"
 [
@@ -216,7 +216,7 @@ and if we pass all above test.
 we finally
 uploadSignature	PUT /signatures/{id}	store a signature for the document identified by id on the ledger
 
-PUT  /signatures/{DocumentID}
+PUT  /signatures/{ReferenceID}
 Same Request Body Received.
 {
          "algorithm":"XXXXX",

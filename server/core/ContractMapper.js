@@ -65,7 +65,7 @@ class ContractMapper {
       returnedResponseBody = {
         contractId: contract.id,
         state: contract.state,
-        documentId: contract.documentId,
+        referenceId: contract.referenceId,
         raw: contract.rawData,
         creationDate: contract.creationDate,
         lastModificationDate: contract.lastModificationDate,
@@ -104,7 +104,7 @@ class ContractMapper {
         },
         body: contract.body,
         state: contract.state,
-        documentId: contract.documentId,
+        referenceId: contract.referenceId,
         creationDate: contract.creationDate,
         lastModificationDate: contract.lastModificationDate
       };
@@ -137,7 +137,7 @@ class ContractMapper {
             }
           },
           state: contract.state,
-          documentId: contract.documentId,
+          referenceId: contract.referenceId,
           creationDate: contract.creationDate,
           lastModificationDate: contract.lastModificationDate
         });

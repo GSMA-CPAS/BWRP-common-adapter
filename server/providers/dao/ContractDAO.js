@@ -9,7 +9,7 @@ const ContractMongoRequester = require('./ContractMongoRequester');
 const MISSING_MANDATORY_PARAM_ERROR = errorUtils.ERROR_DAO_MISSING_MANDATORY_PARAM;
 
 class ContractDAO {
-  static findAll(state) {
+  static findAll(matchingConditions = {}) {
     return new Promise((resolve, reject) => {
       // Verify parameters
 
@@ -17,8 +17,21 @@ class ContractDAO {
       const condition = {
         type: 'contract'
       };
-      if (state !== undefined) {
-        condition.state = state;
+      if (matchingConditions.state !== undefined) {
+        condition.state = matchingConditions.state;
+      }
+      if (matchingConditions.rawData !== undefined) {
+        condition.rawData = matchingConditions.rawData;
+      }
+      if (matchingConditions.id !== undefined) {
+        condition.id = matchingConditions.id;
+      }
+      if (matchingConditions.referenceId !== undefined) {
+        condition.referenceId = matchingConditions.referenceId;
+      }
+      if (matchingConditions.storageKey !== undefined) {
+        // stoargeKeys is an array and we try to find a storageKey in this storageKeys
+        condition.storageKeys = matchingConditions.storageKey;
       }
 
       // Launch database request
@@ -158,8 +171,12 @@ class ContractDAO {
       if (matchingConditions.rawData !== undefined) {
         condition.rawData = matchingConditions.rawData;
       }
-      if (matchingConditions.documentId !== undefined) {
-        condition.documentId = matchingConditions.documentId;
+      if (matchingConditions.referenceId !== undefined) {
+        condition.referenceId = matchingConditions.referenceId;
+      }
+      if (matchingConditions.storageKey !== undefined) {
+        // stoargeKeys is an array and we try to find a storageKey in this storageKeys
+        condition.storageKeys = matchingConditions.storageKey;
       }
 
       // Launch database request
@@ -178,17 +195,17 @@ class ContractDAO {
     });
   }
 
-  static findOneByDocumentId(documentId, matchingConditions = {}) {
+  static findOneByReferenceId(referenceId, matchingConditions = {}) {
     return new Promise((resolve, reject) => {
       // Verify parameters
-      if (documentId === undefined) {
-        logger.error('[ContractDAO::findOneByDocumentId] [FAILED] : documentId undefined');
+      if (referenceId === undefined) {
+        logger.error('[ContractDAO::findOneByReferenceId] [FAILED] : referenceId undefined');
         reject(MISSING_MANDATORY_PARAM_ERROR);
       }
 
       // Define find condition
       const condition = {
-        documentId: documentId,
+        referenceId: referenceId,
         type: 'contract'
       };
       if (matchingConditions.state !== undefined) {
@@ -200,17 +217,21 @@ class ContractDAO {
       if (matchingConditions.id !== undefined) {
         condition.id = matchingConditions.id;
       }
+      if (matchingConditions.storageKey !== undefined) {
+        // stoargeKeys is an array and we try to find a storageKey in this storageKeys
+        condition.storageKeys = matchingConditions.storageKey;
+      }
 
       // Launch database request
       ContractMongoRequester.findOne(condition, (err, contract) => {
         // Use errorManager to return appropriate dao errors
         DAOErrorManager.handleErrorOrNullObject(err, contract)
           .then((objectReturned) => {
-            logger.debug('[DAO] [findOneByDocumentId] [OK] objectReturned:' + typeof objectReturned + ' = ' + JSON.stringify(objectReturned));
+            logger.debug('[DAO] [findOneByReferenceId] [OK] objectReturned:' + typeof objectReturned + ' = ' + JSON.stringify(objectReturned));
             return resolve(objectReturned);
           })
           .catch((errorReturned) => {
-            logger.error('[DAO] [findOneByDocumentId] [FAILED] errorReturned:' + typeof errorReturned + ' = ' + JSON.stringify(errorReturned));
+            logger.error('[DAO] [findOneByReferenceId] [FAILED] errorReturned:' + typeof errorReturned + ' = ' + JSON.stringify(errorReturned));
             return reject(errorReturned);
           });
       });
@@ -247,7 +268,7 @@ class ContractDAO {
     });
   }
 
-  static findOneAndUpdateToSentContract(contractId, rawData, documentId) {
+  static findOneAndUpdateToSentContract(contractId, rawData, referenceId, storageKeys) {
     return new Promise((resolve, reject) => {
       // Verify parameters
       if (contractId === undefined) {
@@ -258,8 +279,12 @@ class ContractDAO {
         logger.error('[ContractDAO::findOneAndUpdateToSentContract] [FAILED] : rawData undefined');
         reject(MISSING_MANDATORY_PARAM_ERROR);
       }
-      if (documentId === undefined) {
-        logger.error('[ContractDAO::findOneAndUpdateToSentContract] [FAILED] : documentId undefined');
+      if (referenceId === undefined) {
+        logger.error('[ContractDAO::findOneAndUpdateToSentContract] [FAILED] : referenceId undefined');
+        reject(MISSING_MANDATORY_PARAM_ERROR);
+      }
+      if (storageKeys === undefined) {
+        logger.error('[ContractDAO::findOneAndUpdateToSentContract] [FAILED] : storageKeys undefined');
         reject(MISSING_MANDATORY_PARAM_ERROR);
       }
 
@@ -289,7 +314,8 @@ class ContractDAO {
         const updateCommand = {
           $set: {
             rawData: rawData,
-            documentId: documentId,
+            referenceId: referenceId,
+            storageKeys: storageKeys,
             state: 'SENT',
             lastModificationDate: lastModificationDate,
             signatureLink: signatureLinks
@@ -335,8 +361,8 @@ class ContractDAO {
         condition.state = object.state;
       }
 
-      if (object.documentId) {
-        condition.documentId = object.documentId;
+      if (object.referenceId) {
+        condition.referenceId = object.referenceId;
       }
 
       if (object.rawData !== undefined) {
