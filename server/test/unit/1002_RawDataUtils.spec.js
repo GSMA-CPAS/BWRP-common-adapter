@@ -52,7 +52,7 @@ describe('Unit Tests for rawDataUtils', function() {
       data: rawDataForContract1,
       fromMSP: 'A1',
       toMSP: 'B1',
-      id: 'documentIddzayudgzadazhduazdza',
+      id: 'referenceIddzayudgzadazhduazdza',
       timeStamp: '156262878176626327'
     };
 
@@ -67,7 +67,7 @@ describe('Unit Tests for rawDataUtils', function() {
     expect(rawDataContractForContract1).to.have.property('version', contract1.version);
 
     expect(rawDataContractForContract1).to.have.property('rawData', rawDataForContract1);
-    expect(rawDataContractForContract1).to.have.property('documentId', blockchainResp.id);
+    expect(rawDataContractForContract1).to.have.property('referenceId', blockchainResp.id);
     expect(rawDataContractForContract1).to.have.property('timestamp', blockchainResp.timeStamp);
 
     expect(rawDataContractForContract1).to.have.property('fromMsp').that.is.an('object');

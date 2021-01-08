@@ -162,10 +162,10 @@ describe(`Tests POST ${route} API OK`, function() {
 
             response.body.forEach((bodyArrayContent) => {
               expect(bodyArrayContent).to.be.an('Object');
-              expect(Object.keys(bodyArrayContent)).have.members(['id', 'type', 'documentId']);
+              expect(Object.keys(bodyArrayContent)).have.members(['id', 'type', 'referenceId']);
               expect(bodyArrayContent).to.have.property('id').that.is.a('String');
               expect(bodyArrayContent).to.have.property('type', 'contract');
-              expect(bodyArrayContent).to.have.property('documentId').that.is.a('String');
+              expect(bodyArrayContent).to.have.property('referenceId').that.is.a('String');
             });
 
             expect(blockchainAdapterNock.isDone(), 'Unconsumed nock error').to.be.true;
@@ -307,7 +307,7 @@ describe(`Tests POST ${route} API OK`, function() {
           index: 0
         }
       ],
-      documentId: '15d69d4c660d68cbc09c100924628afa68e0e309e13acb04d5d8c2c55d542aa5',
+      referenceId: '15d69d4c660d68cbc09c100924628afa68e0e309e13acb04d5d8c2c55d542aa5',
       storageKeys: [
         '007unused',
         '1176751cb67a89f9d2cfdc1e912cb9746c3a1f9a49a01de508509bccf108eccd'
@@ -384,7 +384,7 @@ describe(`Tests POST ${route} API OK`, function() {
           index: 0
         }
       ],
-      documentId: '25d69d4c660d68cbc09c100924628afa68e0e309e13acb04d5d8c2c55d542aa5',
+      referenceId: '25d69d4c660d68cbc09c100924628afa68e0e309e13acb04d5d8c2c55d542aa5',
       storageKeys: [
         'ad756b1cecacb073fa4808f5a754515e033f6b1b3247153d65b6510ae4c9bb49',
         '007unused'
@@ -481,7 +481,7 @@ describe(`Tests POST ${route} API OK`, function() {
           index: 0
         }
       ],
-      documentId: '99d69d4c660d68cbc09c100924628afa68e0e309e13acb04d5d8c2c55d542aa5',
+      referenceId: '99d69d4c660d68cbc09c100924628afa68e0e309e13acb04d5d8c2c55d542aa5',
       storageKeys: [
         '99756b1cecacb073fa4808f5a754515e033f6b1b3247153d65b6510ae4c9bb49',
         '007unused'
@@ -521,7 +521,7 @@ describe(`Tests POST ${route} API OK`, function() {
         const path = globalVersion + route;
         const storageKey = '1176751cb67a89f9d2cfdc1e912cb9746c3a1f9a49a01de508509bccf108eccd';
         // const targetMSPID = 'TMUS';
-        // const documentID = '15d69d4c660d68cbc09c100924628afa68e0e309e13acb04d5d8c2c55d542aa5';
+        // const referenceID = '15d69d4c660d68cbc09c100924628afa68e0e309e13acb04d5d8c2c55d542aa5';
 
         const getSignatureFromBlockchainAdapterResponse = {
           'f6c847b990945996a6c13e21713d76c982ef79779c43c8f9183cb30c3822e3d7': {
@@ -530,7 +530,7 @@ describe(`Tests POST ${route} API OK`, function() {
             signature: 'signature'
           }
         };
-        blockchainAdapterNock.get('/signatures/' + sentContract.documentId + '/' + sentContract.fromMsp.mspId)
+        blockchainAdapterNock.get('/signatures/' + sentContract.referenceId + '/' + sentContract.fromMsp.mspId)
           .times(1)
           .reply((pathReceived, bodyReceived) => {
             return [
@@ -583,7 +583,7 @@ describe(`Tests POST ${route} API OK`, function() {
             signature: 'signature'
           }
         };
-        blockchainAdapterNock.get('/signatures/' + receivedContract.documentId + '/' + receivedContract.fromMsp.mspId)
+        blockchainAdapterNock.get('/signatures/' + receivedContract.referenceId + '/' + receivedContract.fromMsp.mspId)
           .times(1)
           .reply((pathReceived, bodyReceived) => {
             return [
@@ -657,7 +657,7 @@ describe(`Tests POST ${route} API OK`, function() {
             signature: 'signature'
           }
         };
-        blockchainAdapterNock.get('/signatures/' + otherReceivedContract.documentId + '/' + otherReceivedContract.fromMsp.mspId)
+        blockchainAdapterNock.get('/signatures/' + otherReceivedContract.referenceId + '/' + otherReceivedContract.fromMsp.mspId)
           .times(1)
           .reply((pathReceived, bodyReceived) => {
             return [

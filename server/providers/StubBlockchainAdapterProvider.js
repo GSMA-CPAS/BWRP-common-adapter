@@ -134,24 +134,24 @@ class BlockchainAdapterProvider {
    *
    * @return {Promise<[string]>}
    */
-  async getPrivateDocumentIDs() {
+  async getPrivateReferenceIDs() {
     try {
       const ids = STUB_PRIVATES_DOCUMENTS.map((doc) => doc.id);
       return ids;
     } catch (error) {
-      logger.error('[StubBlockchainAdapterProvider::getPrivateDocumentIDs] failed to get documents - %s', error.message);
+      logger.error('[StubBlockchainAdapterProvider::getPrivateReferenceIDs] failed to get documents - %s', error.message);
       throw error;
     }
   }
 
   /**
    *
-   * @param {String} documentId
+   * @param {String} referenceId
    * @return {Promise<Object>}
    */
-  async getPrivateDocument(documentId) {
+  async getPrivateDocument(referenceId) {
     try {
-      const response = STUB_PRIVATES_DOCUMENTS.filter((doc) => (doc.id === documentId))[0];
+      const response = STUB_PRIVATES_DOCUMENTS.filter((doc) => (doc.id === referenceId))[0];
       if (response === undefined) {
         throw ERROR_NOT_FOUND;
       }
@@ -164,12 +164,12 @@ class BlockchainAdapterProvider {
 
   /**
    *
-   * @param {String} documentId
+   * @param {String} referenceId
    * @return {Promise<string>}
    */
-  async deletePrivateDocument(documentId) {
+  async deletePrivateDocument(referenceId) {
     try {
-      const response = STUB_PRIVATES_DOCUMENTS.filter((doc) => (doc.id === documentId))[0];
+      const response = STUB_PRIVATES_DOCUMENTS.filter((doc) => (doc.id === referenceId))[0];
       if (response === undefined) {
         throw ERROR_NOT_FOUND;
       }
@@ -218,7 +218,7 @@ class BlockchainAdapterProvider {
       };
       return {
         rawData,
-        documentId: blockchainResp.documentID
+        referenceId: blockchainResp.documentID
       };
     } catch (error) {
       logger.error('[StubBlockchainAdapterProvider::uploadContract] failed to upload contract - %s', error.message);
@@ -228,11 +228,11 @@ class BlockchainAdapterProvider {
 
   /**
    *
-   * @param {String} documentId
+   * @param {String} referenceId
    * @param {String} msp
    * @return {Promise<Object>}
    */
-  async getSignatures(documentId, msp) {
+  async getSignatures(referenceId, msp) {
     try {
       const response = STUB_SIGNATURES;
       return response;
@@ -244,13 +244,13 @@ class BlockchainAdapterProvider {
 
   /**
    *
-   * @param {String} documentId
+   * @param {String} referenceId
    * @param {String} certificate
    * @param {String} algorithm
    * @param {String} signature
    * @return {Promise<Object>}
    */
-  async uploadSignature(documentId, certificate, algorithm, signature) {
+  async uploadSignature(referenceId, certificate, algorithm, signature) {
     try {
       const response = {
         certificate: certificate,

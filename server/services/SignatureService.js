@@ -34,7 +34,7 @@ const getSignatureById = ({contractId, signatureId}) => new Promise(
           reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_GET_SIGNATURE_WITH_WRONG_SIGNATURE_ID));
         } else {
           const signature = getContractByIdResp.signatureLink[indexOfSignatureToGet];
-          const bcSignatures = await blockchainAdapterConnection.getSignatures(getContractByIdResp.documentId, getContractByIdResp[signature.msp].mspId);
+          const bcSignatures = await blockchainAdapterConnection.getSignatures(getContractByIdResp.referenceId, getContractByIdResp[signature.msp].mspId);
           let state = 'UNSIGNED';
 
           const mySignature = {
@@ -128,7 +128,7 @@ const updateSignatureById = ({contractId, signatureId, body}) => new Promise(
             } else {
               // TODO: additional check if "signature" is valid.
 
-              const bcSignatures = await blockchainAdapterConnection.uploadSignature(getContractByIdResp.documentId, body.certificate, body.algorithm, body.signature);
+              const bcSignatures = await blockchainAdapterConnection.uploadSignature(getContractByIdResp.referenceId, body.certificate, body.algorithm, body.signature);
               console.log(bcSignatures);
 
               signatureLink[indexOfSignatureToUpdate]['txId'] = bcSignatures.txID;
@@ -162,7 +162,7 @@ const updateSignatureById = ({contractId, signatureId, body}) => new Promise(
             } else {
               // TODO: additional check if "signature" is valid.
 
-              const bcSignatures = await blockchainAdapterConnection.uploadSignature(getContractByIdResp.documentId, body.certificate, body.algorithm, body.signature);
+              const bcSignatures = await blockchainAdapterConnection.uploadSignature(getContractByIdResp.referenceId, body.certificate, body.algorithm, body.signature);
               signatureLink[indexOfSignatureToUpdate]['txId'] = bcSignatures.txID;
 
               const contractToUpdate = getContractByIdResp;

@@ -28,7 +28,7 @@ class RawDataUtils {
     contract.fromMsp.mspId = fromMSP;
     contract.toMsp = contract.toMsp ? contract.toMsp : {};
     contract.toMsp.mspId = toMSP;
-    contract.documentId = id;
+    contract.referenceId = id;
     contract.timestamp = timestamp;
     contract.state = 'RECEIVED';
     return contract;

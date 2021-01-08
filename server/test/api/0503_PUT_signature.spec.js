@@ -86,7 +86,7 @@ describe(`Tests PUT ${route} API OK`, function() {
           index: 0
         }
       ],
-      documentId: 'bec1ef2dbce73b6ae9841cf2edfa56de1f16d5a33d8a657de258e85c5f2e1bcb',
+      referenceId: 'bec1ef2dbce73b6ae9841cf2edfa56de1f16d5a33d8a657de258e85c5f2e1bcb',
       rawData: 'eyJ0eXBlIjoiY29udHJhY3QiLCJ2ZXJzaW9uIjoiMS4xLjAiLCJuYW1lIjoiQ29udHJhY3QgbmFtZSBiZXR3ZWVuIE1TUDEgYW5kIE1TUDIiLCJmcm9tTXNwIjp7InNpZ25hdHVyZXMiOlt7InJvbGUiOiJyb2xlIiwibmFtZSI6Im5hbWUiLCJpZCI6ImlkIn1dLCJtc3BJZCI6IkExIn0sInRvTXNwIjp7InNpZ25hdHVyZXMiOlt7InJvbGUiOiJyb2xlIiwibmFtZSI6Im5hbWUiLCJpZCI6ImlkIn1dLCJtc3BJZCI6IkIxIn0sImJvZHkiOnsiYmFua0RldGFpbHMiOnsiQTEiOnsiaWJhbiI6bnVsbCwiYmFua05hbWUiOm51bGwsImN1cnJlbmN5IjpudWxsfSwiQjEiOnsiaWJhbiI6bnVsbCwiYmFua05hbWUiOm51bGwsImN1cnJlbmN5IjpudWxsfX0sImRpc2NvdW50TW9kZWxzIjoic29tZURhdGEiLCJnZW5lcmFsSW5mb3JtYXRpb24iOnsibmFtZSI6InRlc3QxIiwidHlwZSI6Ik5vcm1hbCIsImVuZERhdGUiOiIyMDIxLTAxLTAxVDAwOjAwOjAwLjAwMFoiLCJzdGFydERhdGUiOiIyMDIwLTEyLTAxVDAwOjAwOjAwLjAwMFoifX19'
     };
     const draftContract = {
@@ -206,7 +206,7 @@ describe(`Tests PUT ${route} API OK`, function() {
           index: 0
         }
       ],
-      documentId: 'receivedbec1ef2dbce73b6ae9841cf2edfa56de1f16d5a33d8a657de258e85c5f2e1bcb',
+      referenceId: 'receivedbec1ef2dbce73b6ae9841cf2edfa56de1f16d5a33d8a657de258e85c5f2e1bcb',
       rawData: 'eyJ0eXBlIjoiY29udHJhY3QiLCJ2ZXJzaW9uIjoiMS4xLjAiLCJuYW1lIjoiQ29udHJhY3QgbmFtZSBiZXR3ZWVuIE1TUDEgYW5kIE1TUDIiLCJmcm9tTXNwIjp7InNpZ25hdHVyZXMiOlt7InJvbGUiOiJyb2xlIiwibmFtZSI6Im5hbWUiLCJpZCI6ImlkIn1dLCJtc3BJZCI6IkExIn0sInRvTXNwIjp7InNpZ25hdHVyZXMiOlt7InJvbGUiOiJyb2xlIiwibmFtZSI6Im5hbWUiLCJpZCI6ImlkIn1dLCJtc3BJZCI6IkIxIn0sImJvZHkiOnsiYmFua0RldGFpbHMiOnsiQTEiOnsiaWJhbiI6bnVsbCwiYmFua05hbWUiOm51bGwsImN1cnJlbmN5IjpudWxsfSwiQjEiOnsiaWJhbiI6bnVsbCwiYmFua05hbWUiOm51bGwsImN1cnJlbmN5IjpudWxsfX0sImRpc2NvdW50TW9kZWxzIjoic29tZURhdGEiLCJnZW5lcmFsSW5mb3JtYXRpb24iOnsibmFtZSI6InRlc3QxIiwidHlwZSI6Ik5vcm1hbCIsImVuZERhdGUiOiIyMDIxLTAxLTAxVDAwOjAwOjAwLjAwMFoiLCJzdGFydERhdGUiOiIyMDIwLTEyLTAxVDAwOjAwOjAwLjAwMFoifX19'
     };
 
@@ -260,7 +260,7 @@ describe(`Tests PUT ${route} API OK`, function() {
           algorithm: 'secp384r1'
         };
 
-        blockchainAdapterNock.put('/signatures/' + sentContract.documentId)
+        blockchainAdapterNock.put('/signatures/' + sentContract.referenceId)
           .times(1)
           .reply((pathReceived, bodyReceived) => {
             return [
@@ -347,7 +347,7 @@ describe(`Tests PUT ${route} API OK`, function() {
           algorithm: 'secp384r1'
         };
 
-        blockchainAdapterNock.put('/signatures/' + sentContract.documentId)
+        blockchainAdapterNock.put('/signatures/' + sentContract.referenceId)
           .times(1)
           .reply((pathReceived, bodyReceived) => {
             return [
@@ -392,7 +392,7 @@ describe(`Tests PUT ${route} API OK`, function() {
           algorithm: 'secp384r1'
         };
 
-        blockchainAdapterNock.put('/signatures/' + sentContract.documentId)
+        blockchainAdapterNock.put('/signatures/' + sentContract.referenceId)
           .times(1)
           .reply((pathReceived, bodyReceived) => {
             return [
@@ -470,7 +470,7 @@ describe(`Tests PUT ${route} API OK`, function() {
           algorithm: 'secp384r1'
         };
 
-        blockchainAdapterNock.put('/signatures/' + receivedContract.documentId)
+        blockchainAdapterNock.put('/signatures/' + receivedContract.referenceId)
           .times(1)
           .reply((pathReceived, bodyReceived) => {
             return [

@@ -31,11 +31,11 @@ describe('Unit Tests for base64 converter and sha256', function() {
     done();
   });
 
-  it('Should compute storageKey from targetMSPID  documentID ', function(done) {
+  it('Should compute storageKey from targetMSPID  referenceID ', function(done) {
     const expectedHash = 'ad756b1cecacb073fa4808f5a754515e033f6b1b3247153d65b6510ae4c9bb49';
     const targetMSPID = 'TMUS';
-    const documentID = '25d69d4c660d68cbc09c100924628afa68e0e309e13acb04d5d8c2c55d542aa5';
-    const sha256Hash01 = sjcl.hash.sha256.hash(targetMSPID + documentID);
+    const referenceID = '25d69d4c660d68cbc09c100924628afa68e0e309e13acb04d5d8c2c55d542aa5';
+    const sha256Hash01 = sjcl.hash.sha256.hash(targetMSPID + referenceID);
     const hexStringOfsha256Hash01 = sjcl.codec.hex.fromBits(sha256Hash01);
     debug('Computed storageKey using sjcl = : %s', hexStringOfsha256Hash01);
 

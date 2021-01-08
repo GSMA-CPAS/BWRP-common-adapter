@@ -158,17 +158,17 @@ POST /contracts/{contractId}/usage
 
 ///////////////////////////
 // What we record:
-We add the contractDocumentId to the POST object ("contractDocumentId":      retreive the documentId of the contract)
+We add the contractReferenceId to the POST object ("contractReferenceId":      retreive the referenceId of the contract)
 
 {
   "id":   1,         // generated
-  "documentId": None
+  "referenceId": None
   "usageId" :  "kjh",  //  Generate a UUID
   "fromMSP": "theFromMSP",
   "toMSP": "theToMSP",
   "state": "DRAFT",
-  "rawData": stringify(  POST object (including contractDocumentId) ),
-  "contractDocumentId":      retreive the documentId of the contract,
+  "rawData": stringify(  POST object (including contractReferenceId) ),
+  "contractReferenceId":      retreive the referenceId of the contract,
   "contractId": from path
   "history": [ { "timestamp": "00001", "action": "CREATE" }]
 }
@@ -223,13 +223,13 @@ We update the state to PENDING
 
 We construct the payload
 {
-"data": base64 encoding of rawData | + contractDocumentId
+"data": base64 encoding of rawData | + contractReferenceId
 "toMSP": // toMSID = toMSP
 }
 
 POST /private-document
 
-Receive documentId -> update usage object with doc ID
+Receive referenceId -> update usage object with doc ID
 We update the state to SENT
 
 ###############################################
@@ -237,7 +237,7 @@ We update the state to SENT
 ###############################################
 # Orange receives a webhook event on /contrats/event      with  storageKey  and documentHash
 
-?? What is the best way to get documentId when we receive the storageKey in the webhook from the blockchain-adapter ?
+?? What is the best way to get referenceId when we receive the storageKey in the webhook from the blockchain-adapter ?
 
 blockchain-adapter-dtag     | > reply: FetchPrivateDocument(#0fa34b69e77e8d40155117833bff6fbdae1d196cc080707e687b712391a8e094) =
 {"id":"0fa34b69e77e8d40155117833bff6fbdae1d196cc080707e687b712391a8e094",
@@ -245,7 +245,7 @@ blockchain-adapter-dtag     | > reply: FetchPrivateDocument(#0fa34b69e77e8d40155
 "fromMSP":"DTAG",
 "toMSP":"TMUS",
 "data":"eyJoZWFkZXIiOnsidmVyc2lvbiI6IjEuMCIsInR5cGUiOiJjb250cmFjdCIsIm1zcHMiOnsiRFRBRyI6eyJtaW5TaW
-duYXR1cmVzIjoyfSwiVE1VUyI6eyJtaW5TaWduYXR1cmVzIjoyfX19LCJib2R5Ijp7ImdlbmVyYWxJbmZvcm1hdGlvbiI6eyJu|contractDocumentId",
+duYXR1cmVzIjoyfSwiVE1VUyI6eyJtaW5TaWduYXR1cmVzIjoyfX19LCJib2R5Ijp7ImdlbmVyYWxJbmZvcm1hdGlvbiI6eyJu|contractReferenceId",
 "dataHash":"c3eddb15c50df07faa2da74435f95bdd6592860f3162e18e404e8248f3ed56c0"}
 
 -> decode data to JSON
@@ -254,17 +254,17 @@ Check id header type is "usage"
 Create usageId
 {
 "id":   1,         // generated
-"documentId": id
+"referenceId": id
 "usageId" :  usageId
-"contractId":  find it localy using contractDocumentId
+"contractId":  find it localy using contractReferenceId
 "fromMSP": fromMsp,
 "toMSP": toMSP
 "state": "RECEIVED",
 "rawData": base64Decode(  data[0] ).toString(),
-"contractDocumentId":      data[1],          retreive the documentId of the contract
+"contractReferenceId":      data[1],          retreive the referenceId of the contract
 "history": [ { "timestamp": "00001", "action": "CREATE" }]
 }
 
-storageKey = HASH256( fromMSP + documentId)
-HASH256( base64Encode( rawData ) + | + contractDocumentId )
+storageKey = HASH256( fromMSP + referenceId)
+HASH256( base64Encode( rawData ) + | + contractReferenceId )
 

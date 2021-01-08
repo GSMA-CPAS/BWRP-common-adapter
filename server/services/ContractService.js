@@ -107,8 +107,8 @@ const sendContractById = ({contractId}) => new Promise(
         reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_SEND_CONTRACT_ONLY_ALLOWED_IN_STATE_DRAFT));
       }
       const uploadContractResp = await blockchainAdapterConnection.uploadContract(getContractByIdResp);
-      const getStorageKeysResp = await blockchainAdapterConnection.getStorageKeys(uploadContractResp.documentId, [getContractByIdResp.fromMsp.mspId, getContractByIdResp.toMsp.mspId]);
-      const updateContractResp = await LocalStorageProvider.updateSentContract(contractId, uploadContractResp.rawData, uploadContractResp.documentId, getStorageKeysResp);
+      const getStorageKeysResp = await blockchainAdapterConnection.getStorageKeys(uploadContractResp.referenceId, [getContractByIdResp.fromMsp.mspId, getContractByIdResp.toMsp.mspId]);
+      const updateContractResp = await LocalStorageProvider.updateSentContract(contractId, uploadContractResp.rawData, uploadContractResp.referenceId, getStorageKeysResp);
       const returnedResponse = ContractMapper.getResponseBodyForSendContract(updateContractResp);
       resolve(Service.successResponse(returnedResponse, 200));
     } catch (e) {
