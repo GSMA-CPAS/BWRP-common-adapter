@@ -19,6 +19,23 @@ class TestsDbUtils {
     });
   }
 
+  static verifyContract(contractId, conditions) {
+    return new Promise((resolve, reject) => {
+      const requestConditions = conditions;
+      requestConditions.id = contractId;
+      // Launch database request
+      ContractMongoRequester.findOne(requestConditions, (err, contract) => {
+        if (err) {
+          debug('verify contract failed : ', err);
+          reject(err);
+        } else {
+          debug('verify contract done with success');
+          resolve(contract);
+        }
+      });
+    });
+  }
+
   static removeAllUsages(conditions) {
     return new Promise((resolve, reject) => {
       UsageMongoRequester.deleteMany(conditions, (err, usages) => {
