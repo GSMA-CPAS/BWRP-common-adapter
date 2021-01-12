@@ -23,32 +23,12 @@ describe(`Tests PUT ${route} API OK`, function() {
       state: 'DRAFT',
       type: 'contract',
       version: '1.1.0',
-      fromMsp: {
-        mspId: 'DTAG'
-      },
-      toMsp: {
-        mspId: 'TMUS'
-      },
+      fromMsp: {mspId: 'DTAG'},
+      toMsp: {mspId: 'TMUS'},
       body: {
-        bankDetails: {
-          A1: {
-            iban: null,
-            bankName: null,
-            currency: null
-          },
-          B1: {
-            iban: null,
-            bankName: null,
-            currency: null
-          }
-        },
+        bankDetails: {A1: {iban: null, bankName: null, currency: null}, B1: {iban: null, bankName: null, currency: null}},
         discountModels: 'someData',
-        generalInformation: {
-          name: 'test1',
-          type: 'Normal',
-          endDate: '2021-01-01T00:00:00.000Z',
-          startDate: '2020-12-01T00:00:00.000Z'
-        }
+        generalInformation: {name: 'test1', type: 'Normal', endDate: '2021-01-01T00:00:00.000Z', startDate: '2020-12-01T00:00:00.000Z'}
       },
       rawData: 'Ctr_raw-data-1'
     };
@@ -58,51 +38,12 @@ describe(`Tests PUT ${route} API OK`, function() {
       state: 'DRAFT',
       type: 'contract',
       version: '1.3.1',
-      fromMsp: {
-        mspId: 'DTAG',
-        signatures: [
-          {
-            id: 'signatureId_1_InString',
-            name: 'employeeName_A2_1',
-            role: 'financeDirector'
-          }
-        ]
-      },
-      toMsp: {
-        mspId: 'TMUS',
-        signatures: [
-          {
-            id: 'signatureId_C1_1_InString',
-            name: 'employeeName_C1_1',
-            role: 'financeDirector'
-          },
-          {
-            id: 'signatureId_C1_2_InString',
-            name: 'employeeName_C1_2',
-            role: 'saleDirector'
-          }
-        ]
-      },
+      fromMsp: {mspId: 'DTAG', signatures: [{id: 'signatureId_1_InString', name: 'employeeName_A2_1', role: 'financeDirector'}]},
+      toMsp: {mspId: 'TMUS', signatures: [{id: 'signatureId_C1_1_InString', name: 'employeeName_C1_1', role: 'financeDirector'}, {id: 'signatureId_C1_2_InString', name: 'employeeName_C1_2', role: 'saleDirector'}]},
       body: {
-        bankDetails: {
-          A1: {
-            iban: null,
-            bankName: null,
-            currency: null
-          },
-          C3: {
-            iban: null,
-            bankName: null,
-            currency: null
-          }
-        },
+        bankDetails: {A1: {iban: null, bankName: null, currency: null}, C3: {iban: null, bankName: null, currency: null}},
         discountModels: 'someData',
-        generalInformation: {
-          name: 'test1',
-          type: 'Normal',
-          endDate: '2021-01-01T00:00:00.000Z',
-          startDate: '2020-12-01T00:00:00.000Z'
-        }
+        generalInformation: {name: 'test1', type: 'Normal', endDate: '2021-01-01T00:00:00.000Z', startDate: '2020-12-01T00:00:00.000Z'}
       },
       rawData: 'Ctr_raw-data-2'
     };

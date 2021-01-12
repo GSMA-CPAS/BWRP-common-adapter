@@ -241,71 +241,22 @@ describe(`Tests POST ${route} API OK`, function() {
       state: 'SENT',
       type: 'contract',
       version: '1.1.0',
-      fromMsp: {
-        mspId: 'TMUS',
-        signatures: [
-          {
-            role: 'role',
-            name: 'name',
-            id: 'id'
-          }
-        ]
-      },
-      toMsp: {
-        mspId: 'MSP2',
-        signatures: [
-          {
-            role: 'role',
-            name: 'name',
-            id: 'id'
-          }
-        ]
-      },
+      fromMsp: {mspId: 'TMUS', signatures: [{role: 'role', name: 'name', id: 'id'}]},
+      toMsp: {mspId: 'MSP2', signatures: [{role: 'role', name: 'name', id: 'id'}]},
       body: {
-        bankDetails: {
-          MSP1: {
-            iban: null,
-            bankName: null,
-            currency: null
-          },
-          MSP2: {
-            iban: null,
-            bankName: null,
-            currency: null
-          }
-        },
+        bankDetails: {MSP1: {iban: null, bankName: null, currency: null}, MSP2: {iban: null, bankName: null, currency: null}},
         discountModels: 'someData',
-        generalInformation: {
-          name: 'test1',
-          type: 'Normal',
-          endDate: '2021-01-01T00:00:00.000Z',
-          startDate: '2020-12-01T00:00:00.000Z'
-        }
+        generalInformation: {name: 'test1', type: 'Normal', endDate: '2021-01-01T00:00:00.000Z', startDate: '2020-12-01T00:00:00.000Z'}
       },
       creationDate: '2020-12-15T15:28:06.968Z',
       history: [
-        {
-          date: '2020-12-15T15:28:06.968Z',
-          action: 'CREATION'
-        },
-        {
-          date: '2020-12-15T15:28:07.077Z',
-          action: 'SENT'
-        }
+        {date: '2020-12-15T15:28:06.968Z', action: 'CREATION'},
+        {date: '2020-12-15T15:28:07.077Z', action: 'SENT'}
       ],
       lastModificationDate: '2020-12-15T15:28:07.077Z',
       signatureLink: [
-        {
-          id: '5fd8d6070cc5feb0fc0cb9e433ff',
-          msp: 'fromMsp',
-          index: 0,
-          txId: 'f6c847b990945996a6c13e21713d76c982ef79779c43c8f9183cb30c3822e3d7'
-        },
-        {
-          id: '5fd8d6070cc5feb0fc0cb9e5d45f',
-          msp: 'toMsp',
-          index: 0
-        }
+        {id: '5fd8d6070cc5feb0fc0cb9e433ff', msp: 'fromMsp', index: 0, txId: 'f6c847b990945996a6c13e21713d76c982ef79779c43c8f9183cb30c3822e3d7'},
+        {id: '5fd8d6070cc5feb0fc0cb9e5d45f', msp: 'toMsp', index: 0}
       ],
       referenceId: '15d69d4c660d68cbc09c100924628afa68e0e309e13acb04d5d8c2c55d542aa5',
       storageKeys: [
@@ -319,70 +270,22 @@ describe(`Tests POST ${route} API OK`, function() {
       state: 'RECEIVED',
       type: 'contract',
       version: '1.1.0',
-      fromMsp: {
-        mspId: 'TMUS',
-        signatures: [
-          {
-            role: 'role',
-            name: 'name',
-            id: 'id'
-          }
-        ]
-      },
-      toMsp: {
-        mspId: 'MSP2',
-        signatures: [
-          {
-            role: 'role',
-            name: 'name',
-            id: 'id'
-          }
-        ]
-      },
+      fromMsp: {mspId: 'TMUS', signatures: [{role: 'role', name: 'name', id: 'id'}]},
+      toMsp: {mspId: 'MSP2', signatures: [{role: 'role', name: 'name', id: 'id'}]},
       body: {
-        bankDetails: {
-          MSP1: {
-            iban: null,
-            bankName: null,
-            currency: null
-          },
-          MSP2: {
-            iban: null,
-            bankName: null,
-            currency: null
-          }
-        },
+        bankDetails: {MSP1: {iban: null, bankName: null, currency: null}, MSP2: {iban: null, bankName: null, currency: null}},
         discountModels: 'someData',
-        generalInformation: {
-          name: 'test1',
-          type: 'Normal',
-          endDate: '2021-01-01T00:00:00.000Z',
-          startDate: '2020-12-01T00:00:00.000Z'
-        }
+        generalInformation: {name: 'test1', type: 'Normal', endDate: '2021-01-01T00:00:00.000Z', startDate: '2020-12-01T00:00:00.000Z'}
       },
       creationDate: '2020-12-15T15:28:06.968Z',
       history: [
-        {
-          date: '2020-12-15T15:28:06.968Z',
-          action: 'CREATION'
-        },
-        {
-          date: '2020-12-15T15:28:07.077Z',
-          action: 'SENT'
-        }
+        {date: '2020-12-15T15:28:06.968Z', action: 'CREATION'},
+        {date: '2020-12-15T15:28:07.077Z', action: 'SENT'}
       ],
       lastModificationDate: '2020-12-15T15:28:07.077Z',
       signatureLink: [
-        {
-          id: '5fd8d6070cc5feb0fc0cb9e433ff',
-          msp: 'fromMsp',
-          index: 0,
-        },
-        {
-          id: '5fd8d6070cc5feb0fc0cb9e5d45f',
-          msp: 'toMsp',
-          index: 0
-        }
+        {id: '5fd8d6070cc5feb0fc0cb9e433ff', msp: 'fromMsp', index: 0},
+        {id: '5fd8d6070cc5feb0fc0cb9e5d45f', msp: 'toMsp', index: 0}
       ],
       referenceId: '25d69d4c660d68cbc09c100924628afa68e0e309e13acb04d5d8c2c55d542aa5',
       storageKeys: [
@@ -396,90 +299,24 @@ describe(`Tests POST ${route} API OK`, function() {
       state: 'RECEIVED',
       type: 'contract',
       version: '1.3.0',
-      fromMsp: {
-        mspId: 'TMUS',
-        signatures: [
-          {
-            role: 'role',
-            name: 'name',
-            id: 'id'
-          },
-          {
-            role: 'role2',
-            name: 'name2',
-            id: 'id2'
-          },
-          {
-            role: 'role3',
-            name: 'name3',
-            id: 'id3'
-          }
-        ]
-      },
-      toMsp: {
-        mspId: 'MSP3',
-        signatures: [
-          {
-            role: 'role',
-            name: 'name',
-            id: 'id'
-          }
-        ]
-      },
+      fromMsp: {mspId: 'TMUS', signatures: [{role: 'role', name: 'name', id: 'id'}, {role: 'role2', name: 'name2', id: 'id2'}, {role: 'role3', name: 'name3', id: 'id3'}]},
+      toMsp: {mspId: 'MSP3', signatures: [{role: 'role', name: 'name', id: 'id'}]},
       body: {
-        bankDetails: {
-          MSP1: {
-            iban: null,
-            bankName: null,
-            currency: null
-          },
-          MSP3: {
-            iban: null,
-            bankName: null,
-            currency: null
-          }
-        },
+        bankDetails: {MSP1: {iban: null, bankName: null, currency: null}, MSP3: {iban: null, bankName: null, currency: null}},
         discountModels: 'someData',
-        generalInformation: {
-          name: 'test3',
-          type: 'Normal',
-          endDate: '2021-01-01T00:00:00.000Z',
-          startDate: '2020-12-01T00:00:00.000Z'
-        }
+        generalInformation: {name: 'test3', type: 'Normal', endDate: '2021-01-01T00:00:00.000Z', startDate: '2020-12-01T00:00:00.000Z'}
       },
       creationDate: '2020-12-15T15:28:06.968Z',
       history: [
-        {
-          date: '2020-12-15T15:28:06.968Z',
-          action: 'CREATION'
-        },
-        {
-          date: '2020-12-15T15:28:07.077Z',
-          action: 'SENT'
-        }
+        {date: '2020-12-15T15:28:06.968Z', action: 'CREATION'},
+        {date: '2020-12-15T15:28:07.077Z', action: 'SENT'}
       ],
       lastModificationDate: '2020-12-15T15:28:07.077Z',
       signatureLink: [
-        {
-          id: '5fd8d6070cc5feb0fc0cb9e433ff',
-          msp: 'fromMsp',
-          index: 0,
-        },
-        {
-          id: '5fd8d6070cc5feb0fc0cb9e433fe',
-          msp: 'fromMsp',
-          index: 1,
-        },
-        {
-          id: '5fd8d6070cc5feb0fc0cb9e433fd',
-          msp: 'fromMsp',
-          index: 2,
-        },
-        {
-          id: '5fd8d6070cc5feb0fc0cb9e5d45f',
-          msp: 'toMsp',
-          index: 0
-        }
+        {id: '5fd8d6070cc5feb0fc0cb9e433ff', msp: 'fromMsp', index: 0},
+        {id: '5fd8d6070cc5feb0fc0cb9e433fe', msp: 'fromMsp', index: 1},
+        {id: '5fd8d6070cc5feb0fc0cb9e433fd', msp: 'fromMsp', index: 2},
+        {id: '5fd8d6070cc5feb0fc0cb9e5d45f', msp: 'toMsp', index: 0}
       ],
       referenceId: '99d69d4c660d68cbc09c100924628afa68e0e309e13acb04d5d8c2c55d542aa5',
       storageKeys: [
@@ -490,29 +327,20 @@ describe(`Tests POST ${route} API OK`, function() {
     };
 
     before((done) => {
-      debugSetup('==> remove all contracts in db');
-      testsDbUtils.removeAllContracts({})
-        .then((removeAllContractsResp) => {
-          debugSetup('All contracts in db are removed : ', removeAllContractsResp);
-          testsDbUtils.initDbWithContracts([sentContract, receivedContract, otherReceivedContract])
-            .then((initDbWithContractsResp) => {
-              debugSetup('Added contract(s) in db ', initDbWithContractsResp);
-              sentContract.id = initDbWithContractsResp[0].id;
-              receivedContract.id = initDbWithContractsResp[1].id;
-              otherReceivedContract.id = initDbWithContractsResp[2].id;
+      debugSetup('==> init db with 3 contracts');
+      testsDbUtils.initDbWithContracts([sentContract, receivedContract, otherReceivedContract])
+        .then((initDbWithContractsResp) => {
+          debugSetup('Added contract(s) in db ', initDbWithContractsResp);
+          sentContract.id = initDbWithContractsResp[0].id;
+          receivedContract.id = initDbWithContractsResp[1].id;
+          otherReceivedContract.id = initDbWithContractsResp[2].id;
 
-              done();
-            })
-            .catch((initDbWithContractsError) => {
-              debugSetup('Error initializing the db content : ', initDbWithContractsError);
-              debugSetup('==> failed!');
-              done(initDbWithContractsError);
-            });
+          done();
         })
-        .catch((removeAllContractsError) => {
-          debugSetup('Error removing contracts in db : ', removeAllContractsError);
+        .catch((initDbWithContractsError) => {
+          debugSetup('Error initializing the db content : ', initDbWithContractsError);
           debugSetup('==> failed!');
-          done(removeAllContractsError);
+          done(initDbWithContractsError);
         });
     });
 

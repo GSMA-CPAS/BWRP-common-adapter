@@ -20,32 +20,12 @@ describe(`Tests DELETE ${route} API OK`, function() {
       state: 'DRAFT',
       type: 'contract',
       version: '1.1.0',
-      fromMsp: {
-        mspId: 'A1'
-      },
-      toMsp: {
-        mspId: 'B1'
-      },
+      fromMsp: {mspId: 'A1'},
+      toMsp: {mspId: 'B1'},
       body: {
-        bankDetails: {
-          A1: {
-            iban: null,
-            bankName: null,
-            currency: null
-          },
-          B1: {
-            iban: null,
-            bankName: null,
-            currency: null
-          }
-        },
+        bankDetails: {A1: {iban: null, bankName: null, currency: null}, B1: {iban: null, bankName: null, currency: null}},
         discountModels: 'someData',
-        generalInformation: {
-          name: 'test1',
-          type: 'Normal',
-          endDate: '2021-01-01T00:00:00.000Z',
-          startDate: '2020-12-01T00:00:00.000Z'
-        }
+        generalInformation: {name: 'test1', type: 'Normal', endDate: '2021-01-01T00:00:00.000Z', startDate: '2020-12-01T00:00:00.000Z'}
       },
       rawData: 'Ctr_raw-data-1'
     };
@@ -55,32 +35,12 @@ describe(`Tests DELETE ${route} API OK`, function() {
       state: 'DRAFT',
       type: 'contract',
       version: '1.3.1',
-      fromMsp: {
-        mspId: 'A1'
-      },
-      toMsp: {
-        mspId: 'C3'
-      },
+      fromMsp: {mspId: 'A1'},
+      toMsp: {mspId: 'C3'},
       body: {
-        bankDetails: {
-          A1: {
-            iban: null,
-            bankName: null,
-            currency: null
-          },
-          C3: {
-            iban: null,
-            bankName: null,
-            currency: null
-          }
-        },
+        bankDetails: {A1: {iban: null, bankName: null, currency: null}, C3: {iban: null, bankName: null, currency: null}},
         discountModels: 'someData',
-        generalInformation: {
-          name: 'test1',
-          type: 'Normal',
-          endDate: '2021-01-01T00:00:00.000Z',
-          startDate: '2020-12-01T00:00:00.000Z'
-        }
+        generalInformation: {name: 'test1', type: 'Normal', endDate: '2021-01-01T00:00:00.000Z', startDate: '2020-12-01T00:00:00.000Z'}
       },
       rawData: 'Ctr_raw-data-2'
     };

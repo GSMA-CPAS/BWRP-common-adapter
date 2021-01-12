@@ -20,32 +20,12 @@ describe(`Tests GET ${route} API OK`, function() {
       state: 'SENT',
       type: 'contract',
       version: '1.1.0',
-      fromMsp: {
-        mspId: 'A1'
-      },
-      toMsp: {
-        mspId: 'B1'
-      },
+      fromMsp: {mspId: 'A1'},
+      toMsp: {mspId: 'B1'},
       body: {
-        bankDetails: {
-          A1: {
-            iban: null,
-            bankName: null,
-            currency: null
-          },
-          B1: {
-            iban: null,
-            bankName: null,
-            currency: null
-          }
-        },
+        bankDetails: {A1: {iban: null, bankName: null, currency: null}, B1: {iban: null, bankName: null, currency: null}},
         discountModels: 'someData',
-        generalInformation: {
-          name: 'test1',
-          type: 'Normal',
-          endDate: '2021-01-01T00:00:00.000Z',
-          startDate: '2020-12-01T00:00:00.000Z'
-        }
+        generalInformation: {name: 'test1', type: 'Normal', endDate: '2021-01-01T00:00:00.000Z', startDate: '2020-12-01T00:00:00.000Z'}
       },
       rawData: 'Ctr_raw-data-1'
     };
@@ -54,32 +34,12 @@ describe(`Tests GET ${route} API OK`, function() {
       state: 'SIGNED',
       type: 'contract',
       version: '1.1.0',
-      fromMsp: {
-        mspId: 'B1'
-      },
-      toMsp: {
-        mspId: 'C1'
-      },
+      fromMsp: {mspId: 'B1'},
+      toMsp: {mspId: 'C1'},
       body: {
-        bankDetails: {
-          A1: {
-            iban: null,
-            bankName: null,
-            currency: null
-          },
-          B1: {
-            iban: null,
-            bankName: null,
-            currency: null
-          }
-        },
+        bankDetails: {A1: {iban: null, bankName: null, currency: null}, B1: {iban: null, bankName: null, currency: null}},
         discountModels: 'someData',
-        generalInformation: {
-          name: 'test1',
-          type: 'Normal',
-          endDate: '2021-01-01T00:00:00.000Z',
-          startDate: '2020-12-01T00:00:00.000Z'
-        }
+        generalInformation: {name: 'test1', type: 'Normal', endDate: '2021-01-01T00:00:00.000Z', startDate: '2020-12-01T00:00:00.000Z'}
       },
       rawData: 'Ctr_raw-data-1'
     };
@@ -95,51 +55,31 @@ describe(`Tests GET ${route} API OK`, function() {
     };
 
     before((done) => {
-      debugSetup('==> remove all contracts in db');
-      testsDbUtils.removeAllContracts({})
-        .then((removeAllContractsResp) => {
-          debugSetup('All contracts in db are removed : ', removeAllContractsResp);
-
-          testsDbUtils.removeAllSettlements({})
-            .then((removeAllSettlementsResp) => {
-              debugSetup('All settlements in db are removed : ', removeAllSettlementsResp);
-
-              testsDbUtils.initDbWithContracts([contract1, contract2])
-                .then((initDbWithContractsResp) => {
-                  debugSetup('Two contracts in db ', initDbWithContractsResp);
-                  contract1.id = initDbWithContractsResp[0].id;
-                  contract2.id = initDbWithContractsResp[1].id;
-                  settlement1.contractId = contract1.id;
-                  testsDbUtils.createSettlement(settlement1)
-                    .then((createSettlementResp) => {
-                      debugSetup('One settlement document linked to contract ', createSettlementResp.contractId);
-
-                      settlement1.id = createSettlementResp.id;
-                      debugSetup('==> done!');
-                      done();
-                    })
-                    .catch((createSettlementError) => {
-                      debugSetup('Error initializing the db content : ', createSettlementError);
-                      debugSetup('==> failed!');
-                      done(createSettlementError);
-                    });
-                })
-                .catch((initDbWithContractsError) => {
-                  debugSetup('Error initializing the db content : ', initDbWithContractsError);
-                  debugSetup('==> failed!');
-                  done(initDbWithContractsError);
-                });
+      debugSetup('==> init db with 2 contracts');
+      testsDbUtils.initDbWithContracts([contract1, contract2])
+        .then((initDbWithContractsResp) => {
+          debugSetup('Two contracts in db ', initDbWithContractsResp);
+          contract1.id = initDbWithContractsResp[0].id;
+          contract2.id = initDbWithContractsResp[1].id;
+          settlement1.contractId = contract1.id;
+          debugSetup('==> init db with 1 settlement');
+          testsDbUtils.initDbWithSettlements([settlement1])
+            .then((initDbWithSettlementsResp) => {
+              debugSetup('One settlement document linked to contract ', initDbWithSettlementsResp[0].contractId);
+              settlement1.id = initDbWithSettlementsResp[0].id;
+              debugSetup('==> done!');
+              done();
             })
-            .catch((removeAllSettlementsError) => {
-              debugSetup('Error removing settlements in db : ', removeAllSettlementsError);
+            .catch((initDbWithSettlementsError) => {
+              debugSetup('Error initializing the db content : ', initDbWithSettlementsError);
               debugSetup('==> failed!');
-              done(removeAllSettlementsError);
+              done(initDbWithSettlementsError);
             });
         })
-        .catch((removeAllContractsError) => {
-          debugSetup('Error removing contracts in db : ', removeAllContractsError);
+        .catch((initDbWithContractsError) => {
+          debugSetup('Error initializing the db content : ', initDbWithContractsError);
           debugSetup('==> failed!');
-          done(removeAllContractsError);
+          done(initDbWithContractsError);
         });
     });
 

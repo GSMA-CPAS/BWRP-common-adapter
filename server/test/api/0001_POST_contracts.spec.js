@@ -24,12 +24,8 @@ describe(`Tests POST ${route} API OK`, function() {
             name: 'Contract name between A1 and B1',
             version: '1.1',
             type: 'contract',
-            fromMsp: {
-              mspId: 'A1'
-            },
-            toMsp: {
-              mspId: 'B1'
-            }
+            fromMsp: {mspId: 'A1'},
+            toMsp: {mspId: 'B1'}
           },
           body: {}
         };
