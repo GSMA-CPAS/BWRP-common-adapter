@@ -1,5 +1,13 @@
 const path = require('path');
 
+const getAsString = (envVar, defaultValue) => {
+  let returnedObject = defaultValue;
+  if (envVar !== undefined) {
+    returnedObject = envVar;
+  }
+  return returnedObject;
+};
+
 const getAsObject = (envVar, defaultValue) => {
   let returnedObject = defaultValue;
   if (envVar !== undefined) {
@@ -54,18 +62,18 @@ config.FULL_PATH = `${config.URL_PATH}:${config.URL_PORT}/${config.BASE_VERSION}
 config.FILE_UPLOAD_PATH = path.join(config.PROJECT_DIR, 'uploaded_files');
 
 // Logger configuration
-config.LOG_LEVEL = process.env.LOG_LEVEL || 'info';
+config.LOG_LEVEL = process.env.COMMON_ADAPTER_LOG_LEVEL || 'info';
 
 // BlockchainAdapter configuration
-config.BLOCKCHAIN_ADAPTER_URL = process.env.BLOCKCHAIN_ADAPTER_URL || 'http://127.0.0.1:8081';
-config.BLOCKCHAIN_ADAPTER_WEBHOOK_EVENTS = getAsObject(process.env.BLOCKCHAIN_ADAPTER_WEBHOOK_EVENTS, []);
-config.SELF_HOST = process.env.SELF_HOST || '';
+config.BLOCKCHAIN_ADAPTER_URL = getAsString(process.env.COMMON_ADAPTER_BLOCKCHAIN_ADAPTER_URL, 'http://127.0.0.1:8081');
+config.BLOCKCHAIN_ADAPTER_WEBHOOK_EVENTS = getAsObject(process.env.COMMON_ADAPTER_BLOCKCHAIN_ADAPTER_WEBHOOK_EVENTS, []);
+config.SELF_HOST = getAsString(process.env.COMMON_ADAPTER_SELF_HOST, '');
 
-config.DB_URL = process.env.DB_URL || 'mongodb://user:userpw@127.0.0.1:27917/commondb?authSource=commondb';
-config.DB_CREATE_CONNECTION_TIMEOUT = getAsInt(process.env.DB_CREATE_CONNECTION_TIMEOUT, 30000);
-config.DB_HEARTBEAT_FREQUENCY = getAsInt(process.env.DB_HEARTBEAT_FREQUENCY, 5000);
-config.DB_POOL_SIZE = getAsInt(process.env.DB_POOL_SIZE, 10);
+config.DB_URL = getAsString(process.env.COMMON_ADAPTER_DB_URL, 'mongodb://user:userpw@127.0.0.1:27917/commondb?authSource=commondb');
+config.DB_CREATE_CONNECTION_TIMEOUT = getAsInt(process.env.COMMON_ADAPTER_DB_CREATE_CONNECTION_TIMEOUT, 30000);
+config.DB_HEARTBEAT_FREQUENCY = getAsInt(process.env.COMMON_ADAPTER_DB_HEARTBEAT_FREQUENCY, 5000);
+config.DB_POOL_SIZE = getAsInt(process.env.COMMON_ADAPTER_DB_POOL_SIZE, 10);
 
-config.DEACTIVATE_BLOCKCHAIN_DOCUMENT_DELETE = getAsBoolean(process.env.DEACTIVATE_BLOCKCHAIN_DOCUMENT_DELETE, false);
+config.DEACTIVATE_BLOCKCHAIN_DOCUMENT_DELETE = getAsBoolean(process.env.COMMON_ADAPTER_DEACTIVATE_BLOCKCHAIN_DOCUMENT_DELETE, false);
 
 module.exports = config;

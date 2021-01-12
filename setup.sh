@@ -42,11 +42,11 @@ function install() {
 }
 
 function mongo_init() {
-  mkdir -p ${MONGO_PV_PATH}
+  mkdir -p ${COMMON_ADAPTER_MONGO_PV_PATH}
   echo "db.createUser(
     {
-        user: \"${MONGO_USER}\",
-        pwd: \"${MONGO_USERPW}\",
+        user: \"${COMMON_ADAPTER_MONGO_USER}\",
+        pwd: \"${COMMON_ADAPTER_MONGO_USERPW}\",
         roles: [
             {
                 role: \"readWrite\",
@@ -55,7 +55,7 @@ function mongo_init() {
         ]
     }
 );
-" > ${MONGO_PV_PATH}mongo-init.js
+" > ${COMMON_ADAPTER_MONGO_PV_PATH}mongo-init.js
 }
 
 function up() {

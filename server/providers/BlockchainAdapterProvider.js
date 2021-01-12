@@ -289,7 +289,7 @@ class BlockchainAdapterProvider {
    */
   async subscribe() {
     if (config.SELF_HOST.length <= 0) {
-      logger.info('[BlockchainAdapterProvider::subscribe] env SELF_HOST not set. Not subscribing');
+      logger.info('[BlockchainAdapterProvider::subscribe] env COMMON_ADAPTER_SELF_HOST not set. Not subscribing');
       throw errorUtils.ERROR_BLOCKCHAIN_ADAPTER_SELF_HOST_UNDEFINED_ERROR;
     }
 
@@ -299,7 +299,7 @@ class BlockchainAdapterProvider {
     }
 
     if (!Array.isArray(config.BLOCKCHAIN_ADAPTER_WEBHOOK_EVENTS)) {
-      logger.info('[BlockchainAdapterProvider::subscribe] env BLOCKCHAIN_ADAPTER_WEBHOOK_EVENTS not an array. Not subscribing');
+      logger.info('[BlockchainAdapterProvider::subscribe] env COMMON_ADAPTER_BLOCKCHAIN_ADAPTER_WEBHOOK_EVENTS not an array. Not subscribing');
       throw errorUtils.ERROR_BLOCKCHAIN_ADAPTER_BLOCKCHAIN_ADAPTER_WEBHOOK_EVENTS_INVALID_ERROR;
     }
 

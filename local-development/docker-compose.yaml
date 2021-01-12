@@ -3,17 +3,17 @@ version: '3'
 services:
   CADB-dtag:
     container_name: CADB-dtag
-    image: mongo:${MONGO_VERSION}
+    image: mongo:${COMMON_ADAPTER_MONGO_VERSION}
     restart: always
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=${DTAG_MONGO_ROOT}
-      - MONGO_INITDB_ROOT_PASSWORD=${DTAG_MONGO_ROOTPW}
+      - MONGO_INITDB_ROOT_USERNAME=${DTAG_COMMON_ADAPTER_MONGO_ROOT}
+      - MONGO_INITDB_ROOT_PASSWORD=${DTAG_COMMON_ADAPTER_MONGO_ROOTPW}
       - MONGO_INITDB_DATABASE=commondb
     volumes:
-      - ${DTAG_MONGO_PV_PATH}/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
-      - ${DTAG_MONGO_PV_PATH}:/data/db
+      - ${DTAG_COMMON_ADAPTER_MONGO_PV_PATH}/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - ${DTAG_COMMON_ADAPTER_MONGO_PV_PATH}:/data/db
     ports:
-      - ${DTAG_MONGO_PORT}:27017
+      - ${DTAG_COMMON_ADAPTER_MONGO_PORT}:27017
     networks:
       - nomad
 
@@ -24,9 +24,9 @@ services:
     image: common-adapter
     restart: always
     environment:
-      - LOG_LEVEL=${DTAG_LOG_LEVEL}
-      - DB_URL=mongodb://${DTAG_MONGO_USER}:${DTAG_MONGO_USERPW}@CADB-dtag:27017/commondb?authSource=commondb
-      - BLOCKCHAIN_ADAPTER_URL=${DTAG_BLOCKCHAIN_ADAPTER_URL}
+      - COMMON_ADAPTER_LOG_LEVEL=${DTAG_COMMON_ADAPTER_LOG_LEVEL}
+      - COMMON_ADAPTER_DB_URL=mongodb://${DTAG_COMMON_ADAPTER_MONGO_USER}:${DTAG_COMMON_ADAPTER_MONGO_USERPW}@CADB-dtag:27017/commondb?authSource=commondb
+      - COMMON_ADAPTER_BLOCKCHAIN_ADAPTER_URL=${DTAG_COMMON_ADAPTER_BLOCKCHAIN_ADAPTER_URL}
     depends_on:
       - CADB-dtag
     ports:
@@ -37,17 +37,17 @@ services:
 
   CADB-tmus:
     container_name: CADB-tmus
-    image: mongo:${MONGO_VERSION}
+    image: mongo:${COMMON_ADAPTER_MONGO_VERSION}
     restart: always
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=${TMUS_MONGO_ROOT}
-      - MONGO_INITDB_ROOT_PASSWORD=${TMUS_MONGO_ROOTPW}
+      - MONGO_INITDB_ROOT_USERNAME=${TMUS_COMMON_ADAPTER_MONGO_ROOT}
+      - MONGO_INITDB_ROOT_PASSWORD=${TMUS_COMMON_ADAPTER_MONGO_ROOTPW}
       - MONGO_INITDB_DATABASE=commondb
     volumes:
-      - ${TMUS_MONGO_PV_PATH}/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
-      - ${TMUS_MONGO_PV_PATH}:/data/db
+      - ${TMUS_COMMON_ADAPTER_MONGO_PV_PATH}/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - ${TMUS_COMMON_ADAPTER_MONGO_PV_PATH}:/data/db
     ports:
-      - ${TMUS_MONGO_PORT}:27017
+      - ${TMUS_COMMON_ADAPTER_MONGO_PORT}:27017
     networks:
       - nomad
 
@@ -58,10 +58,10 @@ services:
     image: common-adapter
     restart: always
     environment:
-      - LOG_LEVEL=${TMUS_LOG_LEVEL}
-      - DB_URL=mongodb://${TMUS_MONGO_USER}:${TMUS_MONGO_USERPW}@CADB-tmus:27017/commondb?authSource=commondb
-      - BLOCKCHAIN_ADAPTER_URL=${TMUS_BLOCKCHAIN_ADAPTER_URL}
-      - 'BLOCKCHAIN_ADAPTER_WEBHOOKS=[{"eventName": "STORE:DOCUMENTHASH", "callbackUrl": "http://common-adapter-tmus:3000/api/v1/contracts/event/"},{"eventName": "STORE:SIGNATURE", "callbackUrl": "http://common-adapter-tmus:3000/api/v1/contracts/event/"}]'
+      - COMMON_ADAPTER_LOG_LEVEL=${TMUS_COMMON_ADAPTER_LOG_LEVEL}
+      - COMMON_ADAPTER_DB_URL=mongodb://${TMUS_COMMON_ADAPTER_MONGO_USER}:${TMUS_COMMON_ADAPTER_MONGO_USERPW}@CADB-tmus:27017/commondb?authSource=commondb
+      - COMMON_ADAPTER_BLOCKCHAIN_ADAPTER_URL=${TMUS_COMMON_ADAPTER_BLOCKCHAIN_ADAPTER_URL}
+      - 'COMMON_ADAPTER_BLOCKCHAIN_ADAPTER_WEBHOOKS=[{"eventName": "STORE:DOCUMENTHASH", "callbackUrl": "http://common-adapter-tmus:3000/api/v1/contracts/event/"},{"eventName": "STORE:SIGNATURE", "callbackUrl": "http://common-adapter-tmus:3000/api/v1/contracts/event/"}]'
     depends_on:
       - CADB-tmus
     ports:

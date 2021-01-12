@@ -42,11 +42,11 @@ class TestsUtils {
   }
 
   static getBlockchainAdapterUrl() {
-    return testEnv.BLOCKCHAIN_ADAPTER_URL;
+    return testEnv.COMMON_ADAPTER_BLOCKCHAIN_ADAPTER_URL;
   }
 
   static getSelfHostUrl() {
-    return testEnv.SELF_HOST;
+    return testEnv.COMMON_ADAPTER_SELF_HOST;
   }
 
   static getDateRegexp() {
