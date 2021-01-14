@@ -15,11 +15,11 @@ echo $COMPOSE_FILE
   HASH=$(cat .git/modules/blockchain-adapter/HEAD || echo "NO_HEAD" | head -1 | cut -f1)
   HASH2="12341234"
   docker-compose build --build-arg BSA_COMMIT_HASH="$HASH" --build-arg COMMIT_HASH="$HASH2"  $1 || exit 1
-  mkdir -p ${DTAG_MONGO_PV_PATH}
+  mkdir -p ${DTAG_COMMON_ADAPTER_MONGO_PV_PATH}
   echo "db.createUser(
     {
-        user: \"${DTAG_MONGO_USER}\",
-        pwd: \"${DTAG_MONGO_USERPW}\",
+        user: \"${DTAG_COMMON_ADAPTER_MONGO_USER}\",
+        pwd: \"${DTAG_COMMON_ADAPTER_MONGO_USERPW}\",
         roles: [
             {
                 role: \"readWrite\",
@@ -28,13 +28,13 @@ echo $COMPOSE_FILE
         ]
     }
 );
-" > ${DTAG_MONGO_PV_PATH}mongo-init.js
+" > ${DTAG_COMMON_ADAPTER_MONGO_PV_PATH}mongo-init.js
 
-  mkdir -p ${TMUS_MONGO_PV_PATH}
+  mkdir -p ${TMUS_COMMON_ADAPTER_MONGO_PV_PATH}
   echo "db.createUser(
     {
-        user: \"${TMUS_MONGO_USER}\",
-        pwd: \"${TMUS_MONGO_USERPW}\",
+        user: \"${TMUS_COMMON_ADAPTER_MONGO_USER}\",
+        pwd: \"${TMUS_COMMON_ADAPTER_MONGO_USERPW}\",
         roles: [
             {
                 role: \"readWrite\",
@@ -43,7 +43,7 @@ echo $COMPOSE_FILE
         ]
     }
 );
-" > ${TMUS_MONGO_PV_PATH}mongo-init.js
+" > ${TMUS_COMMON_ADAPTER_MONGO_PV_PATH}mongo-init.js
 
 }
 

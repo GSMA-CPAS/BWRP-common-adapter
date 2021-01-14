@@ -123,8 +123,8 @@ class ErrorUtils {
     code: 500,
     error: {
       internalErrorCode: 3005,
-      message: 'Mandatory SELF_HOST configuration missing',
-      description: 'Environnement variable SELF_HOST is not defined.'
+      message: 'Mandatory COMMON_ADAPTER_SELF_HOST configuration missing',
+      description: 'Environnement variable COMMON_ADAPTER_SELF_HOST is not defined.'
     }
   };
 
@@ -132,8 +132,8 @@ class ErrorUtils {
     code: 500,
     error: {
       internalErrorCode: 3006,
-      message: 'Mandatory BLOCKCHAIN_ADAPTER_URL configuration missing',
-      description: 'Environnement variable BLOCKCHAIN_ADAPTER_URL is not defined.'
+      message: 'Mandatory COMMON_ADAPTER_BLOCKCHAIN_ADAPTER_URL configuration missing',
+      description: 'Environnement variable COMMON_ADAPTER_BLOCKCHAIN_ADAPTER_URL is not defined.'
     }
   };
 
@@ -141,8 +141,8 @@ class ErrorUtils {
     code: 500,
     error: {
       internalErrorCode: 3007,
-      message: 'Mandatory BLOCKCHAIN_ADAPTER_WEBHOOK_EVENTS configuration not valid',
-      description: 'Environnement variable BLOCKCHAIN_ADAPTER_WEBHOOK_EVENTS is not valid.'
+      message: 'Mandatory COMMON_ADAPTER_BLOCKCHAIN_ADAPTER_WEBHOOK_EVENTS configuration not valid',
+      description: 'Environnement variable COMMON_ADAPTER_BLOCKCHAIN_ADAPTER_WEBHOOK_EVENTS is not valid.'
     }
   };
 

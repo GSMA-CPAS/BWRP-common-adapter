@@ -6,11 +6,11 @@ volumes:
 services:
   CADB-for-test:
     container_name: CADB-for-test
-    image: mongo:${MONGO_VERSION}
+    image: mongo:${COMMON_ADAPTER_MONGO_VERSION}
     restart: always
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=${MONGO_ROOT}
-      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_ROOTPW}
+      - MONGO_INITDB_ROOT_USERNAME=${COMMON_ADAPTER_MONGO_ROOT}
+      - MONGO_INITDB_ROOT_PASSWORD=${COMMON_ADAPTER_MONGO_ROOTPW}
       - MONGO_INITDB_DATABASE=commondb
     volumes:
       - ./CATestDB/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
