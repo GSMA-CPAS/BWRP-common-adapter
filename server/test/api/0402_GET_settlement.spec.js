@@ -48,6 +48,8 @@ describe(`Tests GET ${route} API OK`, function() {
       version: '1.1.0',
       name: 'Settlement data',
       contractId: undefined,
+      mspOwner: undefined,
+      mspReceiver: undefined,
       body: {
         data: []
       },
@@ -62,6 +64,8 @@ describe(`Tests GET ${route} API OK`, function() {
           contract1.id = initDbWithContractsResp[0].id;
           contract2.id = initDbWithContractsResp[1].id;
           settlement1.contractId = contract1.id;
+          settlement1.mspOwner = contract1.fromMsp.mspId;
+          settlement1.mspReceiver = contract1.toMsp.mspId;
           debugSetup('==> init db with 1 settlement');
           testsDbUtils.initDbWithSettlements([settlement1])
             .then((initDbWithSettlementsResp) => {

@@ -226,12 +226,13 @@ class LocalStorageProvider {
 
   /**
    *
-   * @param {String} id
+   * @param {String} contractId
+   * @param {String} settlementId
    * @return {Promise<object>}
    */
-  static async getSettlement(id) {
+  static async getSettlement(contractId, settlementId) {
     try {
-      return await SettlementDAO.findOne(id);
+      return await SettlementDAO.findOne(settlementId, {contractId: contractId});
     } catch (error) {
       logger.error('[LocalStorageProvider::getSettlement] failed to get settlement - ' + error.message);
       throw error;

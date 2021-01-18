@@ -51,6 +51,8 @@ class SettlementMapper {
       name: 'Settlement for contract ' + contract.id,
       type: 'settlement',
       version: '1.0.0',
+      mspOwner: usage.mspOwner,
+      mspReceiver: usage.mspReceiver,
       body: {
         generatedResult: getCalculateResultResp,
         usage: {
@@ -62,6 +64,9 @@ class SettlementMapper {
         }
       }
     };
+    if (contract.referenceId !== undefined) {
+      returnedSettlement.contractReferenceId = contract.referenceId;
+    }
 
     return returnedSettlement;
   }

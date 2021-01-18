@@ -67,7 +67,7 @@ class SettlementDAO {
   }
 
 
-  static findOne(id) {
+  static findOne(id, matchingConditions = {}) {
     return new Promise((resolve, reject) => {
       // Verify parameters
       if (id === undefined) {
@@ -75,8 +75,20 @@ class SettlementDAO {
         reject(MISSING_MANDATORY_PARAM_ERROR);
       }
 
+      // Define find condition
+      const condition = {
+        id: id,
+        type: 'settlement'
+      };
+      if (matchingConditions.state !== undefined) {
+        condition.state = matchingConditions.state;
+      }
+      if (matchingConditions.contractId !== undefined) {
+        condition.contractId = matchingConditions.contractId;
+      }
+
       // Launch database request
-      SettlementMongoRequester.findOne({id}, (err, settlement) => {
+      SettlementMongoRequester.findOne(condition, (err, settlement) => {
         // Use errorManager to return appropriate dao errors
         DAOErrorManager.handleErrorOrNullObject(err, settlement)
           .then((objectReturned) => {

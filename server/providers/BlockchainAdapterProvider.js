@@ -52,6 +52,17 @@ class BlockchainAdapterProvider {
 
   /**
    *
+   * @param {String} mspId
+   * @return {Promise<boolean>}
+   */
+  async isMyMspId(mspId) {
+    // TODO: use Blockchain to know if it's my Msp Id
+    // stub response
+    return true;
+  }
+
+  /**
+   *
    * @param {String} msp
    * @return {Promise<[string]|object>}
    */
@@ -317,6 +328,30 @@ class BlockchainAdapterProvider {
       return webhookIds;
     } catch (error) {
       logger.error('[BlockchainAdapterProvider::subscribe] failed to subscribe to events - %s', JSON.stringify(error));
+      throw error;
+    }
+  }
+
+
+  /**
+   *
+   * @param {Object} settlement
+   * @return {Promise<object>}
+   */
+  async uploadSettlement(settlement) {
+    try {
+      const rawData = rawDataUtils.defineRawDataFromSettlement(settlement);
+      const response = await axiosInstance.post(config.BLOCKCHAIN_ADAPTER_URL + '/private-documents', {
+        toMSP: settlement.toMspId,
+        data: rawData
+      });
+      logger.debug(`[BlockchainAdapterProvider::uploadSettlement] response data:${typeof response.data} = ${JSON.stringify(response.data)}`);
+      return {
+        rawData,
+        referenceId: response.data.documentID
+      };
+    } catch (error) {
+      logger.error('[BlockchainAdapterProvider::uploadSettlement] failed to upload contract - %s', error.message);
       throw error;
     }
   }

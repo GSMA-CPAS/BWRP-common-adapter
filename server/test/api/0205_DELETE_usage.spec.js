@@ -61,6 +61,7 @@ describe('Tests DELETE ' + route + ' API OK', function() {
       name: 'Usage data',
       contractId: undefined,
       mspOwner: undefined,
+      mspReceiver: undefined,
       body: {
         data: []
       },
@@ -72,6 +73,7 @@ describe('Tests DELETE ' + route + ' API OK', function() {
       name: 'Usage with data',
       contractId: undefined,
       mspOwner: undefined,
+      mspReceiver: undefined,
       body: {
         data: [
           {year: 2020, month: 1, hpmn: 'HPMN', vpmn: 'VPMN', service: 'service', value: 1, units: 'unit', charges: 'charge', taxes: 'taxes'}
@@ -85,6 +87,7 @@ describe('Tests DELETE ' + route + ' API OK', function() {
       name: 'Usage with data',
       contractId: undefined,
       mspOwner: undefined,
+      mspReceiver: undefined,
       body: {
         data: [
           {year: 2020, month: 1, hpmn: 'HPMN', vpmn: 'VPMN', service: 'service', value: 1, units: 'unit', charges: 'charge', taxes: 'taxes'}
@@ -103,10 +106,13 @@ describe('Tests DELETE ' + route + ' API OK', function() {
           contractReceived.id = initDbWithContractsResp[2].id;
           usageMinimumData.contractId = contractSent.id;
           usageMinimumData.mspOwner = contractSent.fromMsp.mspId;
+          usageMinimumData.mspReceiver = contractSent.toMsp.mspId;
           usageMoreData.contractId = contractReceived.id;
           usageMoreData.mspOwner = contractReceived.fromMsp.mspId;
+          usageMoreData.mspReceiver = contractReceived.toMsp.mspId;
           usageSent.contractId = contractReceived.id;
           usageSent.mspOwner = contractReceived.fromMsp.mspId;
+          usageSent.mspReceiver = contractReceived.toMsp.mspId;
           debugSetup('==> init db with 3 usages');
           testsDbUtils.initDbWithUsages([usageMinimumData, usageMoreData, usageSent])
             .then((initDbWithUsagesResp) => {

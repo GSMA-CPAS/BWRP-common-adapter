@@ -26,7 +26,6 @@ const getApiStatus = () => new Promise(
   },
 );
 
-
 module.exports = {
   getApiStatus,
 };

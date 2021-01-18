@@ -35,6 +35,7 @@ describe(`Tests PUT ${route} API OK`, function() {
       name: 'Usage data',
       contractId: undefined,
       mspOwner: undefined,
+      mspReceiver: undefined,
       body: {
         data: []
       },
@@ -48,6 +49,7 @@ describe(`Tests PUT ${route} API OK`, function() {
           contractSent.id = initDbWithContractsResp[0].id;
           usageMinimumData.contractId = contractSent.id;
           usageMinimumData.mspOwner = contractSent.fromMsp.mspId;
+          usageMinimumData.mspReceiver = contractSent.toMsp.mspId;
           debugSetup('==> init db with 1 usage');
           testsDbUtils.initDbWithUsages([usageMinimumData])
             .then((initDbWithUsagesResp) => {
