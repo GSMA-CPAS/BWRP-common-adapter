@@ -59,9 +59,9 @@ const sendSettlementById = ({contractId, settlementId}) => new Promise(
         reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_SEND_SETTLEMENT_ONLY_ALLOWED_IN_STATE_DRAFT));
       }
       const uploadSettlementResp = await blockchainAdapterConnection.uploadSettlement(getSettlementByIdResp);
-      const getStorageKeysResp = await blockchainAdapterConnection.getStorageKeys(uploadContractResp.referenceId, [getContractByIdResp.fromMsp.mspId, getContractByIdResp.toMsp.mspId]);
-      const updateContractResp = await LocalStorageProvider.updateSentContract(contractId, uploadContractResp.rawData, uploadContractResp.referenceId, getStorageKeysResp);
-      const returnedResponse = ContractMapper.getResponseBodyForSendContract(updateContractResp);
+      const getStorageKeysResp = await blockchainAdapterConnection.getStorageKeys(uploadSettlementResp.referenceId, [getSettlementByIdResp.mspOwner, getSettlementByIdResp.mspReceiver]);
+      const updateSettlementResp = await LocalStorageProvider.updateSentSettlement(settlementId, uploadSettlementResp.rawData, uploadSettlementResp.referenceId, getStorageKeysResp);
+      const returnedResponse = SettlementMapper.getResponseBodyForSendSettlement(updateSettlementResp);
       resolve(Service.successResponse(returnedResponse, 200));
     } catch (e) {
       reject(Service.rejectResponse(e));

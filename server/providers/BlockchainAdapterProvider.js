@@ -342,7 +342,7 @@ class BlockchainAdapterProvider {
     try {
       const rawData = rawDataUtils.defineRawDataFromSettlement(settlement);
       const response = await axiosInstance.post(config.BLOCKCHAIN_ADAPTER_URL + '/private-documents', {
-        toMSP: settlement.toMspId,
+        toMSP: settlement.mspReceiver,
         data: rawData
       });
       logger.debug(`[BlockchainAdapterProvider::uploadSettlement] response data:${typeof response.data} = ${JSON.stringify(response.data)}`);
@@ -351,7 +351,7 @@ class BlockchainAdapterProvider {
         referenceId: response.data.documentID
       };
     } catch (error) {
-      logger.error('[BlockchainAdapterProvider::uploadSettlement] failed to upload contract - %s', error.message);
+      logger.error('[BlockchainAdapterProvider::uploadSettlement] failed to upload settlement - %s', error.message);
       throw error;
     }
   }

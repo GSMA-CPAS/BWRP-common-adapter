@@ -94,10 +94,8 @@ const generateUsageById = ({contractId, usageId, mode}) => new Promise(
 
           const settlement = SettlementMapper.getSettlementForGenerateUsageById(usage, contract, getCalculateResultResp);
           const createSettlementResp = await LocalStorageProvider.createSettlement(settlement);
-          console.log(createSettlementResp);
 
           const returnedResponse = SettlementMapper.getResponseBodyForGetSettlement(createSettlementResp);
-          console.log(returnedResponse);
           resolve(Service.successResponse(returnedResponse));
         }
       }
