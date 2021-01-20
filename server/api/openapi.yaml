@@ -918,7 +918,9 @@ components:
           key: '{}'
       properties:
         header:
-          $ref: '#/components/schemas/ContractRequest_header'
+          oneOf:
+          - $ref: '#/components/schemas/ContractRequest_header'
+          - $ref: '#/components/schemas/ContractRequest_header2'
         body:
           additionalProperties: true
           type: object
@@ -1141,6 +1143,8 @@ components:
           minItems: 1
           type: array
       type: object
+    ContractRequest_header_msps:
+      type: object
     ContractRequest_header:
       example:
         fromMsp:
@@ -1185,6 +1189,24 @@ components:
       required:
       - fromMsp
       - toMsp
+      - type
+      - version
+      type: object
+    ContractRequest_header2:
+      properties:
+        version:
+          description: Version of the contract
+          example: "1.0"
+          type: string
+        type:
+          description: Type of document. MUST be "contract"
+          enum:
+          - contract
+          type: string
+        msps:
+          $ref: '#/components/schemas/ContractRequest_header_msps'
+      required:
+      - msps
       - type
       - version
       type: object

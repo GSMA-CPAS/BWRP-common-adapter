@@ -304,6 +304,15 @@ class BlockchainAdapterProvider {
     }
 
     const callbackUrl = config.SELF_HOST + '/api/v1/contracts/event/';
+    if (config.SELF_MSPID.length <= 0) {
+      try {
+        const response = await axiosInstance.get(config.BLOCKCHAIN_ADAPTER_URL + '/status/');
+        config.SELF_MSPID = response.hyperledger.localMSP;
+      } catch (error) {
+        logger.error('[BlockchainAdapterProvider::subscribe] failed to subscribe to events - %s', JSON.stringify(error));
+        throw error;
+      }
+    }
 
     try {
       const webhookIds = [];

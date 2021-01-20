@@ -68,6 +68,7 @@ config.LOG_LEVEL = process.env.COMMON_ADAPTER_LOG_LEVEL || 'info';
 config.BLOCKCHAIN_ADAPTER_URL = getAsString(process.env.COMMON_ADAPTER_BLOCKCHAIN_ADAPTER_URL, 'http://127.0.0.1:8081');
 config.BLOCKCHAIN_ADAPTER_WEBHOOK_EVENTS = getAsObject(process.env.COMMON_ADAPTER_BLOCKCHAIN_ADAPTER_WEBHOOK_EVENTS, []);
 config.SELF_HOST = getAsString(process.env.COMMON_ADAPTER_SELF_HOST, '');
+config.SELF_MSPID = getAsString(process.env.COMMON_ADAPTER_SELF_MSPID, '');
 
 config.DB_URL = getAsString(process.env.COMMON_ADAPTER_DB_URL, 'mongodb://user:userpw@127.0.0.1:27917/commondb?authSource=commondb');
 config.DB_CREATE_CONNECTION_TIMEOUT = getAsInt(process.env.COMMON_ADAPTER_DB_CREATE_CONNECTION_TIMEOUT, 30000);
