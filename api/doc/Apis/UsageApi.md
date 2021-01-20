@@ -9,7 +9,6 @@ Method | HTTP request | Description
 [**generateUsageById**](UsageApi.md#generateUsageById) | **PUT** /contracts/{contractId}/usages/{usageId}/generate/ | 
 [**getUsageById**](UsageApi.md#getUsageById) | **GET** /contracts/{contractId}/usages/{usageId} | 
 [**getUsages**](UsageApi.md#getUsages) | **GET** /contracts/{contractId}/usages/ | 
-[**sendUsageById**](UsageApi.md#sendUsageById) | **PUT** /contracts/{contractId}/usages/{usageId}/send/ | 
 [**updateUsageById**](UsageApi.md#updateUsageById) | **PUT** /contracts/{contractId}/usages/{usageId} | 
 
 
@@ -143,34 +142,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**String**](../Models/string.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="sendUsageById"></a>
-# **sendUsageById**
-> UsageResponse sendUsageById(contractId, usageId)
-
-
-
-    Set State to \&quot;SEND\&quot; and POST to Blochain adapter towards TargetMsp of the Usage
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **contractId** | **String**| The contract Id | [default to null]
- **usageId** | **String**| The Usage Id | [default to null]
-
-### Return type
-
-[**UsageResponse**](../Models/UsageResponse.md)
 
 ### Authorization
 

@@ -200,19 +200,10 @@ class ErrorUtils {
     }
   };
 
-  static ERROR_BUSINESS_GET_SETTLEMENT_ON_NOT_LINKED_CONTRACT_RECEIVED = {
-    code: 422,
-    error: {
-      internalErrorCode: 2007,
-      message: 'Get settlement not allowed',
-      description: 'It\'s not allowed to get settlement on wrong contract.'
-    }
-  };
-
   static ERROR_BUSINESS_GENERATE_SETTLEMENT_AND_COMMIT_NOT_SUPPORTED = {
     code: 422,
     error: {
-      internalErrorCode: 2008,
+      internalErrorCode: 2007,
       message: 'commit is not implemented yet',
       description: 'It\'s not allowed to commit the settlement yet.'
     }
@@ -278,6 +269,15 @@ class ErrorUtils {
       internalErrorCode: 2015,
       message: 'Get signatures not allowed',
       description: 'This signature Id doesn\'t exist'
+    }
+  };
+
+  static ERROR_BUSINESS_SEND_SETTLEMENT_ONLY_ALLOWED_IN_STATE_DRAFT = {
+    code: 422,
+    error: {
+      internalErrorCode: 2017,
+      message: 'Send settlement not allowed',
+      description: 'It\'s not allowed to send this settlement.'
     }
   };
 }

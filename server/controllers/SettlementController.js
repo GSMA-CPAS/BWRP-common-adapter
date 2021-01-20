@@ -16,8 +16,13 @@ const getSettlements = async (request, response) => {
   await Controller.handleRequest(request, response, service.getSettlements);
 };
 
+const sendSettlementById = async (request, response) => {
+  await Controller.handleRequest(request, response, service.sendSettlementById);
+};
+
 
 module.exports = {
   getSettlementById,
   getSettlements,
+  sendSettlementById,
 };

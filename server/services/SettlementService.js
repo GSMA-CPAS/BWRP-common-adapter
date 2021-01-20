@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
 const Service = require('./Service');
-
 const SettlementMapper = require('../core/SettlementMapper');
-
 const LocalStorageProvider = require('../providers/LocalStorageProvider');
+const BlockchainAdapterProvider = require('../providers/BlockchainAdapterProvider');
+const blockchainAdapterConnection = new BlockchainAdapterProvider();
 const errorUtils = require('../utils/errorUtils');
 
 /**
@@ -16,10 +16,7 @@ const errorUtils = require('../utils/errorUtils');
 const getSettlementById = ({contractId, settlementId}) => new Promise(
   async (resolve, reject) => {
     try {
-      const getSettlementByIdResp = await LocalStorageProvider.getSettlement(settlementId);
-      if (getSettlementByIdResp.contractId != contractId) {
-        reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_GET_SETTLEMENT_ON_NOT_LINKED_CONTRACT_RECEIVED));
-      }
+      const getSettlementByIdResp = await LocalStorageProvider.getSettlement(contractId, settlementId);
       const returnedResponse = SettlementMapper.getResponseBodyForGetSettlement(getSettlementByIdResp);
       resolve(Service.successResponse(returnedResponse));
     } catch (e) {
@@ -46,7 +43,35 @@ const getSettlements = ({contractId}) => new Promise(
   },
 );
 
+
+/**
+ * Set State to \"SEND\" and POST to Blockchain adapter towards TargetMsp of the Usage
+ *
+ * @param {String} contractId The contract Id
+ * @param {String} settlementId The Settlement Id
+ * @return {Promise<ServiceResponse>}
+ */
+const sendSettlementById = ({contractId, settlementId}) => new Promise(
+  async (resolve, reject) => {
+    try {
+      const getSettlementByIdResp = await LocalStorageProvider.getSettlement(contractId, settlementId);
+      if (getSettlementByIdResp.state !== 'DRAFT') {
+        reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_SEND_SETTLEMENT_ONLY_ALLOWED_IN_STATE_DRAFT));
+      }
+      const uploadSettlementResp = await blockchainAdapterConnection.uploadSettlement(getSettlementByIdResp);
+      const getStorageKeysResp = await blockchainAdapterConnection.getStorageKeys(uploadSettlementResp.referenceId, [getSettlementByIdResp.mspOwner, getSettlementByIdResp.mspReceiver]);
+      const updateSettlementResp = await LocalStorageProvider.updateSentSettlement(settlementId, uploadSettlementResp.rawData, uploadSettlementResp.referenceId, getStorageKeysResp);
+      const returnedResponse = SettlementMapper.getResponseBodyForSendSettlement(updateSettlementResp);
+      resolve(Service.successResponse(returnedResponse, 200));
+    } catch (e) {
+      reject(Service.rejectResponse(e));
+    }
+  },
+);
+
+
 module.exports = {
   getSettlementById,
+  sendSettlementById,
   getSettlements,
 };

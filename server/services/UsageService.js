@@ -1,12 +1,13 @@
 /* eslint-disable no-unused-vars */
 const Service = require('./Service');
 const UsageMapper = require('../core/UsageMapper');
-const ContractMapper = require('../core/ContractMapper');
 const SettlementMapper = require('../core/SettlementMapper');
 
 const LocalStorageProvider = require('../providers/LocalStorageProvider');
 const errorUtils = require('../utils/errorUtils');
 
+const BlockchainAdapterProvider = require('../providers/BlockchainAdapterProvider');
+const blockchainAdapterConnection = new BlockchainAdapterProvider();
 
 const CalculationServiceProvider = require('../providers/StubCalculationServiceProvider');
 const calculationServiceConnection = new CalculationServiceProvider();
@@ -25,8 +26,10 @@ const createUsage = ({url, contractId, body}) => new Promise(
       if (!((getContractByIdResp.state == 'SENT') || (getContractByIdResp.state == 'RECEIVED') || (getContractByIdResp.state == 'SIGNED'))) {
         reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_CREATE_USAGE_ON_CONTRACT_ONLY_ALLOWED_IN_STATE_SENT_SIGNED_OR_RECEIVED));
       }
-      const mspOwner = getContractByIdResp.fromMsp.mspId;
-      const usageToCreate = UsageMapper.getUsageFromPostUsagesRequest(contractId, body, mspOwner);
+      const isFromMspIdMyMspId = await blockchainAdapterConnection.isMyMspId(getContractByIdResp.fromMsp.mspId);
+      const mspOwner = isFromMspIdMyMspId ? getContractByIdResp.fromMsp.mspId : getContractByIdResp.toMsp.mspId;
+      const mspReceiver = isFromMspIdMyMspId ? getContractByIdResp.toMsp.mspId : getContractByIdResp.fromMsp.mspId;
+      const usageToCreate = UsageMapper.getUsageFromPostUsagesRequest(contractId, body, mspOwner, mspReceiver);
 
       const createUsageResp = await LocalStorageProvider.createUsage(usageToCreate);
       const returnedResponse = UsageMapper.getResponseBodyForGetUsage(createUsageResp);
@@ -91,10 +94,8 @@ const generateUsageById = ({contractId, usageId, mode}) => new Promise(
 
           const settlement = SettlementMapper.getSettlementForGenerateUsageById(usage, contract, getCalculateResultResp);
           const createSettlementResp = await LocalStorageProvider.createSettlement(settlement);
-          console.log(createSettlementResp);
 
           const returnedResponse = SettlementMapper.getResponseBodyForGetSettlement(createSettlementResp);
-          console.log(returnedResponse);
           resolve(Service.successResponse(returnedResponse));
         }
       }
@@ -145,29 +146,6 @@ const getUsages = ({contractId}) => new Promise(
 );
 
 /**
- * Set State to \"SEND\" and POST to Blochain adapter towards TargetMsp of the Usage
- *
- * @param {String} contractId The contract Id
- * @param {String} usageId The Usage Id
- * @return {Promise<ServiceResponse>}
- */
-const sendUsageById = ({contractId, usageId}) => new Promise(
-  async (resolve, reject) => {
-    try {
-      resolve(Service.successResponse({
-        contractId,
-        usageId,
-      }));
-    } catch (e) {
-      reject(Service.rejectResponse(
-        e.message || 'Invalid input',
-        e.status || 405,
-      ));
-    }
-  },
-);
-
-/**
  * Update Usage Object by its Id
  *
  * @param {String} contractId The contract Id
@@ -201,6 +179,5 @@ module.exports = {
   generateUsageById,
   getUsageById,
   getUsages,
-  sendUsageById,
   updateUsageById,
 };

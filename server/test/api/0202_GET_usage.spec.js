@@ -48,7 +48,8 @@ describe(`Tests GET ${route} API OK`, function() {
       version: '1.1.0',
       name: 'Usage data',
       contractId: contract1.id,
-      mspOwner: 'mspOwner',
+      mspOwner: 'A1',
+      mspReceiver: 'B1',
       body: {
         data: [
           {year: 2020, month: 1, hpmn: 'HPMN', vpmn: 'VPMN', service: 'service', value: 1, units: 'unit', charges: 'charge', taxes: 'taxes'}

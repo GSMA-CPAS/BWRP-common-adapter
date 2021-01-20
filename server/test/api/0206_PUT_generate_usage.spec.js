@@ -35,6 +35,7 @@ describe(`Tests PUT ${route} API OK`, function() {
       name: 'Usage data',
       contractId: undefined,
       mspOwner: undefined,
+      mspReceiver: undefined,
       body: {
         data: []
       },
@@ -48,6 +49,7 @@ describe(`Tests PUT ${route} API OK`, function() {
           contractSent.id = initDbWithContractsResp[0].id;
           usageMinimumData.contractId = contractSent.id;
           usageMinimumData.mspOwner = contractSent.fromMsp.mspId;
+          usageMinimumData.mspReceiver = contractSent.toMsp.mspId;
           debugSetup('==> init db with 1 usage');
           testsDbUtils.initDbWithUsages([usageMinimumData])
             .then((initDbWithUsagesResp) => {
@@ -96,10 +98,11 @@ describe(`Tests PUT ${route} API OK`, function() {
             expect(response).to.be.json;
             expect(response.body).to.exist;
             expect(response.body).to.be.an('object');
-            expect(Object.keys(response.body)).have.members(['settlementId', 'contractId', 'header', 'body', 'state', 'creationDate', 'lastModificationDate']);
+            expect(Object.keys(response.body)).have.members(['settlementId', 'contractId', 'header', 'body', 'mspOwner', 'state', 'creationDate', 'lastModificationDate']);
 
             expect(response.body).to.have.property('contractId', contractSent.id);
             expect(response.body).to.have.property('state', 'DRAFT');
+            expect(response.body).to.have.property('mspOwner', usageMinimumData.mspOwner);
             expect(response.body).to.have.property('creationDate').that.is.a('string').and.match(DATE_REGEX);
             expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
 

@@ -226,12 +226,13 @@ class LocalStorageProvider {
 
   /**
    *
-   * @param {String} id
+   * @param {String} contractId
+   * @param {String} settlementId
    * @return {Promise<object>}
    */
-  static async getSettlement(id) {
+  static async getSettlement(contractId, settlementId) {
     try {
-      return await SettlementDAO.findOne(id);
+      return await SettlementDAO.findOne(settlementId, {contractId: contractId});
     } catch (error) {
       logger.error('[LocalStorageProvider::getSettlement] failed to get settlement - ' + error.message);
       throw error;
@@ -248,6 +249,66 @@ class LocalStorageProvider {
       return await SettlementDAO.create(settlement);
     } catch (error) {
       logger.error('[LocalStorageProvider::createSettlement] failed to create settlement - %s', error.message);
+      throw error;
+    }
+  }
+
+  /**
+   *
+   * @param {Object} settlement
+   * @return {Promise<object>}
+   */
+  static async saveReceivedSettlement(settlement) {
+    try {
+      return await SettlementDAO.create(settlement, 'RECEIVED');
+    } catch (error) {
+      logger.error('[LocalStorageProvider::saveReceivedSettlement] failed to save received settlement - %s', error.message);
+      throw error;
+    }
+  }
+
+  /**
+   *
+   * @param {Object} conditions
+   * @return {Promise<object>}
+   */
+  static async existsSettlement(conditions) {
+    try {
+      return await SettlementDAO.exists(conditions);
+    } catch (error) {
+      logger.error('[LocalStorageProvider::existsSettlement] failed to find if a settlement exists - %s', error.message);
+      throw error;
+    }
+  }
+
+  /**
+   *
+   * @param {String} referenceId
+   * @param {Object} matchingConditions
+   * @return {Promise<object>}
+   */
+  static async findSettlementByReferenceId(referenceId, matchingConditions = {}) {
+    try {
+      return await SettlementDAO.findOneByReferenceId(referenceId, matchingConditions);
+    } catch (error) {
+      logger.error('[LocalStorageProvider::findSettlementByReferenceId] failed to get settlement from referenceId - %s', error.message);
+      throw error;
+    }
+  }
+
+  /**
+   *
+   * @param {String} settlementId
+   * @param {String} rawData
+   * @param {String} referenceId
+   * @param {Array<String>} storageKeys
+   * @return {Promise<object>}
+   */
+  static async updateSentSettlement(settlementId, rawData, referenceId, storageKeys) {
+    try {
+      return await SettlementDAO.findOneAndUpdateToSentSettlement(settlementId, rawData, referenceId, storageKeys);
+    } catch (error) {
+      logger.error('[LocalStorageProvider::updateSentSettlement] failed to update sent settlement - %s', error.message);
       throw error;
     }
   }

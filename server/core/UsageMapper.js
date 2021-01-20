@@ -2,7 +2,7 @@
 
 class UsageMapper {
   // Map the input POST usages request to internal usage
-  static getUsageFromPostUsagesRequest(contractId, body, mspOwner) {
+  static getUsageFromPostUsagesRequest(contractId, body, mspOwner, mspReceiver) {
     const returnedUsage = {
       state: 'DRAFT',
       contractId: contractId,
@@ -10,6 +10,7 @@ class UsageMapper {
       type: body.header.type,
       version: body.header.version,
       mspOwner: mspOwner,
+      mspReceiver: mspReceiver,
       body: body.body,
     };
 
@@ -51,7 +52,6 @@ class UsageMapper {
             type: usage.type,
             version: usage.version,
             mspOwner: usage.mspOwner
-
           },
           state: usage.state,
           creationDate: usage.creationDate,
@@ -64,7 +64,7 @@ class UsageMapper {
 
   // Map the input PUT usage request to internal usage
   static getUsageFromPutUsagesRequest(current, body) {
-    const returnedUsage = UsageMapper.getUsageFromPostUsagesRequest(current.contractId, body, current.mspOwner);
+    const returnedUsage = UsageMapper.getUsageFromPostUsagesRequest(current.contractId, body, current.mspOwner, current.mspReceiver);
 
     returnedUsage.id = current.id;
 

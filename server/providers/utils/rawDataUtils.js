@@ -42,8 +42,24 @@ class RawDataUtils {
 
   static defineSettlementFromRawDataObject(rawDataObject, fromMSP, toMSP, id, timestamp) {
     const settlement = rawDataObject;
+    settlement.referenceId = id;
     settlement.timestamp = timestamp;
+    settlement.state = 'RECEIVED';
     return settlement;
+  }
+
+  static defineRawDataFromSettlement(s) {
+    const rawDataObject = {};
+    rawDataObject.type = s.type;
+    rawDataObject.version = s.version;
+    rawDataObject.name = s.name;
+    rawDataObject.contractReferenceId = s.contractReferenceId;
+    rawDataObject.mspOwner = s.mspOwner;
+    rawDataObject.mspReceiver = s.mspReceiver;
+    rawDataObject.body = s.body;
+    const stringToEncode = JSON.stringify(rawDataObject);
+
+    return Buffer.from(stringToEncode).toString('base64');
   }
 }
 

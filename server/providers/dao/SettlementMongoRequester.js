@@ -73,6 +73,15 @@ class SettlementMongoRequester {
       return next({code: 404, name: 'NotFound'}, null);
     });
   }
+
+  static exists(conditions, next) {
+    SettlementMongoModel.exists(conditions, (err, exists) => {
+      if (err) {
+        next(err);
+      }
+      return next(null, exists);
+    });
+  }
 }
 
 module.exports = SettlementMongoRequester;

@@ -14,7 +14,7 @@ const route = '/contracts/{contractId}/settlements/{settlementId}';
 const DATE_REGEX = testsUtils.getDateRegexp();
 
 describe(`Tests GET ${route} API OK`, function() {
-  describe(`Setup and Test GET ${route} API with minimum contract details`, function() {
+  describe(`Setup and Test GET ${route} API`, function() {
     const contract1 = {
       name: 'Contract name between A1 and B1',
       state: 'SENT',
@@ -48,6 +48,8 @@ describe(`Tests GET ${route} API OK`, function() {
       version: '1.1.0',
       name: 'Settlement data',
       contractId: undefined,
+      mspOwner: undefined,
+      mspReceiver: undefined,
       body: {
         data: []
       },
@@ -62,6 +64,8 @@ describe(`Tests GET ${route} API OK`, function() {
           contract1.id = initDbWithContractsResp[0].id;
           contract2.id = initDbWithContractsResp[1].id;
           settlement1.contractId = contract1.id;
+          settlement1.mspOwner = contract1.fromMsp.mspId;
+          settlement1.mspReceiver = contract1.toMsp.mspId;
           debugSetup('==> init db with 1 settlement');
           testsDbUtils.initDbWithSettlements([settlement1])
             .then((initDbWithSettlementsResp) => {
@@ -98,10 +102,11 @@ describe(`Tests GET ${route} API OK`, function() {
             expect(response).to.be.json;
             expect(response.body).to.exist;
             expect(response.body).to.be.an('object');
-            expect(Object.keys(response.body)).have.members(['settlementId', 'contractId', 'header', 'state', 'body', 'creationDate', 'lastModificationDate']);
+            expect(Object.keys(response.body)).have.members(['settlementId', 'contractId', 'header', 'mspOwner', 'state', 'body', 'creationDate', 'lastModificationDate']);
 
             expect(response.body).to.have.property('settlementId', settlement1.id);
             expect(response.body).to.have.property('state', settlement1.state);
+            expect(response.body).to.have.property('mspOwner', settlement1.mspOwner);
             expect(response.body).to.have.property('creationDate').that.is.a('string').and.match(DATE_REGEX);
             expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
 
@@ -111,8 +116,7 @@ describe(`Tests GET ${route} API OK`, function() {
             expect(response.body.header).to.have.property('version', settlement1.version);
 
             expect(response.body).to.have.property('body').that.is.an('object');
-            expect(Object.keys(response.body.body)).have.members(['data']);
-            expect(response.body.body).to.deep.include(settlement1.body);
+            expect(Object.keys(response.body.body)).have.members([]);
 
             done();
           });

@@ -28,10 +28,6 @@ const getUsages = async (request, response) => {
   await Controller.handleRequest(request, response, service.getUsages);
 };
 
-const sendUsageById = async (request, response) => {
-  await Controller.handleRequest(request, response, service.sendUsageById);
-};
-
 const updateUsageById = async (request, response) => {
   await Controller.handleRequest(request, response, service.updateUsageById);
 };
@@ -43,6 +39,5 @@ module.exports = {
   generateUsageById,
   getUsageById,
   getUsages,
-  sendUsageById,
   updateUsageById,
 };
