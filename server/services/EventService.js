@@ -233,6 +233,9 @@ const eventReceived = ({body}) => new Promise(
 const subscribe = () => new Promise(
   async (resolve, reject) => {
     try {
+      if (config.SELF_MSPID.length <= 0) {
+        config.SELF_MSPID = await blockchainAdapterConnection.getSelfMspId();
+      }
       const subscribeResp = await blockchainAdapterConnection.subscribe();
       resolve(Service.successResponse(subscribeResp, 200));
     } catch (e) {

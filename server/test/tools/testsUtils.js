@@ -49,6 +49,10 @@ class TestsUtils {
     return testEnv.COMMON_ADAPTER_SELF_HOST;
   }
 
+  static getSelfMspId() {
+    return 'ORNG';
+  }
+
   static getDateRegexp() {
     // eslint-disable-next-line no-useless-escape
     return new RegExp('^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z$');

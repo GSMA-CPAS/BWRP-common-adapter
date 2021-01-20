@@ -315,16 +315,6 @@ class BlockchainAdapterProvider {
     }
 
     const callbackUrl = config.SELF_HOST + '/api/v1/contracts/event/';
-    if (config.SELF_MSPID.length <= 0) {
-      try {
-        const response = await axiosInstance.get(config.BLOCKCHAIN_ADAPTER_URL + '/status/');
-        config.SELF_MSPID = response.hyperledger.localMSP;
-      } catch (error) {
-        logger.error('[BlockchainAdapterProvider::subscribe] failed to subscribe to events - %s', JSON.stringify(error));
-        throw error;
-      }
-    }
-
     try {
       const webhookIds = [];
       const webhookEvents = config.BLOCKCHAIN_ADAPTER_WEBHOOK_EVENTS;
@@ -341,6 +331,26 @@ class BlockchainAdapterProvider {
     }
   }
 
+
+  /**
+   *
+   * @return {Promise<string>}
+   */
+  async getSelfMspId() {
+    if (config.BLOCKCHAIN_ADAPTER_URL.length <= 0) {
+      logger.info('[BlockchainAdapterProvider::getSelfMspId] env BLOCKCHAIN_ADAPTER_URL not set. Not possible to define self MSP Id');
+      throw errorUtils.ERROR_BLOCKCHAIN_ADAPTER_BLOCKCHAIN_ADAPTER_URL_UNDEFINED_ERROR;
+    }
+
+    try {
+      const response = await axiosInstance.get(config.BLOCKCHAIN_ADAPTER_URL + '/status');
+      logger.debug(`[BlockchainAdapterProvider::getSelfMspId] response data:${typeof response.data} = ${JSON.stringify(response.data)}`);
+      return response.data.hyperledger.localMSP;
+    } catch (error) {
+      logger.error('[BlockchainAdapterProvider::getSelfMspId] failed to get self MSP Id - %s', JSON.stringify(error));
+      throw error;
+    }
+  }
 
   /**
    *

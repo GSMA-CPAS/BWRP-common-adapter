@@ -6,6 +6,26 @@ const blockchainAdapterNock = nock(testsUtils.getBlockchainAdapterUrl());
 
 before((done) => {
   nock.cleanAll();
+
+  if (process.env.COMMON_ADAPTER_SELF_MSPID === undefined) {
+    // SELF MSPID not defined in env configuration
+    blockchainAdapterNock.get('/status')
+      .times(1)
+      .reply((pathReceived, bodyReceived) => {
+        // Only for exemple
+        debug('Get status nock used');
+        return [
+          200,
+          `{
+            "hyperledger": {
+              "localMSP": "${testsUtils.getSelfMspId()}"
+            }
+          }`,
+          undefined
+        ];
+      });
+  }
+
   blockchainAdapterNock.post('/webhooks/subscribe')
     .times(2)
     .reply((pathReceived, bodyReceived) => {
