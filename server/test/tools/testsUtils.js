@@ -50,7 +50,7 @@ class TestsUtils {
   }
 
   static getSelfMspId() {
-    return 'ORNG';
+    return 'ORAGR';
   }
 
   static getDateRegexp() {
