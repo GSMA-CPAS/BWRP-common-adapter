@@ -11,16 +11,18 @@ const expect = require('chai').expect;
 const globalVersion = '/api/v1';
 const route = '/contracts/{contractId}/usages/';
 
+const selfMspId = testsUtils.getSelfMspId();
+
 const DATE_REGEX = testsUtils.getDateRegexp();
 
 describe(`Tests POST ${route} API OK`, function() {
   describe(`Setup and Test POST ${route} API with a usage document`, function() {
     const contractDraft = {
-      name: 'Contract name between A1 and B1',
+      name: `Contract name between ${selfMspId} and B1`,
       state: 'DRAFT',
       type: 'contract',
       version: '1.1.0',
-      fromMsp: {mspId: 'A1'},
+      fromMsp: {mspId: selfMspId},
       toMsp: {mspId: 'B1'},
       body: {
         bankDetails: {A1: {iban: null, bankName: null, currency: null}, B1: {iban: null, bankName: null, currency: null}},
@@ -30,11 +32,11 @@ describe(`Tests POST ${route} API OK`, function() {
       rawData: 'Ctr_raw-data-1'
     };
     const contractSent = {
-      name: 'Contract name between B1 and C1',
+      name: `Contract name between ${selfMspId} and C1`,
       state: 'SENT',
       type: 'contract',
       version: '1.1.0',
-      fromMsp: {mspId: 'B1'},
+      fromMsp: {mspId: selfMspId},
       toMsp: {mspId: 'C1'},
       body: {
         bankDetails: {A1: {iban: null, bankName: null, currency: null}, B1: {iban: null, bankName: null, currency: null}},
@@ -44,12 +46,12 @@ describe(`Tests POST ${route} API OK`, function() {
       rawData: 'Ctr_raw-data-1'
     };
     const contractReceived = {
-      name: 'Contract name between B1 and C1',
+      name: `Contract name between B1 and ${selfMspId}`,
       state: 'RECEIVED',
       type: 'contract',
       version: '1.1.0',
       fromMsp: {mspId: 'B1'},
-      toMsp: {mspId: 'C1'},
+      toMsp: {mspId: selfMspId},
       body: {
         bankDetails: {A1: {iban: null, bankName: null, currency: null}, B1: {iban: null, bankName: null, currency: null}},
         discountModels: 'someData',
@@ -59,10 +61,10 @@ describe(`Tests POST ${route} API OK`, function() {
     };
 
     before((done) => {
-      debugSetup('==> init db with 2 contracts');
+      debugSetup('==> init db with 3 contracts');
       testsDbUtils.initDbWithContracts([contractDraft, contractSent, contractReceived])
         .then((initDbWithContractsResp) => {
-          debugSetup('Three contracts where added in db ', initDbWithContractsResp);
+          debugSetup('3 contracts where added in db ', initDbWithContractsResp);
           contractDraft.id = initDbWithContractsResp[0].id;
           contractSent.id = initDbWithContractsResp[1].id;
           contractReceived.id = initDbWithContractsResp[2].id;

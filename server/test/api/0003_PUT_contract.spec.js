@@ -145,7 +145,7 @@ describe(`Tests PUT ${route} API OK`, function() {
             toMsp: {mspId: 'C1', signatures: [{id: 'signatureId_C1_1_InString', name: 'employeeName_C1_1', role: 'financeDirector'}, {id: 'signatureId_C1_2_InString', name: 'employeeName_C1_2', role: 'saleDirector'}]}
           },
           body: {
-            randomBodyContent: 'This random field is not defined in schema', 
+            randomBodyContent: 'This random field is not defined in schema',
             bankDetails: {A2: {iban: '##IBAN-A2-1##', bankName: '##BANK-A2-1##', currency: 'Dollars'}, C1: {iban: '##IBAN-C1-3##', bankName: '##BANK-C1-3##', currency: 'Euros'}},
             discountModels: 'someDiscountModelToDefine',
             generalInformation: {name: 'test1', type: 'Normal', endDate: '2021-01-01T00:00:00.000Z', startDate: '2020-12-01T00:00:00.000Z'}

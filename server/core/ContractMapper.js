@@ -6,7 +6,6 @@ const logger = require('../logger');
 class ContractMapper {
   // Map the input POST contracts request to internal contract
   static getContractFromPostContractsRequest(body) {
-
     // Temporary support both version. TO BE removed in future version.
     if (body.header.msps != undefined) {
       const fromMsp = {};

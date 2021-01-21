@@ -280,6 +280,25 @@ class ErrorUtils {
       description: 'It\'s not allowed to send this settlement.'
     }
   };
+
+  static ERROR_INVALID_DEFINED_SELF_MSPID_ERROR = {
+    code: 500,
+    error: {
+      internalErrorCode: 2018,
+      message: 'Invalid SELF_MSPID error',
+      description: 'The defined SELF_MSPID is not valid.'
+    }
+  };
+
+  static ERROR_INVALID_TESTED_MSPID_ERROR = {
+    code: 500,
+    error: {
+      internalErrorCode: 2019,
+      message: 'Invalid tested mspId error',
+      description: 'The tested mspId is not valid.'
+    }
+  };
+
 }
 
 module.exports = ErrorUtils;
