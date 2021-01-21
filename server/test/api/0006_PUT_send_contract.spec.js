@@ -75,7 +75,8 @@ describe(`Tests PUT ${route} API OK`, function() {
           return [
             200,
             {
-              documentID: 'bec1ef2dbce73b6ae9841cf2edfa56de1f16d5a33d8a657de258e85c5f2e1bcb'
+              referenceID: 'bec1ef2dbce73b6ae9841cf2edfa56de1f16d5a33d8a657de258e85c5f2e1bcb',
+              txID: 'b70cef323c0d3b56d44e9b31f16a11cba8dbbdd55c1d255b65f3fd2b3eadf8bb'
             },
             undefined
           ];
@@ -180,7 +181,8 @@ describe(`Tests PUT ${route} API OK`, function() {
           return [
             200,
             {
-              documentID: 'db441b0559d3f1f8144f1dc2da378a0abe0124325b6024b20a9e22de8809eca4'
+              referenceID: 'db441b0559d3f1f8144f1dc2da378a0abe0124325b6024b20a9e22de8809eca4',
+              txID: '111cef323c0d3b56d44e9b31f16a11cba8dbbdd55c1d255b65f3fd2b3eadf8bb'
             },
             undefined
           ];

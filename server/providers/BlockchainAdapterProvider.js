@@ -194,7 +194,8 @@ class BlockchainAdapterProvider {
       logger.debug(`[BlockchainAdapterProvider::uploadContract] response data:${typeof response.data} = ${JSON.stringify(response.data)}`);
       return {
         rawData,
-        referenceId: response.data.documentID
+        referenceId: response.data.referenceID,
+        txId: response.data.txID
       };
     } catch (error) {
       logger.error('[BlockchainAdapterProvider::uploadContract] failed to upload contract - %s', error.message);
@@ -367,7 +368,8 @@ class BlockchainAdapterProvider {
       logger.debug(`[BlockchainAdapterProvider::uploadSettlement] response data:${typeof response.data} = ${JSON.stringify(response.data)}`);
       return {
         rawData,
-        referenceId: response.data.documentID
+        referenceId: response.data.referenceID,
+        txId: response.data.txID
       };
     } catch (error) {
       logger.error('[BlockchainAdapterProvider::uploadSettlement] failed to upload settlement - %s', error.message);
