@@ -8,7 +8,7 @@
     "prestart": "npm install",
     "start": "node index.js",
     "test": "env-cmd -f ./test/env.json --use-shell \"DEBUG=spec* mocha ./test/**/*.spec.js --file test/tools/startServer.js --timeout 12000 --exit\"",
-    "ci": "env-cmd -f ./test/env.json --use-shell \"DEBUG=spec* mocha ./test/scenarios/*.scenario.js --timeout 12000 --bail\"",
+    "ci": "env-cmd -f ./test/env.json --use-shell \"DEBUG=spec* mocha ./test/scenarios/*.scenario.js --timeout 12000\"",
     "startTestDB": "cd .. && docker-compose -f docker-compose-for-tests.yaml up -d",
     "stopTestDB": "cd .. && docker-compose -f docker-compose-for-tests.yaml down"
   },

@@ -8,11 +8,9 @@ const debugSetup = require('debug')('spec:setup');
 const chai = require('chai');
 const expect = require('chai').expect;
 
-const globalVersion = '/api/v1';
-const route = '/contracts/';
-
 const DATE_REGEX = testsUtils.getDateRegexp();
 
+/* eslint-disable camelcase */
 const DTAG_API = `http://127.0.0.1:3030/api/v1`;
 const TMUS_API = `http://127.0.0.1:3040/api/v1`;
 
@@ -75,7 +73,7 @@ const TMUS_create_usage_body = {
   }
 };
 
-let DTAG_dynamic_data = {
+const DTAG_dynamic_data = {
   contractId: undefined,
   contractReferenceId: undefined,
   usageId: undefined,
@@ -84,7 +82,7 @@ let DTAG_dynamic_data = {
   receivedSettlementId: undefined
 };
 
-let TMUS_dynamic_data = {
+const TMUS_dynamic_data = {
   receivedContractId: undefined,
   usageId: undefined,
   settlementId: undefined,
@@ -180,6 +178,9 @@ describe(`Launch scenario 0000_From_DTAG_contract`, function() {
   };
 
   it(`Update the DTAG contract`, function(done) {
+    if (DTAG_dynamic_data.contractId === undefined) {
+      expect.fail('This scenario step should use an undefined data');
+    }
     try {
       chai.request(DTAG_API)
         .put(`/contracts/${DTAG_dynamic_data.contractId}`)
@@ -204,6 +205,9 @@ describe(`Launch scenario 0000_From_DTAG_contract`, function() {
   });
 
   it(`Get the DTAG contract`, function(done) {
+    if (DTAG_dynamic_data.contractId === undefined) {
+      expect.fail('This scenario step should use an undefined data');
+    }
     try {
       chai.request(DTAG_API)
         .get(`/contracts/${DTAG_dynamic_data.contractId}`)
@@ -228,6 +232,9 @@ describe(`Launch scenario 0000_From_DTAG_contract`, function() {
   });
 
   it(`Get all DTAG contracts`, function(done) {
+    if (DTAG_dynamic_data.contractId === undefined) {
+      expect.fail('This scenario step should use an undefined data');
+    }
     try {
       chai.request(DTAG_API)
         .get(`/contracts/`)
@@ -252,6 +259,9 @@ describe(`Launch scenario 0000_From_DTAG_contract`, function() {
   });
 
   it(`Send the DTAG contract`, function(done) {
+    if (DTAG_dynamic_data.contractId === undefined) {
+      expect.fail('This scenario step should use an undefined data');
+    }
     try {
       chai.request(DTAG_API)
         .put(`/contracts/${DTAG_dynamic_data.contractId}/send/`)
@@ -282,6 +292,9 @@ describe(`Launch scenario 0000_From_DTAG_contract`, function() {
   });
 
   it(`Get the DTAG contract in raw format`, function(done) {
+    if ((DTAG_dynamic_data.contractId === undefined) || (DTAG_dynamic_data.contractReferenceId === undefined)) {
+      expect.fail('This scenario step should use an undefined data');
+    }
     try {
       chai.request(DTAG_API)
         .get(`/contracts/${DTAG_dynamic_data.contractId}?format=RAW`)
@@ -308,6 +321,9 @@ describe(`Launch scenario 0000_From_DTAG_contract`, function() {
   });
 
   it(`Wait this contract on TMUS`, function(done) {
+    if (DTAG_dynamic_data.contractReferenceId === undefined) {
+      expect.fail('This scenario step should use an undefined data');
+    }
     const waitContract = (referenceId, tries, interval) => {
       try {
         chai.request(TMUS_API)
@@ -348,7 +364,11 @@ describe(`Launch scenario 0000_From_DTAG_contract`, function() {
   // Now create an usage in DTAG and send the settlement on TMUS
 
   it(`Create a new DTAG usage for this contract`, function(done) {
+    if (DTAG_dynamic_data.contractId === undefined) {
+      expect.fail('This scenario step should use an undefined data');
+    }
     try {
+      testsUtils.debugWarning(`Is it possible to create an usage on a contract not SIGNED?`, '?');
       chai.request(DTAG_API)
         .post(`/contracts/${DTAG_dynamic_data.contractId}/usages/`)
         .send(DTAG_create_usage_body)
@@ -377,6 +397,9 @@ describe(`Launch scenario 0000_From_DTAG_contract`, function() {
   });
 
   it(`Generate a settlement on DTAG usage for this contract`, function(done) {
+    if ((DTAG_dynamic_data.contractId === undefined) || (DTAG_dynamic_data.usageId === undefined)) {
+      expect.fail('This scenario step should use an undefined data');
+    }
     try {
       chai.request(DTAG_API)
         .put(`/contracts/${DTAG_dynamic_data.contractId}/usages/${DTAG_dynamic_data.usageId}/generate/`)
@@ -410,6 +433,9 @@ describe(`Launch scenario 0000_From_DTAG_contract`, function() {
   });
 
   it(`Send DTAG settlement to TMUS`, function(done) {
+    if ((DTAG_dynamic_data.contractId === undefined) || (DTAG_dynamic_data.settlementId === undefined)) {
+      expect.fail('This scenario step should use an undefined data');
+    }
     try {
       chai.request(DTAG_API)
         .put(`/contracts/${DTAG_dynamic_data.contractId}/settlements/${DTAG_dynamic_data.settlementId}/send/`)
@@ -439,6 +465,9 @@ describe(`Launch scenario 0000_From_DTAG_contract`, function() {
   });
 
   it(`Wait this settlement on TMUS`, function(done) {
+    if ((TMUS_dynamic_data.receivedContractId === undefined) || (DTAG_dynamic_data.settlementReferenceId === undefined)) {
+      expect.fail('This scenario step should use an undefined data');
+    }
     const waitSettlement = (referenceId, tries, interval) => {
       try {
         chai.request(TMUS_API)
@@ -455,6 +484,7 @@ describe(`Launch scenario 0000_From_DTAG_contract`, function() {
             // filter settlement with state "received" because GET Settlements does not return referenceId
             const settlementsWithSameSettlementReferenceId = response.body.filter((c) => (c.state === 'RECEIVED'));
             if (settlementsWithSameSettlementReferenceId.length === 1) {
+              testsUtils.debugWarning(`There is no referenceId in settlement document returned by the API`, '!');
               TMUS_dynamic_data.receivedSettlementId = settlementsWithSameSettlementReferenceId[0].settlementId;
               debug(`==> TMUS received settlement id : ${TMUS_dynamic_data.receivedSettlementId}`);
               done();
@@ -477,6 +507,9 @@ describe(`Launch scenario 0000_From_DTAG_contract`, function() {
   });
 
   it(`Get TMUS settlement from DTAG`, function(done) {
+    if ((TMUS_dynamic_data.receivedContractId === undefined) || (TMUS_dynamic_data.receivedSettlementId === undefined)) {
+      expect.fail('This scenario step should use an undefined data');
+    }
     try {
       chai.request(TMUS_API)
         .get(`/contracts/${TMUS_dynamic_data.receivedContractId}/settlements/${TMUS_dynamic_data.receivedSettlementId}`)
@@ -505,7 +538,11 @@ describe(`Launch scenario 0000_From_DTAG_contract`, function() {
   // Now create an usage in TMUS and send the settlement on DTAG
 
   it(`Create a new TMUS usage for this contract`, function(done) {
+    if (TMUS_dynamic_data.receivedContractId === undefined) {
+      expect.fail('This scenario step should use an undefined data');
+    }
     try {
+      testsUtils.debugWarning(`Is it possible to create an usage on a contract not SIGNED?`, '?');
       chai.request(TMUS_API)
         .post(`/contracts/${TMUS_dynamic_data.receivedContractId}/usages/`)
         .send(TMUS_create_usage_body)
@@ -534,6 +571,9 @@ describe(`Launch scenario 0000_From_DTAG_contract`, function() {
   });
 
   it(`Generate a settlement on TMUS usage for this contract`, function(done) {
+    if ((TMUS_dynamic_data.receivedContractId === undefined) || (TMUS_dynamic_data.usageId === undefined)) {
+      expect.fail('This scenario step should use an undefined data');
+    }
     try {
       chai.request(TMUS_API)
         .put(`/contracts/${TMUS_dynamic_data.receivedContractId}/usages/${TMUS_dynamic_data.usageId}/generate/`)
@@ -567,6 +607,9 @@ describe(`Launch scenario 0000_From_DTAG_contract`, function() {
   });
 
   it(`Send TMUS settlement to DTAG`, function(done) {
+    if ((TMUS_dynamic_data.receivedContractId === undefined) || (TMUS_dynamic_data.settlementId === undefined)) {
+      expect.fail('This scenario step should use an undefined data');
+    }
     try {
       chai.request(TMUS_API)
         .put(`/contracts/${TMUS_dynamic_data.receivedContractId}/settlements/${TMUS_dynamic_data.settlementId}/send/`)
@@ -596,6 +639,9 @@ describe(`Launch scenario 0000_From_DTAG_contract`, function() {
   });
 
   it(`Wait this settlement on DTAG`, function(done) {
+    if ((DTAG_dynamic_data.contractId === undefined) || (TMUS_dynamic_data.settlementReferenceId === undefined)) {
+      expect.fail('This scenario step should use an undefined data');
+    }
     const waitSettlement = (referenceId, tries, interval) => {
       try {
         chai.request(DTAG_API)
@@ -612,6 +658,7 @@ describe(`Launch scenario 0000_From_DTAG_contract`, function() {
             // filter settlement with state "received" because GET Settlements does not return referenceId
             const settlementsWithSameSettlementReferenceId = response.body.filter((c) => (c.state === 'RECEIVED'));
             if (settlementsWithSameSettlementReferenceId.length === 1) {
+              testsUtils.debugWarning(`There is no referenceId in settlement document returned by the API`, '!');
               DTAG_dynamic_data.receivedSettlementId = settlementsWithSameSettlementReferenceId[0].settlementId;
               debug(`==> DTAG received settlement id : ${DTAG_dynamic_data.receivedSettlementId}`);
               done();
@@ -634,6 +681,9 @@ describe(`Launch scenario 0000_From_DTAG_contract`, function() {
   });
 
   it(`Get DTAG settlement from TMUS`, function(done) {
+    if ((DTAG_dynamic_data.contractId === undefined) || (DTAG_dynamic_data.receivedSettlementId === undefined)) {
+      expect.fail('This scenario step should use an undefined data');
+    }
     try {
       chai.request(DTAG_API)
         .get(`/contracts/${DTAG_dynamic_data.contractId}/settlements/${DTAG_dynamic_data.receivedSettlementId}`)
@@ -680,6 +730,9 @@ describe(`Launch scenario 0000_From_DTAG_contract`, function() {
   // Now delete the created usage resources
 
   it(`Delete the DTAG usage created by this scenario`, function(done) {
+    if ((DTAG_dynamic_data.contractId === undefined) || (DTAG_dynamic_data.usageId === undefined)) {
+      expect.fail('This scenario step should use an undefined data');
+    }
     try {
       chai.request(DTAG_API)
         .delete(`/contracts/${DTAG_dynamic_data.contractId}/usages/${DTAG_dynamic_data.usageId}`)
@@ -706,6 +759,9 @@ describe(`Launch scenario 0000_From_DTAG_contract`, function() {
   });
 
   it(`Delete the TMUS usage created by this scenario`, function(done) {
+    if ((TMUS_dynamic_data.receivedContractId === undefined) || (TMUS_dynamic_data.usageId === undefined)) {
+      expect.fail('This scenario step should use an undefined data');
+    }
     try {
       chai.request(TMUS_API)
         .delete(`/contracts/${TMUS_dynamic_data.receivedContractId}/usages/${TMUS_dynamic_data.usageId}`)
@@ -734,6 +790,9 @@ describe(`Launch scenario 0000_From_DTAG_contract`, function() {
   // Now delete the created contract resources
 
   it(`Delete the DTAG contract created by this scenario`, function(done) {
+    if (DTAG_dynamic_data.contractId === undefined) {
+      expect.fail('This scenario step should use an undefined data');
+    }
     try {
       chai.request(DTAG_API)
         .delete(`/contracts/${DTAG_dynamic_data.contractId}`)
@@ -760,6 +819,9 @@ describe(`Launch scenario 0000_From_DTAG_contract`, function() {
   });
 
   it(`Delete the TMUS contract created by this scenario`, function(done) {
+    if (TMUS_dynamic_data.receivedContractId === undefined) {
+      expect.fail('This scenario step should use an undefined data');
+    }
     try {
       chai.request(TMUS_API)
         .delete(`/contracts/${TMUS_dynamic_data.receivedContractId}`)
@@ -785,3 +847,4 @@ describe(`Launch scenario 0000_From_DTAG_contract`, function() {
     }
   });
 });
+/* eslint-enable camelcase */

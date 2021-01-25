@@ -57,6 +57,25 @@ class TestsUtils {
     // eslint-disable-next-line no-useless-escape
     return new RegExp('^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z$');
   }
+
+  static debugWarning(text, symbol = '!') {
+    const textLength = text.length;
+    const textSizeInWarning = ( textLength > 30 ) ? textLength : 30;
+    const getChars = (char, number) => {
+      let returnedChars = '';
+      for (let i = 0; i<number; i++) {
+        returnedChars += char;
+      }
+      return returnedChars;
+    };
+    debug(` ___________${getChars('_', textSizeInWarning)}__ `);
+    debug(`|           ${getChars(' ', textSizeInWarning)}  |`);
+    debug(`|    ^      ${getChars(' ', textSizeInWarning)}  |`);
+    debug(`|  / ${symbol} \\    ${text}${getChars(' ', textSizeInWarning - textLength)}  |`);
+    debug(`|  -----    ${getChars(' ', textSizeInWarning)}  |`);
+    debug(`|           ${getChars(' ', textSizeInWarning)}  |`);
+    debug(` -----------${getChars('-', textSizeInWarning)}-- `);
+  }
 }
 
 module.exports = TestsUtils;
