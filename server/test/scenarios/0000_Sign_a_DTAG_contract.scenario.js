@@ -548,7 +548,6 @@ describe(`Launch scenario 0000_From_DTAG_contract`, function() {
         .get(`/contracts/${DTAG_dynamic_data.contractId}/signatures/${DTAG_dynamic_data.DTAG.secondSignatureId}`)
         .send()
         .end((error, response) => {
-          debug('response.body = ', response.body);
           expect(error).to.be.null;
           expect(response).to.have.status(200);
           expect(response).to.be.json;
@@ -702,7 +701,6 @@ describe(`Launch scenario 0000_From_DTAG_contract`, function() {
         .get(`/contracts/${TMUS_dynamic_data.receivedContractId}/signatures/${TMUS_dynamic_data.DTAG.firstSignatureId}`)
         .send()
         .end((error, response) => {
-          debug('response.body = ', response.body);
           expect(error).to.be.null;
           expect(response).to.have.status(200);
           expect(response).to.be.json;
@@ -829,7 +827,6 @@ describe(`Launch scenario 0000_From_DTAG_contract`, function() {
           .get(`/contracts/${DTAG_dynamic_data.contractId}/signatures/`)
           .send()
           .end((error, response) => {
-            debug("response.body = ", response.body);
             expect(error).to.be.null;
             expect(response).to.have.status(200);
             expect(response).to.be.json;
@@ -837,7 +834,6 @@ describe(`Launch scenario 0000_From_DTAG_contract`, function() {
             expect(response.body).to.be.an('array');
 
             const numberOfSignedSignatures = response.body.filter((c) => (c.state === 'SIGNED')).length;
-            debug("numberOfSignedSignatures = ", numberOfSignedSignatures);
 
             if (numberOfSignedSignatures === signedSignaturesWanted) {
               expect(response.body.length).to.equals(5);
