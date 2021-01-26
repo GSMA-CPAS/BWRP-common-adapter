@@ -18,7 +18,11 @@ class ContractDAO {
         type: 'contract'
       };
       if (matchingConditions.state !== undefined) {
-        condition.state = matchingConditions.state;
+        if (Array.isArray(matchingConditions.state)) {
+          condition.state = {$in: matchingConditions.state};
+        } else if (typeof matchingConditions.state === 'string') {
+          condition.state = matchingConditions.state;
+        }
       }
       if (matchingConditions.rawData !== undefined) {
         condition.rawData = matchingConditions.rawData;
@@ -166,7 +170,11 @@ class ContractDAO {
         type: 'contract'
       };
       if (matchingConditions.state !== undefined) {
-        condition.state = matchingConditions.state;
+        if (Array.isArray(matchingConditions.state)) {
+          condition.state = {$in: matchingConditions.state};
+        } else if (typeof matchingConditions.state === 'string') {
+          condition.state = matchingConditions.state;
+        }
       }
       if (matchingConditions.rawData !== undefined) {
         condition.rawData = matchingConditions.rawData;
@@ -209,7 +217,11 @@ class ContractDAO {
         type: 'contract'
       };
       if (matchingConditions.state !== undefined) {
-        condition.state = matchingConditions.state;
+        if (Array.isArray(matchingConditions.state)) {
+          condition.state = {$in: matchingConditions.state};
+        } else if (typeof matchingConditions.state === 'string') {
+          condition.state = matchingConditions.state;
+        }
       }
       if (matchingConditions.rawData !== undefined) {
         condition.rawData = matchingConditions.rawData;

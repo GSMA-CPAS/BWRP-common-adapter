@@ -169,28 +169,38 @@ const eventDocumentReceived = ({body}) => new Promise(
 const eventSignatureReceived = ({body}) => new Promise(
   async (resolve, reject) => {
     try {
-      const getContractsResp = await LocalStorageProvider.getContracts({state: 'RECEIVED', storageKey: body.data.storageKey});
+      const getContractsResp = await LocalStorageProvider.getContracts({state: ['RECEIVED', 'SENT'], storageKey: body.data.storageKey});
       if ((getContractsResp !== undefined) && (Array.isArray(getContractsResp)) && (getContractsResp.length === 1)) {
         // only one contract should be found from the storageKey
         const contract = getContractsResp[0];
         const getContractByIdResp = await LocalStorageProvider.getContract(contract.id);
         const getSignaturesByIdAndMspResp = await blockchainAdapterConnection.getSignatures(contract.referenceId, body.msp);
-        const bcSignaturesIndex = Object.keys(getSignaturesByIdAndMspResp);
-        const signatureLink = getContractByIdResp.signatureLink;
+        const mspParamName = (getContractByIdResp.fromMsp.mspId === body.msp) ? 'fromMsp' : 'toMsp';
         let update = false;
-        let j = 0;
-        for (let i = 0; i < signatureLink.length; i++) {
-          if (getContractByIdResp[signatureLink[i]['msp']]['mspId'] == body.msp) {
-            if (signatureLink[i]['txId'] == undefined) {
-              signatureLink[i]['txId'] = bcSignaturesIndex[j];
+        Object.keys(getSignaturesByIdAndMspResp).forEach((getSignaturesByIdAndMspRespKey) => {
+          const alreadyExistingSignatureLink = getContractByIdResp.signatureLink.filter((signatureLink) => {
+            return ((signatureLink.msp === mspParamName) && (signatureLink.txId === getSignaturesByIdAndMspRespKey));
+          })[0];
+          if (alreadyExistingSignatureLink !== undefined) {
+            // This signature already exists
+            // Do nothing more
+          } else {
+            // This signature must be added
+            const firstSignatureLinkWithoutTxId = getContractByIdResp.signatureLink.filter((signatureLink) => {
+              return ((signatureLink.msp === mspParamName) && (signatureLink.txId === undefined));
+            })[0];
+            if (firstSignatureLinkWithoutTxId === undefined) {
+              // There is no more signatureLink without txId
+              // Do nothing for this new incoming unexpected signature
+            } else {
+              firstSignatureLinkWithoutTxId.txId = getSignaturesByIdAndMspRespKey;
               update = true;
             }
-            j++;
           }
-        }
+        });
         if (update) {
           const contractToUpdate = getContractByIdResp;
-          contractToUpdate.signatureLink = signatureLink;
+          contractToUpdate.signatureLink = getContractByIdResp.signatureLink;
           const updateContractResp = await LocalStorageProvider.updateContract(contractToUpdate);
         }
       }

@@ -640,7 +640,7 @@ describe(`Tests POST ${route} API OK`, function() {
             expect(response.body).to.exist;
             expect(response.body).to.be.an('object').that.is.empty;
             // for SENt contract, nothing should be done
-            expect(blockchainAdapterNock.isDone(), 'Unconsumed nock error').to.be.false;
+            expect(blockchainAdapterNock.isDone(), 'Unconsumed nock error').to.be.true;
 
             done();
           });

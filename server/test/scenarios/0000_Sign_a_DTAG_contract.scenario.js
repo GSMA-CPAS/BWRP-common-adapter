@@ -68,6 +68,26 @@ const DTAG_create_signature_A_body = {
   certificate: '-----BEGIN CERTIFICATE-----\nMIICYjCCAemgAwIBA..AAAA...',
   algorithm: 'secp384r1'
 };
+const DTAG_create_signature_B_body = {
+  signature: 'signature',
+  certificate: '-----BEGIN CERTIFICATE-----\nMIICYjCCAemgAwIBA..BBBB...',
+  algorithm: 'secp384r1'
+};
+const TMUS_create_signature_A_body = {
+  signature: 'signature',
+  certificate: '-----BEGIN CERTIFICATE-----\nMIICYjCCAemgAwIBA..AAAA...',
+  algorithm: 'secp384r2'
+};
+const TMUS_create_signature_B_body = {
+  signature: 'signature',
+  certificate: '-----BEGIN CERTIFICATE-----\nMIICYjCCAemgAwIBA..BBBB...',
+  algorithm: 'secp384r2'
+};
+const TMUS_create_signature_C_body = {
+  signature: 'signature',
+  certificate: '-----BEGIN CERTIFICATE-----\nMIICYjCCAemgAwIBA..CCCC...',
+  algorithm: 'secp384r2'
+};
 
 const DTAG_dynamic_data = {
   contractId: undefined,
@@ -606,59 +626,71 @@ describe(`Launch scenario 0000_From_DTAG_contract`, function() {
     }
   });
 
-  it(`Get the TMUS signatures`, function(done) {
+  it(`Wait TMUS signatures with 1 signed signatures`, function(done) {
     if (TMUS_dynamic_data.receivedContractId === undefined) {
       expect.fail('This scenario step should use an undefined data');
     }
-    try {
-      chai.request(TMUS_API)
-        .get(`/contracts/${TMUS_dynamic_data.receivedContractId}/signatures/`)
-        .send()
-        .end((error, response) => {
-          expect(error).to.be.null;
-          expect(response).to.have.status(200);
-          expect(response).to.be.json;
-          expect(response.body).to.exist;
-          expect(response.body).to.be.an('array');
+    const waitSignedSignatures = (signedSignaturesWanted, tries, interval) => {
+      try {
+        chai.request(TMUS_API)
+          .get(`/contracts/${TMUS_dynamic_data.receivedContractId}/signatures/`)
+          .send()
+          .end((error, response) => {
+            expect(error).to.be.null;
+            expect(response).to.have.status(200);
+            expect(response).to.be.json;
+            expect(response.body).to.exist;
+            expect(response.body).to.be.an('array');
 
-          expect(response.body.length).to.equals(5);
-          response.body.forEach((sign) => {
-            expect(sign.contractId).to.equals(TMUS_dynamic_data.receivedContractId);
-            if (sign.name === DTAG_first_signature_name) {
-              // expect(sign.state).to.equals('UNSIGNED');
-              expect(sign.state).to.equals('SIGNED');
-              testsUtils.debugWarning(`The signed element of signatures should be the second one, not the first one`, '!');
-              expect(sign.msp).to.equals('DTAG');
-              expect(sign.signatureId).to.be.a('string');
-            } else if (sign.name === DTAG_second_signature_name) {
-              // expect(sign.state).to.equals('SIGNED');
-              expect(sign.state).to.equals('UNSIGNED');
-              expect(sign.msp).to.equals('DTAG');
-              expect(sign.signatureId).to.be.a('string');
-            } else if (sign.name === TMUS_first_signature_name) {
-              expect(sign.state).to.equals('UNSIGNED');
-              expect(sign.msp).to.equals('TMUS');
-              expect(sign.signatureId).to.be.a('string');
-            } else if (sign.name === TMUS_second_signature_name) {
-              expect(sign.state).to.equals('UNSIGNED');
-              expect(sign.msp).to.equals('TMUS');
-              expect(sign.signatureId).to.be.a('string');
-            } else if (sign.name === TMUS_third_signature_name) {
-              expect(sign.state).to.equals('UNSIGNED');
-              expect(sign.msp).to.equals('TMUS');
-              expect(sign.signatureId).to.be.a('string');
+            const numberOfSignedSignatures = response.body.filter((c) => (c.state === 'SIGNED')).length;
+            if (numberOfSignedSignatures === signedSignaturesWanted) {
+              expect(response.body.length).to.equals(5);
+              response.body.forEach((sign) => {
+                expect(sign.contractId).to.equals(TMUS_dynamic_data.receivedContractId);
+                if (sign.name === DTAG_first_signature_name) {
+                  // expect(sign.state).to.equals('UNSIGNED');
+                  expect(sign.state).to.equals('SIGNED');
+                  testsUtils.debugWarning(`The signed element of signatures should be the second one, not the first one`, '!');
+                  expect(sign.msp).to.equals('DTAG');
+                  expect(sign.signatureId).to.be.a('string');
+                } else if (sign.name === DTAG_second_signature_name) {
+                  // expect(sign.state).to.equals('SIGNED');
+                  expect(sign.state).to.equals('UNSIGNED');
+                  expect(sign.msp).to.equals('DTAG');
+                  expect(sign.signatureId).to.be.a('string');
+                } else if (sign.name === TMUS_first_signature_name) {
+                  expect(sign.state).to.equals('UNSIGNED');
+                  expect(sign.msp).to.equals('TMUS');
+                  expect(sign.signatureId).to.be.a('string');
+                } else if (sign.name === TMUS_second_signature_name) {
+                  expect(sign.state).to.equals('UNSIGNED');
+                  expect(sign.msp).to.equals('TMUS');
+                  expect(sign.signatureId).to.be.a('string');
+                } else if (sign.name === TMUS_third_signature_name) {
+                  expect(sign.state).to.equals('UNSIGNED');
+                  expect(sign.msp).to.equals('TMUS');
+                  expect(sign.signatureId).to.be.a('string');
+                } else {
+                  expect.fail(`This signature name is unknown : ${sign.name}`);
+                }
+              });
+              done();
+            } else if (tries > 0) {
+              setTimeout(() => {
+                waitSignedSignatures(signedSignaturesWanted, (tries - 1));
+              }, interval);
             } else {
-              expect.fail(`This signature name is unknown : ${sign.name}`);
+              done('No more tries');
             }
           });
+      } catch (exception) {
+        debug('exception: %s', exception.stack);
+        expect.fail('it test throws an exception');
+        done();
+      }
+    };
 
-          done();
-        });
-    } catch (exception) {
-      debug('exception: %s', exception.stack);
-      expect.fail('it test throws an exception');
-      done();
-    }
+    waitSignedSignatures(1, 10, 5000);
   });
 
   it(`Get this signature details on TMUS`, function(done) {
@@ -694,6 +726,167 @@ describe(`Launch scenario 0000_From_DTAG_contract`, function() {
       expect.fail('it test throws an exception');
       done();
     }
+  });
+
+  // Now create a signature in TMUS and send it to DTAG
+
+  it(`Put a signature on thirdSignatureId of TMUS`, function(done) {
+    if ((TMUS_dynamic_data.receivedContractId === undefined) || (TMUS_dynamic_data.TMUS.thirdSignatureId === undefined)) {
+      expect.fail('This scenario step should use an undefined data');
+    }
+    try {
+      chai.request(TMUS_API)
+        .put(`/contracts/${TMUS_dynamic_data.receivedContractId}/signatures/${TMUS_dynamic_data.TMUS.thirdSignatureId}`)
+        .send(TMUS_create_signature_C_body)
+        .end((error, response) => {
+          expect(error).to.be.null;
+          expect(response).to.have.status(200);
+          expect(response).to.be.json;
+          expect(response.body).to.exist;
+          expect(response.body).to.be.an('object');
+
+          expect(response.body).to.have.property('contractId', TMUS_dynamic_data.receivedContractId);
+          expect(response.body).to.have.property('signatureId', TMUS_dynamic_data.TMUS.thirdSignatureId);
+          expect(response.body).to.have.property('name', TMUS_third_signature_name);
+          expect(response.body).to.have.property('msp', 'TMUS');
+          expect(response.body).to.have.property('role', 'role_5_TMUS');
+          expect(response.body).to.have.property('algorithm', TMUS_create_signature_C_body.algorithm);
+          expect(response.body).to.have.property('certificate', TMUS_create_signature_C_body.certificate);
+          expect(response.body).to.have.property('signature', TMUS_create_signature_C_body.signature);
+          expect(response.body).to.have.property('state', 'SIGNED');
+
+          done();
+        });
+    } catch (exception) {
+      debug('exception: %s', exception.stack);
+      expect.fail('it test throws an exception');
+      done();
+    }
+  });
+
+  it(`Get the TMUS signatures`, function(done) {
+    if (TMUS_dynamic_data.receivedContractId === undefined) {
+      expect.fail('This scenario step should use an undefined data');
+    }
+    try {
+      chai.request(TMUS_API)
+        .get(`/contracts/${TMUS_dynamic_data.receivedContractId}/signatures/`)
+        .send()
+        .end((error, response) => {
+          expect(error).to.be.null;
+          expect(response).to.have.status(200);
+          expect(response).to.be.json;
+          expect(response.body).to.exist;
+          expect(response.body).to.be.an('array');
+
+          expect(response.body.length).to.equals(5);
+          response.body.forEach((sign) => {
+            expect(sign.contractId).to.equals(TMUS_dynamic_data.receivedContractId);
+            if (sign.name === DTAG_first_signature_name) {
+              // expect(sign.state).to.equals('UNSIGNED');
+              expect(sign.state).to.equals('SIGNED');
+//              testsUtils.debugWarning(`The signed element of signatures should be the second one, not the first one`, '!');
+              expect(sign.msp).to.equals('DTAG');
+              expect(sign.signatureId).to.be.a('string');
+            } else if (sign.name === DTAG_second_signature_name) {
+              // expect(sign.state).to.equals('SIGNED');
+              expect(sign.state).to.equals('UNSIGNED');
+              expect(sign.msp).to.equals('DTAG');
+              expect(sign.signatureId).to.be.a('string');
+            } else if (sign.name === TMUS_first_signature_name) {
+              expect(sign.state).to.equals('UNSIGNED');
+              expect(sign.msp).to.equals('TMUS');
+              expect(sign.signatureId).to.be.a('string');
+            } else if (sign.name === TMUS_second_signature_name) {
+              expect(sign.state).to.equals('UNSIGNED');
+              expect(sign.msp).to.equals('TMUS');
+              expect(sign.signatureId).to.be.a('string');
+            } else if (sign.name === TMUS_third_signature_name) {
+              expect(sign.state).to.equals('SIGNED');
+              expect(sign.msp).to.equals('TMUS');
+              expect(sign.signatureId).to.be.a('string');
+            } else {
+              expect.fail(`This signature name is unknown : ${sign.name}`);
+            }
+          });
+
+          done();
+        });
+    } catch (exception) {
+      debug('exception: %s', exception.stack);
+      expect.fail('it test throws an exception');
+      done();
+    }
+  });
+
+  it(`Wait DTAG signatures with 2 signed signatures`, function(done) {
+    if (DTAG_dynamic_data.contractId === undefined) {
+      expect.fail('This scenario step should use an undefined data');
+    }
+    const waitSignedSignatures = (signedSignaturesWanted, tries, interval) => {
+      try {
+        chai.request(DTAG_API)
+          .get(`/contracts/${DTAG_dynamic_data.contractId}/signatures/`)
+          .send()
+          .end((error, response) => {
+            debug("response.body = ", response.body);
+            expect(error).to.be.null;
+            expect(response).to.have.status(200);
+            expect(response).to.be.json;
+            expect(response.body).to.exist;
+            expect(response.body).to.be.an('array');
+
+            const numberOfSignedSignatures = response.body.filter((c) => (c.state === 'SIGNED')).length;
+            debug("numberOfSignedSignatures = ", numberOfSignedSignatures);
+
+            if (numberOfSignedSignatures === signedSignaturesWanted) {
+              expect(response.body.length).to.equals(5);
+              response.body.forEach((sign) => {
+                expect(sign.contractId).to.equals(DTAG_dynamic_data.contractId);
+                if (sign.name === DTAG_first_signature_name) {
+                  expect(sign.state).to.equals('UNSIGNED');
+                  expect(sign.msp).to.equals('DTAG');
+                  expect(sign.signatureId).to.be.a('string');
+                } else if (sign.name === DTAG_second_signature_name) {
+                  expect(sign.state).to.equals('SIGNED');
+                  expect(sign.msp).to.equals('DTAG');
+                  expect(sign.signatureId).to.be.a('string');
+                } else if (sign.name === TMUS_first_signature_name) {
+                  // expect(sign.state).to.equals('UNSIGNED');
+                  expect(sign.state).to.equals('SIGNED');
+                  testsUtils.debugWarning(`The signed element of signatures should be the third one, not the first one`, '!');
+                  expect(sign.msp).to.equals('TMUS');
+                  expect(sign.signatureId).to.be.a('string');
+                } else if (sign.name === TMUS_second_signature_name) {
+                  expect(sign.state).to.equals('UNSIGNED');
+                  expect(sign.msp).to.equals('TMUS');
+                  expect(sign.signatureId).to.be.a('string');
+                } else if (sign.name === TMUS_third_signature_name) {
+                  // expect(sign.state).to.equals('SIGNED');
+                  expect(sign.state).to.equals('UNSIGNED');
+                  expect(sign.msp).to.equals('TMUS');
+                  expect(sign.signatureId).to.be.a('string');
+                } else {
+                  expect.fail(`This signature name is unknown : ${sign.name}`);
+                }
+              });
+              done();
+            } else if (tries > 0) {
+              setTimeout(() => {
+                waitSignedSignatures(signedSignaturesWanted, (tries - 1));
+              }, interval);
+            } else {
+              done('No more tries');
+            }
+          });
+      } catch (exception) {
+        debug('exception: %s', exception.stack);
+        expect.fail('it test throws an exception');
+        done();
+      }
+    };
+
+    waitSignedSignatures(2, 20, 5000);
   });
 
   // Now delete the created contract resources
