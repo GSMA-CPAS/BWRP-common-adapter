@@ -1,8 +1,29 @@
 'use strict';
 
+const config = require('../config');
+const logger = require('../logger');
+
 class ContractMapper {
   // Map the input POST contracts request to internal contract
   static getContractFromPostContractsRequest(body) {
+    // Temporary support both version. TO BE removed in future version.
+    if (body.header.msps != undefined) {
+      const fromMsp = {};
+      const toMsp = {};
+
+      for (const msp in body.header.msps) {
+        if (msp == config.SELF_MSPID) {
+          fromMsp.mspId = msp;
+          fromMsp.signatures = body.header.msps[msp].signatures;
+        } else {
+          toMsp.mspId = msp;
+          toMsp.signatures = body.header.msps[msp].signatures;
+        }
+      }
+      body.header.fromMsp = fromMsp;
+      body.header.toMsp = toMsp;
+    }
+
     const returnedContract = {
       state: 'DRAFT',
       name: body.header.name,
@@ -108,6 +129,7 @@ class ContractMapper {
         creationDate: contract.creationDate,
         lastModificationDate: contract.lastModificationDate
       };
+      returnedResponseBody = ContractMapper.convertOldToNew(returnedResponseBody);
     }
     return returnedResponseBody;
   }
@@ -123,26 +145,71 @@ class ContractMapper {
     const returnedResponseBody = [];
     if ((contracts !== undefined) && (Array.isArray(contracts))) {
       contracts.forEach((contract) => {
-        returnedResponseBody.push({
+        returnedResponseBody.push(ContractMapper.convertOldToNew({
           contractId: contract.id,
           header: {
             name: contract.name,
             type: contract.type,
             version: contract.version,
             fromMsp: {
-              mspId: contract.fromMsp.mspId
+              mspId: contract.fromMsp.mspId,
+              signatures: contract.fromMsp.signatures.map((signature) => {
+                return {
+                  id: signature.id,
+                  name: signature.name,
+                  role: signature.role
+                };
+              })
             },
             toMsp: {
-              mspId: contract.toMsp.mspId
+              mspId: contract.toMsp.mspId,
+              signatures: contract.toMsp.signatures.map((signature) => {
+                return {
+                  id: signature.id,
+                  name: signature.name,
+                  role: signature.role
+                };
+              })
             }
           },
           state: contract.state,
           referenceId: contract.referenceId,
           creationDate: contract.creationDate,
           lastModificationDate: contract.lastModificationDate
-        });
+        }));
       });
     }
+    return returnedResponseBody;
+  }
+
+  // Convert Header Format
+  static convertOldToNew(contract) {
+    const returnedResponseBody = contract;
+    const newHeader = {};
+
+    const msps = {};
+    logger.info(contract);
+    msps[contract.header.fromMsp.mspId] = {'signatures': contract.header.fromMsp.signatures.map((signature) => {
+      return {
+        id: signature.id,
+        name: signature.name,
+        role: signature.role
+      };
+    })};
+
+    newHeader.type = contract.header.type;
+    newHeader.version = contract.header.version;
+    newHeader.msps = msps;
+
+    msps[contract.header.toMsp.mspId] = {'signatures': contract.header.toMsp.signatures.map((signature) => {
+      return {
+        id: signature.id,
+        name: signature.name,
+        role: signature.role
+      };
+    })};
+    logger.info(msps);
+    returnedResponseBody.header = newHeader;
     return returnedResponseBody;
   }
 }

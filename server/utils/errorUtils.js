@@ -123,8 +123,8 @@ class ErrorUtils {
     code: 500,
     error: {
       internalErrorCode: 3005,
-      message: 'Mandatory SELF_HOST configuration missing',
-      description: 'Environnement variable SELF_HOST is not defined.'
+      message: 'Mandatory COMMON_ADAPTER_SELF_HOST configuration missing',
+      description: 'Environnement variable COMMON_ADAPTER_SELF_HOST is not defined.'
     }
   };
 
@@ -132,8 +132,8 @@ class ErrorUtils {
     code: 500,
     error: {
       internalErrorCode: 3006,
-      message: 'Mandatory BLOCKCHAIN_ADAPTER_URL configuration missing',
-      description: 'Environnement variable BLOCKCHAIN_ADAPTER_URL is not defined.'
+      message: 'Mandatory COMMON_ADAPTER_BLOCKCHAIN_ADAPTER_URL configuration missing',
+      description: 'Environnement variable COMMON_ADAPTER_BLOCKCHAIN_ADAPTER_URL is not defined.'
     }
   };
 
@@ -141,8 +141,8 @@ class ErrorUtils {
     code: 500,
     error: {
       internalErrorCode: 3007,
-      message: 'Mandatory BLOCKCHAIN_ADAPTER_WEBHOOK_EVENTS configuration not valid',
-      description: 'Environnement variable BLOCKCHAIN_ADAPTER_WEBHOOK_EVENTS is not valid.'
+      message: 'Mandatory COMMON_ADAPTER_BLOCKCHAIN_ADAPTER_WEBHOOK_EVENTS configuration not valid',
+      description: 'Environnement variable COMMON_ADAPTER_BLOCKCHAIN_ADAPTER_WEBHOOK_EVENTS is not valid.'
     }
   };
 
@@ -200,19 +200,10 @@ class ErrorUtils {
     }
   };
 
-  static ERROR_BUSINESS_GET_SETTLEMENT_ON_NOT_LINKED_CONTRACT_RECEIVED = {
-    code: 422,
-    error: {
-      internalErrorCode: 2007,
-      message: 'Get settlement not allowed',
-      description: 'It\'s not allowed to get settlement on wrong contract.'
-    }
-  };
-
   static ERROR_BUSINESS_GENERATE_SETTLEMENT_AND_COMMIT_NOT_SUPPORTED = {
     code: 422,
     error: {
-      internalErrorCode: 2008,
+      internalErrorCode: 2007,
       message: 'commit is not implemented yet',
       description: 'It\'s not allowed to commit the settlement yet.'
     }
@@ -280,6 +271,34 @@ class ErrorUtils {
       description: 'This signature Id doesn\'t exist'
     }
   };
+
+  static ERROR_BUSINESS_SEND_SETTLEMENT_ONLY_ALLOWED_IN_STATE_DRAFT = {
+    code: 422,
+    error: {
+      internalErrorCode: 2017,
+      message: 'Send settlement not allowed',
+      description: 'It\'s not allowed to send this settlement.'
+    }
+  };
+
+  static ERROR_INVALID_DEFINED_SELF_MSPID_ERROR = {
+    code: 500,
+    error: {
+      internalErrorCode: 2018,
+      message: 'Invalid SELF_MSPID error',
+      description: 'The defined SELF_MSPID is not valid.'
+    }
+  };
+
+  static ERROR_INVALID_TESTED_MSPID_ERROR = {
+    code: 500,
+    error: {
+      internalErrorCode: 2019,
+      message: 'Invalid tested mspId error',
+      description: 'The tested mspId is not valid.'
+    }
+  };
+
 }
 
 module.exports = ErrorUtils;

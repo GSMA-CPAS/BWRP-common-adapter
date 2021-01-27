@@ -17,11 +17,17 @@ const SettlementSchema = new Schema({
   version: {type: String, required: true},
   name: {type: String, required: true},
   contractId: {type: String, required: true},
+  contractReferenceId: {type: String, required: false},
+  mspOwner: {type: String, required: true},
+  mspReceiver: {type: String, required: true},
   body: {type: MixSettlementBodySchema, required: true},
+  rawData: {type: String, required: false},
+  referenceId: {type: String, required: false},
+  storageKeys: {type: [String], required: false},
+  state: {type: String, required: true},
   history: {type: [HistorySchema], required: true},
   creationDate: {type: Date, required: true},
   lastModificationDate: {type: Date, required: true, default: Date.now},
-  state: {type: String, required: true},
 });
 
 SettlementSchema.index({id: 1}, {unique: true});

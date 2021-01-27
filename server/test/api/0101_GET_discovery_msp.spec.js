@@ -26,6 +26,7 @@ describe(`Tests GET ${route} API OK`, function() {
             // Only for exemple
             expect(pathReceived).to.equals('/discovery/msps/'+mspId);
             expect(bodyReceived).to.be.empty;
+            /* eslint-disable max-len */
             return [
               200,
               `{
@@ -40,6 +41,7 @@ describe(`Tests GET ${route} API OK`, function() {
               }`,
               undefined
             ];
+            /* eslint-enable max-len */
           });
 
         const path = globalVersion + '/discovery/msps/' + mspId;
@@ -131,6 +133,7 @@ describe(`Tests GET ${route} API OK`, function() {
             // Only for exemple
             expect(pathReceived).to.equals('/discovery/msps/'+mspId);
             expect(bodyReceived).to.be.empty;
+            /* eslint-disable max-len */
             return [
               200,
               `{
@@ -145,6 +148,7 @@ describe(`Tests GET ${route} API OK`, function() {
               }`,
               undefined
             ];
+            /* eslint-enable max-len */
           });
 
         const path = globalVersion + '/discovery/msps/' + mspId;

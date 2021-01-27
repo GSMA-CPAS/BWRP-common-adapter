@@ -642,48 +642,6 @@ paths:
       tags:
       - usage
       x-eov-operation-handler: controllers/UsageController
-  /contracts/{contractId}/usages/{usageId}/send/:
-    put:
-      description: Set State to "SEND" and POST to Blochain adapter towards TargetMsp of the Usage 
-      operationId: sendUsageById
-      parameters:
-      - description: The contract Id
-        explode: false
-        in: path
-        name: contractId
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: The Usage Id
-        explode: false
-        in: path
-        name: usageId
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UsageResponse'
-                x-content-type: application/json
-          description: Successful operation, returns sent Usage Object
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/400ErrorResponse'
-                x-content-type: application/json
-          description: Bad Request
-        "500":
-          content: {}
-          description: Internal Error
-      tags:
-      - usage
-      x-eov-operation-handler: controllers/UsageController
   /contracts/{contractId}/usages/{usageId}/generate/:
     put:
       description: Generate the "Settlement" with local calculator and POST to Blochain adapter towards TargetMsp of the calculated response. 
@@ -803,6 +761,48 @@ paths:
           description: Internal Error
       tags:
       - settlement
+      x-eov-operation-handler: controllers/SettlementController
+  /contracts/{contractId}/settlements/{settlementId}/send/:
+    put:
+      description: Set State to "SEND" and POST to Blockchain adapter towards TargetMsp of the Usage
+      operationId: sendSettlementById
+      parameters:
+        - description: The contract Id
+          explode: false
+          in: path
+          name: contractId
+          required: true
+          schema:
+            type: string
+          style: simple
+        - description: The Settlement Id
+          explode: false
+          in: path
+          name: settlementId
+          required: true
+          schema:
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Settlement'
+                x-content-type: application/json
+          description: Successful operation, returns sent Settlement Object
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400ErrorResponse'
+                x-content-type: application/json
+          description: Bad Request
+        "500":
+          content: {}
+          description: Internal Error
+      tags:
+        - settlement
       x-eov-operation-handler: controllers/SettlementController
 
 

@@ -18,32 +18,12 @@ describe('Tests DELETE ' + route + ' API OK', function() {
       state: 'DRAFT',
       type: 'contract',
       version: '1.1.0',
-      fromMsp: {
-        mspId: 'A1'
-      },
-      toMsp: {
-        mspId: 'B1'
-      },
+      fromMsp: {mspId: 'A1'},
+      toMsp: {mspId: 'B1'},
       body: {
-        bankDetails: {
-          A1: {
-            iban: null,
-            bankName: null,
-            currency: null
-          },
-          B1: {
-            iban: null,
-            bankName: null,
-            currency: null
-          }
-        },
+        bankDetails: {A1: {iban: null, bankName: null, currency: null}, B1: {iban: null, bankName: null, currency: null}},
         discountModels: 'someData',
-        generalInformation: {
-          name: 'test1',
-          type: 'Normal',
-          endDate: '2021-01-01T00:00:00.000Z',
-          startDate: '2020-12-01T00:00:00.000Z'
-        }
+        generalInformation: {name: 'test1', type: 'Normal', endDate: '2021-01-01T00:00:00.000Z', startDate: '2020-12-01T00:00:00.000Z'}
       },
       rawData: 'Ctr_raw-data-1'
     };
@@ -52,32 +32,12 @@ describe('Tests DELETE ' + route + ' API OK', function() {
       state: 'SENT',
       type: 'contract',
       version: '1.1.0',
-      fromMsp: {
-        mspId: 'B1'
-      },
-      toMsp: {
-        mspId: 'C1'
-      },
+      fromMsp: {mspId: 'B1'},
+      toMsp: {mspId: 'C1'},
       body: {
-        bankDetails: {
-          A1: {
-            iban: null,
-            bankName: null,
-            currency: null
-          },
-          B1: {
-            iban: null,
-            bankName: null,
-            currency: null
-          }
-        },
+        bankDetails: {A1: {iban: null, bankName: null, currency: null}, B1: {iban: null, bankName: null, currency: null}},
         discountModels: 'someData',
-        generalInformation: {
-          name: 'test1',
-          type: 'Normal',
-          endDate: '2021-01-01T00:00:00.000Z',
-          startDate: '2020-12-01T00:00:00.000Z'
-        }
+        generalInformation: {name: 'test1', type: 'Normal', endDate: '2021-01-01T00:00:00.000Z', startDate: '2020-12-01T00:00:00.000Z'}
       },
       rawData: 'Ctr_raw-data-1'
     };
@@ -86,32 +46,12 @@ describe('Tests DELETE ' + route + ' API OK', function() {
       state: 'RECEIVED',
       type: 'contract',
       version: '1.1.0',
-      fromMsp: {
-        mspId: 'B1'
-      },
-      toMsp: {
-        mspId: 'C1'
-      },
+      fromMsp: {mspId: 'B1'},
+      toMsp: {mspId: 'C1'},
       body: {
-        bankDetails: {
-          A1: {
-            iban: null,
-            bankName: null,
-            currency: null
-          },
-          B1: {
-            iban: null,
-            bankName: null,
-            currency: null
-          }
-        },
+        bankDetails: {A1: {iban: null, bankName: null, currency: null}, B1: {iban: null, bankName: null, currency: null}},
         discountModels: 'someData',
-        generalInformation: {
-          name: 'test1',
-          type: 'Normal',
-          endDate: '2021-01-01T00:00:00.000Z',
-          startDate: '2020-12-01T00:00:00.000Z'
-        }
+        generalInformation: {name: 'test1', type: 'Normal', endDate: '2021-01-01T00:00:00.000Z', startDate: '2020-12-01T00:00:00.000Z'}
       },
       rawData: 'Ctr_raw-data-1'
     };
@@ -121,6 +61,7 @@ describe('Tests DELETE ' + route + ' API OK', function() {
       name: 'Usage data',
       contractId: undefined,
       mspOwner: undefined,
+      mspReceiver: undefined,
       body: {
         data: []
       },
@@ -132,18 +73,11 @@ describe('Tests DELETE ' + route + ' API OK', function() {
       name: 'Usage with data',
       contractId: undefined,
       mspOwner: undefined,
+      mspReceiver: undefined,
       body: {
-        data: [{
-          year: 2020,
-          month: 1,
-          hpmn: 'HPMN',
-          vpmn: 'VPMN',
-          service: 'service',
-          value: 1,
-          units: 'unit',
-          charges: 'charge',
-          taxes: 'taxes'
-        }]
+        data: [
+          {year: 2020, month: 1, hpmn: 'HPMN', vpmn: 'VPMN', service: 'service', value: 1, units: 'unit', charges: 'charge', taxes: 'taxes'}
+        ]
       },
       state: 'DRAFT'
     };
@@ -153,72 +87,49 @@ describe('Tests DELETE ' + route + ' API OK', function() {
       name: 'Usage with data',
       contractId: undefined,
       mspOwner: undefined,
+      mspReceiver: undefined,
       body: {
-        data: [{
-          year: 2020,
-          month: 1,
-          hpmn: 'HPMN',
-          vpmn: 'VPMN',
-          service: 'service',
-          value: 1,
-          units: 'unit',
-          charges: 'charge',
-          taxes: 'taxes'
-        }]
+        data: [
+          {year: 2020, month: 1, hpmn: 'HPMN', vpmn: 'VPMN', service: 'service', value: 1, units: 'unit', charges: 'charge', taxes: 'taxes'}
+        ]
       },
       state: 'SENT'
     };
 
     before((done) => {
-      debugSetup('==> remove all contracts in db');
-      testsDbUtils.removeAllContracts({})
-        .then((removeAllContractsResp) => {
-          debugSetup('All contracts in db are removed : ', removeAllContractsResp);
-
-          testsDbUtils.removeAllUsages({})
-            .then((removeAllUsagesResp) => {
-              debugSetup('All usages in db are removed : ', removeAllUsagesResp);
-
-              testsDbUtils.initDbWithContracts([contractDraft, contractSent, contractReceived])
-                .then((initDbWithContractsResp) => {
-                  debugSetup('Three contracts where added in db ', removeAllUsagesResp);
-                  contractDraft.id = initDbWithContractsResp[0].id;
-                  contractSent.id = initDbWithContractsResp[1].id;
-                  contractReceived.id = initDbWithContractsResp[2].id;
-                  usageMinimumData.contractId = contractSent.id;
-                  usageMinimumData.mspOwner = contractSent.fromMsp.mspId;
-                  usageMoreData.contractId = contractReceived.id;
-                  usageMoreData.mspOwner = contractReceived.fromMsp.mspId;
-                  usageSent.contractId = contractReceived.id;
-                  usageSent.mspOwner = contractReceived.fromMsp.mspId;
-                  testsDbUtils.initDbWithUsages([usageMinimumData, usageMoreData, usageSent])
-                    .then((initDbWithUsagesResp) => {
-                      debugSetup('The db is initialized with 3 usages : ', initDbWithUsagesResp.map((c) => c.id));
-                      debugSetup('==> done!');
-                      done();
-                    })
-                    .catch((initDbWithUsagesError) => {
-                      debugSetup('Error initializing the db content : ', initDbWithUsagesError);
-                      debugSetup('==> failed!');
-                      done(initDbWithUsagesError);
-                    });
-                })
-                .catch((initDbWithContractsError) => {
-                  debugSetup('Error initializing the db content : ', initDbWithContractsError);
-                  debugSetup('==> failed!');
-                  done(initDbWithContractsError);
-                });
+      debugSetup('==> init db with 3 contracts');
+      testsDbUtils.initDbWithContracts([contractDraft, contractSent, contractReceived])
+        .then((initDbWithContractsResp) => {
+          debugSetup('Three contracts where added in db ', initDbWithContractsResp);
+          contractDraft.id = initDbWithContractsResp[0].id;
+          contractSent.id = initDbWithContractsResp[1].id;
+          contractReceived.id = initDbWithContractsResp[2].id;
+          usageMinimumData.contractId = contractSent.id;
+          usageMinimumData.mspOwner = contractSent.fromMsp.mspId;
+          usageMinimumData.mspReceiver = contractSent.toMsp.mspId;
+          usageMoreData.contractId = contractReceived.id;
+          usageMoreData.mspOwner = contractReceived.fromMsp.mspId;
+          usageMoreData.mspReceiver = contractReceived.toMsp.mspId;
+          usageSent.contractId = contractReceived.id;
+          usageSent.mspOwner = contractReceived.fromMsp.mspId;
+          usageSent.mspReceiver = contractReceived.toMsp.mspId;
+          debugSetup('==> init db with 3 usages');
+          testsDbUtils.initDbWithUsages([usageMinimumData, usageMoreData, usageSent])
+            .then((initDbWithUsagesResp) => {
+              debugSetup('The db is initialized with 3 usages : ', initDbWithUsagesResp.map((c) => c.id));
+              debugSetup('==> done!');
+              done();
             })
-            .catch((removeAllUsagesError) => {
-              debugSetup('Error removing usages in db : ', removeAllUsagesError);
+            .catch((initDbWithUsagesError) => {
+              debugSetup('Error initializing the db content : ', initDbWithUsagesError);
               debugSetup('==> failed!');
-              done(removeAllUsagesError);
+              done(initDbWithUsagesError);
             });
         })
-        .catch((removeAllContractsError) => {
-          debugSetup('Error removing contracts in db : ', removeAllContractsError);
+        .catch((initDbWithContractsError) => {
+          debugSetup('Error initializing the db content : ', initDbWithContractsError);
           debugSetup('==> failed!');
-          done(removeAllContractsError);
+          done(initDbWithContractsError);
         });
     });
 

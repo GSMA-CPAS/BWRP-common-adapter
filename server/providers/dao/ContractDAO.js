@@ -18,7 +18,11 @@ class ContractDAO {
         type: 'contract'
       };
       if (matchingConditions.state !== undefined) {
-        condition.state = matchingConditions.state;
+        if (Array.isArray(matchingConditions.state)) {
+          condition.state = {$in: matchingConditions.state};
+        } else if (typeof matchingConditions.state === 'string') {
+          condition.state = matchingConditions.state;
+        }
       }
       if (matchingConditions.rawData !== undefined) {
         condition.rawData = matchingConditions.rawData;
@@ -166,7 +170,11 @@ class ContractDAO {
         type: 'contract'
       };
       if (matchingConditions.state !== undefined) {
-        condition.state = matchingConditions.state;
+        if (Array.isArray(matchingConditions.state)) {
+          condition.state = {$in: matchingConditions.state};
+        } else if (typeof matchingConditions.state === 'string') {
+          condition.state = matchingConditions.state;
+        }
       }
       if (matchingConditions.rawData !== undefined) {
         condition.rawData = matchingConditions.rawData;
@@ -209,7 +217,11 @@ class ContractDAO {
         type: 'contract'
       };
       if (matchingConditions.state !== undefined) {
-        condition.state = matchingConditions.state;
+        if (Array.isArray(matchingConditions.state)) {
+          condition.state = {$in: matchingConditions.state};
+        } else if (typeof matchingConditions.state === 'string') {
+          condition.state = matchingConditions.state;
+        }
       }
       if (matchingConditions.rawData !== undefined) {
         condition.rawData = matchingConditions.rawData;
@@ -299,43 +311,51 @@ class ContractDAO {
       };
 
       // Convert "header->from/toMSP->signatures to signatureLink
-      ContractMongoRequester.findOne(condition, (err, contract) => {
-        console.log(contract);
+      ContractMongoRequester.findOne(condition, (err, storedContract) => {
+        DAOErrorManager.handleErrorOrNullObject(err, storedContract)
+          .then((storedObjectReturned) => {
+            const signatureLinks = [];
+            if (storedContract.fromMsp.signatures !== undefined) {
+              for (let i = 0; i < storedContract.fromMsp.signatures.length; i++) {
+                signatureLinks.push({id: ContractMongoRequester.defineSignatureId(), msp: 'fromMsp', index: i});
+              }
+            }
+            if (storedContract.toMsp.signatures !== undefined) {
+              for (let i = 0; i < storedContract.toMsp.signatures.length; i++) {
+                signatureLinks.push({id: ContractMongoRequester.defineSignatureId(), msp: 'toMsp', index: i});
+              }
+            }
 
-        const signatureLinks = [];
-        for (let i = 0; i < contract.fromMsp.signatures.length; i++) {
-          signatureLinks.push({id: ContractMongoRequester.defineSignatureId(), msp: 'fromMsp', index: i});
-        }
-        for (let i = 0; i < contract.toMsp.signatures.length; i++) {
-          signatureLinks.push({id: ContractMongoRequester.defineSignatureId(), msp: 'toMsp', index: i});
-        }
-        console.log(signatureLinks);
+            const updateCommand = {
+              $set: {
+                rawData: rawData,
+                referenceId: referenceId,
+                storageKeys: storageKeys,
+                state: 'SENT',
+                lastModificationDate: lastModificationDate,
+                signatureLink: signatureLinks
+              },
+              $push: {
+                history: {date: lastModificationDate, action: 'SENT'}
+              }
+            };
 
-        const updateCommand = {
-          $set: {
-            rawData: rawData,
-            referenceId: referenceId,
-            storageKeys: storageKeys,
-            state: 'SENT',
-            lastModificationDate: lastModificationDate,
-            signatureLink: signatureLinks
-          },
-          $push: {
-            history: {date: lastModificationDate, action: 'SENT'}
-          }
-        };
-
-        // Launch database request
-        ContractMongoRequester.findOneAndUpdate(condition, updateCommand, (err, contract) => {
-          DAOErrorManager.handleErrorOrNullObject(err, contract)
-            .then((objectReturned) => {
-              resolve(objectReturned);
-            })
-            .catch((errorReturned) => {
-              logger.error('[ContractDAO::findOneAndUpdateToSentContract] [FAILED] errorReturned:' + typeof errorReturned + ' = ' + JSON.stringify(errorReturned));
-              reject(errorReturned);
+            // Launch database request
+            ContractMongoRequester.findOneAndUpdate(condition, updateCommand, (err, contract) => {
+              DAOErrorManager.handleErrorOrNullObject(err, contract)
+                .then((objectReturned) => {
+                  resolve(objectReturned);
+                })
+                .catch((errorReturned) => {
+                  logger.error('[ContractDAO::findOneAndUpdateToSentContract] [FAILED] errorReturned:' + typeof errorReturned + ' = ' + JSON.stringify(errorReturned));
+                  reject(errorReturned);
+                });
             });
-        });
+          })
+          .catch((errorReturned) => {
+            logger.error('[ContractDAO::findOneAndUpdateToSentContract] [FAILED] errorReturned:' + typeof errorReturned + ' = ' + JSON.stringify(errorReturned));
+            reject(errorReturned);
+          });
       });
     });
   }

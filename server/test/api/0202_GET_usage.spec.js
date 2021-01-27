@@ -20,32 +20,12 @@ describe(`Tests GET ${route} API OK`, function() {
       state: 'SENT',
       type: 'contract',
       version: '1.1.0',
-      fromMsp: {
-        mspId: 'A1'
-      },
-      toMsp: {
-        mspId: 'B1'
-      },
+      fromMsp: {mspId: 'A1'},
+      toMsp: {mspId: 'B1'},
       body: {
-        bankDetails: {
-          A1: {
-            iban: null,
-            bankName: null,
-            currency: null
-          },
-          B1: {
-            iban: null,
-            bankName: null,
-            currency: null
-          }
-        },
+        bankDetails: {A1: {iban: null, bankName: null, currency: null}, B1: {iban: null, bankName: null, currency: null}},
         discountModels: 'someData',
-        generalInformation: {
-          name: 'test1',
-          type: 'Normal',
-          endDate: '2021-01-01T00:00:00.000Z',
-          startDate: '2020-12-01T00:00:00.000Z'
-        }
+        generalInformation: {name: 'test1', type: 'Normal', endDate: '2021-01-01T00:00:00.000Z', startDate: '2020-12-01T00:00:00.000Z'}
       },
       rawData: 'Ctr_raw-data-1'
     };
@@ -54,32 +34,12 @@ describe(`Tests GET ${route} API OK`, function() {
       state: 'SIGNED',
       type: 'contract',
       version: '1.1.0',
-      fromMsp: {
-        mspId: 'B1'
-      },
-      toMsp: {
-        mspId: 'C1'
-      },
+      fromMsp: {mspId: 'B1'},
+      toMsp: {mspId: 'C1'},
       body: {
-        bankDetails: {
-          A1: {
-            iban: null,
-            bankName: null,
-            currency: null
-          },
-          B1: {
-            iban: null,
-            bankName: null,
-            currency: null
-          }
-        },
+        bankDetails: {A1: {iban: null, bankName: null, currency: null}, B1: {iban: null, bankName: null, currency: null}},
         discountModels: 'someData',
-        generalInformation: {
-          name: 'test1',
-          type: 'Normal',
-          endDate: '2021-01-01T00:00:00.000Z',
-          startDate: '2020-12-01T00:00:00.000Z'
-        }
+        generalInformation: {name: 'test1', type: 'Normal', endDate: '2021-01-01T00:00:00.000Z', startDate: '2020-12-01T00:00:00.000Z'}
       },
       rawData: 'Ctr_raw-data-1'
     };
@@ -88,70 +48,42 @@ describe(`Tests GET ${route} API OK`, function() {
       version: '1.1.0',
       name: 'Usage data',
       contractId: contract1.id,
-      mspOwner: 'mspOwner',
+      mspOwner: 'A1',
+      mspReceiver: 'B1',
       body: {
-        data: [{
-          year: 2020,
-          month: 1,
-          hpmn: 'HPMN',
-          vpmn: 'VPMN',
-          service: 'service',
-          value: 1,
-          units: 'unit',
-          charges: 'charge',
-          taxes: 'taxes'
-        }]
+        data: [
+          {year: 2020, month: 1, hpmn: 'HPMN', vpmn: 'VPMN', service: 'service', value: 1, units: 'unit', charges: 'charge', taxes: 'taxes'}
+        ]
       },
       state: 'DRAFT'
     };
 
     before((done) => {
-      debugSetup('==> remove all contracts in db');
-      testsDbUtils.removeAllContracts({})
-        .then((removeAllContractsResp) => {
-          debugSetup('All contracts in db are removed : ', removeAllContractsResp);
-
-          testsDbUtils.removeAllUsages({})
-            .then((removeAllUsagesResp) => {
-              debugSetup('All usages in db are removed : ', removeAllUsagesResp);
-
-              testsDbUtils.initDbWithContracts([contract1, contract2])
-                .then((initDbWithContractsResp) => {
-                  debugSetup('Two contracts in db ', removeAllUsagesResp);
-                  contract1.id = initDbWithContractsResp[0].id;
-                  contract2.id = initDbWithContractsResp[1].id;
-                  usage1.contractId = contract1.id;
-                  usage1.mspOwner = contract1.fromMsp.mspId;
-                  testsDbUtils.createUsage(usage1)
-                    .then((createUsageResp) => {
-                      debugSetup('One usage document linked to contract ', createUsageResp.contractId);
-
-                      usage1.id = createUsageResp.id;
-                      debugSetup('==> done!');
-                      done();
-                    })
-                    .catch((createUsageError) => {
-                      debugSetup('Error initializing the db content : ', createUsageError);
-                      debugSetup('==> failed!');
-                      done(createUsageError);
-                    });
-                })
-                .catch((initDbWithContractsError) => {
-                  debugSetup('Error initializing the db content : ', initDbWithContractsError);
-                  debugSetup('==> failed!');
-                  done(initDbWithContractsError);
-                });
+      debugSetup('==> init db with 2 contracts');
+      testsDbUtils.initDbWithContracts([contract1, contract2])
+        .then((initDbWithContractsResp) => {
+          debugSetup('Two contracts in db ', initDbWithContractsResp);
+          contract1.id = initDbWithContractsResp[0].id;
+          contract2.id = initDbWithContractsResp[1].id;
+          usage1.contractId = contract1.id;
+          usage1.mspOwner = contract1.fromMsp.mspId;
+          testsDbUtils.initDbWithUsages([usage1])
+            .then((initDbWithUsagesResp) => {
+              debugSetup('One usage document linked to contract ', initDbWithUsagesResp[0].contractId);
+              usage1.id = initDbWithUsagesResp[0].id;
+              debugSetup('==> done!');
+              done();
             })
-            .catch((removeAllUsagesError) => {
-              debugSetup('Error removing usages in db : ', removeAllUsagesError);
+            .catch((initDbWithUsagesError) => {
+              debugSetup('Error initializing the db content : ', initDbWithUsagesError);
               debugSetup('==> failed!');
-              done(removeAllUsagesError);
+              done(initDbWithUsagesError);
             });
         })
-        .catch((removeAllContractsError) => {
-          debugSetup('Error removing contracts in db : ', removeAllContractsError);
+        .catch((initDbWithContractsError) => {
+          debugSetup('Error initializing the db content : ', initDbWithContractsError);
           debugSetup('==> failed!');
-          done(removeAllContractsError);
+          done(initDbWithContractsError);
         });
     });
 

@@ -11,149 +11,71 @@ const expect = require('chai').expect;
 const globalVersion = '/api/v1';
 const route = '/contracts/{contractId}/usages/';
 
+const selfMspId = testsUtils.getSelfMspId();
+
 const DATE_REGEX = testsUtils.getDateRegexp();
 
 describe(`Tests POST ${route} API OK`, function() {
   describe(`Setup and Test POST ${route} API with a usage document`, function() {
     const contractDraft = {
-      name: 'Contract name between A1 and B1',
+      name: `Contract name between ${selfMspId} and B1`,
       state: 'DRAFT',
       type: 'contract',
       version: '1.1.0',
-      fromMsp: {
-        mspId: 'A1'
-      },
-      toMsp: {
-        mspId: 'B1'
-      },
+      fromMsp: {mspId: selfMspId},
+      toMsp: {mspId: 'B1'},
       body: {
-        bankDetails: {
-          A1: {
-            iban: null,
-            bankName: null,
-            currency: null
-          },
-          B1: {
-            iban: null,
-            bankName: null,
-            currency: null
-          }
-        },
+        bankDetails: {A1: {iban: null, bankName: null, currency: null}, B1: {iban: null, bankName: null, currency: null}},
         discountModels: 'someData',
-        generalInformation: {
-          name: 'test1',
-          type: 'Normal',
-          endDate: '2021-01-01T00:00:00.000Z',
-          startDate: '2020-12-01T00:00:00.000Z'
-        }
+        generalInformation: {name: 'test1', type: 'Normal', endDate: '2021-01-01T00:00:00.000Z', startDate: '2020-12-01T00:00:00.000Z'}
       },
       rawData: 'Ctr_raw-data-1'
     };
     const contractSent = {
-      name: 'Contract name between B1 and C1',
+      name: `Contract name between ${selfMspId} and C1`,
       state: 'SENT',
       type: 'contract',
       version: '1.1.0',
-      fromMsp: {
-        mspId: 'B1'
-      },
-      toMsp: {
-        mspId: 'C1'
-      },
+      fromMsp: {mspId: selfMspId},
+      toMsp: {mspId: 'C1'},
       body: {
-        bankDetails: {
-          A1: {
-            iban: null,
-            bankName: null,
-            currency: null
-          },
-          B1: {
-            iban: null,
-            bankName: null,
-            currency: null
-          }
-        },
+        bankDetails: {A1: {iban: null, bankName: null, currency: null}, B1: {iban: null, bankName: null, currency: null}},
         discountModels: 'someData',
-        generalInformation: {
-          name: 'test1',
-          type: 'Normal',
-          endDate: '2021-01-01T00:00:00.000Z',
-          startDate: '2020-12-01T00:00:00.000Z'
-        }
+        generalInformation: {name: 'test1', type: 'Normal', endDate: '2021-01-01T00:00:00.000Z', startDate: '2020-12-01T00:00:00.000Z'}
       },
       rawData: 'Ctr_raw-data-1'
     };
     const contractReceived = {
-      name: 'Contract name between B1 and C1',
+      name: `Contract name between B1 and ${selfMspId}`,
       state: 'RECEIVED',
       type: 'contract',
       version: '1.1.0',
-      fromMsp: {
-        mspId: 'B1'
-      },
-      toMsp: {
-        mspId: 'C1'
-      },
+      fromMsp: {mspId: 'B1'},
+      toMsp: {mspId: selfMspId},
       body: {
-        bankDetails: {
-          A1: {
-            iban: null,
-            bankName: null,
-            currency: null
-          },
-          B1: {
-            iban: null,
-            bankName: null,
-            currency: null
-          }
-        },
+        bankDetails: {A1: {iban: null, bankName: null, currency: null}, B1: {iban: null, bankName: null, currency: null}},
         discountModels: 'someData',
-        generalInformation: {
-          name: 'test1',
-          type: 'Normal',
-          endDate: '2021-01-01T00:00:00.000Z',
-          startDate: '2020-12-01T00:00:00.000Z'
-        }
+        generalInformation: {name: 'test1', type: 'Normal', endDate: '2021-01-01T00:00:00.000Z', startDate: '2020-12-01T00:00:00.000Z'}
       },
       rawData: 'Ctr_raw-data-1'
     };
 
     before((done) => {
-      debugSetup('==> remove all contracts in db');
-      testsDbUtils.removeAllContracts({})
-        .then((removeAllContractsResp) => {
-          debugSetup('All contracts in db are removed : ', removeAllContractsResp);
+      debugSetup('==> init db with 3 contracts');
+      testsDbUtils.initDbWithContracts([contractDraft, contractSent, contractReceived])
+        .then((initDbWithContractsResp) => {
+          debugSetup('3 contracts where added in db ', initDbWithContractsResp);
+          contractDraft.id = initDbWithContractsResp[0].id;
+          contractSent.id = initDbWithContractsResp[1].id;
+          contractReceived.id = initDbWithContractsResp[2].id;
 
-          testsDbUtils.removeAllUsages({})
-            .then((removeAllUsagesResp) => {
-              debugSetup('All usages in db are removed : ', removeAllUsagesResp);
-
-              testsDbUtils.initDbWithContracts([contractDraft, contractSent, contractReceived])
-                .then((initDbWithContractsResp) => {
-                  debugSetup('Three contracts where added in db ', removeAllUsagesResp);
-                  contractDraft.id = initDbWithContractsResp[0].id;
-                  contractSent.id = initDbWithContractsResp[1].id;
-                  contractReceived.id = initDbWithContractsResp[2].id;
-
-                  debugSetup('==> done!');
-                  done();
-                })
-                .catch((initDbWithContractsError) => {
-                  debugSetup('Error initializing the db content : ', initDbWithContractsError);
-                  debugSetup('==> failed!');
-                  done(initDbWithContractsError);
-                });
-            })
-            .catch((removeAllUsagesError) => {
-              debugSetup('Error removing usages in db : ', removeAllUsagesError);
-              debugSetup('==> failed!');
-              done(removeAllUsagesError);
-            });
+          debugSetup('==> done!');
+          done();
         })
-        .catch((removeAllContractsError) => {
-          debugSetup('Error removing contracts in db : ', removeAllContractsError);
+        .catch((initDbWithContractsError) => {
+          debugSetup('Error initializing the db content : ', initDbWithContractsError);
           debugSetup('==> failed!');
-          done(removeAllContractsError);
+          done(initDbWithContractsError);
         });
     });
 
@@ -169,17 +91,9 @@ describe(`Tests POST ${route} API OK`, function() {
             // mspOwner: ->  the MSP which gives the Inbound traffic data   Could be the contract->fromMsp
           },
           body: {
-            data: [{
-              year: 2020,
-              month: 1,
-              hpmn: 'HPMN',
-              vpmn: 'VPMN',
-              service: 'service',
-              value: 1,
-              units: 'unit',
-              charges: 'charge',
-              taxes: 'taxes'
-            }]
+            data: [
+              {year: 2020, month: 1, hpmn: 'HPMN', vpmn: 'VPMN', service: 'service', value: 1, units: 'unit', charges: 'charge', taxes: 'taxes'}
+            ]
           },
         };
 
@@ -212,17 +126,9 @@ describe(`Tests POST ${route} API OK`, function() {
             // mspOwner: ->  the MSP which gives the Inbound traffic data   Could be the contract->fromMsp
           },
           body: {
-            data: [{
-              year: 2020,
-              month: 1,
-              hpmn: 'HPMN',
-              vpmn: 'VPMN',
-              service: 'service',
-              value: 1,
-              units: 'unit',
-              charges: 'charge',
-              taxes: 'taxes'
-            }]
+            data: [
+              {year: 2020, month: 1, hpmn: 'HPMN', vpmn: 'VPMN', service: 'service', value: 1, units: 'unit', charges: 'charge', taxes: 'taxes'}
+            ]
           },
         };
 
@@ -287,17 +193,9 @@ describe(`Tests POST ${route} API OK`, function() {
             // mspOwner: ->  the MSP which gives the Inbound traffic data   Could be the contract->fromMsp
           },
           body: {
-            data: [{
-              year: 2020,
-              month: 1,
-              hpmn: 'HPMN',
-              vpmn: 'VPMN',
-              service: 'service',
-              value: 1,
-              units: 'unit',
-              charges: 'charge',
-              taxes: 'taxes'
-            }]
+            data: [
+              {year: 2020, month: 1, hpmn: 'HPMN', vpmn: 'VPMN', service: 'service', value: 1, units: 'unit', charges: 'charge', taxes: 'taxes'}
+            ]
           },
         };
 

@@ -23,32 +23,12 @@ describe(`Tests PUT ${route} API OK`, function() {
       state: 'DRAFT',
       type: 'contract',
       version: '1.1.0',
-      fromMsp: {
-        mspId: 'DTAG'
-      },
-      toMsp: {
-        mspId: 'TMUS'
-      },
+      fromMsp: {mspId: 'DTAG'},
+      toMsp: {mspId: 'TMUS'},
       body: {
-        bankDetails: {
-          A1: {
-            iban: null,
-            bankName: null,
-            currency: null
-          },
-          B1: {
-            iban: null,
-            bankName: null,
-            currency: null
-          }
-        },
+        bankDetails: {A1: {iban: null, bankName: null, currency: null}, B1: {iban: null, bankName: null, currency: null}},
         discountModels: 'someData',
-        generalInformation: {
-          name: 'test1',
-          type: 'Normal',
-          endDate: '2021-01-01T00:00:00.000Z',
-          startDate: '2020-12-01T00:00:00.000Z'
-        }
+        generalInformation: {name: 'test1', type: 'Normal', endDate: '2021-01-01T00:00:00.000Z', startDate: '2020-12-01T00:00:00.000Z'}
       },
       rawData: 'Ctr_raw-data-1'
     };
@@ -58,51 +38,12 @@ describe(`Tests PUT ${route} API OK`, function() {
       state: 'DRAFT',
       type: 'contract',
       version: '1.3.1',
-      fromMsp: {
-        mspId: 'DTAG',
-        signatures: [
-          {
-            id: 'signatureId_1_InString',
-            name: 'employeeName_A2_1',
-            role: 'financeDirector'
-          }
-        ]
-      },
-      toMsp: {
-        mspId: 'TMUS',
-        signatures: [
-          {
-            id: 'signatureId_C1_1_InString',
-            name: 'employeeName_C1_1',
-            role: 'financeDirector'
-          },
-          {
-            id: 'signatureId_C1_2_InString',
-            name: 'employeeName_C1_2',
-            role: 'saleDirector'
-          }
-        ]
-      },
+      fromMsp: {mspId: 'DTAG', signatures: [{id: 'signatureId_1_InString', name: 'employeeName_A2_1', role: 'financeDirector'}]},
+      toMsp: {mspId: 'TMUS', signatures: [{id: 'signatureId_C1_1_InString', name: 'employeeName_C1_1', role: 'financeDirector'}, {id: 'signatureId_C1_2_InString', name: 'employeeName_C1_2', role: 'saleDirector'}]},
       body: {
-        bankDetails: {
-          A1: {
-            iban: null,
-            bankName: null,
-            currency: null
-          },
-          C3: {
-            iban: null,
-            bankName: null,
-            currency: null
-          }
-        },
+        bankDetails: {A1: {iban: null, bankName: null, currency: null}, C3: {iban: null, bankName: null, currency: null}},
         discountModels: 'someData',
-        generalInformation: {
-          name: 'test1',
-          type: 'Normal',
-          endDate: '2021-01-01T00:00:00.000Z',
-          startDate: '2020-12-01T00:00:00.000Z'
-        }
+        generalInformation: {name: 'test1', type: 'Normal', endDate: '2021-01-01T00:00:00.000Z', startDate: '2020-12-01T00:00:00.000Z'}
       },
       rawData: 'Ctr_raw-data-2'
     };
@@ -134,7 +75,8 @@ describe(`Tests PUT ${route} API OK`, function() {
           return [
             200,
             {
-              documentID: 'bec1ef2dbce73b6ae9841cf2edfa56de1f16d5a33d8a657de258e85c5f2e1bcb'
+              referenceID: 'bec1ef2dbce73b6ae9841cf2edfa56de1f16d5a33d8a657de258e85c5f2e1bcb',
+              txID: 'b70cef323c0d3b56d44e9b31f16a11cba8dbbdd55c1d255b65f3fd2b3eadf8bb'
             },
             undefined
           ];
@@ -165,22 +107,18 @@ describe(`Tests PUT ${route} API OK`, function() {
             expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
 
             expect(response.body).to.have.property('header').that.is.an('object');
-            expect(Object.keys(response.body.header)).have.members(['name', 'type', 'version', 'fromMsp', 'toMsp']);
-            expect(response.body.header).to.have.property('name', contractWithNoSignatures.name);
+            expect(Object.keys(response.body.header)).have.members(['type', 'version', 'msps']);
             expect(response.body.header).to.have.property('type', contractWithNoSignatures.type);
             expect(response.body.header).to.have.property('version', contractWithNoSignatures.version);
+            expect(response.body.header).to.have.property('msps').that.is.an('object');
 
-            expect(response.body.header).to.have.property('fromMsp').that.is.an('object');
-            expect(Object.keys(response.body.header.fromMsp)).have.members(['mspId', 'signatures']);
-            expect(response.body.header.fromMsp).to.have.property('mspId', contractWithNoSignatures.fromMsp.mspId);
-            expect(response.body.header.fromMsp).to.have.property('signatures').that.is.an('array');
-            expect(response.body.header.fromMsp.signatures.length).to.equal(0);
+            expect(Object.keys(response.body.header.msps[contractWithNoSignatures.fromMsp.mspId])).have.members(['signatures']);
+            expect(response.body.header.msps[contractWithNoSignatures.fromMsp.mspId]).to.have.property('signatures').that.is.an('array');
+            expect(response.body.header.msps[contractWithNoSignatures.fromMsp.mspId].signatures.length).to.equal(0);
 
-            expect(response.body.header).to.have.property('toMsp').that.is.an('object');
-            expect(Object.keys(response.body.header.toMsp)).have.members(['mspId', 'signatures']);
-            expect(response.body.header.toMsp).to.have.property('mspId', contractWithNoSignatures.toMsp.mspId);
-            expect(response.body.header.toMsp).to.have.property('signatures').that.is.an('array');
-            expect(response.body.header.toMsp.signatures.length).to.equal(0);
+            expect(Object.keys(response.body.header.msps[contractWithNoSignatures.toMsp.mspId])).have.members(['signatures']);
+            expect(response.body.header.msps[contractWithNoSignatures.toMsp.mspId]).to.have.property('signatures').that.is.an('array');
+            expect(response.body.header.msps[contractWithNoSignatures.toMsp.mspId].signatures.length).to.equal(0);
 
             expect(response.body).to.have.property('body').that.is.an('object');
             expect(Object.keys(response.body.body)).have.members(['bankDetails', 'discountModels', 'generalInformation']);
@@ -243,7 +181,8 @@ describe(`Tests PUT ${route} API OK`, function() {
           return [
             200,
             {
-              documentID: 'db441b0559d3f1f8144f1dc2da378a0abe0124325b6024b20a9e22de8809eca4'
+              referenceID: 'db441b0559d3f1f8144f1dc2da378a0abe0124325b6024b20a9e22de8809eca4',
+              txID: '111cef323c0d3b56d44e9b31f16a11cba8dbbdd55c1d255b65f3fd2b3eadf8bb'
             },
             undefined
           ];
@@ -274,34 +213,29 @@ describe(`Tests PUT ${route} API OK`, function() {
             expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
 
             expect(response.body).to.have.property('header').that.is.an('object');
-            expect(Object.keys(response.body.header)).have.members(['name', 'type', 'version', 'fromMsp', 'toMsp']);
-            expect(response.body.header).to.have.property('name', contractWithSignatures.name);
+            expect(Object.keys(response.body.header)).have.members(['type', 'version', 'msps']);
             expect(response.body.header).to.have.property('type', contractWithSignatures.type);
             expect(response.body.header).to.have.property('version', contractWithSignatures.version);
+            expect(response.body.header).to.have.property('msps').that.is.an('object');
 
-            expect(response.body.header).to.have.property('fromMsp').that.is.an('object');
-            expect(Object.keys(response.body.header.fromMsp)).have.members(['mspId', 'signatures']);
-            expect(response.body.header.fromMsp).to.have.property('mspId', contractWithSignatures.fromMsp.mspId);
-            expect(response.body.header.fromMsp).to.have.property('signatures').that.is.an('array');
-            expect(response.body.header.fromMsp.signatures.length).to.equal(1);
-            expect(Object.keys(response.body.header.fromMsp.signatures[0])).have.members(['id', 'name', 'role']);
-            expect(response.body.header.fromMsp.signatures[0]).to.have.property('id', contractWithSignatures.fromMsp.signatures[0].id);
-            expect(response.body.header.fromMsp.signatures[0]).to.have.property('name', contractWithSignatures.fromMsp.signatures[0].name);
-            expect(response.body.header.fromMsp.signatures[0]).to.have.property('role', contractWithSignatures.fromMsp.signatures[0].role);
+            expect(Object.keys(response.body.header.msps)).have.members([contractWithSignatures.fromMsp.mspId, contractWithSignatures.toMsp.mspId]);
+            expect(response.body.header.msps[contractWithSignatures.fromMsp.mspId]).to.have.property('signatures').that.is.an('array');
+            expect(response.body.header.msps[contractWithSignatures.fromMsp.mspId].signatures.length).to.equal(1);
+            expect(Object.keys(response.body.header.msps[contractWithSignatures.fromMsp.mspId].signatures[0])).have.members(['id', 'name', 'role']);
+            expect(response.body.header.msps[contractWithSignatures.fromMsp.mspId].signatures[0]).to.have.property('id', contractWithSignatures.fromMsp.signatures[0].id);
+            expect(response.body.header.msps[contractWithSignatures.fromMsp.mspId].signatures[0]).to.have.property('name', contractWithSignatures.fromMsp.signatures[0].name);
+            expect(response.body.header.msps[contractWithSignatures.fromMsp.mspId].signatures[0]).to.have.property('role', contractWithSignatures.fromMsp.signatures[0].role);
 
-            expect(response.body.header).to.have.property('toMsp').that.is.an('object');
-            expect(Object.keys(response.body.header.toMsp)).have.members(['mspId', 'signatures']);
-            expect(response.body.header.toMsp).to.have.property('mspId', contractWithSignatures.toMsp.mspId);
-            expect(response.body.header.toMsp).to.have.property('signatures').that.is.an('array');
-            expect(response.body.header.toMsp.signatures.length).to.equal(2);
-            expect(Object.keys(response.body.header.toMsp.signatures[0])).have.members(['id', 'name', 'role']);
-            expect(response.body.header.toMsp.signatures[0]).to.have.property('id', contractWithSignatures.toMsp.signatures[0].id);
-            expect(response.body.header.toMsp.signatures[0]).to.have.property('name', contractWithSignatures.toMsp.signatures[0].name);
-            expect(response.body.header.toMsp.signatures[0]).to.have.property('role', contractWithSignatures.toMsp.signatures[0].role);
-            expect(Object.keys(response.body.header.toMsp.signatures[1])).have.members(['id', 'name', 'role']);
-            expect(response.body.header.toMsp.signatures[1]).to.have.property('id', contractWithSignatures.toMsp.signatures[1].id);
-            expect(response.body.header.toMsp.signatures[1]).to.have.property('name', contractWithSignatures.toMsp.signatures[1].name);
-            expect(response.body.header.toMsp.signatures[1]).to.have.property('role', contractWithSignatures.toMsp.signatures[1].role);
+            expect(response.body.header.msps[contractWithSignatures.toMsp.mspId]).to.have.property('signatures').that.is.an('array');
+            expect(response.body.header.msps[contractWithSignatures.toMsp.mspId].signatures.length).to.equal(2);
+            expect(Object.keys(response.body.header.msps[contractWithSignatures.toMsp.mspId].signatures[0])).have.members(['id', 'name', 'role']);
+            expect(response.body.header.msps[contractWithSignatures.toMsp.mspId].signatures[0]).to.have.property('id', contractWithSignatures.toMsp.signatures[0].id);
+            expect(response.body.header.msps[contractWithSignatures.toMsp.mspId].signatures[0]).to.have.property('name', contractWithSignatures.toMsp.signatures[0].name);
+            expect(response.body.header.msps[contractWithSignatures.toMsp.mspId].signatures[0]).to.have.property('role', contractWithSignatures.toMsp.signatures[0].role);
+            expect(Object.keys(response.body.header.msps[contractWithSignatures.toMsp.mspId].signatures[1])).have.members(['id', 'name', 'role']);
+            expect(response.body.header.msps[contractWithSignatures.toMsp.mspId].signatures[1]).to.have.property('id', contractWithSignatures.toMsp.signatures[1].id);
+            expect(response.body.header.msps[contractWithSignatures.toMsp.mspId].signatures[1]).to.have.property('name', contractWithSignatures.toMsp.signatures[1].name);
+            expect(response.body.header.msps[contractWithSignatures.toMsp.mspId].signatures[1]).to.have.property('role', contractWithSignatures.toMsp.signatures[1].role);
 
             expect(response.body).to.have.property('body').that.is.an('object');
             expect(Object.keys(response.body.body)).have.members(['bankDetails', 'discountModels', 'generalInformation']);

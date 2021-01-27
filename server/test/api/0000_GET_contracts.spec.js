@@ -59,32 +59,12 @@ describe(`Tests GET ${route} API OK`, function() {
       state: 'DRAFT',
       type: 'contract',
       version: '1.1.0',
-      fromMsp: {
-        mspId: 'A1'
-      },
-      toMsp: {
-        mspId: 'B1'
-      },
+      fromMsp: {mspId: 'A1'},
+      toMsp: {mspId: 'B1'},
       body: {
-        bankDetails: {
-          A1: {
-            iban: null,
-            bankName: null,
-            currency: null
-          },
-          B1: {
-            iban: null,
-            bankName: null,
-            currency: null
-          }
-        },
+        bankDetails: {A1: {iban: null, bankName: null, currency: null}, B1: {iban: null, bankName: null, currency: null}},
         discountModels: 'someData',
-        generalInformation: {
-          name: 'test1',
-          type: 'Normal',
-          endDate: '2021-01-01T00:00:00.000Z',
-          startDate: '2020-12-01T00:00:00.000Z'
-        }
+        generalInformation: {name: 'test1', type: 'Normal', endDate: '2021-01-01T00:00:00.000Z', startDate: '2020-12-01T00:00:00.000Z'}
       },
       rawData: 'Ctr_raw-data-1'
     };
@@ -94,32 +74,12 @@ describe(`Tests GET ${route} API OK`, function() {
       state: 'DRAFT',
       type: 'contract',
       version: '1.3.1',
-      fromMsp: {
-        mspId: 'A1'
-      },
-      toMsp: {
-        mspId: 'C3'
-      },
+      fromMsp: {mspId: 'A1'},
+      toMsp: {mspId: 'C3'},
       body: {
-        bankDetails: {
-          A1: {
-            iban: null,
-            bankName: null,
-            currency: null
-          },
-          C3: {
-            iban: null,
-            bankName: null,
-            currency: null
-          }
-        },
+        bankDetails: {A1: {iban: null, bankName: null, currency: null}, C3: {iban: null, bankName: null, currency: null}},
         discountModels: 'someData',
-        generalInformation: {
-          name: 'test1',
-          type: 'Normal',
-          endDate: '2021-01-01T00:00:00.000Z',
-          startDate: '2020-12-01T00:00:00.000Z'
-        }
+        generalInformation: {name: 'test1', type: 'Normal', endDate: '2021-01-01T00:00:00.000Z', startDate: '2020-12-01T00:00:00.000Z'}
       },
       rawData: 'Ctr_raw-data-2'
     };
@@ -171,16 +131,13 @@ describe(`Tests GET ${route} API OK`, function() {
               expect(contractInBody).to.have.property('creationDate').that.match(DATE_REGEX);
               expect(contractInBody).to.have.property('lastModificationDate').that.match(DATE_REGEX);
               expect(contractInBody).to.have.property('header').that.is.an('object');
-              expect(Object.keys(contractInBody.header)).have.members(['name', 'type', 'version', 'fromMsp', 'toMsp']);
-              expect(contractInBody.header).to.have.property('name', contract.name);
+              expect(Object.keys(contractInBody.header)).have.members(['type', 'version', 'msps']);
               expect(contractInBody.header).to.have.property('type', contract.type);
               expect(contractInBody.header).to.have.property('version', contract.version);
-              expect(contractInBody.header).to.have.property('fromMsp').that.is.an('object');
-              expect(Object.keys(contractInBody.header.fromMsp)).have.members(['mspId']);
-              expect(contractInBody.header.fromMsp).to.have.property('mspId', contract.fromMsp.mspId);
-              expect(contractInBody.header).to.have.property('toMsp').that.is.an('object');
-              expect(Object.keys(contractInBody.header.toMsp)).have.members(['mspId']);
-              expect(contractInBody.header.toMsp).to.have.property('mspId', contract.toMsp.mspId);
+              expect(contractInBody.header).to.have.property('msps').that.is.an('object');
+              expect(Object.keys(contractInBody.header.msps)).have.members([contract.fromMsp.mspId, contract.toMsp.mspId]);
+              expect(contractInBody.header.msps[contract.fromMsp.mspId]).to.have.property('signatures').to.be.an('array');
+              expect(contractInBody.header.msps[contract.toMsp.mspId]).to.have.property('signatures').to.be.an('array');
             });
             expect(contract1IsFound).to.be.true;
             expect(contract2IsFound).to.be.true;

@@ -52,6 +52,23 @@ class BlockchainAdapterProvider {
 
   /**
    *
+   * @param {String} mspId
+   * @return {Promise<boolean>}
+   */
+  async isMyMspId(mspId) {
+    if ((config.SELF_MSPID === undefined) || (typeof config.SELF_MSPID !== 'string') || (config.SELF_MSPID.length <= 0)) {
+      logger.warn('[BlockchainAdapterProvider::isMyMspId] config.SELF_MSPID not defined : ', config.SELF_MSPID);
+      throw errorUtils.ERROR_INVALID_DEFINED_SELF_MSPID_ERROR;
+    } else if ((mspId === undefined) || (typeof mspId !== 'string') || (mspId.length <= 0)) {
+      logger.warn('[BlockchainAdapterProvider::isMyMspId] invalid tested mspId : ', mspId);
+      throw errorUtils.ERROR_INVALID_TESTED_MSPID_ERROR;
+    } else {
+      return (config.SELF_MSPID.toLowerCase() === mspId.toLowerCase());
+    }
+  }
+
+  /**
+   *
    * @param {String} msp
    * @return {Promise<[string]|object>}
    */
@@ -183,7 +200,8 @@ class BlockchainAdapterProvider {
       logger.debug(`[BlockchainAdapterProvider::uploadContract] response data:${typeof response.data} = ${JSON.stringify(response.data)}`);
       return {
         rawData,
-        referenceId: response.data.documentID
+        referenceId: response.data.referenceID,
+        txId: response.data.txID
       };
     } catch (error) {
       logger.error('[BlockchainAdapterProvider::uploadContract] failed to upload contract - %s', error.message);
@@ -289,7 +307,7 @@ class BlockchainAdapterProvider {
    */
   async subscribe() {
     if (config.SELF_HOST.length <= 0) {
-      logger.info('[BlockchainAdapterProvider::subscribe] env SELF_HOST not set. Not subscribing');
+      logger.info('[BlockchainAdapterProvider::subscribe] env COMMON_ADAPTER_SELF_HOST not set. Not subscribing');
       throw errorUtils.ERROR_BLOCKCHAIN_ADAPTER_SELF_HOST_UNDEFINED_ERROR;
     }
 
@@ -299,12 +317,11 @@ class BlockchainAdapterProvider {
     }
 
     if (!Array.isArray(config.BLOCKCHAIN_ADAPTER_WEBHOOK_EVENTS)) {
-      logger.info('[BlockchainAdapterProvider::subscribe] env BLOCKCHAIN_ADAPTER_WEBHOOK_EVENTS not an array. Not subscribing');
+      logger.info('[BlockchainAdapterProvider::subscribe] env COMMON_ADAPTER_BLOCKCHAIN_ADAPTER_WEBHOOK_EVENTS not an array. Not subscribing');
       throw errorUtils.ERROR_BLOCKCHAIN_ADAPTER_BLOCKCHAIN_ADAPTER_WEBHOOK_EVENTS_INVALID_ERROR;
     }
 
     const callbackUrl = config.SELF_HOST + '/api/v1/contracts/event/';
-
     try {
       const webhookIds = [];
       const webhookEvents = config.BLOCKCHAIN_ADAPTER_WEBHOOK_EVENTS;
@@ -317,6 +334,51 @@ class BlockchainAdapterProvider {
       return webhookIds;
     } catch (error) {
       logger.error('[BlockchainAdapterProvider::subscribe] failed to subscribe to events - %s', JSON.stringify(error));
+      throw error;
+    }
+  }
+
+
+  /**
+   *
+   * @return {Promise<string>}
+   */
+  async getSelfMspId() {
+    if (config.BLOCKCHAIN_ADAPTER_URL.length <= 0) {
+      logger.info('[BlockchainAdapterProvider::getSelfMspId] env BLOCKCHAIN_ADAPTER_URL not set. Not possible to define self MSP Id');
+      throw errorUtils.ERROR_BLOCKCHAIN_ADAPTER_BLOCKCHAIN_ADAPTER_URL_UNDEFINED_ERROR;
+    }
+
+    try {
+      const response = await axiosInstance.get(config.BLOCKCHAIN_ADAPTER_URL + '/status');
+      logger.debug(`[BlockchainAdapterProvider::getSelfMspId] response data:${typeof response.data} = ${JSON.stringify(response.data)}`);
+      return response.data.hyperledger.localMSP;
+    } catch (error) {
+      logger.error('[BlockchainAdapterProvider::getSelfMspId] failed to get self MSP Id - %s', JSON.stringify(error));
+      throw error;
+    }
+  }
+
+  /**
+   *
+   * @param {Object} settlement
+   * @return {Promise<object>}
+   */
+  async uploadSettlement(settlement) {
+    try {
+      const rawData = rawDataUtils.defineRawDataFromSettlement(settlement);
+      const response = await axiosInstance.post(config.BLOCKCHAIN_ADAPTER_URL + '/private-documents', {
+        toMSP: settlement.mspReceiver,
+        data: rawData
+      });
+      logger.debug(`[BlockchainAdapterProvider::uploadSettlement] response data:${typeof response.data} = ${JSON.stringify(response.data)}`);
+      return {
+        rawData,
+        referenceId: response.data.referenceID,
+        txId: response.data.txID
+      };
+    } catch (error) {
+      logger.error('[BlockchainAdapterProvider::uploadSettlement] failed to upload settlement - %s', error.message);
       throw error;
     }
   }

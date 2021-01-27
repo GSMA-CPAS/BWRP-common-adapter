@@ -83,4 +83,72 @@ describe('Unit Tests for rawDataUtils', function() {
 
     done();
   });
+
+  it('Should generate a settlement rawData and decode the settlement from this rawData', function(done) {
+    const settlement1 = {
+      type: 'settlement',
+      version: '1.1.0',
+      name: 'Settlement data',
+      contractId: 'azerty-1234',
+      contractReferenceId: 'blockchain-contract-ref-id-898786785654',
+      mspOwner: 'H23',
+      mspReceiver: 'J89',
+      body: {
+        settlementData: {
+          A1: {
+            iban: null,
+            bankName: null,
+            currency: null
+          },
+          B1: {
+            iban: null,
+            bankName: null,
+            currency: null
+          }
+        },
+        discountModels: 'someData',
+        generalInformation: {
+          name: 'test3',
+          type: 'Normal',
+          endDate: '2021-01-01T00:00:00.000Z',
+          startDate: '2020-12-01T00:00:00.000Z'
+        }
+      },
+      state: 'DRAFT'
+    };
+
+    const rawDataForSettlement1 = testedRawDataUtils.defineRawDataFromSettlement(settlement1);
+
+    const blockchainResp = {
+      data: rawDataForSettlement1,
+      fromMSP: 'H23',
+      toMSP: 'J89',
+      id: 'referenceIddzayudgzadazhduazdza',
+      timeStamp: '156262878176626327'
+    };
+
+    const rawDataObjectForSettlement1 = testedRawDataUtils.defineRawDataObjectFromRawData(blockchainResp.data);
+
+    const rawDataSettlementForSettlement1 = testedRawDataUtils.defineSettlementFromRawDataObject(rawDataObjectForSettlement1, blockchainResp.fromMSP, blockchainResp.toMSP, blockchainResp.id, blockchainResp.timeStamp);
+
+    expect(rawDataSettlementForSettlement1).to.be.an('object');
+    expect(rawDataSettlementForSettlement1).to.have.property('name', settlement1.name);
+    expect(rawDataSettlementForSettlement1).to.have.property('state', 'RECEIVED');
+    expect(rawDataSettlementForSettlement1).to.have.property('type', settlement1.type);
+    expect(rawDataSettlementForSettlement1).to.have.property('version', settlement1.version);
+
+    expect(rawDataSettlementForSettlement1).to.have.property('rawData', rawDataForSettlement1);
+    expect(rawDataSettlementForSettlement1).to.have.property('referenceId', blockchainResp.id);
+    expect(rawDataSettlementForSettlement1).to.have.property('timestamp', blockchainResp.timeStamp);
+
+    expect(rawDataSettlementForSettlement1).to.have.property('mspOwner', settlement1.mspOwner);
+    expect(rawDataSettlementForSettlement1).to.have.property('mspReceiver', settlement1.mspReceiver);
+
+    expect(rawDataSettlementForSettlement1).to.have.property('body').that.is.an('object');
+    expect(rawDataSettlementForSettlement1.body).to.deep.include(settlement1.body);
+
+    debug('rawDataSettlementForSettlement1 = ', rawDataSettlementForSettlement1);
+
+    done();
+  });
 });

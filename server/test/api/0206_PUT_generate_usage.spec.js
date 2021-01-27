@@ -20,32 +20,12 @@ describe(`Tests PUT ${route} API OK`, function() {
       state: 'SENT',
       type: 'contract',
       version: '1.1.0',
-      fromMsp: {
-        mspId: 'B1'
-      },
-      toMsp: {
-        mspId: 'C1'
-      },
+      fromMsp: {mspId: 'B1'},
+      toMsp: {mspId: 'C1'},
       body: {
-        bankDetails: {
-          A1: {
-            iban: null,
-            bankName: null,
-            currency: null
-          },
-          B1: {
-            iban: null,
-            bankName: null,
-            currency: null
-          }
-        },
+        bankDetails: {A1: {iban: null, bankName: null, currency: null}, B1: {iban: null, bankName: null, currency: null}},
         discountModels: 'someData',
-        generalInformation: {
-          name: 'test1',
-          type: 'Normal',
-          endDate: '2021-01-01T00:00:00.000Z',
-          startDate: '2020-12-01T00:00:00.000Z'
-        }
+        generalInformation: {name: 'test1', type: 'Normal', endDate: '2021-01-01T00:00:00.000Z', startDate: '2020-12-01T00:00:00.000Z'}
       },
       rawData: 'Ctr_raw-data-1'
     };
@@ -55,62 +35,48 @@ describe(`Tests PUT ${route} API OK`, function() {
       name: 'Usage data',
       contractId: undefined,
       mspOwner: undefined,
+      mspReceiver: undefined,
       body: {
         data: []
       },
       state: 'DRAFT'
     };
     before((done) => {
-      debugSetup('==> remove all contracts in db');
-      testsDbUtils.removeAllContracts({})
-        .then((removeAllContractsResp) => {
-          debugSetup('All contracts in db are removed : ', removeAllContractsResp);
-          testsDbUtils.removeAllUsages({})
-            .then((removeAllUsagesResp) => {
-              debugSetup('All usages in db are removed : ', removeAllUsagesResp);
-              testsDbUtils.removeAllSettlements({})
-                .then((removeAllSettlementsResp) => {
-                  debugSetup('All usages in db are removed : ', removeAllSettlementsResp);
-                  testsDbUtils.initDbWithContracts([contractSent])
-                    .then((initDbWithContractsResp) => {
-                      debugSetup('One contract was added in db ', initDbWithContractsResp);
-                      contractSent.id = initDbWithContractsResp[0].id;
-                      usageMinimumData.contractId = contractSent.id;
-                      usageMinimumData.mspOwner = contractSent.fromMsp.mspId;
-                      testsDbUtils.initDbWithUsages([usageMinimumData])
-                        .then((initDbWithUsagesResp) => {
-                          debugSetup('The db is initialized with 1 usages : ', initDbWithUsagesResp.map((c) => c.id));
-                          debugSetup('==> done!');
-                          done();
-                        })
-                        .catch((initDbWithUsagesError) => {
-                          debugSetup('Error initializing the db content : ', initDbWithUsagesError);
-                          debugSetup('==> failed!');
-                          done(initDbWithUsagesError);
-                        });
-                    })
-                    .catch((initDbWithContractsError) => {
-                      debugSetup('Error initializing the db content : ', initDbWithContractsError);
-                      debugSetup('==> failed!');
-                      done(initDbWithContractsError);
-                    });
+      debugSetup('==> init db with 3 contracts');
+      testsDbUtils.initDbWithContracts([contractSent])
+        .then((initDbWithContractsResp) => {
+          debugSetup('One contract was added in db ', initDbWithContractsResp);
+          contractSent.id = initDbWithContractsResp[0].id;
+          usageMinimumData.contractId = contractSent.id;
+          usageMinimumData.mspOwner = contractSent.fromMsp.mspId;
+          usageMinimumData.mspReceiver = contractSent.toMsp.mspId;
+          debugSetup('==> init db with 1 usage');
+          testsDbUtils.initDbWithUsages([usageMinimumData])
+            .then((initDbWithUsagesResp) => {
+              debugSetup('The db is initialized with 1 usage : ', initDbWithUsagesResp.map((c) => c.id));
+              debugSetup('==> init db with 0 settlement');
+              testsDbUtils.initDbWithSettlements([])
+                .then((initDbWithSettlementsResp) => {
+                  debugSetup('The db is initialized with 0 settlement : ', initDbWithSettlementsResp.map((c) => c.id));
+                  debugSetup('==> done!');
+                  done();
                 })
-                .catch((removeAllSettlementsError) => {
-                  debugSetup('Error removing settlements in db : ', removeAllSettlementsError);
+                .catch((initDbWithSettlementsError) => {
+                  debugSetup('Error initializing the db content : ', initDbWithSettlementsError);
                   debugSetup('==> failed!');
-                  done(removeAllSettlementsError);
+                  done(initDbWithSettlementsError);
                 });
             })
-            .catch((removeAllUsagesError) => {
-              debugSetup('Error removing usages in db : ', removeAllUsagesError);
+            .catch((initDbWithUsagesError) => {
+              debugSetup('Error initializing the db content : ', initDbWithUsagesError);
               debugSetup('==> failed!');
-              done(removeAllUsagesError);
+              done(initDbWithUsagesError);
             });
         })
-        .catch((removeAllContractsError) => {
-          debugSetup('Error removing contracts in db : ', removeAllContractsError);
+        .catch((initDbWithContractsError) => {
+          debugSetup('Error initializing the db content : ', initDbWithContractsError);
           debugSetup('==> failed!');
-          done(removeAllContractsError);
+          done(initDbWithContractsError);
         });
     });
 
@@ -132,10 +98,11 @@ describe(`Tests PUT ${route} API OK`, function() {
             expect(response).to.be.json;
             expect(response.body).to.exist;
             expect(response.body).to.be.an('object');
-            expect(Object.keys(response.body)).have.members(['settlementId', 'contractId', 'header', 'body', 'state', 'creationDate', 'lastModificationDate']);
+            expect(Object.keys(response.body)).have.members(['settlementId', 'contractId', 'header', 'body', 'mspOwner', 'state', 'creationDate', 'lastModificationDate']);
 
             expect(response.body).to.have.property('contractId', contractSent.id);
             expect(response.body).to.have.property('state', 'DRAFT');
+            expect(response.body).to.have.property('mspOwner', usageMinimumData.mspOwner);
             expect(response.body).to.have.property('creationDate').that.is.a('string').and.match(DATE_REGEX);
             expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
 

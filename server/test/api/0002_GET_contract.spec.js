@@ -20,32 +20,12 @@ describe(`Tests GET ${route} API OK`, function() {
       state: 'DRAFT',
       type: 'contract',
       version: '1.1.0',
-      fromMsp: {
-        mspId: 'A1'
-      },
-      toMsp: {
-        mspId: 'B1'
-      },
+      fromMsp: {mspId: 'A1'},
+      toMsp: {mspId: 'B1'},
       body: {
-        bankDetails: {
-          A1: {
-            iban: null,
-            bankName: null,
-            currency: null
-          },
-          B1: {
-            iban: null,
-            bankName: null,
-            currency: null
-          }
-        },
+        bankDetails: {A1: {iban: null, bankName: null, currency: null}, B1: {iban: null, bankName: null, currency: null}},
         discountModels: 'someData',
-        generalInformation: {
-          name: 'test3',
-          type: 'Normal',
-          endDate: '2021-01-01T00:00:00.000Z',
-          startDate: '2020-12-01T00:00:00.000Z'
-        }
+        generalInformation: {name: 'test3', type: 'Normal', endDate: '2021-01-01T00:00:00.000Z', startDate: '2020-12-01T00:00:00.000Z'}
       },
       rawData: 'Ctr_raw-data-1'
     };
@@ -55,33 +35,13 @@ describe(`Tests GET ${route} API OK`, function() {
       state: 'SENT',
       type: 'contract',
       version: '1.3.1',
-      fromMsp: {
-        mspId: 'A1'
-      },
-      toMsp: {
-        mspId: 'C3'
-      },
+      fromMsp: {mspId: 'A1'},
+      toMsp: {mspId: 'C3'},
       referenceId: 'AZRAGGSHJIAJAOJSNJNSSNNAIS',
       body: {
-        bankDetails: {
-          A1: {
-            iban: null,
-            bankName: null,
-            currency: null
-          },
-          C3: {
-            iban: null,
-            bankName: null,
-            currency: null
-          }
-        },
+        bankDetails: {A1: {iban: null, bankName: null, currency: null}, C3: {iban: null, bankName: null, currency: null}},
         discountModels: 'someData',
-        generalInformation: {
-          name: 'test2',
-          type: 'Normal',
-          endDate: '2021-01-01T00:00:00.000Z',
-          startDate: '2020-12-01T00:00:00.000Z'
-        }
+        generalInformation: {name: 'test2', type: 'Normal', endDate: '2021-01-01T00:00:00.000Z', startDate: '2020-12-01T00:00:00.000Z'}
       },
       rawData: 'Ctr_raw-data-2'
     };
@@ -126,22 +86,16 @@ describe(`Tests GET ${route} API OK`, function() {
             expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
 
             expect(response.body).to.have.property('header').that.is.an('object');
-            expect(Object.keys(response.body.header)).have.members(['name', 'type', 'version', 'fromMsp', 'toMsp']);
-            expect(response.body.header).to.have.property('name', contract1.name);
+            expect(Object.keys(response.body.header)).have.members(['type', 'version', 'msps']);
             expect(response.body.header).to.have.property('type', contract1.type);
             expect(response.body.header).to.have.property('version', contract1.version);
+            expect(response.body.header).to.have.property('msps').that.is.an('object');
 
-            expect(response.body.header).to.have.property('fromMsp').that.is.an('object');
-            expect(Object.keys(response.body.header.fromMsp)).have.members(['mspId', 'signatures']);
-            expect(response.body.header.fromMsp).to.have.property('mspId', contract1.fromMsp.mspId);
-            expect(response.body.header.fromMsp).to.have.property('signatures').that.is.an('array');
-            expect(response.body.header.fromMsp.signatures.length).to.equal(0);
-
-            expect(response.body.header).to.have.property('toMsp').that.is.an('object');
-            expect(Object.keys(response.body.header.toMsp)).have.members(['mspId', 'signatures']);
-            expect(response.body.header.toMsp).to.have.property('mspId', contract1.toMsp.mspId);
-            expect(response.body.header.toMsp).to.have.property('signatures').that.is.an('array');
-            expect(response.body.header.toMsp.signatures.length).to.equal(0);
+            expect(Object.keys(response.body.header.msps)).have.members([contract1.fromMsp.mspId, contract1.toMsp.mspId]);
+            expect(response.body.header.msps[contract1.fromMsp.mspId]).to.have.property('signatures').to.be.an('array');
+            expect(response.body.header.msps[contract1.toMsp.mspId]).to.have.property('signatures').to.be.an('array');
+            expect(response.body.header.msps[contract1.fromMsp.mspId].signatures.length).to.equal(0);
+            expect(response.body.header.msps[contract1.toMsp.mspId].signatures.length).to.equal(0);
 
             expect(response.body).to.have.property('body').that.is.an('object');
             expect(Object.keys(response.body.body)).have.members(['bankDetails', 'discountModels', 'generalInformation']);
@@ -204,32 +158,12 @@ describe(`Tests GET ${route} API FAILED`, function() {
       state: 'DRAFT',
       type: 'contract',
       version: '1.1.0',
-      fromMsp: {
-        mspId: 'A1'
-      },
-      toMsp: {
-        mspId: 'B1'
-      },
+      fromMsp: {mspId: 'A1'},
+      toMsp: {mspId: 'B1'},
       body: {
-        bankDetails: {
-          A1: {
-            iban: null,
-            bankName: null,
-            currency: null
-          },
-          B1: {
-            iban: null,
-            bankName: null,
-            currency: null
-          }
-        },
+        bankDetails: {A1: {iban: null, bankName: null, currency: null}, B1: {iban: null, bankName: null, currency: null}},
         discountModels: 'someData',
-        generalInformation: {
-          name: 'test3',
-          type: 'Normal',
-          endDate: '2021-01-01T00:00:00.000Z',
-          startDate: '2020-12-01T00:00:00.000Z'
-        }
+        generalInformation: {name: 'test3', type: 'Normal', endDate: '2021-01-01T00:00:00.000Z', startDate: '2020-12-01T00:00:00.000Z'}
       },
       rawData: 'Ctr_raw-data-1'
     };
@@ -239,33 +173,13 @@ describe(`Tests GET ${route} API FAILED`, function() {
       state: 'SENT',
       type: 'contract',
       version: '1.3.1',
-      fromMsp: {
-        mspId: 'A1'
-      },
-      toMsp: {
-        mspId: 'C3'
-      },
+      fromMsp: {mspId: 'A1'},
+      toMsp: {mspId: 'C3'},
       referenceId: 'AZRAGGSHJIAJAOJSNJNSSNNAIS',
       body: {
-        bankDetails: {
-          A1: {
-            iban: null,
-            bankName: null,
-            currency: null
-          },
-          C3: {
-            iban: null,
-            bankName: null,
-            currency: null
-          }
-        },
+        bankDetails: {A1: {iban: null, bankName: null, currency: null}, C3: {iban: null, bankName: null, currency: null}},
         discountModels: 'someData',
-        generalInformation: {
-          name: 'test2',
-          type: 'Normal',
-          endDate: '2021-01-01T00:00:00.000Z',
-          startDate: '2020-12-01T00:00:00.000Z'
-        }
+        generalInformation: {name: 'test2', type: 'Normal', endDate: '2021-01-01T00:00:00.000Z', startDate: '2020-12-01T00:00:00.000Z'}
       }
     };
 

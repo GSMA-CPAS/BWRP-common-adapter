@@ -16,75 +16,28 @@ const route = '/contracts/{contractId}/signatures/{signatureId}';
 
 describe(`Tests PUT ${route} API OK`, function() {
   describe(`Setup and Test PUT ${route} API`, function() {
+    /* eslint-disable max-len */
     const sentContract = {
       name: 'Contract sent between MSP1 and MSP2',
       state: 'SENT',
       type: 'contract',
       version: '1.1.0',
-      fromMsp: {
-        mspId: 'MSP1',
-        signatures: [
-          {
-            role: 'role',
-            name: 'name',
-            id: 'id'
-          }
-        ]
-      },
-      toMsp: {
-        mspId: 'MSP2',
-        signatures: [
-          {
-            role: 'role',
-            name: 'name',
-            id: 'id'
-          }
-        ]
-      },
+      fromMsp: {mspId: 'MSP1', signatures: [{role: 'role', name: 'name', id: 'id'}]},
+      toMsp: {mspId: 'MSP2', signatures: [{role: 'role', name: 'name', id: 'id'}]},
       body: {
-        bankDetails: {
-          MSP1: {
-            iban: null,
-            bankName: null,
-            currency: null
-          },
-          MSP2: {
-            iban: null,
-            bankName: null,
-            currency: null
-          }
-        },
+        bankDetails: {MSP1: {iban: null, bankName: null, currency: null}, MSP2: {iban: null, bankName: null, currency: null}},
         discountModels: 'someData',
-        generalInformation: {
-          name: 'test1',
-          type: 'Normal',
-          endDate: '2021-01-01T00:00:00.000Z',
-          startDate: '2020-12-01T00:00:00.000Z'
-        }
+        generalInformation: {name: 'test1', type: 'Normal', endDate: '2021-01-01T00:00:00.000Z', startDate: '2020-12-01T00:00:00.000Z'}
       },
       creationDate: '2020-12-15T15:28:06.968Z',
       history: [
-        {
-          date: '2020-12-15T15:28:06.968Z',
-          action: 'CREATION'
-        },
-        {
-          date: '2020-12-15T15:28:07.077Z',
-          action: 'SENT'
-        }
+        {date: '2020-12-15T15:28:06.968Z', action: 'CREATION'},
+        {date: '2020-12-15T15:28:07.077Z', action: 'SENT'}
       ],
       lastModificationDate: '2020-12-15T15:28:07.077Z',
       signatureLink: [
-        {
-          id: '5fd8d6070cc5feb0fc0cb9e433ff',
-          msp: 'fromMsp',
-          index: 0
-        },
-        {
-          id: '5fd8d6070cc5feb0fc0cb9e5d45f',
-          msp: 'toMsp',
-          index: 0
-        }
+        {id: '5fd8d6070cc5feb0fc0cb9e433ff', msp: 'fromMsp', index: 0},
+        {id: '5fd8d6070cc5feb0fc0cb9e5d45f', msp: 'toMsp', index: 0}
       ],
       referenceId: 'bec1ef2dbce73b6ae9841cf2edfa56de1f16d5a33d8a657de258e85c5f2e1bcb',
       rawData: 'eyJ0eXBlIjoiY29udHJhY3QiLCJ2ZXJzaW9uIjoiMS4xLjAiLCJuYW1lIjoiQ29udHJhY3QgbmFtZSBiZXR3ZWVuIE1TUDEgYW5kIE1TUDIiLCJmcm9tTXNwIjp7InNpZ25hdHVyZXMiOlt7InJvbGUiOiJyb2xlIiwibmFtZSI6Im5hbWUiLCJpZCI6ImlkIn1dLCJtc3BJZCI6IkExIn0sInRvTXNwIjp7InNpZ25hdHVyZXMiOlt7InJvbGUiOiJyb2xlIiwibmFtZSI6Im5hbWUiLCJpZCI6ImlkIn1dLCJtc3BJZCI6IkIxIn0sImJvZHkiOnsiYmFua0RldGFpbHMiOnsiQTEiOnsiaWJhbiI6bnVsbCwiYmFua05hbWUiOm51bGwsImN1cnJlbmN5IjpudWxsfSwiQjEiOnsiaWJhbiI6bnVsbCwiYmFua05hbWUiOm51bGwsImN1cnJlbmN5IjpudWxsfX0sImRpc2NvdW50TW9kZWxzIjoic29tZURhdGEiLCJnZW5lcmFsSW5mb3JtYXRpb24iOnsibmFtZSI6InRlc3QxIiwidHlwZSI6Ik5vcm1hbCIsImVuZERhdGUiOiIyMDIxLTAxLTAxVDAwOjAwOjAwLjAwMFoiLCJzdGFydERhdGUiOiIyMDIwLTEyLTAxVDAwOjAwOjAwLjAwMFoifX19'
@@ -94,46 +47,12 @@ describe(`Tests PUT ${route} API OK`, function() {
       state: 'DRAFT',
       type: 'contract',
       version: '1.1.0',
-      fromMsp: {
-        mspId: 'A1',
-        signatures: [
-          {
-            role: 'role',
-            name: 'name',
-            id: 'id'
-          }
-        ]
-      },
-      toMsp: {
-        mspId: 'B1',
-        signatures: [
-          {
-            role: 'role',
-            name: 'name',
-            id: 'id'
-          }
-        ]
-      },
+      fromMsp: {mspId: 'A1', signatures: [{role: 'role', name: 'name', id: 'id'}]},
+      toMsp: {mspId: 'B1', signatures: [{role: 'role', name: 'name', id: 'id'}]},
       body: {
-        bankDetails: {
-          A1: {
-            iban: null,
-            bankName: null,
-            currency: null
-          },
-          B1: {
-            iban: null,
-            bankName: null,
-            currency: null
-          }
-        },
+        bankDetails: {A1: {iban: null, bankName: null, currency: null}, B1: {iban: null, bankName: null, currency: null}},
         discountModels: 'someData',
-        generalInformation: {
-          name: 'test1',
-          type: 'Normal',
-          endDate: '2021-01-01T00:00:00.000Z',
-          startDate: '2020-12-01T00:00:00.000Z'
-        }
+        generalInformation: {name: 'test1', type: 'Normal', endDate: '2021-01-01T00:00:00.000Z', startDate: '2020-12-01T00:00:00.000Z'}
       }
     };
     const receivedContract = {
@@ -141,110 +60,42 @@ describe(`Tests PUT ${route} API OK`, function() {
       state: 'RECEIVED',
       type: 'contract',
       version: '1.1.0',
-      fromMsp: {
-        mspId: 'MSP1',
-        signatures: [
-          {
-            role: 'role',
-            name: 'name',
-            id: 'id'
-          }
-        ]
-      },
-      toMsp: {
-        mspId: 'MSP2',
-        signatures: [
-          {
-            role: 'role',
-            name: 'name',
-            id: 'id'
-          }
-        ]
-      },
+      fromMsp: {mspId: 'MSP1', signatures: [{role: 'role', name: 'name', id: 'id'}]},
+      toMsp: {mspId: 'MSP2', signatures: [{role: 'role', name: 'name', id: 'id'}]},
       body: {
-        bankDetails: {
-          MSP1: {
-            iban: null,
-            bankName: null,
-            currency: null
-          },
-          MSP2: {
-            iban: null,
-            bankName: null,
-            currency: null
-          }
-        },
+        bankDetails: {MSP1: {iban: null, bankName: null, currency: null}, MSP2: {iban: null, bankName: null, currency: null}},
         discountModels: 'someData',
-        generalInformation: {
-          name: 'test1',
-          type: 'Normal',
-          endDate: '2021-01-01T00:00:00.000Z',
-          startDate: '2020-12-01T00:00:00.000Z'
-        }
+        generalInformation: {name: 'test1', type: 'Normal', endDate: '2021-01-01T00:00:00.000Z', startDate: '2020-12-01T00:00:00.000Z'}
       },
       creationDate: '2020-12-15T15:28:06.968Z',
       history: [
-        {
-          date: '2020-12-15T15:28:06.968Z',
-          action: 'CREATION'
-        },
-        {
-          date: '2020-12-15T15:28:07.077Z',
-          action: 'SENT'
-        }
+        {date: '2020-12-15T15:28:06.968Z', action: 'CREATION'},
+        {date: '2020-12-15T15:28:07.077Z', action: 'SENT'}
       ],
       lastModificationDate: '2020-12-15T15:28:07.077Z',
       signatureLink: [
-        {
-          id: '5fd8d6070cc5feb0fc0cb9e433ff',
-          msp: 'fromMsp',
-          index: 0
-        },
-        {
-          id: '5fd8d6070cc5feb0fc0cb9e5d45f',
-          msp: 'toMsp',
-          index: 0
-        }
+        {id: '5fd8d6070cc5feb0fc0cb9e433ff', msp: 'fromMsp', index: 0},
+        {id: '5fd8d6070cc5feb0fc0cb9e5d45f', msp: 'toMsp', index: 0}
       ],
       referenceId: 'receivedbec1ef2dbce73b6ae9841cf2edfa56de1f16d5a33d8a657de258e85c5f2e1bcb',
       rawData: 'eyJ0eXBlIjoiY29udHJhY3QiLCJ2ZXJzaW9uIjoiMS4xLjAiLCJuYW1lIjoiQ29udHJhY3QgbmFtZSBiZXR3ZWVuIE1TUDEgYW5kIE1TUDIiLCJmcm9tTXNwIjp7InNpZ25hdHVyZXMiOlt7InJvbGUiOiJyb2xlIiwibmFtZSI6Im5hbWUiLCJpZCI6ImlkIn1dLCJtc3BJZCI6IkExIn0sInRvTXNwIjp7InNpZ25hdHVyZXMiOlt7InJvbGUiOiJyb2xlIiwibmFtZSI6Im5hbWUiLCJpZCI6ImlkIn1dLCJtc3BJZCI6IkIxIn0sImJvZHkiOnsiYmFua0RldGFpbHMiOnsiQTEiOnsiaWJhbiI6bnVsbCwiYmFua05hbWUiOm51bGwsImN1cnJlbmN5IjpudWxsfSwiQjEiOnsiaWJhbiI6bnVsbCwiYmFua05hbWUiOm51bGwsImN1cnJlbmN5IjpudWxsfX0sImRpc2NvdW50TW9kZWxzIjoic29tZURhdGEiLCJnZW5lcmFsSW5mb3JtYXRpb24iOnsibmFtZSI6InRlc3QxIiwidHlwZSI6Ik5vcm1hbCIsImVuZERhdGUiOiIyMDIxLTAxLTAxVDAwOjAwOjAwLjAwMFoiLCJzdGFydERhdGUiOiIyMDIwLTEyLTAxVDAwOjAwOjAwLjAwMFoifX19'
     };
-
+    /* eslint-enable max-len */
 
     before((done) => {
-      debugSetup('==> remove all contracts in db');
-      testsDbUtils.removeAllContracts({})
-        .then((removeAllContractsResp) => {
-          debugSetup('All contracts in db are removed : ', removeAllContractsResp);
-
-          testsDbUtils.removeAllUsages({})
-            .then((removeAllUsagesResp) => {
-              debugSetup('All usages in db are removed : ', removeAllUsagesResp);
-
-              testsDbUtils.initDbWithContracts([sentContract, draftContract, receivedContract])
-                .then((initDbWithContractsResp) => {
-                  debugSetup('3 contracts in db ', removeAllUsagesResp);
-                  sentContract.id = initDbWithContractsResp[0].id;
-                  draftContract.id = initDbWithContractsResp[1].id;
-                  receivedContract.id = initDbWithContractsResp[2].id;
-                  done();
-                })
-                .catch((initDbWithContractsError) => {
-                  debugSetup('Error initializing the db content : ', initDbWithContractsError);
-                  debugSetup('==> failed!');
-                  done(initDbWithContractsError);
-                });
-            })
-            .catch((removeAllUsagesError) => {
-              debugSetup('Error removing usages in db : ', removeAllUsagesError);
-              debugSetup('==> failed!');
-              done(removeAllUsagesError);
-            });
+      debugSetup('==> init db with 3 contracts');
+      testsDbUtils.initDbWithContracts([sentContract, draftContract, receivedContract])
+        .then((initDbWithContractsResp) => {
+          debugSetup('3 contracts in db ', initDbWithContractsResp);
+          sentContract.id = initDbWithContractsResp[0].id;
+          draftContract.id = initDbWithContractsResp[1].id;
+          receivedContract.id = initDbWithContractsResp[2].id;
+          done();
         })
-        .catch((removeAllContractsError) => {
-          debugSetup('Error removing contracts in db : ', removeAllContractsError);
+        .catch((initDbWithContractsError) => {
+          debugSetup('Error initializing the db content : ', initDbWithContractsError);
           debugSetup('==> failed!');
-          done(removeAllContractsError);
+          done(initDbWithContractsError);
         });
     });
 

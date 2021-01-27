@@ -24,12 +24,8 @@ describe(`Tests POST ${route} API OK`, function() {
             name: 'Contract name between A1 and B1',
             version: '1.1',
             type: 'contract',
-            fromMsp: {
-              mspId: 'A1'
-            },
-            toMsp: {
-              mspId: 'B1'
-            }
+            fromMsp: {mspId: 'A1'},
+            toMsp: {mspId: 'B1'}
           },
           body: {}
         };
@@ -52,22 +48,16 @@ describe(`Tests POST ${route} API OK`, function() {
             expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
 
             expect(response.body).to.have.property('header').that.is.an('object');
-            expect(Object.keys(response.body.header)).have.members(['name', 'type', 'version', 'fromMsp', 'toMsp']);
-            expect(response.body.header).to.have.property('name', sentBody.header.name);
+            expect(Object.keys(response.body.header)).have.members(['type', 'version', 'msps']);
             expect(response.body.header).to.have.property('type', sentBody.header.type);
             expect(response.body.header).to.have.property('version', sentBody.header.version);
+            expect(response.body.header).to.have.property('msps').that.is.an('object');
 
-            expect(response.body.header).to.have.property('fromMsp').that.is.an('object');
-            expect(Object.keys(response.body.header.fromMsp)).have.members(['mspId', 'signatures']);
-            expect(response.body.header.fromMsp).to.have.property('mspId', sentBody.header.fromMsp.mspId);
-            expect(response.body.header.fromMsp).to.have.property('signatures').that.is.an('array');
-            expect(response.body.header.fromMsp.signatures.length).to.equal(0);
-
-            expect(response.body.header).to.have.property('toMsp').that.is.an('object');
-            expect(Object.keys(response.body.header.toMsp)).have.members(['mspId', 'signatures']);
-            expect(response.body.header.toMsp).to.have.property('mspId', sentBody.header.toMsp.mspId);
-            expect(response.body.header.toMsp).to.have.property('signatures').that.is.an('array');
-            expect(response.body.header.toMsp.signatures.length).to.equal(0);
+            expect(Object.keys(response.body.header.msps)).have.members([sentBody.header.fromMsp.mspId, sentBody.header.toMsp.mspId]);
+            expect(response.body.header.msps[sentBody.header.fromMsp.mspId]).to.have.property('signatures').to.be.an('array');
+            expect(response.body.header.msps[sentBody.header.toMsp.mspId]).to.have.property('signatures').to.be.an('array');
+            expect(response.body.header.msps[sentBody.header.fromMsp.mspId].signatures.length).to.equal(0);
+            expect(response.body.header.msps[sentBody.header.toMsp.mspId].signatures.length).to.equal(0);
 
             expect(response.body).to.have.property('body').that.is.an('object');
             expect(Object.keys(response.body.body)).have.members([]);
