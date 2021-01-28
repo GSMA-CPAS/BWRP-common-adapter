@@ -156,7 +156,7 @@ class ContractMapper {
       case 'partyInformation':
         return contract.body.framework.partyInformation;
       }
-    } catch(e) {
+    } catch (e) {
       return null;
     }
   }
