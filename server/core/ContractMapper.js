@@ -196,6 +196,8 @@ class ContractMapper {
         role: signature.role
       };
     })};
+    msps[contract.header.fromMsp.mspId].minSignatures = contract.header.fromMsp.minSignatures;
+    msps[contract.header.fromMsp.mspId].nbOfsignatures = contract.header.fromMsp.nbOfsignatures;
 
     newHeader.type = contract.header.type;
     newHeader.version = contract.header.version;
@@ -208,6 +210,9 @@ class ContractMapper {
         role: signature.role
       };
     })};
+    msps[contract.header.toMsp.mspId].minSignatures = contract.header.toMsp.minSignatures;
+    msps[contract.header.toMsp.mspId].nbOfsignatures = contract.header.toMsp.nbOfsignatures;
+
     logger.info(msps);
     returnedResponseBody.header = newHeader;
     return returnedResponseBody;
