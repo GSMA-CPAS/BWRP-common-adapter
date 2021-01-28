@@ -125,12 +125,13 @@ describe(`Tests GET ${route} API OK`, function() {
                 contract2IsFound = true;
                 contract = contract2;
               }
-              expect(Object.keys(contractInBody)).have.members(['contractId', 'state', 'creationDate', 'lastModificationDate', 'header']);
+              expect(Object.keys(contractInBody)).have.members(['contractId', 'state', 'creationDate', 'lastModificationDate', 'header', 'body']);
               expect(contractInBody).to.have.property('contractId', contract.id);
               expect(contractInBody).to.have.property('state', contract.state);
               expect(contractInBody).to.have.property('creationDate').that.match(DATE_REGEX);
               expect(contractInBody).to.have.property('lastModificationDate').that.match(DATE_REGEX);
               expect(contractInBody).to.have.property('header').that.is.an('object');
+              expect(contractInBody).to.have.property('body').that.is.an('object');
               expect(Object.keys(contractInBody.header)).have.members(['type', 'version', 'msps']);
               expect(contractInBody.header).to.have.property('type', contract.type);
               expect(contractInBody.header).to.have.property('version', contract.version);
