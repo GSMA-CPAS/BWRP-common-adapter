@@ -116,7 +116,7 @@ const TMUS_dynamic_data = {
   }
 };
 
-describe(`Launch scenario 0000_From_DTAG_contract`, function() {
+describe(`Launch scenario 0000_Sign_a_DTAG_contract`, function() {
   before((done) => {
     debugSetup('==> verify that DTAG and TMUS APIs are UP');
     try {
