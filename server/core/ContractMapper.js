@@ -15,9 +15,13 @@ class ContractMapper {
         if (msp == config.SELF_MSPID) {
           fromMsp.mspId = msp;
           fromMsp.signatures = body.header.msps[msp].signatures;
+          fromMsp.minSignatures = body.header.msps[msp].minSignatures;
+          fromMsp.nbOfsignatures = body.header.msps[msp].nbOfsignatures;
         } else {
           toMsp.mspId = msp;
           toMsp.signatures = body.header.msps[msp].signatures;
+          toMsp.minSignatures = body.header.msps[msp].minSignatures;
+          toMsp.nbOfsignatures = body.header.msps[msp].nbOfsignatures;
         }
       }
       body.header.fromMsp = fromMsp;
@@ -140,6 +144,24 @@ class ContractMapper {
     return returnedResponseBody;
   }
 
+  static failsafeGetBodyKey(contract, key) {
+    try {
+      switch (key) {
+      case 'name':
+        return contract.body.metadata.name;
+      case 'authors':
+        return contract.body.metadata.authors;
+      case 'term':
+        return contract.body.framework.term;
+      case 'partyInformation':
+        return contract.body.framework.partyInformation;
+      }
+    } catch(e) {
+      return null;
+    }
+  }
+
+
   // Map the internal contracts to GET contracts response body
   static getResponseBodyForGetContracts(contracts) {
     const returnedResponseBody = [];
@@ -170,6 +192,16 @@ class ContractMapper {
                   role: signature.role
                 };
               })
+            }
+          },
+          body: {
+            metadata: {
+              name: this.failsafeGetBodyKey(contract, 'name'),
+              authors: this.failsafeGetBodyKey(contract, 'authors')
+            },
+            framework: {
+              term: this.failsafeGetBodyKey(contract, 'term'),
+              partyInformation: this.failsafeGetBodyKey(contract, 'partyInformation')
             }
           },
           state: contract.state,
