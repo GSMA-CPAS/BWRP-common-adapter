@@ -65,12 +65,12 @@ config.FILE_UPLOAD_PATH = path.join(config.PROJECT_DIR, 'uploaded_files');
 config.LOG_LEVEL = process.env.COMMON_ADAPTER_LOG_LEVEL || 'info';
 
 // BlockchainAdapter configuration
-config.BLOCKCHAIN_ADAPTER_URL = getAsString(process.env.COMMON_ADAPTER_BLOCKCHAIN_ADAPTER_URL, 'http://192.168.219.129:8081');
+config.BLOCKCHAIN_ADAPTER_URL = getAsString(process.env.COMMON_ADAPTER_BLOCKCHAIN_ADAPTER_URL, 'http://127.0.0.1:8081');
 config.BLOCKCHAIN_ADAPTER_WEBHOOK_EVENTS = getAsObject(process.env.COMMON_ADAPTER_BLOCKCHAIN_ADAPTER_WEBHOOK_EVENTS, []);
-config.SELF_HOST = getAsString(process.env.COMMON_ADAPTER_SELF_HOST, 'http://192.168.219.129');
+config.SELF_HOST = getAsString(process.env.COMMON_ADAPTER_SELF_HOST, '');
 config.SELF_MSPID = getAsString(process.env.COMMON_ADAPTER_SELF_MSPID, '');
 
-config.DB_URL = getAsString(process.env.COMMON_ADAPTER_DB_URL, 'mongodb://user:userpw@192.168.219.129:27017/commondb?authSource=commondb');
+config.DB_URL = getAsString(process.env.COMMON_ADAPTER_DB_URL, 'mongodb://user:userpw@127.0.0.1:27917/commondb?authSource=commondb');
 config.DB_CREATE_CONNECTION_TIMEOUT = getAsInt(process.env.COMMON_ADAPTER_DB_CREATE_CONNECTION_TIMEOUT, 30000);
 config.DB_HEARTBEAT_FREQUENCY = getAsInt(process.env.COMMON_ADAPTER_DB_HEARTBEAT_FREQUENCY, 5000);
 config.DB_POOL_SIZE = getAsInt(process.env.COMMON_ADAPTER_DB_POOL_SIZE, 10);
