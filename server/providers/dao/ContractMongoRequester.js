@@ -47,7 +47,7 @@ class ContractMongoRequester {
   }
 
   static findAll(conditions, next) {
-    ContractMongoModel.find(conditions, {_id: false, __v: false, body: false, rawData: false, history: false}, {sort: {creationDate: -1}}, (err, contracts) => {
+    ContractMongoModel.find(conditions, {_id: false, __v: false, rawData: false, history: false}, {sort: {creationDate: -1}}, (err, contracts) => {
       if (err) {
         next(err);
       }

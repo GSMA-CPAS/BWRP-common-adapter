@@ -32,7 +32,7 @@ const MspSchema = new Schema({
 
 const ContractSchema = new Schema({
   id: {type: String, required: true},
-  name: {type: String, required: true},
+  name: {type: String, required: false},
   type: {type: String, required: true},
   version: {type: String, required: true},
   fromMsp: {type: MspSchema, required: true},

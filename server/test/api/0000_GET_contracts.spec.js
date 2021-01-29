@@ -77,6 +77,25 @@ describe(`Tests GET ${route} API OK`, function() {
       fromMsp: {mspId: 'A1'},
       toMsp: {mspId: 'C3'},
       body: {
+        metadata: {
+          name: 'Contract2 Name in Body',
+          authors: 'My boss and me',
+        },
+        framework: {
+          term: {
+            start: '01-01-2021',
+            end: '01-01-2027',
+            otherField: 'a'
+          },
+          partyInformation: {
+            MyPartyId: {
+              contractCurrency: 'euros',
+              defaultTadigCodes: ['AZE', 'RTY'],
+              tadigGroups: {},
+              alsoContractParty: Boolean,
+            }
+          }
+        },
         bankDetails: {A1: {iban: null, bankName: null, currency: null}, C3: {iban: null, bankName: null, currency: null}},
         discountModels: 'someData',
         generalInformation: {name: 'test1', type: 'Normal', endDate: '2021-01-01T00:00:00.000Z', startDate: '2020-12-01T00:00:00.000Z'}
@@ -125,16 +144,35 @@ describe(`Tests GET ${route} API OK`, function() {
                 contract2IsFound = true;
                 contract = contract2;
               }
-              expect(Object.keys(contractInBody)).have.members(['contractId', 'state', 'creationDate', 'lastModificationDate', 'header']);
+              expect(Object.keys(contractInBody)).have.members(['contractId', 'state', 'creationDate', 'lastModificationDate', 'header', 'body']);
               expect(contractInBody).to.have.property('contractId', contract.id);
               expect(contractInBody).to.have.property('state', contract.state);
               expect(contractInBody).to.have.property('creationDate').that.match(DATE_REGEX);
               expect(contractInBody).to.have.property('lastModificationDate').that.match(DATE_REGEX);
               expect(contractInBody).to.have.property('header').that.is.an('object');
+              expect(contractInBody).to.have.property('body').that.is.an('object');
               expect(Object.keys(contractInBody.header)).have.members(['type', 'version', 'msps']);
               expect(contractInBody.header).to.have.property('type', contract.type);
               expect(contractInBody.header).to.have.property('version', contract.version);
               expect(contractInBody.header).to.have.property('msps').that.is.an('object');
+              expect(Object.keys(contractInBody.body)).have.members(['metadata', 'framework']);
+              expect(contractInBody.body).to.have.property('metadata').that.is.an('object');
+              expect(contractInBody.body).to.have.property('framework').that.is.an('object');
+              expect(Object.keys(contractInBody.body.metadata)).have.members(['name', 'authors']);
+              expect(Object.keys(contractInBody.body.framework)).have.members(['term', 'partyInformation']);
+              if (contractInBody.contractId === contract1.id) {
+                expect(contractInBody.body.metadata).to.have.property('name', null);
+                expect(contractInBody.body.metadata).to.have.property('authors', null);
+                expect(contractInBody.body.framework).to.have.property('term', null);
+                expect(contractInBody.body.framework).to.have.property('partyInformation', null);
+              } else if (contractInBody.contractId === contract2.id) {
+                expect(contractInBody.body.metadata).to.have.property('name', contract2.body.metadata.name);
+                expect(contractInBody.body.metadata).to.have.property('authors', contract2.body.metadata.authors);
+                expect(contractInBody.body.framework).to.have.property('term').that.is.an('object');
+                expect(contractInBody.body.framework.term).to.deep.equals({start: '01-01-2021', end: '01-01-2027', otherField: 'a'});
+                expect(contractInBody.body.framework).to.have.property('partyInformation').that.is.an('object');
+                expect(contractInBody.body.framework.partyInformation).to.deep.equals({MyPartyId: {contractCurrency: 'euros', defaultTadigCodes: ['AZE', 'RTY']}});
+              }
               expect(Object.keys(contractInBody.header.msps)).have.members([contract.fromMsp.mspId, contract.toMsp.mspId]);
               expect(contractInBody.header.msps[contract.fromMsp.mspId]).to.have.property('signatures').to.be.an('array');
               expect(contractInBody.header.msps[contract.toMsp.mspId]).to.have.property('signatures').to.be.an('array');

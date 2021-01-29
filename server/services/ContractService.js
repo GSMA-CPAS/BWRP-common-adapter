@@ -135,7 +135,19 @@ const updateContractById = ({contractId, body}) => new Promise(
       const returnedResponse = ContractMapper.getResponseBodyForGetContract(updateContractResp);
       resolve(Service.successResponse(returnedResponse, 200));
     } catch (e) {
-      reject(Service.rejectResponse(e));
+      let rejectError = e;
+      if (e === errorUtils.ERROR_DAO_NOT_FOUND) {
+        // Maybe not found because its state is not DRAFT
+        try {
+          const existingContract = await LocalStorageProvider.getContract(contractId);
+          if (existingContract.state !== 'DRAFT') {
+            rejectError = errorUtils.ERROR_BUSINESS_CONTRACT_UPDATE_ONLY_ALLOWED_IN_STATE_DRAFT;
+          }
+        } catch (otherException) {
+          // Do nothing ( will return ERROR_DAO_NOT_FOUND )
+        }
+      }
+      reject(Service.rejectResponse(rejectError));
     }
   },
 );

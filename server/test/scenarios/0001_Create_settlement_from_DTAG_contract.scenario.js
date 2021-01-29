@@ -90,7 +90,7 @@ const TMUS_dynamic_data = {
   receivedSettlementId: undefined
 };
 
-describe(`Launch scenario 0000_From_DTAG_contract`, function() {
+describe(`Launch scenario 0001_Create_settlement_from_DTAG_contract`, function() {
   before((done) => {
     debugSetup('==> verify that DTAG and TMUS APIs are UP');
     try {
@@ -320,6 +320,34 @@ describe(`Launch scenario 0000_From_DTAG_contract`, function() {
     }
   });
 
+  it(`Reject update for DTAG contract in state SENT`, function(done) {
+    if (DTAG_dynamic_data.contractId === undefined) {
+      expect.fail('This scenario step should use an undefined data');
+    }
+    try {
+      chai.request(DTAG_API)
+        .put(`/contracts/${DTAG_dynamic_data.contractId}`)
+        .send(sent_update_body)
+        .end((error, response) => {
+          expect(error).to.be.null;
+          expect(response).to.have.status(422);
+          expect(response).to.be.json;
+          expect(response.body).to.exist;
+          expect(response.body).to.be.an('object');
+
+          expect(response.body).to.have.property('internalErrorCode', 2000);
+          expect(response.body).to.have.property('message', 'Contract modification not allowed');
+          expect(response.body).to.have.property('description', `It's not allowed to update this contract or its state.`);
+
+          done();
+        });
+    } catch (exception) {
+      debug('exception: %s', exception.stack);
+      expect.fail('it test throws an exception');
+      done();
+    }
+  });
+
   it(`Wait this contract on TMUS`, function(done) {
     if (DTAG_dynamic_data.contractReferenceId === undefined) {
       expect.fail('This scenario step should use an undefined data');
@@ -357,6 +385,34 @@ describe(`Launch scenario 0000_From_DTAG_contract`, function() {
     };
 
     waitContract(DTAG_dynamic_data.contractReferenceId, 10, 5000);
+  });
+
+  it(`Reject update for TMUS contract in state RECEIVED`, function(done) {
+    if (TMUS_dynamic_data.receivedContractId === undefined) {
+      expect.fail('This scenario step should use an undefined data');
+    }
+    try {
+      chai.request(TMUS_API)
+        .put(`/contracts/${TMUS_dynamic_data.receivedContractId}`)
+        .send(sent_update_body)
+        .end((error, response) => {
+          expect(error).to.be.null;
+          expect(response).to.have.status(422);
+          expect(response).to.be.json;
+          expect(response.body).to.exist;
+          expect(response.body).to.be.an('object');
+
+          expect(response.body).to.have.property('internalErrorCode', 2000);
+          expect(response.body).to.have.property('message', 'Contract modification not allowed');
+          expect(response.body).to.have.property('description', `It's not allowed to update this contract or its state.`);
+
+          done();
+        });
+    } catch (exception) {
+      debug('exception: %s', exception.stack);
+      expect.fail('it test throws an exception');
+      done();
+    }
   });
 
   // Now create and use 'usage' endpoints
@@ -794,6 +850,7 @@ describe(`Launch scenario 0000_From_DTAG_contract`, function() {
       expect.fail('This scenario step should use an undefined data');
     }
     try {
+      testsUtils.debugWarning(`Is it possible to delete a SENT contract?`, '?');
       chai.request(DTAG_API)
         .delete(`/contracts/${DTAG_dynamic_data.contractId}`)
         .send()
@@ -823,6 +880,7 @@ describe(`Launch scenario 0000_From_DTAG_contract`, function() {
       expect.fail('This scenario step should use an undefined data');
     }
     try {
+      testsUtils.debugWarning(`Is it possible to delete a RECEIVED contract?`, '?');
       chai.request(TMUS_API)
         .delete(`/contracts/${TMUS_dynamic_data.receivedContractId}`)
         .send(DTAG_create_contract_body)

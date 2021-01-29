@@ -1194,6 +1194,10 @@ components:
       type: object
     ContractRequest_header2:
       properties:
+        name:
+          description: Human readable name for the contract.
+          example: Contract with XYZ
+          type: string
         version:
           description: Version of the contract
           example: "1.0"
