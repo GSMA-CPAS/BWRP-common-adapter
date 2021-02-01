@@ -132,6 +132,39 @@ paths:
     get:
       description: Show a list of all Contracts
       operationId: getContracts
+      parameters:
+      - description: One or more MSPs
+        in: query
+        name: withMSPs
+        schema:
+          type: array
+          items:
+            type: string
+        style: pipeDelimited
+        explode: false
+        examples:
+          oneMSP:
+            summary: Example of a single MSP
+            value: ['GSMA']
+          multipleMSPs:
+            summary: Example of multiple MSPs
+            value: ['GSMA', 'OrdererMSP']
+      - description: One or more states
+        in: query
+        name: states
+        schema:
+          type: array
+          items:
+            type: string
+        style: pipeDelimited
+        explode: false
+        examples:
+          oneState:
+            summary: Example of a single state
+            value: ['DRAFT']
+          multipleStates:
+            summary: Example of multiple states
+            value: ['SENT', 'RECEIVED']
       responses:
         "200":
           content:
