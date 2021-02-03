@@ -108,7 +108,7 @@ const sendContractById = ({contractId}) => new Promise(
       }
       const uploadContractResp = await blockchainAdapterConnection.uploadContract(getContractByIdResp);
       const getStorageKeysResp = await blockchainAdapterConnection.getStorageKeys(uploadContractResp.referenceId, [getContractByIdResp.fromMsp.mspId, getContractByIdResp.toMsp.mspId]);
-      const updateContractResp = await LocalStorageProvider.updateSentContract(contractId, uploadContractResp.rawData, uploadContractResp.referenceId, getStorageKeysResp);
+      const updateContractResp = await LocalStorageProvider.updateSentContract(contractId, uploadContractResp.rawData, uploadContractResp.referenceId, getStorageKeysResp, uploadContractResp.blockchainRef);
       const returnedResponse = ContractMapper.getResponseBodyForSendContract(updateContractResp);
       resolve(Service.successResponse(returnedResponse, 200));
     } catch (e) {
