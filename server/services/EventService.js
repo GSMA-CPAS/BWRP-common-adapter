@@ -114,12 +114,14 @@ const eventDocumentReceived = ({body}) => new Promise(
     try {
       const referenceIds = await getBlockchainReferenceIds(body.data.storageKey);
       logger.info(`[EventService::eventDocumentReceived] referenceIds = ${JSON.stringify(referenceIds)}`);
+      logger.info(`[EventService::eventDocumentReceived] referenceIds = ${JSON.stringify(body)}`);
       const documentsStoredInDb = [];
       if (referenceIds && Array.isArray(referenceIds)) {
         let documents = [];
         for (const referenceId of referenceIds) {
           try {
             const document = await blockchainAdapterConnection.getPrivateDocument(referenceId);
+            if (body.data.)
             documents.push(document);
           } catch (exceptionInGetDocumentById) {
             logger.error(`[EventService::eventDocumentReceived] non-blocking error exceptionInGetDocumentById for referenceId ${referenceId} = ${JSON.stringify(exceptionInGetDocumentById)}`);
