@@ -201,7 +201,6 @@ class BlockchainAdapterProvider {
       return {
         rawData,
         referenceId: response.data.referenceID,
-        txId: response.data.txID,
         blockchainRef: {type: 'hlf', // need a dynamic way to define type to support future multiledger system
           txId: response.data.txID
         }
