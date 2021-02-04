@@ -91,7 +91,7 @@ class ContractMapper {
         contractId: contract.id,
         state: contract.state,
         referenceId: contract.referenceId,
-        blockchainRef : contract.blockchainRef,
+        blockchainRef: contract.blockchainRef,
         raw: contract.rawData,
         creationDate: contract.creationDate,
         lastModificationDate: contract.lastModificationDate,
@@ -131,7 +131,7 @@ class ContractMapper {
         body: contract.body,
         state: contract.state,
         referenceId: contract.referenceId,
-        blockchainRef : contract.blockchainRef,
+        blockchainRef: contract.blockchainRef,
         creationDate: contract.creationDate,
         lastModificationDate: contract.lastModificationDate
       };

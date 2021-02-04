@@ -134,7 +134,7 @@ describe(`Tests GET ${route} API OK`, function() {
             expect(response).to.be.json;
             expect(response.body).to.exist;
             expect(response.body).to.be.an('object');
-            expect(Object.keys(response.body)).have.members(['signatureId', 'contractId', 'msp', 'name', 'role', 'algorithm', 'certificate', 'signature', 'state']);
+            expect(Object.keys(response.body)).have.members(['signatureId', 'contractId', 'msp', 'name', 'role', 'algorithm', 'certificate', 'signature', 'blockchainRef', 'state']);
 
             expect(response.body).to.have.property('signatureId', signatureId);
             expect(response.body).to.have.property('contractId', sentContract.id);
@@ -145,6 +145,11 @@ describe(`Tests GET ${route} API OK`, function() {
             expect(response.body).to.have.property('certificate', getSignatureFromBlockchainAdapterResponse.f6c847b990945996a6c13e21713d76c982ef79779c43c8f9183cb30c3822e3d7.certificate);
             expect(response.body).to.have.property('signature', getSignatureFromBlockchainAdapterResponse.f6c847b990945996a6c13e21713d76c982ef79779c43c8f9183cb30c3822e3d7.signature);
             expect(response.body).to.have.property('state', 'SIGNED');
+
+            expect(response.body).to.have.property('blockchainRef').that.is.an('object');
+            expect(Object.keys(response.body.blockchainRef)).have.members(['type', 'txId']);
+            expect(response.body.blockchainRef).to.have.property('type', 'hlf');
+            expect(response.body.blockchainRef).to.have.property('txId', 'f6c847b990945996a6c13e21713d76c982ef79779c43c8f9183cb30c3822e3d7');
 
             done();
           });
