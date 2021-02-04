@@ -38,6 +38,8 @@ describe(`Tests POST ${route} API OK`, function() {
       version: '1.1.0',
       fromMsp: {mspId: selfMspId},
       toMsp: {mspId: 'C1'},
+      referenceId: 'AZRAGGSHJIAJAOJSNJNSSNNAIT',
+      blockchainRef: {type: 'hlf', txId: 'TX-RAGGSHJIAJAOJSNJNSSNNAIT'},
       body: {
         bankDetails: {A1: {iban: null, bankName: null, currency: null}, B1: {iban: null, bankName: null, currency: null}},
         discountModels: 'someData',
@@ -52,6 +54,8 @@ describe(`Tests POST ${route} API OK`, function() {
       version: '1.1.0',
       fromMsp: {mspId: 'B1'},
       toMsp: {mspId: selfMspId},
+      referenceId: 'AZRAGGSHJIAJAOJSNJNSSNNAIU',
+      blockchainRef: {type: 'hlf', txId: 'TX-RAGGSHJIAJAOJSNJNSSNNAIU'},
       body: {
         bankDetails: {A1: {iban: null, bankName: null, currency: null}, B1: {iban: null, bankName: null, currency: null}},
         discountModels: 'someData',

@@ -9,6 +9,7 @@ const testEnv = require('../env.json');
 let app = undefined;
 
 const nock = require('nock');
+const crypto = require('crypto');
 
 beforeEach(() => {
   console.log('  --  --  --  --  --  --  --  --  --  ');
@@ -56,6 +57,10 @@ class TestsUtils {
   static getDateRegexp() {
     // eslint-disable-next-line no-useless-escape
     return new RegExp('^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z$');
+  }
+
+  static getStorageKey(referenceId, msp) {
+    return crypto.createHash('sha256').update(`${msp}${referenceId}`).digest('hex').toString('utf8');
   }
 
   static debugWarning(text, symbol = '!') {

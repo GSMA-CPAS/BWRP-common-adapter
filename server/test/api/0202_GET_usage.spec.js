@@ -22,6 +22,8 @@ describe(`Tests GET ${route} API OK`, function() {
       version: '1.1.0',
       fromMsp: {mspId: 'A1'},
       toMsp: {mspId: 'B1'},
+      referenceId: 'AZRAGGSHJIAJAOJSNJNSSNNAIT',
+      blockchainRef: {type: 'hlf', txId: 'TX-RAGGSHJIAJAOJSNJNSSNNAIT'},
       body: {
         bankDetails: {A1: {iban: null, bankName: null, currency: null}, B1: {iban: null, bankName: null, currency: null}},
         discountModels: 'someData',

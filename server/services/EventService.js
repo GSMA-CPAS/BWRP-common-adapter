@@ -44,13 +44,22 @@ const compareTimestamp = (a, b) => {
  * Define the list of blockchain reference Ids to download from the storageKey of a received event
  *
  * @param {String} eventStorageKey The storage key of the received event
+ * @param {String} msp The msp of the received event
  * @return {Promise<[String]>}
  */
-const getBlockchainReferenceIds = (eventStorageKey) => new Promise(
+const getBlockchainReferenceIds = (eventStorageKey, msp) => new Promise(
   async (resolve, reject) => {
     try {
       const getPrivateReferenceIDsResp = await blockchainAdapterConnection.getPrivateReferenceIDs();
-      resolve(getPrivateReferenceIDsResp);
+      const getBlockchainReferenceIds = getPrivateReferenceIDsResp.filter((privateReferenceID) => {
+        if ((eventStorageKey === undefined) || (msp === undefined)) {
+          return true;
+        } else {
+          const eventSK = crypto.createHash('sha256').update(msp + privateReferenceID).digest('hex').toString('utf8');
+          return (eventSK === eventStorageKey);
+        }
+      });
+      resolve(getBlockchainReferenceIds);
     } catch (e) {
       reject(e);
     }
@@ -113,7 +122,7 @@ const storeBlockchainDocumentInLocalStorage = (document) => new Promise(
 const eventDocumentReceived = ({body}) => new Promise(
   async (resolve, reject) => {
     try {
-      const referenceIds = await getBlockchainReferenceIds(body.data.storageKey);
+      const referenceIds = await getBlockchainReferenceIds(body.data.storageKey, body.msp);
       logger.info(`[EventService::eventDocumentReceived] referenceIds = ${JSON.stringify(referenceIds)}`);
       const documentsStoredInDb = [];
       if (referenceIds && Array.isArray(referenceIds)) {
@@ -121,13 +130,7 @@ const eventDocumentReceived = ({body}) => new Promise(
         for (const referenceId of referenceIds) {
           try {
             const document = await blockchainAdapterConnection.getPrivateDocument(referenceId);
-            const eventSK = crypto.createHash('sha256').update(body.msp + referenceId).digest('hex').toString('utf8');
-            // only process a "document" that contains the same "storageKey".
-            if (eventSK == body.data.storageKey) {
-              documents.push(document);
-            } else {
-              logger.info(`[EventService::eventDocumentReceived] storageKey do not match. not processed. ${JSON.stringify(document)}`);
-            }
+            documents.push(document);
           } catch (exceptionInGetDocumentById) {
             logger.error(`[EventService::eventDocumentReceived] non-blocking error exceptionInGetDocumentById for referenceId ${referenceId} = ${JSON.stringify(exceptionInGetDocumentById)}`);
             // Do not reject. If there is an exception for a referenceId, the document will not be removed of the blockchain.
