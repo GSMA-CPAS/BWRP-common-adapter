@@ -121,7 +121,9 @@ const eventDocumentReceived = ({body}) => new Promise(
         for (const referenceId of referenceIds) {
           try {
             const document = await blockchainAdapterConnection.getPrivateDocument(referenceId);
+            const eventSK = crypto.createHash('sha256').update(body.msp + referenceId).digest('hex').toString('utf8');
             //if (body.data.)
+            logger.info('XXXXXXXX:' + eventSK + "|" + body.data.storageKey);
             logger.info(`[EventService::doc>>>] ${JSON.stringify(document)}`);
             documents.push(document);
           } catch (exceptionInGetDocumentById) {
