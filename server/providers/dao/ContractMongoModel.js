@@ -10,6 +10,11 @@ const HistorySchema = new Schema({
 
 const ContractBodySchema = Schema.Types.Mixed;
 
+const BlockchainRefSchema = new Schema({
+  type: {type: String, required: true},
+  txId: {type: String, required: true}
+}, {_id: false});
+
 const SignatureSchema = new Schema({
   id: {type: String, required: true},
   name: {type: String, required: true},
@@ -40,6 +45,7 @@ const ContractSchema = new Schema({
   body: {type: ContractBodySchema, required: true},
   rawData: {type: String, required: false},
   referenceId: {type: String, required: false},
+  blockchainRef: {type: BlockchainRefSchema, required: false},
   storageKeys: {type: [String], required: false},
   state: {type: String, required: true},
   history: {type: [HistorySchema], required: true},

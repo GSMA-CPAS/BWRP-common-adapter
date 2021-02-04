@@ -11,6 +11,7 @@ const logger = require('../logger');
 const errorUtils = require('../utils/errorUtils');
 
 const config = require('../config');
+const crypto = require('crypto');
 
 /**
  * Compare objects timestamps
@@ -120,7 +121,13 @@ const eventDocumentReceived = ({body}) => new Promise(
         for (const referenceId of referenceIds) {
           try {
             const document = await blockchainAdapterConnection.getPrivateDocument(referenceId);
-            documents.push(document);
+            const eventSK = crypto.createHash('sha256').update(body.msp + referenceId).digest('hex').toString('utf8');
+            // only process a "document" that contains the same "storageKey".
+            if (eventSK == body.data.storageKey) {
+              documents.push(document);
+            } else {
+              logger.info(`[EventService::eventDocumentReceived] storageKey do not match. not processed. ${JSON.stringify(document)}`);
+            }
           } catch (exceptionInGetDocumentById) {
             logger.error(`[EventService::eventDocumentReceived] non-blocking error exceptionInGetDocumentById for referenceId ${referenceId} = ${JSON.stringify(exceptionInGetDocumentById)}`);
             // Do not reject. If there is an exception for a referenceId, the document will not be removed of the blockchain.
@@ -131,6 +138,12 @@ const eventDocumentReceived = ({body}) => new Promise(
         console.log(`[EventService::eventDocumentReceived] document after sort = ${JSON.stringify(documents)}`);
         for (const document of documents) {
           try {
+            // append blockchainRef to "item"
+            const txId = body.txID || 'XXXXXXX'; // incase we using a blockchain adapter that does not return txID;
+            document.blockchainRef = {type: 'hlf', // need a dynamic way to define type to support future multiledger system
+              txId: txId
+            };
+
             const storedDocument = await storeBlockchainDocumentInLocalStorage(document);
             const referenceId = ['contract', 'settlement'].includes(storedDocument.type) ? storedDocument.referenceId : undefined;
             logger.info(`[EventService::eventDocumentReceived] config.DEACTIVATE_BLOCKCHAIN_DOCUMENT_DELETE = ${JSON.stringify(config.DEACTIVATE_BLOCKCHAIN_DOCUMENT_DELETE)}`);

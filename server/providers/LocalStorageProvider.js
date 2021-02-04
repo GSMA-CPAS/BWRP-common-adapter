@@ -128,11 +128,12 @@ class LocalStorageProvider {
    * @param {String} rawData
    * @param {String} referenceId
    * @param {Array<String>} storageKeys
+   * @param {JSON} blockchainRef
    * @return {Promise<object>}
    */
-  static async updateSentContract(contractId, rawData, referenceId, storageKeys) {
+  static async updateSentContract(contractId, rawData, referenceId, storageKeys, blockchainRef) {
     try {
-      return await ContractDAO.findOneAndUpdateToSentContract(contractId, rawData, referenceId, storageKeys);
+      return await ContractDAO.findOneAndUpdateToSentContract(contractId, rawData, referenceId, storageKeys, blockchainRef);
     } catch (error) {
       logger.error('[LocalStorageProvider::updateSentContract] failed to update sent contract - %s', error.message);
       throw error;

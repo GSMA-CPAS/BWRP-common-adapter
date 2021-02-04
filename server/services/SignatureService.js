@@ -49,6 +49,7 @@ const getSignatureById = ({contractId, signatureId}) => new Promise(
             mySignature.algorithm = bcSignatures[signature.txId]['algorithm'];
             mySignature.certificate = bcSignatures[signature.txId]['certificate'];
             mySignature.signature = bcSignatures[signature.txId]['signature'];
+            mySignature.blockchainRef = {type: 'hlf', txId: signature.txId};
           }
           mySignature.state = state;
 

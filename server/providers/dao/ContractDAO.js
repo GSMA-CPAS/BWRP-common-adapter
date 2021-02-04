@@ -293,7 +293,7 @@ class ContractDAO {
     });
   }
 
-  static findOneAndUpdateToSentContract(contractId, rawData, referenceId, storageKeys) {
+  static findOneAndUpdateToSentContract(contractId, rawData, referenceId, storageKeys, blockchainRef) {
     return new Promise((resolve, reject) => {
       // Verify parameters
       if (contractId === undefined) {
@@ -310,6 +310,10 @@ class ContractDAO {
       }
       if (storageKeys === undefined) {
         logger.error('[ContractDAO::findOneAndUpdateToSentContract] [FAILED] : storageKeys undefined');
+        reject(MISSING_MANDATORY_PARAM_ERROR);
+      }
+      if (blockchainRef === undefined) {
+        logger.error('[ContractDAO::findOneAndUpdateToSentContract] [FAILED] : blockchainRef undefined');
         reject(MISSING_MANDATORY_PARAM_ERROR);
       }
 
@@ -343,6 +347,7 @@ class ContractDAO {
               $set: {
                 rawData: rawData,
                 referenceId: referenceId,
+                blockchainRef: blockchainRef,
                 storageKeys: storageKeys,
                 state: 'SENT',
                 lastModificationDate: lastModificationDate,
