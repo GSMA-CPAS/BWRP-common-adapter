@@ -11,6 +11,7 @@ const logger = require('../logger');
 const errorUtils = require('../utils/errorUtils');
 
 const config = require('../config');
+const crypto = require('crypto');
 
 /**
  * Compare objects timestamps
