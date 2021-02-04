@@ -124,6 +124,8 @@ describe(`Tests PUT ${route} API OK`, function() {
             expect(Object.keys(response.body.body)).have.members(['bankDetails', 'discountModels', 'generalInformation']);
             expect(response.body.body).to.deep.include(contractWithNoSignatures.body);
 
+            expect(response.body).to.have.property('blockchainRef').that.is.an('object');
+
             // expect(response.body).to.have.property('history').that.is.an('array');
             // expect(response.body.history.length).to.equal(2);
             // expect(Object.keys(response.body.history[0])).have.members(["date", "action"]);
