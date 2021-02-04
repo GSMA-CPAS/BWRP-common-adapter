@@ -130,6 +130,7 @@ class ContractMapper {
         body: contract.body,
         state: contract.state,
         referenceId: contract.referenceId,
+        blockchainRef : contract.blockchainRef,
         creationDate: contract.creationDate,
         lastModificationDate: contract.lastModificationDate
       };
