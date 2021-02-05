@@ -3,6 +3,8 @@ const testsUtils = require('../tools/testsUtils');
 const testsDbUtils = require('../tools/testsDbUtils');
 const debug = require('debug')('spec:it');
 const debugSetup = require('debug')('spec:setup');
+const debugObjectOnTMUS = require('debug')('spec:TMUS-side:object');
+const debugObjectOnDTAG = require('debug')('spec:DTAG-side:object');
 /* eslint-enable no-unused-vars */
 
 const chai = require('chai');
@@ -49,28 +51,24 @@ const DTAG_create_contract_body = {
   }
 };
 
+const configured_JSON_DTAG_usage_body_to_create = require('./0001_data/0001_JSON_DTAG_usage_body_to_create.json');
 const DTAG_create_usage_body = {
   header: {
     name: `Usage from DTAG to TMUS created the ${new Date().toJSON()}`,
     type: 'usage',
     version: '8.2'
   },
-  body: {
-    keykey1: '10',
-    keykey2: '13'
-  }
+  body: configured_JSON_DTAG_usage_body_to_create
 };
 
+const configured_JSON_TMUS_usage_body_to_create = require('./0001_data/0001_JSON_TMUS_usage_body_to_create.json');
 const TMUS_create_usage_body = {
   header: {
     name: `Usage from TMUS to DTAG created the ${new Date().toJSON()}`,
     type: 'usage',
     version: '9.3'
   },
-  body: {
-    keykey6: '234',
-    keykey9: '345'
-  }
+  body: configured_JSON_TMUS_usage_body_to_create
 };
 
 const DTAG_dynamic_data = {
@@ -282,6 +280,8 @@ describe(`Launch scenario 0001_Create_settlement_from_DTAG_contract`, function()
           DTAG_dynamic_data.contractReferenceId = response.body.referenceId;
           debug(`==> DTAG contract referenceId : ${DTAG_dynamic_data.contractReferenceId}`);
 
+          debugObjectOnDTAG('Sent contract : ', response.body);
+
           done();
         });
     } catch (exception) {
@@ -387,6 +387,38 @@ describe(`Launch scenario 0001_Create_settlement_from_DTAG_contract`, function()
     waitContract(DTAG_dynamic_data.contractReferenceId, 10, 5000);
   });
 
+  it(`Get TMUS contract in state RECEIVED`, function(done) {
+    if (TMUS_dynamic_data.receivedContractId === undefined) {
+      expect.fail('This scenario step should use an undefined data');
+    }
+    try {
+      chai.request(TMUS_API)
+        .get(`/contracts/${TMUS_dynamic_data.receivedContractId}`)
+        .send()
+        .end((error, response) => {
+          expect(error).to.be.null;
+          expect(response).to.have.status(200);
+          expect(response).to.be.json;
+          expect(response.body).to.exist;
+          expect(response.body).to.be.an('object');
+
+          expect(response.body).to.have.property('header').that.is.an('object');
+          expect(response.body.header).to.have.property('version', sent_update_body.header.version);
+
+          expect(response.body).to.have.property('state', 'RECEIVED');
+          expect(response.body).to.have.property('referenceId').that.is.a('string');
+
+          debugObjectOnTMUS('Received contract from DTAG : ', response.body);
+
+          done();
+        });
+    } catch (exception) {
+      debug('exception: %s', exception.stack);
+      expect.fail('it test throws an exception');
+      done();
+    }
+  });
+
   it(`Reject update for TMUS contract in state RECEIVED`, function(done) {
     if (TMUS_dynamic_data.receivedContractId === undefined) {
       expect.fail('This scenario step should use an undefined data');
@@ -442,6 +474,13 @@ describe(`Launch scenario 0001_Create_settlement_from_DTAG_contract`, function()
 
           DTAG_dynamic_data.usageId = response.body.usageId;
           debug(`==> DTAG new created usage id : ${DTAG_dynamic_data.usageId}`);
+
+          debugObjectOnDTAG('Usage body metadata : ', response.body.body.metadata);
+          if ((response.body.body.data) && (Array.isArray(response.body.body.data))) {
+            debugObjectOnDTAG('Usage body data first rows : ', response.body.body.data.slice(0, 6));
+          } else {
+            debugObjectOnDTAG('Usage body data : ', response.body.body.data);
+          }
 
           done();
         });
@@ -582,6 +621,17 @@ describe(`Launch scenario 0001_Create_settlement_from_DTAG_contract`, function()
           expect(response.body).to.have.property('referenceId').that.is.a('string');
           expect(response.body).to.have.property('mspOwner', 'DTAG');
 
+          debugObjectOnTMUS('Settlement received from DTAG : ', response.body);
+
+          if ((response.body.body) && (response.body.body.usage) && (response.body.body.usage.body)) {
+            debugObjectOnTMUS('Settlement received from DTAG => embedded usage body metadata : ', response.body.body.usage.body.metadata);
+            if ((response.body.body.usage.body.data) && (Array.isArray(response.body.body.usage.body.data))) {
+              debugObjectOnTMUS('Settlement received from DTAG => embedded usage body data first rows : ', response.body.body.usage.body.data.slice(0, 6));
+            } else {
+              debugObjectOnTMUS('Settlement received from DTAG => embedded usage body data : ', response.body.body.usage.body.data);
+            }
+          }
+
           done();
         });
     } catch (exception) {
@@ -616,6 +666,13 @@ describe(`Launch scenario 0001_Create_settlement_from_DTAG_contract`, function()
 
           TMUS_dynamic_data.usageId = response.body.usageId;
           debug(`==> TMUS new created usage id : ${TMUS_dynamic_data.usageId}`);
+
+          debugObjectOnTMUS('Usage body metadata : ', response.body.body.metadata);
+          if ((response.body.body.data) && (Array.isArray(response.body.body.data))) {
+            debugObjectOnTMUS('Usage body data first rows : ', response.body.body.data.slice(0, 6));
+          } else {
+            debugObjectOnTMUS('Usage body data : ', response.body.body.data);
+          }
 
           done();
         });
@@ -755,6 +812,71 @@ describe(`Launch scenario 0001_Create_settlement_from_DTAG_contract`, function()
           expect(response.body).to.have.property('state', 'RECEIVED');
           expect(response.body).to.have.property('referenceId').that.is.a('string');
           expect(response.body).to.have.property('mspOwner', 'TMUS');
+
+          debugObjectOnDTAG('Settlement received from TMUS : ', response.body);
+
+          if ((response.body.body) && (response.body.body.usage) && (response.body.body.usage.body)) {
+            debugObjectOnDTAG('Settlement received from TMUS => embedded usage body metadata : ', response.body.body.usage.body.metadata);
+            if ((response.body.body.usage.body.data) && (Array.isArray(response.body.body.usage.body.data))) {
+              debugObjectOnDTAG('Settlement received from TMUS => embedded usage body data first rows : ', response.body.body.usage.body.data.slice(0, 6));
+            } else {
+              debugObjectOnDTAG('Settlement received from TMUS => embedded usage body data : ', response.body.body.usage.body.data);
+            }
+          }
+
+          done();
+        });
+    } catch (exception) {
+      debug('exception: %s', exception.stack);
+      expect.fail('it test throws an exception');
+      done();
+    }
+  });
+
+  // Now delete the created settlement resources
+
+  it(`Put DTAG discrepancy on received settlement from TMUS`, function(done) {
+    if ((DTAG_dynamic_data.contractId === undefined) || (DTAG_dynamic_data.receivedSettlementId === undefined) || (DTAG_dynamic_data.usageId === undefined)) {
+      expect.fail('This scenario step should use an undefined data');
+    }
+    try {
+      chai.request(DTAG_API)
+        .put(`/contracts/${DTAG_dynamic_data.contractId}/settlements/${DTAG_dynamic_data.receivedSettlementId}/discrepancy/?usageId=${DTAG_dynamic_data.usageId}`)
+        .send()
+        .end((error, response) => {
+          expect(error).to.be.null;
+          expect(response).to.have.status(200);
+          expect(response).to.be.json;
+          expect(response.body).to.exist;
+          expect(response.body).to.be.an('object');
+
+          debugObjectOnDTAG('Discrepancy created : ', response.body);
+
+          done();
+        });
+    } catch (exception) {
+      debug('exception: %s', exception.stack);
+      expect.fail('it test throws an exception');
+      done();
+    }
+  });
+
+  it(`Put TMUS discrepancy on received settlement from DTAG`, function(done) {
+    if ((TMUS_dynamic_data.receivedContractId === undefined) || (TMUS_dynamic_data.usageId === undefined) || (TMUS_dynamic_data.receivedSettlementId === undefined)) {
+      expect.fail('This scenario step should use an undefined data');
+    }
+    try {
+      chai.request(TMUS_API)
+        .put(`/contracts/${TMUS_dynamic_data.receivedContractId}/usages/${TMUS_dynamic_data.usageId}/discrepancy/?settlementId=${TMUS_dynamic_data.receivedSettlementId}`)
+        .send()
+        .end((error, response) => {
+          expect(error).to.be.null;
+          expect(response).to.have.status(200);
+          expect(response).to.be.json;
+          expect(response.body).to.exist;
+          expect(response.body).to.be.an('object');
+
+          debugObjectOnTMUS('Discrepancy created : ', response.body);
 
           done();
         });

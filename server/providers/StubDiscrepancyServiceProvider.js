@@ -29,6 +29,8 @@ class DiscrepancyServiceProvider {
   async createDiscrepancy(usage, settlement) {
     try {
       const response = STUB_DISCREPANCY[0];
+      response.localUsage = usage;
+      response.remoteUsage = settlement.body.usage;
       return response;
     } catch (error) {
       logger.error('[StubDiscrepancyServiceProvider::createDiscrepancy] failed to create discrepancy', error.message);

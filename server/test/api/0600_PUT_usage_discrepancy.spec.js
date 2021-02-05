@@ -198,7 +198,7 @@ describe(`Tests PUT ${route} API OK`, function() {
             expect(response).to.be.json;
             expect(response.body).to.exist;
             expect(response.body).to.be.an('object');
-            expect(Object.keys(response.body)).have.members(['generatedDiscrepancy', 'otherData']);
+            expect(Object.keys(response.body)).have.members(['generatedDiscrepancy', 'otherData', 'localUsage', 'remoteUsage']);
 
             expect(response.body).to.have.property('otherData').that.is.an('array').that.include('test', '8');
             expect(response.body).to.have.property('generatedDiscrepancy').that.is.an('object');
