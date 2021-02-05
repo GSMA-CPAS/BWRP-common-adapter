@@ -851,6 +851,22 @@ describe(`Launch scenario 0001_Create_settlement_from_DTAG_contract`, function()
           expect(response.body).to.be.an('object');
 
           debugObjectOnDTAG('Discrepancy created : ', response.body);
+          if ((response.body.localUsage) && (response.body.localUsage.body)) {
+            debugObjectOnDTAG('Discrepancy created with localUsage metadata : ', response.body.localUsage.body.metadata);
+            if ((response.body.localUsage.body.data) && (Array.isArray(response.body.localUsage.body.data))) {
+              debugObjectOnDTAG('Discrepancy created with localUsage data first rows : ', response.body.localUsage.body.data.slice(0, 6));
+            } else {
+              debugObjectOnDTAG('Discrepancy created with localUsage data : ', response.body.localUsage.body.data);
+            }
+          }
+          if ((response.body.remoteUsage) && (response.body.remoteUsage.body)) {
+            debugObjectOnDTAG('Discrepancy created with remoteUsage metadata : ', response.body.remoteUsage.body.metadata);
+            if ((response.body.remoteUsage.body.data) && (Array.isArray(response.body.remoteUsage.body.data))) {
+              debugObjectOnDTAG('Discrepancy created with remoteUsage data first rows : ', response.body.remoteUsage.body.data.slice(0, 6));
+            } else {
+              debugObjectOnDTAG('Discrepancy created with remoteUsage data : ', response.body.remoteUsage.body.data);
+            }
+          }
 
           done();
         });
@@ -877,6 +893,22 @@ describe(`Launch scenario 0001_Create_settlement_from_DTAG_contract`, function()
           expect(response.body).to.be.an('object');
 
           debugObjectOnTMUS('Discrepancy created : ', response.body);
+          if ((response.body.localUsage) && (response.body.localUsage.body)) {
+            debugObjectOnTMUS('Discrepancy created with localUsage metadata : ', response.body.localUsage.body.metadata);
+            if ((response.body.localUsage.body.data) && (Array.isArray(response.body.localUsage.body.data))) {
+              debugObjectOnTMUS('Discrepancy created with localUsage data first rows : ', response.body.localUsage.body.data.slice(0, 6));
+            } else {
+              debugObjectOnTMUS('Discrepancy created with localUsage data : ', response.body.localUsage.body.data);
+            }
+          }
+          if ((response.body.remoteUsage) && (response.body.remoteUsage.body)) {
+            debugObjectOnTMUS('Discrepancy created with remoteUsage metadata : ', response.body.remoteUsage.body.metadata);
+            if ((response.body.remoteUsage.body.data) && (Array.isArray(response.body.remoteUsage.body.data))) {
+              debugObjectOnTMUS('Discrepancy created with remoteUsage data first rows : ', response.body.remoteUsage.body.data.slice(0, 6));
+            } else {
+              debugObjectOnTMUS('Discrepancy created with remoteUsage data : ', response.body.remoteUsage.body.data);
+            }
+          }
 
           done();
         });
