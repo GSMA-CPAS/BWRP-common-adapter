@@ -8,6 +8,8 @@
 
 const Controller = require('./Controller');
 const service = require('../services/UsageService');
+const discrepancyService = require('../services/DiscrepancyService');
+
 const createUsage = async (request, response) => {
   await Controller.handleRequest(request, response, service.createUsage);
 };
@@ -28,6 +30,10 @@ const getUsages = async (request, response) => {
   await Controller.handleRequest(request, response, service.getUsages);
 };
 
+const putUsageDiscrepancy = async (request, response) => {
+  await Controller.handleRequest(request, response, discrepancyService.putUsageDiscrepancy);
+};
+
 const updateUsageById = async (request, response) => {
   await Controller.handleRequest(request, response, service.updateUsageById);
 };
@@ -39,5 +45,6 @@ module.exports = {
   generateUsageById,
   getUsageById,
   getUsages,
+  putUsageDiscrepancy,
   updateUsageById,
 };
