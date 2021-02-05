@@ -96,7 +96,6 @@ class ContractDAO {
             signatureLinks.push({id: ContractMongoRequester.defineSignatureId(), msp: 'toMsp', index: i});
           }
         }
-        console.log(signatureLinks);
         object.signatureLink = signatureLinks;
       }
 
