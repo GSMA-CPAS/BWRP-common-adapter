@@ -9,8 +9,6 @@ const errorUtils = require('../utils/errorUtils');
 const BlockchainAdapterProvider = require('../providers/BlockchainAdapterProvider');
 const blockchainAdapterConnection = new BlockchainAdapterProvider();
 
-const CalculationServiceProvider = require('../providers/StubCalculationServiceProvider');
-const calculationServiceConnection = new CalculationServiceProvider();
 /**
  * Create a new Usage
  *
@@ -60,44 +58,6 @@ const deleteUsageById = ({contractId, usageId}) => new Promise(
         const deleteUsageByIdResp = await LocalStorageProvider.deleteUsage(usageId);
         const returnedResponse = UsageMapper.getResponseBodyForGetUsage(deleteUsageByIdResp);
         resolve(Service.successResponse(returnedResponse));
-      }
-    } catch (e) {
-      reject(Service.rejectResponse(e));
-    }
-  },
-);
-
-/**
- * Generate the \"Settlement\" with local calculator and POST to Blochain adapter towards TargetMsp of the calculated response.
- *
- * @param {String} contractId The contract Id
- * @param {String} usageId The Usage Id
- * @param {String} mode Defaults to \"preview\" if not selected.
- * Preview will only performs \"calculation\" and return the calculated settlement in response.
- * if \"commit\", will create the settlement and Send it live to the Blockchain to the targetMsp. (optional)
- * @return {Promise<ServiceResponse>}
- */
-const generateUsageById = ({contractId, usageId, mode}) => new Promise(
-  async (resolve, reject) => {
-    try {
-      if (mode == 'commit') {
-        reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_GENERATE_SETTLEMENT_AND_COMMIT_NOT_SUPPORTED));
-      } else {
-        const usage = await LocalStorageProvider.getUsage(usageId);
-
-        if (usage.contractId != contractId) {
-          reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_GENERATE_SETTLEMENT_ON_NOT_LINKED_CONTRACT_RECEIVED));
-        } else {
-          const contract = await LocalStorageProvider.getContract(contractId);
-
-          const getCalculateResultResp = await calculationServiceConnection.getCalculateResult(usage, contract);
-
-          const settlement = SettlementMapper.getSettlementForGenerateUsageById(usage, contract, getCalculateResultResp);
-          const createSettlementResp = await LocalStorageProvider.createSettlement(settlement);
-
-          const returnedResponse = SettlementMapper.getResponseBodyForGetSettlement(createSettlementResp);
-          resolve(Service.successResponse(returnedResponse));
-        }
       }
     } catch (e) {
       reject(Service.rejectResponse(e));
@@ -176,7 +136,6 @@ const updateUsageById = ({contractId, usageId, body}) => new Promise(
 module.exports = {
   createUsage,
   deleteUsageById,
-  generateUsageById,
   getUsageById,
   getUsages,
   updateUsageById,

@@ -9,6 +9,7 @@
 const Controller = require('./Controller');
 const service = require('../services/UsageService');
 const discrepancyService = require('../services/DiscrepancyService');
+const settlementService = require('../services/SettlementService');
 
 const createUsage = async (request, response) => {
   await Controller.handleRequest(request, response, service.createUsage);
@@ -19,7 +20,7 @@ const deleteUsageById = async (request, response) => {
 };
 
 const generateUsageById = async (request, response) => {
-  await Controller.handleRequest(request, response, service.generateUsageById);
+  await Controller.handleRequest(request, response, settlementService.generateUsageById);
 };
 
 const getUsageById = async (request, response) => {
