@@ -208,10 +208,14 @@ const updateSignature = ({contractId, body}) => new Promise(
         reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_UPDATE_SIGNATURES_ONLY_ALLOWED_IN_STATE_SENT_OR_RECEIVED));
       } else {
         const signatureLink = getContractByIdResp.signatureLink;
+        let msp = 'fromMsp';
+        if(getContractByIdResp.state=='RECEIVED') {
+          msp = 'toMsp';
+        }
         let indexOfSignatureToUpdate = -1;
         let signatureId = '';
         for (let i = 0; i < signatureLink.length; i++) {
-          if (signatureLink[i]['txId'] == undefined ) {
+          if (signatureLink[i]['txId'] == undefined && signatureLink[i]['msp'] == msp) {
             indexOfSignatureToUpdate = i;
             signatureId = signatureLink[i]['id'];
           }
