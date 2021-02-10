@@ -34,19 +34,14 @@ const getSignatureById = ({contractId, signatureId}) => new Promise(
           reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_GET_SIGNATURE_WITH_WRONG_SIGNATURE_ID));
         } else {
           const signature = getContractByIdResp.signatureLink[indexOfSignatureToGet];
-          logger.info('>>>>>>>>1');
           const bcSignatures = await blockchainAdapterConnection.getSignatures(getContractByIdResp.referenceId, getContractByIdResp[signature.msp].mspId);
           let state = 'UNSIGNED';
-          logger.info('>>>>>>>>2');
           const mySignature = {
             signatureId: signatureId,
             contractId: getContractByIdResp.id,
             msp: getContractByIdResp[signature.msp].mspId,
-            // name: getContractByIdResp[signature.msp]['signatures'][signature.index].name,
-            // role: getContractByIdResp[signature.msp]['signatures'][signature.index].role
           };
           if (signature.txId != undefined && bcSignatures[signature.txId] != undefined) {
-            logger.info('>>>>>>>>3');
             state = 'SIGNED';
             mySignature.algorithm = bcSignatures[signature.txId]['algorithm'];
             mySignature.certificate = bcSignatures[signature.txId]['certificate'];
@@ -54,7 +49,6 @@ const getSignatureById = ({contractId, signatureId}) => new Promise(
             mySignature.blockchainRef = {type: 'hlf', txId: signature.txId};
           }
           mySignature.state = state;
-          logger.info('>>>>>>>>4');
           resolve(Service.successResponse(mySignature));
         }
       }
@@ -83,7 +77,6 @@ const getSignatures = ({contractId}) => new Promise(
               signatureId: signature.id,
               contractId: getContractByIdResp.id,
               msp: getContractByIdResp[signature.msp].mspId,
-              // name: getContractByIdResp[signature.msp]['signatures'][signature.index].name,
               state: 'SIGNED'
             });
           }
@@ -247,8 +240,6 @@ const updateSignature = ({contractId, body}) => new Promise(
                 signatureId: signatureId,
                 contractId: getContractByIdResp.id,
                 msp: updateContractResp[signatureLink[indexOfSignatureToUpdate]['msp']].mspId,
-                // name: updateContractResp[signatureLink[indexOfSignatureToUpdate]['msp']]['signatures'][signatureLink[indexOfSignatureToUpdate]['index']].name,
-                // role: updateContractResp[signatureLink[indexOfSignatureToUpdate]['msp']]['signatures'][signatureLink[indexOfSignatureToUpdate]['index']].role,
                 algorithm: body.algorithm,
                 certificate: body.certificate,
                 signature: body.signature,
@@ -278,8 +269,6 @@ const updateSignature = ({contractId, body}) => new Promise(
                 signatureId: signatureId,
                 contractId: getContractByIdResp.id,
                 msp: updateContractResp[signatureLink[indexOfSignatureToUpdate]['msp']].mspId,
-                name: updateContractResp[signatureLink[indexOfSignatureToUpdate]['msp']]['signatures'][signatureLink[indexOfSignatureToUpdate]['index']].name,
-                role: updateContractResp[signatureLink[indexOfSignatureToUpdate]['msp']]['signatures'][signatureLink[indexOfSignatureToUpdate]['index']].role,
                 algorithm: body.algorithm,
                 certificate: body.certificate,
                 signature: body.signature,

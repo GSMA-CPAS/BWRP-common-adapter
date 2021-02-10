@@ -16,10 +16,6 @@ const getSignatures = async (request, response) => {
   await Controller.handleRequest(request, response, service.getSignatures);
 };
 
-const updateSignatureById = async (request, response) => {
-  await Controller.handleRequest(request, response, service.updateSignatureById);
-};
-
 const updateSignature = async (request, response) => {
   await Controller.handleRequest(request, response, service.updateSignature);
 };
@@ -27,6 +23,5 @@ const updateSignature = async (request, response) => {
 module.exports = {
   getSignatureById,
   getSignatures,
-  updateSignatureById,
   updateSignature,
 };
