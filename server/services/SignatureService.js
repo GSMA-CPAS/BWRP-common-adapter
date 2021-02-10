@@ -246,6 +246,7 @@ const updateSignature = ({contractId, body}) => new Promise(
                 algorithm: body.algorithm,
                 certificate: body.certificate,
                 signature: body.signature,
+                blockchainRef: {type: 'hlf', txId: bcSignatures.txID},
                 state: 'SIGNED'
               };
 
@@ -276,7 +277,7 @@ const updateSignature = ({contractId, body}) => new Promise(
                 algorithm: body.algorithm,
                 certificate: body.certificate,
                 signature: body.signature,
-                blockchainRef = {type: 'hlf', txId: bcSignatures.txID};
+                blockchainRef: {type: 'hlf', txId: bcSignatures.txID},
                 state: 'SIGNED'
               };
 
