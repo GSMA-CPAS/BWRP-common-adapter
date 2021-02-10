@@ -177,6 +177,8 @@ class ContractMapper {
             version: contract.version,
             fromMsp: {
               mspId: contract.fromMsp.mspId,
+              minSignatures: contract.fromMsp.minSignatures,
+              nbOfsignatures: contract.fromMsp.nbOfsignatures,
               signatures: contract.fromMsp.signatures.map((signature) => {
                 return {
                   id: signature.id,
@@ -187,6 +189,8 @@ class ContractMapper {
             },
             toMsp: {
               mspId: contract.toMsp.mspId,
+              minSignatures: contract.toMsp.minSignatures,
+              nbOfsignatures: contract.toMsp.nbOfsignatures,
               signatures: contract.toMsp.signatures.map((signature) => {
                 return {
                   id: signature.id,

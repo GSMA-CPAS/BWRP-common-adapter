@@ -83,6 +83,16 @@ class ContractDAO {
             signatureLinks.push({id: ContractMongoRequester.defineSignatureId(), msp: 'toMsp', index: i});
           }
         }
+        if (object.fromMsp.minSignatures !== undefined) {
+          for (let i = 0; i < object.fromMsp.minSignatures; i++) {
+            signatureLinks.push({id: ContractMongoRequester.defineSignatureId(), msp: 'fromMsp', index: i});
+          }
+        }
+        if (object.toMsp.minSignatures !== undefined) {
+          for (let i = 0; i < object.toMsp.minSignatures; i++) {
+            signatureLinks.push({id: ContractMongoRequester.defineSignatureId(), msp: 'toMsp', index: i});
+          }
+        }
         console.log(signatureLinks);
         object.signatureLink = signatureLinks;
       }
@@ -326,6 +336,16 @@ class ContractDAO {
             }
             if (storedContract.toMsp.signatures !== undefined) {
               for (let i = 0; i < storedContract.toMsp.signatures.length; i++) {
+                signatureLinks.push({id: ContractMongoRequester.defineSignatureId(), msp: 'toMsp', index: i});
+              }
+            }
+            if (storedContract.fromMsp.minSignatures !== undefined) {
+              for (let i = 0; i < storedContract.fromMsp.minSignatures; i++) {
+                signatureLinks.push({id: ContractMongoRequester.defineSignatureId(), msp: 'fromMsp', index: i});
+              }
+            }
+            if (storedContract.toMsp.minSignatures !== undefined) {
+              for (let i = 0; i < storedContract.toMsp.minSignatures; i++) {
                 signatureLinks.push({id: ContractMongoRequester.defineSignatureId(), msp: 'toMsp', index: i});
               }
             }

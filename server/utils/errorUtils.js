@@ -299,6 +299,15 @@ class ErrorUtils {
     }
   };
 
+  static ERROR_BUSINESS_UPDATE_SIGNATURES_LIMIT = {
+    code: 404,
+    error: {
+      internalErrorCode: 2020,
+      message: 'Update signatures not allowed',
+      description: 'Signature Limit Exceeded.'
+    }
+  };
+
 }
 
 module.exports = ErrorUtils;

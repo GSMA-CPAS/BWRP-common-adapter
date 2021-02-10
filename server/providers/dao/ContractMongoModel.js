@@ -17,8 +17,8 @@ const BlockchainRefSchema = new Schema({
 
 const SignatureSchema = new Schema({
   id: {type: String, required: true},
-  name: {type: String, required: true},
-  role: {type: String, required: true}
+  name: {type: String, required: false},
+  role: {type: String, required: false}
 }, {_id: false});
 
 const SignatureLinkSchema = new Schema({
