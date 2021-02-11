@@ -24,6 +24,19 @@ class ContractDAO {
           condition.state = matchingConditions.state;
         }
       }
+      if (matchingConditions.msp !== undefined) {
+        if (Array.isArray(matchingConditions.msp)) {
+          condition.$or = [
+            {'fromMsp.mspId': {$in: matchingConditions.msp}},
+            {'toMsp.mspId': {$in: matchingConditions.msp}}
+          ];
+        } else if (typeof matchingConditions.state === 'string') {
+          condition.$or = [
+            {'fromMsp.mspId': matchingConditions.msp},
+            {'toMsp.mspId': matchingConditions.msp}
+          ];
+        }
+      }
       if (matchingConditions.rawData !== undefined) {
         condition.rawData = matchingConditions.rawData;
       }
