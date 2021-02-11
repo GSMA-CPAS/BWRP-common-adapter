@@ -1,6 +1,7 @@
 'use strict';
 
 const config = require('../config');
+const errorUtils = require('../utils/errorUtils');
 const logger = require('../logger');
 
 class ContractMapper {
@@ -26,6 +27,9 @@ class ContractMapper {
       }
       body.header.fromMsp = fromMsp;
       body.header.toMsp = toMsp;
+      if ((fromMsp.mspId === undefined) || (toMsp.mspId === undefined)) {
+        throw (errorUtils.ERROR_REQUEST_CONTENT_NOT_VALID);
+      }
     }
 
     const returnedContract = {

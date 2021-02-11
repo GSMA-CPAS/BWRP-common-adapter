@@ -290,6 +290,15 @@ class ErrorUtils {
     }
   };
 
+  static ERROR_REQUEST_CONTENT_NOT_VALID = {
+    code: 422,
+    error: {
+      internalErrorCode: 2020,
+      message: 'Request content not valid',
+      description: 'The content of your request is not valid.'
+    }
+  };
+
 }
 
 module.exports = ErrorUtils;
