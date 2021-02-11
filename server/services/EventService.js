@@ -88,7 +88,16 @@ const storeBlockchainDocumentInLocalStorage = (document) => new Promise(
           returnedResponse = await LocalStorageProvider.saveReceivedContract(document);
         }
       } else if (document.type === 'usage') {
-        returnedResponse = await LocalStorageProvider.createUsage(document);
+        // returnedResponse = await LocalStorageProvider.createUsage(document);
+        const existsUsage = await LocalStorageProvider.existsUsage({referenceId: document.referenceId});
+        const findContractByReferenceIdResp = await LocalStorageProvider.findContractByReferenceId(document.contractReferenceId);
+        document.contractId = findContractByReferenceIdResp.id;
+        if (existsUsage) {
+          returnedResponse = await LocalStorageProvider.findUsageByReferenceId(document.referenceId, {rawData: document.rawData});
+        } else {
+          document.storageKeys = await blockchainAdapterConnection.getStorageKeys(document.referenceId, [document.mspOwner, document.mspReceiver]);
+          returnedResponse = await LocalStorageProvider.saveReceivedUsage(document);
+        }
       } else if (document.type === 'settlement') {
         // storePromises.push(LocalStorageProvider.createSettlement(document));
         // returnedResponse = await LocalStorageProvider.createSettlement(document);
@@ -151,7 +160,7 @@ const eventDocumentReceived = ({body}) => new Promise(
             };
           }
           const storedDocument = await storeBlockchainDocumentInLocalStorage(document);
-          const referenceId = ['contract', 'settlement'].includes(storedDocument.type) ? storedDocument.referenceId : undefined;
+          const referenceId = ['contract', 'usage', 'settlement'].includes(storedDocument.type) ? storedDocument.referenceId : undefined;
           logger.info(`[EventService::eventDocumentReceived] config.DEACTIVATE_BLOCKCHAIN_DOCUMENT_DELETE = ${JSON.stringify(config.DEACTIVATE_BLOCKCHAIN_DOCUMENT_DELETE)}`);
           if (config.DEACTIVATE_BLOCKCHAIN_DOCUMENT_DELETE) {
             // Do not delete private document in blockchain

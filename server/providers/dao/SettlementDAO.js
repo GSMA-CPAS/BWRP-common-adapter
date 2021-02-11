@@ -34,7 +34,7 @@ class SettlementDAO {
   }
 
 
-  static create(object) {
+  static create(object, action = 'CREATION') {
     return new Promise((resolve, reject) => {
       // Verify parameters
       if (object === undefined) {
@@ -49,7 +49,7 @@ class SettlementDAO {
       object.creationDate = creationDate;
       object.lastModificationDate = creationDate;
       object.history = [
-        {date: creationDate, action: 'CREATION'}
+        {date: creationDate, action: action}
       ];
 
       // Launch database request

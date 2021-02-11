@@ -33,7 +33,7 @@ class UsageDAO {
     });
   }
 
-  static create(object) {
+  static create(object, action = 'CREATION') {
     return new Promise((resolve, reject) => {
       // Verify parameters
       if (object === undefined) {
@@ -48,7 +48,7 @@ class UsageDAO {
       object.creationDate = creationDate;
       object.lastModificationDate = creationDate;
       object.history = [
-        {date: creationDate, action: 'CREATION'}
+        {date: creationDate, action: action}
       ];
 
       // Launch database request
@@ -65,7 +65,7 @@ class UsageDAO {
     });
   }
 
-  static findOne(id) {
+  static findOne(id, matchingConditions = {}) {
     return new Promise((resolve, reject) => {
       // Verify parameters
       if (id === undefined) {
@@ -73,8 +73,20 @@ class UsageDAO {
         reject(MISSING_MANDATORY_PARAM_ERROR);
       }
 
+      // Define find condition
+      const condition = {
+        id: id,
+        type: 'usage'
+      };
+      if (matchingConditions.state !== undefined) {
+        condition.state = matchingConditions.state;
+      }
+      if (matchingConditions.contractId !== undefined) {
+        condition.contractId = matchingConditions.contractId;
+      }
+
       // Launch database request
-      UsageMongoRequester.findOne({id}, (err, usage) => {
+      UsageMongoRequester.findOne(condition, (err, usage) => {
         // Use errorManager to return appropriate dao errors
         DAOErrorManager.handleErrorOrNullObject(err, usage)
           .then((objectReturned) => {
@@ -83,6 +95,49 @@ class UsageDAO {
           })
           .catch((errorReturned) => {
             logger.error('[DAO] [findOne] [FAILED] errorReturned:' + typeof errorReturned + ' = ' + JSON.stringify(errorReturned));
+            return reject(errorReturned);
+          });
+      });
+    });
+  }
+
+  static findOneByReferenceId(referenceId, matchingConditions = {}) {
+    return new Promise((resolve, reject) => {
+      // Verify parameters
+      if (referenceId === undefined) {
+        logger.error('[UsageDAO::findOneByReferenceId] [FAILED] : referenceId undefined');
+        reject(MISSING_MANDATORY_PARAM_ERROR);
+      }
+
+      // Define find condition
+      const condition = {
+        referenceId: referenceId,
+        type: 'usage'
+      };
+      if (matchingConditions.state !== undefined) {
+        condition.state = matchingConditions.state;
+      }
+      if (matchingConditions.rawData !== undefined) {
+        condition.rawData = matchingConditions.rawData;
+      }
+      if (matchingConditions.id !== undefined) {
+        condition.id = matchingConditions.id;
+      }
+      if (matchingConditions.storageKey !== undefined) {
+        // stoargeKeys is an array and we try to find a storageKey in this storageKeys
+        condition.storageKeys = matchingConditions.storageKey;
+      }
+
+      // Launch database request
+      UsageMongoRequester.findOne(condition, (err, settlement) => {
+        // Use errorManager to return appropriate dao errors
+        DAOErrorManager.handleErrorOrNullObject(err, settlement)
+          .then((objectReturned) => {
+            logger.debug('[UsageDAO::findOneByReferenceId] [OK] objectReturned:' + typeof objectReturned + ' = ' + JSON.stringify(objectReturned));
+            return resolve(objectReturned);
+          })
+          .catch((errorReturned) => {
+            logger.error('[UsageDAO::findOneByReferenceId] [FAILED] errorReturned:' + typeof errorReturned + ' = ' + JSON.stringify(errorReturned));
             return reject(errorReturned);
           });
       });
@@ -142,6 +197,110 @@ class UsageDAO {
     });
   }
 
+  static addContractReferenceId(id, contractReferenceId) {
+    return new Promise((resolve, reject) => {
+      // Verify parameters
+      if (id === undefined) {
+        logger.error('[UsageDAO::updateContractReferenceId] [FAILED] : id undefined');
+        reject(MISSING_MANDATORY_PARAM_ERROR);
+      }
+      if (contractReferenceId === undefined) {
+        logger.error('[UsageDAO::updateContractReferenceId] [FAILED] : contractReferenceId undefined');
+        reject(MISSING_MANDATORY_PARAM_ERROR);
+      }
+
+      // Define automatic values
+      const lastModificationDate = Date.now();
+
+      // Defined update condition and update command
+      const condition = {
+        id: id,
+        state: 'DRAFT',
+        contractReferenceId: {
+          $exists: false
+        }
+      };
+
+      const updateCommand = {
+        $set: {
+          contractReferenceId: contractReferenceId
+        },
+        $push: {
+          history: {date: lastModificationDate, action: 'UPDATE_CONTRACT_REFERENCE_ID'}
+        }
+      };
+
+      // Launch database request
+      UsageMongoRequester.findOneAndUpdate(condition, updateCommand, (err, usage) => {
+        DAOErrorManager.handleErrorOrNullObject(err, usage)
+          .then((objectReturned) => {
+            resolve(objectReturned);
+          })
+          .catch((errorReturned) => {
+            logger.error('[UsageDAO::updateContractReferenceId] [FAILED] errorReturned:' + typeof errorReturned + ' = ' + JSON.stringify(errorReturned));
+            reject(errorReturned);
+          });
+      });
+    });
+  }
+
+  static findOneAndUpdateToSentUsage(usageId, rawData, referenceId, storageKeys) {
+    return new Promise((resolve, reject) => {
+      // Verify parameters
+      if (usageId === undefined) {
+        logger.error('[UsageDAO::findOneAndUpdateToSentUsage] [FAILED] : usageId undefined');
+        reject(MISSING_MANDATORY_PARAM_ERROR);
+      }
+      if (rawData === undefined) {
+        logger.error('[UsageDAO::findOneAndUpdateToSentUsage] [FAILED] : rawData undefined');
+        reject(MISSING_MANDATORY_PARAM_ERROR);
+      }
+      if (referenceId === undefined) {
+        logger.error('[UsageDAO::findOneAndUpdateToSentUsage] [FAILED] : referenceId undefined');
+        reject(MISSING_MANDATORY_PARAM_ERROR);
+      }
+      if (storageKeys === undefined) {
+        logger.error('[UsageDAO::findOneAndUpdateToSentUsage] [FAILED] : storageKeys undefined');
+        reject(MISSING_MANDATORY_PARAM_ERROR);
+      }
+
+      // Define automatic values
+      const lastModificationDate = Date.now();
+
+      // Defined update condition and update command
+      const condition = {
+        id: usageId,
+        type: 'usage',
+        state: 'DRAFT'
+      };
+
+      const updateCommand = {
+        $set: {
+          rawData: rawData,
+          referenceId: referenceId,
+          storageKeys: storageKeys,
+          state: 'SENT',
+          lastModificationDate: lastModificationDate
+        },
+        $push: {
+          history: {date: lastModificationDate, action: 'SENT'}
+        }
+      };
+
+      // Launch database request
+      UsageMongoRequester.findOneAndUpdate(condition, updateCommand, (err, usage) => {
+        DAOErrorManager.handleErrorOrNullObject(err, usage)
+          .then((objectReturned) => {
+            resolve(objectReturned);
+          })
+          .catch((errorReturned) => {
+            logger.error('[UsageDAO::findOneAndUpdateToSentUsage] [FAILED] errorReturned:' + typeof errorReturned + ' = ' + JSON.stringify(errorReturned));
+            reject(errorReturned);
+          });
+      });
+    });
+  }
+
   static findOneAndRemove(id) {
     return new Promise((resolve, reject) => {
       // Verify parameters
@@ -161,6 +320,49 @@ class UsageDAO {
           .catch((errorReturned) => {
             logger.error('[DAO] [findOneAndRemove] [FAILED] errorReturned:' + typeof errorReturned + ' = ' + JSON.stringify(errorReturned));
             return reject(errorReturned);
+          });
+      });
+    });
+  }
+
+  static exists(object) {
+    return new Promise((resolve, reject) => {
+      // Verify parameters
+      if (object === undefined) {
+        logger.error('[UsageDAO::exists] [FAILED] : object undefined');
+        reject(MISSING_MANDATORY_PARAM_ERROR);
+      }
+
+      // Defined update condition and update command
+      const condition = {
+        type: 'usage'
+      };
+
+      if (object.id) {
+        condition.id = object.id;
+      }
+
+      if (object.state) {
+        condition.state = object.state;
+      }
+
+      if (object.referenceId) {
+        condition.referenceId = object.referenceId;
+      }
+
+      if (object.rawData !== undefined) {
+        condition.rawData = object.rawData;
+      }
+
+      // Launch database request
+      UsageMongoRequester.exists(condition, (err, exists) => {
+        DAOErrorManager.handleError(err, exists)
+          .then((objectReturned) => {
+            resolve(objectReturned);
+          })
+          .catch((errorReturned) => {
+            logger.error('[UsageDAO::exists] [FAILED] errorReturned:' + typeof errorReturned + ' = ' + JSON.stringify(errorReturned));
+            reject(errorReturned);
           });
       });
     });

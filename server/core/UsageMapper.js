@@ -62,6 +62,12 @@ class UsageMapper {
     return returnedResponseBody;
   }
 
+  static getResponseBodyForSendUsage(usage) {
+    // By default, use mapper getResponseBodyForGetUsage
+    const returnedResponseBody = UsageMapper.getResponseBodyForGetUsage(usage);
+    return returnedResponseBody;
+  }
+
   // Map the input PUT usage request to internal usage
   static getUsageFromPutUsagesRequest(current, body) {
     const returnedUsage = UsageMapper.getUsageFromPostUsagesRequest(current.contractId, body, current.mspOwner, current.mspReceiver);

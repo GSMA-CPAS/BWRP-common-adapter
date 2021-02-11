@@ -57,16 +57,25 @@ describe(`Tests POST ${route} API OK`, function() {
           contract1.id = initDbWithContractsResp[0].id;
           contract2.id = initDbWithContractsResp[1].id;
           debugSetup('The db is initialized with 2 contracts : ', initDbWithContractsResp.map((c) => c.id));
-          debugSetup('==> init db with 0 settlement');
-          testsDbUtils.initDbWithSettlements([])
-            .then((initDbWithSettlementsResp) => {
-              debugSetup('==> done!');
-              done();
+          debugSetup('==> init db with 0 usage');
+          testsDbUtils.initDbWithUsages([])
+            .then((initDbWithUsagesResp) => {
+              debugSetup('==> init db with 0 settlement');
+              testsDbUtils.initDbWithSettlements([])
+                .then((initDbWithSettlementsResp) => {
+                  debugSetup('==> done!');
+                  done();
+                })
+                .catch((initDbWithSettlementsError) => {
+                  debugSetup('Error initializing the db content : ', initDbWithSettlementsError);
+                  debugSetup('==> failed!');
+                  done(initDbWithSettlementsError);
+                });
             })
-            .catch((initDbWithSettlementsError) => {
-              debugSetup('Error initializing the db content : ', initDbWithSettlementsError);
+            .catch((initDbWithUsagesError) => {
+              debugSetup('Error initializing the db content : ', initDbWithUsagesError);
               debugSetup('==> failed!');
-              done(initDbWithSettlementsError);
+              done(initDbWithUsagesError);
             });
         })
         .catch((initDbWithContractsError) => {
@@ -198,6 +207,134 @@ describe(`Tests POST ${route} API OK`, function() {
 
                     done();
                   });
+              });
+          });
+      } catch (exception) {
+        debug('exception: %s', exception.stack);
+        expect.fail('it test throws an exception');
+        done();
+      }
+    });
+
+    it('Post event OK with minimum event details and only usages in blockchain', function(done) {
+      try {
+        const path = globalVersion + route;
+
+        const idDocument1 = 'shuzahxazhxijazechxhuezhasqxsdchezu';
+
+        const document1 = `{
+          "type": "usage",
+          "version": "2.1",
+          "name": "StRiNg-Usage1-${Date.now().toString()}",
+          "mspOwner": "DAAA",
+          "mspReceiver": "TMMM",
+          "contractReferenceId": "${contract1.referenceId}",
+          "body": {
+            "usageString": "objectOrString",
+            "usageData": {
+              "part1": {
+                "other": "objectOrString"
+              }
+            }
+          }
+        }`;
+        const encodedDocument1 = Buffer.from(document1).toString('base64');
+
+        const idDocument2 = 'zecxezhucheauhxazi';
+
+        const eventMsp = 'TMUS';
+        const storageKey = testsUtils.getStorageKey(idDocument1, eventMsp);
+
+        blockchainAdapterNock.get('/private-documents')
+          .times(1)
+          .reply((pathReceived, bodyReceived) => {
+            // Only for exemple
+            expect(pathReceived).to.equals('/private-documents');
+            expect(bodyReceived).to.be.empty;
+            return [
+              200,
+              `["${idDocument1}", "${idDocument2}"]`,
+              undefined
+            ];
+          });
+
+        blockchainAdapterNock.get(`/private-documents/${idDocument1}`)
+          .times(1)
+          .reply((pathReceived, bodyReceived) => {
+            // Only for exemple
+            expect(pathReceived).to.equals(`/private-documents/${idDocument1}`);
+            expect(bodyReceived).to.be.empty;
+            return [
+              200,
+              `{
+                "fromMSP":"DTAG",
+                "toMSP":"TMUS",
+                "data":"${encodedDocument1}",
+                "dataHash":"notUsed",
+                "timeStamp":"1606828827767664802",
+                "id":"${idDocument1}"
+              }`,
+              undefined
+            ];
+          });
+
+        blockchainAdapterNock.delete(`/private-documents/${idDocument1}`)
+          .times(1)
+          .reply((pathReceived, bodyReceived) => {
+            // Only for exemple
+            expect(pathReceived).to.equals(`/private-documents/${idDocument1}`);
+            expect(bodyReceived).to.be.empty;
+            return [
+              200,
+              ``,
+              undefined
+            ];
+          });
+
+        const sentBody = {
+          msp: eventMsp,
+          eventName: 'STORE:DOCUMENTHASH',
+          timestamp: '2020-11-30T16:59:35Z',
+          data: {
+            storageKey: storageKey
+          }
+        };
+
+        chai.request(testsUtils.getServer())
+          .post(`${path}`)
+          .send(sentBody)
+          .end((error, response) => {
+            debug('response.body: %s', JSON.stringify(response.body));
+            expect(error).to.be.null;
+            expect(response).to.have.status(200);
+            expect(response).to.be.json;
+            expect(response.body).to.exist;
+            expect(response.body).to.be.an('array');
+            expect(response.body.length).to.equal(1);
+
+            const bodyArrayContent = response.body[0];
+            expect(bodyArrayContent).to.be.an('Object');
+            expect(Object.keys(bodyArrayContent)).have.members(['id', 'type', 'referenceId', 'contractId']);
+            expect(bodyArrayContent).to.have.property('id').that.is.a('string');
+            expect(bodyArrayContent).to.have.property('type', 'usage');
+            expect(bodyArrayContent).to.have.property('referenceId', idDocument1);
+            expect(bodyArrayContent).to.have.property('contractId', contract1.id);
+
+            expect(blockchainAdapterNock.isDone(), 'Unconsumed nock error').to.be.true;
+
+            chai.request(testsUtils.getServer())
+              .get(`${globalVersion}/contracts/${response.body[0].contractId}/usages/${response.body[0].id}`)
+              .send()
+              .end((getError1, getResponse1) => {
+                debug('response.body: %s', JSON.stringify(getResponse1.body));
+                expect(getError1).to.be.null;
+                expect(getResponse1).to.have.status(200);
+                expect(getResponse1).to.be.json;
+                expect(getResponse1.body).to.exist;
+                expect(getResponse1.body).to.be.an('object');
+                expect(getResponse1.body).to.have.property('state', 'RECEIVED');
+
+                done();
               });
           });
       } catch (exception) {

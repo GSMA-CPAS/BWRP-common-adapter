@@ -36,7 +36,9 @@ class RawDataUtils {
 
   static defineUsageFromRawDataObject(rawDataObject, fromMSP, toMSP, id, timestamp) {
     const usage = rawDataObject;
+    usage.referenceId = id;
     usage.timestamp = timestamp;
+    usage.state = 'RECEIVED';
     return usage;
   }
 
@@ -46,6 +48,20 @@ class RawDataUtils {
     settlement.timestamp = timestamp;
     settlement.state = 'RECEIVED';
     return settlement;
+  }
+
+  static defineRawDataFromUsage(u) {
+    const rawDataObject = {};
+    rawDataObject.type = u.type;
+    rawDataObject.version = u.version;
+    rawDataObject.name = u.name;
+    rawDataObject.contractReferenceId = u.contractReferenceId;
+    rawDataObject.mspOwner = u.mspOwner;
+    rawDataObject.mspReceiver = u.mspReceiver;
+    rawDataObject.body = u.body;
+    const stringToEncode = JSON.stringify(rawDataObject);
+
+    return Buffer.from(stringToEncode).toString('base64');
   }
 
   static defineRawDataFromSettlement(s) {

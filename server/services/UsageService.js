@@ -106,6 +106,38 @@ const getUsages = ({contractId}) => new Promise(
 );
 
 /**
+ * Set State to \"SEND\" and POST to Blockchain adapter towards TargetMsp of the Usage
+ *
+ * @param {String} contractId The contract Id
+ * @param {String} usageId The Usage Id
+ * @return {Promise<ServiceResponse>}
+ */
+const sendUsageById = ({contractId, usageId}) => new Promise(
+  async (resolve, reject) => {
+    try {
+      const contract = await LocalStorageProvider.getContract(contractId);
+      if ((contract.state === 'DRAFT') || (contract.referenceId === undefined)) {
+        reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_SEND_USAGE_ONLY_ALLOWED_ON_EXCHANGED_CONTRACT));
+      }
+      let usageToSend = await LocalStorageProvider.getUsage(usageId);
+      if (usageToSend.state !== 'DRAFT') {
+        reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_SEND_USAGE_ONLY_ALLOWED_IN_STATE_DRAFT));
+      }
+      if (usageToSend.contractReferenceId === undefined) {
+        usageToSend = await LocalStorageProvider.updateUsageWithContractReferenceId(usageId, contract.referenceId);
+      }
+      const uploadUsageResp = await blockchainAdapterConnection.uploadUsage(usageToSend);
+      const getStorageKeysResp = await blockchainAdapterConnection.getStorageKeys(uploadUsageResp.referenceId, [uploadUsageResp.mspOwner, uploadUsageResp.mspReceiver]);
+      const updateUsageResp = await LocalStorageProvider.updateSentUsage(usageId, uploadUsageResp.rawData, uploadUsageResp.referenceId, getStorageKeysResp);
+      const returnedResponse = UsageMapper.getResponseBodyForSendUsage(updateUsageResp);
+      resolve(Service.successResponse(returnedResponse, 200));
+    } catch (e) {
+      reject(Service.rejectResponse(e));
+    }
+  },
+);
+
+/**
  * Update Usage Object by its Id
  *
  * @param {String} contractId The contract Id
@@ -138,5 +170,6 @@ module.exports = {
   deleteUsageById,
   getUsageById,
   getUsages,
+  sendUsageById,
   updateUsageById,
 };

@@ -84,6 +84,74 @@ describe('Unit Tests for rawDataUtils', function() {
     done();
   });
 
+  it('Should generate a usage rawData and decode the usage from this rawData', function(done) {
+    const usage1 = {
+      type: 'usage',
+      version: '1.1.0',
+      name: 'usage data',
+      contractId: 'azerty-1234',
+      contractReferenceId: 'blockchain-contract-ref-id-898786785654',
+      mspOwner: 'H23',
+      mspReceiver: 'J89',
+      body: {
+        usageData: {
+          A1: {
+            iban: null,
+            bankName: null,
+            currency: null
+          },
+          B1: {
+            iban: null,
+            bankName: null,
+            currency: null
+          }
+        },
+        otherDataModels: 'someData',
+        generalData: {
+          name: 'test3',
+          type: 'Normal',
+          endDate: '2021-01-01T00:00:00.000Z',
+          startDate: '2020-12-01T00:00:00.000Z'
+        }
+      },
+      state: 'DRAFT'
+    };
+
+    const rawDataForUsage1 = testedRawDataUtils.defineRawDataFromUsage(usage1);
+
+    const blockchainResp = {
+      data: rawDataForUsage1,
+      fromMSP: 'H23',
+      toMSP: 'J89',
+      id: 'referenceIddzayudgzadazhduazdza',
+      timeStamp: '156262878176626327'
+    };
+
+    const rawDataObjectForUsage1 = testedRawDataUtils.defineRawDataObjectFromRawData(blockchainResp.data);
+
+    const rawDataUsageForUsage1 = testedRawDataUtils.defineSettlementFromRawDataObject(rawDataObjectForUsage1, blockchainResp.fromMSP, blockchainResp.toMSP, blockchainResp.id, blockchainResp.timeStamp);
+
+    expect(rawDataUsageForUsage1).to.be.an('object');
+    expect(rawDataUsageForUsage1).to.have.property('name', usage1.name);
+    expect(rawDataUsageForUsage1).to.have.property('state', 'RECEIVED');
+    expect(rawDataUsageForUsage1).to.have.property('type', usage1.type);
+    expect(rawDataUsageForUsage1).to.have.property('version', usage1.version);
+
+    expect(rawDataUsageForUsage1).to.have.property('rawData', rawDataForUsage1);
+    expect(rawDataUsageForUsage1).to.have.property('referenceId', blockchainResp.id);
+    expect(rawDataUsageForUsage1).to.have.property('timestamp', blockchainResp.timeStamp);
+
+    expect(rawDataUsageForUsage1).to.have.property('mspOwner', usage1.mspOwner);
+    expect(rawDataUsageForUsage1).to.have.property('mspReceiver', usage1.mspReceiver);
+
+    expect(rawDataUsageForUsage1).to.have.property('body').that.is.an('object');
+    expect(rawDataUsageForUsage1.body).to.deep.include(usage1.body);
+
+    debug('rawDataUsageForUsage1 = ', rawDataUsageForUsage1);
+
+    done();
+  });
+
   it('Should generate a settlement rawData and decode the settlement from this rawData', function(done) {
     const settlement1 = {
       type: 'settlement',

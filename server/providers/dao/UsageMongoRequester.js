@@ -73,6 +73,15 @@ class UsageMongoRequester {
       return next({code: 404, name: 'NotFound'}, null);
     });
   }
+
+  static exists(conditions, next) {
+    UsageMongoModel.exists(conditions, (err, exists) => {
+      if (err) {
+        next(err);
+      }
+      return next(null, exists);
+    });
+  }
 }
 
 module.exports = UsageMongoRequester;

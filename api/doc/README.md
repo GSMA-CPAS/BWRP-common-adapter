@@ -30,6 +30,7 @@ Class | Method | HTTP request | Description
 *UsageApi* | [**getUsageById**](Apis/UsageApi.md#getusagebyid) | **GET** /contracts/{contractId}/usages/{usageId} | Get Usage Object by its Id
 *UsageApi* | [**getUsages**](Apis/UsageApi.md#getusages) | **GET** /contracts/{contractId}/usages/ | Get All usage of a given Contract
 *UsageApi* | [**putUsageDiscrepancy**](Apis/UsageApi.md#putusagediscrepancy) | **PUT** /contracts/{contractId}/usages/{usageId}/discrepancy/ | Create and return the discrepancy between an usage and the selected settlement.
+*UsageApi* | [**sendUsageById**](Apis/UsageApi.md#sendusagebyid) | **PUT** /contracts/{contractId}/usages/{usageId}/send/ | Set State to \"SEND\" and POST to Blockchain adapter towards TargetMsp of the Usage
 *UsageApi* | [**updateUsageById**](Apis/UsageApi.md#updateusagebyid) | **PUT** /contracts/{contractId}/usages/{usageId} | Update Usage Object by its Id
 
 

@@ -299,6 +299,24 @@ class ErrorUtils {
     }
   };
 
+  static ERROR_BUSINESS_SEND_USAGE_ONLY_ALLOWED_IN_STATE_DRAFT = {
+    code: 422,
+    error: {
+      internalErrorCode: 2021,
+      message: 'Send usage not allowed',
+      description: 'It\'s not allowed to send this usage.'
+    }
+  };
+
+  static ERROR_BUSINESS_SEND_USAGE_ONLY_ALLOWED_ON_EXCHANGED_CONTRACT = {
+    code: 422,
+    error: {
+      internalErrorCode: 2022,
+      message: 'Send usage not allowed',
+      description: 'It\'s not allowed to send this usage.'
+    }
+  };
+
 }
 
 module.exports = ErrorUtils;
