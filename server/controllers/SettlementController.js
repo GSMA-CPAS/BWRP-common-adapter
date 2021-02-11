@@ -8,12 +8,18 @@
 
 const Controller = require('./Controller');
 const service = require('../services/SettlementService');
+const discrepancyService = require('../services/DiscrepancyService');
+
 const getSettlementById = async (request, response) => {
   await Controller.handleRequest(request, response, service.getSettlementById);
 };
 
 const getSettlements = async (request, response) => {
   await Controller.handleRequest(request, response, service.getSettlements);
+};
+
+const putSettlementDiscrepancy = async (request, response) => {
+  await Controller.handleRequest(request, response, discrepancyService.putSettlementDiscrepancy);
 };
 
 const sendSettlementById = async (request, response) => {
@@ -24,5 +30,6 @@ const sendSettlementById = async (request, response) => {
 module.exports = {
   getSettlementById,
   getSettlements,
+  putSettlementDiscrepancy,
   sendSettlementById,
 };

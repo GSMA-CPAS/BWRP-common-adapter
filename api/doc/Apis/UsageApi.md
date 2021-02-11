@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**generateUsageById**](UsageApi.md#generateUsageById) | **PUT** /contracts/{contractId}/usages/{usageId}/generate/ | 
 [**getUsageById**](UsageApi.md#getUsageById) | **GET** /contracts/{contractId}/usages/{usageId} | 
 [**getUsages**](UsageApi.md#getUsages) | **GET** /contracts/{contractId}/usages/ | 
+[**putUsageDiscrepancy**](UsageApi.md#putUsageDiscrepancy) | **PUT** /contracts/{contractId}/usages/{usageId}/discrepancy/ | 
 [**updateUsageById**](UsageApi.md#updateUsageById) | **PUT** /contracts/{contractId}/usages/{usageId} | 
 
 
@@ -142,6 +143,35 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**String**](../Models/string.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="putUsageDiscrepancy"></a>
+# **putUsageDiscrepancy**
+> Object putUsageDiscrepancy(contractId, usageId, settlementId)
+
+
+
+    Create and return the discrepancy between an usage and the selected settlement.
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **contractId** | **String**| The contract Id | [default to null]
+ **usageId** | **String**| The Usage Id | [default to null]
+ **settlementId** | **String**| The id of the settlement to compare | [default to null]
+
+### Return type
+
+[**Object**](../Models/object.md)
 
 ### Authorization
 

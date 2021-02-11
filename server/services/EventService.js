@@ -44,13 +44,25 @@ const compareTimestamp = (a, b) => {
  * Define the list of blockchain reference Ids to download from the storageKey of a received event
  *
  * @param {String} eventStorageKey The storage key of the received event
+ * @param {String} msp The msp of the received event
  * @return {Promise<[String]>}
  */
-const getBlockchainReferenceIds = (eventStorageKey) => new Promise(
+const getBlockchainReferenceIds = (eventStorageKey, msp) => new Promise(
   async (resolve, reject) => {
     try {
       const getPrivateReferenceIDsResp = await blockchainAdapterConnection.getPrivateReferenceIDs();
-      resolve(getPrivateReferenceIDsResp);
+      let getBlockchainReferenceIds = [];
+      if (getPrivateReferenceIDsResp && Array.isArray(getPrivateReferenceIDsResp)) {
+        getBlockchainReferenceIds = getPrivateReferenceIDsResp.filter((privateReferenceID) => {
+          if ((eventStorageKey === undefined) || (msp === undefined)) {
+            return true;
+          } else {
+            const eventSK = crypto.createHash('sha256').update(msp + privateReferenceID).digest('hex').toString('utf8');
+            return (eventSK === eventStorageKey);
+          }
+        });
+      }
+      resolve(getBlockchainReferenceIds);
     } catch (e) {
       reject(e);
     }
@@ -113,52 +125,45 @@ const storeBlockchainDocumentInLocalStorage = (document) => new Promise(
 const eventDocumentReceived = ({body}) => new Promise(
   async (resolve, reject) => {
     try {
-      const referenceIds = await getBlockchainReferenceIds(body.data.storageKey);
-      logger.info(`[EventService::eventDocumentReceived] referenceIds = ${JSON.stringify(referenceIds)}`);
       const documentsStoredInDb = [];
-      if (referenceIds && Array.isArray(referenceIds)) {
-        let documents = [];
-        for (const referenceId of referenceIds) {
-          try {
-            const document = await blockchainAdapterConnection.getPrivateDocument(referenceId);
-            const eventSK = crypto.createHash('sha256').update(body.msp + referenceId).digest('hex').toString('utf8');
-            // only process a "document" that contains the same "storageKey".
-            if (eventSK == body.data.storageKey) {
-              documents.push(document);
-            } else {
-              logger.info(`[EventService::eventDocumentReceived] storageKey do not match. not processed. ${JSON.stringify(document)}`);
-            }
-          } catch (exceptionInGetDocumentById) {
-            logger.error(`[EventService::eventDocumentReceived] non-blocking error exceptionInGetDocumentById for referenceId ${referenceId} = ${JSON.stringify(exceptionInGetDocumentById)}`);
-            // Do not reject. If there is an exception for a referenceId, the document will not be removed of the blockchain.
-          }
+      const referenceIds = await getBlockchainReferenceIds(body.data.storageKey, body.msp);
+      logger.info(`[EventService::eventDocumentReceived] referenceIds = ${JSON.stringify(referenceIds)}`);
+      const isReferenceIdLinkedToEventTxId = ((body.data.storageKey !== undefined) && (body.msp !== undefined) && (referenceIds.length === 1));
+      let documents = [];
+      for (const referenceId of referenceIds) {
+        try {
+          const document = await blockchainAdapterConnection.getPrivateDocument(referenceId);
+          documents.push(document);
+        } catch (exceptionInGetDocumentById) {
+          logger.error(`[EventService::eventDocumentReceived] non-blocking error exceptionInGetDocumentById for referenceId ${referenceId} = ${JSON.stringify(exceptionInGetDocumentById)}`);
+          // Do not reject. If there is an exception for a referenceId, the document will not be removed of the blockchain.
         }
-        console.log(`[EventService::eventDocumentReceived] documents before sort = ${JSON.stringify(documents)}`);
-        documents = documents.sort(compareTimestamp);
-        console.log(`[EventService::eventDocumentReceived] document after sort = ${JSON.stringify(documents)}`);
-        for (const document of documents) {
-          try {
+      }
+      documents = documents.sort(compareTimestamp);
+      for (const document of documents) {
+        try {
+          if (isReferenceIdLinkedToEventTxId) {
             // append blockchainRef to "item"
             const txId = body.txID || 'XXXXXXX'; // incase we using a blockchain adapter that does not return txID;
-            document.blockchainRef = {type: 'hlf', // need a dynamic way to define type to support future multiledger system
+            document.blockchainRef = {
+              type: 'hlf', // need a dynamic way to define type to support future multiledger system
               txId: txId
             };
-
-            const storedDocument = await storeBlockchainDocumentInLocalStorage(document);
-            const referenceId = ['contract', 'settlement'].includes(storedDocument.type) ? storedDocument.referenceId : undefined;
-            logger.info(`[EventService::eventDocumentReceived] config.DEACTIVATE_BLOCKCHAIN_DOCUMENT_DELETE = ${JSON.stringify(config.DEACTIVATE_BLOCKCHAIN_DOCUMENT_DELETE)}`);
-            if (config.DEACTIVATE_BLOCKCHAIN_DOCUMENT_DELETE) {
-              // Do not delete private document in blockchain
-              logger.info(`[EventService::eventDocumentReceived] document stored in DB but not deleted in Blockchain = ${JSON.stringify(storedDocument)}`);
-            } else if (referenceId !== undefined) {
-              const storedDocumentDeletedInBlockchain = await blockchainAdapterConnection.deletePrivateDocument(referenceId);
-              logger.info(`[EventService::eventDocumentReceived] document stored in DB successfully deleted in Blockchain = ${JSON.stringify(storedDocument)}`);
-            }
-            documentsStoredInDb.push(storedDocument);
-          } catch (exceptionInStoreAndDeleteDocument) {
-            logger.error(`[EventService::eventDocumentReceived] non-blocking error exceptionInStoreAndDeleteDocument for document = ${JSON.stringify(document)}`);
-            // Do not reject. If there is an exception for a document, the document will not be removed of the blockchain.
           }
+          const storedDocument = await storeBlockchainDocumentInLocalStorage(document);
+          const referenceId = ['contract', 'settlement'].includes(storedDocument.type) ? storedDocument.referenceId : undefined;
+          logger.info(`[EventService::eventDocumentReceived] config.DEACTIVATE_BLOCKCHAIN_DOCUMENT_DELETE = ${JSON.stringify(config.DEACTIVATE_BLOCKCHAIN_DOCUMENT_DELETE)}`);
+          if (config.DEACTIVATE_BLOCKCHAIN_DOCUMENT_DELETE) {
+            // Do not delete private document in blockchain
+            logger.info(`[EventService::eventDocumentReceived] document stored in DB but not deleted in Blockchain = ${JSON.stringify(storedDocument)}`);
+          } else if (referenceId !== undefined) {
+            const storedDocumentDeletedInBlockchain = await blockchainAdapterConnection.deletePrivateDocument(referenceId);
+            logger.info(`[EventService::eventDocumentReceived] document stored in DB successfully deleted in Blockchain = ${JSON.stringify(storedDocument)}`);
+          }
+          documentsStoredInDb.push(storedDocument);
+        } catch (exceptionInStoreAndDeleteDocument) {
+          logger.error(`[EventService::eventDocumentReceived] non-blocking error exceptionInStoreAndDeleteDocument for document = ${JSON.stringify(document)}`);
+          // Do not reject. If there is an exception for a document, the document will not be removed of the blockchain.
         }
       }
       const eventReceivedResp = documentsStoredInDb.map((documentStoredInDb) => {

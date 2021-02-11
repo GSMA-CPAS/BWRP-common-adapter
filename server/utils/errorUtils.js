@@ -200,15 +200,6 @@ class ErrorUtils {
     }
   };
 
-  static ERROR_BUSINESS_GENERATE_SETTLEMENT_AND_COMMIT_NOT_SUPPORTED = {
-    code: 422,
-    error: {
-      internalErrorCode: 2007,
-      message: 'commit is not implemented yet',
-      description: 'It\'s not allowed to commit the settlement yet.'
-    }
-  };
-
   static ERROR_BUSINESS_GENERATE_SETTLEMENT_ON_NOT_LINKED_CONTRACT_RECEIVED = {
     code: 422,
     error: {

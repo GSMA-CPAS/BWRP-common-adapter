@@ -8,13 +8,8 @@ const debugSetup = require('debug')('spec:setup');
 const chai = require('chai');
 const expect = require('chai').expect;
 
-const nock = require('nock');
-const blockchainAdapterNock = nock(testsUtils.getBlockchainAdapterUrl());
-
 const globalVersion = '/api/v1';
-const route = '/contracts/{contractId}/settlements/{settlementId}/send';
-
-const DATE_REGEX = testsUtils.getDateRegexp();
+const route = '/contracts/{contractId}/settlements/{settlementId}/discrepancy';
 
 describe(`Tests PUT ${route} API OK`, function() {
   describe(`Setup and Test PUT ${route} API`, function() {
@@ -47,6 +42,32 @@ describe(`Tests PUT ${route} API OK`, function() {
         generalInformation: {name: 'test1', type: 'Normal', endDate: '2021-01-01T00:00:00.000Z', startDate: '2020-12-01T00:00:00.000Z'}
       },
       rawData: 'Ctr_raw-data-1'
+    };
+    const usage1 = {
+      type: 'usage',
+      version: '1.1.0',
+      name: 'Usage data',
+      contractId: undefined,
+      mspOwner: undefined,
+      mspReceiver: undefined,
+      body: {
+        data: []
+      },
+      state: 'DRAFT'
+    };
+    const usage2 = {
+      type: 'usage',
+      version: '1.1.0',
+      name: 'Usage with data',
+      contractId: undefined,
+      mspOwner: undefined,
+      mspReceiver: undefined,
+      body: {
+        data: [
+          {year: 2020, month: 1, hpmn: 'HPMN', vpmn: 'VPMN', service: 'service', value: 1, units: 'unit', charges: 'charge', taxes: 'taxes'}
+        ]
+      },
+      state: 'DRAFT'
     };
     const settlement1 = {
       type: 'settlement',
@@ -112,28 +133,44 @@ describe(`Tests PUT ${route} API OK`, function() {
           debugSetup('Two contracts in db ', initDbWithContractsResp);
           contract1.id = initDbWithContractsResp[0].id;
           contract2.id = initDbWithContractsResp[1].id;
+          usage1.contractId = contract1.id;
+          usage1.mspOwner = contract1.fromMsp.mspId;
+          usage1.mspReceiver = contract1.toMsp.mspId;
           settlement1.contractId = contract1.id;
           settlement1.mspOwner = contract1.fromMsp.mspId;
           settlement1.mspReceiver = contract1.toMsp.mspId;
           settlement1.body.usage.mspOwner = contract1.fromMsp.mspId;
+          usage2.contractId = contract2.id;
+          usage2.mspOwner = contract2.fromMsp.mspId;
+          usage2.mspReceiver = contract2.toMsp.mspId;
           settlement2.contractId = contract2.id;
           settlement2.mspOwner = contract2.fromMsp.mspId;
           settlement2.mspReceiver = contract2.toMsp.mspId;
           settlement2.body.usage.mspOwner = contract2.fromMsp.mspId;
-          debugSetup('==> init db with 2 settlements');
-          testsDbUtils.initDbWithSettlements([settlement1, settlement2])
-            .then((initDbWithSettlementsResp) => {
-              debugSetup('First settlement document linked to contract ', initDbWithSettlementsResp[0].contractId);
-              debugSetup('Second settlement document linked to contract ', initDbWithSettlementsResp[1].contractId);
-              settlement1.id = initDbWithSettlementsResp[0].id;
-              settlement2.id = initDbWithSettlementsResp[1].id;
-              debugSetup('==> done!');
-              done();
+          debugSetup('==> init db with 2 usages');
+          testsDbUtils.initDbWithUsages([usage1, usage2])
+            .then((initDbWithUsagesResp) => {
+              debugSetup('The db is initialized with 2 usages : ', initDbWithUsagesResp.map((c) => c.id));
+              debugSetup('==> init db with 2 settlements');
+              testsDbUtils.initDbWithSettlements([settlement1, settlement2])
+                .then((initDbWithSettlementsResp) => {
+                  debugSetup('First settlement document linked to contract ', initDbWithSettlementsResp[0].contractId);
+                  debugSetup('Second settlement document linked to contract ', initDbWithSettlementsResp[1].contractId);
+                  settlement1.id = initDbWithSettlementsResp[0].id;
+                  settlement2.id = initDbWithSettlementsResp[1].id;
+                  debugSetup('==> done!');
+                  done();
+                })
+                .catch((initDbWithSettlementsError) => {
+                  debugSetup('Error initializing the db content : ', initDbWithSettlementsError);
+                  debugSetup('==> failed!');
+                  done(initDbWithSettlementsError);
+                });
             })
-            .catch((initDbWithSettlementsError) => {
-              debugSetup('Error initializing the db content : ', initDbWithSettlementsError);
+            .catch((initDbWithUsagesError) => {
+              debugSetup('Error initializing the db content : ', initDbWithUsagesError);
               debugSetup('==> failed!');
-              done(initDbWithSettlementsError);
+              done(initDbWithUsagesError);
             });
         })
         .catch((initDbWithContractsError) => {
@@ -143,30 +180,15 @@ describe(`Tests PUT ${route} API OK`, function() {
         });
     });
 
-    it('Put send settlement OK', function(done) {
-      blockchainAdapterNock.post('/private-documents')
-        .times(1)
-        .reply((pathReceived, bodyReceived) => {
-          // Only for exemple
-          expect(pathReceived).to.equals('/private-documents');
-          // expect(bodyReceived).to.be.empty;
-          return [
-            200,
-            {
-              referenceID: 'bec1ef2dbce73b6ae9841cf2edfa56de1f16d5a33d8a657de258e85c5f2e1bcb',
-              txID: 'b70cef323c0d3b56d44e9b31f16a11cba8dbbdd55c1d255b65f3fd2b3eadf8bb'
-            },
-            undefined
-          ];
-        });
+    it('Put usage discrepancy OK', function(done) {
       try {
-        const path = globalVersion + '/contracts/' + settlement1.contractId + '/settlements/' + settlement1.id + '/send/';
+        const path = globalVersion + '/contracts/' + settlement1.contractId + '/usages/' + usage1.id + '/discrepancy/';
         debug('path : ', path);
 
         const sentBody = {};
 
         chai.request(testsUtils.getServer())
-          .put(`${path}`)
+          .put(`${path}?settlementId=${settlement1.id}`)
           .send(sentBody)
           .end((error, response) => {
             debug('response.status: %s', JSON.stringify(response.status));
@@ -176,56 +198,17 @@ describe(`Tests PUT ${route} API OK`, function() {
             expect(response).to.be.json;
             expect(response.body).to.exist;
             expect(response.body).to.be.an('object');
-            expect(Object.keys(response.body)).have.members(['settlementId', 'contractId', 'mspOwner', 'state', 'referenceId', 'creationDate', 'lastModificationDate', 'header', 'body']);
+            expect(Object.keys(response.body)).have.members(['generatedDiscrepancy', 'otherData', 'localUsage', 'remoteUsage']);
 
-            expect(response.body).to.have.property('settlementId', settlement1.id);
-            expect(response.body).to.have.property('contractId', settlement1.contractId);
-            expect(response.body).to.have.property('state', 'SENT');
-            expect(response.body).to.have.property('mspOwner', settlement1.mspOwner);
-            expect(response.body).to.have.property('referenceId').that.is.a('string');
-            expect(response.body).to.have.property('creationDate').that.is.a('string').and.match(DATE_REGEX);
-            expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
+            expect(response.body).to.have.property('otherData').that.is.an('array').that.include('test', '8');
+            expect(response.body).to.have.property('generatedDiscrepancy').that.is.an('object');
+            expect(Object.keys(response.body.generatedDiscrepancy)).have.members(['data1', 'data2', 'object1']);
 
-            expect(response.body).to.have.property('header').that.is.an('object');
-            expect(Object.keys(response.body.header)).have.members(['name', 'type', 'version']);
-            expect(response.body.header).to.have.property('name', settlement1.name);
-            expect(response.body.header).to.have.property('type', settlement1.type);
-            expect(response.body.header).to.have.property('version', settlement1.version);
-
-            expect(response.body).to.have.property('body').that.is.an('object');
-            expect(Object.keys(response.body.body)).have.members(['generatedResult', 'usage']);
-            expect(response.body.body.generatedResult).to.deep.include(settlement1.body.generatedResult);
-            expect(response.body.body.usage).to.deep.include(settlement1.body.usage);
-
-            expect(blockchainAdapterNock.isDone(), 'Unconsumed nock error').to.be.true;
-
-            done();
-          });
-      } catch (exception) {
-        debug('exception: %s', exception.stack);
-        expect.fail('it test throws an exception');
-        done();
-      }
-    });
-
-    it('Put send settlement NOK if status is SENT', function(done) {
-      try {
-        const path = globalVersion + '/contracts/' + settlement2.contractId + '/settlements/' + settlement2.id + '/send/';
-        debug('path : ', path);
-
-        const sentBody = {};
-
-        chai.request(testsUtils.getServer())
-          .put(`${path}`)
-          .send(sentBody)
-          .end((error, response) => {
-            debug('response.status: %s', JSON.stringify(response.status));
-            debug('response.body: %s', JSON.stringify(response.body));
-            expect(error).to.be.null;
-            expect(response).to.have.status(422);
-            expect(response).to.be.json;
-            expect(response.body).to.exist;
-            expect(response.body.message).to.equal('Send settlement not allowed');
+            expect(response.body.generatedDiscrepancy).to.have.property('data1', 'a');
+            expect(response.body.generatedDiscrepancy).to.have.property('data2', 'b');
+            expect(response.body.generatedDiscrepancy).to.have.property('object1').that.is.an('object');
+            expect(Object.keys(response.body.generatedDiscrepancy.object1)).have.members(['object1data10']);
+            expect(response.body.generatedDiscrepancy.object1).to.have.property('object1data10', 'z');
 
             done();
           });

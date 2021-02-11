@@ -123,16 +123,13 @@ const updateSignatureById = ({contractId, signatureId, body}) => new Promise(
               // TODO: additional check if "signature" is valid.
 
               const bcSignatures = await blockchainAdapterConnection.uploadSignature(getContractByIdResp.referenceId, body.certificate, body.algorithm, body.signature);
-              console.log(bcSignatures);
 
               signatureLink[indexOfSignatureToUpdate]['txId'] = bcSignatures.txID;
 
               const contractToUpdate = getContractByIdResp;
               contractToUpdate.signatureLink = signatureLink;
-              console.log('11');
 
               const updateContractResp = await LocalStorageProvider.updateContract(contractToUpdate);
-              console.log(updateContractResp);
 
               const mySignature = {
                 signatureId: signatureId,

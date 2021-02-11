@@ -51,6 +51,50 @@ describe(`Tests GET ${route} API OK`, function() {
         done();
       }
     });
+
+    it(`Get DRAFT or SENT contracts OK without any contract in DB`, function(done) {
+      try {
+        const path = globalVersion + route;
+        chai.request(testsUtils.getServer())
+          .get(`${path}?states=DRAFT|SENT`)
+          .end((error, response) => {
+            debug('response.body: %s', JSON.stringify(response.body));
+            expect(error).to.be.null;
+            expect(response).to.have.status(200);
+            expect(response).to.be.json;
+            expect(response.body).to.exist;
+            expect(response.body).to.be.an('array');
+            expect(response.body.length).to.equal(0);
+            done();
+          });
+      } catch (exception) {
+        debug('exception: %s', exception.stack);
+        expect.fail('it test throws an exception');
+        done();
+      }
+    });
+
+    it(`Get DRAFT contracts with GSMA OK without any contract in DB`, function(done) {
+      try {
+        const path = globalVersion + route;
+        chai.request(testsUtils.getServer())
+          .get(`${path}?states=DRAFT&withMSPs=GSMA`)
+          .end((error, response) => {
+            debug('response.body: %s', JSON.stringify(response.body));
+            expect(error).to.be.null;
+            expect(response).to.have.status(200);
+            expect(response).to.be.json;
+            expect(response.body).to.exist;
+            expect(response.body).to.be.an('array');
+            expect(response.body.length).to.equal(0);
+            done();
+          });
+      } catch (exception) {
+        debug('exception: %s', exception.stack);
+        expect.fail('it test throws an exception');
+        done();
+      }
+    });
   });
 
   describe(`Setup and Test GET ${route} API with 2 contracts in DB`, function() {
@@ -179,6 +223,215 @@ describe(`Tests GET ${route} API OK`, function() {
             });
             expect(contract1IsFound).to.be.true;
             expect(contract2IsFound).to.be.true;
+
+            done();
+          });
+      } catch (exception) {
+        debug('exception: %s', exception.stack);
+        expect.fail('it test throws an exception');
+        done();
+      }
+    });
+
+    it('Get DRAFT contracts OK with 2 contracts in DB', function(done) {
+      try {
+        const path = globalVersion + route;
+        chai.request(testsUtils.getServer())
+          .get(`${path}?states=DRAFT`)
+          .end((error, response) => {
+            debug('response.body : ', JSON.stringify(response.body));
+            expect(error).to.be.null;
+            expect(response).to.have.status(200);
+            expect(response).to.be.json;
+            expect(response.body).to.exist;
+            expect(response.body).to.be.an('array');
+            expect(response.body.length).to.equal(2);
+
+            let contract1IsFound = false;
+            let contract2IsFound = false;
+            response.body.forEach((contractInBody) => {
+              let contract = undefined;
+              if (contractInBody.contractId === contract1.id) {
+                contract1IsFound = true;
+                contract = contract1;
+              }
+              if (contractInBody.contractId === contract2.id) {
+                contract2IsFound = true;
+                contract = contract2;
+              }
+              expect(Object.keys(contractInBody)).have.members(['contractId', 'state', 'creationDate', 'lastModificationDate', 'header', 'body']);
+              expect(contractInBody).to.have.property('contractId', contract.id);
+              expect(contractInBody).to.have.property('state', contract.state);
+              expect(contractInBody).to.have.property('creationDate').that.match(DATE_REGEX);
+              expect(contractInBody).to.have.property('lastModificationDate').that.match(DATE_REGEX);
+              expect(contractInBody).to.have.property('header').that.is.an('object');
+              expect(contractInBody).to.have.property('body').that.is.an('object');
+              expect(Object.keys(contractInBody.header)).have.members(['type', 'version', 'msps']);
+              expect(contractInBody.header).to.have.property('type', contract.type);
+              expect(contractInBody.header).to.have.property('version', contract.version);
+              expect(contractInBody.header).to.have.property('msps').that.is.an('object');
+              expect(Object.keys(contractInBody.body)).have.members(['metadata', 'framework']);
+              expect(contractInBody.body).to.have.property('metadata').that.is.an('object');
+              expect(contractInBody.body).to.have.property('framework').that.is.an('object');
+              expect(Object.keys(contractInBody.body.metadata)).have.members(['name', 'authors']);
+              expect(Object.keys(contractInBody.body.framework)).have.members(['term', 'partyInformation']);
+              if (contractInBody.contractId === contract1.id) {
+                expect(contractInBody.body.metadata).to.have.property('name', null);
+                expect(contractInBody.body.metadata).to.have.property('authors', null);
+                expect(contractInBody.body.framework).to.have.property('term', null);
+                expect(contractInBody.body.framework).to.have.property('partyInformation', null);
+              } else if (contractInBody.contractId === contract2.id) {
+                expect(contractInBody.body.metadata).to.have.property('name', contract2.body.metadata.name);
+                expect(contractInBody.body.metadata).to.have.property('authors', contract2.body.metadata.authors);
+                expect(contractInBody.body.framework).to.have.property('term').that.is.an('object');
+                expect(contractInBody.body.framework.term).to.deep.equals({start: '01-01-2021', end: '01-01-2027', otherField: 'a'});
+                expect(contractInBody.body.framework).to.have.property('partyInformation').that.is.an('object');
+                expect(contractInBody.body.framework.partyInformation).to.deep.equals({MyPartyId: {contractCurrency: 'euros', defaultTadigCodes: ['AZE', 'RTY']}});
+              }
+              expect(Object.keys(contractInBody.header.msps)).have.members([contract.fromMsp.mspId, contract.toMsp.mspId]);
+              expect(contractInBody.header.msps[contract.fromMsp.mspId]).to.have.property('signatures').to.be.an('array');
+              expect(contractInBody.header.msps[contract.toMsp.mspId]).to.have.property('signatures').to.be.an('array');
+            });
+            expect(contract1IsFound).to.be.true;
+            expect(contract2IsFound).to.be.true;
+
+            done();
+          });
+      } catch (exception) {
+        debug('exception: %s', exception.stack);
+        expect.fail('it test throws an exception');
+        done();
+      }
+    });
+
+    it('Get SENT contracts OK with 2 contracts in DB', function(done) {
+      try {
+        const path = globalVersion + route;
+        chai.request(testsUtils.getServer())
+          .get(`${path}?states=SENT`)
+          .end((error, response) => {
+            debug('response.body : ', JSON.stringify(response.body));
+            expect(error).to.be.null;
+            expect(response).to.have.status(200);
+            expect(response).to.be.json;
+            expect(response.body).to.exist;
+            expect(response.body).to.be.an('array');
+            expect(response.body.length).to.equal(0);
+            done();
+          });
+      } catch (exception) {
+        debug('exception: %s', exception.stack);
+        expect.fail('it test throws an exception');
+        done();
+      }
+    });
+
+    it('Get DRAFT contracts with B1 OK with 2 contracts in DB', function(done) {
+      try {
+        const path = globalVersion + route;
+        chai.request(testsUtils.getServer())
+          .get(`${path}?states=DRAFT&withMSPs=B1`)
+          .end((error, response) => {
+            debug('response.body : ', JSON.stringify(response.body));
+            expect(error).to.be.null;
+            expect(response).to.have.status(200);
+            expect(response).to.be.json;
+            expect(response.body).to.exist;
+            expect(response.body).to.be.an('array');
+            expect(response.body.length).to.equal(1);
+
+            const contractInBody = response.body[0];
+            const contract = contract1;
+            expect(Object.keys(contractInBody)).have.members(['contractId', 'state', 'creationDate', 'lastModificationDate', 'header', 'body']);
+            expect(contractInBody).to.have.property('contractId', contract.id);
+            expect(contractInBody).to.have.property('state', contract.state);
+            expect(contractInBody).to.have.property('creationDate').that.match(DATE_REGEX);
+            expect(contractInBody).to.have.property('lastModificationDate').that.match(DATE_REGEX);
+            expect(contractInBody).to.have.property('header').that.is.an('object');
+            expect(contractInBody).to.have.property('body').that.is.an('object');
+            expect(Object.keys(contractInBody.header)).have.members(['type', 'version', 'msps']);
+            expect(contractInBody.header).to.have.property('type', contract.type);
+            expect(contractInBody.header).to.have.property('version', contract.version);
+            expect(contractInBody.header).to.have.property('msps').that.is.an('object');
+            expect(Object.keys(contractInBody.body)).have.members(['metadata', 'framework']);
+            expect(contractInBody.body).to.have.property('metadata').that.is.an('object');
+            expect(contractInBody.body).to.have.property('framework').that.is.an('object');
+            expect(Object.keys(contractInBody.body.metadata)).have.members(['name', 'authors']);
+            expect(Object.keys(contractInBody.body.framework)).have.members(['term', 'partyInformation']);
+            if (contractInBody.contractId === contract1.id) {
+              expect(contractInBody.body.metadata).to.have.property('name', null);
+              expect(contractInBody.body.metadata).to.have.property('authors', null);
+              expect(contractInBody.body.framework).to.have.property('term', null);
+              expect(contractInBody.body.framework).to.have.property('partyInformation', null);
+            } else if (contractInBody.contractId === contract2.id) {
+              expect(contractInBody.body.metadata).to.have.property('name', contract2.body.metadata.name);
+              expect(contractInBody.body.metadata).to.have.property('authors', contract2.body.metadata.authors);
+              expect(contractInBody.body.framework).to.have.property('term').that.is.an('object');
+              expect(contractInBody.body.framework.term).to.deep.equals({start: '01-01-2021', end: '01-01-2027', otherField: 'a'});
+              expect(contractInBody.body.framework).to.have.property('partyInformation').that.is.an('object');
+              expect(contractInBody.body.framework.partyInformation).to.deep.equals({MyPartyId: {contractCurrency: 'euros', defaultTadigCodes: ['AZE', 'RTY']}});
+            }
+            expect(Object.keys(contractInBody.header.msps)).have.members([contract.fromMsp.mspId, contract.toMsp.mspId]);
+            expect(contractInBody.header.msps[contract.fromMsp.mspId]).to.have.property('signatures').to.be.an('array');
+            expect(contractInBody.header.msps[contract.toMsp.mspId]).to.have.property('signatures').to.be.an('array');
+
+            done();
+          });
+      } catch (exception) {
+        debug('exception: %s', exception.stack);
+        expect.fail('it test throws an exception');
+        done();
+      }
+    });
+
+    it('Get DRAFT contracts with C3 or C4 OK with 2 contracts in DB', function(done) {
+      try {
+        const path = globalVersion + route;
+        chai.request(testsUtils.getServer())
+          .get(`${path}?states=DRAFT&withMSPs=C3|C4`)
+          .end((error, response) => {
+            debug('response.body : ', JSON.stringify(response.body));
+            expect(error).to.be.null;
+            expect(response).to.have.status(200);
+            expect(response).to.be.json;
+            expect(response.body).to.exist;
+            expect(response.body).to.be.an('array');
+            expect(response.body.length).to.equal(1);
+
+            const contractInBody = response.body[0];
+            const contract = contract2;
+            expect(Object.keys(contractInBody)).have.members(['contractId', 'state', 'creationDate', 'lastModificationDate', 'header', 'body']);
+            expect(contractInBody).to.have.property('contractId', contract.id);
+            expect(contractInBody).to.have.property('state', contract.state);
+            expect(contractInBody).to.have.property('creationDate').that.match(DATE_REGEX);
+            expect(contractInBody).to.have.property('lastModificationDate').that.match(DATE_REGEX);
+            expect(contractInBody).to.have.property('header').that.is.an('object');
+            expect(contractInBody).to.have.property('body').that.is.an('object');
+            expect(Object.keys(contractInBody.header)).have.members(['type', 'version', 'msps']);
+            expect(contractInBody.header).to.have.property('type', contract.type);
+            expect(contractInBody.header).to.have.property('version', contract.version);
+            expect(contractInBody.header).to.have.property('msps').that.is.an('object');
+            expect(Object.keys(contractInBody.body)).have.members(['metadata', 'framework']);
+            expect(contractInBody.body).to.have.property('metadata').that.is.an('object');
+            expect(contractInBody.body).to.have.property('framework').that.is.an('object');
+            expect(Object.keys(contractInBody.body.metadata)).have.members(['name', 'authors']);
+            expect(Object.keys(contractInBody.body.framework)).have.members(['term', 'partyInformation']);
+            if (contractInBody.contractId === contract1.id) {
+              expect(contractInBody.body.metadata).to.have.property('name', null);
+              expect(contractInBody.body.metadata).to.have.property('authors', null);
+              expect(contractInBody.body.framework).to.have.property('term', null);
+              expect(contractInBody.body.framework).to.have.property('partyInformation', null);
+            } else if (contractInBody.contractId === contract2.id) {
+              expect(contractInBody.body.metadata).to.have.property('name', contract2.body.metadata.name);
+              expect(contractInBody.body.metadata).to.have.property('authors', contract2.body.metadata.authors);
+              expect(contractInBody.body.framework).to.have.property('term').that.is.an('object');
+              expect(contractInBody.body.framework.term).to.deep.equals({start: '01-01-2021', end: '01-01-2027', otherField: 'a'});
+              expect(contractInBody.body.framework).to.have.property('partyInformation').that.is.an('object');
+              expect(contractInBody.body.framework.partyInformation).to.deep.equals({MyPartyId: {contractCurrency: 'euros', defaultTadigCodes: ['AZE', 'RTY']}});
+            }
+            expect(Object.keys(contractInBody.header.msps)).have.members([contract.fromMsp.mspId, contract.toMsp.mspId]);
+            expect(contractInBody.header.msps[contract.fromMsp.mspId]).to.have.property('signatures').to.be.an('array');
+            expect(contractInBody.header.msps[contract.toMsp.mspId]).to.have.property('signatures').to.be.an('array');
 
             done();
           });

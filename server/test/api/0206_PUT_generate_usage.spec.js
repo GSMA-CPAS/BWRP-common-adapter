@@ -7,7 +7,8 @@ const debugSetup = require('debug')('spec:setup');
 
 const chai = require('chai');
 const expect = require('chai').expect;
-
+const nock = require('nock');
+const blockchainAdapterNock = nock(testsUtils.getBlockchainAdapterUrl());
 const globalVersion = '/api/v1';
 const route = '/contracts/{contractId}/usages/{usageId}/generate';
 
@@ -22,6 +23,8 @@ describe(`Tests PUT ${route} API OK`, function() {
       version: '1.1.0',
       fromMsp: {mspId: 'B1'},
       toMsp: {mspId: 'C1'},
+      referenceId: 'AZRAGGSHJIAJAOJSNJNSSNNAIT',
+      blockchainRef: {type: 'hlf', txId: 'TX-RAGGSHJIAJAOJSNJNSSNNAIT'},
       body: {
         bankDetails: {A1: {iban: null, bankName: null, currency: null}, B1: {iban: null, bankName: null, currency: null}},
         discountModels: 'someData',
@@ -82,7 +85,7 @@ describe(`Tests PUT ${route} API OK`, function() {
 
     it('Put generate usage OK with minimum contract details', function(done) {
       try {
-        const path = globalVersion + '/contracts/' + contractSent.id + '/usages/' + usageMinimumData.id + '/generate/';
+        const path = globalVersion + '/contracts/' + contractSent.id + '/usages/' + usageMinimumData.id + '/generate/?mode=preview';
         debug('path : ', path);
 
         const sentBody = {};
@@ -102,6 +105,68 @@ describe(`Tests PUT ${route} API OK`, function() {
 
             expect(response.body).to.have.property('contractId', contractSent.id);
             expect(response.body).to.have.property('state', 'DRAFT');
+            expect(response.body).to.have.property('mspOwner', usageMinimumData.mspOwner);
+            expect(response.body).to.have.property('creationDate').that.is.a('string').and.match(DATE_REGEX);
+            expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
+
+            expect(response.body).to.have.property('header').that.is.an('object');
+            expect(Object.keys(response.body.header)).have.members(['name', 'type', 'version']);
+            expect(response.body.header).to.have.property('type', 'settlement');
+
+
+            expect(response.body).to.have.property('body').that.is.an('object');
+            expect(Object.keys(response.body.body)).have.members(['generatedResult', 'usage']);
+            expect(response.body.body.usage.body).to.deep.include(usageMinimumData.body);
+
+
+            done();
+          });
+      } catch (exception) {
+        debug('exception: %s', exception.stack);
+        expect.fail('it test throws an exception');
+        done();
+      }
+    });
+
+    it('Put generate usage OK with mode=commit', function(done) {
+      blockchainAdapterNock.post('/private-documents')
+        .times(1)
+        .reply((pathReceived, bodyReceived) => {
+          // Only for exemple
+          expect(pathReceived).to.equals('/private-documents');
+          // expect(bodyReceived).to.be.empty;
+          return [
+            200,
+            {
+              referenceID: 'bec1ef2dbce73b6ae9841cf2edfa56de1f16d5a33d8a657de258e85c5f2e1bcb',
+              txID: 'b70cef323c0d3b56d44e9b31f16a11cba8dbbdd55c1d255b65f3fd2b3eadf8bb'
+            },
+            undefined
+          ];
+        });
+
+      try {
+        const path = globalVersion + '/contracts/' + contractSent.id + '/usages/' + usageMinimumData.id + '/generate/?mode=commit';
+        debug('path : ', path);
+
+        const sentBody = {};
+
+        chai.request(testsUtils.getServer())
+          .put(`${path}`)
+          .send(sentBody)
+          .end((error, response) => {
+            debug('response.status: %s', JSON.stringify(response.status));
+            debug('response.body: %s', JSON.stringify(response.body));
+            expect(error).to.be.null;
+            expect(response).to.have.status(200);
+            expect(response).to.be.json;
+            expect(response.body).to.exist;
+            expect(response.body).to.be.an('object');
+            expect(Object.keys(response.body)).have.members(['referenceId', 'settlementId', 'contractId', 'header', 'body', 'mspOwner', 'state', 'creationDate', 'lastModificationDate']);
+
+            expect(response.body).to.have.property('contractId', contractSent.id);
+            expect(response.body).to.have.property('state', 'SENT');
+            expect(response.body).to.have.property('referenceId', 'bec1ef2dbce73b6ae9841cf2edfa56de1f16d5a33d8a657de258e85c5f2e1bcb');
             expect(response.body).to.have.property('mspOwner', usageMinimumData.mspOwner);
             expect(response.body).to.have.property('creationDate').that.is.a('string').and.match(DATE_REGEX);
             expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);

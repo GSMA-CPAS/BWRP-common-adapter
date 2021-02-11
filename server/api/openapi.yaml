@@ -128,6 +128,47 @@ paths:
     get:
       description: Show a list of all Contracts
       operationId: getContracts
+      parameters:
+      - description: One or more MSPs
+        examples:
+          oneMSP:
+            summary: Example of a single MSP
+            value:
+            - GSMA
+          multipleMSPs:
+            summary: Example of multiple MSPs
+            value:
+            - GSMA
+            - OrdererMSP
+        explode: false
+        in: query
+        name: withMSPs
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: pipeDelimited
+      - description: One or more states
+        examples:
+          oneState:
+            summary: Example of a single state
+            value:
+            - DRAFT
+          multipleStates:
+            summary: Example of multiple states
+            value:
+            - SENT
+            - RECEIVED
+        explode: false
+        in: query
+        name: states
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: pipeDelimited
       responses:
         "200":
           content:
@@ -613,6 +654,55 @@ paths:
       - usage
       x-codegen-request-body-name: body
       x-eov-operation-handler: controllers/UsageController
+  /contracts/{contractId}/usages/{usageId}/discrepancy/:
+    put:
+      description: Create and return the discrepancy between an usage and the selected
+        settlement.
+      operationId: putUsageDiscrepancy
+      parameters:
+      - description: The contract Id
+        explode: false
+        in: path
+        name: contractId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The Usage Id
+        explode: false
+        in: path
+        name: usageId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The id of the settlement to compare
+        explode: false
+        in: query
+        name: settlementId
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Settlement'
+          description: Successful operation, returns sent Usage Object
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400ErrorResponse'
+          description: Bad Request
+        "500":
+          content: {}
+          description: Internal Error
+      tags:
+      - usage
+      x-eov-operation-handler: controllers/UsageController
   /contracts/{contractId}/usages/{usageId}/generate/:
     put:
       description: Generate the "Settlement" with local calculator and POST to Blochain
@@ -722,6 +812,55 @@ paths:
               schema:
                 $ref: '#/components/schemas/Settlement'
           description: The Settlement Object
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400ErrorResponse'
+          description: Bad Request
+        "500":
+          content: {}
+          description: Internal Error
+      tags:
+      - settlement
+      x-eov-operation-handler: controllers/SettlementController
+  /contracts/{contractId}/settlements/{settlementId}/discrepancy/:
+    put:
+      description: Create and return the discrepancy between an settlement and the
+        selected usage.
+      operationId: putSettlementDiscrepancy
+      parameters:
+      - description: The contract Id
+        explode: false
+        in: path
+        name: contractId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The Settlement Id
+        explode: false
+        in: path
+        name: settlementId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The id of the usage to compare
+        explode: false
+        in: query
+        name: usageId
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Settlement'
+          description: Successful operation, returns sent Usage Object
         "400":
           content:
             application/json:
@@ -910,9 +1049,7 @@ components:
           key: '{}'
       properties:
         header:
-          oneOf:
-          - $ref: '#/components/schemas/ContractRequest_header'
-          - $ref: '#/components/schemas/ContractRequest_header2'
+          $ref: '#/components/schemas/ContractRequest_header'
         body:
           additionalProperties: true
           type: object
@@ -1135,8 +1272,6 @@ components:
           minItems: 1
           type: array
       type: object
-    ContractRequest_header_msps:
-      type: object
     ContractRequest_header:
       example:
         fromMsp:
@@ -1181,28 +1316,6 @@ components:
       required:
       - fromMsp
       - toMsp
-      - type
-      - version
-      type: object
-    ContractRequest_header2:
-      properties:
-        name:
-          description: Human readable name for the contract.
-          example: Contract with XYZ
-          type: string
-        version:
-          description: Version of the contract
-          example: "1.0"
-          type: string
-        type:
-          description: Type of document. MUST be "contract"
-          enum:
-          - contract
-          type: string
-        msps:
-          $ref: '#/components/schemas/ContractRequest_header_msps'
-      required:
-      - msps
       - type
       - version
       type: object

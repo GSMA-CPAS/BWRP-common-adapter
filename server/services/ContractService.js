@@ -81,10 +81,10 @@ const getContractById = ({contractId, format}) => new Promise(
  *
  * @return {Promise<ServiceResponse>}
  */
-const getContracts = () => new Promise(
+const getContracts = ({withMSPs, states}) => new Promise(
   async (resolve, reject) => {
     try {
-      const getContractsResp = await LocalStorageProvider.getContracts();
+      const getContractsResp = await LocalStorageProvider.getContracts({msp: withMSPs, state: states});
       const returnedResponse = ContractMapper.getResponseBodyForGetContracts(getContractsResp);
       resolve(Service.successResponse(returnedResponse, 200));
     } catch (e) {
