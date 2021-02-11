@@ -39,6 +39,7 @@ Class | Method | HTTP request | Description
  - [400ErrorResponse](./Models/400ErrorResponse.md)
  - [ContractRequest](./Models/ContractRequest.md)
  - [ContractRequestHeader](./Models/ContractRequestHeader.md)
+ - [ContractRequestHeader2](./Models/ContractRequestHeader2.md)
  - [ContractRequestHeaderFromMsp](./Models/ContractRequestHeaderFromMsp.md)
  - [ContractRequestHeaderToMsp](./Models/ContractRequestHeaderToMsp.md)
  - [ContractResponse](./Models/ContractResponse.md)

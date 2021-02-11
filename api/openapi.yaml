@@ -1035,54 +1035,38 @@ components:
     ContractRequest:
       title: Contract JSON for POST/PUT
       type: object
+      example:
+        header:
+          fromMsp:
+            mspId: DTAG
+            signatures:
+            - role: role
+              name: name
+              id: id
+            - role: role
+              name: name
+              id: id
+          name: Contract with XYZ
+          toMsp:
+            mspId: TMUS
+            signatures:
+            - role: role
+              name: name
+              id: id
+            - role: role
+              name: name
+              id: id
+          type: contract
+          version: "1.0"
+        body:
+          key: '{}'
       properties:
         header:
-          properties:
-            name:
-              type: string
-              description: Human readable name for the contract.
-              example: Contract with XYZ
-            version:
-              type: string
-              description: Version of the contract
-              example: 1.0
-            type:
-              type: string
-              description: Type of document. MUST be "contract"
-              enum: [contract]
+          type: object
+          oneOf:
+          - $ref: '#/components/schemas/ContractRequest_header'
+          - $ref: '#/components/schemas/ContractRequest_header2'
 
-            fromMsp:
-              type: object
-              properties:
-                mspId:
-                  type: string
-                  description: mspId of the contract creator.
-                  example: DTAG
-                signatures:
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/SignatureBase'
-                  minItems: 1
-              
-            toMsp:
-              type: object
-              properties:
-                mspId:
-                  type: string
-                  description: mspId of the contract creator.
-                  example: TMUS
-                signatures:
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/SignatureBase'
-                  minItems: 1
-
-          additionalProperties: false
-          required:
-            - version
-            - type
-            - fromMsp
-            - toMsp
         body:
           additionalProperties: true
       additionalProperties: false
@@ -1092,6 +1076,10 @@ components:
 
     SignatureBase:
       type: object
+      example:
+        role: role
+        name: name
+        id: id
       properties:
         id:
           type: string
@@ -1264,3 +1252,117 @@ components:
       required:
         - error
         - description
+
+    ContractRequest_header_fromMsp:
+      example:
+        mspId: DTAG
+        signatures:
+        - role: role
+          name: name
+          id: id
+        - role: role
+          name: name
+          id: id
+      properties:
+        mspId:
+          description: mspId of the contract creator.
+          example: DTAG
+          type: string
+        signatures:
+          items:
+            $ref: '#/components/schemas/SignatureBase'
+          minItems: 1
+          type: array
+      type: object
+
+    ContractRequest_header_toMsp:
+      example:
+        mspId: TMUS
+        signatures:
+        - role: role
+          name: name
+          id: id
+        - role: role
+          name: name
+          id: id
+      properties:
+        mspId:
+          description: mspId of the contract creator.
+          example: TMUS
+          type: string
+        signatures:
+          items:
+            $ref: '#/components/schemas/SignatureBase'
+          minItems: 1
+          type: array
+      type: object
+
+    ContractRequest_header:
+      example:
+        fromMsp:
+          mspId: DTAG
+          signatures:
+          - role: role
+            name: name
+            id: id
+          - role: role
+            name: name
+            id: id
+        name: Contract with XYZ
+        toMsp:
+          mspId: TMUS
+          signatures:
+          - role: role
+            name: name
+            id: id
+          - role: role
+            name: name
+            id: id
+        type: contract
+        version: "1.0"
+      properties:
+        name:
+          type: string
+          description: Human readable name for the contract.
+          example: Contract with XYZ
+        version:
+          type: string
+          description: Version of the contract
+          example: 1.0
+        type:
+          type: string
+          description: Type of document. MUST be "contract"
+          enum: [contract]
+        fromMsp:
+          $ref: '#/components/schemas/ContractRequest_header_fromMsp'
+        toMsp:
+          $ref: '#/components/schemas/ContractRequest_header_toMsp'
+      required:
+        - version
+        - type
+        - fromMsp
+        - toMsp
+
+    ContractRequest_header2:
+      properties:
+        name:
+          description: Human readable name for the contract.
+          example: Contract with XYZ
+          type: string
+        version:
+          description: Version of the contract
+          example: "1.0"
+          type: string
+        type:
+          description: Type of document. MUST be "contract"
+          enum:
+          - contract
+          type: string
+        msps:
+          type: object
+      required:
+      - msps
+      - type
+      - version
+      type: object
+
