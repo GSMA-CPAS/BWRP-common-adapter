@@ -85,19 +85,15 @@ const generateUsageById = ({contractId, usageId, mode}) => new Promise(
   async (resolve, reject) => {
     try {
       const usage = await LocalStorageProvider.getUsage(usageId);
-
-      if (usage.contractId != contractId) {
+      if (usage.contractId !== contractId) {
         reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_GENERATE_SETTLEMENT_ON_NOT_LINKED_CONTRACT_RECEIVED));
       } else {
         const contract = await LocalStorageProvider.getContract(contractId);
         const getCalculateResultResp = await calculationServiceConnection.getCalculateResult(usage, contract);
         const settlement = SettlementMapper.getSettlementForGenerateUsageById(usage, contract, getCalculateResultResp);
         const createSettlementResp = await LocalStorageProvider.createSettlement(settlement);
-        if (mode == 'commit') {
-          console.log('0')
-
+        if (mode === 'commit') {
           const uploadSettlementResp = await blockchainAdapterConnection.uploadSettlement(createSettlementResp);
-          console.log('1')
           const getStorageKeysResp = await blockchainAdapterConnection.getStorageKeys(uploadSettlementResp.referenceId, [createSettlementResp.mspOwner, createSettlementResp.mspReceiver]);
           const updateSettlementResp = await LocalStorageProvider.updateSentSettlement(createSettlementResp.id, uploadSettlementResp.rawData, uploadSettlementResp.referenceId, getStorageKeysResp, uploadSettlementResp.blockchainRef);
           const returnedResponse = SettlementMapper.getResponseBodyForSendSettlement(updateSettlementResp);

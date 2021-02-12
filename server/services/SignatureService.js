@@ -198,7 +198,7 @@ const updateSignatureById = ({contractId, signatureId, body}) => new Promise(
  * @param {Object} body The Signature Object Payload
  * @return {Promise<ServiceResponse>}
  */
-const createSignature = ({contractId, body}) => new Promise(
+const createSignature = ({url, contractId, body}) => new Promise(
   async (resolve, reject) => {
     try {
       const getContractByIdResp = await LocalStorageProvider.getContract(contractId);
@@ -208,29 +208,28 @@ const createSignature = ({contractId, body}) => new Promise(
       } else {
         const signatureLink = getContractByIdResp.signatureLink;
         let msp = 'fromMsp';
-        if(getContractByIdResp.state=='RECEIVED') {
+        if (getContractByIdResp.state === 'RECEIVED') {
           msp = 'toMsp';
         }
         let indexOfSignatureToUpdate = -1;
         let signatureId = '';
         for (let i = 0; i < signatureLink.length; i++) {
-          if (signatureLink[i]['txId'] == undefined && signatureLink[i]['msp'] == msp) {
+          if (signatureLink[i]['txId'] == undefined && signatureLink[i]['msp'] === msp) {
             indexOfSignatureToUpdate = i;
             signatureId = signatureLink[i]['id'];
           }
         }
-        if (indexOfSignatureToUpdate == -1) {
+        if (indexOfSignatureToUpdate === -1) {
           reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_UPDATE_SIGNATURES_LIMIT));
         } else {
-          if (getContractByIdResp.state == 'SENT') {
+          if (getContractByIdResp.state === 'SENT') {
             // only Updates on fromMSP allowed
-            if (signatureLink[indexOfSignatureToUpdate].msp != 'fromMsp') {
+            if (signatureLink[indexOfSignatureToUpdate].msp !== 'fromMsp') {
               reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_UPDATE_SIGNATURES_ON_SENT_CONTRACT));
             } else {
               // TODO: additional check if "signature" is valid.
 
               const bcSignatures = await blockchainAdapterConnection.uploadSignature(getContractByIdResp.referenceId, body.certificate, body.algorithm, body.signature);
-              console.log(bcSignatures);
 
               signatureLink[indexOfSignatureToUpdate]['txId'] = bcSignatures.txID;
 
@@ -238,7 +237,6 @@ const createSignature = ({contractId, body}) => new Promise(
               contractToUpdate.signatureLink = signatureLink;
 
               const updateContractResp = await LocalStorageProvider.updateContract(contractToUpdate);
-              console.log(updateContractResp);
 
               const mySignature = {
                 signatureId: signatureId,
@@ -251,12 +249,16 @@ const createSignature = ({contractId, body}) => new Promise(
                 state: 'SIGNED'
               };
 
-              resolve(Service.successResponse(mySignature));
+              const returnedHeaders = {
+                'Content-Location': `${url.replace(/\/$/, '')}/${signatureId}`
+              };
+
+              resolve(Service.successResponse(mySignature, 201, returnedHeaders));
             }
           } else {
             // getContractByIdResp.state == 'RECEIVED'
             // only Updates on toMSP allowed
-            if (signatureLink[indexOfSignatureToUpdate].msp != 'toMsp') {
+            if (signatureLink[indexOfSignatureToUpdate].msp !== 'toMsp') {
               reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_UPDATE_SIGNATURES_ON_RECEIVED_CONTRACT));
             } else {
               // TODO: additional check if "signature" is valid.
@@ -280,7 +282,11 @@ const createSignature = ({contractId, body}) => new Promise(
                 state: 'SIGNED'
               };
 
-              resolve(Service.successResponse(mySignature));
+              const returnedHeaders = {
+                'Content-Location': `${url.replace(/\/$/, '')}/${signatureId}`
+              };
+
+              resolve(Service.successResponse(mySignature, 201, returnedHeaders));
             }
           }
         }

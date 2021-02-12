@@ -198,12 +198,10 @@ describe(`Tests GET ${route} API OK`, function() {
                 expect(response.body[0]).to.have.property('signatureId').that.is.a('string');
                 expect(response.body[0]).to.have.property('contractId', draftContract.id);
                 expect(response.body[0]).to.have.property('msp', draftContract.fromMsp.mspId);
-                expect(response.body[0]).to.have.property('name', draftContract.fromMsp.signatures[0].name);
                 expect(response.body[0]).to.have.property('state', 'UNSIGNED');
                 expect(response.body[1]).to.have.property('signatureId').that.is.a('string');
                 expect(response.body[1]).to.have.property('contractId', draftContract.id);
                 expect(response.body[1]).to.have.property('msp', draftContract.toMsp.mspId);
-                expect(response.body[1]).to.have.property('name', draftContract.toMsp.signatures[0].name);
                 expect(response.body[1]).to.have.property('state', 'UNSIGNED');
                 done();
               });
@@ -232,12 +230,10 @@ describe(`Tests GET ${route} API OK`, function() {
             expect(response.body[0]).to.have.property('signatureId').that.is.a('string');
             expect(response.body[0]).to.have.property('contractId', sentContract.id);
             expect(response.body[0]).to.have.property('msp', sentContract.fromMsp.mspId);
-            expect(response.body[0]).to.have.property('name', sentContract.fromMsp.signatures[0].name);
             expect(response.body[0]).to.have.property('state', 'UNSIGNED');
             expect(response.body[1]).to.have.property('signatureId').that.is.a('string');
             expect(response.body[1]).to.have.property('contractId', sentContract.id);
             expect(response.body[1]).to.have.property('msp', sentContract.toMsp.mspId);
-            expect(response.body[1]).to.have.property('name', sentContract.toMsp.signatures[0].name);
             expect(response.body[1]).to.have.property('state', 'UNSIGNED');
             done();
           });
@@ -265,12 +261,10 @@ describe(`Tests GET ${route} API OK`, function() {
             expect(response.body[0]).to.have.property('signatureId').that.is.a('string');
             expect(response.body[0]).to.have.property('contractId', receivedContract.id);
             expect(response.body[0]).to.have.property('msp', receivedContract.fromMsp.mspId);
-            expect(response.body[0]).to.have.property('name', receivedContract.fromMsp.signatures[0].name);
             expect(response.body[0]).to.have.property('state', 'UNSIGNED');
             expect(response.body[1]).to.have.property('signatureId').that.is.a('string');
             expect(response.body[1]).to.have.property('contractId', receivedContract.id);
             expect(response.body[1]).to.have.property('msp', receivedContract.toMsp.mspId);
-            expect(response.body[1]).to.have.property('name', receivedContract.toMsp.signatures[0].name);
             expect(response.body[1]).to.have.property('state', 'UNSIGNED');
             done();
           });

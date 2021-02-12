@@ -136,13 +136,11 @@ describe(`Tests GET ${route} API OK`, function() {
             expect(response).to.be.json;
             expect(response.body).to.exist;
             expect(response.body).to.be.an('object');
-            expect(Object.keys(response.body)).have.members(['signatureId', 'contractId', 'msp', 'name', 'role', 'algorithm', 'certificate', 'signature', 'blockchainRef', 'state']);
+            expect(Object.keys(response.body)).have.members(['signatureId', 'contractId', 'msp', 'algorithm', 'certificate', 'signature', 'blockchainRef', 'state']);
 
             expect(response.body).to.have.property('signatureId', signatureId);
             expect(response.body).to.have.property('contractId', sentContract.id);
             expect(response.body).to.have.property('msp', sentContract.fromMsp.mspId);
-            expect(response.body).to.have.property('name', sentContract.fromMsp.signatures[0].name);
-            expect(response.body).to.have.property('role', sentContract.fromMsp.signatures[0].role);
             expect(response.body).to.have.property('algorithm', getSignatureFromBlockchainAdapterResponse.f6c847b990945996a6c13e21713d76c982ef79779c43c8f9183cb30c3822e3d7.algorithm);
             expect(response.body).to.have.property('certificate', getSignatureFromBlockchainAdapterResponse.f6c847b990945996a6c13e21713d76c982ef79779c43c8f9183cb30c3822e3d7.certificate);
             expect(response.body).to.have.property('signature', getSignatureFromBlockchainAdapterResponse.f6c847b990945996a6c13e21713d76c982ef79779c43c8f9183cb30c3822e3d7.signature);
@@ -196,13 +194,11 @@ describe(`Tests GET ${route} API OK`, function() {
             expect(response).to.be.json;
             expect(response.body).to.exist;
             expect(response.body).to.be.an('object');
-            expect(Object.keys(response.body)).have.members(['signatureId', 'contractId', 'msp', 'name', 'role', 'state']);
+            expect(Object.keys(response.body)).have.members(['signatureId', 'contractId', 'msp', 'state']);
 
             expect(response.body).to.have.property('signatureId', signatureId);
             expect(response.body).to.have.property('contractId', sentContract.id);
             expect(response.body).to.have.property('msp', sentContract.toMsp.mspId);
-            expect(response.body).to.have.property('name', sentContract.toMsp.signatures[0].name);
-            expect(response.body).to.have.property('role', sentContract.toMsp.signatures[0].role);
             expect(response.body).to.have.property('state', 'UNSIGNED');
 
             done();

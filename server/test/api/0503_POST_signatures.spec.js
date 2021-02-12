@@ -12,10 +12,10 @@ const nock = require('nock');
 const blockchainAdapterNock = nock(testsUtils.getBlockchainAdapterUrl());
 
 const globalVersion = '/api/v1';
-const route = '/contracts/{contractId}/signatures/{signatureId}';
+const route = '/contracts/{contractId}/signatures/';
 
-describe(`Tests PUT ${route} API OK`, function() {
-  describe(`Setup and Test PUT ${route} API`, function() {
+describe(`Tests POST ${route} API OK`, function() {
+  describe(`Setup and Test POST ${route} API`, function() {
     /* eslint-disable max-len */
     const sentContract = {
       name: 'Contract sent between MSP1 and MSP2',
@@ -101,11 +101,10 @@ describe(`Tests PUT ${route} API OK`, function() {
         });
     });
 
-    it('Put signature OK on fromMsp for SENT contract', function(done) {
+    it('Post signatures OK for SENT contract', function(done) {
       try {
-        const signatureId = sentContract.signatureLink[0].id;
-        const path = globalVersion + '/contracts/' + sentContract.id + '/signatures/' + signatureId;
-        debug('PUT path : ', path);
+        const path = globalVersion + '/contracts/' + sentContract.id + '/signatures/';
+        debug('POST path : ', path);
 
         const sentBody = {
           signature: 'signature',
@@ -125,18 +124,18 @@ describe(`Tests PUT ${route} API OK`, function() {
             ];
           });
         chai.request(testsUtils.getServer())
-          .put(`${path}`)
+          .post(`${path}`)
           .send(sentBody)
           .end((error, response) => {
             debug('response.status: %s', JSON.stringify(response.status));
             debug('response.body: %s', JSON.stringify(response.body));
             expect(error).to.be.null;
-            expect(response).to.have.status(200);
+            expect(response).to.have.status(201);
             expect(response).to.be.json;
             expect(response.body).to.exist;
             expect(response.body).to.be.an('object');
 
-            expect(Object.keys(response.body)).have.members(['signatureId', 'contractId', 'msp', 'name', 'role', 'algorithm', 'certificate', 'signature', 'state']);
+            expect(Object.keys(response.body)).have.members(['blockchainRef', 'signatureId', 'contractId', 'msp', 'algorithm', 'certificate', 'signature', 'state']);
 
             expect(response.body).to.have.property('signatureId', sentContract.signatureLink[0].id);
             expect(response.body).to.have.property('contractId', sentContract.id);
@@ -145,6 +144,12 @@ describe(`Tests PUT ${route} API OK`, function() {
             expect(response.body).to.have.property('certificate', sentBody.certificate);
             expect(response.body).to.have.property('signature', sentBody.signature);
 
+            expect(response.body).to.have.property('blockchainRef').that.is.an('object');
+            expect(Object.keys(response.body.blockchainRef)).have.members(['type', 'txId']);
+            expect(response.body.blockchainRef).to.have.property('type', 'hlf');
+            expect(response.body.blockchainRef).to.have.property('txId', 'txidf2dbce73b6ae9841cf2edfa56de1f16d5a33d8a657de258e85c5f2e1bcb');
+
+            expect(response.headers).to.have.property('content-location', `${path.replace(/\/$/, '')}/${response.body.signatureId}`);
 
             done();
           });
@@ -155,12 +160,11 @@ describe(`Tests PUT ${route} API OK`, function() {
       }
     });
 
-    it('Put signature NOK on wrong contractId', function(done) {
+    it('Post signatures NOK on wrong contractId', function(done) {
       try {
         const randomValue = testsUtils.defineRandomValue();
-        const signatureId = sentContract.signatureLink[0].id;
-        const path = globalVersion + '/contracts/' + 'id_' + randomValue + '/signatures/' + signatureId;
-        debug('PUT path : ', path);
+        const path = globalVersion + '/contracts/' + 'id_' + randomValue + '/signatures/';
+        debug('POST path : ', path);
 
         const sentBody = {
           signature: 'signature',
@@ -169,7 +173,7 @@ describe(`Tests PUT ${route} API OK`, function() {
         };
 
         chai.request(testsUtils.getServer())
-          .put(`${path}`)
+          .post(`${path}`)
           .send(sentBody)
           .end((error, response) => {
             debug('response.body: %s', JSON.stringify(response.body));
@@ -188,11 +192,10 @@ describe(`Tests PUT ${route} API OK`, function() {
       }
     });
 
-    it('Put signature KO if contract is not SENT or RECEIVED', function(done) {
+    it('Post signatures KO if contract is not SENT or RECEIVED', function(done) {
       try {
-        const signatureId = sentContract.signatureLink[0].id;
-        const path = globalVersion + '/contracts/' + draftContract.id + '/signatures/' + signatureId;
-        debug('PUT path : ', path);
+        const path = globalVersion + '/contracts/' + draftContract.id + '/signatures/';
+        debug('POST path : ', path);
 
         const sentBody = {
           signature: 'signature',
@@ -212,7 +215,7 @@ describe(`Tests PUT ${route} API OK`, function() {
             ];
           });
         chai.request(testsUtils.getServer())
-          .put(`${path}`)
+          .post(`${path}`)
           .send(sentBody)
           .end((error, response) => {
             debug('response.body: %s', JSON.stringify(response.body));
@@ -231,91 +234,10 @@ describe(`Tests PUT ${route} API OK`, function() {
       }
     });
 
-    it('Put signature KO if signatureId not exists', function(done) {
+    it('Post signatures OK for RECEIVED contract', function(done) {
       try {
-        const randomValue = testsUtils.defineRandomValue();
-
-        const wrongSignatureId = sentContract.signatureLink[0].id + randomValue;
-        const path = globalVersion + '/contracts/' + sentContract.id + '/signatures/' + wrongSignatureId;
-        debug('PUT path : ', path);
-
-        const sentBody = {
-          signature: 'signature',
-          certificate: '-----BEGIN CERTIFICATE-----\nMIICYjCCAemgAwIBA...',
-          algorithm: 'secp384r1'
-        };
-
-        blockchainAdapterNock.put('/signatures/' + sentContract.referenceId)
-          .times(1)
-          .reply((pathReceived, bodyReceived) => {
-            return [
-              200,
-              {
-                txID: 'txidf2dbce73b6ae9841cf2edfa56de1f16d5a33d8a657de258e85c5f2e1bcb'
-              },
-              undefined
-            ];
-          });
-        chai.request(testsUtils.getServer())
-          .put(`${path}`)
-          .send(sentBody)
-          .end((error, response) => {
-            debug('response.status: %s', JSON.stringify(response.status));
-            debug('response.body: %s', JSON.stringify(response.body));
-            expect(error).to.be.null;
-            expect(response).to.have.status(404);
-            expect(response).to.be.json;
-            expect(response.body).to.exist;
-
-            expect(response.body.message).to.equal('Update signatures not allowed');
-            expect(response.body.description).to.equal('This signature Id doesn\'t exist');
-            done();
-          });
-      } catch (exception) {
-        debug('exception: %s', exception.stack);
-        expect.fail('it test throws an exception');
-        done();
-      }
-    });
-
-    it('Put signature KO on fromMsp if RECEIVED', function(done) {
-      try {
-        const signatureId = receivedContract.signatureLink[0].id;
-        const path = globalVersion + '/contracts/' + receivedContract.id + '/signatures/' + signatureId;
-        debug('PUT path : ', path);
-
-        const sentBody = {
-          signature: 'signature',
-          certificate: '-----BEGIN CERTIFICATE-----\nMIICYjCCAemgAwIBA...',
-          algorithm: 'secp384r1'
-        };
-        chai.request(testsUtils.getServer())
-          .put(`${path}`)
-          .send(sentBody)
-          .end((error, response) => {
-            debug('response.status: %s', JSON.stringify(response.status));
-            debug('response.body: %s', JSON.stringify(response.body));
-            expect(error).to.be.null;
-            expect(response).to.have.status(422);
-            expect(response).to.be.json;
-            expect(response.body).to.exist;
-
-            expect(response.body.message).to.equal('Update signatures not allowed');
-            expect(response.body.description).to.equal('For RECEIVED contract update signature only allowed on toMsp');
-            done();
-          });
-      } catch (exception) {
-        debug('exception: %s', exception.stack);
-        expect.fail('it test throws an exception');
-        done();
-      }
-    });
-
-    it('Put signature OK on toMsp for RECEIVED contract', function(done) {
-      try {
-        const signatureId = receivedContract.signatureLink[1].id;
-        const path = globalVersion + '/contracts/' + receivedContract.id + '/signatures/' + signatureId;
-        debug('PUT path : ', path);
+        const path = globalVersion + '/contracts/' + receivedContract.id + '/signatures/';
+        debug('POST path : ', path);
 
         const sentBody = {
           signature: 'signature',
@@ -335,18 +257,18 @@ describe(`Tests PUT ${route} API OK`, function() {
             ];
           });
         chai.request(testsUtils.getServer())
-          .put(`${path}`)
+          .post(`${path}`)
           .send(sentBody)
           .end((error, response) => {
             debug('response.status: %s', JSON.stringify(response.status));
             debug('response.body: %s', JSON.stringify(response.body));
             expect(error).to.be.null;
-            expect(response).to.have.status(200);
+            expect(response).to.have.status(201);
             expect(response).to.be.json;
             expect(response.body).to.exist;
             expect(response.body).to.be.an('object');
 
-            expect(Object.keys(response.body)).have.members(['signatureId', 'contractId', 'msp', 'name', 'role', 'algorithm', 'certificate', 'signature', 'state']);
+            expect(Object.keys(response.body)).have.members(['blockchainRef', 'signatureId', 'contractId', 'msp', 'algorithm', 'certificate', 'signature', 'state']);
 
             expect(response.body).to.have.property('signatureId', receivedContract.signatureLink[1].id);
             expect(response.body).to.have.property('contractId', receivedContract.id);
@@ -355,6 +277,12 @@ describe(`Tests PUT ${route} API OK`, function() {
             expect(response.body).to.have.property('certificate', sentBody.certificate);
             expect(response.body).to.have.property('signature', sentBody.signature);
 
+            expect(response.body).to.have.property('blockchainRef').that.is.an('object');
+            expect(Object.keys(response.body.blockchainRef)).have.members(['type', 'txId']);
+            expect(response.body.blockchainRef).to.have.property('type', 'hlf');
+            expect(response.body.blockchainRef).to.have.property('txId', 'idf2dbce73b6ae9841cf2edfa56de1f16d5a33d8a657de258e85c5f2e1bcb');
+
+            expect(response.headers).to.have.property('content-location', `${path.replace(/\/$/, '')}/${response.body.signatureId}`);
 
             done();
           });
