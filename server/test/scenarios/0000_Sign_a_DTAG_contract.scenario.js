@@ -3,6 +3,7 @@ const testsUtils = require('../tools/testsUtils');
 const testsDbUtils = require('../tools/testsDbUtils');
 const debug = require('debug')('spec:it');
 const debugSetup = require('debug')('spec:setup');
+const debugAction = require('debug')('spec:action');
 /* eslint-enable no-unused-vars */
 
 const chai = require('chai');
@@ -164,6 +165,7 @@ describe(`Launch scenario 0000_Sign_a_DTAG_contract`, function() {
   });
 
   it(`Create a new DTAG contract`, function(done) {
+    debugAction(`${this.test.title}`);
     try {
       chai.request(DTAG_API)
         .post(`/contracts/`)
@@ -204,6 +206,7 @@ describe(`Launch scenario 0000_Sign_a_DTAG_contract`, function() {
   };
 
   it(`Update the DTAG contract`, function(done) {
+    debugAction(`${this.test.title}`);
     if (DTAG_dynamic_data.contractId === undefined) {
       expect.fail('This scenario step should use an undefined data');
     }
@@ -231,6 +234,7 @@ describe(`Launch scenario 0000_Sign_a_DTAG_contract`, function() {
   });
 
   it(`Get the DTAG contract`, function(done) {
+    debugAction(`${this.test.title}`);
     if (DTAG_dynamic_data.contractId === undefined) {
       expect.fail('This scenario step should use an undefined data');
     }
@@ -258,6 +262,7 @@ describe(`Launch scenario 0000_Sign_a_DTAG_contract`, function() {
   });
 
   it(`Get all DTAG contracts`, function(done) {
+    debugAction(`${this.test.title}`);
     if (DTAG_dynamic_data.contractId === undefined) {
       expect.fail('This scenario step should use an undefined data');
     }
@@ -285,6 +290,7 @@ describe(`Launch scenario 0000_Sign_a_DTAG_contract`, function() {
   });
 
   it(`Send the DTAG contract`, function(done) {
+    debugAction(`${this.test.title}`);
     if (DTAG_dynamic_data.contractId === undefined) {
       expect.fail('This scenario step should use an undefined data');
     }
@@ -318,6 +324,7 @@ describe(`Launch scenario 0000_Sign_a_DTAG_contract`, function() {
   });
 
   it(`Get the DTAG contract in raw format`, function(done) {
+    debugAction(`${this.test.title}`);
     if ((DTAG_dynamic_data.contractId === undefined) || (DTAG_dynamic_data.contractReferenceId === undefined)) {
       expect.fail('This scenario step should use an undefined data');
     }
@@ -347,6 +354,7 @@ describe(`Launch scenario 0000_Sign_a_DTAG_contract`, function() {
   });
 
   it(`Wait this contract on TMUS`, function(done) {
+    debugAction(`${this.test.title}`);
     if (DTAG_dynamic_data.contractReferenceId === undefined) {
       expect.fail('This scenario step should use an undefined data');
     }
@@ -390,6 +398,7 @@ describe(`Launch scenario 0000_Sign_a_DTAG_contract`, function() {
   // Now create a signature in DTAG and send it to TMUS
 
   it(`Get the DTAG signatures`, function(done) {
+    debugAction(`${this.test.title}`);
     if (DTAG_dynamic_data.contractId === undefined) {
       expect.fail('This scenario step should use an undefined data');
     }
@@ -448,6 +457,7 @@ describe(`Launch scenario 0000_Sign_a_DTAG_contract`, function() {
   });
 
   it(`Get the TMUS signatures`, function(done) {
+    debugAction(`${this.test.title}`);
     if (TMUS_dynamic_data.receivedContractId === undefined) {
       expect.fail('This scenario step should use an undefined data');
     }
@@ -506,6 +516,7 @@ describe(`Launch scenario 0000_Sign_a_DTAG_contract`, function() {
   });
 
   it(`Put a signature on secondSignatureId of DTAG`, function(done) {
+    debugAction(`${this.test.title}`);
     if ((DTAG_dynamic_data.contractId === undefined) || (DTAG_dynamic_data.DTAG.secondSignatureId === undefined)) {
       expect.fail('This scenario step should use an undefined data');
     }
@@ -540,6 +551,7 @@ describe(`Launch scenario 0000_Sign_a_DTAG_contract`, function() {
   });
 
   it(`Get this signature details on DTAG`, function(done) {
+    debugAction(`${this.test.title}`);
     if ((DTAG_dynamic_data.contractId === undefined) || (DTAG_dynamic_data.DTAG.secondSignatureId === undefined)) {
       expect.fail('This scenario step should use an undefined data');
     }
@@ -574,6 +586,7 @@ describe(`Launch scenario 0000_Sign_a_DTAG_contract`, function() {
   });
 
   it(`Get the DTAG signatures`, function(done) {
+    debugAction(`${this.test.title}`);
     if (DTAG_dynamic_data.contractId === undefined) {
       expect.fail('This scenario step should use an undefined data');
     }
@@ -626,6 +639,7 @@ describe(`Launch scenario 0000_Sign_a_DTAG_contract`, function() {
   });
 
   it(`Wait TMUS signatures with 1 signed signatures`, function(done) {
+    debugAction(`${this.test.title}`);
     if (TMUS_dynamic_data.receivedContractId === undefined) {
       expect.fail('This scenario step should use an undefined data');
     }
@@ -693,6 +707,7 @@ describe(`Launch scenario 0000_Sign_a_DTAG_contract`, function() {
   });
 
   it(`Get this signature details on TMUS`, function(done) {
+    debugAction(`${this.test.title}`);
     if ((TMUS_dynamic_data.receivedContractId === undefined) || (TMUS_dynamic_data.DTAG.firstSignatureId === undefined)) {
       expect.fail('This scenario step should use an undefined data');
     }
@@ -729,6 +744,7 @@ describe(`Launch scenario 0000_Sign_a_DTAG_contract`, function() {
   // Now create a signature in TMUS and send it to DTAG
 
   it(`Put a signature on thirdSignatureId of TMUS`, function(done) {
+    debugAction(`${this.test.title}`);
     if ((TMUS_dynamic_data.receivedContractId === undefined) || (TMUS_dynamic_data.TMUS.thirdSignatureId === undefined)) {
       expect.fail('This scenario step should use an undefined data');
     }
@@ -763,6 +779,7 @@ describe(`Launch scenario 0000_Sign_a_DTAG_contract`, function() {
   });
 
   it(`Get the TMUS signatures`, function(done) {
+    debugAction(`${this.test.title}`);
     if (TMUS_dynamic_data.receivedContractId === undefined) {
       expect.fail('This scenario step should use an undefined data');
     }
@@ -818,6 +835,7 @@ describe(`Launch scenario 0000_Sign_a_DTAG_contract`, function() {
   });
 
   it(`Wait DTAG signatures with 2 signed signatures`, function(done) {
+    debugAction(`${this.test.title}`);
     if (DTAG_dynamic_data.contractId === undefined) {
       expect.fail('This scenario step should use an undefined data');
     }
@@ -888,6 +906,7 @@ describe(`Launch scenario 0000_Sign_a_DTAG_contract`, function() {
   // Now delete the created contract resources
 
   it(`Delete the DTAG contract created by this scenario`, function(done) {
+    debugAction(`${this.test.title}`);
     if (DTAG_dynamic_data.contractId === undefined) {
       expect.fail('This scenario step should use an undefined data');
     }
@@ -917,6 +936,7 @@ describe(`Launch scenario 0000_Sign_a_DTAG_contract`, function() {
   });
 
   it(`Delete the TMUS contract created by this scenario`, function(done) {
+    debugAction(`${this.test.title}`);
     if (TMUS_dynamic_data.receivedContractId === undefined) {
       expect.fail('This scenario step should use an undefined data');
     }
