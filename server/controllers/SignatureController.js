@@ -8,6 +8,10 @@
 
 const Controller = require('./Controller');
 const service = require('../services/SignatureService');
+const createSignature = async (request, response) => {
+  await Controller.handleRequest(request, response, service.createSignature);
+};
+
 const getSignatureById = async (request, response) => {
   await Controller.handleRequest(request, response, service.getSignatureById);
 };
@@ -16,13 +20,9 @@ const getSignatures = async (request, response) => {
   await Controller.handleRequest(request, response, service.getSignatures);
 };
 
-const updateSignatureById = async (request, response) => {
-  await Controller.handleRequest(request, response, service.updateSignatureById);
-};
-
 
 module.exports = {
+  createSignature,
   getSignatureById,
   getSignatures,
-  updateSignatureById,
 };

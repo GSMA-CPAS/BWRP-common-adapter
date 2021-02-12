@@ -20,9 +20,9 @@ Class | Method | HTTP request | Description
 *SettlementApi* | [**getSettlements**](Apis/SettlementApi.md#getsettlements) | **GET** /contracts/{contractId}/settlements/ | Get All Settlement of a given Contract
 *SettlementApi* | [**putSettlementDiscrepancy**](Apis/SettlementApi.md#putsettlementdiscrepancy) | **PUT** /contracts/{contractId}/settlements/{settlementId}/discrepancy/ | Create and return the discrepancy between an settlement and the selected usage.
 *SettlementApi* | [**sendSettlementById**](Apis/SettlementApi.md#sendsettlementbyid) | **PUT** /contracts/{contractId}/settlements/{settlementId}/send/ | Set State to \"SEND\" and POST to Blockchain adapter towards TargetMsp of the Usage
+*SignatureApi* | [**createSignature**](Apis/SignatureApi.md#createsignature) | **POST** /contracts/{contractId}/signatures/ | Create/Upload Signature
 *SignatureApi* | [**getSignatureById**](Apis/SignatureApi.md#getsignaturebyid) | **GET** /contracts/{contractId}/signatures/{signatureId} | Get Signature Object by its Id
 *SignatureApi* | [**getSignatures**](Apis/SignatureApi.md#getsignatures) | **GET** /contracts/{contractId}/signatures/ | Get All signatures of a given Contract
-*SignatureApi* | [**updateSignatureById**](Apis/SignatureApi.md#updatesignaturebyid) | **PUT** /contracts/{contractId}/signatures/{signatureId} | Update Signature Object by its Id
 *StatusApi* | [**getApiStatus**](Apis/StatusApi.md#getapistatus) | **GET** /status | Show version information of the API
 *UsageApi* | [**createUsage**](Apis/UsageApi.md#createusage) | **POST** /contracts/{contractId}/usages/ | Create a new Usage
 *UsageApi* | [**deleteUsageById**](Apis/UsageApi.md#deleteusagebyid) | **DELETE** /contracts/{contractId}/usages/{usageId} | Delete a Usage By its Id
