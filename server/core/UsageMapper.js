@@ -30,6 +30,8 @@ class UsageMapper {
         mspOwner: usage.mspOwner
       },
       state: usage.state,
+      referenceId: usage.referenceId,
+      mspOwner: usage.mspOwner,
       body: usage.body,
       // history: usage.history,
       creationDate: usage.creationDate,
@@ -50,10 +52,11 @@ class UsageMapper {
           header: {
             name: usage.name,
             type: usage.type,
-            version: usage.version,
-            mspOwner: usage.mspOwner
+            version: usage.version
           },
           state: usage.state,
+          referenceId: usage.referenceId,
+          mspOwner: usage.mspOwner,    
           creationDate: usage.creationDate,
           lastModificationDate: usage.lastModificationDate
         });

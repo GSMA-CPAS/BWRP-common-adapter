@@ -147,10 +147,11 @@ describe(`Tests POST ${route} API OK`, function() {
             expect(response.body).to.exist;
             expect(response.body).to.be.an('object');
 
-            expect(Object.keys(response.body)).have.members(['usageId', 'contractId', 'state', 'creationDate', 'lastModificationDate', 'header', 'body']);
+            expect(Object.keys(response.body)).have.members(['usageId', 'contractId', 'mspOwner', 'state', 'creationDate', 'lastModificationDate', 'header', 'body']);
 
             expect(response.body).to.have.property('usageId').that.is.a('string');
             expect(response.body).to.have.property('contractId').that.is.a('string');
+            expect(response.body).to.have.property('mspOwner', testsUtils.getSelfMspId());
 
             expect(response.body).to.have.property('state', 'DRAFT');
             expect(response.body).to.have.property('creationDate').that.is.a('string').and.match(DATE_REGEX);
@@ -214,10 +215,11 @@ describe(`Tests POST ${route} API OK`, function() {
             expect(response.body).to.exist;
             expect(response.body).to.be.an('object');
 
-            expect(Object.keys(response.body)).have.members(['usageId', 'contractId', 'state', 'creationDate', 'lastModificationDate', 'header', 'body']);
+            expect(Object.keys(response.body)).have.members(['usageId', 'contractId', 'mspOwner', 'state', 'creationDate', 'lastModificationDate', 'header', 'body']);
 
             expect(response.body).to.have.property('usageId').that.is.a('string');
             expect(response.body).to.have.property('state', 'DRAFT');
+            expect(response.body).to.have.property('mspOwner', testsUtils.getSelfMspId());
             expect(response.body).to.have.property('creationDate').that.is.a('string').and.match(DATE_REGEX);
             expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
 

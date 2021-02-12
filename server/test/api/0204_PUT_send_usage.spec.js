@@ -177,10 +177,12 @@ describe(`Tests PUT ${route} API OK`, function() {
             expect(response.body).to.exist;
             expect(response.body).to.be.an('object');
 
-            expect(Object.keys(response.body)).have.members(['usageId', 'contractId', 'header', 'state', 'body', 'creationDate', 'lastModificationDate']);
+            expect(Object.keys(response.body)).have.members(['usageId', 'contractId', 'header', 'mspOwner', 'referenceId', 'state', 'body', 'creationDate', 'lastModificationDate']);
 
             expect(response.body).to.have.property('usageId', usageMinimumData.id);
             expect(response.body).to.have.property('contractId', usageMinimumData.contractId);
+            expect(response.body).to.have.property('mspOwner', usageMinimumData.mspOwner);
+            expect(response.body).to.have.property('referenceId').that.is.a('string');
             expect(response.body).to.have.property('state', 'SENT');
             expect(response.body).to.have.property('creationDate').that.is.a('string').and.match(DATE_REGEX);
             expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
@@ -241,10 +243,12 @@ describe(`Tests PUT ${route} API OK`, function() {
             expect(response.body).to.exist;
             expect(response.body).to.be.an('object');
 
-            expect(Object.keys(response.body)).have.members(['usageId', 'contractId', 'header', 'state', 'body', 'creationDate', 'lastModificationDate']);
+            expect(Object.keys(response.body)).have.members(['usageId', 'contractId', 'header', 'mspOwner', 'referenceId', 'state', 'body', 'creationDate', 'lastModificationDate']);
 
             expect(response.body).to.have.property('usageId', usageMoreData.id);
             expect(response.body).to.have.property('state', 'SENT');
+            expect(response.body).to.have.property('mspOwner', usageMinimumData.mspOwner);
+            expect(response.body).to.have.property('referenceId').that.is.a('string');
             expect(response.body).to.have.property('creationDate').that.is.a('string').and.match(DATE_REGEX);
             expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
 
