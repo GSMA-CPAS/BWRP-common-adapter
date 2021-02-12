@@ -201,7 +201,8 @@ class BlockchainAdapterProvider {
       return {
         rawData,
         referenceId: response.data.referenceID,
-        blockchainRef: {type: 'hlf', // need a dynamic way to define type to support future multiledger system
+        blockchainRef: {
+          type: 'hlf', // need a dynamic way to define type to support future multiledger system
           txId: response.data.txID
         }
       };
@@ -377,7 +378,10 @@ class BlockchainAdapterProvider {
       return {
         rawData,
         referenceId: response.data.referenceID,
-        txId: response.data.txID
+        blockchainRef: {
+          type: 'hlf', // need a dynamic way to define type to support future multiledger system
+          txId: response.data.txID
+        }
       };
     } catch (error) {
       logger.error('[BlockchainAdapterProvider::uploadUsage] failed to upload usage - %s', error.message);
@@ -401,7 +405,10 @@ class BlockchainAdapterProvider {
       return {
         rawData,
         referenceId: response.data.referenceID,
-        txId: response.data.txID
+        blockchainRef: {
+          type: 'hlf', // need a dynamic way to define type to support future multiledger system
+          txId: response.data.txID
+        }
       };
     } catch (error) {
       logger.error('[BlockchainAdapterProvider::uploadSettlement] failed to upload settlement - %s', error.message);

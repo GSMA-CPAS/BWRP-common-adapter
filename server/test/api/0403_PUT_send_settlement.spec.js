@@ -176,7 +176,7 @@ describe(`Tests PUT ${route} API OK`, function() {
             expect(response).to.be.json;
             expect(response.body).to.exist;
             expect(response.body).to.be.an('object');
-            expect(Object.keys(response.body)).have.members(['settlementId', 'contractId', 'mspOwner', 'state', 'referenceId', 'creationDate', 'lastModificationDate', 'header', 'body']);
+            expect(Object.keys(response.body)).have.members(['settlementId', 'contractId', 'mspOwner', 'state', 'referenceId', 'blockchainRef', 'creationDate', 'lastModificationDate', 'header', 'body']);
 
             expect(response.body).to.have.property('settlementId', settlement1.id);
             expect(response.body).to.have.property('contractId', settlement1.contractId);
@@ -191,6 +191,11 @@ describe(`Tests PUT ${route} API OK`, function() {
             expect(response.body.header).to.have.property('name', settlement1.name);
             expect(response.body.header).to.have.property('type', settlement1.type);
             expect(response.body.header).to.have.property('version', settlement1.version);
+
+            expect(response.body).to.have.property('blockchainRef').that.is.an('object');
+            expect(Object.keys(response.body.blockchainRef)).have.members(['type', 'txId']);
+            expect(response.body.blockchainRef).to.have.property('type', 'hlf');
+            expect(response.body.blockchainRef).to.have.property('txId', 'b70cef323c0d3b56d44e9b31f16a11cba8dbbdd55c1d255b65f3fd2b3eadf8bb');
 
             expect(response.body).to.have.property('body').that.is.an('object');
             expect(Object.keys(response.body.body)).have.members(['generatedResult', 'usage']);

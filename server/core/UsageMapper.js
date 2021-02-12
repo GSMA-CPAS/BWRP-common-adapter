@@ -31,6 +31,7 @@ class UsageMapper {
       },
       state: usage.state,
       referenceId: usage.referenceId,
+      blockchainRef: usage.blockchainRef,
       mspOwner: usage.mspOwner,
       body: usage.body,
       // history: usage.history,
@@ -56,7 +57,8 @@ class UsageMapper {
           },
           state: usage.state,
           referenceId: usage.referenceId,
-          mspOwner: usage.mspOwner,    
+          blockchainRef: usage.blockchainRef,
+          mspOwner: usage.mspOwner,
           creationDate: usage.creationDate,
           lastModificationDate: usage.lastModificationDate
         });

@@ -246,11 +246,12 @@ class LocalStorageProvider {
    * @param {String} rawData
    * @param {String} referenceId
    * @param {Array<String>} storageKeys
+   * @param {JSON} blockchainRef
    * @return {Promise<object>}
    */
-  static async updateSentUsage(usageId, rawData, referenceId, storageKeys) {
+  static async updateSentUsage(usageId, rawData, referenceId, storageKeys, blockchainRef) {
     try {
-      return await UsageDAO.findOneAndUpdateToSentUsage(usageId, rawData, referenceId, storageKeys);
+      return await UsageDAO.findOneAndUpdateToSentUsage(usageId, rawData, referenceId, storageKeys, blockchainRef);
     } catch (error) {
       logger.error('[LocalStorageProvider::updateSentUsage] failed to update sent usage - %s', error.message);
       throw error;
@@ -377,11 +378,12 @@ class LocalStorageProvider {
    * @param {String} rawData
    * @param {String} referenceId
    * @param {Array<String>} storageKeys
+   * @param {JSON} blockchainRef
    * @return {Promise<object>}
    */
-  static async updateSentSettlement(settlementId, rawData, referenceId, storageKeys) {
+  static async updateSentSettlement(settlementId, rawData, referenceId, storageKeys, blockchainRef) {
     try {
-      return await SettlementDAO.findOneAndUpdateToSentSettlement(settlementId, rawData, referenceId, storageKeys);
+      return await SettlementDAO.findOneAndUpdateToSentSettlement(settlementId, rawData, referenceId, storageKeys, blockchainRef);
     } catch (error) {
       logger.error('[LocalStorageProvider::updateSentSettlement] failed to update sent settlement - %s', error.message);
       throw error;

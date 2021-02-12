@@ -244,7 +244,7 @@ class UsageDAO {
     });
   }
 
-  static findOneAndUpdateToSentUsage(usageId, rawData, referenceId, storageKeys) {
+  static findOneAndUpdateToSentUsage(usageId, rawData, referenceId, storageKeys, blockchainRef) {
     return new Promise((resolve, reject) => {
       // Verify parameters
       if (usageId === undefined) {
@@ -263,6 +263,10 @@ class UsageDAO {
         logger.error('[UsageDAO::findOneAndUpdateToSentUsage] [FAILED] : storageKeys undefined');
         reject(MISSING_MANDATORY_PARAM_ERROR);
       }
+      if (blockchainRef === undefined) {
+        logger.error('[UsageDAO::findOneAndUpdateToSentUsage] [FAILED] : blockchainRef undefined');
+        reject(MISSING_MANDATORY_PARAM_ERROR);
+      }
 
       // Define automatic values
       const lastModificationDate = Date.now();
@@ -278,6 +282,7 @@ class UsageDAO {
         $set: {
           rawData: rawData,
           referenceId: referenceId,
+          blockchainRef: blockchainRef,
           storageKeys: storageKeys,
           state: 'SENT',
           lastModificationDate: lastModificationDate

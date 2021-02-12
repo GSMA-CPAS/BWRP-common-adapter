@@ -113,7 +113,6 @@ describe(`Tests PUT ${route} API OK`, function() {
             expect(Object.keys(response.body.header)).have.members(['name', 'type', 'version']);
             expect(response.body.header).to.have.property('type', 'settlement');
 
-
             expect(response.body).to.have.property('body').that.is.an('object');
             expect(Object.keys(response.body.body)).have.members(['generatedResult', 'usage']);
             expect(response.body.body.usage.body).to.deep.include(usageMinimumData.body);
@@ -162,7 +161,7 @@ describe(`Tests PUT ${route} API OK`, function() {
             expect(response).to.be.json;
             expect(response.body).to.exist;
             expect(response.body).to.be.an('object');
-            expect(Object.keys(response.body)).have.members(['referenceId', 'settlementId', 'contractId', 'header', 'body', 'mspOwner', 'state', 'creationDate', 'lastModificationDate']);
+            expect(Object.keys(response.body)).have.members(['referenceId', 'blockchainRef', 'settlementId', 'contractId', 'header', 'body', 'mspOwner', 'state', 'creationDate', 'lastModificationDate']);
 
             expect(response.body).to.have.property('contractId', contractSent.id);
             expect(response.body).to.have.property('state', 'SENT');
@@ -175,6 +174,10 @@ describe(`Tests PUT ${route} API OK`, function() {
             expect(Object.keys(response.body.header)).have.members(['name', 'type', 'version']);
             expect(response.body.header).to.have.property('type', 'settlement');
 
+            expect(response.body).to.have.property('blockchainRef').that.is.an('object');
+            expect(Object.keys(response.body.blockchainRef)).have.members(['type', 'txId']);
+            expect(response.body.blockchainRef).to.have.property('type', 'hlf');
+            expect(response.body.blockchainRef).to.have.property('txId', 'b70cef323c0d3b56d44e9b31f16a11cba8dbbdd55c1d255b65f3fd2b3eadf8bb');
 
             expect(response.body).to.have.property('body').that.is.an('object');
             expect(Object.keys(response.body.body)).have.members(['generatedResult', 'usage']);

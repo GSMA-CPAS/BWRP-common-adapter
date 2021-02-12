@@ -62,7 +62,7 @@ const sendSettlementById = ({contractId, settlementId}) => new Promise(
       }
       const uploadSettlementResp = await blockchainAdapterConnection.uploadSettlement(getSettlementByIdResp);
       const getStorageKeysResp = await blockchainAdapterConnection.getStorageKeys(uploadSettlementResp.referenceId, [getSettlementByIdResp.mspOwner, getSettlementByIdResp.mspReceiver]);
-      const updateSettlementResp = await LocalStorageProvider.updateSentSettlement(settlementId, uploadSettlementResp.rawData, uploadSettlementResp.referenceId, getStorageKeysResp);
+      const updateSettlementResp = await LocalStorageProvider.updateSentSettlement(settlementId, uploadSettlementResp.rawData, uploadSettlementResp.referenceId, getStorageKeysResp, uploadSettlementResp.blockchainRef);
       const returnedResponse = SettlementMapper.getResponseBodyForSendSettlement(updateSettlementResp);
       resolve(Service.successResponse(returnedResponse, 200));
     } catch (e) {
@@ -99,7 +99,7 @@ const generateUsageById = ({contractId, usageId, mode}) => new Promise(
           const uploadSettlementResp = await blockchainAdapterConnection.uploadSettlement(createSettlementResp);
           console.log('1')
           const getStorageKeysResp = await blockchainAdapterConnection.getStorageKeys(uploadSettlementResp.referenceId, [createSettlementResp.mspOwner, createSettlementResp.mspReceiver]);
-          const updateSettlementResp = await LocalStorageProvider.updateSentSettlement(createSettlementResp.id, uploadSettlementResp.rawData, uploadSettlementResp.referenceId, getStorageKeysResp);
+          const updateSettlementResp = await LocalStorageProvider.updateSentSettlement(createSettlementResp.id, uploadSettlementResp.rawData, uploadSettlementResp.referenceId, getStorageKeysResp, uploadSettlementResp.blockchainRef);
           const returnedResponse = SettlementMapper.getResponseBodyForSendSettlement(updateSettlementResp);
           resolve(Service.successResponse(returnedResponse, 200));
         } else {
