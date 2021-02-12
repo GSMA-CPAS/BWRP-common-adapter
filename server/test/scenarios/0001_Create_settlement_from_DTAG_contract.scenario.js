@@ -74,9 +74,11 @@ const TMUS_create_usage_body = {
 
 const DTAG_dynamic_data = {
   contractId: undefined,
+  contractTxId: undefined,
   contractReferenceId: undefined,
   usageId: undefined,
   settlementId: undefined,
+  settlementTxId: undefined,
   settlementReferenceId: undefined,
   receivedSettlementId: undefined
 };
@@ -85,6 +87,7 @@ const TMUS_dynamic_data = {
   receivedContractId: undefined,
   usageId: undefined,
   settlementId: undefined,
+  settlementTxId: undefined,
   settlementReferenceId: undefined,
   receivedSettlementId: undefined
 };
@@ -283,6 +286,12 @@ describe(`Launch scenario 0001_Create_settlement_from_DTAG_contract`, function()
           expect(response.body).to.have.property('state', 'SENT');
           expect(response.body).to.have.property('referenceId').that.is.a('string');
 
+          expect(response.body).to.have.property('blockchainRef').that.is.an('object');
+          expect(response.body.blockchainRef).to.have.property('type', 'hlf');
+          expect(response.body.blockchainRef).to.have.property('txId').that.is.a('string');
+
+          DTAG_dynamic_data.contractTxId = response.body.blockchainRef.txId;
+          debug(`==> DTAG contract txId : ${DTAG_dynamic_data.contractTxId}`);
           DTAG_dynamic_data.contractReferenceId = response.body.referenceId;
           debug(`==> DTAG contract referenceId : ${DTAG_dynamic_data.contractReferenceId}`);
 
@@ -417,6 +426,12 @@ describe(`Launch scenario 0001_Create_settlement_from_DTAG_contract`, function()
 
           expect(response.body).to.have.property('state', 'RECEIVED');
           expect(response.body).to.have.property('referenceId').that.is.a('string');
+
+          expect(response.body).to.have.property('blockchainRef').that.is.an('object');
+          expect(response.body.blockchainRef).to.have.property('type', 'hlf');
+          // not returned yet by blockchain-adapter
+          // expect(response.body.blockchainRef).to.have.property('txId', DTAG_dynamic_data.contractTxId);
+          expect(response.body.blockchainRef).to.have.property('txId', 'XXXXXXX');
 
           debugObjectOnTMUS('Received contract from DTAG : ', response.body);
 
@@ -561,6 +576,12 @@ describe(`Launch scenario 0001_Create_settlement_from_DTAG_contract`, function()
           expect(response.body).to.have.property('referenceId').that.is.a('string');
           expect(response.body).to.have.property('mspOwner', 'DTAG');
 
+          expect(response.body).to.have.property('blockchainRef').that.is.an('object');
+          expect(response.body.blockchainRef).to.have.property('type', 'hlf');
+          expect(response.body.blockchainRef).to.have.property('txId').that.is.a('string');
+
+          DTAG_dynamic_data.settlementTxId = response.body.blockchainRef.txId;
+          debug(`==> DTAG settlement txId : ${DTAG_dynamic_data.settlementTxId}`);
           DTAG_dynamic_data.settlementReferenceId = response.body.referenceId;
           debug(`==> DTAG settlement referenceId : ${DTAG_dynamic_data.settlementReferenceId}`);
 
@@ -636,6 +657,12 @@ describe(`Launch scenario 0001_Create_settlement_from_DTAG_contract`, function()
           expect(response.body).to.have.property('state', 'RECEIVED');
           expect(response.body).to.have.property('referenceId').that.is.a('string');
           expect(response.body).to.have.property('mspOwner', 'DTAG');
+
+          expect(response.body).to.have.property('blockchainRef').that.is.an('object');
+          expect(response.body.blockchainRef).to.have.property('type', 'hlf');
+          // not returned yet by blockchain-adapter
+          // expect(response.body.blockchainRef).to.have.property('txId', DTAG_dynamic_data.settlementTxId);
+          expect(response.body.blockchainRef).to.have.property('txId', 'XXXXXXX');
 
           debugObjectOnTMUS('Settlement received from DTAG : ', response.body);
 
@@ -758,6 +785,12 @@ describe(`Launch scenario 0001_Create_settlement_from_DTAG_contract`, function()
           expect(response.body).to.have.property('referenceId').that.is.a('string');
           expect(response.body).to.have.property('mspOwner', 'TMUS');
 
+          expect(response.body).to.have.property('blockchainRef').that.is.an('object');
+          expect(response.body.blockchainRef).to.have.property('type', 'hlf');
+          expect(response.body.blockchainRef).to.have.property('txId').that.is.a('string');
+
+          TMUS_dynamic_data.settlementTxId = response.body.blockchainRef.txId;
+          debug(`==> TMUS settlement txId : ${TMUS_dynamic_data.settlementTxId}`);
           TMUS_dynamic_data.settlementReferenceId = response.body.referenceId;
           debug(`==> TMUS settlement referenceId : ${TMUS_dynamic_data.settlementReferenceId}`);
 
@@ -833,6 +866,12 @@ describe(`Launch scenario 0001_Create_settlement_from_DTAG_contract`, function()
           expect(response.body).to.have.property('state', 'RECEIVED');
           expect(response.body).to.have.property('referenceId').that.is.a('string');
           expect(response.body).to.have.property('mspOwner', 'TMUS');
+
+          expect(response.body).to.have.property('blockchainRef').that.is.an('object');
+          expect(response.body.blockchainRef).to.have.property('type', 'hlf');
+          // not returned yet by blockchain-adapter
+          // expect(response.body.blockchainRef).to.have.property('txId', TMUS_dynamic_data.settlementTxId);
+          expect(response.body.blockchainRef).to.have.property('txId', 'XXXXXXX');
 
           debugObjectOnDTAG('Settlement received from TMUS : ', response.body);
 

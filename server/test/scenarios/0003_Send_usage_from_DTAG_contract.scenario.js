@@ -74,8 +74,10 @@ const TMUS_create_usage_body = {
 
 const DTAG_dynamic_data = {
   contractId: undefined,
+  contractTxId: undefined,
   contractReferenceId: undefined,
   usageId: undefined,
+  usageTxId: undefined,
   usageReferenceId: undefined,
   receivedUsageId: undefined
 };
@@ -83,6 +85,7 @@ const DTAG_dynamic_data = {
 const TMUS_dynamic_data = {
   receivedContractId: undefined,
   usageId: undefined,
+  usageTxId: undefined,
   usageReferenceId: undefined,
   receivedUsageId: undefined
 };
@@ -186,6 +189,12 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           expect(response.body).to.have.property('state', 'SENT');
           expect(response.body).to.have.property('referenceId').that.is.a('string');
 
+          expect(response.body).to.have.property('blockchainRef').that.is.an('object');
+          expect(response.body.blockchainRef).to.have.property('type', 'hlf');
+          expect(response.body.blockchainRef).to.have.property('txId').that.is.a('string');
+
+          DTAG_dynamic_data.contractTxId = response.body.blockchainRef.txId;
+          debug(`==> DTAG contract txId : ${DTAG_dynamic_data.contractTxId}`);
           DTAG_dynamic_data.contractReferenceId = response.body.referenceId;
           debug(`==> DTAG contract referenceId : ${DTAG_dynamic_data.contractReferenceId}`);
 
@@ -261,6 +270,12 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
 
           expect(response.body).to.have.property('state', 'RECEIVED');
           expect(response.body).to.have.property('referenceId').that.is.a('string');
+
+          expect(response.body).to.have.property('blockchainRef').that.is.an('object');
+          expect(response.body.blockchainRef).to.have.property('type', 'hlf');
+          // not returned yet by blockchain-adapter
+          // expect(response.body.blockchainRef).to.have.property('txId', DTAG_dynamic_data.contractTxId);
+          expect(response.body.blockchainRef).to.have.property('txId', 'XXXXXXX');
 
           debugObjectOnTMUS('Received contract from DTAG : ', response.body);
 
@@ -339,6 +354,12 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           expect(response.body).to.have.property('referenceId').that.is.a('string');
           expect(response.body).to.have.property('mspOwner', 'DTAG');
 
+          expect(response.body).to.have.property('blockchainRef').that.is.an('object');
+          expect(response.body.blockchainRef).to.have.property('type', 'hlf');
+          expect(response.body.blockchainRef).to.have.property('txId').that.is.a('string');
+
+          DTAG_dynamic_data.usageTxId = response.body.blockchainRef.txId;
+          debug(`==> DTAG usage txId : ${DTAG_dynamic_data.usageTxId}`);
           DTAG_dynamic_data.usageReferenceId = response.body.referenceId;
           debug(`==> DTAG usage referenceId : ${DTAG_dynamic_data.usageReferenceId}`);
 
@@ -415,6 +436,12 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           expect(response.body).to.have.property('state', 'RECEIVED');
           expect(response.body).to.have.property('referenceId').that.is.a('string');
           expect(response.body).to.have.property('mspOwner', 'DTAG');
+
+          expect(response.body).to.have.property('blockchainRef').that.is.an('object');
+          expect(response.body.blockchainRef).to.have.property('type', 'hlf');
+          // not returned yet by blockchain-adapter
+          // expect(response.body.blockchainRef).to.have.property('txId', DTAG_dynamic_data.contractTxId);
+          expect(response.body.blockchainRef).to.have.property('txId', 'XXXXXXX');
 
           debugObjectOnTMUS('Usage received from DTAG : ', response.body);
 
@@ -500,6 +527,12 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           expect(response.body).to.have.property('referenceId').that.is.a('string');
           expect(response.body).to.have.property('mspOwner', 'TMUS');
 
+          expect(response.body).to.have.property('blockchainRef').that.is.an('object');
+          expect(response.body.blockchainRef).to.have.property('type', 'hlf');
+          expect(response.body.blockchainRef).to.have.property('txId').that.is.a('string');
+
+          TMUS_dynamic_data.usageTxId = response.body.blockchainRef.txId;
+          debug(`==> DTAG usage txId : ${TMUS_dynamic_data.usageTxId}`);
           TMUS_dynamic_data.usageReferenceId = response.body.referenceId;
           debug(`==> TMUS usage referenceId : ${TMUS_dynamic_data.usageReferenceId}`);
 
@@ -576,6 +609,12 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           expect(response.body).to.have.property('state', 'RECEIVED');
           expect(response.body).to.have.property('referenceId').that.is.a('string');
           expect(response.body).to.have.property('mspOwner', 'TMUS');
+
+          expect(response.body).to.have.property('blockchainRef').that.is.an('object');
+          expect(response.body.blockchainRef).to.have.property('type', 'hlf');
+          // not returned yet by blockchain-adapter
+          // expect(response.body.blockchainRef).to.have.property('txId', DTAG_dynamic_data.contractTxId);
+          expect(response.body.blockchainRef).to.have.property('txId', 'XXXXXXX');
 
           debugObjectOnDTAG('Usage received from TMUS : ', response.body);
 

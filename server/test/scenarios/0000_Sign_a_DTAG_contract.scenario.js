@@ -92,6 +92,7 @@ const TMUS_create_signature_C_body = {
 
 const DTAG_dynamic_data = {
   contractId: undefined,
+  contractTxId: undefined,
   contractReferenceId: undefined,
   DTAG: {
     firstSignatureId: undefined,
@@ -311,6 +312,12 @@ describe(`Launch scenario 0000_Sign_a_DTAG_contract`, function() {
           expect(response.body).to.have.property('state', 'SENT');
           expect(response.body).to.have.property('referenceId').that.is.a('string');
 
+          expect(response.body).to.have.property('blockchainRef').that.is.an('object');
+          expect(response.body.blockchainRef).to.have.property('type', 'hlf');
+          expect(response.body.blockchainRef).to.have.property('txId').that.is.a('string');
+
+          DTAG_dynamic_data.contractTxId = response.body.blockchainRef.txId;
+          debug(`==> DTAG contract txId : ${DTAG_dynamic_data.contractTxId}`);
           DTAG_dynamic_data.contractReferenceId = response.body.referenceId;
           debug(`==> DTAG contract referenceId : ${DTAG_dynamic_data.contractReferenceId}`);
 
