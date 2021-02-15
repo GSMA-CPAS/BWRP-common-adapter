@@ -337,8 +337,8 @@ class ContractDAO {
       };
 
       // Convert "header->from/toMSP->signatures to signatureLink
-      ContractMongoRequester.findOne(condition, (err, storedContract) => {
-        DAOErrorManager.handleErrorOrNullObject(err, storedContract)
+      ContractMongoRequester.findOne(condition, (findOneErr, storedContract) => {
+        DAOErrorManager.handleErrorOrNullObject(findOneErr, storedContract)
           .then((storedObjectReturned) => {
             const signatureLinks = [];
             if (storedContract.fromMsp.signatures !== undefined) {

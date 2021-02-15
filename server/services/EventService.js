@@ -166,7 +166,7 @@ const eventDocumentReceived = ({body}) => new Promise(
             // Do not delete private document in blockchain
             logger.info(`[EventService::eventDocumentReceived] document stored in DB but not deleted in Blockchain = ${JSON.stringify(storedDocument)}`);
           } else if (referenceId !== undefined) {
-            const storedDocumentDeletedInBlockchain = await blockchainAdapterConnection.deletePrivateDocument(referenceId);
+            await blockchainAdapterConnection.deletePrivateDocument(referenceId);
             logger.info(`[EventService::eventDocumentReceived] document stored in DB successfully deleted in Blockchain = ${JSON.stringify(storedDocument)}`);
           }
           documentsStoredInDb.push(storedDocument);
@@ -228,7 +228,7 @@ const eventSignatureReceived = ({body}) => new Promise(
         if (update) {
           const contractToUpdate = getContractByIdResp;
           contractToUpdate.signatureLink = getContractByIdResp.signatureLink;
-          const updateContractResp = await LocalStorageProvider.updateContract(contractToUpdate);
+          await LocalStorageProvider.updateContract(contractToUpdate);
         }
       }
       resolve(Service.successResponse({}, 200));
