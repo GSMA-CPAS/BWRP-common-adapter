@@ -413,13 +413,7 @@ describe(`Launch scenario 0000_Sign_a_DTAG_contract`, function() {
           expect(response.body).to.exist;
           expect(response.body).to.be.an('array');
 
-          expect(response.body.length).to.equals(5);
-          response.body.forEach((sign) => {
-            expect(sign.contractId).to.equals(DTAG_dynamic_data.contractId);
-            expect(sign.state).to.equals('UNSIGNED');
-            expect(sign.signatureId).to.be.a('string');
-            expect(sign.msp).to.match(new RegExp('^(DTAG|TMUS)$'));
-          });
+          expect(response.body.length).to.equals(0);
 
           done();
         });
@@ -446,13 +440,7 @@ describe(`Launch scenario 0000_Sign_a_DTAG_contract`, function() {
           expect(response.body).to.exist;
           expect(response.body).to.be.an('array');
 
-          expect(response.body.length).to.equals(5);
-          response.body.forEach((sign) => {
-            expect(sign.contractId).to.equals(TMUS_dynamic_data.receivedContractId);
-            expect(sign.state).to.equals('UNSIGNED');
-            expect(sign.signatureId).to.be.a('string');
-            expect(sign.msp).to.match(new RegExp('^(DTAG|TMUS)$'));
-          });
+          expect(response.body.length).to.equals(0);
 
           done();
         });
@@ -547,16 +535,12 @@ describe(`Launch scenario 0000_Sign_a_DTAG_contract`, function() {
           expect(response.body).to.exist;
           expect(response.body).to.be.an('array');
 
-          expect(response.body.length).to.equals(5);
+          expect(response.body.length).to.equals(1);
           response.body.forEach((sign) => {
             expect(sign.contractId).to.equals(DTAG_dynamic_data.contractId);
             expect(sign.signatureId).to.be.a('string');
-            expect(sign.msp).to.match(new RegExp('^(DTAG|TMUS)$'));
-            if (sign.signatureId === DTAG_dynamic_data.DTAG.firstSignatureId) {
-              expect(sign.state).to.equals('SIGNED');
-            } else {
-              expect(sign.state).to.equals('UNSIGNED');
-            }
+            expect(sign.msp).to.equals('DTAG');
+            expect(sign.state).to.equals('SIGNED');
           });
 
           done();
@@ -587,16 +571,13 @@ describe(`Launch scenario 0000_Sign_a_DTAG_contract`, function() {
 
             const numberOfSignedSignatures = response.body.filter((c) => (c.state === 'SIGNED')).length;
             if (numberOfSignedSignatures === signedSignaturesWanted) {
-              expect(response.body.length).to.equals(5);
+              expect(response.body.length).to.equals(1);
               response.body.forEach((sign) => {
                 expect(sign.contractId).to.equals(TMUS_dynamic_data.receivedContractId);
                 expect(sign.signatureId).to.be.a('string');
-                expect(sign.msp).to.match(new RegExp('^(DTAG|TMUS)$'));
-                expect(sign.state).to.match(new RegExp('^(SIGNED|UNSIGNED)$'));
-                if (sign.state === 'SIGNED') {
-                  expect(sign.msp).to.equals('DTAG');
-                  TMUS_dynamic_data.DTAG.firstSignatureId = sign.signatureId;
-                }
+                expect(sign.msp).to.equals('DTAG');
+                expect(sign.state).to.equals('SIGNED');
+                TMUS_dynamic_data.DTAG.firstSignatureId = sign.signatureId;
               });
               done();
             } else if (tries > 0) {
@@ -652,7 +633,7 @@ describe(`Launch scenario 0000_Sign_a_DTAG_contract`, function() {
 
   // Now create a signature in TMUS and send it to DTAG
 
-  it(`Post a signature on  TMUS`, function(done) {
+  it(`Post a signature on TMUS`, function(done) {
     debugAction(`${this.test.title}`);
     if (TMUS_dynamic_data.receivedContractId === undefined) {
       expect.fail('This scenario step should use an undefined data');
@@ -703,18 +684,16 @@ describe(`Launch scenario 0000_Sign_a_DTAG_contract`, function() {
           expect(response.body).to.exist;
           expect(response.body).to.be.an('array');
 
-          expect(response.body.length).to.equals(5);
+          expect(response.body.length).to.equals(2);
           response.body.forEach((sign) => {
             expect(sign.contractId).to.equals(TMUS_dynamic_data.receivedContractId);
             expect(sign.signatureId).to.be.a('string');
             expect(sign.msp).to.match(new RegExp('^(DTAG|TMUS)$'));
-            expect(sign.state).to.match(new RegExp('^(SIGNED|UNSIGNED)$'));
-            if (sign.state === 'SIGNED') {
-              if (sign.msp === 'DTAG') {
-                expect(sign.signatureId).to.equals(TMUS_dynamic_data.DTAG.firstSignatureId);
-              } else if (sign.msp === 'TMUS') {
-                expect(sign.signatureId).to.equals(TMUS_dynamic_data.TMUS.firstSignatureId);
-              }
+            expect(sign.state).to.equals('SIGNED');
+            if (sign.msp === 'DTAG') {
+              expect(sign.signatureId).to.equals(TMUS_dynamic_data.DTAG.firstSignatureId);
+            } else if (sign.msp === 'TMUS') {
+              expect(sign.signatureId).to.equals(TMUS_dynamic_data.TMUS.firstSignatureId);
             }
           });
 
@@ -747,18 +726,16 @@ describe(`Launch scenario 0000_Sign_a_DTAG_contract`, function() {
             const numberOfSignedSignatures = response.body.filter((c) => (c.state === 'SIGNED')).length;
 
             if (numberOfSignedSignatures === signedSignaturesWanted) {
-              expect(response.body.length).to.equals(5);
+              expect(response.body.length).to.equals(2);
               response.body.forEach((sign) => {
                 expect(sign.contractId).to.equals(DTAG_dynamic_data.contractId);
                 expect(sign.signatureId).to.be.a('string');
                 expect(sign.msp).to.match(new RegExp('^(DTAG|TMUS)$'));
-                expect(sign.state).to.match(new RegExp('^(SIGNED|UNSIGNED)$'));
-                if (sign.state === 'SIGNED') {
-                  if (sign.msp === 'DTAG') {
-                    expect(sign.signatureId).to.equals(DTAG_dynamic_data.DTAG.firstSignatureId);
-                  } else if (sign.msp === 'TMUS') {
-                    DTAG_dynamic_data.DTAG.firstSignatureId = sign.signatureId;
-                  }
+                expect(sign.state).to.equals('SIGNED');
+                if (sign.msp === 'DTAG') {
+                  expect(sign.signatureId).to.equals(DTAG_dynamic_data.DTAG.firstSignatureId);
+                } else if (sign.msp === 'TMUS') {
+                  DTAG_dynamic_data.DTAG.firstSignatureId = sign.signatureId;
                 }
               });
               done();
