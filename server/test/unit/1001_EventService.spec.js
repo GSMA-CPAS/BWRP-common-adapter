@@ -31,31 +31,25 @@ describe('Unit Tests for events subscription', function() {
         ];
       });
 
-    try {
-      testedEventService.subscribe()
-        .then((resp) => {
-          try {
-            expect(resp).to.be.an('Object');
-            expect(resp.payload).to.be.an('Array');
-            expect(resp.payload).to.have.members(['07473280-3b23-41bf-bff1-cb37e6958951', '07473280-3b23-41bf-bff1-cb37e6958952']);
+    testedEventService.subscribe()
+      .then((resp) => {
+        try {
+          expect(resp).to.be.an('Object');
+          expect(resp.payload).to.be.an('Array');
+          expect(resp.payload).to.have.members(['07473280-3b23-41bf-bff1-cb37e6958951', '07473280-3b23-41bf-bff1-cb37e6958952']);
 
-            expect(blockchainAdapterNock.isDone(), 'Unconsumed nock error').to.be.true;
+          expect(blockchainAdapterNock.isDone(), 'Unconsumed nock error').to.be.true;
 
-            done();
-          } catch (expectError) {
-            // Don't fail otherwise
-            done(expectError);
-          }
-        })
-        .catch((error) => {
-          debug('error: %s', error.stack);
-          expect.fail('it test returns an error');
           done();
-        });
-    } catch (e) {
-      debug('exception: %s', e.stack);
-      expect.fail('it test throws an exception');
-      done();
-    }
+        } catch (expectError) {
+          // Don't fail otherwise
+          done(expectError);
+        }
+      })
+      .catch((error) => {
+        debug('error: %s', error.stack);
+        expect.fail('it test returns an error');
+        done();
+      });
   });
 });
