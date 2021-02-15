@@ -105,12 +105,13 @@ const sendContractById = ({contractId}) => new Promise(
       const getContractByIdResp = await LocalStorageProvider.getContract(contractId);
       if (getContractByIdResp.state !== 'DRAFT') {
         reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_SEND_CONTRACT_ONLY_ALLOWED_IN_STATE_DRAFT));
+      } else {
+        const uploadContractResp = await blockchainAdapterConnection.uploadContract(getContractByIdResp);
+        const getStorageKeysResp = await blockchainAdapterConnection.getStorageKeys(uploadContractResp.referenceId, [getContractByIdResp.fromMsp.mspId, getContractByIdResp.toMsp.mspId]);
+        const updateContractResp = await LocalStorageProvider.updateSentContract(contractId, uploadContractResp.rawData, uploadContractResp.referenceId, getStorageKeysResp, uploadContractResp.blockchainRef);
+        const returnedResponse = ContractMapper.getResponseBodyForSendContract(updateContractResp);
+        resolve(Service.successResponse(returnedResponse, 200));
       }
-      const uploadContractResp = await blockchainAdapterConnection.uploadContract(getContractByIdResp);
-      const getStorageKeysResp = await blockchainAdapterConnection.getStorageKeys(uploadContractResp.referenceId, [getContractByIdResp.fromMsp.mspId, getContractByIdResp.toMsp.mspId]);
-      const updateContractResp = await LocalStorageProvider.updateSentContract(contractId, uploadContractResp.rawData, uploadContractResp.referenceId, getStorageKeysResp, uploadContractResp.blockchainRef);
-      const returnedResponse = ContractMapper.getResponseBodyForSendContract(updateContractResp);
-      resolve(Service.successResponse(returnedResponse, 200));
     } catch (e) {
       reject(Service.rejectResponse(e));
     }
@@ -128,26 +129,27 @@ const updateContractById = ({contractId, body}) => new Promise(
   async (resolve, reject) => {
     if ((body.state !== undefined) && (body.state !== 'DRAFT')) {
       reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_CONTRACT_UPDATE_ONLY_ALLOWED_IN_STATE_DRAFT));
-    }
-    try {
-      const contractToUpdate = ContractMapper.getContractFromPutContractRequest(contractId, body);
-      const updateContractResp = await LocalStorageProvider.updateContract(contractToUpdate);
-      const returnedResponse = ContractMapper.getResponseBodyForGetContract(updateContractResp);
-      resolve(Service.successResponse(returnedResponse, 200));
-    } catch (e) {
-      let rejectError = e;
-      if (e === errorUtils.ERROR_DAO_NOT_FOUND) {
-        // Maybe not found because its state is not DRAFT
-        try {
-          const existingContract = await LocalStorageProvider.getContract(contractId);
-          if (existingContract.state !== 'DRAFT') {
-            rejectError = errorUtils.ERROR_BUSINESS_CONTRACT_UPDATE_ONLY_ALLOWED_IN_STATE_DRAFT;
+    } else {
+      try {
+        const contractToUpdate = ContractMapper.getContractFromPutContractRequest(contractId, body);
+        const updateContractResp = await LocalStorageProvider.updateContract(contractToUpdate);
+        const returnedResponse = ContractMapper.getResponseBodyForGetContract(updateContractResp);
+        resolve(Service.successResponse(returnedResponse, 200));
+      } catch (e) {
+        let rejectError = e;
+        if (e === errorUtils.ERROR_DAO_NOT_FOUND) {
+          // Maybe not found because its state is not DRAFT
+          try {
+            const existingContract = await LocalStorageProvider.getContract(contractId);
+            if (existingContract.state !== 'DRAFT') {
+              rejectError = errorUtils.ERROR_BUSINESS_CONTRACT_UPDATE_ONLY_ALLOWED_IN_STATE_DRAFT;
+            }
+          } catch (otherException) {
+            // Do nothing ( will return ERROR_DAO_NOT_FOUND )
           }
-        } catch (otherException) {
-          // Do nothing ( will return ERROR_DAO_NOT_FOUND )
         }
+        reject(Service.rejectResponse(rejectError));
       }
-      reject(Service.rejectResponse(rejectError));
     }
   },
 );

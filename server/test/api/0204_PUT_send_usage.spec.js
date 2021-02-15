@@ -23,7 +23,7 @@ describe(`Tests PUT ${route} API OK`, function() {
       state: 'DRAFT',
       type: 'contract',
       version: '1.1.0',
-      fromMsp: {mspId: 'A1'},
+      fromMsp: {mspId: testsUtils.getSelfMspId()},
       toMsp: {mspId: 'B1'},
       body: {
         bankDetails: {A1: {iban: null, bankName: null, currency: null}, B1: {iban: null, bankName: null, currency: null}},
@@ -37,7 +37,7 @@ describe(`Tests PUT ${route} API OK`, function() {
       state: 'SENT',
       type: 'contract',
       version: '1.1.0',
-      fromMsp: {mspId: 'B1', signatures: [{role: 'role', name: 'name', id: 'id'}]},
+      fromMsp: {mspId: testsUtils.getSelfMspId(), signatures: [{role: 'role', name: 'name', id: 'id'}]},
       toMsp: {mspId: 'C1', signatures: [{role: 'role', name: 'name', id: 'id'}]},
       referenceId: 'AZRAGGSHJIAJAOJSNJNSSNNAIT',
       blockchainRef: {type: 'hlf', txId: 'TX-RAGGSHJIAJAOJSNJNSSNNAIT'},
@@ -54,7 +54,7 @@ describe(`Tests PUT ${route} API OK`, function() {
       type: 'contract',
       version: '1.1.0',
       fromMsp: {mspId: 'B1'},
-      toMsp: {mspId: 'C1'},
+      toMsp: {mspId: testsUtils.getSelfMspId()},
       referenceId: 'AZRAGGSHJIAJAOJSNJNSSNNAIU',
       blockchainRef: {type: 'hlf', txId: 'TX-RAGGSHJIAJAOJSNJNSSNNAIU'},
       body: {
@@ -104,6 +104,20 @@ describe(`Tests PUT ${route} API OK`, function() {
       },
       state: 'SENT'
     };
+    const usageWithOtherMspOwner = {
+      type: 'usage',
+      version: '2.12.0',
+      name: 'Usage with data',
+      contractId: undefined,
+      mspOwner: undefined,
+      mspReceiver: undefined,
+      body: {
+        data: [
+          {year: 2020, month: 1, hpmn: 'HPMN', vpmn: 'VPMN', service: 'service', value: 1, units: 'unit', charges: 'charge', taxes: 'taxes'}
+        ]
+      },
+      state: 'DRAFT'
+    };
 
     before((done) => {
       debugSetup('==> init db with 3 contracts');
@@ -117,15 +131,18 @@ describe(`Tests PUT ${route} API OK`, function() {
           usageMinimumData.mspOwner = contractSent.fromMsp.mspId;
           usageMinimumData.mspReceiver = contractSent.toMsp.mspId;
           usageMoreData.contractId = contractReceived.id;
-          usageMoreData.mspOwner = contractReceived.fromMsp.mspId;
-          usageMoreData.mspReceiver = contractReceived.toMsp.mspId;
+          usageMoreData.mspOwner = contractReceived.toMsp.mspId;
+          usageMoreData.mspReceiver = contractReceived.fromMsp.mspId;
           usageSent.contractId = contractReceived.id;
-          usageSent.mspOwner = contractReceived.fromMsp.mspId;
-          usageSent.mspReceiver = contractReceived.toMsp.mspId;
-          debugSetup('==> init db with 3 usages');
-          testsDbUtils.initDbWithUsages([usageMinimumData, usageMoreData, usageSent])
+          usageSent.mspOwner = contractReceived.toMsp.mspId;
+          usageSent.mspReceiver = contractReceived.fromMsp.mspId;
+          usageWithOtherMspOwner.contractId = contractReceived.id;
+          usageWithOtherMspOwner.mspOwner = contractReceived.fromMsp.mspId;
+          usageWithOtherMspOwner.mspReceiver = contractReceived.toMsp.mspId;
+          debugSetup('==> init db with 4 usages');
+          testsDbUtils.initDbWithUsages([usageMinimumData, usageMoreData, usageSent, usageWithOtherMspOwner])
             .then((initDbWithUsagesResp) => {
-              debugSetup('The db is initialized with 3 usages : ', initDbWithUsagesResp.map((c) => c.id));
+              debugSetup('The db is initialized with 4 usages : ', initDbWithUsagesResp.map((c) => c.id));
               debugSetup('==> done!');
               done();
             })
@@ -313,6 +330,32 @@ describe(`Tests PUT ${route} API OK`, function() {
     it('Put send usage NOK if usage in db is not DRAFT', function(done) {
       try {
         const path = globalVersion + '/contracts/' + contractReceived.id + '/usages/' + usageSent.id + '/send/';
+        debug('PUT path : ', path);
+
+        const sentBody = {};
+        chai.request(testsUtils.getServer())
+          .put(`${path}`)
+          .send(sentBody)
+          .end((error, response) => {
+            debug('response.body: %s', JSON.stringify(response.body));
+            expect(error).to.be.null;
+            expect(response).to.have.status(422);
+            expect(response).to.be.json;
+            expect(response.body).to.exist;
+
+            expect(response.body.message).to.equal('Send usage not allowed');
+            done();
+          });
+      } catch (exception) {
+        debug('exception: %s', exception.stack);
+        expect.fail('it test throws an exception');
+        done();
+      }
+    });
+
+    it('Put send usage NOK if usage mspOwner is not me', function(done) {
+      try {
+        const path = globalVersion + '/contracts/' + contractReceived.id + '/usages/' + usageWithOtherMspOwner.id + '/send/';
         debug('PUT path : ', path);
 
         const sentBody = {};

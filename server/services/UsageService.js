@@ -23,18 +23,19 @@ const createUsage = ({url, contractId, body}) => new Promise(
       const getContractByIdResp = await LocalStorageProvider.getContract(contractId);
       if (!((getContractByIdResp.state == 'SENT') || (getContractByIdResp.state == 'RECEIVED') || (getContractByIdResp.state == 'SIGNED'))) {
         reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_CREATE_USAGE_ON_CONTRACT_ONLY_ALLOWED_IN_STATE_SENT_SIGNED_OR_RECEIVED));
-      }
-      const isFromMspIdMyMspId = await blockchainAdapterConnection.isMyMspId(getContractByIdResp.fromMsp.mspId);
-      const mspOwner = isFromMspIdMyMspId ? getContractByIdResp.fromMsp.mspId : getContractByIdResp.toMsp.mspId;
-      const mspReceiver = isFromMspIdMyMspId ? getContractByIdResp.toMsp.mspId : getContractByIdResp.fromMsp.mspId;
-      const usageToCreate = UsageMapper.getUsageFromPostUsagesRequest(contractId, body, mspOwner, mspReceiver);
+      } else {
+        const isFromMspIdMyMspId = await blockchainAdapterConnection.isMyMspId(getContractByIdResp.fromMsp.mspId);
+        const mspOwner = isFromMspIdMyMspId ? getContractByIdResp.fromMsp.mspId : getContractByIdResp.toMsp.mspId;
+        const mspReceiver = isFromMspIdMyMspId ? getContractByIdResp.toMsp.mspId : getContractByIdResp.fromMsp.mspId;
+        const usageToCreate = UsageMapper.getUsageFromPostUsagesRequest(contractId, body, mspOwner, mspReceiver);
 
-      const createUsageResp = await LocalStorageProvider.createUsage(usageToCreate);
-      const returnedResponse = UsageMapper.getResponseBodyForGetUsage(createUsageResp);
-      const returnedHeaders = {
-        'Content-Location': `${url.replace(/\/$/, '')}/${createUsageResp.id}`
-      };
-      resolve(Service.successResponse(returnedResponse, 201, returnedHeaders));
+        const createUsageResp = await LocalStorageProvider.createUsage(usageToCreate);
+        const returnedResponse = UsageMapper.getResponseBodyForGetUsage(createUsageResp);
+        const returnedHeaders = {
+          'Content-Location': `${url.replace(/\/$/, '')}/${createUsageResp.id}`
+        };
+        resolve(Service.successResponse(returnedResponse, 201, returnedHeaders));
+      }
     } catch (e) {
       reject(Service.rejectResponse(e));
     }
@@ -78,9 +79,10 @@ const getUsageById = ({contractId, usageId}) => new Promise(
       const getUsageByIdResp = await LocalStorageProvider.getUsage(usageId);
       if (getUsageByIdResp.contractId != contractId) {
         reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_GET_USAGE_ON_NOT_LINKED_CONTRACT_RECEIVED));
+      } else {
+        const returnedResponse = UsageMapper.getResponseBodyForGetUsage(getUsageByIdResp);
+        resolve(Service.successResponse(returnedResponse));
       }
-      const returnedResponse = UsageMapper.getResponseBodyForGetUsage(getUsageByIdResp);
-      resolve(Service.successResponse(returnedResponse));
     } catch (e) {
       reject(Service.rejectResponse(e));
     }
@@ -118,19 +120,24 @@ const sendUsageById = ({contractId, usageId}) => new Promise(
       const contract = await LocalStorageProvider.getContract(contractId);
       if ((contract.state === 'DRAFT') || (contract.referenceId === undefined)) {
         reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_SEND_USAGE_ONLY_ALLOWED_ON_EXCHANGED_CONTRACT));
+      } else {
+        let usageToSend = await LocalStorageProvider.getUsage(usageId);
+        const isMspOwnerMyMspId = await blockchainAdapterConnection.isMyMspId(usageToSend.mspOwner);
+        if (usageToSend.state !== 'DRAFT') {
+          reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_SEND_USAGE_ONLY_ALLOWED_IN_STATE_DRAFT));
+        } else if (!isMspOwnerMyMspId) {
+          reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_SEND_USAGE_ONLY_ALLOWED_FOR_MSP_OWNER));
+        } else {
+          if (usageToSend.contractReferenceId === undefined) {
+            usageToSend = await LocalStorageProvider.updateUsageWithContractReferenceId(usageId, contract.referenceId);
+          }
+          const uploadUsageResp = await blockchainAdapterConnection.uploadUsage(usageToSend);
+          const getStorageKeysResp = await blockchainAdapterConnection.getStorageKeys(uploadUsageResp.referenceId, [uploadUsageResp.mspOwner, uploadUsageResp.mspReceiver]);
+          const updateUsageResp = await LocalStorageProvider.updateSentUsage(usageId, uploadUsageResp.rawData, uploadUsageResp.referenceId, getStorageKeysResp, uploadUsageResp.blockchainRef);
+          const returnedResponse = UsageMapper.getResponseBodyForSendUsage(updateUsageResp);
+          resolve(Service.successResponse(returnedResponse, 200));
+        }
       }
-      let usageToSend = await LocalStorageProvider.getUsage(usageId);
-      if (usageToSend.state !== 'DRAFT') {
-        reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_SEND_USAGE_ONLY_ALLOWED_IN_STATE_DRAFT));
-      }
-      if (usageToSend.contractReferenceId === undefined) {
-        usageToSend = await LocalStorageProvider.updateUsageWithContractReferenceId(usageId, contract.referenceId);
-      }
-      const uploadUsageResp = await blockchainAdapterConnection.uploadUsage(usageToSend);
-      const getStorageKeysResp = await blockchainAdapterConnection.getStorageKeys(uploadUsageResp.referenceId, [uploadUsageResp.mspOwner, uploadUsageResp.mspReceiver]);
-      const updateUsageResp = await LocalStorageProvider.updateSentUsage(usageId, uploadUsageResp.rawData, uploadUsageResp.referenceId, getStorageKeysResp, uploadUsageResp.blockchainRef);
-      const returnedResponse = UsageMapper.getResponseBodyForSendUsage(updateUsageResp);
-      resolve(Service.successResponse(returnedResponse, 200));
     } catch (e) {
       reject(Service.rejectResponse(e));
     }

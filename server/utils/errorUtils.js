@@ -281,6 +281,15 @@ class ErrorUtils {
     }
   };
 
+  static ERROR_BUSINESS_SEND_SETTLEMENT_ONLY_ALLOWED_FOR_MSP_OWNER = {
+    code: 422,
+    error: {
+      internalErrorCode: 2024,
+      message: 'Send settlement not allowed',
+      description: 'It\'s not allowed to send this settlement.'
+    }
+  };
+
   static ERROR_INVALID_DEFINED_SELF_MSPID_ERROR = {
     code: 500,
     error: {
@@ -321,6 +330,15 @@ class ErrorUtils {
     code: 422,
     error: {
       internalErrorCode: 2022,
+      message: 'Send usage not allowed',
+      description: 'It\'s not allowed to send this usage.'
+    }
+  };
+
+  static ERROR_BUSINESS_SEND_USAGE_ONLY_ALLOWED_FOR_MSP_OWNER = {
+    code: 422,
+    error: {
+      internalErrorCode: 2023,
       message: 'Send usage not allowed',
       description: 'It\'s not allowed to send this usage.'
     }

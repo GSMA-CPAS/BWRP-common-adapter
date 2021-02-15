@@ -57,14 +57,18 @@ const sendSettlementById = ({contractId, settlementId}) => new Promise(
   async (resolve, reject) => {
     try {
       const getSettlementByIdResp = await LocalStorageProvider.getSettlement(contractId, settlementId);
+      const isMspOwnerMyMspId = await blockchainAdapterConnection.isMyMspId(getSettlementByIdResp.mspOwner);
       if (getSettlementByIdResp.state !== 'DRAFT') {
         reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_SEND_SETTLEMENT_ONLY_ALLOWED_IN_STATE_DRAFT));
+      } else if (!isMspOwnerMyMspId) {
+        reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_SEND_SETTLEMENT_ONLY_ALLOWED_FOR_MSP_OWNER));
+      } else {
+        const uploadSettlementResp = await blockchainAdapterConnection.uploadSettlement(getSettlementByIdResp);
+        const getStorageKeysResp = await blockchainAdapterConnection.getStorageKeys(uploadSettlementResp.referenceId, [getSettlementByIdResp.mspOwner, getSettlementByIdResp.mspReceiver]);
+        const updateSettlementResp = await LocalStorageProvider.updateSentSettlement(settlementId, uploadSettlementResp.rawData, uploadSettlementResp.referenceId, getStorageKeysResp, uploadSettlementResp.blockchainRef);
+        const returnedResponse = SettlementMapper.getResponseBodyForSendSettlement(updateSettlementResp);
+        resolve(Service.successResponse(returnedResponse, 200));
       }
-      const uploadSettlementResp = await blockchainAdapterConnection.uploadSettlement(getSettlementByIdResp);
-      const getStorageKeysResp = await blockchainAdapterConnection.getStorageKeys(uploadSettlementResp.referenceId, [getSettlementByIdResp.mspOwner, getSettlementByIdResp.mspReceiver]);
-      const updateSettlementResp = await LocalStorageProvider.updateSentSettlement(settlementId, uploadSettlementResp.rawData, uploadSettlementResp.referenceId, getStorageKeysResp, uploadSettlementResp.blockchainRef);
-      const returnedResponse = SettlementMapper.getResponseBodyForSendSettlement(updateSettlementResp);
-      resolve(Service.successResponse(returnedResponse, 200));
     } catch (e) {
       reject(Service.rejectResponse(e));
     }
