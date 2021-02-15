@@ -636,6 +636,215 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
     }
   });
 
+  // Now on DTAG side create the 2 settlements
+
+  it(`Generate DTAG settlement on DTAG usage for this contract`, function(done) {
+    debugAction(`${this.test.title}`);
+    if ((DTAG_dynamic_data.contractId === undefined) || (DTAG_dynamic_data.usageId === undefined)) {
+      expect.fail('This scenario step should use an undefined data');
+    }
+    try {
+      chai.request(DTAG_API)
+        .put(`/contracts/${DTAG_dynamic_data.contractId}/usages/${DTAG_dynamic_data.usageId}/generate/`)
+        .send()
+        .end((error, response) => {
+          expect(error).to.be.null;
+          expect(response).to.have.status(200);
+          expect(response).to.be.json;
+          expect(response.body).to.exist;
+          expect(response.body).to.be.an('object');
+
+          expect(response.body).to.have.property('settlementId').that.is.a('string');
+          expect(response.body).to.have.property('state', 'DRAFT');
+          expect(response.body).to.have.property('mspOwner', 'DTAG');
+          expect(response.body).to.have.property('body').that.is.an('object');
+          expect(response.body.body).to.have.property('generatedResult').that.is.an('object');
+          expect(response.body.body).to.have.property('usage').that.is.an('object');
+          expect(response.body).to.have.property('creationDate').that.is.a('string').and.match(DATE_REGEX);
+          expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
+
+          DTAG_dynamic_data.settlementIdFromLocalUsage = response.body.settlementId;
+          debug(`==> DTAG new created settlement id from local usage: ${DTAG_dynamic_data.settlementIdFromLocalUsage}`);
+
+          done();
+        });
+    } catch (exception) {
+      debug('exception: %s', exception.stack);
+      expect.fail('it test throws an exception');
+      done();
+    }
+  });
+
+  it(`Generate DTAG settlement on TMUS usage for this contract`, function(done) {
+    debugAction(`${this.test.title}`);
+    if ((DTAG_dynamic_data.contractId === undefined) || (DTAG_dynamic_data.receivedUsageId === undefined)) {
+      expect.fail('This scenario step should use an undefined data');
+    }
+    try {
+      chai.request(DTAG_API)
+        .put(`/contracts/${DTAG_dynamic_data.contractId}/usages/${DTAG_dynamic_data.receivedUsageId}/generate/`)
+        .send()
+        .end((error, response) => {
+          expect(error).to.be.null;
+          expect(response).to.have.status(200);
+          expect(response).to.be.json;
+          expect(response.body).to.exist;
+          expect(response.body).to.be.an('object');
+
+          expect(response.body).to.have.property('settlementId').that.is.a('string');
+          expect(response.body).to.have.property('state', 'DRAFT');
+          expect(response.body).to.have.property('mspOwner', 'TMUS');
+          expect(response.body).to.have.property('body').that.is.an('object');
+          expect(response.body.body).to.have.property('generatedResult').that.is.an('object');
+          expect(response.body.body).to.have.property('usage').that.is.an('object');
+          expect(response.body).to.have.property('creationDate').that.is.a('string').and.match(DATE_REGEX);
+          expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
+
+          DTAG_dynamic_data.settlementIdFromReceivedUsage = response.body.settlementId;
+          debug(`==> DTAG new created settlement id from received usage: ${DTAG_dynamic_data.settlementIdFromReceivedUsage}`);
+
+          done();
+        });
+    } catch (exception) {
+      debug('exception: %s', exception.stack);
+      expect.fail('it test throws an exception');
+      done();
+    }
+  });
+
+  it(`Reject DTAG send settlement to TMUS on TMUS usage`, function(done) {
+    debugAction(`${this.test.title}`);
+    if ((DTAG_dynamic_data.contractId === undefined) || (DTAG_dynamic_data.settlementIdFromReceivedUsage === undefined)) {
+      expect.fail('This scenario step should use an undefined data');
+    }
+    try {
+      chai.request(DTAG_API)
+        .put(`/contracts/${DTAG_dynamic_data.contractId}/settlements/${DTAG_dynamic_data.settlementIdFromReceivedUsage}/send/`)
+        .send()
+        .end((error, response) => {
+          expect(error).to.be.null;
+          expect(response).to.have.status(422);
+          expect(response).to.be.json;
+          expect(response.body).to.exist;
+          expect(response.body).to.be.an('object');
+
+          expect(response.body).to.have.property('internalErrorCode', 2024);
+          expect(response.body).to.have.property('message', 'Send settlement not allowed');
+          expect(response.body).to.have.property('description', 'It\'s not allowed to send this settlement.');
+
+          done();
+        });
+    } catch (exception) {
+      debug('exception: %s', exception.stack);
+      expect.fail('it test throws an exception');
+      done();
+    }
+  });
+
+  // Now on TMUS side create the 2 settlements
+
+  it(`Generate TMUS settlement on TMUS usage for this contract`, function(done) {
+    debugAction(`${this.test.title}`);
+    if ((TMUS_dynamic_data.receivedContractId === undefined) || (TMUS_dynamic_data.usageId === undefined)) {
+      expect.fail('This scenario step should use an undefined data');
+    }
+    try {
+      chai.request(TMUS_API)
+        .put(`/contracts/${TMUS_dynamic_data.receivedContractId}/usages/${TMUS_dynamic_data.usageId}/generate/`)
+        .send()
+        .end((error, response) => {
+          expect(error).to.be.null;
+          expect(response).to.have.status(200);
+          expect(response).to.be.json;
+          expect(response.body).to.exist;
+          expect(response.body).to.be.an('object');
+
+          expect(response.body).to.have.property('settlementId').that.is.a('string');
+          expect(response.body).to.have.property('state', 'DRAFT');
+          expect(response.body).to.have.property('mspOwner', 'TMUS');
+          expect(response.body).to.have.property('body').that.is.an('object');
+          expect(response.body.body).to.have.property('generatedResult').that.is.an('object');
+          expect(response.body.body).to.have.property('usage').that.is.an('object');
+          expect(response.body).to.have.property('creationDate').that.is.a('string').and.match(DATE_REGEX);
+          expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
+
+          TMUS_dynamic_data.settlementIdFromLocalUsage = response.body.settlementId;
+          debug(`==> TMUS new created settlement id from local usage: ${TMUS_dynamic_data.settlementIdFromLocalUsage}`);
+
+          done();
+        });
+    } catch (exception) {
+      debug('exception: %s', exception.stack);
+      expect.fail('it test throws an exception');
+      done();
+    }
+  });
+
+  it(`Generate TMUS settlement on DTAG usage for this contract`, function(done) {
+    debugAction(`${this.test.title}`);
+    if ((TMUS_dynamic_data.receivedContractId === undefined) || (TMUS_dynamic_data.receivedUsageId === undefined)) {
+      expect.fail('This scenario step should use an undefined data');
+    }
+    try {
+      chai.request(TMUS_API)
+        .put(`/contracts/${TMUS_dynamic_data.receivedContractId}/usages/${TMUS_dynamic_data.receivedUsageId}/generate/`)
+        .send()
+        .end((error, response) => {
+          expect(error).to.be.null;
+          expect(response).to.have.status(200);
+          expect(response).to.be.json;
+          expect(response.body).to.exist;
+          expect(response.body).to.be.an('object');
+
+          expect(response.body).to.have.property('settlementId').that.is.a('string');
+          expect(response.body).to.have.property('state', 'DRAFT');
+          expect(response.body).to.have.property('mspOwner', 'DTAG');
+          expect(response.body).to.have.property('body').that.is.an('object');
+          expect(response.body.body).to.have.property('generatedResult').that.is.an('object');
+          expect(response.body.body).to.have.property('usage').that.is.an('object');
+          expect(response.body).to.have.property('creationDate').that.is.a('string').and.match(DATE_REGEX);
+          expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
+
+          TMUS_dynamic_data.settlementIdFromReceivedUsage = response.body.settlementId;
+          debug(`==> TMUS  new created settlement id from received usage: ${TMUS_dynamic_data.settlementIdFromReceivedUsage}`);
+
+          done();
+        });
+    } catch (exception) {
+      debug('exception: %s', exception.stack);
+      expect.fail('it test throws an exception');
+      done();
+    }
+  });
+
+  it(`Reject TMUS send settlement to DTAG on DTAG usage`, function(done) {
+    debugAction(`${this.test.title}`);
+    if ((TMUS_dynamic_data.receivedContractId === undefined) || (TMUS_dynamic_data.settlementIdFromReceivedUsage === undefined)) {
+      expect.fail('This scenario step should use an undefined data');
+    }
+    try {
+      chai.request(TMUS_API)
+        .put(`/contracts/${TMUS_dynamic_data.receivedContractId}/settlements/${TMUS_dynamic_data.settlementIdFromReceivedUsage}/send/`)
+        .send()
+        .end((error, response) => {
+          expect(error).to.be.null;
+          expect(response).to.have.status(422);
+          expect(response).to.be.json;
+          expect(response.body).to.exist;
+          expect(response.body).to.be.an('object');
+
+          expect(response.body).to.have.property('internalErrorCode', 2024);
+          expect(response.body).to.have.property('message', 'Send settlement not allowed');
+          expect(response.body).to.have.property('description', 'It\'s not allowed to send this settlement.');
+
+          done();
+        });
+    } catch (exception) {
+      debug('exception: %s', exception.stack);
+      expect.fail('it test throws an exception');
+      done();
+    }
+  });
 
   // Now delete the created settlement resources
 
