@@ -65,7 +65,6 @@ const deleteUsageById = ({contractId, usageId}) => new Promise(
   },
 );
 
-
 /**
  * Get Usage Object by its Id
  *
@@ -87,6 +86,7 @@ const getUsageById = ({contractId, usageId}) => new Promise(
     }
   },
 );
+
 /**
  * Get All usage of a given Contract
  *

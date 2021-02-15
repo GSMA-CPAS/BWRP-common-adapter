@@ -227,6 +227,15 @@ class ErrorUtils {
     }
   };
 
+  static ERROR_BUSINESS_UPDATE_SIGNATURES_LIMIT = {
+    code: 422,
+    error: {
+      internalErrorCode: 2011,
+      message: 'Update signatures not allowed',
+      description: 'Signature Limit Exceeded.'
+    }
+  };
+
   static ERROR_BUSINESS_UPDATE_SIGNATURES_ON_SENT_CONTRACT = {
     code: 422,
     error: {

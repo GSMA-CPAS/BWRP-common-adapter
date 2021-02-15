@@ -211,7 +211,7 @@ const createSignature = ({url, contractId, body}) => new Promise(
         let indexOfSignatureToUpdate = -1;
         let signatureId = '';
         for (let i = 0; i < signatureLink.length; i++) {
-          if (signatureLink[i]['txId'] === undefined && signatureLink[i]['msp'] === msp) {
+          if ((signatureLink[i]['txId'] === undefined) && (signatureLink[i]['msp'] === msp)) {
             indexOfSignatureToUpdate = i;
             signatureId = signatureLink[i]['id'];
           }
