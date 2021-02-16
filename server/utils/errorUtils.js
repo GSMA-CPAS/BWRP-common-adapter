@@ -200,15 +200,6 @@ class ErrorUtils {
     }
   };
 
-  static ERROR_BUSINESS_GENERATE_SETTLEMENT_AND_COMMIT_NOT_SUPPORTED = {
-    code: 422,
-    error: {
-      internalErrorCode: 2007,
-      message: 'commit is not implemented yet',
-      description: 'It\'s not allowed to commit the settlement yet.'
-    }
-  };
-
   static ERROR_BUSINESS_GENERATE_SETTLEMENT_ON_NOT_LINKED_CONTRACT_RECEIVED = {
     code: 422,
     error: {
@@ -233,6 +224,15 @@ class ErrorUtils {
       internalErrorCode: 2010,
       message: 'Update signatures not allowed',
       description: 'It\'s only allowed to update signatures on contracts SENT or RECEIVED.'
+    }
+  };
+
+  static ERROR_BUSINESS_UPDATE_SIGNATURES_LIMIT = {
+    code: 422,
+    error: {
+      internalErrorCode: 2011,
+      message: 'Update signatures not allowed',
+      description: 'Signature Limit Exceeded.'
     }
   };
 
@@ -281,6 +281,15 @@ class ErrorUtils {
     }
   };
 
+  static ERROR_BUSINESS_SEND_SETTLEMENT_ONLY_ALLOWED_FOR_MSP_OWNER = {
+    code: 422,
+    error: {
+      internalErrorCode: 2024,
+      message: 'Send settlement not allowed',
+      description: 'It\'s not allowed to send this settlement.'
+    }
+  };
+
   static ERROR_INVALID_DEFINED_SELF_MSPID_ERROR = {
     code: 500,
     error: {
@@ -296,6 +305,42 @@ class ErrorUtils {
       internalErrorCode: 2019,
       message: 'Invalid tested mspId error',
       description: 'The tested mspId is not valid.'
+    }
+  };
+
+  static ERROR_REQUEST_CONTENT_NOT_VALID = {
+    code: 422,
+    error: {
+      internalErrorCode: 2020,
+      message: 'Request content not valid',
+      description: 'The content of your request is not valid.'
+    }
+  };
+
+  static ERROR_BUSINESS_SEND_USAGE_ONLY_ALLOWED_IN_STATE_DRAFT = {
+    code: 422,
+    error: {
+      internalErrorCode: 2021,
+      message: 'Send usage not allowed',
+      description: 'It\'s not allowed to send this usage.'
+    }
+  };
+
+  static ERROR_BUSINESS_SEND_USAGE_ONLY_ALLOWED_ON_EXCHANGED_CONTRACT = {
+    code: 422,
+    error: {
+      internalErrorCode: 2022,
+      message: 'Send usage not allowed',
+      description: 'It\'s not allowed to send this usage.'
+    }
+  };
+
+  static ERROR_BUSINESS_SEND_USAGE_ONLY_ALLOWED_FOR_MSP_OWNER = {
+    code: 422,
+    error: {
+      internalErrorCode: 2023,
+      message: 'Send usage not allowed',
+      description: 'It\'s not allowed to send this usage.'
     }
   };
 

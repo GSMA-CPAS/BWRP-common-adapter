@@ -3,6 +3,7 @@ const testsUtils = require('../tools/testsUtils');
 const testsDbUtils = require('../tools/testsDbUtils');
 const debug = require('debug')('spec:it');
 const debugSetup = require('debug')('spec:setup');
+const debugAction = require('debug')('spec:action');
 /* eslint-enable no-unused-vars */
 
 const chai = require('chai');
@@ -54,6 +55,7 @@ describe(`Launch scenario 0002_Discovery`, function() {
   // Create and use 'discovery' endpoints
 
   it(`Get all MSPs on DTAG`, function(done) {
+    debugAction(`${this.test.title}`);
     try {
       chai.request(DTAG_API)
         .get(`/discovery/msps`)
@@ -77,6 +79,7 @@ describe(`Launch scenario 0002_Discovery`, function() {
   });
 
   it(`Get TMUS MSP on DTAG`, function(done) {
+    debugAction(`${this.test.title}`);
     try {
       chai.request(DTAG_API)
         .get(`/discovery/msps/TMUS`)
@@ -107,6 +110,7 @@ describe(`Launch scenario 0002_Discovery`, function() {
   });
 
   it(`Get all MSPs on TMUS`, function(done) {
+    debugAction(`${this.test.title}`);
     try {
       chai.request(TMUS_API)
         .get(`/discovery/msps`)
@@ -130,6 +134,7 @@ describe(`Launch scenario 0002_Discovery`, function() {
   });
 
   it(`Get GSMA MSP on TMUS`, function(done) {
+    debugAction(`${this.test.title}`);
     try {
       chai.request(TMUS_API)
         .get(`/discovery/msps/GSMA`)

@@ -128,11 +128,12 @@ class LocalStorageProvider {
    * @param {String} rawData
    * @param {String} referenceId
    * @param {Array<String>} storageKeys
+   * @param {JSON} blockchainRef
    * @return {Promise<object>}
    */
-  static async updateSentContract(contractId, rawData, referenceId, storageKeys) {
+  static async updateSentContract(contractId, rawData, referenceId, storageKeys, blockchainRef) {
     try {
-      return await ContractDAO.findOneAndUpdateToSentContract(contractId, rawData, referenceId, storageKeys);
+      return await ContractDAO.findOneAndUpdateToSentContract(contractId, rawData, referenceId, storageKeys, blockchainRef);
     } catch (error) {
       logger.error('[LocalStorageProvider::updateSentContract] failed to update sent contract - %s', error.message);
       throw error;
@@ -172,11 +173,87 @@ class LocalStorageProvider {
    * @param {Object} usage
    * @return {Promise<object>}
    */
+  static async saveReceivedUsage(usage) {
+    try {
+      return await UsageDAO.create(usage, 'RECEIVED');
+    } catch (error) {
+      logger.error('[LocalStorageProvider::saveReceivedUsage] failed to save received usage - %s', error.message);
+      throw error;
+    }
+  }
+
+  /**
+   *
+   * @param {Object} conditions
+   * @return {Promise<object>}
+   */
+  static async existsUsage(conditions) {
+    try {
+      return await UsageDAO.exists(conditions);
+    } catch (error) {
+      logger.error('[LocalStorageProvider::existsUsage] failed to find if an usage exists - %s', error.message);
+      throw error;
+    }
+  }
+
+  /**
+   *
+   * @param {Object} usage
+   * @return {Promise<object>}
+   */
   static async updateUsage(usage) {
     try {
       return await UsageDAO.update(usage);
     } catch (error) {
       logger.error('[LocalStorageProvider::updateUsage] failed to update usage - ', error.message);
+      throw error;
+    }
+  }
+
+  /**
+   *
+   * @param {String} referenceId
+   * @param {Object} matchingConditions
+   * @return {Promise<object>}
+   */
+  static async findUsageByReferenceId(referenceId, matchingConditions = {}) {
+    try {
+      return await UsageDAO.findOneByReferenceId(referenceId, matchingConditions);
+    } catch (error) {
+      logger.error('[LocalStorageProvider::findUsageByReferenceId] failed to get usage from referenceId - %s', error.message);
+      throw error;
+    }
+  }
+
+  /**
+   *
+   * @param {Object} id
+   * @param {Object} contractReferenceId
+   * @return {Promise<object>}
+   */
+  static async updateUsageWithContractReferenceId(id, contractReferenceId) {
+    try {
+      return await UsageDAO.addContractReferenceId(id, contractReferenceId);
+    } catch (error) {
+      logger.error('[LocalStorageProvider::updateUsageWithContractReferenceId] failed to updateUsageWithContractReferenceId - ', error.message);
+      throw error;
+    }
+  }
+
+  /**
+   *
+   * @param {String} usageId
+   * @param {String} rawData
+   * @param {String} referenceId
+   * @param {Array<String>} storageKeys
+   * @param {JSON} blockchainRef
+   * @return {Promise<object>}
+   */
+  static async updateSentUsage(usageId, rawData, referenceId, storageKeys, blockchainRef) {
+    try {
+      return await UsageDAO.findOneAndUpdateToSentUsage(usageId, rawData, referenceId, storageKeys, blockchainRef);
+    } catch (error) {
+      logger.error('[LocalStorageProvider::updateSentUsage] failed to update sent usage - %s', error.message);
       throw error;
     }
   }
@@ -194,7 +271,6 @@ class LocalStorageProvider {
       throw error;
     }
   }
-
 
   /**
    *
@@ -302,11 +378,12 @@ class LocalStorageProvider {
    * @param {String} rawData
    * @param {String} referenceId
    * @param {Array<String>} storageKeys
+   * @param {JSON} blockchainRef
    * @return {Promise<object>}
    */
-  static async updateSentSettlement(settlementId, rawData, referenceId, storageKeys) {
+  static async updateSentSettlement(settlementId, rawData, referenceId, storageKeys, blockchainRef) {
     try {
-      return await SettlementDAO.findOneAndUpdateToSentSettlement(settlementId, rawData, referenceId, storageKeys);
+      return await SettlementDAO.findOneAndUpdateToSentSettlement(settlementId, rawData, referenceId, storageKeys, blockchainRef);
     } catch (error) {
       logger.error('[LocalStorageProvider::updateSentSettlement] failed to update sent settlement - %s', error.message);
       throw error;

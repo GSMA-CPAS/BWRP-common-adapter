@@ -53,6 +53,7 @@ describe(`Tests PUT ${route} API OK`, function() {
       fromMsp: {mspId: 'A1'},
       toMsp: {mspId: 'D4'},
       referenceId: 'AZRAGGSHJIAJAOJSNJNSSNNAIT',
+      blockchainRef: {type: 'hlf', txId: 'TX-RAGGSHJIAJAOJSNJNSSNNAIT'},
       body: {
         bankDetails: {A1: {iban: null, bankName: null, currency: null}, C3: {iban: null, bankName: null, currency: null}},
         discountModels: 'someData',

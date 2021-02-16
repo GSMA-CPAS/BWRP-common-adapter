@@ -23,8 +23,10 @@ describe(`Tests PUT ${route} API OK`, function() {
       state: 'SENT',
       type: 'contract',
       version: '1.1.0',
-      fromMsp: {mspId: 'A1'},
+      fromMsp: {mspId: testsUtils.getSelfMspId()},
       toMsp: {mspId: 'B1'},
+      referenceId: 'AZRAGGSHJIAJAOJSNJNSSNNAIT',
+      blockchainRef: {type: 'hlf', txId: 'TX-RAGGSHJIAJAOJSNJNSSNNAIT'},
       body: {
         bankDetails: {A1: {iban: null, bankName: null, currency: null}, B1: {iban: null, bankName: null, currency: null}},
         discountModels: 'someData',
@@ -37,7 +39,7 @@ describe(`Tests PUT ${route} API OK`, function() {
       state: 'DRAFT',
       type: 'contract',
       version: '1.1.0',
-      fromMsp: {mspId: 'B1'},
+      fromMsp: {mspId: testsUtils.getSelfMspId()},
       toMsp: {mspId: 'C1'},
       body: {
         bankDetails: {A1: {iban: null, bankName: null, currency: null}, B1: {iban: null, bankName: null, currency: null}},
@@ -102,6 +104,28 @@ describe(`Tests PUT ${route} API OK`, function() {
       },
       state: 'SENT'
     };
+    const settlementWithOtherMspOwner = {
+      type: 'settlement',
+      version: '3.4.0',
+      name: 'Settlement data',
+      contractId: undefined,
+      contractReferenceId: 'xiazxzaosxoazpslazopdkxzepckeozdczelxpze',
+      mspOwner: undefined,
+      mspReceiver: undefined,
+      body: {
+        generatedResult: 'objectOrString',
+        usage: {
+          name: 'usageNameAA',
+          version: 'usageVersionAA',
+          state: 'usageStateAA',
+          mspOwner: undefined,
+          body: {
+            other: 'objectOrString',
+          },
+        }
+      },
+      state: 'DRAFT'
+    };
 
     before((done) => {
       debugSetup('==> init db with 2 contracts');
@@ -118,13 +142,19 @@ describe(`Tests PUT ${route} API OK`, function() {
           settlement2.mspOwner = contract2.fromMsp.mspId;
           settlement2.mspReceiver = contract2.toMsp.mspId;
           settlement2.body.usage.mspOwner = contract2.fromMsp.mspId;
-          debugSetup('==> init db with 2 settlements');
-          testsDbUtils.initDbWithSettlements([settlement1, settlement2])
+          settlementWithOtherMspOwner.contractId = contract2.id;
+          settlementWithOtherMspOwner.mspOwner = contract2.toMsp.mspId;
+          settlementWithOtherMspOwner.mspReceiver = contract2.fromMsp.mspId;
+          settlementWithOtherMspOwner.body.usage.mspOwner = contract2.toMsp.mspId;
+          debugSetup('==> init db with 3 settlements');
+          testsDbUtils.initDbWithSettlements([settlement1, settlement2, settlementWithOtherMspOwner])
             .then((initDbWithSettlementsResp) => {
               debugSetup('First settlement document linked to contract ', initDbWithSettlementsResp[0].contractId);
               debugSetup('Second settlement document linked to contract ', initDbWithSettlementsResp[1].contractId);
+              debugSetup('Third settlement document linked to contract ', initDbWithSettlementsResp[2].contractId);
               settlement1.id = initDbWithSettlementsResp[0].id;
               settlement2.id = initDbWithSettlementsResp[1].id;
+              settlementWithOtherMspOwner.id = initDbWithSettlementsResp[2].id;
               debugSetup('==> done!');
               done();
             })
@@ -174,7 +204,7 @@ describe(`Tests PUT ${route} API OK`, function() {
             expect(response).to.be.json;
             expect(response.body).to.exist;
             expect(response.body).to.be.an('object');
-            expect(Object.keys(response.body)).have.members(['settlementId', 'contractId', 'mspOwner', 'state', 'referenceId', 'creationDate', 'lastModificationDate', 'header', 'body']);
+            expect(Object.keys(response.body)).have.members(['settlementId', 'contractId', 'mspOwner', 'state', 'referenceId', 'blockchainRef', 'creationDate', 'lastModificationDate', 'header', 'body']);
 
             expect(response.body).to.have.property('settlementId', settlement1.id);
             expect(response.body).to.have.property('contractId', settlement1.contractId);
@@ -189,6 +219,11 @@ describe(`Tests PUT ${route} API OK`, function() {
             expect(response.body.header).to.have.property('name', settlement1.name);
             expect(response.body.header).to.have.property('type', settlement1.type);
             expect(response.body.header).to.have.property('version', settlement1.version);
+
+            expect(response.body).to.have.property('blockchainRef').that.is.an('object');
+            expect(Object.keys(response.body.blockchainRef)).have.members(['type', 'txId']);
+            expect(response.body.blockchainRef).to.have.property('type', 'hlf');
+            expect(response.body.blockchainRef).to.have.property('txId', 'b70cef323c0d3b56d44e9b31f16a11cba8dbbdd55c1d255b65f3fd2b3eadf8bb');
 
             expect(response.body).to.have.property('body').that.is.an('object');
             expect(Object.keys(response.body.body)).have.members(['generatedResult', 'usage']);
@@ -209,6 +244,34 @@ describe(`Tests PUT ${route} API OK`, function() {
     it('Put send settlement NOK if status is SENT', function(done) {
       try {
         const path = globalVersion + '/contracts/' + settlement2.contractId + '/settlements/' + settlement2.id + '/send/';
+        debug('path : ', path);
+
+        const sentBody = {};
+
+        chai.request(testsUtils.getServer())
+          .put(`${path}`)
+          .send(sentBody)
+          .end((error, response) => {
+            debug('response.status: %s', JSON.stringify(response.status));
+            debug('response.body: %s', JSON.stringify(response.body));
+            expect(error).to.be.null;
+            expect(response).to.have.status(422);
+            expect(response).to.be.json;
+            expect(response.body).to.exist;
+            expect(response.body.message).to.equal('Send settlement not allowed');
+
+            done();
+          });
+      } catch (exception) {
+        debug('exception: %s', exception.stack);
+        expect.fail('it test throws an exception');
+        done();
+      }
+    });
+
+    it('Put send settlement NOK if settlement mspOwner is not me', function(done) {
+      try {
+        const path = globalVersion + '/contracts/' + settlementWithOtherMspOwner.contractId + '/settlements/' + settlementWithOtherMspOwner.id + '/send/';
         debug('path : ', path);
 
         const sentBody = {};

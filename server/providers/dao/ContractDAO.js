@@ -24,6 +24,19 @@ class ContractDAO {
           condition.state = matchingConditions.state;
         }
       }
+      if (matchingConditions.msp !== undefined) {
+        if (Array.isArray(matchingConditions.msp)) {
+          condition.$or = [
+            {'fromMsp.mspId': {$in: matchingConditions.msp}},
+            {'toMsp.mspId': {$in: matchingConditions.msp}}
+          ];
+        } else if (typeof matchingConditions.state === 'string') {
+          condition.$or = [
+            {'fromMsp.mspId': matchingConditions.msp},
+            {'toMsp.mspId': matchingConditions.msp}
+          ];
+        }
+      }
       if (matchingConditions.rawData !== undefined) {
         condition.rawData = matchingConditions.rawData;
       }
@@ -83,7 +96,16 @@ class ContractDAO {
             signatureLinks.push({id: ContractMongoRequester.defineSignatureId(), msp: 'toMsp', index: i});
           }
         }
-        console.log(signatureLinks);
+        if (object.fromMsp.minSignatures !== undefined) {
+          for (let i = 0; i < object.fromMsp.minSignatures; i++) {
+            signatureLinks.push({id: ContractMongoRequester.defineSignatureId(), msp: 'fromMsp', index: i});
+          }
+        }
+        if (object.toMsp.minSignatures !== undefined) {
+          for (let i = 0; i < object.toMsp.minSignatures; i++) {
+            signatureLinks.push({id: ContractMongoRequester.defineSignatureId(), msp: 'toMsp', index: i});
+          }
+        }
         object.signatureLink = signatureLinks;
       }
 
@@ -280,7 +302,7 @@ class ContractDAO {
     });
   }
 
-  static findOneAndUpdateToSentContract(contractId, rawData, referenceId, storageKeys) {
+  static findOneAndUpdateToSentContract(contractId, rawData, referenceId, storageKeys, blockchainRef) {
     return new Promise((resolve, reject) => {
       // Verify parameters
       if (contractId === undefined) {
@@ -299,6 +321,10 @@ class ContractDAO {
         logger.error('[ContractDAO::findOneAndUpdateToSentContract] [FAILED] : storageKeys undefined');
         reject(MISSING_MANDATORY_PARAM_ERROR);
       }
+      if (blockchainRef === undefined) {
+        logger.error('[ContractDAO::findOneAndUpdateToSentContract] [FAILED] : blockchainRef undefined');
+        reject(MISSING_MANDATORY_PARAM_ERROR);
+      }
 
       // Define automatic values
       const lastModificationDate = Date.now();
@@ -311,8 +337,8 @@ class ContractDAO {
       };
 
       // Convert "header->from/toMSP->signatures to signatureLink
-      ContractMongoRequester.findOne(condition, (err, storedContract) => {
-        DAOErrorManager.handleErrorOrNullObject(err, storedContract)
+      ContractMongoRequester.findOne(condition, (findOneErr, storedContract) => {
+        DAOErrorManager.handleErrorOrNullObject(findOneErr, storedContract)
           .then((storedObjectReturned) => {
             const signatureLinks = [];
             if (storedContract.fromMsp.signatures !== undefined) {
@@ -325,11 +351,23 @@ class ContractDAO {
                 signatureLinks.push({id: ContractMongoRequester.defineSignatureId(), msp: 'toMsp', index: i});
               }
             }
+            if (storedContract.fromMsp.minSignatures !== undefined) {
+              for (let i = 0; i < storedContract.fromMsp.minSignatures; i++) {
+                signatureLinks.push({id: ContractMongoRequester.defineSignatureId(), msp: 'fromMsp', index: i});
+              }
+            }
+            if (storedContract.toMsp.minSignatures !== undefined) {
+              for (let i = 0; i < storedContract.toMsp.minSignatures; i++) {
+                signatureLinks.push({id: ContractMongoRequester.defineSignatureId(), msp: 'toMsp', index: i});
+              }
+            }
+
 
             const updateCommand = {
               $set: {
                 rawData: rawData,
                 referenceId: referenceId,
+                blockchainRef: blockchainRef,
                 storageKeys: storageKeys,
                 state: 'SENT',
                 lastModificationDate: lastModificationDate,

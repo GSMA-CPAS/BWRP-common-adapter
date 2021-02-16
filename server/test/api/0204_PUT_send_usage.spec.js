@@ -8,8 +8,11 @@ const debugSetup = require('debug')('spec:setup');
 const chai = require('chai');
 const expect = require('chai').expect;
 
+const nock = require('nock');
+const blockchainAdapterNock = nock(testsUtils.getBlockchainAdapterUrl());
+
 const globalVersion = '/api/v1';
-const route = '/contracts/{contractId}/usages/{usageId}';
+const route = '/contracts/{contractId}/usages/{usageId}/send/';
 
 const DATE_REGEX = testsUtils.getDateRegexp();
 
@@ -20,7 +23,7 @@ describe(`Tests PUT ${route} API OK`, function() {
       state: 'DRAFT',
       type: 'contract',
       version: '1.1.0',
-      fromMsp: {mspId: 'A1'},
+      fromMsp: {mspId: testsUtils.getSelfMspId()},
       toMsp: {mspId: 'B1'},
       body: {
         bankDetails: {A1: {iban: null, bankName: null, currency: null}, B1: {iban: null, bankName: null, currency: null}},
@@ -34,7 +37,7 @@ describe(`Tests PUT ${route} API OK`, function() {
       state: 'SENT',
       type: 'contract',
       version: '1.1.0',
-      fromMsp: {mspId: 'B1', signatures: [{role: 'role', name: 'name', id: 'id'}]},
+      fromMsp: {mspId: testsUtils.getSelfMspId(), signatures: [{role: 'role', name: 'name', id: 'id'}]},
       toMsp: {mspId: 'C1', signatures: [{role: 'role', name: 'name', id: 'id'}]},
       referenceId: 'AZRAGGSHJIAJAOJSNJNSSNNAIT',
       blockchainRef: {type: 'hlf', txId: 'TX-RAGGSHJIAJAOJSNJNSSNNAIT'},
@@ -51,7 +54,7 @@ describe(`Tests PUT ${route} API OK`, function() {
       type: 'contract',
       version: '1.1.0',
       fromMsp: {mspId: 'B1'},
-      toMsp: {mspId: 'C1'},
+      toMsp: {mspId: testsUtils.getSelfMspId()},
       referenceId: 'AZRAGGSHJIAJAOJSNJNSSNNAIU',
       blockchainRef: {type: 'hlf', txId: 'TX-RAGGSHJIAJAOJSNJNSSNNAIU'},
       body: {
@@ -101,6 +104,20 @@ describe(`Tests PUT ${route} API OK`, function() {
       },
       state: 'SENT'
     };
+    const usageWithOtherMspOwner = {
+      type: 'usage',
+      version: '2.12.0',
+      name: 'Usage with data',
+      contractId: undefined,
+      mspOwner: undefined,
+      mspReceiver: undefined,
+      body: {
+        data: [
+          {year: 2020, month: 1, hpmn: 'HPMN', vpmn: 'VPMN', service: 'service', value: 1, units: 'unit', charges: 'charge', taxes: 'taxes'}
+        ]
+      },
+      state: 'DRAFT'
+    };
 
     before((done) => {
       debugSetup('==> init db with 3 contracts');
@@ -114,15 +131,18 @@ describe(`Tests PUT ${route} API OK`, function() {
           usageMinimumData.mspOwner = contractSent.fromMsp.mspId;
           usageMinimumData.mspReceiver = contractSent.toMsp.mspId;
           usageMoreData.contractId = contractReceived.id;
-          usageMoreData.mspOwner = contractReceived.fromMsp.mspId;
-          usageMoreData.mspReceiver = contractReceived.toMsp.mspId;
+          usageMoreData.mspOwner = contractReceived.toMsp.mspId;
+          usageMoreData.mspReceiver = contractReceived.fromMsp.mspId;
           usageSent.contractId = contractReceived.id;
-          usageSent.mspOwner = contractReceived.fromMsp.mspId;
-          usageSent.mspReceiver = contractReceived.toMsp.mspId;
-          debugSetup('==> init db with 3 usages');
-          testsDbUtils.initDbWithUsages([usageMinimumData, usageMoreData, usageSent])
+          usageSent.mspOwner = contractReceived.toMsp.mspId;
+          usageSent.mspReceiver = contractReceived.fromMsp.mspId;
+          usageWithOtherMspOwner.contractId = contractReceived.id;
+          usageWithOtherMspOwner.mspOwner = contractReceived.fromMsp.mspId;
+          usageWithOtherMspOwner.mspReceiver = contractReceived.toMsp.mspId;
+          debugSetup('==> init db with 4 usages');
+          testsDbUtils.initDbWithUsages([usageMinimumData, usageMoreData, usageSent, usageWithOtherMspOwner])
             .then((initDbWithUsagesResp) => {
-              debugSetup('The db is initialized with 3 usages : ', initDbWithUsagesResp.map((c) => c.id));
+              debugSetup('The db is initialized with 4 usages : ', initDbWithUsagesResp.map((c) => c.id));
               debugSetup('==> done!');
               done();
             })
@@ -140,23 +160,28 @@ describe(`Tests PUT ${route} API OK`, function() {
     });
 
 
-    it('Put usage OK', function(done) {
+    it('Put send usage OK on sent contract', function(done) {
+      blockchainAdapterNock.post('/private-documents')
+        .times(1)
+        .reply((pathReceived, bodyReceived) => {
+          // Only for exemple
+          expect(pathReceived).to.equals('/private-documents');
+          // expect(bodyReceived).to.be.empty;
+          return [
+            200,
+            {
+              referenceID: 'bec1ef2dbce73b6ae9841cf2edfa56de1f16d5a33d8a657de258e85c5f2e1bcb',
+              txID: 'b70cef323c0d3b56d44e9b31f16a11cba8dbbdd55c1d255b65f3fd2b3eadf8bb'
+            },
+            undefined
+          ];
+        });
+
       try {
-        const path = globalVersion + '/contracts/' + contractSent.id + '/usages/' + usageMinimumData.id;
+        const path = globalVersion + '/contracts/' + contractSent.id + '/usages/' + usageMinimumData.id + '/send/';
         debug('PUT path : ', path);
 
-        const sentBody = {
-          header: {
-            name: 'Usage data name changed',
-            type: 'usage',
-            version: '1.2.0',
-            mspOwner: 'B1'
-          },
-          state: 'DRAFT',
-          body: {
-            data: []
-          }
-        };
+        const sentBody = {};
         chai.request(testsUtils.getServer())
           .put(`${path}`)
           .send(sentBody)
@@ -169,21 +194,27 @@ describe(`Tests PUT ${route} API OK`, function() {
             expect(response.body).to.exist;
             expect(response.body).to.be.an('object');
 
-            expect(Object.keys(response.body)).have.members(['usageId', 'contractId', 'header', 'mspOwner', 'state', 'body', 'creationDate', 'lastModificationDate']);
+            expect(Object.keys(response.body)).have.members(['usageId', 'contractId', 'header', 'mspOwner', 'referenceId', 'blockchainRef', 'state', 'body', 'creationDate', 'lastModificationDate']);
 
             expect(response.body).to.have.property('usageId', usageMinimumData.id);
             expect(response.body).to.have.property('contractId', usageMinimumData.contractId);
             expect(response.body).to.have.property('mspOwner', usageMinimumData.mspOwner);
-            expect(response.body).to.have.property('state', usageMinimumData.state);
+            expect(response.body).to.have.property('referenceId').that.is.a('string');
+            expect(response.body).to.have.property('state', 'SENT');
             expect(response.body).to.have.property('creationDate').that.is.a('string').and.match(DATE_REGEX);
             expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
 
             expect(response.body).to.have.property('header').that.is.an('object');
             expect(Object.keys(response.body.header)).have.members(['name', 'type', 'version', 'mspOwner']);
-            expect(response.body.header).to.have.property('name', 'Usage data name changed');
+            expect(response.body.header).to.have.property('name', usageMinimumData.name);
             expect(response.body.header).to.have.property('type', usageMinimumData.type);
-            expect(response.body.header).to.have.property('version', '1.2.0');
+            expect(response.body.header).to.have.property('version', usageMinimumData.version);
             expect(response.body.header).to.have.property('mspOwner', usageMinimumData.mspOwner);
+
+            expect(response.body).to.have.property('blockchainRef').that.is.an('object');
+            expect(Object.keys(response.body.blockchainRef)).have.members(['type', 'txId']);
+            expect(response.body.blockchainRef).to.have.property('type', 'hlf');
+            expect(response.body.blockchainRef).to.have.property('txId', 'b70cef323c0d3b56d44e9b31f16a11cba8dbbdd55c1d255b65f3fd2b3eadf8bb');
 
             expect(response.body).to.have.property('body').that.is.an('object');
             expect(Object.keys(response.body.body)).have.members(['data']);
@@ -199,25 +230,28 @@ describe(`Tests PUT ${route} API OK`, function() {
     });
 
 
-    it('Put usage OK with maximum usage details', function(done) {
+    it('Put send usage OK on received contract', function(done) {
+      blockchainAdapterNock.post('/private-documents')
+        .times(1)
+        .reply((pathReceived, bodyReceived) => {
+          // Only for exemple
+          expect(pathReceived).to.equals('/private-documents');
+          // expect(bodyReceived).to.be.empty;
+          return [
+            200,
+            {
+              referenceID: 'bec1ef2dbce73b6ae9841cf2edfa56de1f16d5a33d8a657de258e85c5f2e1bcb',
+              txID: 'b70cef323c0d3b56d44e9b31f16a11cba8dbbdd55c1d255b65f3fd2b3eadf8bb'
+            },
+            undefined
+          ];
+        });
+
       try {
-        const path = globalVersion + '/contracts/' + contractReceived.id + '/usages/' + usageMoreData.id;
+        const path = globalVersion + '/contracts/' + contractReceived.id + '/usages/' + usageMoreData.id + '/send/';
         debug('PUT path : ', path);
 
-        const sentBody = {
-          header: {
-            name: 'Usage data name changed',
-            type: 'usage',
-            version: '1.2.0',
-            mspOwner: 'B1'
-          },
-          state: 'DRAFT',
-          body: {
-            data: [
-              {year: 2020, month: 1, hpmn: 'HPMN', vpmn: 'VPMN', service: 'service', value: 1, units: 'unit', charges: 'charge', taxes: 'taxes'}
-            ]
-          },
-        };
+        const sentBody = {};
 
         chai.request(testsUtils.getServer())
           .put(`${path}`)
@@ -231,21 +265,26 @@ describe(`Tests PUT ${route} API OK`, function() {
             expect(response.body).to.exist;
             expect(response.body).to.be.an('object');
 
-            expect(Object.keys(response.body)).have.members(['usageId', 'contractId', 'header', 'mspOwner', 'state', 'body', 'creationDate', 'lastModificationDate']);
+            expect(Object.keys(response.body)).have.members(['usageId', 'contractId', 'header', 'mspOwner', 'referenceId', 'blockchainRef', 'state', 'body', 'creationDate', 'lastModificationDate']);
 
             expect(response.body).to.have.property('usageId', usageMoreData.id);
-            expect(response.body).to.have.property('state', usageMoreData.state);
-            expect(response.body).to.have.property('mspOwner', usageMoreData.mspOwner);
+            expect(response.body).to.have.property('state', 'SENT');
+            expect(response.body).to.have.property('mspOwner', usageMinimumData.mspOwner);
+            expect(response.body).to.have.property('referenceId').that.is.a('string');
             expect(response.body).to.have.property('creationDate').that.is.a('string').and.match(DATE_REGEX);
             expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
 
             expect(response.body).to.have.property('header').that.is.an('object');
             expect(Object.keys(response.body.header)).have.members(['name', 'type', 'version', 'mspOwner']);
-            expect(response.body.header).to.have.property('name', 'Usage data name changed');
+            expect(response.body.header).to.have.property('name', usageMoreData.name);
             expect(response.body.header).to.have.property('type', usageMoreData.type);
-            expect(response.body.header).to.have.property('version', '1.2.0');
+            expect(response.body.header).to.have.property('version', usageMoreData.version);
             expect(response.body.header).to.have.property('mspOwner', usageMoreData.mspOwner);
 
+            expect(response.body).to.have.property('blockchainRef').that.is.an('object');
+            expect(Object.keys(response.body.blockchainRef)).have.members(['type', 'txId']);
+            expect(response.body.blockchainRef).to.have.property('type', 'hlf');
+            expect(response.body.blockchainRef).to.have.property('txId', 'b70cef323c0d3b56d44e9b31f16a11cba8dbbdd55c1d255b65f3fd2b3eadf8bb');
 
             expect(response.body).to.have.property('body').that.is.an('object');
             expect(Object.keys(response.body.body)).have.members(['data']);
@@ -260,36 +299,25 @@ describe(`Tests PUT ${route} API OK`, function() {
       }
     });
 
-    it('Put usage NOK on wrong contractId', function(done) {
+    it('Put send usage NOK on wrong contractId', function(done) {
       try {
         const randomValue = testsUtils.defineRandomValue();
 
-        const path = globalVersion + '/contracts/' + 'id_' + randomValue + '/usages/' + usageMinimumData.id;
+        const path = globalVersion + '/contracts/' + 'id_' + randomValue + '/usages/' + usageMinimumData.id + '/send/';
         debug('PUT path : ', path);
 
-        const sentBody = {
-          header: {
-            name: 'Usage data name changed',
-            type: 'usage',
-            version: '1.2.0',
-            mspOwner: 'B1'
-          },
-          state: 'DRAFT',
-          body: {
-            data: []
-          }
-        };
+        const sentBody = {};
         chai.request(testsUtils.getServer())
           .put(`${path}`)
           .send(sentBody)
           .end((error, response) => {
             debug('response.body: %s', JSON.stringify(response.body));
             expect(error).to.be.null;
-            expect(response).to.have.status(422);
+            expect(response).to.have.status(404);
             expect(response).to.be.json;
             expect(response.body).to.exist;
 
-            expect(response.body.message).to.equal('Put usage not allowed');
+            expect(response.body.message).to.equal('Resource not found');
             done();
           });
       } catch (exception) {
@@ -299,23 +327,12 @@ describe(`Tests PUT ${route} API OK`, function() {
       }
     });
 
-    it('Put usage NOK if request body state is not DRAFT', function(done) {
+    it('Put send usage NOK if usage in db is not DRAFT', function(done) {
       try {
-        const path = globalVersion + '/contracts/' + contractSent.id + '/usages/' + usageMinimumData.id;
+        const path = globalVersion + '/contracts/' + contractReceived.id + '/usages/' + usageSent.id + '/send/';
         debug('PUT path : ', path);
 
-        const sentBody = {
-          header: {
-            name: 'Usage data name changed',
-            type: 'usage',
-            version: '1.2.0',
-            mspOwner: 'B1'
-          },
-          state: 'SENT',
-          body: {
-            data: []
-          }
-        };
+        const sentBody = {};
         chai.request(testsUtils.getServer())
           .put(`${path}`)
           .send(sentBody)
@@ -326,7 +343,7 @@ describe(`Tests PUT ${route} API OK`, function() {
             expect(response).to.be.json;
             expect(response.body).to.exist;
 
-            expect(response.body.message).to.equal('Usage modification not allowed');
+            expect(response.body.message).to.equal('Send usage not allowed');
             done();
           });
       } catch (exception) {
@@ -336,23 +353,12 @@ describe(`Tests PUT ${route} API OK`, function() {
       }
     });
 
-    it('Put usage NOK if usage in db is not DRAFT', function(done) {
+    it('Put send usage NOK if usage mspOwner is not me', function(done) {
       try {
-        const path = globalVersion + '/contracts/' + contractReceived.id + '/usages/' + usageSent.id;
+        const path = globalVersion + '/contracts/' + contractReceived.id + '/usages/' + usageWithOtherMspOwner.id + '/send/';
         debug('PUT path : ', path);
 
-        const sentBody = {
-          header: {
-            name: 'Usage data name changed',
-            type: 'usage',
-            version: '1.2.0',
-            mspOwner: 'B1'
-          },
-          state: 'SENT',
-          body: {
-            data: []
-          }
-        };
+        const sentBody = {};
         chai.request(testsUtils.getServer())
           .put(`${path}`)
           .send(sentBody)
@@ -363,7 +369,7 @@ describe(`Tests PUT ${route} API OK`, function() {
             expect(response).to.be.json;
             expect(response.body).to.exist;
 
-            expect(response.body.message).to.equal('Usage modification not allowed');
+            expect(response.body.message).to.equal('Send usage not allowed');
             done();
           });
       } catch (exception) {

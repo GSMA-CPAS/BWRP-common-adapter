@@ -41,6 +41,7 @@ describe(`Tests GET ${route} API OK`, function() {
         {id: '5fd8d6070cc5feb0fc0cb9e5d45f', msp: 'toMsp', index: 0}
       ],
       referenceId: 'bec1ef2dbce73b6ae9841cf2edfa56de1f16d5a33d8a657de258e85c5f2e1bcb',
+      blockchainRef: {type: 'hlf', txId: 'TX-c1ef2dbce73b6ae9841cf2edfa56de1f16d5a33d8a657de258e85c5f2e1bcb'},
       rawData: 'eyJ0eXBlIjoiY29udHJhY3QiLCJ2ZXJzaW9uIjoiMS4xLjAiLCJuYW1lIjoiQ29udHJhY3QgbmFtZSBiZXR3ZWVuIE1TUDEgYW5kIE1TUDIiLCJmcm9tTXNwIjp7InNpZ25hdHVyZXMiOlt7InJvbGUiOiJyb2xlIiwibmFtZSI6Im5hbWUiLCJpZCI6ImlkIn1dLCJtc3BJZCI6IkExIn0sInRvTXNwIjp7InNpZ25hdHVyZXMiOlt7InJvbGUiOiJyb2xlIiwibmFtZSI6Im5hbWUiLCJpZCI6ImlkIn1dLCJtc3BJZCI6IkIxIn0sImJvZHkiOnsiYmFua0RldGFpbHMiOnsiQTEiOnsiaWJhbiI6bnVsbCwiYmFua05hbWUiOm51bGwsImN1cnJlbmN5IjpudWxsfSwiQjEiOnsiaWJhbiI6bnVsbCwiYmFua05hbWUiOm51bGwsImN1cnJlbmN5IjpudWxsfX0sImRpc2NvdW50TW9kZWxzIjoic29tZURhdGEiLCJnZW5lcmFsSW5mb3JtYXRpb24iOnsibmFtZSI6InRlc3QxIiwidHlwZSI6Ik5vcm1hbCIsImVuZERhdGUiOiIyMDIxLTAxLTAxVDAwOjAwOjAwLjAwMFoiLCJzdGFydERhdGUiOiIyMDIwLTEyLTAxVDAwOjAwOjAwLjAwMFoifX19'
     };
     const draftContract = {
@@ -79,6 +80,7 @@ describe(`Tests GET ${route} API OK`, function() {
         {id: '5fd8d6070cc5feb0fc0cb9e5d45f', msp: 'toMsp', index: 0}
       ],
       referenceId: 'receivedbec1ef2dbce73b6ae9841cf2edfa56de1f16d5a33d8a657de258e85c5f2e1bcb',
+      blockchainRef: {type: 'hlf', txId: 'TX-ceivedbec1ef2dbce73b6ae9841cf2edfa56de1f16d5a33d8a657de258e85c5f2e1bcb'},
       rawData: 'eyJ0eXBlIjoiY29udHJhY3QiLCJ2ZXJzaW9uIjoiMS4xLjAiLCJuYW1lIjoiQ29udHJhY3QgbmFtZSBiZXR3ZWVuIE1TUDEgYW5kIE1TUDIiLCJmcm9tTXNwIjp7InNpZ25hdHVyZXMiOlt7InJvbGUiOiJyb2xlIiwibmFtZSI6Im5hbWUiLCJpZCI6ImlkIn1dLCJtc3BJZCI6IkExIn0sInRvTXNwIjp7InNpZ25hdHVyZXMiOlt7InJvbGUiOiJyb2xlIiwibmFtZSI6Im5hbWUiLCJpZCI6ImlkIn1dLCJtc3BJZCI6IkIxIn0sImJvZHkiOnsiYmFua0RldGFpbHMiOnsiQTEiOnsiaWJhbiI6bnVsbCwiYmFua05hbWUiOm51bGwsImN1cnJlbmN5IjpudWxsfSwiQjEiOnsiaWJhbiI6bnVsbCwiYmFua05hbWUiOm51bGwsImN1cnJlbmN5IjpudWxsfX0sImRpc2NvdW50TW9kZWxzIjoic29tZURhdGEiLCJnZW5lcmFsSW5mb3JtYXRpb24iOnsibmFtZSI6InRlc3QxIiwidHlwZSI6Ik5vcm1hbCIsImVuZERhdGUiOiIyMDIxLTAxLTAxVDAwOjAwOjAwLjAwMFoiLCJzdGFydERhdGUiOiIyMDIwLTEyLTAxVDAwOjAwOjAwLjAwMFoifX19'
     };
     /* eslint-enable max-len */
@@ -134,17 +136,20 @@ describe(`Tests GET ${route} API OK`, function() {
             expect(response).to.be.json;
             expect(response.body).to.exist;
             expect(response.body).to.be.an('object');
-            expect(Object.keys(response.body)).have.members(['signatureId', 'contractId', 'msp', 'name', 'role', 'algorithm', 'certificate', 'signature', 'state']);
+            expect(Object.keys(response.body)).have.members(['signatureId', 'contractId', 'msp', 'algorithm', 'certificate', 'signature', 'blockchainRef', 'state']);
 
             expect(response.body).to.have.property('signatureId', signatureId);
             expect(response.body).to.have.property('contractId', sentContract.id);
             expect(response.body).to.have.property('msp', sentContract.fromMsp.mspId);
-            expect(response.body).to.have.property('name', sentContract.fromMsp.signatures[0].name);
-            expect(response.body).to.have.property('role', sentContract.fromMsp.signatures[0].role);
             expect(response.body).to.have.property('algorithm', getSignatureFromBlockchainAdapterResponse.f6c847b990945996a6c13e21713d76c982ef79779c43c8f9183cb30c3822e3d7.algorithm);
             expect(response.body).to.have.property('certificate', getSignatureFromBlockchainAdapterResponse.f6c847b990945996a6c13e21713d76c982ef79779c43c8f9183cb30c3822e3d7.certificate);
             expect(response.body).to.have.property('signature', getSignatureFromBlockchainAdapterResponse.f6c847b990945996a6c13e21713d76c982ef79779c43c8f9183cb30c3822e3d7.signature);
             expect(response.body).to.have.property('state', 'SIGNED');
+
+            expect(response.body).to.have.property('blockchainRef').that.is.an('object');
+            expect(Object.keys(response.body.blockchainRef)).have.members(['type', 'txId']);
+            expect(response.body.blockchainRef).to.have.property('type', 'hlf');
+            expect(response.body.blockchainRef).to.have.property('txId', 'f6c847b990945996a6c13e21713d76c982ef79779c43c8f9183cb30c3822e3d7');
 
             done();
           });
@@ -189,13 +194,11 @@ describe(`Tests GET ${route} API OK`, function() {
             expect(response).to.be.json;
             expect(response.body).to.exist;
             expect(response.body).to.be.an('object');
-            expect(Object.keys(response.body)).have.members(['signatureId', 'contractId', 'msp', 'name', 'role', 'state']);
+            expect(Object.keys(response.body)).have.members(['signatureId', 'contractId', 'msp', 'state']);
 
             expect(response.body).to.have.property('signatureId', signatureId);
             expect(response.body).to.have.property('contractId', sentContract.id);
             expect(response.body).to.have.property('msp', sentContract.toMsp.mspId);
-            expect(response.body).to.have.property('name', sentContract.toMsp.signatures[0].name);
-            expect(response.body).to.have.property('role', sentContract.toMsp.signatures[0].role);
             expect(response.body).to.have.property('state', 'UNSIGNED');
 
             done();

@@ -34,7 +34,7 @@ class SettlementDAO {
   }
 
 
-  static create(object) {
+  static create(object, action = 'CREATION') {
     return new Promise((resolve, reject) => {
       // Verify parameters
       if (object === undefined) {
@@ -49,7 +49,7 @@ class SettlementDAO {
       object.creationDate = creationDate;
       object.lastModificationDate = creationDate;
       object.history = [
-        {date: creationDate, action: 'CREATION'}
+        {date: creationDate, action: action}
       ];
 
       // Launch database request
@@ -146,7 +146,7 @@ class SettlementDAO {
     });
   }
 
-  static findOneAndUpdateToSentSettlement(settlementId, rawData, referenceId, storageKeys) {
+  static findOneAndUpdateToSentSettlement(settlementId, rawData, referenceId, storageKeys, blockchainRef) {
     return new Promise((resolve, reject) => {
       // Verify parameters
       if (settlementId === undefined) {
@@ -165,6 +165,10 @@ class SettlementDAO {
         logger.error('[SettlementDAO::findOneAndUpdateToSentSettlement] [FAILED] : storageKeys undefined');
         reject(MISSING_MANDATORY_PARAM_ERROR);
       }
+      if (blockchainRef === undefined) {
+        logger.error('[SettlementDAO::findOneAndUpdateToSentSettlement] [FAILED] : blockchainRef undefined');
+        reject(MISSING_MANDATORY_PARAM_ERROR);
+      }
 
       // Define automatic values
       const lastModificationDate = Date.now();
@@ -180,6 +184,7 @@ class SettlementDAO {
         $set: {
           rawData: rawData,
           referenceId: referenceId,
+          blockchainRef: blockchainRef,
           storageKeys: storageKeys,
           state: 'SENT',
           lastModificationDate: lastModificationDate

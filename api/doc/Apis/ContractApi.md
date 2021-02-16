@@ -96,14 +96,18 @@ No authorization required
 
 <a name="getContracts"></a>
 # **getContracts**
-> String getContracts()
+> String getContracts(withMSPs, states)
 
 
 
     Show a list of all Contracts
 
 ### Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **withMSPs** | [**List**](../Models/String.md)| One or more MSPs | [optional] [default to null]
+ **states** | [**List**](../Models/String.md)| One or more states | [optional] [default to null]
 
 ### Return type
 

@@ -201,7 +201,10 @@ class BlockchainAdapterProvider {
       return {
         rawData,
         referenceId: response.data.referenceID,
-        txId: response.data.txID
+        blockchainRef: {
+          type: 'hlf', // need a dynamic way to define type to support future multiledger system
+          txId: response.data.txID
+        }
       };
     } catch (error) {
       logger.error('[BlockchainAdapterProvider::uploadContract] failed to upload contract - %s', error.message);
@@ -361,6 +364,33 @@ class BlockchainAdapterProvider {
 
   /**
    *
+   * @param {Object} usage
+   * @return {Promise<object>}
+   */
+  async uploadUsage(usage) {
+    try {
+      const rawData = rawDataUtils.defineRawDataFromUsage(usage);
+      const response = await axiosInstance.post(config.BLOCKCHAIN_ADAPTER_URL + '/private-documents', {
+        toMSP: usage.mspReceiver,
+        data: rawData
+      });
+      logger.debug(`[BlockchainAdapterProvider::uploadUsage] response data:${typeof response.data} = ${JSON.stringify(response.data)}`);
+      return {
+        rawData,
+        referenceId: response.data.referenceID,
+        blockchainRef: {
+          type: 'hlf', // need a dynamic way to define type to support future multiledger system
+          txId: response.data.txID
+        }
+      };
+    } catch (error) {
+      logger.error('[BlockchainAdapterProvider::uploadUsage] failed to upload usage - %s', error.message);
+      throw error;
+    }
+  }
+
+  /**
+   *
    * @param {Object} settlement
    * @return {Promise<object>}
    */
@@ -375,7 +405,10 @@ class BlockchainAdapterProvider {
       return {
         rawData,
         referenceId: response.data.referenceID,
-        txId: response.data.txID
+        blockchainRef: {
+          type: 'hlf', // need a dynamic way to define type to support future multiledger system
+          txId: response.data.txID
+        }
       };
     } catch (error) {
       logger.error('[BlockchainAdapterProvider::uploadSettlement] failed to upload settlement - %s', error.message);

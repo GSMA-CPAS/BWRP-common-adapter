@@ -34,6 +34,8 @@ describe('Tests DELETE ' + route + ' API OK', function() {
       version: '1.1.0',
       fromMsp: {mspId: 'B1'},
       toMsp: {mspId: 'C1'},
+      referenceId: 'AZRAGGSHJIAJAOJSNJNSSNNAIT',
+      blockchainRef: {type: 'hlf', txId: 'TX-RAGGSHJIAJAOJSNJNSSNNAIT'},
       body: {
         bankDetails: {A1: {iban: null, bankName: null, currency: null}, B1: {iban: null, bankName: null, currency: null}},
         discountModels: 'someData',
@@ -48,6 +50,8 @@ describe('Tests DELETE ' + route + ' API OK', function() {
       version: '1.1.0',
       fromMsp: {mspId: 'B1'},
       toMsp: {mspId: 'C1'},
+      referenceId: 'AZRAGGSHJIAJAOJSNJNSSNNAIU',
+      blockchainRef: {type: 'hlf', txId: 'TX-RAGGSHJIAJAOJSNJNSSNNAIU'},
       body: {
         bankDetails: {A1: {iban: null, bankName: null, currency: null}, B1: {iban: null, bankName: null, currency: null}},
         discountModels: 'someData',
@@ -153,10 +157,11 @@ describe('Tests DELETE ' + route + ' API OK', function() {
             expect(response).to.be.json;
             expect(response.body).to.exist;
             expect(response.body).to.be.an('object');
-            expect(Object.keys(response.body)).have.members(['usageId', 'contractId', 'header', 'state', 'body', 'creationDate', 'lastModificationDate']);
+            expect(Object.keys(response.body)).have.members(['usageId', 'contractId', 'header', 'mspOwner', 'state', 'body', 'creationDate', 'lastModificationDate']);
 
             expect(response.body).to.have.property('usageId', usageMinimumData.id);
             expect(response.body).to.have.property('contractId', usageMinimumData.contractId);
+            expect(response.body).to.have.property('mspOwner', usageMinimumData.mspOwner);
             expect(response.body).to.have.property('state', usageMinimumData.state);
             expect(response.body).to.have.property('creationDate').that.is.a('string').and.match(DATE_REGEX);
             expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);

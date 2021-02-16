@@ -1,6 +1,7 @@
 'use strict';
 
 const config = require('../config');
+const errorUtils = require('../utils/errorUtils');
 const logger = require('../logger');
 
 class ContractMapper {
@@ -26,6 +27,9 @@ class ContractMapper {
       }
       body.header.fromMsp = fromMsp;
       body.header.toMsp = toMsp;
+      if ((fromMsp.mspId === undefined) || (toMsp.mspId === undefined)) {
+        throw (errorUtils.ERROR_REQUEST_CONTENT_NOT_VALID);
+      }
     }
 
     const returnedContract = {
@@ -91,6 +95,7 @@ class ContractMapper {
         contractId: contract.id,
         state: contract.state,
         referenceId: contract.referenceId,
+        blockchainRef: contract.blockchainRef,
         raw: contract.rawData,
         creationDate: contract.creationDate,
         lastModificationDate: contract.lastModificationDate,
@@ -130,6 +135,7 @@ class ContractMapper {
         body: contract.body,
         state: contract.state,
         referenceId: contract.referenceId,
+        blockchainRef: contract.blockchainRef,
         creationDate: contract.creationDate,
         lastModificationDate: contract.lastModificationDate
       };

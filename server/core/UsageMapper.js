@@ -30,6 +30,9 @@ class UsageMapper {
         mspOwner: usage.mspOwner
       },
       state: usage.state,
+      referenceId: usage.referenceId,
+      blockchainRef: usage.blockchainRef,
+      mspOwner: usage.mspOwner,
       body: usage.body,
       // history: usage.history,
       creationDate: usage.creationDate,
@@ -50,15 +53,23 @@ class UsageMapper {
           header: {
             name: usage.name,
             type: usage.type,
-            version: usage.version,
-            mspOwner: usage.mspOwner
+            version: usage.version
           },
           state: usage.state,
+          referenceId: usage.referenceId,
+          blockchainRef: usage.blockchainRef,
+          mspOwner: usage.mspOwner,
           creationDate: usage.creationDate,
           lastModificationDate: usage.lastModificationDate
         });
       });
     }
+    return returnedResponseBody;
+  }
+
+  static getResponseBodyForSendUsage(usage) {
+    // By default, use mapper getResponseBodyForGetUsage
+    const returnedResponseBody = UsageMapper.getResponseBodyForGetUsage(usage);
     return returnedResponseBody;
   }
 

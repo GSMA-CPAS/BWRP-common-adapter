@@ -4,9 +4,11 @@ const {promisify} = require('util');
 const sleep = promisify(setTimeout);
 
 // config
-const port = 8086;
-var blockchainadapterHost = 'localhost';
-var blockchainadapterPort = 8085;
+let port = 8086;
+let blockchainadapterHost = 'localhost';
+let blockchainadapterPort = 8085;
+
+const USE_ACKNOWLEDGE = true;
 
 if (process.env.WEBHOOK_DUMMY_PORT != undefined) {
   port = process.env.WEBHOOK_DUMMY_PORT;
@@ -111,8 +113,6 @@ function subscribe() {
       }
     });
 
-    
-
     req.on('error', (e) => {
       reject(e);
     });
@@ -135,7 +135,7 @@ http.createServer(function(req, res) {
 
     console.log('> incoming ' + req.method + ' ' + req.url + ': ' + body);
 
-    if (1) {
+    if (USE_ACKNOWLEDGE) {
       // acknowledge
       res.statusCode = 202;
     } else {

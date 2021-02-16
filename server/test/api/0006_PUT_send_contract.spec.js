@@ -98,11 +98,11 @@ describe(`Tests PUT ${route} API OK`, function() {
             expect(response).to.be.json;
             expect(response.body).to.exist;
             expect(response.body).to.be.an('object');
-            expect(Object.keys(response.body)).have.members(['contractId', 'state', 'referenceId', 'creationDate', 'lastModificationDate', 'header', 'body']);
+            expect(Object.keys(response.body)).have.members(['contractId', 'state', 'referenceId', 'blockchainRef', 'creationDate', 'lastModificationDate', 'header', 'body']);
 
             expect(response.body).to.have.property('contractId', contractWithNoSignatures.id);
             expect(response.body).to.have.property('state', 'SENT');
-            expect(response.body).to.have.property('referenceId').that.is.a('string');
+            expect(response.body).to.have.property('referenceId', 'bec1ef2dbce73b6ae9841cf2edfa56de1f16d5a33d8a657de258e85c5f2e1bcb');
             expect(response.body).to.have.property('creationDate').that.is.a('string').and.match(DATE_REGEX);
             expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
 
@@ -120,9 +120,16 @@ describe(`Tests PUT ${route} API OK`, function() {
             expect(response.body.header.msps[contractWithNoSignatures.toMsp.mspId]).to.have.property('signatures').that.is.an('array');
             expect(response.body.header.msps[contractWithNoSignatures.toMsp.mspId].signatures.length).to.equal(0);
 
+            expect(response.body).to.have.property('blockchainRef').that.is.an('object');
+            expect(Object.keys(response.body.blockchainRef)).have.members(['type', 'txId']);
+            expect(response.body.blockchainRef).to.have.property('type', 'hlf');
+            expect(response.body.blockchainRef).to.have.property('txId', 'b70cef323c0d3b56d44e9b31f16a11cba8dbbdd55c1d255b65f3fd2b3eadf8bb');
+
             expect(response.body).to.have.property('body').that.is.an('object');
             expect(Object.keys(response.body.body)).have.members(['bankDetails', 'discountModels', 'generalInformation']);
             expect(response.body.body).to.deep.include(contractWithNoSignatures.body);
+
+            expect(response.body).to.have.property('blockchainRef').that.is.an('object');
 
             // expect(response.body).to.have.property('history').that.is.an('array');
             // expect(response.body.history.length).to.equal(2);
@@ -204,11 +211,11 @@ describe(`Tests PUT ${route} API OK`, function() {
             expect(response).to.be.json;
             expect(response.body).to.exist;
             expect(response.body).to.be.an('object');
-            expect(Object.keys(response.body)).have.members(['contractId', 'state', 'referenceId', 'creationDate', 'lastModificationDate', 'header', 'body']);
+            expect(Object.keys(response.body)).have.members(['contractId', 'state', 'referenceId', 'blockchainRef', 'creationDate', 'lastModificationDate', 'header', 'body']);
 
             expect(response.body).to.have.property('contractId', contractWithSignatures.id);
             expect(response.body).to.have.property('state', 'SENT');
-            expect(response.body).to.have.property('referenceId').that.is.a('string');
+            expect(response.body).to.have.property('referenceId', 'db441b0559d3f1f8144f1dc2da378a0abe0124325b6024b20a9e22de8809eca4');
             expect(response.body).to.have.property('creationDate').that.is.a('string').and.match(DATE_REGEX);
             expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
 
@@ -236,6 +243,11 @@ describe(`Tests PUT ${route} API OK`, function() {
             expect(response.body.header.msps[contractWithSignatures.toMsp.mspId].signatures[1]).to.have.property('id', contractWithSignatures.toMsp.signatures[1].id);
             expect(response.body.header.msps[contractWithSignatures.toMsp.mspId].signatures[1]).to.have.property('name', contractWithSignatures.toMsp.signatures[1].name);
             expect(response.body.header.msps[contractWithSignatures.toMsp.mspId].signatures[1]).to.have.property('role', contractWithSignatures.toMsp.signatures[1].role);
+
+            expect(response.body).to.have.property('blockchainRef').that.is.an('object');
+            expect(Object.keys(response.body.blockchainRef)).have.members(['type', 'txId']);
+            expect(response.body.blockchainRef).to.have.property('type', 'hlf');
+            expect(response.body.blockchainRef).to.have.property('txId', '111cef323c0d3b56d44e9b31f16a11cba8dbbdd55c1d255b65f3fd2b3eadf8bb');
 
             expect(response.body).to.have.property('body').that.is.an('object');
             expect(Object.keys(response.body.body)).have.members(['bankDetails', 'discountModels', 'generalInformation']);

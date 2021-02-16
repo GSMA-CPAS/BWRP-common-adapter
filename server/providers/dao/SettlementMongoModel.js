@@ -8,6 +8,10 @@ const HistorySchema = new Schema({
   action: {type: String, required: true}
 }, {_id: false});
 
+const BlockchainRefSchema = new Schema({
+  type: {type: String, required: true},
+  txId: {type: String, required: true}
+}, {_id: false});
 
 const MixSettlementBodySchema = Schema.Types.Mixed;
 
@@ -23,6 +27,7 @@ const SettlementSchema = new Schema({
   body: {type: MixSettlementBodySchema, required: true},
   rawData: {type: String, required: false},
   referenceId: {type: String, required: false},
+  blockchainRef: {type: BlockchainRefSchema, required: false},
   storageKeys: {type: [String], required: false},
   state: {type: String, required: true},
   history: {type: [HistorySchema], required: true},
