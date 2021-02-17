@@ -23,6 +23,7 @@ class UsageMapper {
     const returnedResponseBody = {
       usageId: usage.id,
       contractId: usage.contractId,
+      settlementId: usage.settlementId,
       header: {
         name: usage.name,
         type: usage.type,
@@ -50,6 +51,7 @@ class UsageMapper {
         returnedResponseBody.push({
           usageId: usage.id,
           contractId: usage.contractId,
+          settlementId: usage.settlementId,
           header: {
             name: usage.name,
             type: usage.type,

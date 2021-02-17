@@ -44,6 +44,37 @@ describe(`Tests PUT ${route} API OK`, function() {
       },
       state: 'DRAFT'
     };
+    const usageSentData = {
+      type: 'usage',
+      version: '4.3.2',
+      name: 'Usage data sent',
+      contractId: undefined,
+      mspOwner: undefined,
+      mspReceiver: undefined,
+      body: {
+        data: []
+      },
+      state: 'SENT',
+      referenceId: 'OPIPOUFTDRDDFCFYU',
+      blockchainRef: {type: 'hlf', txId: 'TX-OPIPOUFTDRDDFCFYU'},
+      rawData: 'Usg_raw-data-1'
+    };
+    const usageSentDataWithAlreadyExistingSettlementId = {
+      type: 'usage',
+      version: '4.3.2',
+      name: 'Usage data sent',
+      contractId: undefined,
+      settlementId: 'one-value-of-settlement-id',
+      mspOwner: undefined,
+      mspReceiver: undefined,
+      body: {
+        data: []
+      },
+      state: 'SENT',
+      referenceId: 'OPIPOUFTDRDDFCFYU',
+      blockchainRef: {type: 'hlf', txId: 'TX-OPIPOUFTDRDDFCFYU'},
+      rawData: 'Usg_raw-data-1'
+    };
     before((done) => {
       debugSetup('==> init db with 3 contracts');
       testsDbUtils.initDbWithContracts([contractSent])
@@ -53,10 +84,16 @@ describe(`Tests PUT ${route} API OK`, function() {
           usageMinimumData.contractId = contractSent.id;
           usageMinimumData.mspOwner = contractSent.fromMsp.mspId;
           usageMinimumData.mspReceiver = contractSent.toMsp.mspId;
-          debugSetup('==> init db with 1 usage');
-          testsDbUtils.initDbWithUsages([usageMinimumData])
+          usageSentData.contractId = contractSent.id;
+          usageSentData.mspOwner = contractSent.fromMsp.mspId;
+          usageSentData.mspReceiver = contractSent.toMsp.mspId;
+          usageSentDataWithAlreadyExistingSettlementId.contractId = contractSent.id;
+          usageSentDataWithAlreadyExistingSettlementId.mspOwner = contractSent.fromMsp.mspId;
+          usageSentDataWithAlreadyExistingSettlementId.mspReceiver = contractSent.toMsp.mspId;
+          debugSetup('==> init db with 3 usages');
+          testsDbUtils.initDbWithUsages([usageMinimumData, usageSentData, usageSentDataWithAlreadyExistingSettlementId])
             .then((initDbWithUsagesResp) => {
-              debugSetup('The db is initialized with 1 usage : ', initDbWithUsagesResp.map((c) => c.id));
+              debugSetup('The db is initialized with 3 usages : ', initDbWithUsagesResp.map((c) => c.id));
               debugSetup('==> init db with 0 settlement');
               testsDbUtils.initDbWithSettlements([])
                 .then((initDbWithSettlementsResp) => {
@@ -183,6 +220,101 @@ describe(`Tests PUT ${route} API OK`, function() {
             expect(Object.keys(response.body.body)).have.members(['generatedResult', 'usage']);
             expect(response.body.body.usage.body).to.deep.include(usageMinimumData.body);
 
+
+            done();
+          });
+      } catch (exception) {
+        debug('exception: %s', exception.stack);
+        expect.fail('it test throws an exception');
+        done();
+      }
+    });
+
+    it('Put generate usage OK on sent usage', function(done) {
+      try {
+        const path = globalVersion + '/contracts/' + contractSent.id + '/usages/' + usageSentData.id + '/generate/?mode=preview';
+        debug('path : ', path);
+
+        const getUsagePath = globalVersion + '/contracts/' + contractSent.id + '/usages/' + usageSentData.id;
+
+        const sentBody = {};
+        chai.request(testsUtils.getServer())
+          .get(`${getUsagePath}`)
+          .send()
+          .end((firstGetError, firstGetResponse) => {
+            expect(firstGetError).to.be.null;
+            expect(firstGetResponse).to.have.status(200);
+            expect(firstGetResponse).to.be.json;
+            expect(firstGetResponse.body).to.be.an('object');
+            expect(firstGetResponse.body).to.not.have.property('settlementId');
+
+            chai.request(testsUtils.getServer())
+              .put(`${path}`)
+              .send(sentBody)
+              .end((error, response) => {
+                debug('response.status: %s', JSON.stringify(response.status));
+                debug('response.body: %s', JSON.stringify(response.body));
+                expect(error).to.be.null;
+                expect(response).to.have.status(200);
+                expect(response).to.be.json;
+                expect(response.body).to.exist;
+                expect(response.body).to.be.an('object');
+                expect(Object.keys(response.body)).have.members(['settlementId', 'contractId', 'usageId', 'header', 'body', 'mspOwner', 'state', 'creationDate', 'lastModificationDate']);
+
+                expect(response.body).to.have.property('contractId', contractSent.id);
+                expect(response.body).to.have.property('usageId', usageSentData.id);
+                expect(response.body).to.have.property('state', 'DRAFT');
+                expect(response.body).to.have.property('mspOwner', usageMinimumData.mspOwner);
+                expect(response.body).to.have.property('creationDate').that.is.a('string').and.match(DATE_REGEX);
+                expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
+
+                expect(response.body).to.have.property('header').that.is.an('object');
+                expect(Object.keys(response.body.header)).have.members(['name', 'type', 'version']);
+                expect(response.body.header).to.have.property('type', 'settlement');
+
+                expect(response.body).to.have.property('body').that.is.an('object');
+                expect(Object.keys(response.body.body)).have.members(['generatedResult', 'usage']);
+                expect(response.body.body.usage.body).to.deep.include(usageMinimumData.body);
+
+                chai.request(testsUtils.getServer())
+                  .get(`${getUsagePath}`)
+                  .send()
+                  .end((secondGetError, secondGetResponse) => {
+                    expect(secondGetError).to.be.null;
+                    expect(secondGetResponse).to.have.status(200);
+                    expect(secondGetResponse).to.be.json;
+                    expect(secondGetResponse.body).to.be.an('object');
+                    expect(secondGetResponse.body).to.have.property('settlementId', response.body.settlementId);
+
+                    done();
+                  });
+              });
+          });
+      } catch (exception) {
+        debug('exception: %s', exception.stack);
+        expect.fail('it test throws an exception');
+        done();
+      }
+    });
+
+    it('Put generate usage KO on sent usage with already existing settlmeentId', function(done) {
+      try {
+        const path = globalVersion + '/contracts/' + contractSent.id + '/usages/' + usageSentDataWithAlreadyExistingSettlementId.id + '/generate/?mode=preview';
+        debug('path : ', path);
+
+        const sentBody = {};
+        chai.request(testsUtils.getServer())
+          .put(`${path}`)
+          .send(sentBody)
+          .end((error, response) => {
+            debug('response.status: %s', JSON.stringify(response.status));
+            debug('response.body: %s', JSON.stringify(response.body));
+            expect(error).to.be.null;
+            expect(response).to.have.status(422);
+            expect(response).to.be.json;
+            expect(response.body).to.exist;
+            expect(response.body).to.be.an('object');
+            expect(response.body.message).to.equal('Calculate settlement not allowed');
 
             done();
           });

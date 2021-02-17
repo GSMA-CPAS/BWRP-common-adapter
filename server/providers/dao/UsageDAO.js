@@ -306,6 +306,52 @@ class UsageDAO {
     });
   }
 
+  static addSettlementId(usageId, settlementId) {
+    return new Promise((resolve, reject) => {
+      // Verify parameters
+      if (usageId === undefined) {
+        logger.error('[UsageDAO::addSettlementId] [FAILED] : usageId undefined');
+        reject(MISSING_MANDATORY_PARAM_ERROR);
+      }
+      if (settlementId === undefined) {
+        logger.error('[UsageDAO::addSettlementId] [FAILED] : settlementId undefined');
+        reject(MISSING_MANDATORY_PARAM_ERROR);
+      }
+
+      // Define automatic values
+      const lastModificationDate = Date.now();
+
+      // Defined update condition and update command
+      const condition = {
+        id: usageId,
+        type: 'usage',
+        state: ['SENT', 'RECEIVED']
+      };
+
+      const updateCommand = {
+        $set: {
+          settlementId: settlementId,
+          lastModificationDate: lastModificationDate
+        },
+        $push: {
+          history: {date: lastModificationDate, action: 'SAVE_SETTLEMENT_ID'}
+        }
+      };
+
+      // Launch database request
+      UsageMongoRequester.findOneAndUpdate(condition, updateCommand, (err, usage) => {
+        DAOErrorManager.handleErrorOrNullObject(err, usage)
+          .then((objectReturned) => {
+            resolve(objectReturned);
+          })
+          .catch((errorReturned) => {
+            logger.error('[UsageDAO::addSettlementId] [FAILED] errorReturned:' + typeof errorReturned + ' = ' + JSON.stringify(errorReturned));
+            reject(errorReturned);
+          });
+      });
+    });
+  }
+
   static findOneAndRemove(id) {
     return new Promise((resolve, reject) => {
       // Verify parameters

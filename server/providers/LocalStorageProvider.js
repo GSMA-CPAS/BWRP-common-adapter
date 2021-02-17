@@ -260,6 +260,21 @@ class LocalStorageProvider {
 
   /**
    *
+   * @param {Object} usageId
+   * @param {Object} settlementId
+   * @return {Promise<object>}
+   */
+  static async updateUsageWithSettlementId(usageId, settlementId) {
+    try {
+      return await UsageDAO.addSettlementId(usageId, settlementId);
+    } catch (error) {
+      logger.error('[LocalStorageProvider::updateUsageWithSettlementId] failed to updateUsageWithSettlementId - ', error.message);
+      throw error;
+    }
+  }
+
+  /**
+   *
    * @param {String} id
    * @return {Promise<object>}
    */

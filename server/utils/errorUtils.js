@@ -209,6 +209,15 @@ class ErrorUtils {
     }
   };
 
+  static ERROR_BUSINESS_GENERATE_SETTLEMENT_ON_USAGE_WITH_ALREADY_LINKED_SETTLEMENT = {
+    code: 422,
+    error: {
+      internalErrorCode: 2025,
+      message: 'Calculate settlement not allowed',
+      description: 'It\'s not allowed to calculate settlement on usage with an already linked settlement.'
+    }
+  };
+
   static ERROR_BUSINESS_GET_SIGNATURES_ONLY_ALLOWED_IN_STATE_SENT_OR_RECEIVED = {
     code: 422,
     error: {

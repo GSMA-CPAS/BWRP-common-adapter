@@ -39,6 +39,7 @@ const UsageSchema = new Schema({
   name: {type: String, required: true},
   contractId: {type: String, required: true},
   contractReferenceId: {type: String, required: false},
+  settlementId: {type: String, required: false},
   mspOwner: {type: String, required: true},
   mspReceiver: {type: String, required: true},
   body: {type: MixUsageBodySchema, required: true},
