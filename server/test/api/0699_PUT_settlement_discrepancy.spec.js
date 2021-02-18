@@ -11,7 +11,8 @@ const expect = require('chai').expect;
 const globalVersion = '/api/v1';
 const route = '/contracts/{contractId}/settlements/{settlementId}/discrepancy';
 
-describe(`Tests PUT ${route} API OK`, function() {
+// Removed from API - but maybe not for a long time
+describe.skip(`Tests PUT ${route} API OK`, function() {
   describe(`Setup and Test PUT ${route} API`, function() {
     const contract1 = {
       name: 'Contract name between A1 and B1',
@@ -180,15 +181,15 @@ describe(`Tests PUT ${route} API OK`, function() {
         });
     });
 
-    it('Put usage discrepancy OK', function(done) {
+    it('Put settlement discrepancy OK', function(done) {
       try {
-        const path = globalVersion + '/contracts/' + settlement1.contractId + '/usages/' + usage1.id + '/discrepancy/';
+        const path = globalVersion + '/contracts/' + settlement1.contractId + '/settlements/' + settlement1.id + '/discrepancy/';
         debug('path : ', path);
 
         const sentBody = {};
 
         chai.request(testsUtils.getServer())
-          .put(`${path}?settlementId=${settlement1.id}`)
+          .put(`${path}?usageId=${usage1.id}`)
           .send(sentBody)
           .end((error, response) => {
             debug('response.status: %s', JSON.stringify(response.status));

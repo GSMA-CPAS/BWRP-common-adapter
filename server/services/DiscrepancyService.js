@@ -47,7 +47,53 @@ const putSettlementDiscrepancy = ({contractId, settlementId, usageId}) => putDis
  */
 const putUsageDiscrepancy = ({contractId, usageId, settlementId}) => putDiscrepancy({contractId, settlementId, usageId});
 
+
+/**
+ * Get Settlement Discrepancy
+ *
+ * @param {String} contractId The contract Id
+ * @param {String} settlementId The Settlement Id
+ * @return {Promise<ServiceResponse>}
+ */
+const getSettlementDiscrepancy = ({contractId, settlementId, partnerSettlementId}) => new Promise(
+  async (resolve, reject) => {
+    try {
+      const getSettlementByIdResp = await LocalStorageProvider.getSettlement(contractId, settlementId);
+      const getPartnerSettlementByIdResp = await LocalStorageProvider.getSettlement(contractId, partnerSettlementId);
+      const getDiscrepancyResp = discrepencyServiceProviderConnection.getSettlementDiscrepancy(getSettlementByIdResp, getPartnerSettlementByIdResp);
+      const returnedResponse = await DiscrepancyMapper.getResponseBodyForGetSettlementDiscrepancy(getDiscrepancyResp);
+      resolve(Service.successResponse(returnedResponse));
+    } catch (e) {
+      reject(Service.rejectResponse(e));
+    }
+  },
+);
+
+/**
+ * Get Settlement Discrepancy
+ *
+ * @param {String} contractId The contract Id
+ * @param {String} usageId The Settlement Id
+ * @return {Promise<ServiceResponse>}
+ */
+const getUsageDiscrepancy = ({contractId, usageId, partnerUsageId}) => new Promise(
+  async (resolve, reject) => {
+    try {
+      const getUsageByIdResp = await LocalStorageProvider.getUsage(usageId);
+      const getPartnerUsageByIdResp = await LocalStorageProvider.getUsage(partnerUsageId);
+      const getDiscrepancyResp = discrepencyServiceProviderConnection.getUsageDiscrepancy(getUsageByIdResp, getPartnerUsageByIdResp);
+      const returnedResponse = await DiscrepancyMapper.getResponseBodyForGetUsageDiscrepancy(getDiscrepancyResp);
+      resolve(Service.successResponse(returnedResponse));
+    } catch (e) {
+      reject(Service.rejectResponse(e));
+    }
+  },
+);
+
+// putSettlementDiscrepancy and putUsageDiscrepancy exported but not exposed in API
 module.exports = {
   putSettlementDiscrepancy,
-  putUsageDiscrepancy
+  putUsageDiscrepancy,
+  getSettlementDiscrepancy,
+  getUsageDiscrepancy
 };

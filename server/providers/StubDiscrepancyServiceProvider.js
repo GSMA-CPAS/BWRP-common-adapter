@@ -37,6 +37,42 @@ class DiscrepancyServiceProvider {
       throw error;
     }
   }
+
+  /**
+   *
+   * @param {Object} settlement
+   * @param {Object} settlementToCompare
+   * @return {Promise<Object>}
+   */
+  async getSettlementDiscrepancy(settlement, settlementToCompare) {
+    try {
+      const response = STUB_DISCREPANCY[0];
+      response.localUsage = settlement.body.usage;
+      response.remoteUsage = settlementToCompare.body.usage;
+      return response;
+    } catch (error) {
+      logger.error('[StubDiscrepancyServiceProvider::getSettlementDiscrepancy] failed to get discrepancy', error.message);
+      throw error;
+    }
+  }
+
+  /**
+   *
+   * @param {Object} usage
+   * @param {Object} usageToCompare
+   * @return {Promise<Object>}
+   */
+  async getUsageDiscrepancy(usage, usageToCompare) {
+    try {
+      const response = STUB_DISCREPANCY[0];
+      response.localUsage = usage;
+      response.remoteUsage = usageToCompare;
+      return response;
+    } catch (error) {
+      logger.error('[StubDiscrepancyServiceProvider::getUsageDiscrepancy] failed to get discrepancy', error.message);
+      throw error;
+    }
+  }
 }
 
 module.exports = DiscrepancyServiceProvider;
