@@ -42,6 +42,10 @@ class TestsUtils {
     return String(Date.now()) + ((Math.random() * 100) | 1);
   }
 
+  static getCalculationServiceUrl() {
+    return testEnv.COMMON_ADAPTER_CALCULATION_SERVICE_URL;
+  }
+
   static getBlockchainAdapterUrl() {
     return testEnv.COMMON_ADAPTER_BLOCKCHAIN_ADAPTER_URL;
   }

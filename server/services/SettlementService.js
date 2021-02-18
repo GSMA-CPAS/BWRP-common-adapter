@@ -5,7 +5,7 @@ const LocalStorageProvider = require('../providers/LocalStorageProvider');
 const BlockchainAdapterProvider = require('../providers/BlockchainAdapterProvider');
 const blockchainAdapterConnection = new BlockchainAdapterProvider();
 const errorUtils = require('../utils/errorUtils');
-const CalculationServiceProvider = require('../providers/StubCalculationServiceProvider');
+const CalculationServiceProvider = require('../providers/CalculationServiceProvider');
 const calculationServiceConnection = new CalculationServiceProvider();
 
 /**

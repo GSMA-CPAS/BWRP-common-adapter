@@ -9,6 +9,7 @@ const chai = require('chai');
 const expect = require('chai').expect;
 const nock = require('nock');
 const blockchainAdapterNock = nock(testsUtils.getBlockchainAdapterUrl());
+const calculationServiceNock = nock(testsUtils.getCalculationServiceUrl());
 const globalVersion = '/api/v1';
 const route = '/contracts/{contractId}/usages/{usageId}/generate';
 
@@ -16,6 +17,44 @@ const DATE_REGEX = testsUtils.getDateRegexp();
 
 describe(`Tests PUT ${route} API OK`, function() {
   describe(`Setup and Test PUT ${route} API with minimum contract details`, function() {
+    const discountsOnContractSent = {
+      'HOME': {
+        serviceGroups: [
+          {
+            homeTadigs: ['HOR1'],
+            visitorTadigs: ['HOR2'],
+            services: [
+              {
+                service: 'SMSMO',
+                usagePricing: {ratingPlan: {rate: {thresholds: [{start: 0, linearPrice: 5}, {start: 1500, linearPrice: 3}]}}}
+              },
+              {
+                service: 'MOC',
+                usagePricing: {ratingPlan: {rate: {thresholds: [{start: 0, fixedPrice: 1500}]}}}
+              }
+            ]
+          }
+        ]
+      },
+      'VISITOR': {
+        serviceGroups: [
+          {
+            homeTadigs: ['HOR2'],
+            visitorTadigs: ['HOR1'],
+            services: [
+              {
+                service: 'SMSMO',
+                usagePricing: {ratingPlan: {rate: {thresholds: [{start: 0, fixedPrice: 5000}]}}}
+              },
+              {
+                service: 'MOC',
+                usagePricing: {ratingPlan: {rate: {thresholds: [{start: 0, fixedPrice: 3000}]}}}
+              }
+            ]
+          }
+        ]
+      }
+    };
     const contractSent = {
       name: 'Contract name between B1 and C1',
       state: 'SENT',
@@ -28,6 +67,7 @@ describe(`Tests PUT ${route} API OK`, function() {
       body: {
         bankDetails: {A1: {iban: null, bankName: null, currency: null}, B1: {iban: null, bankName: null, currency: null}},
         discountModels: 'someData',
+        discounts: discountsOnContractSent,
         generalInformation: {name: 'test1', type: 'Normal', endDate: '2021-01-01T00:00:00.000Z', startDate: '2020-12-01T00:00:00.000Z'}
       },
       rawData: 'Ctr_raw-data-1'
@@ -121,6 +161,26 @@ describe(`Tests PUT ${route} API OK`, function() {
     });
 
     it('Put generate usage OK with minimum contract details', function(done) {
+      calculationServiceNock.post('/calculate')
+        .times(1)
+        .reply((pathReceived, bodyReceived) => {
+          // Only for exemple
+          expect(pathReceived).to.equals('/calculate');
+          // expect(bodyReceived).to.be.empty;
+          return [
+            200,
+            {
+              intermediateResults: [
+                {service: 'SMSMO', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: 0},
+                {service: 'MOC', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: 0},
+                {service: 'SMSMO', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 0},
+                {service: 'MOC', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 0}
+              ]
+            },
+            undefined
+          ];
+        });
+
       try {
         const path = globalVersion + '/contracts/' + contractSent.id + '/usages/' + usageMinimumData.id + '/generate/?mode=preview';
         debug('path : ', path);
@@ -152,8 +212,16 @@ describe(`Tests PUT ${route} API OK`, function() {
 
             expect(response.body).to.have.property('body').that.is.an('object');
             expect(Object.keys(response.body.body)).have.members(['generatedResult', 'usage']);
+
             expect(response.body.body.usage.body).to.deep.include(usageMinimumData.body);
 
+            expect(response.body.body.generatedResult).to.have.property('intermediateResults').that.is.an('array');
+            expect(response.body.body.generatedResult.intermediateResults).to.deep.include( {service: 'SMSMO', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: 0} );
+            expect(response.body.body.generatedResult.intermediateResults).to.deep.include( {service: 'MOC', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: 0} );
+            expect(response.body.body.generatedResult.intermediateResults).to.deep.include( {service: 'SMSMO', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 0} );
+            expect(response.body.body.generatedResult.intermediateResults).to.deep.include( {service: 'MOC', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 0} );
+
+            expect(calculationServiceNock.isDone(), 'Unconsumed nock error').to.be.true;
 
             done();
           });
@@ -165,6 +233,26 @@ describe(`Tests PUT ${route} API OK`, function() {
     });
 
     it('Put generate usage OK with mode=commit', function(done) {
+      calculationServiceNock.post('/calculate')
+        .times(1)
+        .reply((pathReceived, bodyReceived) => {
+          // Only for exemple
+          expect(pathReceived).to.equals('/calculate');
+          // expect(bodyReceived).to.be.empty;
+          return [
+            200,
+            {
+              intermediateResults: [
+                {service: 'SMSMO', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: 0},
+                {service: 'MOC', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: 0},
+                {service: 'SMSMO', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 0},
+                {service: 'MOC', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 0}
+              ]
+            },
+            undefined
+          ];
+        });
+
       blockchainAdapterNock.post('/private-documents')
         .times(1)
         .reply((pathReceived, bodyReceived) => {
@@ -220,6 +308,14 @@ describe(`Tests PUT ${route} API OK`, function() {
             expect(Object.keys(response.body.body)).have.members(['generatedResult', 'usage']);
             expect(response.body.body.usage.body).to.deep.include(usageMinimumData.body);
 
+            expect(response.body.body.generatedResult).to.have.property('intermediateResults').that.is.an('array');
+            expect(response.body.body.generatedResult.intermediateResults).to.deep.include( {service: 'SMSMO', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: 0} );
+            expect(response.body.body.generatedResult.intermediateResults).to.deep.include( {service: 'MOC', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: 0} );
+            expect(response.body.body.generatedResult.intermediateResults).to.deep.include( {service: 'SMSMO', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 0} );
+            expect(response.body.body.generatedResult.intermediateResults).to.deep.include( {service: 'MOC', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 0} );
+
+            expect(calculationServiceNock.isDone(), 'Unconsumed nock error').to.be.true;
+            expect(blockchainAdapterNock.isDone(), 'Unconsumed nock error').to.be.true;
 
             done();
           });
@@ -231,6 +327,26 @@ describe(`Tests PUT ${route} API OK`, function() {
     });
 
     it('Put generate usage OK on sent usage', function(done) {
+      calculationServiceNock.post('/calculate')
+        .times(1)
+        .reply((pathReceived, bodyReceived) => {
+          // Only for exemple
+          expect(pathReceived).to.equals('/calculate');
+          // expect(bodyReceived).to.be.empty;
+          return [
+            200,
+            {
+              intermediateResults: [
+                {service: 'SMSMO', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: 0},
+                {service: 'MOC', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: 0},
+                {service: 'SMSMO', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 0},
+                {service: 'MOC', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 0}
+              ]
+            },
+            undefined
+          ];
+        });
+
       try {
         const path = globalVersion + '/contracts/' + contractSent.id + '/usages/' + usageSentData.id + '/generate/?mode=preview';
         debug('path : ', path);
@@ -275,6 +391,14 @@ describe(`Tests PUT ${route} API OK`, function() {
                 expect(response.body).to.have.property('body').that.is.an('object');
                 expect(Object.keys(response.body.body)).have.members(['generatedResult', 'usage']);
                 expect(response.body.body.usage.body).to.deep.include(usageMinimumData.body);
+
+                expect(response.body.body.generatedResult).to.have.property('intermediateResults').that.is.an('array');
+                expect(response.body.body.generatedResult.intermediateResults).to.deep.include( {service: 'SMSMO', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: 0} );
+                expect(response.body.body.generatedResult.intermediateResults).to.deep.include( {service: 'MOC', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: 0} );
+                expect(response.body.body.generatedResult.intermediateResults).to.deep.include( {service: 'SMSMO', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 0} );
+                expect(response.body.body.generatedResult.intermediateResults).to.deep.include( {service: 'MOC', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 0} );
+
+                expect(calculationServiceNock.isDone(), 'Unconsumed nock error').to.be.true;
 
                 chai.request(testsUtils.getServer())
                   .get(`${getUsagePath}`)

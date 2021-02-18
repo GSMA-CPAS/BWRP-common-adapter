@@ -155,6 +155,42 @@ class ErrorUtils {
     }
   };
 
+  static ERROR_CALCULATION_SERVICE_RESPONSE_PARSING_ERROR = {
+    code: 500,
+    error: {
+      internalErrorCode: 3100,
+      message: 'Calculation Service response parsing error',
+      description: 'It\'s not possible to parse the Calculation Service response.'
+    }
+  };
+
+  static ERROR_CALCULATION_SERVICE_NO_RESPONSE = {
+    code: 500,
+    error: {
+      internalErrorCode: 3101,
+      message: 'No response received from Calculation Service',
+      description: 'The Calculation Service does not respond.'
+    }
+  };
+
+  static ERROR_CALCULATION_SERVICE_REQUEST_ERROR = {
+    code: 500,
+    error: {
+      internalErrorCode: 3102,
+      message: 'Calculation Service request error',
+      description: 'Something happened in setting up the Calculation Service request.'
+    }
+  };
+
+  static ERROR_CALCULATION_SERVICE_RESPONSE_UNEXPECTED_ERROR = {
+    code: 500,
+    error: {
+      internalErrorCode: 3104,
+      message: 'Calculation Service response error',
+      description: 'An unexpected response has been received from the Calculation Service.'
+    }
+  };
+
   static ERROR_BUSINESS_CREATE_USAGE_ON_CONTRACT_ONLY_ALLOWED_IN_STATE_SENT_SIGNED_OR_RECEIVED = {
     code: 422,
     error: {
