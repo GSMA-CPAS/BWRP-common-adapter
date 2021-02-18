@@ -81,62 +81,6 @@ describe(`Tests GET ${route} API OK`, function() {
       },
       state: 'DRAFT'
     };
-    const settlement1 = {
-      type: 'settlement',
-      version: '1.1.0',
-      name: 'Settlement data',
-      contractId: undefined,
-      contractReferenceId: 'pdzaodzapdiozpadi',
-      mspOwner: undefined,
-      mspReceiver: undefined,
-      body: {
-        generatedResult: {
-          complexObject: {
-            a: 'a',
-            b: 'b'
-          },
-          otherValue: 'other'
-        },
-        usage: {
-          name: 'usageName1',
-          version: 'usageVersion1',
-          state: 'usageState1',
-          mspOwner: undefined,
-          body: {
-            bodyContent1: 'minutes',
-            bodyContent2: {
-              param1: 'value1',
-              param2: 'value2'
-            }
-          },
-        },
-        data: [],
-        otherData: 'otherDataContent'
-      },
-      state: 'DRAFT'
-    };
-    const settlement2 = {
-      type: 'settlement',
-      version: '1.2.0',
-      name: 'Settlement data',
-      contractId: undefined,
-      contractReferenceId: 'xiazxzaosxoazpslazopdkxzepckeozdczelxpze',
-      mspOwner: undefined,
-      mspReceiver: undefined,
-      body: {
-        generatedResult: 'objectOrString',
-        usage: {
-          name: 'usageName1',
-          version: 'usageVersion1',
-          state: 'usageState1',
-          mspOwner: undefined,
-          body: {
-            other: 'objectOrString',
-          },
-        }
-      },
-      state: 'SENT'
-    };
 
     before((done) => {
       debugSetup('==> init db with 2 contracts');
@@ -151,28 +95,16 @@ describe(`Tests GET ${route} API OK`, function() {
           usageReceived1.contractId = contract1.id;
           usageReceived1.mspOwner = contract1.toMsp.mspId;
           usageReceived1.mspReceiver = contract1.fromMsp.mspId;
-          settlement1.contractId = contract1.id;
-          settlement1.mspOwner = contract1.fromMsp.mspId;
-          settlement1.mspReceiver = contract1.toMsp.mspId;
-          settlement1.body.usage.mspOwner = contract1.fromMsp.mspId;
           usage2.contractId = contract2.id;
           usage2.mspOwner = contract2.fromMsp.mspId;
           usage2.mspReceiver = contract2.toMsp.mspId;
-          settlement2.contractId = contract2.id;
-          settlement2.mspOwner = contract2.fromMsp.mspId;
-          settlement2.mspReceiver = contract2.toMsp.mspId;
-          settlement2.body.usage.mspOwner = contract2.fromMsp.mspId;
           debugSetup('==> init db with 3 usages');
           testsDbUtils.initDbWithUsages([usage1, usage2, usageReceived1])
             .then((initDbWithUsagesResp) => {
               debugSetup('The db is initialized with 3 usages : ', initDbWithUsagesResp.map((c) => c.id));
-              debugSetup('==> init db with 2 settlements');
-              testsDbUtils.initDbWithSettlements([settlement1, settlement2])
+              debugSetup('==> init db with 0 settlements');
+              testsDbUtils.initDbWithSettlements([])
                 .then((initDbWithSettlementsResp) => {
-                  debugSetup('First settlement document linked to contract ', initDbWithSettlementsResp[0].contractId);
-                  debugSetup('Second settlement document linked to contract ', initDbWithSettlementsResp[1].contractId);
-                  settlement1.id = initDbWithSettlementsResp[0].id;
-                  settlement2.id = initDbWithSettlementsResp[1].id;
                   debugSetup('==> done!');
                   done();
                 })

@@ -43,44 +43,6 @@ describe(`Tests GET ${route} API OK`, function() {
       },
       rawData: 'Ctr_raw-data-1'
     };
-    const usage1 = {
-      type: 'usage',
-      version: '1.1.0',
-      name: 'Usage data',
-      contractId: undefined,
-      mspOwner: undefined,
-      mspReceiver: undefined,
-      body: {
-        data: []
-      },
-      state: 'DRAFT'
-    };
-    const usageReceived1 = {
-      type: 'usage',
-      version: '1.1.1',
-      name: 'Usage data received',
-      contractId: undefined,
-      mspOwner: undefined,
-      mspReceiver: undefined,
-      body: {
-        data: []
-      },
-      state: 'RECEIVED'
-    };
-    const usage2 = {
-      type: 'usage',
-      version: '1.1.0',
-      name: 'Usage with data',
-      contractId: undefined,
-      mspOwner: undefined,
-      mspReceiver: undefined,
-      body: {
-        data: [
-          {year: 2020, month: 1, hpmn: 'HPMN', vpmn: 'VPMN', service: 'service', value: 1, units: 'unit', charges: 'charge', taxes: 'taxes'}
-        ]
-      },
-      state: 'DRAFT'
-    };
     const settlement1 = {
       type: 'settlement',
       version: '1.1.0',
@@ -213,12 +175,6 @@ describe(`Tests GET ${route} API OK`, function() {
           debugSetup('Two contracts in db ', initDbWithContractsResp);
           contract1.id = initDbWithContractsResp[0].id;
           contract2.id = initDbWithContractsResp[1].id;
-          usage1.contractId = contract1.id;
-          usage1.mspOwner = contract1.fromMsp.mspId;
-          usage1.mspReceiver = contract1.toMsp.mspId;
-          usageReceived1.contractId = contract1.id;
-          usageReceived1.mspOwner = contract1.toMsp.mspId;
-          usageReceived1.mspReceiver = contract1.fromMsp.mspId;
           settlement1.contractId = contract1.id;
           settlement1.mspOwner = contract1.fromMsp.mspId;
           settlement1.mspReceiver = contract1.toMsp.mspId;
@@ -231,17 +187,14 @@ describe(`Tests GET ${route} API OK`, function() {
           settlementReceived1.mspOwner = contract1.toMsp.mspId;
           settlementReceived1.mspReceiver = contract1.fromMsp.mspId;
           settlementReceived1.body.usage.mspOwner = contract1.toMsp.mspId;
-          usage2.contractId = contract2.id;
-          usage2.mspOwner = contract2.fromMsp.mspId;
-          usage2.mspReceiver = contract2.toMsp.mspId;
           settlement2.contractId = contract2.id;
           settlement2.mspOwner = contract2.fromMsp.mspId;
           settlement2.mspReceiver = contract2.toMsp.mspId;
           settlement2.body.usage.mspOwner = contract2.fromMsp.mspId;
-          debugSetup('==> init db with 3 usages');
-          testsDbUtils.initDbWithUsages([usage1, usage2, usageReceived1])
+          debugSetup('==> init db with 0 usages');
+          testsDbUtils.initDbWithUsages([])
             .then((initDbWithUsagesResp) => {
-              debugSetup('The db is initialized with 3 usages : ', initDbWithUsagesResp.map((c) => c.id));
+              debugSetup('The db is initialized with 0 usages : ', initDbWithUsagesResp.map((c) => c.id));
               debugSetup('==> init db with 4 settlements');
               testsDbUtils.initDbWithSettlements([settlement1, settlement2, settlementDraftFromUsageReceived1, settlementReceived1])
                 .then((initDbWithSettlementsResp) => {
