@@ -164,7 +164,7 @@ describe(`Tests GET ${route} API OK`, function() {
       }
     });
 
-    it.skip('Get usage discrepancy KO when usages do not have the same contract', function(done) {
+    it('Get usage discrepancy KO when usages do not have the same contract', function(done) {
       try {
         const path = globalVersion + '/contracts/' + usage1.contractId + '/usages/' + usage1.id + '/discrepancy/';
         debug('path : ', path);

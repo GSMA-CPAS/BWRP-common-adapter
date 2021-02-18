@@ -88,10 +88,8 @@ const sendSettlementById = ({contractId, settlementId}) => new Promise(
 const generateUsageById = ({contractId, usageId, mode}) => new Promise(
   async (resolve, reject) => {
     try {
-      const usage = await LocalStorageProvider.getUsage(usageId);
-      if (usage.contractId !== contractId) {
-        reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_GENERATE_SETTLEMENT_ON_NOT_LINKED_CONTRACT_RECEIVED));
-      } else if ((['SENT', 'RECEIVED'].includes(usage.state)) && (usage.settlementId !== undefined)) {
+      const usage = await LocalStorageProvider.getUsage(contractId, usageId);
+      if ((['SENT', 'RECEIVED'].includes(usage.state)) && (usage.settlementId !== undefined)) {
         reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_GENERATE_SETTLEMENT_ON_USAGE_WITH_ALREADY_LINKED_SETTLEMENT));
       } else {
         const contract = await LocalStorageProvider.getContract(contractId);

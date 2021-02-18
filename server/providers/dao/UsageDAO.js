@@ -352,7 +352,7 @@ class UsageDAO {
     });
   }
 
-  static findOneAndRemove(id) {
+  static findOneAndRemove(id, matchingConditions = {}) {
     return new Promise((resolve, reject) => {
       // Verify parameters
       if (id === undefined) {
@@ -360,8 +360,20 @@ class UsageDAO {
         reject(MISSING_MANDATORY_PARAM_ERROR);
       }
 
+      // Define find condition
+      const condition = {
+        id: id,
+        type: 'usage'
+      };
+      if (matchingConditions.state !== undefined) {
+        condition.state = matchingConditions.state;
+      }
+      if (matchingConditions.contractId !== undefined) {
+        condition.contractId = matchingConditions.contractId;
+      }
+
       // Launch database request
-      UsageMongoRequester.findOneAndRemove({id}, (err, usage) => {
+      UsageMongoRequester.findOneAndRemove(condition, (err, usage) => {
         // Use errorManager to return appropriate dao errors
         DAOErrorManager.handleErrorOrNullObject(err, usage)
           .then((objectReturned) => {

@@ -17,7 +17,7 @@ const putDiscrepancy = ({contractId, settlementId, usageId}) => new Promise(
   async (resolve, reject) => {
     try {
       const getSettlementByIdResp = await LocalStorageProvider.getSettlement(contractId, settlementId);
-      const getUsageByIdResp = await LocalStorageProvider.getUsage(usageId);
+      const getUsageByIdResp = await LocalStorageProvider.getUsage(contractId, usageId);
       const createDiscrepancyResp = discrepencyServiceProviderConnection.createDiscrepancy(getUsageByIdResp, getSettlementByIdResp);
       const returnedResponse = await DiscrepancyMapper.getResponseBodyForGetDiscrepancy(createDiscrepancyResp);
       resolve(Service.successResponse(returnedResponse));
@@ -79,8 +79,8 @@ const getSettlementDiscrepancy = ({contractId, settlementId, partnerSettlementId
 const getUsageDiscrepancy = ({contractId, usageId, partnerUsageId}) => new Promise(
   async (resolve, reject) => {
     try {
-      const getUsageByIdResp = await LocalStorageProvider.getUsage(usageId);
-      const getPartnerUsageByIdResp = await LocalStorageProvider.getUsage(partnerUsageId);
+      const getUsageByIdResp = await LocalStorageProvider.getUsage(contractId, usageId);
+      const getPartnerUsageByIdResp = await LocalStorageProvider.getUsage(contractId, partnerUsageId);
       const getDiscrepancyResp = discrepencyServiceProviderConnection.getUsageDiscrepancy(getUsageByIdResp, getPartnerUsageByIdResp);
       const returnedResponse = await DiscrepancyMapper.getResponseBodyForGetUsageDiscrepancy(getDiscrepancyResp);
       resolve(Service.successResponse(returnedResponse));

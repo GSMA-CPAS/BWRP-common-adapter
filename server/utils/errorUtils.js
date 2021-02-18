@@ -164,48 +164,12 @@ class ErrorUtils {
     }
   };
 
-  static ERROR_BUSINESS_GET_USAGE_ON_NOT_LINKED_CONTRACT_RECEIVED = {
-    code: 422,
-    error: {
-      internalErrorCode: 2003,
-      message: 'Get usage not allowed',
-      description: 'It\'s not allowed to get usage on wrong contract.'
-    }
-  };
-
   static ERROR_BUSINESS_USAGE_UPDATE_ONLY_ALLOWED_IN_STATE_DRAFT = {
     code: 422,
     error: {
       internalErrorCode: 2004,
       message: 'Usage modification not allowed',
       description: 'It\'s not allowed to update this usage or its state.'
-    }
-  };
-
-  static ERROR_BUSINESS_PUT_USAGE_ON_NOT_LINKED_CONTRACT_RECEIVED = {
-    code: 422,
-    error: {
-      internalErrorCode: 2005,
-      message: 'Put usage not allowed',
-      description: 'It\'s not allowed to put usage on wrong contract.'
-    }
-  };
-
-  static ERROR_BUSINESS_DELETE_USAGE_ON_NOT_LINKED_CONTRACT_RECEIVED = {
-    code: 422,
-    error: {
-      internalErrorCode: 2006,
-      message: 'Delete usage not allowed',
-      description: 'It\'s not allowed to delete usage on wrong contract.'
-    }
-  };
-
-  static ERROR_BUSINESS_GENERATE_SETTLEMENT_ON_NOT_LINKED_CONTRACT_RECEIVED = {
-    code: 422,
-    error: {
-      internalErrorCode: 2008,
-      message: 'Calculate settlement not allowed',
-      description: 'It\'s not allowed to calculate settlement on wrong contract.'
     }
   };
 
