@@ -19,6 +19,7 @@ const SHOW_DISCREPANCY_GENERATION_DETAILS = false;
 const DTAG_API = `http://127.0.0.1:3030/api/v1`;
 const TMUS_API = `http://127.0.0.1:3040/api/v1`;
 
+const configured_JSON_DTAG_contract_body_to_create = require('./0003_data/0003_JSON_DTAG_contract_body_to_create.json');
 const DTAG_create_contract_body = {
   header: {
     name: 'Contract name for scenario 0000_From_DTAG_contract between DTAG and TMUS',
@@ -27,31 +28,7 @@ const DTAG_create_contract_body = {
     fromMsp: {mspId: 'DTAG'},
     toMsp: {mspId: 'TMUS'}
   },
-  body: {
-    generalInformation: {
-      name: 'Nae',
-      type: 'Special',
-      startDate: '2020-05-01T00:00:00.000Z',
-      endDate: '2020-12-01T00:00:00.000Z',
-      prolongationLength: null,
-      taxesIncluded: true,
-      authors: 'fd',
-      TMUS: {
-        currencyForAllDiscounts: 'JPY',
-        tadigCodes: {
-          codes: 'dfd',
-          includeContractParty: true
-        }
-      },
-      DTAG: {
-        currencyForAllDiscounts: 'EUR',
-        tadigCodes: {
-          codes: 'fds',
-          includeContractParty: false
-        }
-      }
-    }
-  }
+  body: configured_JSON_DTAG_contract_body_to_create
 };
 
 const configured_JSON_DTAG_usage_body_to_create = require('./0003_data/0003_JSON_DTAG_usage_body_to_create.json');
@@ -666,6 +643,10 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
 
           DTAG_dynamic_data.settlementIdFromLocalUsage = response.body.settlementId;
+          debugObjectOnDTAG('Settlement created on DTAG from local usage : ', response.body);
+          if ((response.body.body) && (response.body.body.generatedResult)) {
+            debugObjectOnDTAG('Settlement created on DTAG from local usage => embedded generatedResult : ', response.body.body.generatedResult);
+          }
           debug(`==> DTAG new created settlement id from local usage: ${DTAG_dynamic_data.settlementIdFromLocalUsage}`);
 
           done();
@@ -703,6 +684,10 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
 
           DTAG_dynamic_data.settlementIdFromReceivedUsage = response.body.settlementId;
+          debugObjectOnDTAG('Settlement created on DTAG from received usage : ', response.body);
+          if ((response.body.body) && (response.body.body.generatedResult)) {
+            debugObjectOnDTAG('Settlement created on DTAG from received usage => embedded generatedResult : ', response.body.body.generatedResult);
+          }
           debug(`==> DTAG new created settlement id from received usage: ${DTAG_dynamic_data.settlementIdFromReceivedUsage}`);
 
           done();
@@ -771,6 +756,10 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
 
           TMUS_dynamic_data.settlementIdFromLocalUsage = response.body.settlementId;
+          debugObjectOnTMUS('Settlement created on TMUS from local usage : ', response.body);
+          if ((response.body.body) && (response.body.body.generatedResult)) {
+            debugObjectOnTMUS('Settlement created on TMUS from local usage => embedded generatedResult : ', response.body.body.generatedResult);
+          }
           debug(`==> TMUS new created settlement id from local usage: ${TMUS_dynamic_data.settlementIdFromLocalUsage}`);
 
           done();
@@ -808,7 +797,11 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
 
           TMUS_dynamic_data.settlementIdFromReceivedUsage = response.body.settlementId;
-          debug(`==> TMUS  new created settlement id from received usage: ${TMUS_dynamic_data.settlementIdFromReceivedUsage}`);
+          debugObjectOnTMUS('Settlement created on TMUS from received usage : ', response.body);
+          if ((response.body.body) && (response.body.body.generatedResult)) {
+            debugObjectOnTMUS('Settlement created on TMUS from received usage => embedded generatedResult : ', response.body.body.generatedResult);
+          }
+          debug(`==> TMUS new created settlement id from received usage: ${TMUS_dynamic_data.settlementIdFromReceivedUsage}`);
 
           done();
         });

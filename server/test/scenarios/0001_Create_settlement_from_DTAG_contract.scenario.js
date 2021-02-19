@@ -19,6 +19,7 @@ const SHOW_DISCREPANCY_GENERATION_DETAILS = false;
 const DTAG_API = `http://127.0.0.1:3030/api/v1`;
 const TMUS_API = `http://127.0.0.1:3040/api/v1`;
 
+const configured_JSON_DTAG_contract_body_to_create = require('./0001_data/0001_JSON_DTAG_contract_body_to_create.json');
 const DTAG_create_contract_body = {
   header: {
     name: 'Contract name for scenario 0000_From_DTAG_contract between DTAG and TMUS',
@@ -27,31 +28,7 @@ const DTAG_create_contract_body = {
     fromMsp: {mspId: 'DTAG'},
     toMsp: {mspId: 'TMUS'}
   },
-  body: {
-    generalInformation: {
-      name: 'Nae',
-      type: 'Special',
-      startDate: '2020-05-01T00:00:00.000Z',
-      endDate: '2020-12-01T00:00:00.000Z',
-      prolongationLength: null,
-      taxesIncluded: true,
-      authors: 'fd',
-      TMUS: {
-        currencyForAllDiscounts: 'JPY',
-        tadigCodes: {
-          codes: 'dfd',
-          includeContractParty: true
-        }
-      },
-      DTAG: {
-        currencyForAllDiscounts: 'EUR',
-        tadigCodes: {
-          codes: 'fds',
-          includeContractParty: false
-        }
-      }
-    }
-  }
+  body: configured_JSON_DTAG_contract_body_to_create
 };
 
 const configured_JSON_DTAG_usage_body_to_create = require('./0001_data/0001_JSON_DTAG_usage_body_to_create.json');

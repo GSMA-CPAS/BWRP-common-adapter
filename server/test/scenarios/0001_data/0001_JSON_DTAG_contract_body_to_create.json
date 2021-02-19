@@ -1,0 +1,157 @@
+{
+  "generalInformation": {
+    "name": "Nae",
+    "type": "Special",
+    "startDate": "2020-05-01T00:00:00.000Z",
+    "endDate": "2020-12-01T00:00:00.000Z",
+    "prolongationLength": null,
+    "taxesIncluded": true,
+    "authors": "fd",
+    "TMUS": {
+      "currencyForAllDiscounts": "JPY",
+      "tadigCodes": {
+        "codes": "dfd",
+        "includeContractParty": true
+      }
+    },
+    "DTAG": {
+      "currencyForAllDiscounts": "EUR",
+      "tadigCodes": {
+        "codes": "fds",
+        "includeContractParty": false
+      }
+    }
+  },
+  "discounts": {
+    "HOME": {
+      "serviceGroups": [
+        {
+          "homeTadigs": ["HOR1"],
+          "visitorTadigs": ["HOR2"],
+          "services": [
+            {
+              "service": "SMSMO",
+              "usagePricing": {
+                "ratingPlan": {
+                  "rate": {
+                    "thresholds": [
+                      {
+                        "start": 0,
+                        "linearPrice": 5
+                      },
+                      {
+                        "start": 1500,
+                        "linearPrice": 3
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "service":"MOC",
+              "usagePricing": {
+                "ratingPlan": {
+                  "rate": {
+                    "thresholds": [
+                      {
+                        "start": 0,
+                        "fixedPrice": 1500
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "service": "VOLTE",
+              "usagePricing": {
+                "ratingPlan": {
+                  "balancedRate": {
+                    "value": 10
+                  },
+                  "unbalancedRate": {
+                    "value": 20
+                  }
+                }
+              }
+            },
+            {
+              "service": "MOCEU",
+              "usagePricing": {
+                "ratingPlan": {
+                  "rate": {
+                    "linearPrice": 12
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "VISITOR": {
+      "serviceGroups": [
+        {
+          "homeTadigs": ["HOR2"],
+          "visitorTadigs": ["HOR1"],
+          "services": [
+            {
+              "service": "SMSMO",
+              "usagePricing": {
+                "ratingPlan": {
+                  "rate": {
+                    "thresholds": [
+                      {
+                        "start": 0,
+                        "fixedPrice": 5000
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "service": "MOC",
+              "usagePricing": {
+                "ratingPlan": {
+                  "rate": {
+                    "thresholds": [
+                      {
+                        "start": 0,
+                        "fixedPrice": 3000
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "service": "VOLTE",
+              "usagePricing": {
+                "ratingPlan": {
+                  "balancedRate": {
+                    "value": 10
+                  },
+                  "unbalancedRate": {
+                    "value": 20
+                  }
+                }
+              }
+            },
+            {
+              "service": "MOCEU",
+              "usagePricing": {
+                "ratingPlan": {
+                  "rate": {
+                    "linearPrice": 15
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
