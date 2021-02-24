@@ -47,22 +47,11 @@ const compareTimestamp = (a, b) => {
  * @param {String} msp The msp of the received event
  * @return {Promise<[String]>}
  */
-const getBlockchainReferenceIds = (eventStorageKey, msp) => new Promise(
+const getBlockchainReferenceIds = (eventStorageKey) => new Promise(
   async (resolve, reject) => {
     try {
       const getPrivateReferenceIDsResp = await blockchainAdapterConnection.getPrivateReferenceIDs();
-      let getBlockchainReferenceIds = [];
-      if (getPrivateReferenceIDsResp && Array.isArray(getPrivateReferenceIDsResp)) {
-        getBlockchainReferenceIds = getPrivateReferenceIDsResp.filter((privateReferenceID) => {
-          if ((eventStorageKey === undefined) || (msp === undefined)) {
-            return true;
-          } else {
-            const eventSK = crypto.createHash('sha256').update(msp + privateReferenceID).digest('hex').toString('utf8');
-            return (eventSK === eventStorageKey);
-          }
-        });
-      }
-      resolve(getBlockchainReferenceIds);
+      resolve(getPrivateReferenceIDsResp);
     } catch (e) {
       reject(e);
     }
@@ -135,9 +124,8 @@ const eventDocumentReceived = ({body}) => new Promise(
   async (resolve, reject) => {
     try {
       const documentsStoredInDb = [];
-      const referenceIds = await getBlockchainReferenceIds(body.data.storageKey, body.msp);
+      const referenceIds = await getBlockchainReferenceIds(body.data.storageKey);
       logger.info(`[EventService::eventDocumentReceived] referenceIds = ${JSON.stringify(referenceIds)}`);
-      const isReferenceIdLinkedToEventTxId = ((body.data.storageKey !== undefined) && (body.msp !== undefined) && (referenceIds.length === 1));
       let documents = [];
       for (const referenceId of referenceIds) {
         try {
@@ -151,14 +139,12 @@ const eventDocumentReceived = ({body}) => new Promise(
       documents = documents.sort(compareTimestamp);
       for (const document of documents) {
         try {
-          if (isReferenceIdLinkedToEventTxId) {
-            // append blockchainRef to "item"
-            const txId = body.txID || 'XXXXXXX'; // incase we using a blockchain adapter that does not return txID;
-            document.blockchainRef = {
-              type: 'hlf', // need a dynamic way to define type to support future multiledger system
-              txId: txId
-            };
-          }
+          // append blockchainRef to "item"
+          document.blockchainRef = {
+            type: 'hlf', // need a dynamic way to define type to support future multiledger system
+            txId: document.blockchainRef.txID,
+            timestamp: document.blockchainRef.timestamp
+          };
           const storedDocument = await storeBlockchainDocumentInLocalStorage(document);
           const referenceId = ['contract', 'usage', 'settlement'].includes(storedDocument.type) ? storedDocument.referenceId : undefined;
           logger.info(`[EventService::eventDocumentReceived] config.DEACTIVATE_BLOCKCHAIN_DOCUMENT_DELETE = ${JSON.stringify(config.DEACTIVATE_BLOCKCHAIN_DOCUMENT_DELETE)}`);
@@ -250,8 +236,8 @@ const eventReceived = ({body}) => new Promise(
     try {
       if (body.eventName === 'STORE:DOCUMENTHASH') {
         resolve(await eventDocumentReceived({body}));
-      } else if (body.eventName === 'STORE:PAYLOADLINK') {
-        resolve(await eventSignatureReceived({body}));
+      } else if (body.eventName === 'STORE:SIGNATURE') {
+        resolve(await eventDocumentReceived({body}));
       } else if (body.eventName === 'STORE:SIGNATURE') {
         resolve(await eventSignatureReceived({body}));
       } else {
