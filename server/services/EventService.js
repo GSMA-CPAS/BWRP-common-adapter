@@ -131,6 +131,7 @@ const eventDocumentReceived = ({body}) => new Promise(
       let documents = [];
       for (const referenceId of referenceIds) {
         try {
+          logger.info(`[EventService::kong] bbb = ${JSON.stringify(referenceId)}`);
           const document = await blockchainAdapterConnection.getPrivateDocument(referenceId);
           documents.push(document);
         } catch (exceptionInGetDocumentById) {
