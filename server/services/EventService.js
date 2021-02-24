@@ -126,7 +126,6 @@ const eventDocumentReceived = ({body}) => new Promise(
       const documentsStoredInDb = [];
       const referenceIds = await getBlockchainReferenceIds(body.data.storageKey);
       logger.info(`[EventService::eventDocumentReceived] referenceIds = ${JSON.stringify(referenceIds)}`);
-      //if (referenceIds && Array.isArray(referenceIds)) {
       let documents = [];
       for (const referenceId of referenceIds) {
         try {
@@ -139,6 +138,7 @@ const eventDocumentReceived = ({body}) => new Promise(
       }
       documents = documents.sort(compareTimestamp);
       for (const document of documents) {
+      logger.info(`[EventService::eventDocumentReceived] aaa = ${JSON.stringify(document)}`);
         try {
           // append blockchainRef to "item"
           document.blockchainRef = {
