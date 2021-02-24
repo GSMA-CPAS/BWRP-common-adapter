@@ -390,7 +390,7 @@ class BlockchainAdapterProvider {
         referenceId: response.data.referenceID,
         blockchainRef: {
           type: 'hlf', // need a dynamic way to define type to support future multiledger system
-          txId: response.data.txID,
+          txId: response.data.blockchainRef.txID,
           timestamp: response.data.blockchainRef.timestamp
         }
       };
@@ -418,7 +418,7 @@ class BlockchainAdapterProvider {
         referenceId: response.data.referenceID,
         blockchainRef: {
           type: 'hlf', // need a dynamic way to define type to support future multiledger system
-          txId: response.data.txID,
+          txId: response.data.blockchainRef.txID,
           timestamp: response.data.blockchainRef.timestamp
         }
       };
