@@ -115,7 +115,7 @@ class BlockchainAdapterProvider {
     try {
       const response = await axiosInstance.get(config.BLOCKCHAIN_ADAPTER_URL + '/private-documents/' + referenceId);
       logger.debug(`[BlockchainAdapterProvider::getPrivateDocument] response data:${typeof response.data} = ${JSON.stringify(response.data)}`);
-      const rawDataObject = rawDataUtils.defineRawDataObjectFromRawData(response.data.data);
+      const rawDataObject = rawDataUtils.defineRawDataObjectFromRawData(response.data.payload);
       if (!rawDataObject.type) {
         throw errorUtils.ERROR_BLOCKCHAIN_ADAPTER_DOCUMENT_TYPE_ERROR;
       } else if (rawDataObject.type === 'contract') {
