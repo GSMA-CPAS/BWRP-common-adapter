@@ -51,6 +51,7 @@ const getBlockchainReferenceIds = (eventStorageKey) => new Promise(
   async (resolve, reject) => {
     try {
       const getPrivateReferenceIDsResp = await blockchainAdapterConnection.getPrivateReferenceIDs();
+      logger.info(`[EventService::kong] aaa = ${JSON.stringify(getPrivateReferenceIDsResp)}`);
       resolve(getPrivateReferenceIDsResp);
     } catch (e) {
       reject(e);
@@ -126,6 +127,7 @@ const eventDocumentReceived = ({body}) => new Promise(
       const documentsStoredInDb = [];
       const referenceIds = await getBlockchainReferenceIds(body.data.storageKey);
       logger.info(`[EventService::eventDocumentReceived] referenceIds = ${JSON.stringify(referenceIds)}`);
+      //if (referenceIds && Array.isArray(referenceIds)) {
       let documents = [];
       for (const referenceId of referenceIds) {
         try {
