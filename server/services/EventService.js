@@ -138,14 +138,8 @@ const eventDocumentReceived = ({body}) => new Promise(
       }
       documents = documents.sort(compareTimestamp);
       for (const document of documents) {
-      logger.info(`[EventService::eventDocumentReceived] aaa = ${JSON.stringify(document)}`);
+        logger.info(`[EventService::eventDocumentReceived] aaa = ${JSON.stringify(document)}`);
         try {
-          // append blockchainRef to "item"
-          document.blockchainRef = {
-            type: 'hlf', // need a dynamic way to define type to support future multiledger system
-            txId: document.blockchainRef.txID,
-            timestamp: document.blockchainRef.timestamp
-          };
           const storedDocument = await storeBlockchainDocumentInLocalStorage(document);
           const referenceId = ['contract', 'usage', 'settlement'].includes(storedDocument.type) ? storedDocument.referenceId : undefined;
           logger.info(`[EventService::eventDocumentReceived] config.DEACTIVATE_BLOCKCHAIN_DOCUMENT_DELETE = ${JSON.stringify(config.DEACTIVATE_BLOCKCHAIN_DOCUMENT_DELETE)}`);

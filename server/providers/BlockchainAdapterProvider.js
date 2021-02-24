@@ -116,10 +116,17 @@ class BlockchainAdapterProvider {
       const response = await axiosInstance.get(config.BLOCKCHAIN_ADAPTER_URL + '/private-documents/' + referenceId);
       logger.debug(`[BlockchainAdapterProvider::getPrivateDocument] response data:${typeof response.data} = ${JSON.stringify(response.data)}`);
       const rawDataObject = rawDataUtils.defineRawDataObjectFromRawData(response.data.payload);
+      // append blockchainRef to "item"
+      const blockchainRef = {
+        type: 'hlf', // need a dynamic way to define type to support future multiledger system
+        txId: response.data.blockchainRef.txID,
+        timestamp: response.data.blockchainRef.timestamp
+      };
       if (!rawDataObject.type) {
         throw errorUtils.ERROR_BLOCKCHAIN_ADAPTER_DOCUMENT_TYPE_ERROR;
       } else if (rawDataObject.type === 'contract') {
         const contract = rawDataUtils.defineContractFromRawDataObject(rawDataObject, response.data.fromMSP, response.data.toMSP, response.data.referenceID, response.data.blockchainRef.timeStamp);
+        contract.blockchainRef = blockchainRef;
         return contract;
       } else if (rawDataObject.type === 'usage') {
         const usage = rawDataUtils.defineUsageFromRawDataObject(rawDataObject, response.data.fromMSP, response.data.toMSP, response.data.id, response.data.timeStamp);
