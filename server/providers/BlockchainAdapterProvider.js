@@ -195,7 +195,7 @@ class BlockchainAdapterProvider {
       const rawData = rawDataUtils.defineRawDataFromContract(contract);
       const response = await axiosInstance.post(config.BLOCKCHAIN_ADAPTER_URL + '/private-documents', {
         toMSP: contract.toMsp.mspId,
-        data: rawData
+        payload: rawData
       });
       logger.debug(`[BlockchainAdapterProvider::uploadContract] response data:${typeof response.data} = ${JSON.stringify(response.data)}`);
       return {
@@ -203,7 +203,8 @@ class BlockchainAdapterProvider {
         referenceId: response.data.referenceID,
         blockchainRef: {
           type: 'hlf', // need a dynamic way to define type to support future multiledger system
-          txId: response.data.txID
+          txId: response.data.blockchainRef.txID,
+          timestamp: response.data.blockchainRef.timestamp
         }
       };
     } catch (error) {
