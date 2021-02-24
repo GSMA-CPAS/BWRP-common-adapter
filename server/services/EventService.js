@@ -250,6 +250,8 @@ const eventReceived = ({body}) => new Promise(
     try {
       if (body.eventName === 'STORE:DOCUMENTHASH') {
         resolve(await eventDocumentReceived({body}));
+      } else if (body.eventName === 'STORE:PAYLOADLINK') {
+        resolve(await eventSignatureReceived({body}));
       } else if (body.eventName === 'STORE:SIGNATURE') {
         resolve(await eventSignatureReceived({body}));
       } else {
