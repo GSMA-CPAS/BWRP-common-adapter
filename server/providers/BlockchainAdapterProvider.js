@@ -115,17 +115,26 @@ class BlockchainAdapterProvider {
     try {
       const response = await axiosInstance.get(config.BLOCKCHAIN_ADAPTER_URL + '/private-documents/' + referenceId);
       logger.debug(`[BlockchainAdapterProvider::getPrivateDocument] response data:${typeof response.data} = ${JSON.stringify(response.data)}`);
-      const rawDataObject = rawDataUtils.defineRawDataObjectFromRawData(response.data.data);
+      const rawDataObject = rawDataUtils.defineRawDataObjectFromRawData(response.data.payload);
+      // append blockchainRef to "item"
+      const blockchainRef = {
+        type: 'hlf', // need a dynamic way to define type to support future multiledger system
+        txId: response.data.blockchainRef.txID,
+        timestamp: response.data.blockchainRef.timestamp
+      };
       if (!rawDataObject.header || !rawDataObject.header.type) {
         throw errorUtils.ERROR_BLOCKCHAIN_ADAPTER_DOCUMENT_TYPE_ERROR;
       } else if (rawDataObject.header.type === 'contract') {
-        const contract = rawDataUtils.defineContractFromRawDataObject(rawDataObject, response.data.fromMSP, response.data.toMSP, response.data.id, response.data.timeStamp);
+        const contract = rawDataUtils.defineContractFromRawDataObject(rawDataObject, response.data.fromMSP, response.data.toMSP, response.data.referenceID, response.data.blockchainRef.timeStamp);
+        contract.blockchainRef = blockchainRef;
         return contract;
       } else if (rawDataObject.header.type === 'usage') {
-        const usage = rawDataUtils.defineUsageFromRawDataObject(rawDataObject, response.data.fromMSP, response.data.toMSP, response.data.id, response.data.timeStamp);
+        const usage = rawDataUtils.defineUsageFromRawDataObject(rawDataObject, response.data.fromMSP, response.data.toMSP, response.data.referenceID, response.data.blockchainRef.timeStamp);
+        usage.blockchainRef = blockchainRef;
         return usage;
       } else if (rawDataObject.header.type === 'settlement') {
-        const settlement = rawDataUtils.defineSettlementFromRawDataObject(rawDataObject, response.data.fromMSP, response.data.toMSP, response.data.id, response.data.timeStamp);
+        const settlement = rawDataUtils.defineSettlementFromRawDataObject(rawDataObject, response.data.fromMSP, response.data.toMSP, response.data.referenceID, response.data.blockchainRef.timeStamp);
+        settlement.blockchainRef = blockchainRef;
         return settlement;
       } else {
         throw errorUtils.ERROR_BLOCKCHAIN_ADAPTER_DOCUMENT_TYPE_ERROR;
@@ -195,7 +204,7 @@ class BlockchainAdapterProvider {
       const rawData = rawDataUtils.defineRawDataFromContract(contract);
       const response = await axiosInstance.post(config.BLOCKCHAIN_ADAPTER_URL + '/private-documents', {
         toMSP: contract.toMsp.mspId,
-        data: rawData
+        payload: rawData
       });
       logger.debug(`[BlockchainAdapterProvider::uploadContract] response data:${typeof response.data} = ${JSON.stringify(response.data)}`);
       return {
@@ -203,7 +212,8 @@ class BlockchainAdapterProvider {
         referenceId: response.data.referenceID,
         blockchainRef: {
           type: 'hlf', // need a dynamic way to define type to support future multiledger system
-          txId: response.data.txID
+          txId: response.data.blockchainRef.txID,
+          timestamp: response.data.blockchainRef.timestamp
         }
       };
     } catch (error) {
@@ -372,7 +382,7 @@ class BlockchainAdapterProvider {
       const rawData = rawDataUtils.defineRawDataFromUsage(usage);
       const response = await axiosInstance.post(config.BLOCKCHAIN_ADAPTER_URL + '/private-documents', {
         toMSP: usage.mspReceiver,
-        data: rawData
+        payload: rawData
       });
       logger.debug(`[BlockchainAdapterProvider::uploadUsage] response data:${typeof response.data} = ${JSON.stringify(response.data)}`);
       return {
@@ -380,7 +390,8 @@ class BlockchainAdapterProvider {
         referenceId: response.data.referenceID,
         blockchainRef: {
           type: 'hlf', // need a dynamic way to define type to support future multiledger system
-          txId: response.data.txID
+          txId: response.data.blockchainRef.txID,
+          timestamp: response.data.blockchainRef.timestamp
         }
       };
     } catch (error) {
@@ -399,7 +410,7 @@ class BlockchainAdapterProvider {
       const rawData = rawDataUtils.defineRawDataFromSettlement(settlement);
       const response = await axiosInstance.post(config.BLOCKCHAIN_ADAPTER_URL + '/private-documents', {
         toMSP: settlement.mspReceiver,
-        data: rawData
+        payload: rawData
       });
       logger.debug(`[BlockchainAdapterProvider::uploadSettlement] response data:${typeof response.data} = ${JSON.stringify(response.data)}`);
       return {
@@ -407,7 +418,8 @@ class BlockchainAdapterProvider {
         referenceId: response.data.referenceID,
         blockchainRef: {
           type: 'hlf', // need a dynamic way to define type to support future multiledger system
-          txId: response.data.txID
+          txId: response.data.blockchainRef.txID,
+          timestamp: response.data.blockchainRef.timestamp
         }
       };
     } catch (error) {
