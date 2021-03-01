@@ -478,6 +478,22 @@ paths:
         schema:
           type: string
         style: simple
+      - description: One or more states
+        in: query
+        name: states
+        schema:
+          type: array
+          items:
+            type: string
+        style: pipeDelimited
+        explode: false
+        examples:
+          oneState:
+            summary: Example of a single state
+            value: ['DRAFT']
+          multipleStates:
+            summary: Example of multiple states
+            value: ['SENT', 'RECEIVED']
       responses:
         "200":
           content:

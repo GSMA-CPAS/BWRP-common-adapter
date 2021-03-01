@@ -158,7 +158,7 @@ No authorization required
 
 <a name="getUsages"></a>
 # **getUsages**
-> String getUsages(contractId)
+> String getUsages(contractId, states)
 
 
 
@@ -169,6 +169,7 @@ No authorization required
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **contractId** | **String**| The contract Id | [default to null]
+ **states** | [**List**](../Models/String.md)| One or more states | [optional] [default to null]
 
 ### Return type
 

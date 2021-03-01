@@ -475,6 +475,26 @@ paths:
         schema:
           type: string
         style: simple
+      - description: One or more states
+        examples:
+          oneState:
+            summary: Example of a single state
+            value:
+            - DRAFT
+          multipleStates:
+            summary: Example of multiple states
+            value:
+            - SENT
+            - RECEIVED
+        explode: false
+        in: query
+        name: states
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: pipeDelimited
       responses:
         "200":
           content:

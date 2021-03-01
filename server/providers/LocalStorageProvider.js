@@ -143,11 +143,12 @@ class LocalStorageProvider {
   /**
    *
    * @param {String} contractId
+   * @param {Object} matchingConditions
    * @return {Promise<[string]>}
    */
-  static async getUsages(contractId) {
+  static async getUsages(contractId, matchingConditions = {}) {
     try {
-      return await UsageDAO.findAll(contractId);
+      return await UsageDAO.findAll(contractId, matchingConditions);
     } catch (error) {
       logger.error('[LocalStorageProvider::getUsages] failed to get usages - %s', error.message);
       throw error;

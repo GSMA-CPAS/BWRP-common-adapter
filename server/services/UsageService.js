@@ -86,10 +86,12 @@ const getUsageById = ({contractId, usageId}) => new Promise(
  * @param {String} contractId The contract Id
  * @return {Promise<ServiceResponse>}
  */
-const getUsages = ({contractId}) => new Promise(
+const getUsages = ({contractId, states}) => new Promise(
   async (resolve, reject) => {
     try {
-      const getUsagesResp = await LocalStorageProvider.getUsages(contractId);
+      // Only to check that the contract exists and to return not found error in this case
+      await LocalStorageProvider.getContract(contractId);
+      const getUsagesResp = await LocalStorageProvider.getUsages(contractId, {state: states});
       const returnedResponse = UsageMapper.getResponseBodyForGetUsages(getUsagesResp);
       resolve(Service.successResponse(returnedResponse, 200));
     } catch (e) {
