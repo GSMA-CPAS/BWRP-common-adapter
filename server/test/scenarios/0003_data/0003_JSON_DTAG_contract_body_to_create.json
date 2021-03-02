@@ -23,88 +23,29 @@
     }
   },
   "discounts": {
-    "HOME": {
+    "DTAG": {
+      "condition": {
+        "kind": "Unconditional"
+      },
       "serviceGroups": [
         {
-          "homeTadigs": ["HOR1"],
-          "visitorTadigs": ["HOR2"],
+          "homeTadigs": ["AAZOR","GRCPF"],
+          "visitorTadigs": ["AAZVF","AAZTD"],
           "services": [
             {
               "service": "SMSMO",
+              "includedInCommitment": true,
               "usagePricing": {
                 "ratingPlan": {
                   "rate": {
                     "thresholds": [
                       {
-                        "start": 0,
-                        "linearPrice": 5
+                        "start": "0",
+                        "linearPrice": "5"
                       },
                       {
-                        "start": 1500,
-                        "linearPrice": 3
-                      }
-                    ]
-                  }
-                }
-              }
-            },
-            {
-              "service":"MOC",
-              "usagePricing": {
-                "ratingPlan": {
-                  "rate": {
-                    "thresholds": [
-                      {
-                        "start": 0,
-                        "fixedPrice": 1500
-                      }
-                    ]
-                  }
-                }
-              }
-            },
-            {
-              "service": "VOLTE",
-              "usagePricing": {
-                "ratingPlan": {
-                  "balancedRate": {
-                    "value": 10
-                  },
-                  "unbalancedRate": {
-                    "value": 20
-                  }
-                }
-              }
-            },
-            {
-              "service": "MOCEU",
-              "usagePricing": {
-                "ratingPlan": {
-                  "rate": {
-                    "linearPrice": 12
-                  }
-                }
-              }
-            }
-          ]
-        }
-      ]
-    },
-    "VISITOR": {
-      "serviceGroups": [
-        {
-          "homeTadigs": ["HOR2"],
-          "visitorTadigs": ["HOR1"],
-          "services": [
-            {
-              "service": "SMSMO",
-              "usagePricing": {
-                "ratingPlan": {
-                  "rate": {
-                    "thresholds": [
-                      {
-                        "start": 0,
-                        "fixedPrice": 5000
+                        "start":"1500",
+                        "linearPrice":"3"
                       }
                     ]
                   }
@@ -118,8 +59,8 @@
                   "rate": {
                     "thresholds": [
                       {
-                        "start": 0,
-                        "fixedPrice": 3000
+                        "start": "0",
+                        "fixedPrice": "1500"
                       }
                     ]
                   }
@@ -131,10 +72,21 @@
               "usagePricing": {
                 "ratingPlan": {
                   "balancedRate": {
-                    "value": 10
+                    "thresholds": [
+                      {
+                        "start": "0",
+                        "linearPrice": "15"
+                      }
+                    ]
                   },
                   "unbalancedRate": {
-                    "value": 20
+                    "thresholds": [
+                      {
+                        "start": "0",
+                        "linearPrice": "20",
+                        "fixedPrice": "1000"
+                      }
+                    ]
                   }
                 }
               }
@@ -144,7 +96,94 @@
               "usagePricing": {
                 "ratingPlan": {
                   "rate": {
-                    "linearPrice": 15
+                    "thresholds": [
+                      {
+                        "start": "0",
+                        "linearPrice": "12"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "TMUS": {
+      "condition": {
+        "kind": "Unconditional"
+      },
+      "serviceGroups": [
+        {
+          "homeTadigs": ["AAZVF", "AAZTD"],
+          "visitorTadigs": ["AAZOR", "GRCPF"],
+          "services": [
+            {
+              "service": "SMSMO",
+              "usagePricing": {
+                "ratingPlan": {
+                  "rate": {
+                    "thresholds": [
+                      {
+                        "start": "0",
+                        "fixedPrice": "5000"
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "service": "MOC",
+              "usagePricing": {
+                "ratingPlan": {
+                  "rate": {
+                    "thresholds": [
+                      {
+                        "start": "0",
+                        "fixedPrice": "3000"
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "service": "VOLTE",
+              "usagePricing": {
+                "ratingPlan": {
+                  "balancedRate": {
+                    "thresholds": [
+                      {
+                        "start": "0",
+                        "linearPrice": "15"
+                      }
+                    ]
+                  },
+                  "unbalancedRate": {
+                    "thresholds": [
+                      {
+                        "start": "0",
+                        "linearPrice": "20.5",
+                        "fixedPrice":"1000"
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "service": "MOCEU",
+              "usagePricing": {
+                "ratingPlan": {
+                  "rate": {
+                    "thresholds": [
+                      {
+                        "start": "0",
+                        "linearPrice": "15"
+                      }
+                    ]
                   }
                 }
               }
