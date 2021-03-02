@@ -92,7 +92,59 @@ describe(`Tests PUT ${route} API OK`, function() {
       mspOwner: undefined,
       mspReceiver: undefined,
       body: {
-        data: []
+        metadata: {
+          name: 'DTAG_local_usage_in_tests'
+        },
+        data: [
+          {
+            yearMonth: "202001",
+            HPMN: "TMUS",
+            VPMN: "DTAG",
+            direction: "Inbound",
+            service: "SMS MO",
+            usage: "5208.2115",
+            units: "SMS",
+            charges: "104.16423",
+            taxes: "0",
+            currency: "EUR"
+          },
+          {
+            yearMonth: "202001",
+            HPMN: "TMUS",
+            VPMN: "DTAG",
+            direction: "Inbound",
+            service: "MOC Back Home",
+            usage: "2149.896",
+            units: "min",
+            charges: "322.4844",
+            taxes: "0",
+            currency: "EUR"
+          },
+          {
+            yearMonth: "202001",
+            HPMN: "DTAG",
+            VPMN: "TMUS",
+            direction: "Outbound",
+            service: "SMS MO",
+            usage: "21530.517",
+            units: "SMS",
+            charges: "430.61034",
+            taxes: "0",
+            currency: "EUR"
+          },
+          {
+            yearMonth: "202001",
+            HPMN: "DTAG",
+            VPMN: "TMUS",
+            direction: "Outbound",
+            service: "GPRS",
+            usage: "14696.6175",
+            units: "MB",
+            charges: "4408.98525",
+            taxes: "0",
+            currency: "EUR"
+          }
+        ]
       },
       state: 'SENT',
       referenceId: 'OPIPOUFTDRDDFCFYU',
@@ -166,6 +218,14 @@ describe(`Tests PUT ${route} API OK`, function() {
         .reply((pathReceived, bodyReceived) => {
           // Only for exemple
           expect(pathReceived).to.equals('/calculate');
+          expect(bodyReceived).to.be.an('object');
+          expect(bodyReceived).to.have.property('discounts').that.is.an('object');
+          expect(bodyReceived).to.have.property('usage').that.is.an('array');
+          expect(bodyReceived.usage.length).to.equals(0);
+          bodyReceived.usage.forEach((element) => {
+            expect(element).to.be.an('object');
+            expect(Object.keys(element)).have.members(['yearMonth', 'HPMN', 'VPMN', 'direction', 'service', 'usage', 'units', 'charges', 'taxes', 'currency']);
+          });
           // expect(bodyReceived).to.be.empty;
           return [
             200,
@@ -238,6 +298,14 @@ describe(`Tests PUT ${route} API OK`, function() {
         .reply((pathReceived, bodyReceived) => {
           // Only for exemple
           expect(pathReceived).to.equals('/calculate');
+          expect(bodyReceived).to.be.an('object');
+          expect(bodyReceived).to.have.property('discounts').that.is.an('object');
+          expect(bodyReceived).to.have.property('usage').that.is.an('array');
+          expect(bodyReceived.usage.length).to.equals(0);
+          bodyReceived.usage.forEach((element) => {
+            expect(element).to.be.an('object');
+            expect(Object.keys(element)).have.members(['yearMonth', 'HPMN', 'VPMN', 'direction', 'service', 'usage', 'units', 'charges', 'taxes', 'currency']);
+          });
           // expect(bodyReceived).to.be.empty;
           return [
             200,
@@ -332,6 +400,14 @@ describe(`Tests PUT ${route} API OK`, function() {
         .reply((pathReceived, bodyReceived) => {
           // Only for exemple
           expect(pathReceived).to.equals('/calculate');
+          expect(bodyReceived).to.be.an('object');
+          expect(bodyReceived).to.have.property('discounts').that.is.an('object');
+          expect(bodyReceived).to.have.property('usage').that.is.an('array');
+          expect(bodyReceived.usage.length).to.equals(4);
+          bodyReceived.usage.forEach((element) => {
+            expect(element).to.be.an('object');
+            expect(Object.keys(element)).have.members(['yearMonth', 'HPMN', 'VPMN', 'direction', 'service', 'usage', 'units', 'charges', 'taxes', 'currency']);
+          });
           // expect(bodyReceived).to.be.empty;
           return [
             200,
@@ -380,7 +456,7 @@ describe(`Tests PUT ${route} API OK`, function() {
                 expect(response.body).to.have.property('contractId', contractSent.id);
                 expect(response.body).to.have.property('usageId', usageSentData.id);
                 expect(response.body).to.have.property('state', 'DRAFT');
-                expect(response.body).to.have.property('mspOwner', usageMinimumData.mspOwner);
+                expect(response.body).to.have.property('mspOwner', usageSentData.mspOwner);
                 expect(response.body).to.have.property('creationDate').that.is.a('string').and.match(DATE_REGEX);
                 expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
 
@@ -390,7 +466,7 @@ describe(`Tests PUT ${route} API OK`, function() {
 
                 expect(response.body).to.have.property('body').that.is.an('object');
                 expect(Object.keys(response.body.body)).have.members(['generatedResult', 'usage']);
-                expect(response.body.body.usage.body).to.deep.include(usageMinimumData.body);
+                expect(response.body.body.usage.body).to.deep.include(usageSentData.body);
 
                 expect(response.body.body.generatedResult).to.have.property('intermediateResults').that.is.an('array');
                 expect(response.body.body.generatedResult.intermediateResults).to.deep.include( {service: 'SMSMO', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: 0} );
