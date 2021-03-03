@@ -645,7 +645,8 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           DTAG_dynamic_data.settlementIdFromLocalUsage = response.body.settlementId;
           debugObjectOnDTAG('Settlement created on DTAG from local usage : ', response.body);
           if ((response.body.body) && (response.body.body.generatedResult)) {
-            debugObjectOnDTAG('Settlement created on DTAG from local usage => embedded generatedResult : ', response.body.body.generatedResult);
+            debugObjectOnDTAG('Settlement created on DTAG from local usage => embedded generatedResult inbound : ', response.body.body.generatedResult.inbound);
+            debugObjectOnDTAG('Settlement created on DTAG from local usage => embedded generatedResult outbound : ', response.body.body.generatedResult.outbound);
           }
           debug(`==> DTAG new created settlement id from local usage: ${DTAG_dynamic_data.settlementIdFromLocalUsage}`);
 
@@ -686,7 +687,8 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           DTAG_dynamic_data.settlementIdFromReceivedUsage = response.body.settlementId;
           debugObjectOnDTAG('Settlement created on DTAG from received usage : ', response.body);
           if ((response.body.body) && (response.body.body.generatedResult)) {
-            debugObjectOnDTAG('Settlement created on DTAG from received usage => embedded generatedResult : ', response.body.body.generatedResult);
+            debugObjectOnDTAG('Settlement created on DTAG from received usage => embedded generatedResult inbound : ', response.body.body.generatedResult.inbound);
+            debugObjectOnDTAG('Settlement created on DTAG from received usage => embedded generatedResult outbound : ', response.body.body.generatedResult.outbound);
           }
           debug(`==> DTAG new created settlement id from received usage: ${DTAG_dynamic_data.settlementIdFromReceivedUsage}`);
 
@@ -758,7 +760,8 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           TMUS_dynamic_data.settlementIdFromLocalUsage = response.body.settlementId;
           debugObjectOnTMUS('Settlement created on TMUS from local usage : ', response.body);
           if ((response.body.body) && (response.body.body.generatedResult)) {
-            debugObjectOnTMUS('Settlement created on TMUS from local usage => embedded generatedResult : ', response.body.body.generatedResult);
+            debugObjectOnTMUS('Settlement created on DTAG from local usage => embedded generatedResult inbound : ', response.body.body.generatedResult.inbound);
+            debugObjectOnTMUS('Settlement created on DTAG from local usage => embedded generatedResult outbound : ', response.body.body.generatedResult.outbound);
           }
           debug(`==> TMUS new created settlement id from local usage: ${TMUS_dynamic_data.settlementIdFromLocalUsage}`);
 
@@ -799,7 +802,8 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           TMUS_dynamic_data.settlementIdFromReceivedUsage = response.body.settlementId;
           debugObjectOnTMUS('Settlement created on TMUS from received usage : ', response.body);
           if ((response.body.body) && (response.body.body.generatedResult)) {
-            debugObjectOnTMUS('Settlement created on TMUS from received usage => embedded generatedResult : ', response.body.body.generatedResult);
+            debugObjectOnTMUS('Settlement created on DTAG from received usage => embedded generatedResult inbound : ', response.body.body.generatedResult.inbound);
+            debugObjectOnTMUS('Settlement created on DTAG from received usage => embedded generatedResult outbound : ', response.body.body.generatedResult.outbound);
           }
           debug(`==> TMUS new created settlement id from received usage: ${TMUS_dynamic_data.settlementIdFromReceivedUsage}`);
 
