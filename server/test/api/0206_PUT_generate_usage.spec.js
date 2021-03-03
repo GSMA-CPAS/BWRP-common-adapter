@@ -92,57 +92,52 @@ describe(`Tests PUT ${route} API OK`, function() {
       mspOwner: undefined,
       mspReceiver: undefined,
       body: {
-        metadata: {
-          name: 'DTAG_local_usage_in_tests'
-        },
-        data: [
+        inbound: [
           {
-            yearMonth: "202001",
-            HPMN: "TMUS",
-            VPMN: "DTAG",
-            direction: "Inbound",
-            service: "SMS MO",
-            usage: "5208.2115",
-            units: "SMS",
-            charges: "104.16423",
-            taxes: "0",
-            currency: "EUR"
+            yearMonth: '202001',
+            homeTadig: 'TMUS',
+            visitorTadig: 'DTAG',
+            service: 'SMS MO',
+            usage: '5208.2115',
+            units: 'SMS',
+            charges: '104.16423',
+            taxes: '0',
+            currency: 'EUR'
           },
           {
-            yearMonth: "202001",
-            HPMN: "TMUS",
-            VPMN: "DTAG",
-            direction: "Inbound",
-            service: "MOC Back Home",
-            usage: "2149.896",
-            units: "min",
-            charges: "322.4844",
-            taxes: "0",
-            currency: "EUR"
+            yearMonth: '202001',
+            homeTadig: 'TMUS',
+            visitorTadig: 'DTAG',
+            service: 'MOC Back Home',
+            usage: '2149.896',
+            units: 'min',
+            charges: '322.4844',
+            taxes: '0',
+            currency: 'EUR'
+          }
+        ],
+        outbound: [
+          {
+            yearMonth: '202001',
+            homeTadig: 'DTAG',
+            visitorTadig: 'TMUS',
+            service: 'SMS MO',
+            usage: '21530.517',
+            units: 'SMS',
+            charges: '430.61034',
+            taxes: '0',
+            currency: 'EUR'
           },
           {
-            yearMonth: "202001",
-            HPMN: "DTAG",
-            VPMN: "TMUS",
-            direction: "Outbound",
-            service: "SMS MO",
-            usage: "21530.517",
-            units: "SMS",
-            charges: "430.61034",
-            taxes: "0",
-            currency: "EUR"
-          },
-          {
-            yearMonth: "202001",
-            HPMN: "DTAG",
-            VPMN: "TMUS",
-            direction: "Outbound",
-            service: "GPRS",
-            usage: "14696.6175",
-            units: "MB",
-            charges: "4408.98525",
-            taxes: "0",
-            currency: "EUR"
+            yearMonth: '202001',
+            homeTadig: 'DTAG',
+            visitorTadig: 'TMUS',
+            service: 'GPRS',
+            usage: '14696.6175',
+            units: 'MB',
+            charges: '4408.98525',
+            taxes: '0',
+            currency: 'EUR'
           }
         ]
       },
@@ -214,7 +209,7 @@ describe(`Tests PUT ${route} API OK`, function() {
 
     it('Put generate usage OK with minimum contract details', function(done) {
       calculationServiceNock.post('/calculate')
-        .times(1)
+        .times(2)
         .reply((pathReceived, bodyReceived) => {
           // Only for exemple
           expect(pathReceived).to.equals('/calculate');
@@ -275,11 +270,19 @@ describe(`Tests PUT ${route} API OK`, function() {
 
             expect(response.body.body.usage.body).to.deep.include(usageMinimumData.body);
 
-            expect(response.body.body.generatedResult).to.have.property('intermediateResults').that.is.an('array');
-            expect(response.body.body.generatedResult.intermediateResults).to.deep.include( {service: 'SMSMO', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: 0} );
-            expect(response.body.body.generatedResult.intermediateResults).to.deep.include( {service: 'MOC', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: 0} );
-            expect(response.body.body.generatedResult.intermediateResults).to.deep.include( {service: 'SMSMO', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 0} );
-            expect(response.body.body.generatedResult.intermediateResults).to.deep.include( {service: 'MOC', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 0} );
+            expect(response.body.body.generatedResult).to.have.property('inbound').that.is.an('object');
+            expect(response.body.body.generatedResult.inbound).to.have.property('intermediateResults').that.is.an('array');
+            expect(response.body.body.generatedResult.inbound.intermediateResults).to.deep.include( {service: 'SMSMO', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: 0} );
+            expect(response.body.body.generatedResult.inbound.intermediateResults).to.deep.include( {service: 'MOC', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: 0} );
+            expect(response.body.body.generatedResult.inbound.intermediateResults).to.deep.include( {service: 'SMSMO', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 0} );
+            expect(response.body.body.generatedResult.inbound.intermediateResults).to.deep.include( {service: 'MOC', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 0} );
+
+            expect(response.body.body.generatedResult).to.have.property('outbound').that.is.an('object');
+            expect(response.body.body.generatedResult.outbound).to.have.property('intermediateResults').that.is.an('array');
+            expect(response.body.body.generatedResult.outbound.intermediateResults).to.deep.include( {service: 'SMSMO', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: 0} );
+            expect(response.body.body.generatedResult.outbound.intermediateResults).to.deep.include( {service: 'MOC', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: 0} );
+            expect(response.body.body.generatedResult.outbound.intermediateResults).to.deep.include( {service: 'SMSMO', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 0} );
+            expect(response.body.body.generatedResult.outbound.intermediateResults).to.deep.include( {service: 'MOC', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 0} );
 
             expect(calculationServiceNock.isDone(), 'Unconsumed nock error').to.be.true;
 
@@ -294,7 +297,7 @@ describe(`Tests PUT ${route} API OK`, function() {
 
     it('Put generate usage OK with mode=commit', function(done) {
       calculationServiceNock.post('/calculate')
-        .times(1)
+        .times(2)
         .reply((pathReceived, bodyReceived) => {
           // Only for exemple
           expect(pathReceived).to.equals('/calculate');
@@ -376,11 +379,19 @@ describe(`Tests PUT ${route} API OK`, function() {
             expect(Object.keys(response.body.body)).have.members(['generatedResult', 'usage']);
             expect(response.body.body.usage.body).to.deep.include(usageMinimumData.body);
 
-            expect(response.body.body.generatedResult).to.have.property('intermediateResults').that.is.an('array');
-            expect(response.body.body.generatedResult.intermediateResults).to.deep.include( {service: 'SMSMO', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: 0} );
-            expect(response.body.body.generatedResult.intermediateResults).to.deep.include( {service: 'MOC', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: 0} );
-            expect(response.body.body.generatedResult.intermediateResults).to.deep.include( {service: 'SMSMO', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 0} );
-            expect(response.body.body.generatedResult.intermediateResults).to.deep.include( {service: 'MOC', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 0} );
+            expect(response.body.body.generatedResult).to.have.property('inbound').that.is.an('object');
+            expect(response.body.body.generatedResult.inbound).to.have.property('intermediateResults').that.is.an('array');
+            expect(response.body.body.generatedResult.inbound.intermediateResults).to.deep.include( {service: 'SMSMO', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: 0} );
+            expect(response.body.body.generatedResult.inbound.intermediateResults).to.deep.include( {service: 'MOC', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: 0} );
+            expect(response.body.body.generatedResult.inbound.intermediateResults).to.deep.include( {service: 'SMSMO', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 0} );
+            expect(response.body.body.generatedResult.inbound.intermediateResults).to.deep.include( {service: 'MOC', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 0} );
+
+            expect(response.body.body.generatedResult).to.have.property('outbound').that.is.an('object');
+            expect(response.body.body.generatedResult.outbound).to.have.property('intermediateResults').that.is.an('array');
+            expect(response.body.body.generatedResult.outbound.intermediateResults).to.deep.include( {service: 'SMSMO', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: 0} );
+            expect(response.body.body.generatedResult.outbound.intermediateResults).to.deep.include( {service: 'MOC', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: 0} );
+            expect(response.body.body.generatedResult.outbound.intermediateResults).to.deep.include( {service: 'SMSMO', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 0} );
+            expect(response.body.body.generatedResult.outbound.intermediateResults).to.deep.include( {service: 'MOC', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 0} );
 
             expect(calculationServiceNock.isDone(), 'Unconsumed nock error').to.be.true;
             expect(blockchainAdapterNock.isDone(), 'Unconsumed nock error').to.be.true;
@@ -396,17 +407,18 @@ describe(`Tests PUT ${route} API OK`, function() {
 
     it('Put generate usage OK on sent usage', function(done) {
       calculationServiceNock.post('/calculate')
-        .times(1)
+        .times(2)
         .reply((pathReceived, bodyReceived) => {
           // Only for exemple
           expect(pathReceived).to.equals('/calculate');
           expect(bodyReceived).to.be.an('object');
           expect(bodyReceived).to.have.property('discounts').that.is.an('object');
           expect(bodyReceived).to.have.property('usage').that.is.an('array');
-          expect(bodyReceived.usage.length).to.equals(4);
+          // 2 usages for each direction 'inbound' and 'outbound'
+          expect(bodyReceived.usage.length).to.equals(2);
           bodyReceived.usage.forEach((element) => {
             expect(element).to.be.an('object');
-            expect(Object.keys(element)).have.members(['yearMonth', 'HPMN', 'VPMN', 'direction', 'service', 'usage', 'units', 'charges', 'taxes', 'currency']);
+            expect(Object.keys(element)).have.members(['homeTadig', 'visitorTadig', 'service', 'usage', 'charges']);
           });
           // expect(bodyReceived).to.be.empty;
           return [
@@ -468,11 +480,19 @@ describe(`Tests PUT ${route} API OK`, function() {
                 expect(Object.keys(response.body.body)).have.members(['generatedResult', 'usage']);
                 expect(response.body.body.usage.body).to.deep.include(usageSentData.body);
 
-                expect(response.body.body.generatedResult).to.have.property('intermediateResults').that.is.an('array');
-                expect(response.body.body.generatedResult.intermediateResults).to.deep.include( {service: 'SMSMO', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: 0} );
-                expect(response.body.body.generatedResult.intermediateResults).to.deep.include( {service: 'MOC', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: 0} );
-                expect(response.body.body.generatedResult.intermediateResults).to.deep.include( {service: 'SMSMO', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 0} );
-                expect(response.body.body.generatedResult.intermediateResults).to.deep.include( {service: 'MOC', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 0} );
+                expect(response.body.body.generatedResult).to.have.property('inbound').that.is.an('object');
+                expect(response.body.body.generatedResult.inbound).to.have.property('intermediateResults').that.is.an('array');
+                expect(response.body.body.generatedResult.inbound.intermediateResults).to.deep.include( {service: 'SMSMO', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: 0} );
+                expect(response.body.body.generatedResult.inbound.intermediateResults).to.deep.include( {service: 'MOC', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: 0} );
+                expect(response.body.body.generatedResult.inbound.intermediateResults).to.deep.include( {service: 'SMSMO', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 0} );
+                expect(response.body.body.generatedResult.inbound.intermediateResults).to.deep.include( {service: 'MOC', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 0} );
+
+                expect(response.body.body.generatedResult).to.have.property('outbound').that.is.an('object');
+                expect(response.body.body.generatedResult.outbound).to.have.property('intermediateResults').that.is.an('array');
+                expect(response.body.body.generatedResult.outbound.intermediateResults).to.deep.include( {service: 'SMSMO', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: 0} );
+                expect(response.body.body.generatedResult.outbound.intermediateResults).to.deep.include( {service: 'MOC', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: 0} );
+                expect(response.body.body.generatedResult.outbound.intermediateResults).to.deep.include( {service: 'SMSMO', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 0} );
+                expect(response.body.body.generatedResult.outbound.intermediateResults).to.deep.include( {service: 'MOC', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 0} );
 
                 expect(calculationServiceNock.isDone(), 'Unconsumed nock error').to.be.true;
 
