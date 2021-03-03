@@ -36,7 +36,7 @@ const UsageSchema = new Schema({
   id: {type: String, required: true},
   type: {type: String, required: true},
   version: {type: String, required: true},
-  name: {type: String, required: true},
+  name: {type: String, required: false},
   contractId: {type: String, required: true},
   contractReferenceId: {type: String, required: false},
   settlementId: {type: String, required: false},

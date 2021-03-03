@@ -98,20 +98,26 @@ const generateUsageById = ({contractId, usageId, mode}) => new Promise(
         if (['SENT', 'RECEIVED'].includes(usage.state)) {
           settlement.usageId = usage.id;
         }
-        const createSettlementResp = await LocalStorageProvider.createSettlement(settlement);
-        if (['SENT', 'RECEIVED'].includes(usage.state)) {
-          // Update usage with the created settlementId
-          await LocalStorageProvider.updateUsageWithSettlementId(usageId, createSettlementResp.id);
-        }
-        if (mode === 'commit') {
-          const uploadSettlementResp = await blockchainAdapterConnection.uploadSettlement(createSettlementResp);
-          const getStorageKeysResp = await blockchainAdapterConnection.getStorageKeys(uploadSettlementResp.referenceId, [createSettlementResp.mspOwner, createSettlementResp.mspReceiver]);
-          const updateSettlementResp = await LocalStorageProvider.updateSentSettlement(createSettlementResp.id, uploadSettlementResp.rawData, uploadSettlementResp.referenceId, getStorageKeysResp, uploadSettlementResp.blockchainRef);
-          const returnedResponse = SettlementMapper.getResponseBodyForSendSettlement(updateSettlementResp);
-          resolve(Service.successResponse(returnedResponse, 200));
-        } else {
-          const returnedResponse = SettlementMapper.getResponseBodyForGetSettlement(createSettlementResp);
+        if (mode === 'preview') {
+          // Create the returned response from the object that should be stored in LocalStorageProvider
+          const returnedResponse = SettlementMapper.getResponseBodyForGetSettlement(settlement);
           resolve(Service.successResponse(returnedResponse));
+        } else {
+          const createSettlementResp = await LocalStorageProvider.createSettlement(settlement);
+          if (['SENT', 'RECEIVED'].includes(usage.state)) {
+            // Update usage with the created settlementId
+            await LocalStorageProvider.updateUsageWithSettlementId(usageId, createSettlementResp.id);
+          }
+          if (mode === 'commit') {
+            const uploadSettlementResp = await blockchainAdapterConnection.uploadSettlement(createSettlementResp);
+            const getStorageKeysResp = await blockchainAdapterConnection.getStorageKeys(uploadSettlementResp.referenceId, [createSettlementResp.mspOwner, createSettlementResp.mspReceiver]);
+            const updateSettlementResp = await LocalStorageProvider.updateSentSettlement(createSettlementResp.id, uploadSettlementResp.rawData, uploadSettlementResp.referenceId, getStorageKeysResp, uploadSettlementResp.blockchainRef);
+            const returnedResponse = SettlementMapper.getResponseBodyForSendSettlement(updateSettlementResp);
+            resolve(Service.successResponse(returnedResponse, 200));
+          } else {
+            const returnedResponse = SettlementMapper.getResponseBodyForGetSettlement(createSettlementResp);
+            resolve(Service.successResponse(returnedResponse));
+          }
         }
       }
     } catch (e) {
