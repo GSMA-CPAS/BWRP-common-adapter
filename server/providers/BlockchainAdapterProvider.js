@@ -116,15 +116,15 @@ class BlockchainAdapterProvider {
       const response = await axiosInstance.get(config.BLOCKCHAIN_ADAPTER_URL + '/private-documents/' + referenceId);
       logger.debug(`[BlockchainAdapterProvider::getPrivateDocument] response data:${typeof response.data} = ${JSON.stringify(response.data)}`);
       const rawDataObject = rawDataUtils.defineRawDataObjectFromRawData(response.data.data);
-      if (!rawDataObject.type) {
+      if (!rawDataObject.header || !rawDataObject.header.type) {
         throw errorUtils.ERROR_BLOCKCHAIN_ADAPTER_DOCUMENT_TYPE_ERROR;
-      } else if (rawDataObject.type === 'contract') {
+      } else if (rawDataObject.header.type === 'contract') {
         const contract = rawDataUtils.defineContractFromRawDataObject(rawDataObject, response.data.fromMSP, response.data.toMSP, response.data.id, response.data.timeStamp);
         return contract;
-      } else if (rawDataObject.type === 'usage') {
+      } else if (rawDataObject.header.type === 'usage') {
         const usage = rawDataUtils.defineUsageFromRawDataObject(rawDataObject, response.data.fromMSP, response.data.toMSP, response.data.id, response.data.timeStamp);
         return usage;
-      } else if (rawDataObject.type === 'settlement') {
+      } else if (rawDataObject.header.type === 'settlement') {
         const settlement = rawDataUtils.defineSettlementFromRawDataObject(rawDataObject, response.data.fromMSP, response.data.toMSP, response.data.id, response.data.timeStamp);
         return settlement;
       } else {

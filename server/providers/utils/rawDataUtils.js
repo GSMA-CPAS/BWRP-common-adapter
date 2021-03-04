@@ -2,13 +2,16 @@
 
 class RawDataUtils {
   static defineRawDataFromContract(c) {
-    const rawDataObject = {};
-    rawDataObject.type = c.type;
-    rawDataObject.version = c.version;
-    rawDataObject.name = c.name;
-    rawDataObject.fromMsp = c.fromMsp ? c.fromMsp : {}; // to keep signatures if specified
-    rawDataObject.toMsp = c.toMsp ? c.toMsp : {}; // to keep signatures if specified
-    rawDataObject.body = c.body;
+    const rawDataObject = {
+      header: {
+        type: c.type,
+        version: c.version,
+        name: c.name,
+        fromMsp: c.fromMsp ? c.fromMsp : {},
+        toMsp: c.toMsp ? c.toMsp : {}
+      },
+      body: c.body
+    };
     const stringToEncode = JSON.stringify(rawDataObject);
 
     return Buffer.from(stringToEncode).toString('base64');
@@ -22,7 +25,15 @@ class RawDataUtils {
   }
 
   static defineContractFromRawDataObject(rawDataObject, fromMSP, toMSP, id, timestamp) {
-    const contract = rawDataObject;
+    const contract = {
+      type: rawDataObject.header.type,
+      version: rawDataObject.header.version,
+      name: rawDataObject.header.name,
+      fromMsp: rawDataObject.header.fromMsp,
+      toMsp: rawDataObject.header.toMsp,
+      body: rawDataObject.body,
+      rawData: rawDataObject.rawData
+    };
 
     contract.fromMsp = contract.fromMsp ? contract.fromMsp : {};
     contract.fromMsp.mspId = fromMSP;
@@ -35,7 +46,16 @@ class RawDataUtils {
   }
 
   static defineUsageFromRawDataObject(rawDataObject, fromMSP, toMSP, id, timestamp) {
-    const usage = rawDataObject;
+    const usage = {
+      contractReferenceId: rawDataObject.contractReferenceId,
+      mspOwner: rawDataObject.mspOwner,
+      mspReceiver: rawDataObject.mspReceiver,
+      type: rawDataObject.header.type,
+      version: rawDataObject.header.version,
+      name: rawDataObject.header.name,
+      body: rawDataObject.body,
+      rawData: rawDataObject.rawData
+    };
     usage.referenceId = id;
     usage.timestamp = timestamp;
     usage.state = 'RECEIVED';
@@ -43,7 +63,16 @@ class RawDataUtils {
   }
 
   static defineSettlementFromRawDataObject(rawDataObject, fromMSP, toMSP, id, timestamp) {
-    const settlement = rawDataObject;
+    const settlement = {
+      contractReferenceId: rawDataObject.contractReferenceId,
+      mspOwner: rawDataObject.mspOwner,
+      mspReceiver: rawDataObject.mspReceiver,
+      type: rawDataObject.header.type,
+      version: rawDataObject.header.version,
+      name: rawDataObject.header.name,
+      body: rawDataObject.body,
+      rawData: rawDataObject.rawData
+    };
     settlement.referenceId = id;
     settlement.timestamp = timestamp;
     settlement.state = 'RECEIVED';
@@ -51,28 +80,34 @@ class RawDataUtils {
   }
 
   static defineRawDataFromUsage(u) {
-    const rawDataObject = {};
-    rawDataObject.type = u.type;
-    rawDataObject.version = u.version;
-    rawDataObject.name = u.name;
-    rawDataObject.contractReferenceId = u.contractReferenceId;
-    rawDataObject.mspOwner = u.mspOwner;
-    rawDataObject.mspReceiver = u.mspReceiver;
-    rawDataObject.body = u.body;
+    const rawDataObject = {
+      contractReferenceId: u.contractReferenceId,
+      mspOwner: u.mspOwner,
+      mspReceiver: u.mspReceiver,
+      header: {
+        type: u.type,
+        version: u.version,
+        name: u.name
+      },
+      body: u.body
+    };
     const stringToEncode = JSON.stringify(rawDataObject);
 
     return Buffer.from(stringToEncode).toString('base64');
   }
 
   static defineRawDataFromSettlement(s) {
-    const rawDataObject = {};
-    rawDataObject.type = s.type;
-    rawDataObject.version = s.version;
-    rawDataObject.name = s.name;
-    rawDataObject.contractReferenceId = s.contractReferenceId;
-    rawDataObject.mspOwner = s.mspOwner;
-    rawDataObject.mspReceiver = s.mspReceiver;
-    rawDataObject.body = s.body;
+    const rawDataObject = {
+      contractReferenceId: s.contractReferenceId,
+      mspOwner: s.mspOwner,
+      mspReceiver: s.mspReceiver,
+      header: {
+        type: s.type,
+        version: s.version,
+        name: s.name
+      },
+      body: s.body
+    };
     const stringToEncode = JSON.stringify(rawDataObject);
 
     return Buffer.from(stringToEncode).toString('base64');
