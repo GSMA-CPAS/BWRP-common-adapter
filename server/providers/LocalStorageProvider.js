@@ -143,11 +143,12 @@ class LocalStorageProvider {
   /**
    *
    * @param {String} contractId
+   * @param {Object} matchingConditions
    * @return {Promise<[string]>}
    */
-  static async getUsages(contractId) {
+  static async getUsages(contractId, matchingConditions = {}) {
     try {
-      return await UsageDAO.findAll(contractId);
+      return await UsageDAO.findAll(contractId, matchingConditions);
     } catch (error) {
       logger.error('[LocalStorageProvider::getUsages] failed to get usages - %s', error.message);
       throw error;
@@ -260,12 +261,28 @@ class LocalStorageProvider {
 
   /**
    *
-   * @param {String} id
+   * @param {Object} usageId
+   * @param {Object} settlementId
    * @return {Promise<object>}
    */
-  static async getUsage(id) {
+  static async updateUsageWithSettlementId(usageId, settlementId) {
     try {
-      return await UsageDAO.findOne(id);
+      return await UsageDAO.addSettlementId(usageId, settlementId);
+    } catch (error) {
+      logger.error('[LocalStorageProvider::updateUsageWithSettlementId] failed to updateUsageWithSettlementId - ', error.message);
+      throw error;
+    }
+  }
+
+  /**
+   *
+   * @param {String} contractId
+   * @param {String} usageId
+   * @return {Promise<object>}
+   */
+  static async getUsage(contractId, usageId) {
+    try {
+      return await UsageDAO.findOne(usageId, {contractId: contractId});
     } catch (error) {
       logger.error('[LocalStorageProvider::getUsage] failed to get usage - ' + error.message);
       throw error;
@@ -274,12 +291,13 @@ class LocalStorageProvider {
 
   /**
    *
-   * @param {String} id
+   * @param {String} contractId
+   * @param {String} usageId
    * @return {Promise<object>}
    */
-  static async deleteUsage(id) {
+  static async deleteUsage(contractId, usageId) {
     try {
-      return await UsageDAO.findOneAndRemove(id);
+      return await UsageDAO.findOneAndRemove(usageId, {contractId: contractId});
     } catch (error) {
       logger.error('[LocalStorageProvider::deleteUsage] failed to delete usage - ' + error.message);
       throw error;

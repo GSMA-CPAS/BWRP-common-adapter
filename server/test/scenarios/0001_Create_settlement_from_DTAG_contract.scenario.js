@@ -13,10 +13,13 @@ const expect = require('chai').expect;
 
 const DATE_REGEX = testsUtils.getDateRegexp();
 
+const SHOW_DISCREPANCY_GENERATION_DETAILS = false;
+
 /* eslint-disable camelcase */
 const DTAG_API = `http://127.0.0.1:3030/api/v1`;
 const TMUS_API = `http://127.0.0.1:3040/api/v1`;
 
+const configured_JSON_DTAG_contract_body_to_create = require('./0001_data/0001_JSON_DTAG_contract_body_to_create.json');
 const DTAG_create_contract_body = {
   header: {
     name: 'Contract name for scenario 0000_From_DTAG_contract between DTAG and TMUS',
@@ -25,31 +28,7 @@ const DTAG_create_contract_body = {
     fromMsp: {mspId: 'DTAG'},
     toMsp: {mspId: 'TMUS'}
   },
-  body: {
-    generalInformation: {
-      name: 'Nae',
-      type: 'Special',
-      startDate: '2020-05-01T00:00:00.000Z',
-      endDate: '2020-12-01T00:00:00.000Z',
-      prolongationLength: null,
-      taxesIncluded: true,
-      authors: 'fd',
-      TMUS: {
-        currencyForAllDiscounts: 'JPY',
-        tadigCodes: {
-          codes: 'dfd',
-          includeContractParty: true
-        }
-      },
-      DTAG: {
-        currencyForAllDiscounts: 'EUR',
-        tadigCodes: {
-          codes: 'fds',
-          includeContractParty: false
-        }
-      }
-    }
-  }
+  body: configured_JSON_DTAG_contract_body_to_create
 };
 
 const configured_JSON_DTAG_usage_body_to_create = require('./0001_data/0001_JSON_DTAG_usage_body_to_create.json');
@@ -103,9 +82,9 @@ describe(`Launch scenario 0001_Create_settlement_from_DTAG_contract`, function()
           expect(response).to.have.status(200);
           expect(response).to.be.json;
           expect(response.body).to.exist;
-          expect(response.body).to.have.property('commitHash', 'unknown');
-          expect(response.body).to.have.property('apiHash', 'unknown');
-          expect(response.body).to.have.property('apiVersion', '?.?.?');
+          expect(response.body).to.have.property('commitHash');
+          expect(response.body).to.have.property('apiHash');
+          expect(response.body).to.have.property('apiVersion');
           chai.request(TMUS_API)
             .get(`/status`)
             .end((error, response) => {
@@ -114,9 +93,9 @@ describe(`Launch scenario 0001_Create_settlement_from_DTAG_contract`, function()
               expect(response).to.have.status(200);
               expect(response).to.be.json;
               expect(response.body).to.exist;
-              expect(response.body).to.have.property('commitHash', 'unknown');
-              expect(response.body).to.have.property('apiHash', 'unknown');
-              expect(response.body).to.have.property('apiVersion', '?.?.?');
+              expect(response.body).to.have.property('commitHash');
+              expect(response.body).to.have.property('apiHash');
+              expect(response.body).to.have.property('apiVersion');
 
               debugSetup('==> they are UP');
               done();
@@ -893,9 +872,10 @@ describe(`Launch scenario 0001_Create_settlement_from_DTAG_contract`, function()
     }
   });
 
-  // Now delete the created settlement resources
+  // Now calculate settlement discrepancy
 
-  it(`Put DTAG discrepancy on received settlement from TMUS`, function(done) {
+  // Endpoint removed from API - but could be useful for later
+  it.skip(`Put DTAG discrepancy on received settlement from TMUS`, function(done) {
     debugAction(`${this.test.title}`);
     if ((DTAG_dynamic_data.contractId === undefined) || (DTAG_dynamic_data.receivedSettlementId === undefined) || (DTAG_dynamic_data.usageId === undefined)) {
       expect.fail('This scenario step should use an undefined data');
@@ -912,7 +892,7 @@ describe(`Launch scenario 0001_Create_settlement_from_DTAG_contract`, function()
           expect(response.body).to.be.an('object');
 
           debugObjectOnDTAG('Discrepancy created : ', response.body);
-          if ((response.body.localUsage) && (response.body.localUsage.body)) {
+          if (SHOW_DISCREPANCY_GENERATION_DETAILS && (response.body.localUsage) && (response.body.localUsage.body)) {
             debugObjectOnDTAG('Discrepancy created with localUsage metadata : ', response.body.localUsage.body.metadata);
             if ((response.body.localUsage.body.data) && (Array.isArray(response.body.localUsage.body.data))) {
               debugObjectOnDTAG('Discrepancy created with localUsage data first rows : ', response.body.localUsage.body.data.slice(0, 6));
@@ -920,7 +900,7 @@ describe(`Launch scenario 0001_Create_settlement_from_DTAG_contract`, function()
               debugObjectOnDTAG('Discrepancy created with localUsage data : ', response.body.localUsage.body.data);
             }
           }
-          if ((response.body.remoteUsage) && (response.body.remoteUsage.body)) {
+          if (SHOW_DISCREPANCY_GENERATION_DETAILS && (response.body.remoteUsage) && (response.body.remoteUsage.body)) {
             debugObjectOnDTAG('Discrepancy created with remoteUsage metadata : ', response.body.remoteUsage.body.metadata);
             if ((response.body.remoteUsage.body.data) && (Array.isArray(response.body.remoteUsage.body.data))) {
               debugObjectOnDTAG('Discrepancy created with remoteUsage data first rows : ', response.body.remoteUsage.body.data.slice(0, 6));
@@ -938,7 +918,8 @@ describe(`Launch scenario 0001_Create_settlement_from_DTAG_contract`, function()
     }
   });
 
-  it(`Put TMUS discrepancy on received settlement from DTAG`, function(done) {
+  // Endpoint removed from API - but could be useful for later
+  it.skip(`Put TMUS discrepancy on received settlement from DTAG`, function(done) {
     debugAction(`${this.test.title}`);
     if ((TMUS_dynamic_data.receivedContractId === undefined) || (TMUS_dynamic_data.usageId === undefined) || (TMUS_dynamic_data.receivedSettlementId === undefined)) {
       expect.fail('This scenario step should use an undefined data');
@@ -955,7 +936,7 @@ describe(`Launch scenario 0001_Create_settlement_from_DTAG_contract`, function()
           expect(response.body).to.be.an('object');
 
           debugObjectOnTMUS('Discrepancy created : ', response.body);
-          if ((response.body.localUsage) && (response.body.localUsage.body)) {
+          if (SHOW_DISCREPANCY_GENERATION_DETAILS && (response.body.localUsage) && (response.body.localUsage.body)) {
             debugObjectOnTMUS('Discrepancy created with localUsage metadata : ', response.body.localUsage.body.metadata);
             if ((response.body.localUsage.body.data) && (Array.isArray(response.body.localUsage.body.data))) {
               debugObjectOnTMUS('Discrepancy created with localUsage data first rows : ', response.body.localUsage.body.data.slice(0, 6));
@@ -963,12 +944,98 @@ describe(`Launch scenario 0001_Create_settlement_from_DTAG_contract`, function()
               debugObjectOnTMUS('Discrepancy created with localUsage data : ', response.body.localUsage.body.data);
             }
           }
-          if ((response.body.remoteUsage) && (response.body.remoteUsage.body)) {
+          if (SHOW_DISCREPANCY_GENERATION_DETAILS && (response.body.remoteUsage) && (response.body.remoteUsage.body)) {
             debugObjectOnTMUS('Discrepancy created with remoteUsage metadata : ', response.body.remoteUsage.body.metadata);
             if ((response.body.remoteUsage.body.data) && (Array.isArray(response.body.remoteUsage.body.data))) {
               debugObjectOnTMUS('Discrepancy created with remoteUsage data first rows : ', response.body.remoteUsage.body.data.slice(0, 6));
             } else {
               debugObjectOnTMUS('Discrepancy created with remoteUsage data : ', response.body.remoteUsage.body.data);
+            }
+          }
+
+          done();
+        });
+    } catch (exception) {
+      debug('exception: %s', exception.stack);
+      expect.fail('it test throws an exception');
+      done();
+    }
+  });
+
+  it(`Get DTAG settlement discrepancy on received settlement from TMUS`, function(done) {
+    debugAction(`${this.test.title}`);
+    if ((DTAG_dynamic_data.contractId === undefined) || (DTAG_dynamic_data.receivedSettlementId === undefined) || (DTAG_dynamic_data.settlementId === undefined)) {
+      expect.fail('This scenario step should use an undefined data');
+    }
+    try {
+      chai.request(DTAG_API)
+        .get(`/contracts/${DTAG_dynamic_data.contractId}/settlements/${DTAG_dynamic_data.receivedSettlementId}/discrepancy/?partnerSettlementId=${DTAG_dynamic_data.settlementId}`)
+        .send()
+        .end((error, response) => {
+          expect(error).to.be.null;
+          expect(response).to.have.status(200);
+          expect(response).to.be.json;
+          expect(response.body).to.exist;
+          expect(response.body).to.be.an('object');
+
+          debugObjectOnDTAG('Settlement Discrepancy calculated : ', response.body);
+          if (SHOW_DISCREPANCY_GENERATION_DETAILS && (response.body.localUsage) && (response.body.localUsage.body)) {
+            debugObjectOnDTAG('Settlement Discrepancy calculated with localUsage metadata : ', response.body.localUsage.body.metadata);
+            if ((response.body.localUsage.body.data) && (Array.isArray(response.body.localUsage.body.data))) {
+              debugObjectOnDTAG('Settlement Discrepancy calculated with localUsage data first rows : ', response.body.localUsage.body.data.slice(0, 6));
+            } else {
+              debugObjectOnDTAG('Settlement Discrepancy calculated with localUsage data : ', response.body.localUsage.body.data);
+            }
+          }
+          if (SHOW_DISCREPANCY_GENERATION_DETAILS && (response.body.remoteUsage) && (response.body.remoteUsage.body)) {
+            debugObjectOnDTAG('Settlement Discrepancy calculated with remoteUsage metadata : ', response.body.remoteUsage.body.metadata);
+            if ((response.body.remoteUsage.body.data) && (Array.isArray(response.body.remoteUsage.body.data))) {
+              debugObjectOnDTAG('Settlement Discrepancy calculated with remoteUsage data first rows : ', response.body.remoteUsage.body.data.slice(0, 6));
+            } else {
+              debugObjectOnDTAG('Settlement Discrepancy calculated with remoteUsage data : ', response.body.remoteUsage.body.data);
+            }
+          }
+
+          done();
+        });
+    } catch (exception) {
+      debug('exception: %s', exception.stack);
+      expect.fail('it test throws an exception');
+      done();
+    }
+  });
+
+  it(`Get TMUS settlement discrepancy on received settlement from DTAG`, function(done) {
+    debugAction(`${this.test.title}`);
+    if ((TMUS_dynamic_data.receivedContractId === undefined) || (TMUS_dynamic_data.usageId === undefined) || (TMUS_dynamic_data.receivedSettlementId === undefined)) {
+      expect.fail('This scenario step should use an undefined data');
+    }
+    try {
+      chai.request(TMUS_API)
+        .get(`/contracts/${TMUS_dynamic_data.receivedContractId}/settlements/${TMUS_dynamic_data.settlementId}/discrepancy/?partnerSettlementId=${TMUS_dynamic_data.receivedSettlementId}`)
+        .send()
+        .end((error, response) => {
+          expect(error).to.be.null;
+          expect(response).to.have.status(200);
+          expect(response).to.be.json;
+          expect(response.body).to.exist;
+          expect(response.body).to.be.an('object');
+
+          debugObjectOnTMUS('Settlement Discrepancy calculated : ', response.body);
+          if (SHOW_DISCREPANCY_GENERATION_DETAILS && (response.body.localUsage) && (response.body.localUsage.body)) {
+            debugObjectOnTMUS('Settlement Discrepancy calculated with localUsage metadata : ', response.body.localUsage.body.metadata);
+            if ((response.body.localUsage.body.data) && (Array.isArray(response.body.localUsage.body.data))) {
+              debugObjectOnTMUS('Settlement Discrepancy calculated with localUsage data first rows : ', response.body.localUsage.body.data.slice(0, 6));
+            } else {
+              debugObjectOnTMUS('Settlement Discrepancy calculated with localUsage data : ', response.body.localUsage.body.data);
+            }
+          }
+          if (SHOW_DISCREPANCY_GENERATION_DETAILS && (response.body.remoteUsage) && (response.body.remoteUsage.body)) {
+            debugObjectOnTMUS('Settlement Discrepancy calculated with remoteUsage metadata : ', response.body.remoteUsage.body.metadata);
+            if ((response.body.remoteUsage.body.data) && (Array.isArray(response.body.remoteUsage.body.data))) {
+              debugObjectOnTMUS('Settlement Discrepancy calculated with remoteUsage data first rows : ', response.body.remoteUsage.body.data.slice(0, 6));
+            } else {
+              debugObjectOnTMUS('Settlement Discrepancy calculated with remoteUsage data : ', response.body.remoteUsage.body.data);
             }
           }
 

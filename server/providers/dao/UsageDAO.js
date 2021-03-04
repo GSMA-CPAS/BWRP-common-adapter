@@ -9,14 +9,29 @@ const UsageMongoRequester = require('./UsageMongoRequester');
 const MISSING_MANDATORY_PARAM_ERROR = errorUtils.ERROR_DAO_MISSING_MANDATORY_PARAM;
 
 class UsageDAO {
-  static findAll(contractId) {
+  static findAll(contractId, matchingConditions = {}) {
     return new Promise((resolve, reject) => {
       // Verify parameters
 
       // Define find condition
-      const condition = {};
+      const condition = {
+        type: 'usage'
+      };
       if (contractId !== undefined) {
         condition.contractId = contractId;
+      }
+      if (matchingConditions.state !== undefined) {
+        if (Array.isArray(matchingConditions.state)) {
+          condition.state = {$in: matchingConditions.state};
+        } else if (typeof matchingConditions.state === 'string') {
+          condition.state = matchingConditions.state;
+        }
+      }
+      if (matchingConditions.id !== undefined) {
+        condition.id = matchingConditions.id;
+      }
+      if (matchingConditions.referenceId !== undefined) {
+        condition.referenceId = matchingConditions.referenceId;
       }
 
       // Launch database request
@@ -79,10 +94,17 @@ class UsageDAO {
         type: 'usage'
       };
       if (matchingConditions.state !== undefined) {
-        condition.state = matchingConditions.state;
+        if (Array.isArray(matchingConditions.state)) {
+          condition.state = {$in: matchingConditions.state};
+        } else if (typeof matchingConditions.state === 'string') {
+          condition.state = matchingConditions.state;
+        }
       }
       if (matchingConditions.contractId !== undefined) {
         condition.contractId = matchingConditions.contractId;
+      }
+      if (matchingConditions.referenceId !== undefined) {
+        condition.referenceId = matchingConditions.referenceId;
       }
 
       // Launch database request
@@ -115,13 +137,23 @@ class UsageDAO {
         type: 'usage'
       };
       if (matchingConditions.state !== undefined) {
-        condition.state = matchingConditions.state;
+        if (Array.isArray(matchingConditions.state)) {
+          condition.state = {$in: matchingConditions.state};
+        } else if (typeof matchingConditions.state === 'string') {
+          condition.state = matchingConditions.state;
+        }
       }
       if (matchingConditions.rawData !== undefined) {
         condition.rawData = matchingConditions.rawData;
       }
       if (matchingConditions.id !== undefined) {
         condition.id = matchingConditions.id;
+      }
+      if (matchingConditions.contractId !== undefined) {
+        condition.contractId = matchingConditions.contractId;
+      }
+      if (matchingConditions.referenceId !== undefined) {
+        condition.referenceId = matchingConditions.referenceId;
       }
       if (matchingConditions.storageKey !== undefined) {
         // stoargeKeys is an array and we try to find a storageKey in this storageKeys
@@ -306,7 +338,53 @@ class UsageDAO {
     });
   }
 
-  static findOneAndRemove(id) {
+  static addSettlementId(usageId, settlementId) {
+    return new Promise((resolve, reject) => {
+      // Verify parameters
+      if (usageId === undefined) {
+        logger.error('[UsageDAO::addSettlementId] [FAILED] : usageId undefined');
+        reject(MISSING_MANDATORY_PARAM_ERROR);
+      }
+      if (settlementId === undefined) {
+        logger.error('[UsageDAO::addSettlementId] [FAILED] : settlementId undefined');
+        reject(MISSING_MANDATORY_PARAM_ERROR);
+      }
+
+      // Define automatic values
+      const lastModificationDate = Date.now();
+
+      // Defined update condition and update command
+      const condition = {
+        id: usageId,
+        type: 'usage',
+        state: ['SENT', 'RECEIVED']
+      };
+
+      const updateCommand = {
+        $set: {
+          settlementId: settlementId,
+          lastModificationDate: lastModificationDate
+        },
+        $push: {
+          history: {date: lastModificationDate, action: 'SAVE_SETTLEMENT_ID'}
+        }
+      };
+
+      // Launch database request
+      UsageMongoRequester.findOneAndUpdate(condition, updateCommand, (err, usage) => {
+        DAOErrorManager.handleErrorOrNullObject(err, usage)
+          .then((objectReturned) => {
+            resolve(objectReturned);
+          })
+          .catch((errorReturned) => {
+            logger.error('[UsageDAO::addSettlementId] [FAILED] errorReturned:' + typeof errorReturned + ' = ' + JSON.stringify(errorReturned));
+            reject(errorReturned);
+          });
+      });
+    });
+  }
+
+  static findOneAndRemove(id, matchingConditions = {}) {
     return new Promise((resolve, reject) => {
       // Verify parameters
       if (id === undefined) {
@@ -314,8 +392,24 @@ class UsageDAO {
         reject(MISSING_MANDATORY_PARAM_ERROR);
       }
 
+      // Define find condition
+      const condition = {
+        id: id,
+        type: 'usage'
+      };
+      if (matchingConditions.state !== undefined) {
+        if (Array.isArray(matchingConditions.state)) {
+          condition.state = {$in: matchingConditions.state};
+        } else if (typeof matchingConditions.state === 'string') {
+          condition.state = matchingConditions.state;
+        }
+      }
+      if (matchingConditions.contractId !== undefined) {
+        condition.contractId = matchingConditions.contractId;
+      }
+
       // Launch database request
-      UsageMongoRequester.findOneAndRemove({id}, (err, usage) => {
+      UsageMongoRequester.findOneAndRemove(condition, (err, usage) => {
         // Use errorManager to return appropriate dao errors
         DAOErrorManager.handleErrorOrNullObject(err, usage)
           .then((objectReturned) => {
@@ -347,8 +441,16 @@ class UsageDAO {
         condition.id = object.id;
       }
 
-      if (object.state) {
-        condition.state = object.state;
+      if (object.state !== undefined) {
+        if (Array.isArray(object.state)) {
+          condition.state = {$in: object.state};
+        } else if (typeof object.state === 'string') {
+          condition.state = object.state;
+        }
+      }
+
+      if (object.contractId) {
+        condition.contractId = object.contractId;
       }
 
       if (object.referenceId) {

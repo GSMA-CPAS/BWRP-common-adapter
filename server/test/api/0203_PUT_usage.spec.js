@@ -285,11 +285,11 @@ describe(`Tests PUT ${route} API OK`, function() {
           .end((error, response) => {
             debug('response.body: %s', JSON.stringify(response.body));
             expect(error).to.be.null;
-            expect(response).to.have.status(422);
+            expect(response).to.have.status(404);
             expect(response).to.be.json;
             expect(response.body).to.exist;
 
-            expect(response.body.message).to.equal('Put usage not allowed');
+            expect(response.body.message).to.equal('Resource not found');
             done();
           });
       } catch (exception) {

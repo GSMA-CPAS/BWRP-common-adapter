@@ -5,7 +5,7 @@ const LocalStorageProvider = require('../providers/LocalStorageProvider');
 const BlockchainAdapterProvider = require('../providers/BlockchainAdapterProvider');
 const blockchainAdapterConnection = new BlockchainAdapterProvider();
 const errorUtils = require('../utils/errorUtils');
-const CalculationServiceProvider = require('../providers/StubCalculationServiceProvider');
+const CalculationServiceProvider = require('../providers/CalculationServiceProvider');
 const calculationServiceConnection = new CalculationServiceProvider();
 
 /**
@@ -88,23 +88,36 @@ const sendSettlementById = ({contractId, settlementId}) => new Promise(
 const generateUsageById = ({contractId, usageId, mode}) => new Promise(
   async (resolve, reject) => {
     try {
-      const usage = await LocalStorageProvider.getUsage(usageId);
-      if (usage.contractId !== contractId) {
-        reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_GENERATE_SETTLEMENT_ON_NOT_LINKED_CONTRACT_RECEIVED));
+      const usage = await LocalStorageProvider.getUsage(contractId, usageId);
+      if ((['SENT', 'RECEIVED'].includes(usage.state)) && (usage.settlementId !== undefined)) {
+        reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_GENERATE_SETTLEMENT_ON_USAGE_WITH_ALREADY_LINKED_SETTLEMENT));
       } else {
         const contract = await LocalStorageProvider.getContract(contractId);
         const getCalculateResultResp = await calculationServiceConnection.getCalculateResult(usage, contract);
         const settlement = SettlementMapper.getSettlementForGenerateUsageById(usage, contract, getCalculateResultResp);
-        const createSettlementResp = await LocalStorageProvider.createSettlement(settlement);
-        if (mode === 'commit') {
-          const uploadSettlementResp = await blockchainAdapterConnection.uploadSettlement(createSettlementResp);
-          const getStorageKeysResp = await blockchainAdapterConnection.getStorageKeys(uploadSettlementResp.referenceId, [createSettlementResp.mspOwner, createSettlementResp.mspReceiver]);
-          const updateSettlementResp = await LocalStorageProvider.updateSentSettlement(createSettlementResp.id, uploadSettlementResp.rawData, uploadSettlementResp.referenceId, getStorageKeysResp, uploadSettlementResp.blockchainRef);
-          const returnedResponse = SettlementMapper.getResponseBodyForSendSettlement(updateSettlementResp);
-          resolve(Service.successResponse(returnedResponse, 200));
-        } else {
-          const returnedResponse = SettlementMapper.getResponseBodyForGetSettlement(createSettlementResp);
+        if (['SENT', 'RECEIVED'].includes(usage.state)) {
+          settlement.usageId = usage.id;
+        }
+        if (mode === 'preview') {
+          // Create the returned response from the object that should be stored in LocalStorageProvider
+          const returnedResponse = SettlementMapper.getResponseBodyForGetSettlement(settlement);
           resolve(Service.successResponse(returnedResponse));
+        } else {
+          const createSettlementResp = await LocalStorageProvider.createSettlement(settlement);
+          if (['SENT', 'RECEIVED'].includes(usage.state)) {
+            // Update usage with the created settlementId
+            await LocalStorageProvider.updateUsageWithSettlementId(usageId, createSettlementResp.id);
+          }
+          if (mode === 'commit') {
+            const uploadSettlementResp = await blockchainAdapterConnection.uploadSettlement(createSettlementResp);
+            const getStorageKeysResp = await blockchainAdapterConnection.getStorageKeys(uploadSettlementResp.referenceId, [createSettlementResp.mspOwner, createSettlementResp.mspReceiver]);
+            const updateSettlementResp = await LocalStorageProvider.updateSentSettlement(createSettlementResp.id, uploadSettlementResp.rawData, uploadSettlementResp.referenceId, getStorageKeysResp, uploadSettlementResp.blockchainRef);
+            const returnedResponse = SettlementMapper.getResponseBodyForSendSettlement(updateSettlementResp);
+            resolve(Service.successResponse(returnedResponse, 200));
+          } else {
+            const returnedResponse = SettlementMapper.getResponseBodyForGetSettlement(createSettlementResp);
+            resolve(Service.successResponse(returnedResponse));
+          }
         }
       }
     } catch (e) {

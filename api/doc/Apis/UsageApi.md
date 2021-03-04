@@ -8,8 +8,8 @@ Method | HTTP request | Description
 [**deleteUsageById**](UsageApi.md#deleteUsageById) | **DELETE** /contracts/{contractId}/usages/{usageId} | 
 [**generateUsageById**](UsageApi.md#generateUsageById) | **PUT** /contracts/{contractId}/usages/{usageId}/generate/ | 
 [**getUsageById**](UsageApi.md#getUsageById) | **GET** /contracts/{contractId}/usages/{usageId} | 
+[**getUsageDiscrepancy**](UsageApi.md#getUsageDiscrepancy) | **GET** /contracts/{contractId}/usages/{usageId}/discrepancy/ | 
 [**getUsages**](UsageApi.md#getUsages) | **GET** /contracts/{contractId}/usages/ | 
-[**putUsageDiscrepancy**](UsageApi.md#putUsageDiscrepancy) | **PUT** /contracts/{contractId}/usages/{usageId}/discrepancy/ | 
 [**sendUsageById**](UsageApi.md#sendUsageById) | **PUT** /contracts/{contractId}/usages/{usageId}/send/ | 
 [**updateUsageById**](UsageApi.md#updateUsageById) | **PUT** /contracts/{contractId}/usages/{usageId} | 
 
@@ -127,23 +127,25 @@ No authorization required
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="getUsages"></a>
-# **getUsages**
-> String getUsages(contractId)
+<a name="getUsageDiscrepancy"></a>
+# **getUsageDiscrepancy**
+> Object getUsageDiscrepancy(contractId, usageId, partnerUsageId)
 
 
 
-    Get All usage of a given Contract
+    Get the discrepancy between an usage and a given partner usage.
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **contractId** | **String**| The contract Id | [default to null]
+ **usageId** | **String**| The Usage Id | [default to null]
+ **partnerUsageId** | **String**| The id of the partner usage to compare | [default to null]
 
 ### Return type
 
-[**String**](../Models/string.md)
+[**Object**](../Models/object.md)
 
 ### Authorization
 
@@ -154,25 +156,24 @@ No authorization required
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="putUsageDiscrepancy"></a>
-# **putUsageDiscrepancy**
-> Object putUsageDiscrepancy(contractId, usageId, settlementId)
+<a name="getUsages"></a>
+# **getUsages**
+> String getUsages(contractId, states)
 
 
 
-    Create and return the discrepancy between an usage and the selected settlement.
+    Get All usage of a given Contract
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **contractId** | **String**| The contract Id | [default to null]
- **usageId** | **String**| The Usage Id | [default to null]
- **settlementId** | **String**| The id of the settlement to compare | [default to null]
+ **states** | [**List**](../Models/String.md)| One or more states | [optional] [default to null]
 
 ### Return type
 
-[**Object**](../Models/object.md)
+[**String**](../Models/string.md)
 
 ### Authorization
 

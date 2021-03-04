@@ -27,12 +27,12 @@ const getUsageById = async (request, response) => {
   await Controller.handleRequest(request, response, service.getUsageById);
 };
 
-const getUsages = async (request, response) => {
-  await Controller.handleRequest(request, response, service.getUsages);
+const getUsageDiscrepancy = async (request, response) => {
+  await Controller.handleRequest(request, response, discrepancyService.getUsageDiscrepancy);
 };
 
-const putUsageDiscrepancy = async (request, response) => {
-  await Controller.handleRequest(request, response, discrepancyService.putUsageDiscrepancy);
+const getUsages = async (request, response) => {
+  await Controller.handleRequest(request, response, service.getUsages);
 };
 
 const sendUsageById = async (request, response) => {
@@ -49,8 +49,8 @@ module.exports = {
   deleteUsageById,
   generateUsageById,
   getUsageById,
+  getUsageDiscrepancy,
   getUsages,
-  putUsageDiscrepancy,
   sendUsageById,
   updateUsageById,
 };

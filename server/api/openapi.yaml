@@ -475,6 +475,26 @@ paths:
         schema:
           type: string
         style: simple
+      - description: One or more states
+        examples:
+          oneState:
+            summary: Example of a single state
+            value:
+            - DRAFT
+          multipleStates:
+            summary: Example of multiple states
+            value:
+            - SENT
+            - RECEIVED
+        explode: false
+        in: query
+        name: states
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: pipeDelimited
       responses:
         "200":
           content:
@@ -655,10 +675,9 @@ paths:
       x-codegen-request-body-name: body
       x-eov-operation-handler: controllers/UsageController
   /contracts/{contractId}/usages/{usageId}/discrepancy/:
-    put:
-      description: Create and return the discrepancy between an usage and the selected
-        settlement.
-      operationId: putUsageDiscrepancy
+    get:
+      description: Get the discrepancy between an usage and a given partner usage.
+      operationId: getUsageDiscrepancy
       parameters:
       - description: The contract Id
         explode: false
@@ -676,10 +695,10 @@ paths:
         schema:
           type: string
         style: simple
-      - description: The id of the settlement to compare
+      - description: The id of the partner usage to compare
         explode: false
         in: query
-        name: settlementId
+        name: partnerUsageId
         required: true
         schema:
           type: string
@@ -689,7 +708,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Settlement'
+                $ref: '#/components/schemas/UsageDiscrepancy'
           description: Successful operation, returns sent Usage Object
         "400":
           content:
@@ -866,10 +885,9 @@ paths:
       - settlement
       x-eov-operation-handler: controllers/SettlementController
   /contracts/{contractId}/settlements/{settlementId}/discrepancy/:
-    put:
-      description: Create and return the discrepancy between an settlement and the
-        selected usage.
-      operationId: putSettlementDiscrepancy
+    get:
+      description: Get the discrepancy between a settlement and a given partner settlement.
+      operationId: getSettlementDiscrepancy
       parameters:
       - description: The contract Id
         explode: false
@@ -887,10 +905,10 @@ paths:
         schema:
           type: string
         style: simple
-      - description: The id of the usage to compare
+      - description: The id of the partner settlement to compare
         explode: false
         in: query
-        name: usageId
+        name: partnerSettlementId
         required: true
         schema:
           type: string
@@ -900,7 +918,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Settlement'
+                $ref: '#/components/schemas/SettlementDiscrepancy'
           description: Successful operation, returns sent Usage Object
         "400":
           content:
@@ -1238,6 +1256,12 @@ components:
       - body
       - header
       title: Usage JSON for POST/PUT
+      type: object
+    UsageDiscrepancy:
+      title: Usage Discrepancy JSON
+      type: object
+    SettlementDiscrepancy:
+      title: Settlement Discrepancy JSON
       type: object
     Settlement:
       title: Settlement JSON

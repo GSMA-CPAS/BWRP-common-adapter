@@ -14,12 +14,12 @@ const getSettlementById = async (request, response) => {
   await Controller.handleRequest(request, response, service.getSettlementById);
 };
 
-const getSettlements = async (request, response) => {
-  await Controller.handleRequest(request, response, service.getSettlements);
+const getSettlementDiscrepancy = async (request, response) => {
+  await Controller.handleRequest(request, response, discrepancyService.getSettlementDiscrepancy);
 };
 
-const putSettlementDiscrepancy = async (request, response) => {
-  await Controller.handleRequest(request, response, discrepancyService.putSettlementDiscrepancy);
+const getSettlements = async (request, response) => {
+  await Controller.handleRequest(request, response, service.getSettlements);
 };
 
 const sendSettlementById = async (request, response) => {
@@ -29,7 +29,7 @@ const sendSettlementById = async (request, response) => {
 
 module.exports = {
   getSettlementById,
+  getSettlementDiscrepancy,
   getSettlements,
-  putSettlementDiscrepancy,
   sendSettlementById,
 };

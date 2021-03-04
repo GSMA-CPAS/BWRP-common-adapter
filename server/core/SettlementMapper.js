@@ -8,6 +8,7 @@ class SettlementMapper {
       returnedResponseBody = {
         settlementId: settlement.id,
         contractId: settlement.contractId,
+        usageId: settlement.usageId,
         state: settlement.state,
         referenceId: settlement.referenceId,
         blockchainRef: settlement.blockchainRef,
@@ -20,6 +21,7 @@ class SettlementMapper {
       returnedResponseBody = {
         settlementId: settlement.id,
         contractId: settlement.contractId,
+        usageId: settlement.usageId,
         header: {
           name: settlement.name,
           type: settlement.type,

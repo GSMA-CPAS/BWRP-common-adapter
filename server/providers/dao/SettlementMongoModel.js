@@ -22,6 +22,7 @@ const SettlementSchema = new Schema({
   name: {type: String, required: true},
   contractId: {type: String, required: true},
   contractReferenceId: {type: String, required: false},
+  usageId: {type: String, required: false},
   mspOwner: {type: String, required: true},
   mspReceiver: {type: String, required: true},
   body: {type: MixSettlementBodySchema, required: true},

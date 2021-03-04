@@ -155,21 +155,48 @@ class ErrorUtils {
     }
   };
 
+  static ERROR_CALCULATION_SERVICE_RESPONSE_PARSING_ERROR = {
+    code: 500,
+    error: {
+      internalErrorCode: 3100,
+      message: 'Calculation Service response parsing error',
+      description: 'It\'s not possible to parse the Calculation Service response.'
+    }
+  };
+
+  static ERROR_CALCULATION_SERVICE_NO_RESPONSE = {
+    code: 500,
+    error: {
+      internalErrorCode: 3101,
+      message: 'No response received from Calculation Service',
+      description: 'The Calculation Service does not respond.'
+    }
+  };
+
+  static ERROR_CALCULATION_SERVICE_REQUEST_ERROR = {
+    code: 500,
+    error: {
+      internalErrorCode: 3102,
+      message: 'Calculation Service request error',
+      description: 'Something happened in setting up the Calculation Service request.'
+    }
+  };
+
+  static ERROR_CALCULATION_SERVICE_RESPONSE_UNEXPECTED_ERROR = {
+    code: 500,
+    error: {
+      internalErrorCode: 3104,
+      message: 'Calculation Service response error',
+      description: 'An unexpected response has been received from the Calculation Service.'
+    }
+  };
+
   static ERROR_BUSINESS_CREATE_USAGE_ON_CONTRACT_ONLY_ALLOWED_IN_STATE_SENT_SIGNED_OR_RECEIVED = {
     code: 422,
     error: {
       internalErrorCode: 2002,
       message: 'Create usage not allowed',
       description: 'It\'s not allowed to create usage on this contract.'
-    }
-  };
-
-  static ERROR_BUSINESS_GET_USAGE_ON_NOT_LINKED_CONTRACT_RECEIVED = {
-    code: 422,
-    error: {
-      internalErrorCode: 2003,
-      message: 'Get usage not allowed',
-      description: 'It\'s not allowed to get usage on wrong contract.'
     }
   };
 
@@ -182,30 +209,12 @@ class ErrorUtils {
     }
   };
 
-  static ERROR_BUSINESS_PUT_USAGE_ON_NOT_LINKED_CONTRACT_RECEIVED = {
+  static ERROR_BUSINESS_GENERATE_SETTLEMENT_ON_USAGE_WITH_ALREADY_LINKED_SETTLEMENT = {
     code: 422,
     error: {
-      internalErrorCode: 2005,
-      message: 'Put usage not allowed',
-      description: 'It\'s not allowed to put usage on wrong contract.'
-    }
-  };
-
-  static ERROR_BUSINESS_DELETE_USAGE_ON_NOT_LINKED_CONTRACT_RECEIVED = {
-    code: 422,
-    error: {
-      internalErrorCode: 2006,
-      message: 'Delete usage not allowed',
-      description: 'It\'s not allowed to delete usage on wrong contract.'
-    }
-  };
-
-  static ERROR_BUSINESS_GENERATE_SETTLEMENT_ON_NOT_LINKED_CONTRACT_RECEIVED = {
-    code: 422,
-    error: {
-      internalErrorCode: 2008,
+      internalErrorCode: 2025,
       message: 'Calculate settlement not allowed',
-      description: 'It\'s not allowed to calculate settlement on wrong contract.'
+      description: 'It\'s not allowed to calculate settlement on usage with an already linked settlement.'
     }
   };
 

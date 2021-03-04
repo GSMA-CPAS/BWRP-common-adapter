@@ -65,6 +65,9 @@ config.FILE_UPLOAD_PATH = path.join(config.PROJECT_DIR, 'uploaded_files');
 config.LOG_LEVEL = process.env.COMMON_ADAPTER_LOG_LEVEL || 'info';
 
 // BlockchainAdapter configuration
+config.CALCULATION_SERVICE_URL = getAsString(process.env.COMMON_ADAPTER_CALCULATION_SERVICE_URL, 'http://127.0.0.1:8989');
+
+// BlockchainAdapter configuration
 config.BLOCKCHAIN_ADAPTER_URL = getAsString(process.env.COMMON_ADAPTER_BLOCKCHAIN_ADAPTER_URL, 'http://127.0.0.1:8081');
 config.BLOCKCHAIN_ADAPTER_WEBHOOK_EVENTS = getAsObject(process.env.COMMON_ADAPTER_BLOCKCHAIN_ADAPTER_WEBHOOK_EVENTS, []);
 config.SELF_HOST = getAsString(process.env.COMMON_ADAPTER_SELF_HOST, '');

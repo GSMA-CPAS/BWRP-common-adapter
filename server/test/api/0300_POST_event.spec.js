@@ -93,9 +93,11 @@ describe(`Tests POST ${route} API OK`, function() {
 
         const idDocument2 = 'zecxezhucheauhxazi';
         const document2 = `{
-          "type": "contract",
-          "version": "1.8",
-          "name": "StRiNg-Doc2-${Date.now().toString()}",
+          "header": {
+            "type": "contract",
+            "version": "1.8",
+            "name": "StRiNg-Doc2-${Date.now().toString()}"
+          },
           "body": {
             "test": "1"
           }
@@ -223,9 +225,11 @@ describe(`Tests POST ${route} API OK`, function() {
         const idDocument1 = 'shuzahxazhxijazechxhuezhasqxsdchezu';
 
         const document1 = `{
-          "type": "usage",
-          "version": "2.1",
-          "name": "StRiNg-Usage1-${Date.now().toString()}",
+          "header": {
+            "type": "usage",
+            "version": "2.1",
+            "name": "StRiNg-Usage1-${Date.now().toString()}"  
+          },
           "mspOwner": "DAAA",
           "mspReceiver": "TMMM",
           "contractReferenceId": "${contract1.referenceId}",
@@ -350,9 +354,11 @@ describe(`Tests POST ${route} API OK`, function() {
 
         const idDocument1 = 'shuzahxazhxijazechxhuezhasqxsdchezu';
         const document1 = `{
-          "type": "settlement",
-          "version": "2.1",
-          "name": "StRiNg-Settlement1-${Date.now().toString()}",
+          "header": {
+            "type": "settlement",
+            "version": "2.1",
+            "name": "StRiNg-Settlement1-${Date.now().toString()}"  
+          },
           "mspOwner": "DAAA",
           "mspReceiver": "TMMM",
           "contractReferenceId": "${contract1.referenceId}",

@@ -52,14 +52,9 @@ const createUsage = ({url, contractId, body}) => new Promise(
 const deleteUsageById = ({contractId, usageId}) => new Promise(
   async (resolve, reject) => {
     try {
-      const getUsageByIdResp = await LocalStorageProvider.getUsage(usageId);
-      if (getUsageByIdResp.contractId != contractId) {
-        reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_PUT_USAGE_ON_NOT_LINKED_CONTRACT_RECEIVED));
-      } else {
-        const deleteUsageByIdResp = await LocalStorageProvider.deleteUsage(usageId);
-        const returnedResponse = UsageMapper.getResponseBodyForGetUsage(deleteUsageByIdResp);
-        resolve(Service.successResponse(returnedResponse));
-      }
+      const deleteUsageByIdResp = await LocalStorageProvider.deleteUsage(contractId, usageId);
+      const returnedResponse = UsageMapper.getResponseBodyForGetUsage(deleteUsageByIdResp);
+      resolve(Service.successResponse(returnedResponse));
     } catch (e) {
       reject(Service.rejectResponse(e));
     }
@@ -76,13 +71,9 @@ const deleteUsageById = ({contractId, usageId}) => new Promise(
 const getUsageById = ({contractId, usageId}) => new Promise(
   async (resolve, reject) => {
     try {
-      const getUsageByIdResp = await LocalStorageProvider.getUsage(usageId);
-      if (getUsageByIdResp.contractId != contractId) {
-        reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_GET_USAGE_ON_NOT_LINKED_CONTRACT_RECEIVED));
-      } else {
-        const returnedResponse = UsageMapper.getResponseBodyForGetUsage(getUsageByIdResp);
-        resolve(Service.successResponse(returnedResponse));
-      }
+      const getUsageByIdResp = await LocalStorageProvider.getUsage(contractId, usageId);
+      const returnedResponse = UsageMapper.getResponseBodyForGetUsage(getUsageByIdResp);
+      resolve(Service.successResponse(returnedResponse));
     } catch (e) {
       reject(Service.rejectResponse(e));
     }
@@ -95,10 +86,12 @@ const getUsageById = ({contractId, usageId}) => new Promise(
  * @param {String} contractId The contract Id
  * @return {Promise<ServiceResponse>}
  */
-const getUsages = ({contractId}) => new Promise(
+const getUsages = ({contractId, states}) => new Promise(
   async (resolve, reject) => {
     try {
-      const getUsagesResp = await LocalStorageProvider.getUsages(contractId);
+      // Only to check that the contract exists and to return not found error in this case
+      await LocalStorageProvider.getContract(contractId);
+      const getUsagesResp = await LocalStorageProvider.getUsages(contractId, {state: states});
       const returnedResponse = UsageMapper.getResponseBodyForGetUsages(getUsagesResp);
       resolve(Service.successResponse(returnedResponse, 200));
     } catch (e) {
@@ -121,7 +114,7 @@ const sendUsageById = ({contractId, usageId}) => new Promise(
       if ((contract.state === 'DRAFT') || (contract.referenceId === undefined)) {
         reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_SEND_USAGE_ONLY_ALLOWED_ON_EXCHANGED_CONTRACT));
       } else {
-        let usageToSend = await LocalStorageProvider.getUsage(usageId);
+        let usageToSend = await LocalStorageProvider.getUsage(contractId, usageId);
         const isMspOwnerMyMspId = await blockchainAdapterConnection.isMyMspId(usageToSend.mspOwner);
         if (usageToSend.state !== 'DRAFT') {
           reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_SEND_USAGE_ONLY_ALLOWED_IN_STATE_DRAFT));
@@ -155,10 +148,8 @@ const sendUsageById = ({contractId, usageId}) => new Promise(
 const updateUsageById = ({contractId, usageId, body}) => new Promise(
   async (resolve, reject) => {
     try {
-      const getUsageByIdResp = await LocalStorageProvider.getUsage(usageId);
-      if (getUsageByIdResp.contractId != contractId) {
-        reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_PUT_USAGE_ON_NOT_LINKED_CONTRACT_RECEIVED));
-      } else if ((body.state !== undefined) && !((getUsageByIdResp.state == 'DRAFT') && (body.state == 'DRAFT'))) {
+      const getUsageByIdResp = await LocalStorageProvider.getUsage(contractId, usageId);
+      if ((body.state !== undefined) && !((getUsageByIdResp.state == 'DRAFT') && (body.state == 'DRAFT'))) {
         reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_USAGE_UPDATE_ONLY_ALLOWED_IN_STATE_DRAFT));
       } else {
         const usageToUpdate = UsageMapper.getUsageFromPutUsagesRequest(getUsageByIdResp, body);

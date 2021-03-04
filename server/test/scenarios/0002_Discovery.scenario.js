@@ -26,9 +26,9 @@ describe(`Launch scenario 0002_Discovery`, function() {
           expect(response).to.have.status(200);
           expect(response).to.be.json;
           expect(response.body).to.exist;
-          expect(response.body).to.have.property('commitHash', 'unknown');
-          expect(response.body).to.have.property('apiHash', 'unknown');
-          expect(response.body).to.have.property('apiVersion', '?.?.?');
+          expect(response.body).to.have.property('commitHash');
+          expect(response.body).to.have.property('apiHash');
+          expect(response.body).to.have.property('apiVersion');
           chai.request(TMUS_API)
             .get(`/status`)
             .end((error, response) => {
@@ -37,9 +37,9 @@ describe(`Launch scenario 0002_Discovery`, function() {
               expect(response).to.have.status(200);
               expect(response).to.be.json;
               expect(response.body).to.exist;
-              expect(response.body).to.have.property('commitHash', 'unknown');
-              expect(response.body).to.have.property('apiHash', 'unknown');
-              expect(response.body).to.have.property('apiVersion', '?.?.?');
+              expect(response.body).to.have.property('commitHash');
+              expect(response.body).to.have.property('apiHash');
+              expect(response.body).to.have.property('apiVersion');
 
               debugSetup('==> they are UP');
               done();
