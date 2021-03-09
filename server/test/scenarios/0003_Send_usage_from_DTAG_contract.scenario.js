@@ -297,10 +297,15 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           debug(`==> DTAG new created usage id : ${DTAG_dynamic_data.usageId}`);
 
           debugObjectOnDTAG('Usage body metadata : ', response.body.body.metadata);
-          if ((response.body.body.data) && (Array.isArray(response.body.body.data))) {
-            debugObjectOnDTAG('Usage body data first rows : ', response.body.body.data.slice(0, 6));
+          if ((response.body.body.inbound) && (Array.isArray(response.body.body.inbound))) {
+            debugObjectOnDTAG('Usage body inbound first rows : ', response.body.body.inbound.slice(0, 2));
           } else {
-            debugObjectOnDTAG('Usage body data : ', response.body.body.data);
+            debugObjectOnDTAG('Usage body inbound : ', response.body.body.inbound);
+          }
+          if ((response.body.body.outbound) && (Array.isArray(response.body.body.outbound))) {
+            debugObjectOnDTAG('Usage body outbound first rows : ', response.body.body.outbound.slice(0, 2));
+          } else {
+            debugObjectOnDTAG('Usage body outbound : ', response.body.body.outbound);
           }
 
           done();
@@ -426,10 +431,15 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
 
           if ((response.body) && (response.body.body)) {
             debugObjectOnTMUS('Usage received from DTAG => Usage body metadata : ', response.body.body.metadata);
-            if ((response.body.body.data) && (Array.isArray(response.body.body.data))) {
-              debugObjectOnTMUS('Usage received from DTAG => Usage body data first rows : ', response.body.body.data.slice(0, 6));
+            if ((response.body.body.inbound) && (Array.isArray(response.body.body.inbound))) {
+              debugObjectOnTMUS('Usage received from DTAG => Usage body inbound first rows : ', response.body.body.inbound.slice(0, 2));
             } else {
-              debugObjectOnTMUS('Usage received from DTAG => Usage body data : ', response.body.body.data);
+              debugObjectOnTMUS('Usage received from DTAG => Usage body inbound : ', response.body.body.inbound);
+            }
+            if ((response.body.body.outbound) && (Array.isArray(response.body.body.outbound))) {
+              debugObjectOnTMUS('Usage received from DTAG => Usage body outbound first rows : ', response.body.body.outbound.slice(0, 2));
+            } else {
+              debugObjectOnTMUS('Usage received from DTAG => Usage body outbound : ', response.body.body.outbound);
             }
           }
 
@@ -470,10 +480,15 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           debug(`==> TMUS new created usage id : ${TMUS_dynamic_data.usageId}`);
 
           debugObjectOnTMUS('Usage body metadata : ', response.body.body.metadata);
-          if ((response.body.body.data) && (Array.isArray(response.body.body.data))) {
-            debugObjectOnTMUS('Usage body data first rows : ', response.body.body.data.slice(0, 6));
+          if ((response.body.body.inbound) && (Array.isArray(response.body.body.inbound))) {
+            debugObjectOnTMUS('Usage body inbound first rows : ', response.body.body.inbound.slice(0, 2));
           } else {
-            debugObjectOnTMUS('Usage body data : ', response.body.body.data);
+            debugObjectOnTMUS('Usage body inbound : ', response.body.body.inbound);
+          }
+          if ((response.body.body.outbound) && (Array.isArray(response.body.body.outbound))) {
+            debugObjectOnTMUS('Usage body outbound first rows : ', response.body.body.outbound.slice(0, 2));
+          } else {
+            debugObjectOnTMUS('Usage body outbound : ', response.body.body.outbound);
           }
 
           done();
@@ -599,10 +614,15 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
 
           if ((response.body) && (response.body.body)) {
             debugObjectOnDTAG('Usage received from TMUS => Usage body metadata : ', response.body.body.metadata);
-            if ((response.body.body.data) && (Array.isArray(response.body.body.data))) {
-              debugObjectOnDTAG('Usage received from TMUS => Usage body data first rows : ', response.body.body.data.slice(0, 6));
+            if ((response.body.body.inbound) && (Array.isArray(response.body.body.inbound))) {
+              debugObjectOnDTAG('Usage received from TMUS => Usage body inbound first rows : ', response.body.body.inbound.slice(0, 2));
             } else {
-              debugObjectOnDTAG('Usage received from TMUS => Usage body data : ', response.body.body.data);
+              debugObjectOnDTAG('Usage received from TMUS => Usage body inbound : ', response.body.body.inbound);
+            }
+            if ((response.body.body.outbound) && (Array.isArray(response.body.body.outbound))) {
+              debugObjectOnDTAG('Usage received from TMUS => Usage body outbound first rows : ', response.body.body.outbound.slice(0, 2));
+            } else {
+              debugObjectOnDTAG('Usage received from TMUS => Usage body outbound : ', response.body.body.outbound);
             }
           }
 
@@ -645,8 +665,7 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           DTAG_dynamic_data.settlementIdFromLocalUsage = response.body.settlementId;
           debugObjectOnDTAG('Settlement created on DTAG from local usage : ', response.body);
           if ((response.body.body) && (response.body.body.generatedResult)) {
-            debugObjectOnDTAG('Settlement created on DTAG from local usage => embedded generatedResult inbound : ', response.body.body.generatedResult.inbound);
-            debugObjectOnDTAG('Settlement created on DTAG from local usage => embedded generatedResult outbound : ', response.body.body.generatedResult.outbound);
+            debugObjectOnDTAG('Settlement created on DTAG from local usage => embedded generatedResult intermediateResults : ', response.body.body.generatedResult.intermediateResults);
           }
           debug(`==> DTAG new created settlement id from local usage: ${DTAG_dynamic_data.settlementIdFromLocalUsage}`);
 
@@ -687,8 +706,7 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           DTAG_dynamic_data.settlementIdFromReceivedUsage = response.body.settlementId;
           debugObjectOnDTAG('Settlement created on DTAG from received usage : ', response.body);
           if ((response.body.body) && (response.body.body.generatedResult)) {
-            debugObjectOnDTAG('Settlement created on DTAG from received usage => embedded generatedResult inbound : ', response.body.body.generatedResult.inbound);
-            debugObjectOnDTAG('Settlement created on DTAG from received usage => embedded generatedResult outbound : ', response.body.body.generatedResult.outbound);
+            debugObjectOnDTAG('Settlement created on DTAG from received usage => embedded generatedResult intermediateResults : ', response.body.body.generatedResult.intermediateResults);
           }
           debug(`==> DTAG new created settlement id from received usage: ${DTAG_dynamic_data.settlementIdFromReceivedUsage}`);
 
@@ -760,8 +778,7 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           TMUS_dynamic_data.settlementIdFromLocalUsage = response.body.settlementId;
           debugObjectOnTMUS('Settlement created on TMUS from local usage : ', response.body);
           if ((response.body.body) && (response.body.body.generatedResult)) {
-            debugObjectOnTMUS('Settlement created on DTAG from local usage => embedded generatedResult inbound : ', response.body.body.generatedResult.inbound);
-            debugObjectOnTMUS('Settlement created on DTAG from local usage => embedded generatedResult outbound : ', response.body.body.generatedResult.outbound);
+            debugObjectOnTMUS('Settlement created on TMUS from local usage => embedded generatedResult intermediateResults : ', response.body.body.generatedResult.intermediateResults);
           }
           debug(`==> TMUS new created settlement id from local usage: ${TMUS_dynamic_data.settlementIdFromLocalUsage}`);
 
@@ -802,8 +819,7 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           TMUS_dynamic_data.settlementIdFromReceivedUsage = response.body.settlementId;
           debugObjectOnTMUS('Settlement created on TMUS from received usage : ', response.body);
           if ((response.body.body) && (response.body.body.generatedResult)) {
-            debugObjectOnTMUS('Settlement created on DTAG from received usage => embedded generatedResult inbound : ', response.body.body.generatedResult.inbound);
-            debugObjectOnTMUS('Settlement created on DTAG from received usage => embedded generatedResult outbound : ', response.body.body.generatedResult.outbound);
+            debugObjectOnTMUS('Settlement created on TMUS from received usage => embedded generatedResult intermediateResults : ', response.body.body.generatedResult.intermediateResults);
           }
           debug(`==> TMUS new created settlement id from received usage: ${TMUS_dynamic_data.settlementIdFromReceivedUsage}`);
 
@@ -866,18 +882,28 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           debugObjectOnDTAG('Usage Discrepancy calculated : ', response.body);
           if (SHOW_DISCREPANCY_GENERATION_DETAILS && (response.body.localUsage) && (response.body.localUsage.body)) {
             debugObjectOnDTAG('Usage Discrepancy calculated with localUsage metadata : ', response.body.localUsage.body.metadata);
-            if ((response.body.localUsage.body.data) && (Array.isArray(response.body.localUsage.body.data))) {
-              debugObjectOnDTAG('Usage Discrepancy calculated with localUsage data first rows : ', response.body.localUsage.body.data.slice(0, 6));
+            if ((response.body.localUsage.body.inbound) && (Array.isArray(response.body.localUsage.body.inbound))) {
+              debugObjectOnDTAG('Usage Discrepancy calculated with localUsage inbound first rows : ', response.body.localUsage.body.inbound.slice(0, 2));
             } else {
-              debugObjectOnDTAG('Usage Discrepancy calculated with localUsage data : ', response.body.localUsage.body.data);
+              debugObjectOnDTAG('Usage Discrepancy calculated with localUsage inbound : ', response.body.localUsage.body.inbound);
+            }
+            if ((response.body.localUsage.body.outbound) && (Array.isArray(response.body.localUsage.body.outbound))) {
+              debugObjectOnDTAG('Usage Discrepancy calculated with localUsage outbound first rows : ', response.body.localUsage.body.outbound.slice(0, 2));
+            } else {
+              debugObjectOnDTAG('Usage Discrepancy calculated with localUsage outbound : ', response.body.localUsage.body.outbound);
             }
           }
           if (SHOW_DISCREPANCY_GENERATION_DETAILS && (response.body.remoteUsage) && (response.body.remoteUsage.body)) {
             debugObjectOnDTAG('Usage Discrepancy calculated with remoteUsage metadata : ', response.body.remoteUsage.body.metadata);
-            if ((response.body.remoteUsage.body.data) && (Array.isArray(response.body.remoteUsage.body.data))) {
-              debugObjectOnDTAG('Usage Discrepancy calculated with remoteUsage data first rows : ', response.body.remoteUsage.body.data.slice(0, 6));
+            if ((response.body.remoteUsage.body.inbound) && (Array.isArray(response.body.remoteUsage.body.inbound))) {
+              debugObjectOnDTAG('Usage Discrepancy calculated with remoteUsage inbound first rows : ', response.body.remoteUsage.body.inbound.slice(0, 2));
             } else {
-              debugObjectOnDTAG('Usage Discrepancy calculated with remoteUsage data : ', response.body.remoteUsage.body.data);
+              debugObjectOnDTAG('Usage Discrepancy calculated with remoteUsage inbound : ', response.body.remoteUsage.body.inbound);
+            }
+            if ((response.body.remoteUsage.body.outbound) && (Array.isArray(response.body.remoteUsage.body.outbound))) {
+              debugObjectOnDTAG('Usage Discrepancy calculated with remoteUsage outbound first rows : ', response.body.remoteUsage.body.outbound.slice(0, 2));
+            } else {
+              debugObjectOnDTAG('Usage Discrepancy calculated with remoteUsage outbound : ', response.body.remoteUsage.body.outbound);
             }
           }
 
@@ -909,18 +935,28 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           debugObjectOnTMUS('Usage Discrepancy calculated : ', response.body);
           if (SHOW_DISCREPANCY_GENERATION_DETAILS && (response.body.localUsage) && (response.body.localUsage.body)) {
             debugObjectOnTMUS('Usage Discrepancy calculated with localUsage metadata : ', response.body.localUsage.body.metadata);
-            if ((response.body.localUsage.body.data) && (Array.isArray(response.body.localUsage.body.data))) {
-              debugObjectOnTMUS('Usage Discrepancy calculated with localUsage data first rows : ', response.body.localUsage.body.data.slice(0, 6));
+            if ((response.body.localUsage.body.inbound) && (Array.isArray(response.body.localUsage.body.inbound))) {
+              debugObjectOnTMUS('Usage Discrepancy calculated with localUsage inbound first rows : ', response.body.localUsage.body.inbound.slice(0, 2));
             } else {
-              debugObjectOnTMUS('Usage Discrepancy calculated with localUsage data : ', response.body.localUsage.body.data);
+              debugObjectOnTMUS('Usage Discrepancy calculated with localUsage inbound : ', response.body.localUsage.body.inbound);
+            }
+            if ((response.body.localUsage.body.outbound) && (Array.isArray(response.body.localUsage.body.outbound))) {
+              debugObjectOnTMUS('Usage Discrepancy calculated with localUsage outbound first rows : ', response.body.localUsage.body.outbound.slice(0, 2));
+            } else {
+              debugObjectOnTMUS('Usage Discrepancy calculated with localUsage outbound : ', response.body.localUsage.body.outbound);
             }
           }
           if (SHOW_DISCREPANCY_GENERATION_DETAILS && (response.body.remoteUsage) && (response.body.remoteUsage.body)) {
             debugObjectOnTMUS('Usage Discrepancy calculated with remoteUsage metadata : ', response.body.remoteUsage.body.metadata);
-            if ((response.body.remoteUsage.body.data) && (Array.isArray(response.body.remoteUsage.body.data))) {
-              debugObjectOnTMUS('Usage Discrepancy calculated with remoteUsage data first rows : ', response.body.remoteUsage.body.data.slice(0, 6));
+            if ((response.body.remoteUsage.body.inbound) && (Array.isArray(response.body.remoteUsage.body.inbound))) {
+              debugObjectOnTMUS('Usage Discrepancy calculated with remoteUsage inbound first rows : ', response.body.remoteUsage.body.inbound.slice(0, 2));
             } else {
-              debugObjectOnTMUS('Usage Discrepancy calculated with remoteUsage data : ', response.body.remoteUsage.body.data);
+              debugObjectOnTMUS('Usage Discrepancy calculated with remoteUsage inbound : ', response.body.remoteUsage.body.inbound);
+            }
+            if ((response.body.remoteUsage.body.outbound) && (Array.isArray(response.body.remoteUsage.body.outbound))) {
+              debugObjectOnTMUS('Usage Discrepancy calculated with remoteUsage outbound first rows : ', response.body.remoteUsage.body.outbound.slice(0, 2));
+            } else {
+              debugObjectOnTMUS('Usage Discrepancy calculated with remoteUsage outbound : ', response.body.remoteUsage.body.outbound);
             }
           }
 
@@ -954,18 +990,28 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           debugObjectOnDTAG('Settlement Discrepancy calculated : ', response.body);
           if (SHOW_DISCREPANCY_GENERATION_DETAILS && (response.body.localUsage) && (response.body.localUsage.body)) {
             debugObjectOnDTAG('Settlement Discrepancy calculated with localUsage metadata : ', response.body.localUsage.body.metadata);
-            if ((response.body.localUsage.body.data) && (Array.isArray(response.body.localUsage.body.data))) {
-              debugObjectOnDTAG('Settlement Discrepancy calculated with localUsage data first rows : ', response.body.localUsage.body.data.slice(0, 6));
+            if ((response.body.localUsage.body.inbound) && (Array.isArray(response.body.localUsage.body.inbound))) {
+              debugObjectOnDTAG('Settlement Discrepancy calculated with localUsage inbound first rows : ', response.body.localUsage.body.inbound.slice(0, 2));
             } else {
-              debugObjectOnDTAG('Settlement Discrepancy calculated with localUsage data : ', response.body.localUsage.body.data);
+              debugObjectOnDTAG('Settlement Discrepancy calculated with localUsage inbound : ', response.body.localUsage.body.inbound);
+            }
+            if ((response.body.localUsage.body.outbound) && (Array.isArray(response.body.localUsage.body.outbound))) {
+              debugObjectOnDTAG('Settlement Discrepancy calculated with localUsage outbound first rows : ', response.body.localUsage.body.outbound.slice(0, 2));
+            } else {
+              debugObjectOnDTAG('Settlement Discrepancy calculated with localUsage outbound : ', response.body.localUsage.body.outbound);
             }
           }
           if (SHOW_DISCREPANCY_GENERATION_DETAILS && (response.body.remoteUsage) && (response.body.remoteUsage.body)) {
             debugObjectOnDTAG('Settlement Discrepancy calculated with remoteUsage metadata : ', response.body.remoteUsage.body.metadata);
-            if ((response.body.remoteUsage.body.data) && (Array.isArray(response.body.remoteUsage.body.data))) {
-              debugObjectOnDTAG('Settlement Discrepancy calculated with remoteUsage data first rows : ', response.body.remoteUsage.body.data.slice(0, 6));
+            if ((response.body.remoteUsage.body.inbound) && (Array.isArray(response.body.remoteUsage.body.inbound))) {
+              debugObjectOnDTAG('Settlement Discrepancy calculated with remoteUsage inbound first rows : ', response.body.remoteUsage.body.inbound.slice(0, 2));
             } else {
-              debugObjectOnDTAG('Settlement Discrepancy calculated with remoteUsage data : ', response.body.remoteUsage.body.data);
+              debugObjectOnDTAG('Settlement Discrepancy calculated with remoteUsage inbound : ', response.body.remoteUsage.body.inbound);
+            }
+            if ((response.body.remoteUsage.body.outbound) && (Array.isArray(response.body.remoteUsage.body.outbound))) {
+              debugObjectOnDTAG('Settlement Discrepancy calculated with remoteUsage outbound first rows : ', response.body.remoteUsage.body.outbound.slice(0, 2));
+            } else {
+              debugObjectOnDTAG('Settlement Discrepancy calculated with remoteUsage outbound : ', response.body.remoteUsage.body.outbound);
             }
           }
 
@@ -997,18 +1043,28 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           debugObjectOnTMUS('Settlement Discrepancy calculated : ', response.body);
           if (SHOW_DISCREPANCY_GENERATION_DETAILS && (response.body.localUsage) && (response.body.localUsage.body)) {
             debugObjectOnTMUS('Settlement Discrepancy calculated with localUsage metadata : ', response.body.localUsage.body.metadata);
-            if ((response.body.localUsage.body.data) && (Array.isArray(response.body.localUsage.body.data))) {
-              debugObjectOnTMUS('Settlement Discrepancy calculated with localUsage data first rows : ', response.body.localUsage.body.data.slice(0, 6));
+            if ((response.body.localUsage.body.inbound) && (Array.isArray(response.body.localUsage.body.inbound))) {
+              debugObjectOnTMUS('Settlement Discrepancy calculated with localUsage inbound first rows : ', response.body.localUsage.body.inbound.slice(0, 2));
             } else {
-              debugObjectOnTMUS('Settlement Discrepancy calculated with localUsage data : ', response.body.localUsage.body.data);
+              debugObjectOnTMUS('Settlement Discrepancy calculated with localUsage inbound : ', response.body.localUsage.body.inbound);
+            }
+            if ((response.body.localUsage.body.outbound) && (Array.isArray(response.body.localUsage.body.outbound))) {
+              debugObjectOnTMUS('Settlement Discrepancy calculated with localUsage outbound first rows : ', response.body.localUsage.body.outbound.slice(0, 2));
+            } else {
+              debugObjectOnTMUS('Settlement Discrepancy calculated with localUsage outbound : ', response.body.localUsage.body.outbound);
             }
           }
           if (SHOW_DISCREPANCY_GENERATION_DETAILS && (response.body.remoteUsage) && (response.body.remoteUsage.body)) {
             debugObjectOnTMUS('Settlement Discrepancy calculated with remoteUsage metadata : ', response.body.remoteUsage.body.metadata);
-            if ((response.body.remoteUsage.body.data) && (Array.isArray(response.body.remoteUsage.body.data))) {
-              debugObjectOnTMUS('Settlement Discrepancy calculated with remoteUsage data first rows : ', response.body.remoteUsage.body.data.slice(0, 6));
+            if ((response.body.remoteUsage.body.inbound) && (Array.isArray(response.body.remoteUsage.body.inbound))) {
+              debugObjectOnTMUS('Settlement Discrepancy calculated with remoteUsage inbound first rows : ', response.body.remoteUsage.body.inbound.slice(0, 2));
             } else {
-              debugObjectOnTMUS('Settlement Discrepancy calculated with remoteUsage data : ', response.body.remoteUsage.body.data);
+              debugObjectOnTMUS('Settlement Discrepancy calculated with remoteUsage inbound : ', response.body.remoteUsage.body.inbound);
+            }
+            if ((response.body.remoteUsage.body.outbound) && (Array.isArray(response.body.remoteUsage.body.outbound))) {
+              debugObjectOnTMUS('Settlement Discrepancy calculated with remoteUsage outbound first rows : ', response.body.remoteUsage.body.outbound.slice(0, 2));
+            } else {
+              debugObjectOnTMUS('Settlement Discrepancy calculated with remoteUsage outbound : ', response.body.remoteUsage.body.outbound);
             }
           }
 
