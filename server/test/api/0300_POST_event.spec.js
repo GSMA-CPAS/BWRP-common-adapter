@@ -16,7 +16,7 @@ const globalVersion = '/api/v1';
 const route = '/contracts/event/';
 
 describe(`Tests POST ${route} API OK`, function() {
-  describe(`Setup and Test POST ${route} API with STORE:DOCUMENTHASH event`, function() {
+  describe(`Setup and Test POST ${route} API with STORE:PAYLOADLINK event`, function() {
     const contract1 = {
       name: 'Contract name between A1 and B1',
       state: 'DRAFT',
@@ -41,7 +41,7 @@ describe(`Tests POST ${route} API OK`, function() {
       fromMsp: {mspId: 'A1'},
       toMsp: {mspId: 'C3'},
       referenceId: 'AZRAGGSHJIAJAOJSNJNSSNNAIS',
-      blockchainRef: {type: 'hlf', txId: 'TX-RAGGSHJIAJAOJSNJNSSNNAIS'},
+      blockchainRef: {type: 'hlf', txId: 'TX-RAGGSHJIAJAOJSNJNSSNNAIS', timestamp: new Date().toJSON()},
       body: {
         bankDetails: {A1: {iban: null, bankName: null, currency: null}, C3: {iban: null, bankName: null, currency: null}},
         discountModels: 'someData',
@@ -129,12 +129,16 @@ describe(`Tests POST ${route} API OK`, function() {
             return [
               200,
               `{
-                "fromMSP":"${eventMsp}",
-                "toMSP":"TMUS",
-                "data":"${encodedDocument2}",
-                "dataHash":"notUsed",
-                "timeStamp":"1606828827767664800",
-                "id":"${idDocument2}"
+                "fromMSP": "${eventMsp}",
+                "toMSP": "TMUS",
+                "payload": "${encodedDocument2}",
+                "payloadHash": "notUsed",
+                "blockchainRef": {
+                  "type": "hlf",
+                  "txID": "b70cef323c0d3b56d44e9b31f16a11cba8dbbdd55c1d255b65f3fd2b3eadf8cc",
+                  "timestamp": "2021-03-15T11:43:57Z"
+                },
+                "referenceID": "${idDocument2}"
               }`,
               undefined
             ];
@@ -155,7 +159,7 @@ describe(`Tests POST ${route} API OK`, function() {
 
         const sentBody = {
           msp: eventMsp,
-          eventName: 'STORE:DOCUMENTHASH',
+          eventName: 'STORE:PAYLOADLINK',
           timestamp: '2020-11-30T16:59:35Z',
           data: {
             storageKey: storageKey
@@ -271,12 +275,16 @@ describe(`Tests POST ${route} API OK`, function() {
             return [
               200,
               `{
-                "fromMSP":"DTAG",
-                "toMSP":"TMUS",
-                "data":"${encodedDocument1}",
-                "dataHash":"notUsed",
-                "timeStamp":"1606828827767664802",
-                "id":"${idDocument1}"
+                "fromMSP": "DTAG",
+                "toMSP": "TMUS",
+                "payload": "${encodedDocument1}",
+                "payloadHash": "notUsed",
+                "blockchainRef": {
+                  "type": "hlf",
+                  "txID": "b70cef323c0d3b56d44e9b31f16a11cba8dbbdd55c1d255b65f3fd2b3eadf8dd",
+                  "timestamp": "2021-03-15T11:43:57Z"
+                },
+                "referenceID": "${idDocument1}"
               }`,
               undefined
             ];
@@ -297,7 +305,7 @@ describe(`Tests POST ${route} API OK`, function() {
 
         const sentBody = {
           msp: eventMsp,
-          eventName: 'STORE:DOCUMENTHASH',
+          eventName: 'STORE:PAYLOADLINK',
           timestamp: '2020-11-30T16:59:35Z',
           data: {
             storageKey: storageKey
@@ -386,6 +394,7 @@ describe(`Tests POST ${route} API OK`, function() {
         blockchainAdapterNock.get('/private-documents')
           .times(1)
           .reply((pathReceived, bodyReceived) => {
+            debug('bodyReceived = ', bodyReceived);
             // Only for exemple
             expect(pathReceived).to.equals('/private-documents');
             expect(bodyReceived).to.be.empty;
@@ -405,12 +414,16 @@ describe(`Tests POST ${route} API OK`, function() {
             return [
               200,
               `{
-                "fromMSP":"DTAG",
-                "toMSP":"TMUS",
-                "data":"${encodedDocument1}",
-                "dataHash":"notUsed",
-                "timeStamp":"1606828827767664802",
-                "id":"${idDocument1}"
+                "fromMSP": "DTAG",
+                "toMSP": "TMUS",
+                "payload": "${encodedDocument1}",
+                "payloadHash": "notUsed",
+                "blockchainRef": {
+                  "type": "hlf",
+                  "txID": "b70cef323c0d3b56d44e9b31f16a11cba8dbbdd55c1d255b65f3fd2b3eadf8bb",
+                  "timestamp": "2021-03-15T11:43:56Z"
+                },
+                "referenceID": "${idDocument1}"
               }`,
               undefined
             ];
@@ -431,7 +444,7 @@ describe(`Tests POST ${route} API OK`, function() {
 
         const sentBody = {
           msp: eventMsp,
-          eventName: 'STORE:DOCUMENTHASH',
+          eventName: 'STORE:PAYLOADLINK',
           timestamp: '2020-11-30T16:59:35Z',
           data: {
             storageKey: storageKey
@@ -508,7 +521,7 @@ describe(`Tests POST ${route} API OK`, function() {
         {id: '5fd8d6070cc5feb0fc0cb9e5d45f', msp: 'toMsp', index: 0}
       ],
       referenceId: '15d69d4c660d68cbc09c100924628afa68e0e309e13acb04d5d8c2c55d542aa5',
-      blockchainRef: {type: 'hlf', txId: 'TX-d69d4c660d68cbc09c100924628afa68e0e309e13acb04d5d8c2c55d542aa5'},
+      blockchainRef: {type: 'hlf', txId: 'TX-d69d4c660d68cbc09c100924628afa68e0e309e13acb04d5d8c2c55d542aa5', timestamp: new Date().toJSON()},
       storageKeys: [
         '007unused',
         '1176751cb67a89f9d2cfdc1e912cb9746c3a1f9a49a01de508509bccf108eccd'
@@ -538,7 +551,7 @@ describe(`Tests POST ${route} API OK`, function() {
         {id: '5fd8d6070cc5feb0fc0cb9e5d45f', msp: 'toMsp', index: 0}
       ],
       referenceId: '25d69d4c660d68cbc09c100924628afa68e0e309e13acb04d5d8c2c55d542aa5',
-      blockchainRef: {type: 'hlf', txId: 'TX-d69d4c660d68cbc09c100924628afa68e0e309e13acb04d5d8c2c55d542aa5'},
+      blockchainRef: {type: 'hlf', txId: 'TX-d69d4c660d68cbc09c100924628afa68e0e309e13acb04d5d8c2c55d542aa5', timestamp: new Date().toJSON()},
       storageKeys: [
         'ad756b1cecacb073fa4808f5a754515e033f6b1b3247153d65b6510ae4c9bb49',
         '007unused'
@@ -570,7 +583,7 @@ describe(`Tests POST ${route} API OK`, function() {
         {id: '5fd8d6070cc5feb0fc0cb9e5d45f', msp: 'toMsp', index: 0}
       ],
       referenceId: '99d69d4c660d68cbc09c100924628afa68e0e309e13acb04d5d8c2c55d542aa5',
-      blockchainRef: {type: 'hlf', txId: 'TX-d69d4c660d68cbc09c100924628afa68e0e309e13acb04d5d8c2c55d542aa5'},
+      blockchainRef: {type: 'hlf', txId: 'TX-d69d4c660d68cbc09c100924628afa68e0e309e13acb04d5d8c2c55d542aa5', timestamp: new Date().toJSON()},
       storageKeys: [
         '99756b1cecacb073fa4808f5a754515e033f6b1b3247153d65b6510ae4c9bb49',
         '007unused'

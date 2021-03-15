@@ -40,7 +40,7 @@ describe(`Tests PUT ${route} API OK`, function() {
       fromMsp: {mspId: testsUtils.getSelfMspId(), signatures: [{role: 'role', name: 'name', id: 'id'}]},
       toMsp: {mspId: 'C1', signatures: [{role: 'role', name: 'name', id: 'id'}]},
       referenceId: 'AZRAGGSHJIAJAOJSNJNSSNNAIT',
-      blockchainRef: {type: 'hlf', txId: 'TX-RAGGSHJIAJAOJSNJNSSNNAIT'},
+      blockchainRef: {type: 'hlf', txId: 'TX-RAGGSHJIAJAOJSNJNSSNNAIT', timestamp: new Date().toJSON()},
       body: {
         bankDetails: {A1: {iban: null, bankName: null, currency: null}, B1: {iban: null, bankName: null, currency: null}},
         discountModels: 'someData',
@@ -56,7 +56,7 @@ describe(`Tests PUT ${route} API OK`, function() {
       fromMsp: {mspId: 'B1'},
       toMsp: {mspId: testsUtils.getSelfMspId()},
       referenceId: 'AZRAGGSHJIAJAOJSNJNSSNNAIU',
-      blockchainRef: {type: 'hlf', txId: 'TX-RAGGSHJIAJAOJSNJNSSNNAIU'},
+      blockchainRef: {type: 'hlf', txId: 'TX-RAGGSHJIAJAOJSNJNSSNNAIU', timestamp: new Date().toJSON()},
       body: {
         bankDetails: {A1: {iban: null, bankName: null, currency: null}, B1: {iban: null, bankName: null, currency: null}},
         discountModels: 'someData',
@@ -170,8 +170,16 @@ describe(`Tests PUT ${route} API OK`, function() {
           return [
             200,
             {
-              referenceID: 'bec1ef2dbce73b6ae9841cf2edfa56de1f16d5a33d8a657de258e85c5f2e1bcb',
-              txID: 'b70cef323c0d3b56d44e9b31f16a11cba8dbbdd55c1d255b65f3fd2b3eadf8bb'
+              fromMSP: 'DTAG',
+              toMSP: 'TMUS',
+              payload: 'payload',
+              payloadHash: '239f59ed55e737c77147cf55ad0c1b030b6d7ee748a7426952f9b852d5a935e5',
+              blockchainRef: {
+                type: 'hlf',
+                txID: 'b70cef323c0d3b56d44e9b31f16a11cba8dbbdd55c1d255b65f3fd2b3eadf8bb',
+                timestamp: '2021-03-15T11:43:49Z'
+              },
+              referenceID: 'bec1ef2dbce73b6ae9841cf2edfa56de1f16d5a33d8a657de258e85c5f2e1bcb'
             },
             undefined
           ];
@@ -212,9 +220,10 @@ describe(`Tests PUT ${route} API OK`, function() {
             expect(response.body.header).to.have.property('mspOwner', usageMinimumData.mspOwner);
 
             expect(response.body).to.have.property('blockchainRef').that.is.an('object');
-            expect(Object.keys(response.body.blockchainRef)).have.members(['type', 'txId']);
+            expect(Object.keys(response.body.blockchainRef)).have.members(['type', 'txId', 'timestamp']);
             expect(response.body.blockchainRef).to.have.property('type', 'hlf');
             expect(response.body.blockchainRef).to.have.property('txId', 'b70cef323c0d3b56d44e9b31f16a11cba8dbbdd55c1d255b65f3fd2b3eadf8bb');
+            expect(response.body.blockchainRef).to.have.property('timestamp').that.is.a('string');
 
             expect(response.body).to.have.property('body').that.is.an('object');
             expect(Object.keys(response.body.body)).have.members(['data']);
@@ -240,8 +249,16 @@ describe(`Tests PUT ${route} API OK`, function() {
           return [
             200,
             {
-              referenceID: 'bec1ef2dbce73b6ae9841cf2edfa56de1f16d5a33d8a657de258e85c5f2e1bcb',
-              txID: 'b70cef323c0d3b56d44e9b31f16a11cba8dbbdd55c1d255b65f3fd2b3eadf8bb'
+              fromMSP: 'DTAG',
+              toMSP: 'TMUS',
+              payload: 'payload',
+              payloadHash: '239f59ed55e737c77147cf55ad0c1b030b6d7ee748a7426952f9b852d5a935e5',
+              blockchainRef: {
+                type: 'hlf',
+                txID: 'b70cef323c0d3b56d44e9b31f16a11cba8dbbdd55c1d255b65f3fd2b3eadf8bb',
+                timestamp: '2021-03-15T11:43:49Z'
+              },
+              referenceID: 'bec1ef2dbce73b6ae9841cf2edfa56de1f16d5a33d8a657de258e85c5f2e1bcb'
             },
             undefined
           ];
@@ -282,9 +299,10 @@ describe(`Tests PUT ${route} API OK`, function() {
             expect(response.body.header).to.have.property('mspOwner', usageMoreData.mspOwner);
 
             expect(response.body).to.have.property('blockchainRef').that.is.an('object');
-            expect(Object.keys(response.body.blockchainRef)).have.members(['type', 'txId']);
+            expect(Object.keys(response.body.blockchainRef)).have.members(['type', 'txId', 'timestamp']);
             expect(response.body.blockchainRef).to.have.property('type', 'hlf');
             expect(response.body.blockchainRef).to.have.property('txId', 'b70cef323c0d3b56d44e9b31f16a11cba8dbbdd55c1d255b65f3fd2b3eadf8bb');
+            expect(response.body.blockchainRef).to.have.property('timestamp').that.is.a('string');
 
             expect(response.body).to.have.property('body').that.is.an('object');
             expect(Object.keys(response.body.body)).have.members(['data']);

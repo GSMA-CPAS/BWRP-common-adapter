@@ -38,7 +38,7 @@ describe(`Tests GET ${route} API OK`, function() {
       fromMsp: {mspId: 'A1'},
       toMsp: {mspId: 'C3'},
       referenceId: 'AZRAGGSHJIAJAOJSNJNSSNNAIS',
-      blockchainRef: {type: 'hlf', txId: 'TX-RAGGSHJIAJAOJSNJNSSNNAIS'},
+      blockchainRef: {type: 'hlf', txId: 'TX-RAGGSHJIAJAOJSNJNSSNNAIS', timestamp: new Date().toJSON()},
       body: {
         bankDetails: {A1: {iban: null, bankName: null, currency: null}, C3: {iban: null, bankName: null, currency: null}},
         discountModels: 'someData',
@@ -142,9 +142,10 @@ describe(`Tests GET ${route} API OK`, function() {
             expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
 
             expect(response.body).to.have.property('blockchainRef').that.is.an('object');
-            expect(Object.keys(response.body.blockchainRef)).have.members(['type', 'txId']);
+            expect(Object.keys(response.body.blockchainRef)).have.members(['type', 'txId', 'timestamp']);
             expect(response.body.blockchainRef).to.have.property('type', 'hlf');
             expect(response.body.blockchainRef).to.have.property('txId', contract2.blockchainRef.txId);
+            expect(response.body.blockchainRef).to.have.property('timestamp').that.is.a('string');
 
             done();
           });
@@ -182,7 +183,7 @@ describe(`Tests GET ${route} API FAILED`, function() {
       fromMsp: {mspId: 'A1'},
       toMsp: {mspId: 'C3'},
       referenceId: 'AZRAGGSHJIAJAOJSNJNSSNNAIS',
-      blockchainRef: {type: 'hlf', txId: 'TX-RAGGSHJIAJAOJSNJNSSNNAIS'},
+      blockchainRef: {type: 'hlf', txId: 'TX-RAGGSHJIAJAOJSNJNSSNNAIS', timestamp: new Date().toJSON()},
       body: {
         bankDetails: {A1: {iban: null, bankName: null, currency: null}, C3: {iban: null, bankName: null, currency: null}},
         discountModels: 'someData',

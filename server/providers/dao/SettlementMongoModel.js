@@ -11,7 +11,7 @@ const HistorySchema = new Schema({
 const BlockchainRefSchema = new Schema({
   type: {type: String, required: true},
   txId: {type: String, required: true},
-  timestamp: {type: Date, required: true}
+  timestamp: {type: Date, required: false}
 }, {_id: false});
 
 const MixSettlementBodySchema = Schema.Types.Mixed;
