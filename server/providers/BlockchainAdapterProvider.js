@@ -235,7 +235,7 @@ class BlockchainAdapterProvider {
         mspIds.forEach((mspId) => {
           returnedContractStorageKeys.push(crypto
             .createHash('sha256')
-            .update(mspId + referenceId)
+            .update(mspId + ':' + referenceId)
             .digest('hex')
             .toString('utf8'));
         });
@@ -282,8 +282,6 @@ class BlockchainAdapterProvider {
         algorithm: algorithm,
         signature: signature
       });
-      logger.debug(`[BlockchainAdapterProvider::uploadContract] response data:${typeof response.data} = ${JSON.stringify(response.data)}`);
-
       logger.debug(`[BlockchainAdapterProvider::uploadSignature] response data:${typeof response.data} = ${JSON.stringify(response.data)}`);
       return response.data;
     } catch (error) {
