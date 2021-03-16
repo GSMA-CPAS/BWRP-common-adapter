@@ -84,7 +84,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **contractId** | **String**| The contract Id | [default to null]
  **usageId** | **String**| The Usage Id | [default to null]
- **mode** | **String**| Defaults to \&quot;preview\&quot; if not selected. Preview will only performs \&quot;calculation\&quot; and return the calculated settlement in response. if \&quot;commit\&quot;, will create the settlement and Send it live to the Blockchain to the targetMsp. | [optional] [default to null] [enum: preview, commit]
+ **mode** | **String**| By default, for undefined mode, will calculate and store a new settlement. If \&quot;preview\&quot; mode is selected, will not store the calculated settlement. If \&quot;commit\&quot; mode is selected, will store and send the calculated settlement. | [optional] [default to null] [enum: preview, commit]
 
 ### Return type
 
