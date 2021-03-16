@@ -253,8 +253,8 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           expect(response.body).to.have.property('blockchainRef').that.is.an('object');
           expect(response.body.blockchainRef).to.have.property('type', 'hlf');
           // not returned yet by blockchain-adapter
-          // expect(response.body.blockchainRef).to.have.property('txId', DTAG_dynamic_data.contractTxId);
-          expect(response.body.blockchainRef).to.have.property('txId', 'XXXXXXX');
+          expect(response.body.blockchainRef).to.have.property('txId', DTAG_dynamic_data.contractTxId);
+          // expect(response.body.blockchainRef).to.have.property('txId', 'XXXXXXX');
 
           debugObjectOnTMUS('Received contract from DTAG : ', response.body);
 
@@ -424,8 +424,8 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           expect(response.body).to.have.property('blockchainRef').that.is.an('object');
           expect(response.body.blockchainRef).to.have.property('type', 'hlf');
           // not returned yet by blockchain-adapter
-          // expect(response.body.blockchainRef).to.have.property('txId', DTAG_dynamic_data.contractTxId);
-          expect(response.body.blockchainRef).to.have.property('txId', 'XXXXXXX');
+          expect(response.body.blockchainRef).to.have.property('txId', DTAG_dynamic_data.usageTxId);
+          // expect(response.body.blockchainRef).to.have.property('txId', 'XXXXXXX');
 
           debugObjectOnTMUS('Usage received from DTAG : ', response.body);
 
@@ -607,8 +607,8 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           expect(response.body).to.have.property('blockchainRef').that.is.an('object');
           expect(response.body.blockchainRef).to.have.property('type', 'hlf');
           // not returned yet by blockchain-adapter
-          // expect(response.body.blockchainRef).to.have.property('txId', DTAG_dynamic_data.contractTxId);
-          expect(response.body.blockchainRef).to.have.property('txId', 'XXXXXXX');
+          expect(response.body.blockchainRef).to.have.property('txId', TMUS_dynamic_data.usageTxId);
+          // expect(response.body.blockchainRef).to.have.property('txId', 'XXXXXXX');
 
           debugObjectOnDTAG('Usage received from TMUS : ', response.body);
 
