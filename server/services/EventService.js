@@ -14,23 +14,23 @@ const config = require('../config');
 const crypto = require('crypto');
 
 /**
- * Compare objects timestamps
+ * Compare objects blockchainRef timestamps
  *
  * @param {Object} a The first object to compare
  * @param {Object} b The second object to compare
  * @return {Promise<number>}
  */
-const compareTimestamp = (a, b) => {
+const compareBlockchainRefTimestamp = (a, b) => {
   try {
     /* eslint-disable new-cap */
     /* eslint-disable no-undef */
-    const aTimestamp = BigInt(a.timestamp);
-    const bTimestamp = BigInt(b.timestamp);
+    const aDate = new Date(a.blockchainRef.timestamp);
+    const bDate = new Date(b.blockchainRef.timestamp);
     /* eslint-enable no-undef */
     /* eslint-enable new-cap */
-    if (aTimestamp > bTimestamp) {
+    if (aDate > bDate) {
       return 1;
-    } else if (aTimestamp < bTimestamp) {
+    } else if (aDate < bDate) {
       return -1;
     } else {
       return 0;
@@ -41,17 +41,29 @@ const compareTimestamp = (a, b) => {
 };
 
 /**
- * Define the list of blockchain reference Ids to download from the storageKey of a received event
+ * Define the list of blockchain reference Ids to download from storageKey and msp of a received event
+ * if storageKey or msp are undefined, returns all the blockchainReferenceIds
  *
- * @param {String} eventStorageKey The storage key of the received event
- * @param {String} msp The msp of the received event
+ * @param {String|undefined} eventStorageKey The storage key of the received event
+ * @param {String|undefined} msp The msp of the received event
  * @return {Promise<[String]>}
  */
-const getBlockchainReferenceIds = (eventStorageKey) => new Promise(
+const getBlockchainReferenceIds = (eventStorageKey = undefined, msp = undefined) => new Promise(
   async (resolve, reject) => {
     try {
       const getPrivateReferenceIDsResp = await blockchainAdapterConnection.getPrivateReferenceIDs();
-      resolve(getPrivateReferenceIDsResp);
+      let getBlockchainReferenceIds = [];
+      if (getPrivateReferenceIDsResp && Array.isArray(getPrivateReferenceIDsResp)) {
+        getBlockchainReferenceIds = getPrivateReferenceIDsResp.filter((privateReferenceID) => {
+          if ((eventStorageKey === undefined) || (msp === undefined)) {
+            return true;
+          } else {
+            const eventSK = crypto.createHash('sha256').update(msp + ':' + privateReferenceID).digest('hex').toString('utf8');
+            return (eventSK === eventStorageKey);
+          }
+        });
+      }
+      resolve(getBlockchainReferenceIds);
     } catch (e) {
       reject(e);
     }
@@ -124,7 +136,8 @@ const eventDocumentReceived = ({body}) => new Promise(
   async (resolve, reject) => {
     try {
       const documentsStoredInDb = [];
-      const referenceIds = await getBlockchainReferenceIds(body.data.storageKey);
+      // Do not send storageKey and msp params to do not filter this BlockchainReferenceIds
+      const referenceIds = await getBlockchainReferenceIds();
       logger.info(`[EventService::eventDocumentReceived] referenceIds = ${JSON.stringify(referenceIds)}`);
       let documents = [];
       for (const referenceId of referenceIds) {
@@ -136,7 +149,7 @@ const eventDocumentReceived = ({body}) => new Promise(
           // Do not reject. If there is an exception for a referenceId, the document will not be removed of the blockchain.
         }
       }
-      documents = documents.sort(compareTimestamp);
+      documents = documents.sort(compareBlockchainRefTimestamp);
       for (const document of documents) {
         try {
           const storedDocument = await storeBlockchainDocumentInLocalStorage(document);
