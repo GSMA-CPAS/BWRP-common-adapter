@@ -64,7 +64,7 @@ class TestsUtils {
   }
 
   static getStorageKey(referenceId, msp) {
-    return crypto.createHash('sha256').update(`${msp}${referenceId}`).digest('hex').toString('utf8');
+    return crypto.createHash('sha256').update(`${msp}:${referenceId}`).digest('hex').toString('utf8');
   }
 
   static debugWarning(text, symbol = '!') {

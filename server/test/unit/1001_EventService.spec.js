@@ -22,11 +22,11 @@ describe('Unit Tests for events subscription', function() {
         // Only for exemple
         expect(pathReceived).to.equals('/webhooks/subscribe');
         expect(bodyReceived).to.be.an('Object');
-        expect(bodyReceived).to.have.property('eventName').that.match(new RegExp('^(STORE:DOCUMENTHASH|STORE:SIGNATURE)$'));
+        expect(bodyReceived).to.have.property('eventName').that.match(new RegExp('^(STORE:PAYLOADLINK|STORE:SIGNATURE)$'));
         expect(bodyReceived).to.have.property('callbackUrl', selfHostUrl + '/api/v1/contracts/event/');
         return [
           201,
-          '07473280-3b23-41bf-bff1-cb37e695895' + ((bodyReceived.eventName === 'STORE:DOCUMENTHASH') ? '1' : '2'),
+          '07473280-3b23-41bf-bff1-cb37e695895' + ((bodyReceived.eventName === 'STORE:PAYLOADLINK') ? '1' : '2'),
           undefined
         ];
       });

@@ -409,8 +409,8 @@ describe(`Launch scenario 0001_Create_settlement_from_DTAG_contract`, function()
           expect(response.body).to.have.property('blockchainRef').that.is.an('object');
           expect(response.body.blockchainRef).to.have.property('type', 'hlf');
           // not returned yet by blockchain-adapter
-          // expect(response.body.blockchainRef).to.have.property('txId', DTAG_dynamic_data.contractTxId);
-          expect(response.body.blockchainRef).to.have.property('txId', 'XXXXXXX');
+          expect(response.body.blockchainRef).to.have.property('txId', DTAG_dynamic_data.contractTxId);
+          // expect(response.body.blockchainRef).to.have.property('txId', 'XXXXXXX');
 
           debugObjectOnTMUS('Received contract from DTAG : ', response.body);
 
@@ -482,10 +482,15 @@ describe(`Launch scenario 0001_Create_settlement_from_DTAG_contract`, function()
           debug(`==> DTAG new created usage id : ${DTAG_dynamic_data.usageId}`);
 
           debugObjectOnDTAG('Usage body metadata : ', response.body.body.metadata);
-          if ((response.body.body.data) && (Array.isArray(response.body.body.data))) {
-            debugObjectOnDTAG('Usage body data first rows : ', response.body.body.data.slice(0, 6));
+          if ((response.body.body.inbound) && (Array.isArray(response.body.body.inbound))) {
+            debugObjectOnDTAG('Usage body inbound first rows : ', response.body.body.inbound.slice(0, 2));
           } else {
-            debugObjectOnDTAG('Usage body data : ', response.body.body.data);
+            debugObjectOnDTAG('Usage body inbound : ', response.body.body.inbound);
+          }
+          if ((response.body.body.outbound) && (Array.isArray(response.body.body.outbound))) {
+            debugObjectOnDTAG('Usage body outbound first rows : ', response.body.body.outbound.slice(0, 2));
+          } else {
+            debugObjectOnDTAG('Usage body outbound : ', response.body.body.outbound);
           }
 
           done();
@@ -640,18 +645,13 @@ describe(`Launch scenario 0001_Create_settlement_from_DTAG_contract`, function()
           expect(response.body).to.have.property('blockchainRef').that.is.an('object');
           expect(response.body.blockchainRef).to.have.property('type', 'hlf');
           // not returned yet by blockchain-adapter
-          // expect(response.body.blockchainRef).to.have.property('txId', DTAG_dynamic_data.settlementTxId);
-          expect(response.body.blockchainRef).to.have.property('txId', 'XXXXXXX');
+          expect(response.body.blockchainRef).to.have.property('txId', DTAG_dynamic_data.settlementTxId);
+          // expect(response.body.blockchainRef).to.have.property('txId', 'XXXXXXX');
 
           debugObjectOnTMUS('Settlement received from DTAG : ', response.body);
 
-          if ((response.body.body) && (response.body.body.usage) && (response.body.body.usage.body)) {
-            debugObjectOnTMUS('Settlement received from DTAG => embedded usage body metadata : ', response.body.body.usage.body.metadata);
-            if ((response.body.body.usage.body.data) && (Array.isArray(response.body.body.usage.body.data))) {
-              debugObjectOnTMUS('Settlement received from DTAG => embedded usage body data first rows : ', response.body.body.usage.body.data.slice(0, 6));
-            } else {
-              debugObjectOnTMUS('Settlement received from DTAG => embedded usage body data : ', response.body.body.usage.body.data);
-            }
+          if ((response.body.body) && (response.body.body.generatedResult)) {
+            debugObjectOnTMUS('Settlement received from DTAG => embedded generatedResult : ', response.body.body.generatedResult);
           }
 
           done();
@@ -691,10 +691,15 @@ describe(`Launch scenario 0001_Create_settlement_from_DTAG_contract`, function()
           debug(`==> TMUS new created usage id : ${TMUS_dynamic_data.usageId}`);
 
           debugObjectOnTMUS('Usage body metadata : ', response.body.body.metadata);
-          if ((response.body.body.data) && (Array.isArray(response.body.body.data))) {
-            debugObjectOnTMUS('Usage body data first rows : ', response.body.body.data.slice(0, 6));
+          if ((response.body.body.inbound) && (Array.isArray(response.body.body.inbound))) {
+            debugObjectOnTMUS('Usage body inbound first rows : ', response.body.body.inbound.slice(0, 2));
           } else {
-            debugObjectOnTMUS('Usage body data : ', response.body.body.data);
+            debugObjectOnTMUS('Usage body inbound : ', response.body.body.inbound);
+          }
+          if ((response.body.body.outbound) && (Array.isArray(response.body.body.outbound))) {
+            debugObjectOnTMUS('Usage body outbound first rows : ', response.body.body.outbound.slice(0, 2));
+          } else {
+            debugObjectOnTMUS('Usage body outbound : ', response.body.body.outbound);
           }
 
           done();
@@ -849,18 +854,13 @@ describe(`Launch scenario 0001_Create_settlement_from_DTAG_contract`, function()
           expect(response.body).to.have.property('blockchainRef').that.is.an('object');
           expect(response.body.blockchainRef).to.have.property('type', 'hlf');
           // not returned yet by blockchain-adapter
-          // expect(response.body.blockchainRef).to.have.property('txId', TMUS_dynamic_data.settlementTxId);
-          expect(response.body.blockchainRef).to.have.property('txId', 'XXXXXXX');
+          expect(response.body.blockchainRef).to.have.property('txId', TMUS_dynamic_data.settlementTxId);
+          // expect(response.body.blockchainRef).to.have.property('txId', 'XXXXXXX');
 
           debugObjectOnDTAG('Settlement received from TMUS : ', response.body);
 
-          if ((response.body.body) && (response.body.body.usage) && (response.body.body.usage.body)) {
-            debugObjectOnDTAG('Settlement received from TMUS => embedded usage body metadata : ', response.body.body.usage.body.metadata);
-            if ((response.body.body.usage.body.data) && (Array.isArray(response.body.body.usage.body.data))) {
-              debugObjectOnDTAG('Settlement received from TMUS => embedded usage body data first rows : ', response.body.body.usage.body.data.slice(0, 6));
-            } else {
-              debugObjectOnDTAG('Settlement received from TMUS => embedded usage body data : ', response.body.body.usage.body.data);
-            }
+          if ((response.body.body) && (response.body.body.generatedResult)) {
+            debugObjectOnDTAG('Settlement received from TMUS => embedded generatedResult : ', response.body.body.generatedResult);
           }
 
           done();

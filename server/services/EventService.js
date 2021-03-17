@@ -14,23 +14,23 @@ const config = require('../config');
 const crypto = require('crypto');
 
 /**
- * Compare objects timestamps
+ * Compare objects blockchainRef timestamps
  *
  * @param {Object} a The first object to compare
  * @param {Object} b The second object to compare
  * @return {Promise<number>}
  */
-const compareTimestamp = (a, b) => {
+const compareBlockchainRefTimestamp = (a, b) => {
   try {
     /* eslint-disable new-cap */
     /* eslint-disable no-undef */
-    const aTimestamp = BigInt(a.timestamp);
-    const bTimestamp = BigInt(b.timestamp);
+    const aDate = new Date(a.blockchainRef.timestamp);
+    const bDate = new Date(b.blockchainRef.timestamp);
     /* eslint-enable no-undef */
     /* eslint-enable new-cap */
-    if (aTimestamp > bTimestamp) {
+    if (aDate > bDate) {
       return 1;
-    } else if (aTimestamp < bTimestamp) {
+    } else if (aDate < bDate) {
       return -1;
     } else {
       return 0;
@@ -41,13 +41,14 @@ const compareTimestamp = (a, b) => {
 };
 
 /**
- * Define the list of blockchain reference Ids to download from the storageKey of a received event
+ * Define the list of blockchain reference Ids to download from storageKey and msp of a received event
+ * if storageKey or msp are undefined, returns all the blockchainReferenceIds
  *
- * @param {String} eventStorageKey The storage key of the received event
- * @param {String} msp The msp of the received event
+ * @param {String|undefined} eventStorageKey The storage key of the received event
+ * @param {String|undefined} msp The msp of the received event
  * @return {Promise<[String]>}
  */
-const getBlockchainReferenceIds = (eventStorageKey, msp) => new Promise(
+const getBlockchainReferenceIds = (eventStorageKey = undefined, msp = undefined) => new Promise(
   async (resolve, reject) => {
     try {
       const getPrivateReferenceIDsResp = await blockchainAdapterConnection.getPrivateReferenceIDs();
@@ -57,7 +58,7 @@ const getBlockchainReferenceIds = (eventStorageKey, msp) => new Promise(
           if ((eventStorageKey === undefined) || (msp === undefined)) {
             return true;
           } else {
-            const eventSK = crypto.createHash('sha256').update(msp + privateReferenceID).digest('hex').toString('utf8');
+            const eventSK = crypto.createHash('sha256').update(msp + ':' + privateReferenceID).digest('hex').toString('utf8');
             return (eventSK === eventStorageKey);
           }
         });
@@ -135,9 +136,9 @@ const eventDocumentReceived = ({body}) => new Promise(
   async (resolve, reject) => {
     try {
       const documentsStoredInDb = [];
-      const referenceIds = await getBlockchainReferenceIds(body.data.storageKey, body.msp);
+      // Do not send storageKey and msp params to do not filter this BlockchainReferenceIds
+      const referenceIds = await getBlockchainReferenceIds();
       logger.info(`[EventService::eventDocumentReceived] referenceIds = ${JSON.stringify(referenceIds)}`);
-      const isReferenceIdLinkedToEventTxId = ((body.data.storageKey !== undefined) && (body.msp !== undefined) && (referenceIds.length === 1));
       let documents = [];
       for (const referenceId of referenceIds) {
         try {
@@ -148,17 +149,9 @@ const eventDocumentReceived = ({body}) => new Promise(
           // Do not reject. If there is an exception for a referenceId, the document will not be removed of the blockchain.
         }
       }
-      documents = documents.sort(compareTimestamp);
+      documents = documents.sort(compareBlockchainRefTimestamp);
       for (const document of documents) {
         try {
-          if (isReferenceIdLinkedToEventTxId) {
-            // append blockchainRef to "item"
-            const txId = body.txID || 'XXXXXXX'; // incase we using a blockchain adapter that does not return txID;
-            document.blockchainRef = {
-              type: 'hlf', // need a dynamic way to define type to support future multiledger system
-              txId: txId
-            };
-          }
           const storedDocument = await storeBlockchainDocumentInLocalStorage(document);
           const referenceId = ['contract', 'usage', 'settlement'].includes(storedDocument.type) ? storedDocument.referenceId : undefined;
           logger.info(`[EventService::eventDocumentReceived] config.DEACTIVATE_BLOCKCHAIN_DOCUMENT_DELETE = ${JSON.stringify(config.DEACTIVATE_BLOCKCHAIN_DOCUMENT_DELETE)}`);
@@ -248,7 +241,7 @@ const eventSignatureReceived = ({body}) => new Promise(
 const eventReceived = ({body}) => new Promise(
   async (resolve, reject) => {
     try {
-      if (body.eventName === 'STORE:DOCUMENTHASH') {
+      if (body.eventName === 'STORE:PAYLOADLINK') {
         resolve(await eventDocumentReceived({body}));
       } else if (body.eventName === 'STORE:SIGNATURE') {
         resolve(await eventSignatureReceived({body}));

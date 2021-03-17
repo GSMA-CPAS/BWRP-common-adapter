@@ -751,7 +751,7 @@ paths:
         schema:
           type: string
         style: simple
-      - description: Defaults to "preview" if not selected. Preview will only performs "calculation" and return the calculated settlement in response. if "commit", will create the settlement and Send it live to the Blockchain to the targetMsp.
+      - description: By default, for undefined mode, will calculate and store a new settlement. If "preview" mode is selected, will not store the calculated settlement. If "commit" mode is selected, will store and send the calculated settlement.
         explode: true
         in: query
         name: mode

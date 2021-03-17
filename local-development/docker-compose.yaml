@@ -61,7 +61,7 @@ services:
       - COMMON_ADAPTER_LOG_LEVEL=${TMUS_COMMON_ADAPTER_LOG_LEVEL}
       - COMMON_ADAPTER_DB_URL=mongodb://${TMUS_COMMON_ADAPTER_MONGO_USER}:${TMUS_COMMON_ADAPTER_MONGO_USERPW}@CADB-tmus:27017/commondb?authSource=commondb
       - COMMON_ADAPTER_BLOCKCHAIN_ADAPTER_URL=${TMUS_COMMON_ADAPTER_BLOCKCHAIN_ADAPTER_URL}
-      - 'COMMON_ADAPTER_BLOCKCHAIN_ADAPTER_WEBHOOKS=[{"eventName": "STORE:DOCUMENTHASH", "callbackUrl": "http://common-adapter-tmus:3000/api/v1/contracts/event/"},{"eventName": "STORE:SIGNATURE", "callbackUrl": "http://common-adapter-tmus:3000/api/v1/contracts/event/"}]'
+      - 'COMMON_ADAPTER_BLOCKCHAIN_ADAPTER_WEBHOOKS=[{"eventName": "STORE:PAYLOADLINK", "callbackUrl": "http://common-adapter-tmus:3000/api/v1/contracts/event/"},{"eventName": "STORE:SIGNATURE", "callbackUrl": "http://common-adapter-tmus:3000/api/v1/contracts/event/"}]'
     depends_on:
       - CADB-tmus
     ports:

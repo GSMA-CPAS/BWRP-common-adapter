@@ -16,7 +16,7 @@ const globalVersion = '/api/v1';
 const route = '/contracts/event/';
 
 describe(`Tests POST ${route} API OK`, function() {
-  describe(`Setup and Test POST ${route} API with STORE:DOCUMENTHASH event`, function() {
+  describe(`Setup and Test POST ${route} API with STORE:PAYLOADLINK event`, function() {
     const contract1 = {
       name: 'Contract name between A1 and B1',
       state: 'DRAFT',
@@ -41,7 +41,7 @@ describe(`Tests POST ${route} API OK`, function() {
       fromMsp: {mspId: 'A1'},
       toMsp: {mspId: 'C3'},
       referenceId: 'AZRAGGSHJIAJAOJSNJNSSNNAIS',
-      blockchainRef: {type: 'hlf', txId: 'TX-RAGGSHJIAJAOJSNJNSSNNAIS'},
+      blockchainRef: {type: 'hlf', txId: 'TX-RAGGSHJIAJAOJSNJNSSNNAIS', timestamp: new Date().toJSON()},
       body: {
         bankDetails: {A1: {iban: null, bankName: null, currency: null}, C3: {iban: null, bankName: null, currency: null}},
         discountModels: 'someData',
@@ -50,16 +50,48 @@ describe(`Tests POST ${route} API OK`, function() {
       rawData: 'Ctr_raw-data-2'
     };
 
+    const usageSent1 = {
+      type: 'usage',
+      version: '1.2.4',
+      name: 'Usage data',
+      contractId: undefined,
+      mspOwner: 'A1',
+      mspReceiver: 'B1',
+      body: {
+        data: [
+          {year: 2020, month: 1, hpmn: 'HPMN', vpmn: 'VPMN', service: 'service', value: 1, units: 'unit', charges: 'charge', taxes: 'taxes'}
+        ]
+      },
+      state: 'SENT',
+      referenceId: 'dizaudzaidsazxjzxkzodjxzepdoezzasza',
+      blockchainRef: {type: 'hlf', txId: 'TX-OPIPOUFTDRDDZYTFGFS', timestamp: new Date().toJSON()}
+    };
+    const rawDataObjectFromUsageSent1 = `{
+      "header": {
+        "type": "${usageSent1.type}",
+        "version": "${usageSent1.version}",
+        "name": "${usageSent1.name}"  
+      },
+      "mspOwner": "${usageSent1.mspOwner}",
+      "mspReceiver": "${usageSent1.mspReceiver}",
+      "contractReferenceId": "${contract1.referenceId}",
+      "body": ${JSON.stringify(usageSent1.body)}
+    }`;
+    usageSent1.rawData = Buffer.from(rawDataObjectFromUsageSent1).toString('base64');
+
     before((done) => {
       debugSetup('==> init db with 2 contracts');
       testsDbUtils.initDbWithContracts([contract1, contract2])
         .then((initDbWithContractsResp) => {
           contract1.id = initDbWithContractsResp[0].id;
           contract2.id = initDbWithContractsResp[1].id;
+          usageSent1.contractId = contract1.id;
           debugSetup('The db is initialized with 2 contracts : ', initDbWithContractsResp.map((c) => c.id));
-          debugSetup('==> init db with 0 usage');
-          testsDbUtils.initDbWithUsages([])
+          debugSetup('==> init db with 1 usage');
+          testsDbUtils.initDbWithUsages([usageSent1])
             .then((initDbWithUsagesResp) => {
+              usageSent1.id = initDbWithUsagesResp[0].id;
+              debugSetup('The db is initialized with 1 usage : ', initDbWithUsagesResp.map((c) => c.id));
               debugSetup('==> init db with 0 settlement');
               testsDbUtils.initDbWithSettlements([])
                 .then((initDbWithSettlementsResp) => {
@@ -129,12 +161,16 @@ describe(`Tests POST ${route} API OK`, function() {
             return [
               200,
               `{
-                "fromMSP":"${eventMsp}",
-                "toMSP":"TMUS",
-                "data":"${encodedDocument2}",
-                "dataHash":"notUsed",
-                "timeStamp":"1606828827767664800",
-                "id":"${idDocument2}"
+                "fromMSP": "${eventMsp}",
+                "toMSP": "TMUS",
+                "payload": "${encodedDocument2}",
+                "payloadHash": "notUsed",
+                "blockchainRef": {
+                  "type": "hlf",
+                  "txID": "b70cef323c0d3b56d44e9b31f16a11cba8dbbdd55c1d255b65f3fd2b3eadf8cc",
+                  "timestamp": "2021-03-15T11:43:57Z"
+                },
+                "referenceID": "${idDocument2}"
               }`,
               undefined
             ];
@@ -155,7 +191,7 @@ describe(`Tests POST ${route} API OK`, function() {
 
         const sentBody = {
           msp: eventMsp,
-          eventName: 'STORE:DOCUMENTHASH',
+          eventName: 'STORE:PAYLOADLINK',
           timestamp: '2020-11-30T16:59:35Z',
           data: {
             storageKey: storageKey
@@ -246,6 +282,28 @@ describe(`Tests POST ${route} API OK`, function() {
 
         const idDocument2 = 'zecxezhucheauhxazi';
 
+        const document2 = `{
+          "header": {
+            "type": "usage",
+            "version": "3.5",
+            "name": "StRiNg-Usage2-${Date.now().toString()}"  
+          },
+          "mspOwner": "DAAA",
+          "mspReceiver": "TMMM",
+          "contractReferenceId": "${contract1.referenceId}",
+          "body": {
+            "usageString": "objectOrString-2",
+            "usageData": {
+              "part2": {
+                "other": "objectOrString-2"
+              }
+            }
+          }
+        }`;
+        const encodedDocument2 = Buffer.from(document2).toString('base64');
+
+        const idDocument3 = usageSent1.referenceId;
+
         const eventMsp = 'TMUS';
         const storageKey = testsUtils.getStorageKey(idDocument1, eventMsp);
 
@@ -257,7 +315,7 @@ describe(`Tests POST ${route} API OK`, function() {
             expect(bodyReceived).to.be.empty;
             return [
               200,
-              `["${idDocument1}", "${idDocument2}"]`,
+              `["${idDocument1}", "${idDocument2}", "${idDocument3}"]`,
               undefined
             ];
           });
@@ -271,12 +329,16 @@ describe(`Tests POST ${route} API OK`, function() {
             return [
               200,
               `{
-                "fromMSP":"DTAG",
-                "toMSP":"TMUS",
-                "data":"${encodedDocument1}",
-                "dataHash":"notUsed",
-                "timeStamp":"1606828827767664802",
-                "id":"${idDocument1}"
+                "fromMSP": "DTAG",
+                "toMSP": "TMUS",
+                "payload": "${encodedDocument1}",
+                "payloadHash": "notUsed",
+                "blockchainRef": {
+                  "type": "hlf",
+                  "txID": "b70cef323c0d3b56d44e9b31f16a11cba8dbbdd55c1d255b65f3fd2b3eadf8dd",
+                  "timestamp": "2021-03-15T11:43:57Z"
+                },
+                "referenceID": "${idDocument1}"
               }`,
               undefined
             ];
@@ -295,9 +357,83 @@ describe(`Tests POST ${route} API OK`, function() {
             ];
           });
 
+        blockchainAdapterNock.get(`/private-documents/${idDocument2}`)
+          .times(1)
+          .reply((pathReceived, bodyReceived) => {
+            // Only for exemple
+            expect(pathReceived).to.equals(`/private-documents/${idDocument2}`);
+            expect(bodyReceived).to.be.empty;
+            return [
+              200,
+              `{
+                "fromMSP": "DTAG",
+                "toMSP": "TMUS",
+                "payload": "${encodedDocument2}",
+                "payloadHash": "notUsed",
+                "blockchainRef": {
+                  "type": "hlf",
+                  "txID": "b70cef323c0d3b56d44e9b31f16a11cba8dbbdd55c1d255b65f3fd2b3eadf8ff",
+                  "timestamp": "2021-03-15T11:43:58Z"
+                },
+                "referenceID": "${idDocument2}"
+              }`,
+              undefined
+            ];
+          });
+
+        blockchainAdapterNock.delete(`/private-documents/${idDocument2}`)
+          .times(1)
+          .reply((pathReceived, bodyReceived) => {
+            // Only for exemple
+            expect(pathReceived).to.equals(`/private-documents/${idDocument2}`);
+            expect(bodyReceived).to.be.empty;
+            return [
+              200,
+              ``,
+              undefined
+            ];
+          });
+
+        blockchainAdapterNock.get(`/private-documents/${idDocument3}`)
+          .times(1)
+          .reply((pathReceived, bodyReceived) => {
+            // Only for exemple
+            expect(pathReceived).to.equals(`/private-documents/${idDocument3}`);
+            expect(bodyReceived).to.be.empty;
+            return [
+              200,
+              `{
+                "fromMSP": "TMUS",
+                "toMSP": "DTAG",
+                "payload": "${usageSent1.rawData}",
+                "payloadHash": "notUsed",
+                "blockchainRef": {
+                  "type": "hlf",
+                  "txID": "b70cef323c0d3b56d44e9b31f16a11cba8dbbdd55c1d255b65f3fd2b3eadf8dd",
+                  "timestamp": "2021-03-15T11:43:52Z"
+                },
+                "referenceID": "${idDocument3}"
+              }`,
+              undefined
+            ];
+          });
+
+        blockchainAdapterNock.delete(`/private-documents/${idDocument3}`)
+          .times(1)
+          .reply((pathReceived, bodyReceived) => {
+            // Only for exemple
+            expect(pathReceived).to.equals(`/private-documents/${idDocument3}`);
+            expect(bodyReceived).to.be.empty;
+            return [
+              200,
+              ``,
+              undefined
+            ];
+          });
+
         const sentBody = {
           msp: eventMsp,
-          eventName: 'STORE:DOCUMENTHASH',
+          eventName: 'STORE:PAYLOADLINK',
           timestamp: '2020-11-30T16:59:35Z',
           data: {
             storageKey: storageKey
@@ -314,20 +450,41 @@ describe(`Tests POST ${route} API OK`, function() {
             expect(response).to.be.json;
             expect(response.body).to.exist;
             expect(response.body).to.be.an('array');
-            expect(response.body.length).to.equal(1);
+            expect(response.body.length).to.equal(3);
 
-            const bodyArrayContent = response.body[0];
-            expect(bodyArrayContent).to.be.an('Object');
-            expect(Object.keys(bodyArrayContent)).have.members(['id', 'type', 'referenceId', 'contractId']);
-            expect(bodyArrayContent).to.have.property('id').that.is.a('string');
-            expect(bodyArrayContent).to.have.property('type', 'usage');
-            expect(bodyArrayContent).to.have.property('referenceId', idDocument1);
-            expect(bodyArrayContent).to.have.property('contractId', contract1.id);
+            const bodyArrayContentFromDocument1 = response.body.filter((content) => (content.referenceId === idDocument1))[0];
+            expect(bodyArrayContentFromDocument1).to.be.an('Object');
+            expect(Object.keys(bodyArrayContentFromDocument1)).have.members(['id', 'type', 'referenceId', 'contractId']);
+            expect(bodyArrayContentFromDocument1).to.have.property('id').that.is.a('string');
+            expect(bodyArrayContentFromDocument1).to.have.property('type', 'usage');
+            expect(bodyArrayContentFromDocument1).to.have.property('referenceId', idDocument1);
+            expect(bodyArrayContentFromDocument1).to.have.property('contractId', contract1.id);
+
+            const bodyArrayContentFromDocument2 = response.body.filter((content) => (content.referenceId === idDocument2))[0];
+            expect(bodyArrayContentFromDocument2).to.be.an('Object');
+            expect(Object.keys(bodyArrayContentFromDocument2)).have.members(['id', 'type', 'referenceId', 'contractId']);
+            expect(bodyArrayContentFromDocument2).to.have.property('id').that.is.a('string');
+            expect(bodyArrayContentFromDocument2).to.have.property('type', 'usage');
+            expect(bodyArrayContentFromDocument2).to.have.property('referenceId', idDocument2);
+            expect(bodyArrayContentFromDocument2).to.have.property('contractId', contract1.id);
+
+            const bodyArrayContentFromDocument3 = response.body.filter((content) => (content.referenceId === idDocument3))[0];
+            expect(bodyArrayContentFromDocument3).to.be.an('Object');
+            expect(Object.keys(bodyArrayContentFromDocument3)).have.members(['id', 'type', 'referenceId', 'contractId']);
+            expect(bodyArrayContentFromDocument3).to.have.property('id').that.is.a('string');
+            expect(bodyArrayContentFromDocument3).to.have.property('type', 'usage');
+            expect(bodyArrayContentFromDocument3).to.have.property('referenceId', idDocument3);
+            expect(bodyArrayContentFromDocument3).to.have.property('contractId', contract1.id);
+
+            // this array should be ordered
+            expect(response.body[0].referenceId).to.equals(idDocument3);
+            expect(response.body[1].referenceId).to.equals(idDocument1);
+            expect(response.body[2].referenceId).to.equals(idDocument2);
 
             expect(blockchainAdapterNock.isDone(), 'Unconsumed nock error').to.be.true;
 
             chai.request(testsUtils.getServer())
-              .get(`${globalVersion}/contracts/${response.body[0].contractId}/usages/${response.body[0].id}`)
+              .get(`${globalVersion}/contracts/${bodyArrayContentFromDocument1.contractId}/usages/${bodyArrayContentFromDocument1.id}`)
               .send()
               .end((getError1, getResponse1) => {
                 debug('response.body: %s', JSON.stringify(getResponse1.body));
@@ -338,7 +495,33 @@ describe(`Tests POST ${route} API OK`, function() {
                 expect(getResponse1.body).to.be.an('object');
                 expect(getResponse1.body).to.have.property('state', 'RECEIVED');
 
-                done();
+                chai.request(testsUtils.getServer())
+                  .get(`${globalVersion}/contracts/${bodyArrayContentFromDocument2.contractId}/usages/${bodyArrayContentFromDocument2.id}`)
+                  .send()
+                  .end((getError2, getResponse2) => {
+                    debug('response.body: %s', JSON.stringify(getResponse2.body));
+                    expect(getError2).to.be.null;
+                    expect(getResponse2).to.have.status(200);
+                    expect(getResponse2).to.be.json;
+                    expect(getResponse2.body).to.exist;
+                    expect(getResponse2.body).to.be.an('object');
+                    expect(getResponse2.body).to.have.property('state', 'RECEIVED');
+
+                    chai.request(testsUtils.getServer())
+                      .get(`${globalVersion}/contracts/${bodyArrayContentFromDocument3.contractId}/usages/${bodyArrayContentFromDocument3.id}`)
+                      .send()
+                      .end((getError3, getResponse3) => {
+                        debug('response.body: %s', JSON.stringify(getResponse3.body));
+                        expect(getError3).to.be.null;
+                        expect(getResponse3).to.have.status(200);
+                        expect(getResponse3).to.be.json;
+                        expect(getResponse3.body).to.exist;
+                        expect(getResponse3.body).to.be.an('object');
+                        expect(getResponse3.body).to.have.property('state', 'SENT');
+
+                        done();
+                      });
+                  });
               });
           });
       } catch (exception) {
@@ -386,6 +569,7 @@ describe(`Tests POST ${route} API OK`, function() {
         blockchainAdapterNock.get('/private-documents')
           .times(1)
           .reply((pathReceived, bodyReceived) => {
+            debug('bodyReceived = ', bodyReceived);
             // Only for exemple
             expect(pathReceived).to.equals('/private-documents');
             expect(bodyReceived).to.be.empty;
@@ -405,12 +589,16 @@ describe(`Tests POST ${route} API OK`, function() {
             return [
               200,
               `{
-                "fromMSP":"DTAG",
-                "toMSP":"TMUS",
-                "data":"${encodedDocument1}",
-                "dataHash":"notUsed",
-                "timeStamp":"1606828827767664802",
-                "id":"${idDocument1}"
+                "fromMSP": "DTAG",
+                "toMSP": "TMUS",
+                "payload": "${encodedDocument1}",
+                "payloadHash": "notUsed",
+                "blockchainRef": {
+                  "type": "hlf",
+                  "txID": "b70cef323c0d3b56d44e9b31f16a11cba8dbbdd55c1d255b65f3fd2b3eadf8bb",
+                  "timestamp": "2021-03-15T11:43:56Z"
+                },
+                "referenceID": "${idDocument1}"
               }`,
               undefined
             ];
@@ -431,7 +619,7 @@ describe(`Tests POST ${route} API OK`, function() {
 
         const sentBody = {
           msp: eventMsp,
-          eventName: 'STORE:DOCUMENTHASH',
+          eventName: 'STORE:PAYLOADLINK',
           timestamp: '2020-11-30T16:59:35Z',
           data: {
             storageKey: storageKey
@@ -508,7 +696,7 @@ describe(`Tests POST ${route} API OK`, function() {
         {id: '5fd8d6070cc5feb0fc0cb9e5d45f', msp: 'toMsp', index: 0}
       ],
       referenceId: '15d69d4c660d68cbc09c100924628afa68e0e309e13acb04d5d8c2c55d542aa5',
-      blockchainRef: {type: 'hlf', txId: 'TX-d69d4c660d68cbc09c100924628afa68e0e309e13acb04d5d8c2c55d542aa5'},
+      blockchainRef: {type: 'hlf', txId: 'TX-d69d4c660d68cbc09c100924628afa68e0e309e13acb04d5d8c2c55d542aa5', timestamp: new Date().toJSON()},
       storageKeys: [
         '007unused',
         '1176751cb67a89f9d2cfdc1e912cb9746c3a1f9a49a01de508509bccf108eccd'
@@ -538,7 +726,7 @@ describe(`Tests POST ${route} API OK`, function() {
         {id: '5fd8d6070cc5feb0fc0cb9e5d45f', msp: 'toMsp', index: 0}
       ],
       referenceId: '25d69d4c660d68cbc09c100924628afa68e0e309e13acb04d5d8c2c55d542aa5',
-      blockchainRef: {type: 'hlf', txId: 'TX-d69d4c660d68cbc09c100924628afa68e0e309e13acb04d5d8c2c55d542aa5'},
+      blockchainRef: {type: 'hlf', txId: 'TX-d69d4c660d68cbc09c100924628afa68e0e309e13acb04d5d8c2c55d542aa5', timestamp: new Date().toJSON()},
       storageKeys: [
         'ad756b1cecacb073fa4808f5a754515e033f6b1b3247153d65b6510ae4c9bb49',
         '007unused'
@@ -570,7 +758,7 @@ describe(`Tests POST ${route} API OK`, function() {
         {id: '5fd8d6070cc5feb0fc0cb9e5d45f', msp: 'toMsp', index: 0}
       ],
       referenceId: '99d69d4c660d68cbc09c100924628afa68e0e309e13acb04d5d8c2c55d542aa5',
-      blockchainRef: {type: 'hlf', txId: 'TX-d69d4c660d68cbc09c100924628afa68e0e309e13acb04d5d8c2c55d542aa5'},
+      blockchainRef: {type: 'hlf', txId: 'TX-d69d4c660d68cbc09c100924628afa68e0e309e13acb04d5d8c2c55d542aa5', timestamp: new Date().toJSON()},
       storageKeys: [
         '99756b1cecacb073fa4808f5a754515e033f6b1b3247153d65b6510ae4c9bb49',
         '007unused'

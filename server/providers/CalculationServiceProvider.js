@@ -51,13 +51,21 @@ class CalculationServiceProvider {
    *
    * @param {Object} usage
    * @param {Object} contract
-   * @param {String} directionName
    * @return {Promise<Object>}
    */
-  async getUnidirectionalCalculateResult(usage, contract, directionName) {
+  async getCalculateResult(usage, contract) {
     try {
       const sentDiscounts = ((contract === undefined) || (contract.body === undefined) || (typeof contract.body.discounts !== 'object')) ? {} : contract.body.discounts;
-      const sentUsage = ((usage === undefined) || (usage.body === undefined) || (!Array.isArray(usage.body[directionName]))) ? [] : usage.body[directionName].map((usageElement) => {
+      const sentInboundUsage = ((usage === undefined) || (usage.body === undefined) || (!Array.isArray(usage.body.inbound))) ? [] : usage.body.inbound.map((usageElement) => {
+        return {
+          service: usageElement.service,
+          usage: usageElement.usage,
+          charges: usageElement.charges,
+          homeTadig: usageElement.homeTadig,
+          visitorTadig: usageElement.visitorTadig
+        };
+      });
+      const sentOutboundUsage = ((usage === undefined) || (usage.body === undefined) || (!Array.isArray(usage.body.outbound))) ? [] : usage.body.outbound.map((usageElement) => {
         return {
           service: usageElement.service,
           usage: usageElement.usage,
@@ -68,33 +76,13 @@ class CalculationServiceProvider {
       });
       const response = await axiosInstance.post(config.CALCULATION_SERVICE_URL + '/calculate', {
         discounts: sentDiscounts,
-        usage: sentUsage
+        usage: {
+          inbound: sentInboundUsage,
+          outbound: sentOutboundUsage
+        }
       });
-      logger.info(`[CalculationServiceProvider::getUnidirectionalCalculateResult] response data:${typeof response.data} = ${JSON.stringify(response.data)}`);
+      logger.info(`[CalculationServiceProvider::getCalculateResult] response data:${typeof response.data} = ${JSON.stringify(response.data)}`);
       return response.data;
-    } catch (error) {
-      throwDefaultCommonInternalError(error, '[CalculationServiceProvider::getUnidirectionalCalculateResult]');
-    }
-  }
-
-  /**
-   *
-   * @param {Object} usage
-   * @param {Object} contract
-   * @return {Promise<Object>}
-   */
-  async getCalculateResult(usage, contract) {
-    try {
-      const getUnidirectionalCalculateResults = await Promise.all([
-        this.getUnidirectionalCalculateResult(usage, contract, 'inbound'),
-        this.getUnidirectionalCalculateResult(usage, contract, 'outbound')
-      ]);
-      const returnedResponse = {
-        inbound: getUnidirectionalCalculateResults[0],
-        outbound: getUnidirectionalCalculateResults[1]
-      };
-      logger.info(`[CalculationServiceProvider::getCalculateResult] returnedResponse :${typeof returnedResponse} = ${JSON.stringify(returnedResponse)}`);
-      return returnedResponse;
     } catch (error) {
       throwDefaultCommonInternalError(error, '[CalculationServiceProvider::getCalculateResult]');
     }

@@ -37,7 +37,7 @@ describe(`Tests PUT ${route} API OK`, function() {
       fromMsp: {mspId: 'B1', signatures: [{role: 'role', name: 'name', id: 'id'}]},
       toMsp: {mspId: 'C1', signatures: [{role: 'role', name: 'name', id: 'id'}]},
       referenceId: 'AZRAGGSHJIAJAOJSNJNSSNNAIT',
-      blockchainRef: {type: 'hlf', txId: 'TX-RAGGSHJIAJAOJSNJNSSNNAIT'},
+      blockchainRef: {type: 'hlf', txId: 'TX-RAGGSHJIAJAOJSNJNSSNNAIT', timestamp: new Date().toJSON()},
       body: {
         bankDetails: {A1: {iban: null, bankName: null, currency: null}, B1: {iban: null, bankName: null, currency: null}},
         discountModels: 'someData',
@@ -53,7 +53,7 @@ describe(`Tests PUT ${route} API OK`, function() {
       fromMsp: {mspId: 'B1'},
       toMsp: {mspId: 'C1'},
       referenceId: 'AZRAGGSHJIAJAOJSNJNSSNNAIU',
-      blockchainRef: {type: 'hlf', txId: 'TX-RAGGSHJIAJAOJSNJNSSNNAIU'},
+      blockchainRef: {type: 'hlf', txId: 'TX-RAGGSHJIAJAOJSNJNSSNNAIU', timestamp: new Date().toJSON()},
       body: {
         bankDetails: {A1: {iban: null, bankName: null, currency: null}, B1: {iban: null, bankName: null, currency: null}},
         discountModels: 'someData',
