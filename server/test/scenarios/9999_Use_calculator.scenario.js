@@ -40,7 +40,10 @@ describe.skip(`Launch scenario 9999_Use_calculator`, function() {
 
     const sentBody = {
       discounts: configured_JSON_DTAG_contract_body_to_create.discounts,
-      usage: configured_JSON_TMUS_usage_body_to_create.data
+      usage: {
+        inbound: configured_JSON_TMUS_usage_body_to_create.inbound.filter((s) => (s.service === 'SMSMO')),
+        outbound: configured_JSON_TMUS_usage_body_to_create.outbound.filter((s) => (s.service === 'SMSMO'))
+      }
     };
 
     try {
@@ -60,11 +63,12 @@ describe.skip(`Launch scenario 9999_Use_calculator`, function() {
 
           expect(response.body.intermediateResults.length).to.equals(8);
           response.body.intermediateResults.forEach((element) => {
-            expect(Object.keys(element)).have.members(['service', 'homeTadigs', 'visitorTadigs', 'dealValue']);
+            expect(Object.keys(element)).have.members(['service', 'homeTadigs', 'visitorTadigs', 'dealValue', 'type']);
             expect(element).to.have.property('service').that.is.a('string');
             expect(element).to.have.property('homeTadigs').that.is.a('array');
             expect(element).to.have.property('visitorTadigs').that.is.a('array');
             expect(element).to.have.property('dealValue').that.is.a('string');
+            expect(element).to.have.property('type').that.matches(new RegExp('^(inbound|outbound|)$'));
           });
 
           done();
