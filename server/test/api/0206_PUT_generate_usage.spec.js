@@ -302,15 +302,15 @@ describe(`Tests PUT ${route} API OK`, function() {
                 md5hash: 'd8a67bdb368d59766b362265530d32e8'
               },
               intermediateResults: [
-                {service: 'SMSMO', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: '9000', type: 'inbound'},
-                {service: 'SMSMO', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '4500', type: 'outbound'},
-                {service: 'GPRS', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '1', type: 'outbound'},
-                {service: 'GPRS', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '2500', type: 'inbound'},
-                {service: 'MOC Back Home', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '25', type: 'inbound'},
-                {service: 'MOC Back Home', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '500', type: 'outbound'},
-                {service: 'MOC Local', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '5', type: 'inbound'},
-                {service: 'MOC Local', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '6', type: 'outbound'},
-                {service: 'MOC', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '2500', type: 'outbound'}
+                {yearMonth: 202001, service: 'SMSMO', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: '9000', type: 'inbound'},
+                {yearMonth: 202001, service: 'SMSMO', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '4500', type: 'outbound'},
+                {yearMonth: 202001, service: 'GPRS', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '1', type: 'outbound'},
+                {yearMonth: 202001, service: 'GPRS', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '2500', type: 'inbound'},
+                {yearMonth: 202001, service: 'MOC Back Home', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '25', type: 'inbound'},
+                {yearMonth: 202001, service: 'MOC Back Home', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '500', type: 'outbound'},
+                {yearMonth: 202001, service: 'MOC Local', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '5', type: 'inbound'},
+                {yearMonth: 202002, service: 'MOC Local', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '6', type: 'outbound'},
+                {yearMonth: 202002, service: 'MOC', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '2500', type: 'outbound'}
               ]
             },
             undefined
@@ -349,8 +349,8 @@ describe(`Tests PUT ${route} API OK`, function() {
             expect(response.body).to.have.property('body').that.is.an('object');
             expect(Object.keys(response.body.body)).have.members(['generatedResult', 'usage']);
             expect(response.body.body.usage.body).to.deep.include(usageMinimumData.body);
-            expect(response.body.body.generatedResult).to.have.property('fromDate', '');
-            expect(response.body.body.generatedResult).to.have.property('toDate', '');
+            expect(response.body.body.generatedResult).to.have.property('fromDate', 202001);
+            expect(response.body.body.generatedResult).to.have.property('toDate', 202002);
             expect(response.body.body.generatedResult).to.have.property('calculationEngineVersion', '0.0.0');
             expect(response.body.body.generatedResult).to.have.property('inbound');
             expect(response.body.body.generatedResult.inbound).to.have.property('tax').that.deep.equals({rate: ''});
@@ -481,8 +481,8 @@ describe(`Tests PUT ${route} API OK`, function() {
             expect(response.body).to.have.property('body').that.is.an('object');
             expect(Object.keys(response.body.body)).have.members(['generatedResult', 'usage']);
             expect(response.body.body.usage.body).to.deep.include(usageMinimumData.body);
-            expect(response.body.body.generatedResult).to.have.property('fromDate', '');
-            expect(response.body.body.generatedResult).to.have.property('toDate', '');
+            expect(response.body.body.generatedResult).to.have.property('fromDate', null);
+            expect(response.body.body.generatedResult).to.have.property('toDate', null);
             expect(response.body.body.generatedResult).to.have.property('calculationEngineVersion', '0.0.0');
             expect(response.body.body.generatedResult).to.have.property('inbound');
             expect(response.body.body.generatedResult.inbound).to.have.property('tax').that.deep.equals({rate: ''});
@@ -597,8 +597,8 @@ describe(`Tests PUT ${route} API OK`, function() {
                 expect(response.body).to.have.property('body').that.is.an('object');
                 expect(Object.keys(response.body.body)).have.members(['generatedResult', 'usage']);
                 expect(response.body.body.usage.body).to.deep.include(usageSentData1.body);
-                expect(response.body.body.generatedResult).to.have.property('fromDate', '');
-                expect(response.body.body.generatedResult).to.have.property('toDate', '');
+                expect(response.body.body.generatedResult).to.have.property('fromDate', null);
+                expect(response.body.body.generatedResult).to.have.property('toDate', null);
                 expect(response.body.body.generatedResult).to.have.property('calculationEngineVersion', '0.0.0');
                 expect(response.body.body.generatedResult).to.have.property('inbound');
                 expect(response.body.body.generatedResult.inbound).to.have.property('tax').that.deep.equals({rate: ''});
@@ -725,8 +725,8 @@ describe(`Tests PUT ${route} API OK`, function() {
                 expect(response.body).to.have.property('body').that.is.an('object');
                 expect(Object.keys(response.body.body)).have.members(['generatedResult', 'usage']);
                 expect(response.body.body.usage.body).to.deep.include(usageSentData2.body);
-                expect(response.body.body.generatedResult).to.have.property('fromDate', '');
-                expect(response.body.body.generatedResult).to.have.property('toDate', '');
+                expect(response.body.body.generatedResult).to.have.property('fromDate', null);
+                expect(response.body.body.generatedResult).to.have.property('toDate', null);
                 expect(response.body.body.generatedResult).to.have.property('calculationEngineVersion', '0.0.0');
                 expect(response.body.body.generatedResult).to.have.property('inbound');
                 expect(response.body.body.generatedResult.inbound).to.have.property('tax').that.deep.equals({rate: ''});

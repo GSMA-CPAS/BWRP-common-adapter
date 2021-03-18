@@ -75,16 +75,16 @@ class SettlementMapper {
     return returnedResponseBody;
   }
 
-  static defineGeneratedResult(getCalculateResultResp) {
+  static defineGeneratedResult(getCalculateResultResp,usage) {
     const returnedGeneratedResult = {
-      fromDate: '',
-      toDate: '',
-      calculationEngineVersion: '',
+      fromDate: undefined,
+      toDate: undefined,
+      calculationEngineVersion: undefined,
       inbound: {
         tax: {
           rate: ''
         },
-        currency: '',
+        currency: 'EURO',
         services: {
           voice: {
             'MOC': {
@@ -100,7 +100,6 @@ class SettlementMapper {
               'specialDestinations': 0
             },
             'MTC': 0
-
           },
           SMS: {
             MO: 0,
@@ -144,7 +143,7 @@ class SettlementMapper {
         tax: {
           rate: ''
         },
-        currency: '',
+        currency: 'EURO',
         services: {
           voice: {
             'MOC': {
@@ -201,6 +200,11 @@ class SettlementMapper {
       },
       unexpectedServiceNames: [],
     };
+    const yearMonthArray = getCalculateResultResp.intermediateResults
+      .filter((intermediateResult) => (intermediateResult.yearMonth)).map((intermediateResult) => parseInt(intermediateResult.yearMonth));
+
+    returnedGeneratedResult.fromDate = Math.min(...yearMonthArray);
+    returnedGeneratedResult.toDate = Math.max(...yearMonthArray);
 
 
     getCalculateResultResp.intermediateResults
@@ -294,7 +298,7 @@ class SettlementMapper {
       mspOwner: usage.mspOwner,
       mspReceiver: usage.mspReceiver,
       body: {
-        generatedResult: SettlementMapper.defineGeneratedResult(getCalculateResultResp),
+        generatedResult: SettlementMapper.defineGeneratedResult(getCalculateResultResp, usage),
         usage: {
           name: usage.name,
           version: usage.version,
