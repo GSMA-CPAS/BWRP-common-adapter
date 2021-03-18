@@ -351,7 +351,7 @@ describe(`Tests PUT ${route} API OK`, function() {
             expect(response.body.body.usage.body).to.deep.include(usageMinimumData.body);
             expect(response.body.body.generatedResult).to.have.property('fromDate', '');
             expect(response.body.body.generatedResult).to.have.property('toDate', '');
-            expect(response.body.body.generatedResult).to.have.property('calculationEngineVersion', '');
+            expect(response.body.body.generatedResult).to.have.property('calculationEngineVersion', '0.0.0');
             expect(response.body.body.generatedResult).to.have.property('inbound');
             expect(response.body.body.generatedResult.inbound).to.have.property('tax').that.deep.equals({rate: ''});
             expect(response.body.body.generatedResult.inbound).to.have.property('currency');
@@ -483,7 +483,7 @@ describe(`Tests PUT ${route} API OK`, function() {
             expect(response.body.body.usage.body).to.deep.include(usageMinimumData.body);
             expect(response.body.body.generatedResult).to.have.property('fromDate', '');
             expect(response.body.body.generatedResult).to.have.property('toDate', '');
-            expect(response.body.body.generatedResult).to.have.property('calculationEngineVersion', '');
+            expect(response.body.body.generatedResult).to.have.property('calculationEngineVersion', '0.0.0');
             expect(response.body.body.generatedResult).to.have.property('inbound');
             expect(response.body.body.generatedResult.inbound).to.have.property('tax').that.deep.equals({rate: ''});
             expect(response.body.body.generatedResult.inbound).to.have.property('currency');
@@ -599,7 +599,7 @@ describe(`Tests PUT ${route} API OK`, function() {
                 expect(response.body.body.usage.body).to.deep.include(usageSentData1.body);
                 expect(response.body.body.generatedResult).to.have.property('fromDate', '');
                 expect(response.body.body.generatedResult).to.have.property('toDate', '');
-                expect(response.body.body.generatedResult).to.have.property('calculationEngineVersion', '');
+                expect(response.body.body.generatedResult).to.have.property('calculationEngineVersion', '0.0.0');
                 expect(response.body.body.generatedResult).to.have.property('inbound');
                 expect(response.body.body.generatedResult.inbound).to.have.property('tax').that.deep.equals({rate: ''});
                 expect(response.body.body.generatedResult.inbound).to.have.property('currency');
@@ -727,7 +727,7 @@ describe(`Tests PUT ${route} API OK`, function() {
                 expect(response.body.body.usage.body).to.deep.include(usageSentData2.body);
                 expect(response.body.body.generatedResult).to.have.property('fromDate', '');
                 expect(response.body.body.generatedResult).to.have.property('toDate', '');
-                expect(response.body.body.generatedResult).to.have.property('calculationEngineVersion', '');
+                expect(response.body.body.generatedResult).to.have.property('calculationEngineVersion', '0.0.0');
                 expect(response.body.body.generatedResult).to.have.property('inbound');
                 expect(response.body.body.generatedResult.inbound).to.have.property('tax').that.deep.equals({rate: ''});
                 expect(response.body.body.generatedResult.inbound).to.have.property('currency');

@@ -661,12 +661,21 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           expect(response.body.body).to.have.property('usage').that.is.an('object');
           expect(response.body).to.have.property('creationDate').that.is.a('string').and.match(DATE_REGEX);
           expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
-
           DTAG_dynamic_data.settlementIdFromLocalUsage = response.body.settlementId;
-          debugObjectOnDTAG('Settlement created on DTAG from local usage : ', response.body);
-          if ((response.body.body) && (response.body.body.generatedResult)) {
-            debugObjectOnDTAG('Settlement created on DTAG from local usage => embedded generatedResult intermediateResults : ', response.body.body.generatedResult.intermediateResults);
-          }
+          debugObjectOnDTAG('Settlement created on DTAG from local usage : ', JSON.stringify(response.body));
+          expect(response.body).to.have.property('body').that.is.an('object');
+          expect(Object.keys(response.body.body)).have.members(['generatedResult', 'usage']);
+          expect(response.body.body.generatedResult).to.have.property('fromDate', '');
+          expect(response.body.body.generatedResult).to.have.property('toDate', '');
+          expect(response.body.body.generatedResult).to.have.property('calculationEngineVersion', '');
+          expect(response.body.body.generatedResult).to.have.property('inbound');
+          expect(response.body.body.generatedResult.inbound).to.have.property('tax').that.deep.equals({rate: ''});
+          expect(response.body.body.generatedResult.inbound).to.have.property('currency');
+          expect(response.body.body.generatedResult.inbound).to.have.property('services');
+
+          expect(response.body.body.generatedResult.outbound).to.have.property('tax').that.deep.equals({rate: ''});
+          expect(response.body.body.generatedResult.outbound).to.have.property('currency');
+          expect(response.body.body.generatedResult.outbound).to.have.property('services');
           debug(`==> DTAG new created settlement id from local usage: ${DTAG_dynamic_data.settlementIdFromLocalUsage}`);
 
           done();
@@ -702,12 +711,20 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           expect(response.body.body).to.have.property('usage').that.is.an('object');
           expect(response.body).to.have.property('creationDate').that.is.a('string').and.match(DATE_REGEX);
           expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
-
           DTAG_dynamic_data.settlementIdFromReceivedUsage = response.body.settlementId;
-          debugObjectOnDTAG('Settlement created on DTAG from received usage : ', response.body);
-          if ((response.body.body) && (response.body.body.generatedResult)) {
-            debugObjectOnDTAG('Settlement created on DTAG from received usage => embedded generatedResult intermediateResults : ', response.body.body.generatedResult.intermediateResults);
-          }
+          debugObjectOnDTAG('Settlement created on DTAG from received usage : ', JSON.stringify(response.body));
+          expect(response.body).to.have.property('body').that.is.an('object');
+          expect(Object.keys(response.body.body)).have.members(['generatedResult', 'usage']);
+          expect(response.body.body.generatedResult).to.have.property('fromDate', '');
+          expect(response.body.body.generatedResult).to.have.property('toDate', '');
+          expect(response.body.body.generatedResult).to.have.property('calculationEngineVersion', '');
+          expect(response.body.body.generatedResult).to.have.property('inbound');
+          expect(response.body.body.generatedResult.inbound).to.have.property('tax').that.deep.equals({rate: ''});
+          expect(response.body.body.generatedResult.inbound).to.have.property('currency');
+          expect(response.body.body.generatedResult.inbound).to.have.property('services');
+          expect(response.body.body.generatedResult.outbound).to.have.property('tax').that.deep.equals({rate: ''});
+          expect(response.body.body.generatedResult.outbound).to.have.property('currency');
+          expect(response.body.body.generatedResult.outbound).to.have.property('services');
           debug(`==> DTAG new created settlement id from received usage: ${DTAG_dynamic_data.settlementIdFromReceivedUsage}`);
 
           done();
@@ -778,7 +795,7 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           TMUS_dynamic_data.settlementIdFromLocalUsage = response.body.settlementId;
           debugObjectOnTMUS('Settlement created on TMUS from local usage : ', response.body);
           if ((response.body.body) && (response.body.body.generatedResult)) {
-            debugObjectOnTMUS('Settlement created on TMUS from local usage => embedded generatedResult intermediateResults : ', response.body.body.generatedResult.intermediateResults);
+            debugObjectOnTMUS('Settlement created on TMUS from local usage => embedded generatedResult : ', response.body.body.generatedResult);
           }
           debug(`==> TMUS new created settlement id from local usage: ${TMUS_dynamic_data.settlementIdFromLocalUsage}`);
 
@@ -819,7 +836,7 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           TMUS_dynamic_data.settlementIdFromReceivedUsage = response.body.settlementId;
           debugObjectOnTMUS('Settlement created on TMUS from received usage : ', response.body);
           if ((response.body.body) && (response.body.body.generatedResult)) {
-            debugObjectOnTMUS('Settlement created on TMUS from received usage => embedded generatedResult intermediateResults : ', response.body.body.generatedResult.intermediateResults);
+            debugObjectOnTMUS('Settlement created on TMUS from received usage => embedded generatedResult : ', response.body.body.generatedResult);
           }
           debug(`==> TMUS new created settlement id from received usage: ${TMUS_dynamic_data.settlementIdFromReceivedUsage}`);
 

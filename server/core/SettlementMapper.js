@@ -275,6 +275,10 @@ class SettlementMapper {
         }
       });
 
+    if (( getCalculateResultResp.header ) && ( getCalculateResultResp.header.version )) {
+      returnedGeneratedResult.calculationEngineVersion = getCalculateResultResp.header.version;
+    }
+
     return returnedGeneratedResult;
   }
 
