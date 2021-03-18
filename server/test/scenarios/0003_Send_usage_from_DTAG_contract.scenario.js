@@ -665,9 +665,9 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           debugObjectOnDTAG('Settlement created on DTAG from local usage : ', JSON.stringify(response.body));
           expect(response.body).to.have.property('body').that.is.an('object');
           expect(Object.keys(response.body.body)).have.members(['generatedResult', 'usage']);
-          expect(response.body.body.generatedResult).to.have.property('fromDate', '');
-          expect(response.body.body.generatedResult).to.have.property('toDate', '');
-          expect(response.body.body.generatedResult).to.have.property('calculationEngineVersion', '');
+          expect(response.body.body.generatedResult).to.have.property('fromDate', null);
+          expect(response.body.body.generatedResult).to.have.property('toDate', null);
+          expect(response.body.body.generatedResult).to.have.property('calculationEngineVersion', '0.0.0');
           expect(response.body.body.generatedResult).to.have.property('inbound');
           expect(response.body.body.generatedResult.inbound).to.have.property('tax').that.deep.equals({rate: ''});
           expect(response.body.body.generatedResult.inbound).to.have.property('currency');
@@ -715,9 +715,9 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           debugObjectOnDTAG('Settlement created on DTAG from received usage : ', JSON.stringify(response.body));
           expect(response.body).to.have.property('body').that.is.an('object');
           expect(Object.keys(response.body.body)).have.members(['generatedResult', 'usage']);
-          expect(response.body.body.generatedResult).to.have.property('fromDate', '');
-          expect(response.body.body.generatedResult).to.have.property('toDate', '');
-          expect(response.body.body.generatedResult).to.have.property('calculationEngineVersion', '');
+          expect(response.body.body.generatedResult).to.have.property('fromDate', null);
+          expect(response.body.body.generatedResult).to.have.property('toDate', null);
+          expect(response.body.body.generatedResult).to.have.property('calculationEngineVersion', '0.0.0');
           expect(response.body.body.generatedResult).to.have.property('inbound');
           expect(response.body.body.generatedResult.inbound).to.have.property('tax').that.deep.equals({rate: ''});
           expect(response.body.body.generatedResult.inbound).to.have.property('currency');
