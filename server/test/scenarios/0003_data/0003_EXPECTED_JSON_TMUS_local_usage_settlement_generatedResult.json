@@ -10,12 +10,12 @@
     "services": {
       "voice": {
         "MOC": {
-          "local": 3000,
+          "local": 1500,
           "backHome": 0,
           "international": 0,
           "premium": 0,
           "ROW": 0,
-          "EU": 320880,
+          "EU": 256704,
           "EEA": 0,
           "satellite": 0,
           "videoTelephony": 0,
@@ -24,7 +24,7 @@
         "MTC": 0
       },
       "SMS": {
-        "MO": 5000,
+        "MO": 158469.00000000003,
         "MT": 0
       },
       "data": [
@@ -70,12 +70,12 @@
     "services": {
       "voice": {
         "MOC": {
-          "local": 1500,
+          "local": 3000,
           "backHome": 0,
           "international": 0,
           "premium": 0,
           "ROW": 0,
-          "EU": 1477236,
+          "EU": 1846545,
           "EEA": 0,
           "satellite": 0,
           "videoTelephony": 0,
@@ -84,7 +84,7 @@
         "MTC": 0
       },
       "SMS": {
-        "MO": 645702,
+        "MO": 5000,
         "MT": 0
       },
       "data": [
@@ -106,7 +106,7 @@
         },
         {
           "name": "VoLTE",
-          "value": 2308420
+          "value": 2319809.5
         },
         {
           "name": "ViLTE",

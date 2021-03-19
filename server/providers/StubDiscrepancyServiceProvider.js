@@ -554,7 +554,6 @@ class DiscrepancyServiceProvider {
   async getUsageDiscrepancy(usage, usageToCompare) {
     try {
       const response = getStubReturnForGetUsageDiscrepancy(usage, usageToCompare);
-      console.log("response = ", response);
       // const response = STUB_DISCREPANCY[0];
       // response.localUsage = defineUsageToSendToDiscrepancyService(usage);
       // response.remoteUsage = defineUsageToSendToDiscrepancyService(usageToCompare);
