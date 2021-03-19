@@ -69,6 +69,13 @@ const TMUS_dynamic_data = {
   receivedUsageId: undefined
 };
 
+const configured_EXPECTED_JSON_DTAG_local_usage_settlement_generatedResult = require('./0003_data/0003_EXPECTED_JSON_DTAG_local_usage_settlement_generatedResult.json');
+const configured_EXPECTED_JSON_DTAG_partner_usage_settlement_generatedResult = require('./0003_data/0003_EXPECTED_JSON_DTAG_partner_usage_settlement_generatedResult.json');
+const configured_EXPECTED_JSON_TMUS_local_usage_settlement_generatedResult = configured_EXPECTED_JSON_DTAG_partner_usage_settlement_generatedResult;
+const configured_EXPECTED_JSON_TMUS_partner_usage_settlement_generatedResult = configured_EXPECTED_JSON_DTAG_local_usage_settlement_generatedResult;
+
+const configured_EXPECTED_JSON_DTAG_local_usage_discrepancy_body = require('./0003_data/0003_EXPECTED_JSON_DTAG_local_usage_discrepancy_body.json');
+
 describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
   before((done) => {
     debugSetup('==> verify that DTAG and TMUS APIs are UP');
@@ -665,6 +672,9 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           debugObjectOnDTAG('Settlement created on DTAG from local usage : ', JSON.stringify(response.body));
           expect(response.body).to.have.property('body').that.is.an('object');
           expect(Object.keys(response.body.body)).have.members(['generatedResult', 'usage']);
+
+          expect(response.body.body.generatedResult).to.deep.equals(configured_EXPECTED_JSON_DTAG_local_usage_settlement_generatedResult);
+
           expect(response.body.body.generatedResult).to.have.property('fromDate', null);
           expect(response.body.body.generatedResult).to.have.property('toDate', null);
           expect(response.body.body.generatedResult).to.have.property('calculationEngineVersion', '0.0.0');
@@ -715,6 +725,9 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           debugObjectOnDTAG('Settlement created on DTAG from received usage : ', JSON.stringify(response.body));
           expect(response.body).to.have.property('body').that.is.an('object');
           expect(Object.keys(response.body.body)).have.members(['generatedResult', 'usage']);
+
+          expect(response.body.body.generatedResult).to.deep.equals(configured_EXPECTED_JSON_DTAG_partner_usage_settlement_generatedResult);
+
           expect(response.body.body.generatedResult).to.have.property('fromDate', null);
           expect(response.body.body.generatedResult).to.have.property('toDate', null);
           expect(response.body.body.generatedResult).to.have.property('calculationEngineVersion', '0.0.0');
@@ -788,6 +801,9 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           expect(response.body).to.have.property('mspOwner', 'TMUS');
           expect(response.body).to.have.property('body').that.is.an('object');
           expect(response.body.body).to.have.property('generatedResult').that.is.an('object');
+
+          expect(response.body.body.generatedResult).to.deep.equals(configured_EXPECTED_JSON_TMUS_local_usage_settlement_generatedResult);
+
           expect(response.body.body).to.have.property('usage').that.is.an('object');
           expect(response.body).to.have.property('creationDate').that.is.a('string').and.match(DATE_REGEX);
           expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
@@ -829,6 +845,9 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           expect(response.body).to.have.property('mspOwner', 'DTAG');
           expect(response.body).to.have.property('body').that.is.an('object');
           expect(response.body.body).to.have.property('generatedResult').that.is.an('object');
+
+          expect(response.body.body.generatedResult).to.deep.equals(configured_EXPECTED_JSON_TMUS_partner_usage_settlement_generatedResult);
+
           expect(response.body.body).to.have.property('usage').that.is.an('object');
           expect(response.body).to.have.property('creationDate').that.is.a('string').and.match(DATE_REGEX);
           expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
@@ -895,6 +914,10 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           expect(response).to.be.json;
           expect(response.body).to.exist;
           expect(response.body).to.be.an('object');
+
+          debugObjectOnDTAG('Usage discrepancy generated on DTAG from received usage : ', JSON.stringify(response.body));
+
+          expect(response.body).to.deep.equals(configured_EXPECTED_JSON_DTAG_local_usage_discrepancy_body);
 
           debugObjectOnDTAG('Usage Discrepancy calculated : ', response.body);
           if (SHOW_DISCREPANCY_GENERATION_DETAILS && (response.body.localUsage) && (response.body.localUsage.body)) {
