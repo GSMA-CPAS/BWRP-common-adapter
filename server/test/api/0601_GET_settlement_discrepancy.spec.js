@@ -53,11 +53,84 @@ describe(`Tests GET ${route} API OK`, function() {
       mspReceiver: undefined,
       body: {
         generatedResult: {
-          complexObject: {
-            a: 'a',
-            b: 'b'
+          fromDate: 202001,
+          toDate: 202012,
+          calculationEngineVersion: '0.0.0.4',
+          inbound: {
+            tax: {rate: ''},
+            currency: 'EURO',
+            services: {
+              voice: {
+                MOC: {
+                  local: 10234,
+                  backHome: 6780,
+                  international: 0,
+                  premium: 0,
+                  ROW: 0,
+                  EU: 0,
+                  EEA: 0,
+                  satellite: 0,
+                  videoTelephony: 0,
+                  specialDestinations: 0
+                },
+                MTC: 0
+              },
+              SMS: {
+                MO: 5000,
+                MT: 0
+              },
+              data: [
+                {name: 'GPRS', value: 951},
+                {name: 'M2M', value: 0},
+                {name: 'NB-IOT', value: 0},
+                {name: 'LTE-M', value: 0},
+                {name: 'VoLTE', value: 0},
+                {name: 'ViLTE', value: 0},
+                {name: 'signalling', value: 0}
+              ],
+              access: {
+                networkAccess: 0
+              }
+            }
           },
-          otherValue: 'other'
+          outbound: {
+            tax: {rate: ''},
+            currency: 'EURO',
+            services: {
+              voice: {
+                MOC: {
+                  local: 9456,
+                  backHome: 1289,
+                  international: 0,
+                  premium: 0,
+                  ROW: 0,
+                  EU: 0,
+                  EEA: 0,
+                  satellite: 0,
+                  videoTelephony: 0,
+                  specialDestinations: 0
+                },
+                MTC: 0
+              },
+              SMS: {
+                MO: 5000,
+                MT: 0
+              },
+              data: [
+                {name: 'GPRS', value: 0},
+                {name: 'M2M', value: 0},
+                {name: 'NB-IOT', value: 0},
+                {name: 'LTE-M', value: 0},
+                {name: 'VoLTE', value: 389},
+                {name: 'ViLTE', value: 0},
+                {name: 'signalling', value: 0}
+              ],
+              access: {
+                networkAccess: 0
+              }
+            }
+          },
+          unexpectedServiceNames: ['MOC', 'VOLTE', 'MOCEU', 'MOC', 'VOLTE', 'MOCEU']
         },
         usage: {
           name: 'usageName1',
@@ -87,11 +160,84 @@ describe(`Tests GET ${route} API OK`, function() {
       mspReceiver: undefined,
       body: {
         generatedResult: {
-          complexObject: {
-            a: 'a',
-            b: 'b'
+          fromDate: 202001,
+          toDate: 202012,
+          calculationEngineVersion: '0.0.0.4',
+          inbound: {
+            tax: {rate: ''},
+            currency: 'EURO',
+            services: {
+              voice: {
+                MOC: {
+                  local: 9336,
+                  backHome: 2389,
+                  international: 0,
+                  premium: 0,
+                  ROW: 0,
+                  EU: 0,
+                  EEA: 134,
+                  satellite: 0,
+                  videoTelephony: 0,
+                  specialDestinations: 0
+                },
+                MTC: 0
+              },
+              SMS: {
+                MO: 5040,
+                MT: 0
+              },
+              data: [
+                {name: 'GPRS', value: 0},
+                {name: 'M2M', value: 0},
+                {name: 'NB-IOT', value: 0},
+                {name: 'LTE-M', value: 0},
+                {name: 'VoLTE', value: 189},
+                {name: 'ViLTE', value: 0},
+                {name: 'signalling', value: 0}
+              ],
+              access: {
+                networkAccess: 0
+              }
+            }
           },
-          otherValue: 'other'
+          outbound: {
+            tax: {rate: ''},
+            currency: 'EURO',
+            services: {
+              voice: {
+                MOC: {
+                  local: 10238,
+                  backHome: 6980,
+                  international: 0,
+                  premium: 0,
+                  ROW: 0,
+                  EU: 0,
+                  EEA: 0,
+                  satellite: 234,
+                  videoTelephony: 0,
+                  specialDestinations: 0
+                },
+                MTC: 0
+              },
+              SMS: {
+                MO: 5200,
+                MT: 0
+              },
+              data: [
+                {name: 'GPRS', value: 972},
+                {name: 'M2M', value: 0},
+                {name: 'NB-IOT', value: 23},
+                {name: 'LTE-M', value: 0},
+                {name: 'VoLTE', value: 0},
+                {name: 'ViLTE', value: 0},
+                {name: 'signalling', value: 0}
+              ],
+              access: {
+                networkAccess: 0
+              }
+            }
+          },
+          unexpectedServiceNames: ['MOC', 'VOLTE', 'MOCEU', 'MOC', 'VOLTE', 'MOCEU']
         },
         usage: {
           name: 'usageName-2-EmbeddedInSettlement',
@@ -121,11 +267,17 @@ describe(`Tests GET ${route} API OK`, function() {
       mspReceiver: undefined,
       body: {
         generatedResult: {
-          complexObject: {
-            a: 'a',
-            b: 'b'
+          fromDate: 202001,
+          toDate: 202012,
+          calculationEngineVersion: '0.0.0.4',
+          inbound: {
+            tax: {rate: ''},
+            currency: 'EURO',
           },
-          otherValue: 'other'
+          outbound: {
+            tax: {rate: ''},
+            currency: 'EURO',
+          }
         },
         usage: {
           name: 'usageName-3-EmbeddedInSettlement',
@@ -242,17 +394,140 @@ describe(`Tests GET ${route} API OK`, function() {
             expect(response).to.be.json;
             expect(response.body).to.exist;
             expect(response.body).to.be.an('object');
-            expect(Object.keys(response.body)).have.members(['generatedDiscrepancy', 'otherData', 'localUsage', 'remoteUsage']);
+            expect(Object.keys(response.body)).have.members(['homePerspective', 'partnerPerspective']);
 
-            expect(response.body).to.have.property('otherData').that.is.an('array').that.include('test', '8');
-            expect(response.body).to.have.property('generatedDiscrepancy').that.is.an('object');
-            expect(Object.keys(response.body.generatedDiscrepancy)).have.members(['data1', 'data2', 'object1']);
+            /* eslint-disable quotes */
+            expect(response.body.homePerspective).to.have.property('general_information').that.is.an('array').that.deep.equals([
+              {
+                "bearer": "Voice",
+                "unit": "min",
+                "own_calculation": 17014,
+                "partner_calculation": 17452,
+                "delta_calculation_percent": 2.57
+              },
+              {
+                "bearer": "SMS",
+                "unit": "#",
+                "own_calculation": 5000,
+                "partner_calculation": 5200,
+                "delta_calculation_percent": 4
+              },
+              {
+                "bearer": "Data",
+                "unit": "min",
+                "own_calculation": 951,
+                "partner_calculation": 995,
+                "delta_calculation_percent": 4.63
+              }
+            ]);
 
-            expect(response.body.generatedDiscrepancy).to.have.property('data1', 'a');
-            expect(response.body.generatedDiscrepancy).to.have.property('data2', 'b');
-            expect(response.body.generatedDiscrepancy).to.have.property('object1').that.is.an('object');
-            expect(Object.keys(response.body.generatedDiscrepancy.object1)).have.members(['object1data10']);
-            expect(response.body.generatedDiscrepancy.object1).to.have.property('object1data10', 'z');
+            expect(response.body.homePerspective).to.have.property('details').that.is.an('array').that.deep.equals([
+              {
+                "service": "MOC Back Home",
+                "unit": "min",
+                "own_calculation": 6780,
+                "partner_calculation": 6980,
+                "delta_calculation_percent": 2.95
+              },
+              {
+                "service": "MOC Local",
+                "unit": "min",
+                "own_calculation": 10234,
+                "partner_calculation": 10238,
+                "delta_calculation_percent": 0.04
+              },
+              {
+                "service": "MOC Satellite",
+                "unit": "min",
+                "own_calculation": 0,
+                "partner_calculation": 234,
+                "delta_calculation_percent": 100
+              },
+              {
+                "service": "SMSMO",
+                "unit": "min",
+                "own_calculation": 5000,
+                "partner_calculation": 5200,
+                "delta_calculation_percent": 4
+              },
+              {
+                "service": "NB-IoT",
+                "unit": "min",
+                "own_calculation": 0,
+                "partner_calculation": 23,
+                "delta_calculation_percent": 100
+              },
+              {
+                "service": "GPRS",
+                "unit": "min",
+                "own_calculation": 951,
+                "partner_calculation": 972,
+                "delta_calculation_percent": 2.21
+              }
+            ]);
+
+            expect(response.body.partnerPerspective).to.have.property('general_information').that.is.an('array').that.deep.equals([
+              {
+                "bearer": "Voice",
+                "unit": "min",
+                "own_calculation": 10745,
+                "partner_calculation": 11859,
+                "delta_calculation_percent": 10.37
+              },
+              {
+                "bearer": "SMS",
+                "unit": "#",
+                "own_calculation": 5000,
+                "partner_calculation": 5040,
+                "delta_calculation_percent": 0.8
+              },
+              {
+                "bearer": "Data",
+                "unit": "min",
+                "own_calculation": 389,
+                "partner_calculation": 189,
+                "delta_calculation_percent": -51.41
+              }
+            ]);
+
+            expect(response.body.partnerPerspective).to.have.property('details').that.is.an('array').that.deep.equals([
+              {
+                "service": "MOC Back Home",
+                "unit": "min",
+                "own_calculation": 1289,
+                "partner_calculation": 2389,
+                "delta_calculation_percent": 85.34
+              },
+              {
+                "service": "MOC Local",
+                "unit": "min",
+                "own_calculation": 9456,
+                "partner_calculation": 9336,
+                "delta_calculation_percent": -1.27
+              },
+              {
+                "service": "MOC EEA",
+                "unit": "min",
+                "own_calculation": 0,
+                "partner_calculation": 134,
+                "delta_calculation_percent": 100
+              },
+              {
+                "service": "SMSMO",
+                "unit": "min",
+                "own_calculation": 5000,
+                "partner_calculation": 5040,
+                "delta_calculation_percent": 0.8
+              },
+              {
+                "service": "VoLTE",
+                "unit": "min",
+                "own_calculation": 389,
+                "partner_calculation": 189,
+                "delta_calculation_percent": -51.41
+              }
+            ]);
+            /* eslint-enable quotes */
 
             done();
           });
@@ -263,7 +538,7 @@ describe(`Tests GET ${route} API OK`, function() {
       }
     });
 
-    it('Get settlement discrepancy OK', function(done) {
+    it('Get settlement discrepancy OK without any data in parntnerSettlement', function(done) {
       try {
         const path = globalVersion + '/contracts/' + settlement1.contractId + '/settlements/' + settlement1.id + '/discrepancy/';
         debug('path : ', path);
@@ -279,17 +554,119 @@ describe(`Tests GET ${route} API OK`, function() {
             expect(response).to.be.json;
             expect(response.body).to.exist;
             expect(response.body).to.be.an('object');
-            expect(Object.keys(response.body)).have.members(['generatedDiscrepancy', 'otherData', 'localUsage', 'remoteUsage']);
+            expect(Object.keys(response.body)).have.members(['homePerspective', 'partnerPerspective']);
 
-            expect(response.body).to.have.property('otherData').that.is.an('array').that.include('test', '8');
-            expect(response.body).to.have.property('generatedDiscrepancy').that.is.an('object');
-            expect(Object.keys(response.body.generatedDiscrepancy)).have.members(['data1', 'data2', 'object1']);
+            /* eslint-disable quotes */
+            expect(response.body.homePerspective).to.have.property('general_information').that.is.an('array').that.deep.equals([
+              {
+                "bearer": "Voice",
+                "unit": "min",
+                "own_calculation": 17014,
+                "partner_calculation": 0,
+                "delta_calculation_percent": -100
+              },
+              {
+                "bearer": "SMS",
+                "unit": "#",
+                "own_calculation": 5000,
+                "partner_calculation": 0,
+                "delta_calculation_percent": -100
+              },
+              {
+                "bearer": "Data",
+                "unit": "min",
+                "own_calculation": 951,
+                "partner_calculation": 0,
+                "delta_calculation_percent": -100
+              }
+            ]);
 
-            expect(response.body.generatedDiscrepancy).to.have.property('data1', 'a');
-            expect(response.body.generatedDiscrepancy).to.have.property('data2', 'b');
-            expect(response.body.generatedDiscrepancy).to.have.property('object1').that.is.an('object');
-            expect(Object.keys(response.body.generatedDiscrepancy.object1)).have.members(['object1data10']);
-            expect(response.body.generatedDiscrepancy.object1).to.have.property('object1data10', 'z');
+            expect(response.body.homePerspective).to.have.property('details').that.is.an('array').that.deep.equals([
+              {
+                "service": "MOC Back Home",
+                "unit": "min",
+                "own_calculation": 6780,
+                "partner_calculation": 0,
+                "delta_calculation_percent": -100
+              },
+              {
+                "service": "MOC Local",
+                "unit": "min",
+                "own_calculation": 10234,
+                "partner_calculation": 0,
+                "delta_calculation_percent": -100
+              },
+              {
+                "service": "SMSMO",
+                "unit": "min",
+                "own_calculation": 5000,
+                "partner_calculation": 0,
+                "delta_calculation_percent": -100
+              },
+              {
+                "service": "GPRS",
+                "unit": "min",
+                "own_calculation": 951,
+                "partner_calculation": 0,
+                "delta_calculation_percent": -100
+              }
+            ]);
+
+            expect(response.body.partnerPerspective).to.have.property('general_information').that.is.an('array').that.deep.equals([
+              {
+                "bearer": "Voice",
+                "unit": "min",
+                "own_calculation": 10745,
+                "partner_calculation": 0,
+                "delta_calculation_percent": -100
+              },
+              {
+                "bearer": "SMS",
+                "unit": "#",
+                "own_calculation": 5000,
+                "partner_calculation": 0,
+                "delta_calculation_percent": -100
+              },
+              {
+                "bearer": "Data",
+                "unit": "min",
+                "own_calculation": 389,
+                "partner_calculation": 0,
+                "delta_calculation_percent": -100
+              }
+            ]);
+
+            expect(response.body.partnerPerspective).to.have.property('details').that.is.an('array').that.deep.equals([
+              {
+                "service": "MOC Back Home",
+                "unit": "min",
+                "own_calculation": 1289,
+                "partner_calculation": 0,
+                "delta_calculation_percent": -100
+              },
+              {
+                "service": "MOC Local",
+                "unit": "min",
+                "own_calculation": 9456,
+                "partner_calculation": 0,
+                "delta_calculation_percent": -100
+              },
+              {
+                "service": "SMSMO",
+                "unit": "min",
+                "own_calculation": 5000,
+                "partner_calculation": 0,
+                "delta_calculation_percent": -100
+              },
+              {
+                "service": "VoLTE",
+                "unit": "min",
+                "own_calculation": 389,
+                "partner_calculation": 0,
+                "delta_calculation_percent": -100
+              }
+            ]);
+            /* eslint-enable quotes */
 
             done();
           });

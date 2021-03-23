@@ -1,0 +1,112 @@
+{
+  "homePerspective": {
+    "general_information": [
+      {
+        "bearer": "Voice",
+        "unit": "min",
+        "own_calculation": 258204,
+        "partner_calculation": 1479245.65,
+        "delta_calculation_percent": 472.9
+      },
+      {
+        "bearer": "SMS",
+        "unit": "#",
+        "own_calculation": 158469,
+        "partner_calculation": 645923.73,
+        "delta_calculation_percent": 307.6
+      },
+      {
+        "bearer": "Data",
+        "unit": "min",
+        "own_calculation": 1851840,
+        "partner_calculation": 2309216.06,
+        "delta_calculation_percent": 24.7
+      }
+    ],
+    "details": [
+      {
+        "service": "MOC Local",
+        "unit": "min",
+        "own_calculation": 1500,
+        "partner_calculation": 1500,
+        "delta_calculation_percent": 0
+      },
+      {
+        "service": "MOC EU",
+        "unit": "min",
+        "own_calculation": 256704,
+        "partner_calculation": 1477745.65,
+        "delta_calculation_percent": 475.66
+      },
+      {
+        "service": "SMSMO",
+        "unit": "min",
+        "own_calculation": 158469,
+        "partner_calculation": 645923.73,
+        "delta_calculation_percent": 307.6
+      },
+      {
+        "service": "VoLTE",
+        "unit": "min",
+        "own_calculation": 1851840,
+        "partner_calculation": 2309216.06,
+        "delta_calculation_percent": 24.7
+      }
+    ]
+  },
+  "partnerPerspective": {
+    "general_information": [
+      {
+        "bearer": "Voice",
+        "unit": "min",
+        "own_calculation": 1849545,
+        "partner_calculation": 323990.7,
+        "delta_calculation_percent": -82.48
+      },
+      {
+        "bearer": "SMS",
+        "unit": "#",
+        "own_calculation": 5000,
+        "partner_calculation": 5000,
+        "delta_calculation_percent": 0
+      },
+      {
+        "bearer": "Data",
+        "unit": "min",
+        "own_calculation": 2319809.5,
+        "partner_calculation": 1852478.88,
+        "delta_calculation_percent": -20.15
+      }
+    ],
+    "details": [
+      {
+        "service": "MOC Local",
+        "unit": "min",
+        "own_calculation": 3000,
+        "partner_calculation": 3000,
+        "delta_calculation_percent": 0
+      },
+      {
+        "service": "MOC EU",
+        "unit": "min",
+        "own_calculation": 1846545,
+        "partner_calculation": 320990.7,
+        "delta_calculation_percent": -82.62
+      },
+      {
+        "service": "SMSMO",
+        "unit": "min",
+        "own_calculation": 5000,
+        "partner_calculation": 5000,
+        "delta_calculation_percent": 0
+      },
+      {
+        "service": "VoLTE",
+        "unit": "min",
+        "own_calculation": 2319809.5,
+        "partner_calculation": 1852478.88,
+        "delta_calculation_percent": -20.15
+      }
+    ]
+  }
+}

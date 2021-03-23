@@ -51,7 +51,54 @@ describe(`Tests GET ${route} API OK`, function() {
       mspOwner: undefined,
       mspReceiver: undefined,
       body: {
-        data: []
+        inbound: [
+          {
+            yearMonth: '202001',
+            homeTadig: 'TMUS',
+            visitorTadig: 'DTAG',
+            service: 'SMS MO',
+            usage: '5298.2115',
+            units: 'SMS',
+            charges: '104.16423',
+            taxes: '0',
+            currency: 'EUR'
+          },
+          {
+            yearMonth: '202001',
+            homeTadig: 'TMUS',
+            visitorTadig: 'DTAG',
+            service: 'MOC Back Home',
+            usage: '2249.896',
+            units: 'min',
+            charges: '322.4844',
+            taxes: '0',
+            currency: 'EUR'
+          }
+        ],
+        outbound: [
+          {
+            yearMonth: '202001',
+            homeTadig: 'DTAG',
+            visitorTadig: 'TMUS',
+            service: 'SMS MO',
+            usage: '21537.517',
+            units: 'SMS',
+            charges: '430.61034',
+            taxes: '0',
+            currency: 'EUR'
+          },
+          {
+            yearMonth: '202001',
+            homeTadig: 'DTAG',
+            visitorTadig: 'TMUS',
+            service: 'GPRS',
+            usage: '14692.6175',
+            units: 'MB',
+            charges: '4408.98525',
+            taxes: '0',
+            currency: 'EUR'
+          }
+        ]
       },
       state: 'DRAFT'
     };
@@ -63,7 +110,54 @@ describe(`Tests GET ${route} API OK`, function() {
       mspOwner: undefined,
       mspReceiver: undefined,
       body: {
-        data: []
+        inbound: [
+          {
+            yearMonth: '202001',
+            homeTadig: 'DTAG',
+            visitorTadig: 'TMUS',
+            service: 'SMS MO',
+            usage: '21530.517',
+            units: 'SMS',
+            charges: '415.61670',
+            taxes: '0',
+            currency: 'EUR'
+          },
+          {
+            yearMonth: '202001',
+            homeTadig: 'DTAG',
+            visitorTadig: 'TMUS',
+            service: 'GPRS',
+            usage: '14696.6175',
+            units: 'MB',
+            charges: '4390.98291',
+            taxes: '0',
+            currency: 'EUR'
+          }
+        ],
+        outbound: [
+          {
+            yearMonth: '202001',
+            homeTadig: 'TMUS',
+            visitorTadig: 'DTAG',
+            service: 'SMS MO',
+            usage: '5208.2115',
+            units: 'SMS',
+            charges: '170.16411',
+            taxes: '0',
+            currency: 'EUR'
+          },
+          {
+            yearMonth: '202001',
+            homeTadig: 'TMUS',
+            visitorTadig: 'DTAG',
+            service: 'MOC Back Home',
+            usage: '2149.896',
+            units: 'min',
+            charges: '4252.4104',
+            taxes: '0',
+            currency: 'EUR'
+          }
+        ]
       },
       state: 'RECEIVED'
     };
@@ -143,17 +237,88 @@ describe(`Tests GET ${route} API OK`, function() {
             expect(response).to.be.json;
             expect(response.body).to.exist;
             expect(response.body).to.be.an('object');
-            expect(Object.keys(response.body)).have.members(['generatedDiscrepancy', 'otherData', 'localUsage', 'remoteUsage']);
+            expect(Object.keys(response.body)).have.members(['general_information', 'inbound', 'outbound']);
 
-            expect(response.body).to.have.property('otherData').that.is.an('array').that.include('test', '8');
-            expect(response.body).to.have.property('generatedDiscrepancy').that.is.an('object');
-            expect(Object.keys(response.body.generatedDiscrepancy)).have.members(['data1', 'data2', 'object1']);
+            /* eslint-disable quotes */
+            expect(response.body).to.have.property('general_information').that.is.an('array').that.deep.equals([
+              {
+                "service": "MOC",
+                "unit": "min",
+                "inbound_own_usage": 2249.9,
+                "inbound_partner_usage": 2149.9,
+                "inbound_discrepancy": -100,
+                "outbound_own_usage": 0,
+                "outbound_partner_usage": 0,
+                "outbound_discrepancy": 0
+              },
+              {
+                "service": "SMS",
+                "unit": "#",
+                "inbound_own_usage": 5298.21,
+                "inbound_partner_usage": 5208.21,
+                "inbound_discrepancy": -90,
+                "outbound_own_usage": 21537.52,
+                "outbound_partner_usage": 21530.52,
+                "outbound_discrepancy": -7
+              },
+              {
+                "service": "Data",
+                "unit": "min",
+                "inbound_own_usage": 0,
+                "inbound_partner_usage": 0,
+                "inbound_discrepancy": 0,
+                "outbound_own_usage": 14692.62,
+                "outbound_partner_usage": 14696.62,
+                "outbound_discrepancy": 4
+              }
+            ]);
 
-            expect(response.body.generatedDiscrepancy).to.have.property('data1', 'a');
-            expect(response.body.generatedDiscrepancy).to.have.property('data2', 'b');
-            expect(response.body.generatedDiscrepancy).to.have.property('object1').that.is.an('object');
-            expect(Object.keys(response.body.generatedDiscrepancy.object1)).have.members(['object1data10']);
-            expect(response.body.generatedDiscrepancy.object1).to.have.property('object1data10', 'z');
+            expect(response.body).to.have.property('inbound').that.is.an('array').that.deep.equals([
+              {
+                "HTMN": "TMUS",
+                "VPMN": "DTAG",
+                "yearMonth": "202001",
+                "service": "SMS MO",
+                "own_usage": 5298.21,
+                "partner_usage": 5208.21,
+                "delta_usage_abs": -90,
+                "delta_usage_percent": -1.7
+              },
+              {
+                "HTMN": "TMUS",
+                "VPMN": "DTAG",
+                "yearMonth": "202001",
+                "service": "MOC Back Home",
+                "own_usage": 2249.9,
+                "partner_usage": 2149.9,
+                "delta_usage_abs": -100,
+                "delta_usage_percent": -4.44,
+              }
+            ]);
+
+            expect(response.body).to.have.property('outbound').that.is.an('array').that.deep.equals([
+              {
+                "HTMN": "DTAG",
+                "VPMN": "TMUS",
+                "yearMonth": "202001",
+                "service": "SMS MO",
+                "own_usage": 21537.52,
+                "partner_usage": 21530.52,
+                "delta_usage_abs": -7,
+                "delta_usage_percent": -0.03
+              },
+              {
+                "HTMN": "DTAG",
+                "VPMN": "TMUS",
+                "yearMonth": "202001",
+                "service": "GPRS",
+                "own_usage": 14692.62,
+                "partner_usage": 14696.62,
+                "delta_usage_abs": 4,
+                "delta_usage_percent": 0.03
+              }
+            ]);
+            /* eslint-enable quotes */
 
             done();
           });
