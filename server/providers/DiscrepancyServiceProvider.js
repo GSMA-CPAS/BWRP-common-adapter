@@ -81,6 +81,34 @@ const defineUsageToSendToDiscrepancyService = (usage) => {
   };
 };
 
+
+const defineSentUsage = (usage, context) => {
+  const returnedResponse = {
+    header: {
+      version: usage.version,
+      type: usage.type,
+      mspOwner: usage.mspOwner,
+      context: context
+    },
+    body: usage.body
+  };
+  return returnedResponse;
+}
+
+const defineSentSettlement = (settlement, context) => {
+  const returnedResponse = {
+    header: {
+      version: settlement.version,
+      type: settlement.type,
+      mspOwner: settlement.mspOwner,
+      context: context
+    },
+    body: settlement.body
+  };
+  return returnedResponse;
+}
+
+
 class DiscrepancyServiceProvider {
   constructor() {
   }
@@ -111,12 +139,10 @@ class DiscrepancyServiceProvider {
    */
   async getSettlementDiscrepancy(settlement, settlementToCompare) {
     try {
-      const response = await axiosInstance.post(config.DISCREPANCY_SERVICE_URL + '/discrepancy', {
-        settlement: settlement,
-        settlementToCompare: settlementToCompare
-      });
+      const queryString = '?partnerSettlementId=' + settlementToCompare.id;
+      const sentBody = [defineSentSettlement(settlement, 'home'), defineSentSettlement(settlementToCompare, 'partner')];
+      const response = await axiosInstance.put(config.DISCREPANCY_SERVICE_URL + '/settlements/' + settlement.id + queryString, sentBody);
       logger.info(`[DiscrepancyServiceProvider::getSettlementDiscrepancy] response data:${typeof response.data} = ${JSON.stringify(response.data)}`);
-
       return response.data;
     } catch (error) {
       logger.error('[DiscrepancyServiceProvider::getSettlementDiscrepancy] failed to get settlement discrepancy', error.message);
@@ -132,12 +158,10 @@ class DiscrepancyServiceProvider {
    */
   async getUsageDiscrepancy(usage, usageToCompare) {
     try {
-      const response = await axiosInstance.post(config.DISCREPANCY_SERVICE_URL + '/discrepancy', {
-        usage: usage,
-        usageToCompare: usageToCompare
-      });
+      const queryString = '?partnerUsageId=' + usageToCompare.id;
+      const sentBody = [defineSentUsage(usage, 'home'), defineSentUsage(usageToCompare, 'partner')];
+      const response = await axiosInstance.put(config.DISCREPANCY_SERVICE_URL + '/usages/' + usage.id + queryString, sentBody);
       logger.info(`[DiscrepancyServiceProvider::getUsageDiscrepancy] response data:${typeof response.data} = ${JSON.stringify(response.data)}`);
-
       return response.data;
     } catch (error) {
       logger.error('[DiscrepancyServiceProvider::getUsageDiscrepancy] failed to get usage discrepancy', error.message);
