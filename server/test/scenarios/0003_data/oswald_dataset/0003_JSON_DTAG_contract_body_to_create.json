@@ -1,0 +1,194 @@
+{
+  "discounts": {
+    "BLAMSP": {
+      "condition": {
+        "kind": "Deal Revenue Commitment",
+        "commitment": {
+          "value": "555000"
+        }
+      },
+      "serviceGroups": [
+        {
+          "homeTadigs": [
+            "BLA1"
+          ],
+          "visitorTadigs": [
+            "ALB1"
+          ],
+          "services": [
+            {
+              "service": "SMSMO",
+              "includedInCommitment": true,
+              "usagePricing": {
+                "ratingPlan": {
+                  "rate": {
+                    "linearPrice": "0.0015"
+                  }
+                }
+              }
+            },
+            {
+              "service": "MOC Local",
+              "includedInCommitment": true,
+              "usagePricing": {
+                "ratingPlan": {
+                  "rate": {
+                    "linearPrice": "0.060"
+                  }
+                }
+              }
+            },
+            {
+              "service": "GPRS",
+              "includedInCommitment": true,
+              "usagePricing": {
+                "ratingPlan": {
+                  "rate": {
+                    "thresholds": [
+                      {
+                        "start": "0",
+                        "linearPrice": "0.0015"
+                      },
+                      {
+                        "start": "37500000",
+                        "linearPrice": "0.0012"
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "service": "MOC Back Home",
+              "includedInCommitment": true,
+              "usagePricing": {
+                "ratingPlan": {
+                  "rate": {
+                    "linearPrice": "0.100"
+                  }
+                }
+              }
+            },
+            {
+              "service": "MOC RoW",
+              "includedInCommitment": true,
+              "usagePricing": {
+                "ratingPlan": {
+                  "rate": {
+                    "linearPrice": "0.150"
+                  }
+                }
+              }
+            },
+            {
+              "service": "MTC",
+              "includedInCommitment": true,
+              "usagePricing": {
+                "ratingPlan": {
+                  "rate": {
+                    "linearPrice": "0.0"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "ALBMSP": {
+      "condition": {
+        "kind": "Deal Revenue Commitment",
+        "commitment": {
+          "value": "555000"
+        }
+      },
+      "serviceGroups": [
+        {
+          "homeTadigs": [
+            "ALB1"
+          ],
+          "visitorTadigs": [
+            "BLA1"
+          ],
+          "services": [
+            {
+              "service": "SMSMO",
+              "includedInCommitment": true,
+              "usagePricing": {
+                "ratingPlan": {
+                  "rate": {
+                    "linearPrice": "0.0015"
+                  }
+                }
+              }
+            },
+            {
+              "service": "MOC Local",
+              "includedInCommitment": true,
+              "usagePricing": {
+                "ratingPlan": {
+                  "rate": {
+                    "linearPrice": "0.060"
+                  }
+                }
+              }
+            },
+            {
+              "service": "GPRS",
+              "includedInCommitment": true,
+              "usagePricing": {
+                "ratingPlan": {
+                  "rate": {
+                    "thresholds": [
+                      {
+                        "start": "0",
+                        "linearPrice": "0.0015"
+                      },
+                      {
+                        "start": "37500000",
+                        "linearPrice": "0.0012"
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "service": "MOC Back Home",
+              "includedInCommitment": true,
+              "usagePricing": {
+                "ratingPlan": {
+                  "rate": {
+                    "linearPrice": "0.100"
+                  }
+                }
+              }
+            },
+            {
+              "service": "MOC RoW",
+              "includedInCommitment": true,
+              "usagePricing": {
+                "ratingPlan": {
+                  "rate": {
+                    "linearPrice": "0.150"
+                  }
+                }
+              }
+            },
+            {
+              "service": "MTC",
+              "includedInCommitment": true,
+              "usagePricing": {
+                "ratingPlan": {
+                  "rate": {
+                    "linearPrice": "0.0"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
