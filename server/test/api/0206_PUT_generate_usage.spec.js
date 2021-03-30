@@ -98,10 +98,10 @@ describe(`Tests PUT ${route} API OK`, function() {
             homeTadig: 'TMUS',
             visitorTadig: 'DTAG',
             service: 'SMS MO',
-            usage: '5208.2115',
+            usage: 5208.2115,
             units: 'SMS',
-            charges: '104.16423',
-            taxes: '0',
+            charges: 104.16423,
+            taxes: 0,
             currency: 'EUR'
           },
           {
@@ -109,10 +109,10 @@ describe(`Tests PUT ${route} API OK`, function() {
             homeTadig: 'TMUS',
             visitorTadig: 'DTAG',
             service: 'MOC Back Home',
-            usage: '2149.896',
+            usage: 2149.896,
             units: 'min',
-            charges: '322.4844',
-            taxes: '0',
+            charges: 322.4844,
+            taxes: 0,
             currency: 'EUR'
           }
         ],
@@ -122,10 +122,10 @@ describe(`Tests PUT ${route} API OK`, function() {
             homeTadig: 'DTAG',
             visitorTadig: 'TMUS',
             service: 'SMS MO',
-            usage: '21530.517',
+            usage: 21530.517,
             units: 'SMS',
-            charges: '430.61034',
-            taxes: '0',
+            charges: 430.61034,
+            taxes: 0,
             currency: 'EUR'
           },
           {
@@ -133,10 +133,10 @@ describe(`Tests PUT ${route} API OK`, function() {
             homeTadig: 'DTAG',
             visitorTadig: 'TMUS',
             service: 'GPRS',
-            usage: '14696.6175',
+            usage: 14696.6175,
             units: 'MB',
-            charges: '4408.98525',
-            taxes: '0',
+            charges: 4408.98525,
+            taxes: 0,
             currency: 'EUR'
           }
         ]
@@ -160,10 +160,10 @@ describe(`Tests PUT ${route} API OK`, function() {
             homeTadig: 'TMUS',
             visitorTadig: 'DTAG',
             service: 'SMS MO',
-            usage: '5208.2115',
+            usage: 5208.2115,
             units: 'SMS',
-            charges: '104.16423',
-            taxes: '0',
+            charges: 104.16423,
+            taxes: 0,
             currency: 'EUR'
           },
           {
@@ -171,10 +171,10 @@ describe(`Tests PUT ${route} API OK`, function() {
             homeTadig: 'TMUS',
             visitorTadig: 'DTAG',
             service: 'MOC Back Home',
-            usage: '2149.896',
+            usage: 2149.896,
             units: 'min',
-            charges: '322.4844',
-            taxes: '0',
+            charges: 322.4844,
+            taxes: 0,
             currency: 'EUR'
           }
         ],
@@ -184,10 +184,10 @@ describe(`Tests PUT ${route} API OK`, function() {
             homeTadig: 'DTAG',
             visitorTadig: 'TMUS',
             service: 'SMS MO',
-            usage: '21530.517',
+            usage: 21530.517,
             units: 'SMS',
-            charges: '430.61034',
-            taxes: '0',
+            charges: 430.61034,
+            taxes: 0,
             currency: 'EUR'
           },
           {
@@ -195,10 +195,10 @@ describe(`Tests PUT ${route} API OK`, function() {
             homeTadig: 'DTAG',
             visitorTadig: 'TMUS',
             service: 'GPRS',
-            usage: '14696.6175',
+            usage: 14696.6175,
             units: 'MB',
-            charges: '4408.98525',
-            taxes: '0',
+            charges: 4408.98525,
+            taxes: 0,
             currency: 'EUR'
           }
         ]
@@ -302,15 +302,15 @@ describe(`Tests PUT ${route} API OK`, function() {
                 md5hash: 'd8a67bdb368d59766b362265530d32e8'
               },
               intermediateResults: [
-                {yearMonth: 202001, service: 'SMSMO', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: '9000', type: 'inbound'},
-                {yearMonth: 202001, service: 'SMSMO', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '4500', type: 'outbound'},
-                {yearMonth: 202001, service: 'GPRS', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '1', type: 'outbound'},
-                {yearMonth: 202001, service: 'GPRS', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '2500', type: 'inbound'},
-                {yearMonth: 202001, service: 'MOC Back Home', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '25', type: 'inbound'},
-                {yearMonth: 202001, service: 'MOC Back Home', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '500', type: 'outbound'},
-                {yearMonth: 202001, service: 'MOC Local', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '5', type: 'inbound'},
-                {yearMonth: 202002, service: 'MOC Local', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '6', type: 'outbound'},
-                {yearMonth: 202002, service: 'MOC', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '2500', type: 'outbound'}
+                {yearMonth: 202001, service: 'SMSMO', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: 9000, type: 'inbound'},
+                {yearMonth: 202001, service: 'SMSMO', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 4500, type: 'outbound'},
+                {yearMonth: 202001, service: 'GPRS', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 1, type: 'outbound'},
+                {yearMonth: 202001, service: 'GPRS', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 2500, type: 'inbound'},
+                {yearMonth: 202001, service: 'MOC Back Home', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 25, type: 'inbound'},
+                {yearMonth: 202001, service: 'MOC Back Home', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 500, type: 'outbound'},
+                {yearMonth: 202001, service: 'MOC Local', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 5, type: 'inbound'},
+                {yearMonth: 202002, service: 'MOC Local', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 6, type: 'outbound'},
+                {yearMonth: 202002, service: 'MOC', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 2500, type: 'outbound'}
               ]
             },
             undefined
@@ -404,15 +404,15 @@ describe(`Tests PUT ${route} API OK`, function() {
                 md5hash: 'd8a67bdb368d59766b362265530d32e8'
               },
               intermediateResults: [
-                {service: 'SMSMO', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: '9000', type: 'inbound'},
-                {service: 'SMSMO', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '4500', type: 'outbound'},
-                {service: 'GPRS', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '1', type: 'outbound'},
-                {service: 'GPRS', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '2500', type: 'inbound'},
-                {service: 'MOC Back Home', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '25', type: 'inbound'},
-                {service: 'MOC Back Home', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '500', type: 'outbound'},
-                {service: 'MOC Local', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '5', type: 'inbound'},
-                {service: 'MOC Local', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '6', type: 'outbound'},
-                {service: 'MOC', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '2500', type: 'outbound'}
+                {service: 'SMSMO', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: 9000, type: 'inbound'},
+                {service: 'SMSMO', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 4500, type: 'outbound'},
+                {service: 'GPRS', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 1, type: 'outbound'},
+                {service: 'GPRS', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 2500, type: 'inbound'},
+                {service: 'MOC Back Home', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 25, type: 'inbound'},
+                {service: 'MOC Back Home', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 500, type: 'outbound'},
+                {service: 'MOC Local', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 5, type: 'inbound'},
+                {service: 'MOC Local', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 6, type: 'outbound'},
+                {service: 'MOC', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 2500, type: 'outbound'}
               ]
             },
             undefined
@@ -538,15 +538,15 @@ describe(`Tests PUT ${route} API OK`, function() {
                 md5hash: 'd8a67bdb368d59766b362265530d32e8'
               },
               intermediateResults: [
-                {service: 'SMSMO', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: '9000', type: 'inbound'},
-                {service: 'SMSMO', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '4500', type: 'outbound'},
-                {service: 'GPRS', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '1', type: 'outbound'},
-                {service: 'GPRS', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '2500', type: 'inbound'},
-                {service: 'MOC Back Home', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '25', type: 'inbound'},
-                {service: 'MOC Back Home', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '500', type: 'outbound'},
-                {service: 'MOC Local', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '5', type: 'inbound'},
-                {service: 'MOC Local', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '6', type: 'outbound'},
-                {service: 'MOC', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '2500', type: 'outbound'}
+                {service: 'SMSMO', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: 9000, type: 'inbound'},
+                {service: 'SMSMO', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 4500, type: 'outbound'},
+                {service: 'GPRS', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 1, type: 'outbound'},
+                {service: 'GPRS', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 2500, type: 'inbound'},
+                {service: 'MOC Back Home', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 25, type: 'inbound'},
+                {service: 'MOC Back Home', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 500, type: 'outbound'},
+                {service: 'MOC Local', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 5, type: 'inbound'},
+                {service: 'MOC Local', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 6, type: 'outbound'},
+                {service: 'MOC', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 2500, type: 'outbound'}
               ]
             },
             undefined
@@ -664,15 +664,15 @@ describe(`Tests PUT ${route} API OK`, function() {
                 md5hash: 'd8a67bdb368d59766b362265530d32e8'
               },
               intermediateResults: [
-                {service: 'SMSMO', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: '9000', type: 'inbound'},
-                {service: 'SMSMO', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '4500', type: 'outbound'},
-                {service: 'GPRS', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '1', type: 'outbound'},
-                {service: 'GPRS', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '2500', type: 'inbound'},
-                {service: 'MOC Back Home', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '25', type: 'inbound'},
-                {service: 'MOC Back Home', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '500', type: 'outbound'},
-                {service: 'MOC Local', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '5', type: 'inbound'},
-                {service: 'MOC Local', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '6', type: 'outbound'},
-                {service: 'MOC', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '2500', type: 'outbound'}
+                {service: 'SMSMO', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: 9000, type: 'inbound'},
+                {service: 'SMSMO', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 4500, type: 'outbound'},
+                {service: 'GPRS', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 1, type: 'outbound'},
+                {service: 'GPRS', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 2500, type: 'inbound'},
+                {service: 'MOC Back Home', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 25, type: 'inbound'},
+                {service: 'MOC Back Home', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 500, type: 'outbound'},
+                {service: 'MOC Local', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 5, type: 'inbound'},
+                {service: 'MOC Local', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 6, type: 'outbound'},
+                {service: 'MOC', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 2500, type: 'outbound'}
               ]
             },
             undefined

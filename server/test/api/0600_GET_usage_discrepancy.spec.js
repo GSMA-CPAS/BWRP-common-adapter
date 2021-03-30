@@ -57,10 +57,10 @@ describe(`Tests GET ${route} API OK`, function() {
             homeTadig: 'TMUS',
             visitorTadig: 'DTAG',
             service: 'SMS MO',
-            usage: '5298.2115',
+            usage: 5298.2115,
             units: 'SMS',
-            charges: '104.16423',
-            taxes: '0',
+            charges: 104.16423,
+            taxes: 0,
             currency: 'EUR'
           },
           {
@@ -68,10 +68,10 @@ describe(`Tests GET ${route} API OK`, function() {
             homeTadig: 'TMUS',
             visitorTadig: 'DTAG',
             service: 'MOC Back Home',
-            usage: '2249.896',
+            usage: 2249.896,
             units: 'min',
-            charges: '322.4844',
-            taxes: '0',
+            charges: 322.4844,
+            taxes: 0,
             currency: 'EUR'
           }
         ],
@@ -81,10 +81,10 @@ describe(`Tests GET ${route} API OK`, function() {
             homeTadig: 'DTAG',
             visitorTadig: 'TMUS',
             service: 'SMS MO',
-            usage: '21537.517',
+            usage: 21537.517,
             units: 'SMS',
-            charges: '430.61034',
-            taxes: '0',
+            charges: 430.61034,
+            taxes: 0,
             currency: 'EUR'
           },
           {
@@ -92,10 +92,10 @@ describe(`Tests GET ${route} API OK`, function() {
             homeTadig: 'DTAG',
             visitorTadig: 'TMUS',
             service: 'GPRS',
-            usage: '14692.6175',
+            usage: 14692.6175,
             units: 'MB',
-            charges: '4408.98525',
-            taxes: '0',
+            charges: 4408.98525,
+            taxes: 0,
             currency: 'EUR'
           }
         ]
@@ -116,10 +116,10 @@ describe(`Tests GET ${route} API OK`, function() {
             homeTadig: 'DTAG',
             visitorTadig: 'TMUS',
             service: 'SMS MO',
-            usage: '21530.517',
+            usage: 21530.517,
             units: 'SMS',
-            charges: '415.61670',
-            taxes: '0',
+            charges: 415.61670,
+            taxes: 0,
             currency: 'EUR'
           },
           {
@@ -127,10 +127,10 @@ describe(`Tests GET ${route} API OK`, function() {
             homeTadig: 'DTAG',
             visitorTadig: 'TMUS',
             service: 'GPRS',
-            usage: '14696.6175',
+            usage: 14696.6175,
             units: 'MB',
-            charges: '4390.98291',
-            taxes: '0',
+            charges: 4390.98291,
+            taxes: 0,
             currency: 'EUR'
           }
         ],
@@ -140,10 +140,10 @@ describe(`Tests GET ${route} API OK`, function() {
             homeTadig: 'TMUS',
             visitorTadig: 'DTAG',
             service: 'SMS MO',
-            usage: '5208.2115',
+            usage: 5208.2115,
             units: 'SMS',
-            charges: '170.16411',
-            taxes: '0',
+            charges: 170.16411,
+            taxes: 0,
             currency: 'EUR'
           },
           {
@@ -151,10 +151,10 @@ describe(`Tests GET ${route} API OK`, function() {
             homeTadig: 'TMUS',
             visitorTadig: 'DTAG',
             service: 'MOC Back Home',
-            usage: '2149.896',
+            usage: 2149.896,
             units: 'min',
-            charges: '4252.4104',
-            taxes: '0',
+            charges: 4252.4104,
+            taxes: 0,
             currency: 'EUR'
           }
         ]

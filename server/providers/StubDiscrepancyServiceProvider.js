@@ -57,7 +57,7 @@ const getStubReturnForGetUsageDiscrepancy = (homeUsage, partnerUsage) => {
             }
           };
           const matchingPartnerOneWayServices = partnerOneWayServicesToFind.filter((partnerOneWayService) => matchingFilterMethod(partnerOneWayService));
-          const matchingPartnerOneWayService = (matchingPartnerOneWayServices.length !== 0) ? matchingPartnerOneWayServices[0] : {usage: '0'};
+          const matchingPartnerOneWayService = (matchingPartnerOneWayServices.length !== 0) ? matchingPartnerOneWayServices[0] : {usage: 0};
 
           // do not use already found matchingPartnerOneWayServices for next iterations
           partnerOneWayServicesToFind = partnerOneWayServicesToFind.filter((partnerOneWayService) => !matchingFilterMethod(partnerOneWayService));
@@ -67,8 +67,8 @@ const getStubReturnForGetUsageDiscrepancy = (homeUsage, partnerUsage) => {
             "VPMN": homeOneWayService.visitorTadig,
             "yearMonth": homeOneWayService.yearMonth,
             "service": homeOneWayService.service,
-            "own_usage": numberFormatter(parseFloat(homeOneWayService.usage)),
-            "partner_usage": numberFormatter(parseFloat(matchingPartnerOneWayService.usage))
+            "own_usage": numberFormatter(homeOneWayService.usage),
+            "partner_usage": numberFormatter(matchingPartnerOneWayService.usage)
           };
           usageDiscrepancyServiceToReturn.delta_usage_abs = numberFormatter(usageDiscrepancyServiceToReturn.partner_usage - usageDiscrepancyServiceToReturn.own_usage);
           if (usageDiscrepancyServiceToReturn.own_usage != 0) {
@@ -81,15 +81,15 @@ const getStubReturnForGetUsageDiscrepancy = (homeUsage, partnerUsage) => {
 
         // if there is some partnerOneWayServicesToFind not already found in homeOneWayServices
         partnerOneWayServicesToFind.forEach((partnerOneWayService) => {
-          const homeOneWayService = {usage: '0'};
+          const homeOneWayService = {usage: 0};
 
           const usageDiscrepancyServiceToReturn = {
             "HTMN": partnerOneWayService.homeTadig,
             "VPMN": partnerOneWayService.visitorTadig,
             "yearMonth": partnerOneWayService.yearMonth,
             "service": partnerOneWayService.service,
-            "own_usage": numberFormatter(parseFloat(homeOneWayService.usage)),
-            "partner_usage": numberFormatter(parseFloat(partnerOneWayService.usage))
+            "own_usage": numberFormatter(homeOneWayService.usage),
+            "partner_usage": numberFormatter(partnerOneWayService.usage)
           };
           usageDiscrepancyServiceToReturn.delta_usage_abs = numberFormatter(usageDiscrepancyServiceToReturn.partner_usage - usageDiscrepancyServiceToReturn.own_usage);
           if (usageDiscrepancyServiceToReturn.own_usage != 0) {
@@ -264,10 +264,8 @@ const getStubReturnForGetSettlementDiscrepancy = (homeSettlement, partnerSettlem
         return oneWaySettlement.services.voice.MOC.specialDestinations;
       case 'MTC':
         return oneWaySettlement.services.voice.MTC;
-      case 'SMS MO':
       case 'SMSMO':
         return oneWaySettlement.services.SMS.MO;
-      case 'SMS MT':
       case 'SMSMT':
         return oneWaySettlement.services.SMS.MT;
       case 'M2M':

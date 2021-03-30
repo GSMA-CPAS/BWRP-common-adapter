@@ -212,69 +212,69 @@ class SettlementMapper {
       .forEach((intermediateResult) => {
         switch (intermediateResult.service) {
         case 'MOC Back Home':
-          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.backHome += parseFloat(intermediateResult.dealValue);
+          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.backHome += intermediateResult.dealValue;
           break;
         case 'MOC Local':
-          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.local += parseFloat(intermediateResult.dealValue);
+          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.local += intermediateResult.dealValue;
           break;
         case 'MOC International':
-          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.international += parseFloat(intermediateResult.dealValue);
+          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.international += intermediateResult.dealValue;
           break;
         case 'MOC EU':
-          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.EU += parseFloat(intermediateResult.dealValue);
+          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.EU += intermediateResult.dealValue;
           break;
         case 'MOC EEA':
-          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.EEA += parseFloat(intermediateResult.dealValue);
+          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.EEA += intermediateResult.dealValue;
           break;
         case 'MOC RoW':
-          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.ROW += parseFloat(intermediateResult.dealValue);
+          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.ROW += intermediateResult.dealValue;
           break;
         case 'MOC Premium':
-          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.premium += parseFloat(intermediateResult.dealValue);
+          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.premium += intermediateResult.dealValue;
           break;
         case 'MOC Satellite':
-          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.satellite += parseFloat(intermediateResult.dealValue);
+          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.satellite += intermediateResult.dealValue;
           break;
         case 'MOC Video Telephony':
-          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.videoTelephony += parseFloat(intermediateResult.dealValue);
+          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.videoTelephony += intermediateResult.dealValue;
           break;
         case 'MOC Special Destinations':
-          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.specialDestinations += parseFloat(intermediateResult.dealValue);
+          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.specialDestinations += intermediateResult.dealValue;
           break;
         case 'MTC':
-          returnedGeneratedResult[intermediateResult.type].services.voice.MTC += parseFloat(intermediateResult.dealValue);
+          returnedGeneratedResult[intermediateResult.type].services.voice.MTC += intermediateResult.dealValue;
           break;
         case 'SMS MO':
         case 'SMSMO':
-          returnedGeneratedResult[intermediateResult.type].services.SMS.MO += parseFloat(intermediateResult.dealValue);
+          returnedGeneratedResult[intermediateResult.type].services.SMS.MO += intermediateResult.dealValue;
           break;
         case 'SMS MT':
         case 'SMSMT':
-          returnedGeneratedResult[intermediateResult.type].services.SMS.MT += parseFloat(intermediateResult.dealValue);
+          returnedGeneratedResult[intermediateResult.type].services.SMS.MT += intermediateResult.dealValue;
           break;
         case 'M2M':
-          returnedGeneratedResult[intermediateResult.type].services.data.filter((d) => (d.name === 'M2M'))[0].value += parseFloat(intermediateResult.dealValue);
+          returnedGeneratedResult[intermediateResult.type].services.data.filter((d) => (d.name === 'M2M'))[0].value += intermediateResult.dealValue;
           break;
         case 'NB-IoT':
-          returnedGeneratedResult[intermediateResult.type].services.data.filter((d) => (d.name === 'NB-IOT'))[0].value += parseFloat(intermediateResult.dealValue);
+          returnedGeneratedResult[intermediateResult.type].services.data.filter((d) => (d.name === 'NB-IOT'))[0].value += intermediateResult.dealValue;
           break;
         case 'LTE-M':
-          returnedGeneratedResult[intermediateResult.type].services.data.filter((d) => (d.name === 'LTE-M'))[0].value += parseFloat(intermediateResult.dealValue);
+          returnedGeneratedResult[intermediateResult.type].services.data.filter((d) => (d.name === 'LTE-M'))[0].value += intermediateResult.dealValue;
           break;
         case 'VoLTE':
-          returnedGeneratedResult[intermediateResult.type].services.data.filter((d) => (d.name === 'VoLTE'))[0].value += parseFloat(intermediateResult.dealValue);
+          returnedGeneratedResult[intermediateResult.type].services.data.filter((d) => (d.name === 'VoLTE'))[0].value += intermediateResult.dealValue;
           break;
         case 'ViLTE':
-          returnedGeneratedResult[intermediateResult.type].services.data.filter((d) => (d.name === 'ViLTE'))[0].value += parseFloat(intermediateResult.dealValue);
+          returnedGeneratedResult[intermediateResult.type].services.data.filter((d) => (d.name === 'ViLTE'))[0].value += intermediateResult.dealValue;
           break;
         case 'IMS Signalling':
-          returnedGeneratedResult[intermediateResult.type].services.data.filter((d) => (d.name === 'signalling'))[0].value += parseFloat(intermediateResult.dealValue);
+          returnedGeneratedResult[intermediateResult.type].services.data.filter((d) => (d.name === 'signalling'))[0].value += intermediateResult.dealValue;
           break;
         case 'GPRS':
-          returnedGeneratedResult[intermediateResult.type].services.data.filter((d) => (d.name === 'GPRS'))[0].value += parseFloat(intermediateResult.dealValue);
+          returnedGeneratedResult[intermediateResult.type].services.data.filter((d) => (d.name === 'GPRS'))[0].value += intermediateResult.dealValue;
           break;
         case 'Network Access':
-          returnedGeneratedResult[intermediateResult.type].services.access.networkAccess += parseFloat(intermediateResult.dealValue);
+          returnedGeneratedResult[intermediateResult.type].services.access.networkAccess += intermediateResult.dealValue;
           break;
         default:
           returnedGeneratedResult.unexpectedServiceNames.push(intermediateResult.service);
