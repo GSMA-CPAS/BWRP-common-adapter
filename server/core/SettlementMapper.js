@@ -244,9 +244,11 @@ class SettlementMapper {
         case 'MTC':
           returnedGeneratedResult[intermediateResult.type].services.voice.MTC += parseFloat(intermediateResult.dealValue);
           break;
+        case 'SMS MO':
         case 'SMSMO':
           returnedGeneratedResult[intermediateResult.type].services.SMS.MO += parseFloat(intermediateResult.dealValue);
           break;
+        case 'SMS MT':
         case 'SMSMT':
           returnedGeneratedResult[intermediateResult.type].services.SMS.MT += parseFloat(intermediateResult.dealValue);
           break;

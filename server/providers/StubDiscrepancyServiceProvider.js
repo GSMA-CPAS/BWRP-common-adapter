@@ -237,7 +237,7 @@ const getStubReturnForGetSettlementDiscrepancy = (homeSettlement, partnerSettlem
     return Math.round(number * d) / d;
   };
 
-  const serviceNames = ['MOC Back Home', 'MOC Local', 'MOC International', 'MOC EU', 'MOC EEA', 'MOC RoW', 'MOC Premium', 'MOC Satellite', 'MOC Video Telephony', 'MOC Special Destinations', 'MTC', 'SMSMO', 'SMSMT', 'M2M', 'NB-IoT', 'LTE-M', 'VoLTE', 'ViLTE', 'IMS Signalling', 'GPRS', 'Network Access'];
+  const serviceNames = ['MOC Back Home', 'MOC Local', 'MOC International', 'MOC EU', 'MOC EEA', 'MOC RoW', 'MOC Premium', 'MOC Satellite', 'MOC Video Telephony', 'MOC Special Destinations', 'MTC', 'SMSMO', 'SMS MO', 'SMSMT', 'SMS MT', 'M2M', 'NB-IoT', 'LTE-M', 'VoLTE', 'ViLTE', 'IMS Signalling', 'GPRS', 'Network Access'];
 
   const failsafeGetServiceSettlement = (oneWaySettlement, key) => {
     try {
@@ -264,8 +264,10 @@ const getStubReturnForGetSettlementDiscrepancy = (homeSettlement, partnerSettlem
         return oneWaySettlement.services.voice.MOC.specialDestinations;
       case 'MTC':
         return oneWaySettlement.services.voice.MTC;
+      case 'SMS MO':
       case 'SMSMO':
         return oneWaySettlement.services.SMS.MO;
+      case 'SMS MT':
       case 'SMSMT':
         return oneWaySettlement.services.SMS.MT;
       case 'M2M':
