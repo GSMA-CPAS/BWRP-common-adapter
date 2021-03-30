@@ -11,6 +11,8 @@ const debugObjectOnDTAG = require('debug')('spec:DTAG-side:object');
 const chai = require('chai');
 const expect = require('chai').expect;
 
+const skipFlag = (process.env.MOCHA_SCENARIO_FILTER !== '') && (process.env.MOCHA_SCENARIO_FILTER !== '0001');
+
 const DATE_REGEX = testsUtils.getDateRegexp();
 
 const SHOW_DISCREPANCY_GENERATION_DETAILS = false;
@@ -72,7 +74,10 @@ const TMUS_dynamic_data = {
 };
 
 describe(`Launch scenario 0001_Create_settlement_from_DTAG_contract`, function() {
-  before((done) => {
+  before(function(done) {
+    if (skipFlag) {
+      this.skip();
+    }
     debugSetup('==> verify that DTAG and TMUS APIs are UP');
     try {
       chai.request(DTAG_API)

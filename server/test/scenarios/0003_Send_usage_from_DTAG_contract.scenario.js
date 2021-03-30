@@ -11,6 +11,8 @@ const debugObjectOnDTAG = require('debug')('spec:DTAG-side:object');
 const chai = require('chai');
 const expect = require('chai').expect;
 
+const skipFlag = (process.env.MOCHA_SCENARIO_FILTER !== '') && (process.env.MOCHA_SCENARIO_FILTER !== '0003');
+
 const DATE_REGEX = testsUtils.getDateRegexp();
 
 const SHOW_DISCREPANCY_GENERATION_DETAILS = false;
@@ -19,7 +21,10 @@ const SHOW_DISCREPANCY_GENERATION_DETAILS = false;
 const DTAG_API = `http://127.0.0.1:3030/api/v1`;
 const TMUS_API = `http://127.0.0.1:3040/api/v1`;
 
-const configured_JSON_DTAG_contract_body_to_create = require('./0003_data/0003_JSON_DTAG_contract_body_to_create.json');
+const datasetName = (process.env.MOCHA_SCENARIO_0003_DATASET !== undefined) && (process.env.MOCHA_SCENARIO_0003_DATASET !== '') ? process.env.MOCHA_SCENARIO_0003_DATASET : 'initial_dataset';
+const datasetPath = `./0003_data/${datasetName}`;
+
+const configured_JSON_DTAG_contract_body_to_create = require(`${datasetPath}/0003_JSON_DTAG_contract_body_to_create.json`);
 const DTAG_create_contract_body = {
   header: {
     name: 'Contract name for scenario 0000_From_DTAG_contract between DTAG and TMUS',
@@ -31,7 +36,7 @@ const DTAG_create_contract_body = {
   body: configured_JSON_DTAG_contract_body_to_create
 };
 
-const configured_JSON_DTAG_usage_body_to_create = require('./0003_data/0003_JSON_DTAG_usage_body_to_create.json');
+const configured_JSON_DTAG_usage_body_to_create = require(`${datasetPath}/0003_JSON_DTAG_usage_body_to_create.json`);
 const DTAG_create_usage_body = {
   header: {
     name: `Usage from DTAG to TMUS created the ${new Date().toJSON()}`,
@@ -41,7 +46,7 @@ const DTAG_create_usage_body = {
   body: configured_JSON_DTAG_usage_body_to_create
 };
 
-const configured_JSON_TMUS_usage_body_to_create = require('./0003_data/0003_JSON_TMUS_usage_body_to_create.json');
+const configured_JSON_TMUS_usage_body_to_create = require(`${datasetPath}/0003_JSON_TMUS_usage_body_to_create.json`);
 const TMUS_create_usage_body = {
   header: {
     name: `Usage from TMUS to DTAG created the ${new Date().toJSON()}`,
@@ -69,23 +74,26 @@ const TMUS_dynamic_data = {
   receivedUsageId: undefined
 };
 
-const configured_EXPECTED_JSON_DTAG_local_usage_settlement_generatedResult = require('./0003_data/0003_EXPECTED_JSON_DTAG_local_usage_settlement_generatedResult.json');
-const configured_EXPECTED_JSON_DTAG_partner_usage_settlement_generatedResult = require('./0003_data/0003_EXPECTED_JSON_TMUS_local_usage_settlement_generatedResult.json');
+const configured_EXPECTED_JSON_DTAG_local_usage_settlement_generatedResult = require(`${datasetPath}/0003_EXPECTED_JSON_DTAG_local_usage_settlement_generatedResult.json`);
+const configured_EXPECTED_JSON_DTAG_partner_usage_settlement_generatedResult = require(`${datasetPath}/0003_EXPECTED_JSON_TMUS_local_usage_settlement_generatedResult.json`);
 const configured_EXPECTED_JSON_TMUS_local_usage_settlement_generatedResult = configured_EXPECTED_JSON_DTAG_partner_usage_settlement_generatedResult;
 const configured_EXPECTED_JSON_TMUS_partner_usage_settlement_generatedResult = configured_EXPECTED_JSON_DTAG_local_usage_settlement_generatedResult;
 
-const configured_EXPECTED_JSON_DTAG_local_usage_discrepancy_body = require('./0003_data/0003_EXPECTED_JSON_DTAG_local_usage_discrepancy_body.json');
-const configured_EXPECTED_JSON_DTAG_partner_usage_discrepancy_body = require('./0003_data/0003_EXPECTED_JSON_TMUS_local_usage_discrepancy_body.json');
+const configured_EXPECTED_JSON_DTAG_local_usage_discrepancy_body = require(`${datasetPath}/0003_EXPECTED_JSON_DTAG_local_usage_discrepancy_body.json`);
+const configured_EXPECTED_JSON_DTAG_partner_usage_discrepancy_body = require(`${datasetPath}/0003_EXPECTED_JSON_TMUS_local_usage_discrepancy_body.json`);
 const configured_EXPECTED_JSON_TMUS_local_usage_discrepancy_body = configured_EXPECTED_JSON_DTAG_partner_usage_discrepancy_body;
 const configured_EXPECTED_JSON_TMUS_partner_usage_discrepancy_body = configured_EXPECTED_JSON_DTAG_local_usage_discrepancy_body;
 
-const configured_EXPECTED_JSON_DTAG_local_settlement_discrepancy_body = require('./0003_data/0003_EXPECTED_JSON_DTAG_local_settlement_discrepancy_body.json');
-const configured_EXPECTED_JSON_DTAG_partner_settlement_discrepancy_body = require('./0003_data/0003_EXPECTED_JSON_TMUS_local_settlement_discrepancy_body.json');
+const configured_EXPECTED_JSON_DTAG_local_settlement_discrepancy_body = require(`${datasetPath}/0003_EXPECTED_JSON_DTAG_local_settlement_discrepancy_body.json`);
+const configured_EXPECTED_JSON_DTAG_partner_settlement_discrepancy_body = require(`${datasetPath}/0003_EXPECTED_JSON_TMUS_local_settlement_discrepancy_body.json`);
 const configured_EXPECTED_JSON_TMUS_local_settlement_discrepancy_body = configured_EXPECTED_JSON_DTAG_partner_settlement_discrepancy_body;
 const configured_EXPECTED_JSON_TMUS_partner_settlement_discrepancy_body = configured_EXPECTED_JSON_DTAG_local_settlement_discrepancy_body;
 
 describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
-  before((done) => {
+  before(function(done) {
+    if (skipFlag) {
+      this.skip();
+    }
     debugSetup('==> verify that DTAG and TMUS APIs are UP');
     try {
       chai.request(DTAG_API)
@@ -685,7 +693,7 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
 
           expect(response.body.body.generatedResult).to.have.property('fromDate', null);
           expect(response.body.body.generatedResult).to.have.property('toDate', null);
-          expect(response.body.body.generatedResult).to.have.property('calculationEngineVersion', '0.0.0');
+          expect(response.body.body.generatedResult).to.have.property('calculationEngineVersion', '0.0.1');
           expect(response.body.body.generatedResult).to.have.property('inbound');
           expect(response.body.body.generatedResult.inbound).to.have.property('tax').that.deep.equals({rate: ''});
           expect(response.body.body.generatedResult.inbound).to.have.property('currency');
@@ -738,7 +746,7 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
 
           expect(response.body.body.generatedResult).to.have.property('fromDate', null);
           expect(response.body.body.generatedResult).to.have.property('toDate', null);
-          expect(response.body.body.generatedResult).to.have.property('calculationEngineVersion', '0.0.0');
+          expect(response.body.body.generatedResult).to.have.property('calculationEngineVersion', '0.0.1');
           expect(response.body.body.generatedResult).to.have.property('inbound');
           expect(response.body.body.generatedResult.inbound).to.have.property('tax').that.deep.equals({rate: ''});
           expect(response.body.body.generatedResult.inbound).to.have.property('currency');
@@ -923,7 +931,7 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           expect(response.body).to.exist;
           expect(response.body).to.be.an('object');
 
-          // debugObjectOnDTAG('Usage Discrepancy calculated : ', response.body);
+          debugObjectOnDTAG('Usage Discrepancy calculated : ', JSON.stringify(response.body));
           expect(response.body).to.deep.equals(configured_EXPECTED_JSON_DTAG_local_usage_discrepancy_body);
 
           if (SHOW_DISCREPANCY_GENERATION_DETAILS && (response.body.localUsage) && (response.body.localUsage.body)) {
@@ -1005,7 +1013,7 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           expect(response.body).to.exist;
           expect(response.body).to.be.an('object');
 
-          // debugObjectOnTMUS('Usage Discrepancy calculated : ', response.body);
+          debugObjectOnTMUS('Usage Discrepancy calculated : ', JSON.stringify(response.body));
           expect(response.body).to.deep.equals(configured_EXPECTED_JSON_TMUS_local_usage_discrepancy_body);
 
           if (SHOW_DISCREPANCY_GENERATION_DETAILS && (response.body.localUsage) && (response.body.localUsage.body)) {
@@ -1089,7 +1097,7 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           expect(response.body).to.exist;
           expect(response.body).to.be.an('object');
 
-          // debugObjectOnDTAG('Settlement Discrepancy calculated : ', JSON.stringify(response.body));
+          debugObjectOnDTAG('Settlement Discrepancy calculated : ', JSON.stringify(response.body));
           expect(response.body).to.deep.equals(configured_EXPECTED_JSON_DTAG_local_settlement_discrepancy_body);
 
           if (SHOW_DISCREPANCY_GENERATION_DETAILS && (response.body.localUsage) && (response.body.localUsage.body)) {
@@ -1144,7 +1152,7 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           expect(response.body).to.exist;
           expect(response.body).to.be.an('object');
 
-          // debugObjectOnDTAG('Settlement Discrepancy calculated : ', JSON.stringify(response.body));
+          debugObjectOnDTAG('Settlement Discrepancy calculated : ', JSON.stringify(response.body));
           expect(response.body).to.deep.equals(configured_EXPECTED_JSON_DTAG_partner_settlement_discrepancy_body);
 
           done();
@@ -1172,7 +1180,7 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           expect(response.body).to.exist;
           expect(response.body).to.be.an('object');
 
-          // debugObjectOnTMUS('Settlement Discrepancy calculated : ', JSON.stringify(response.body));
+          debugObjectOnTMUS('Settlement Discrepancy calculated : ', JSON.stringify(response.body));
           expect(response.body).to.deep.equals(configured_EXPECTED_JSON_TMUS_local_settlement_discrepancy_body);
 
           if (SHOW_DISCREPANCY_GENERATION_DETAILS && (response.body.localUsage) && (response.body.localUsage.body)) {
