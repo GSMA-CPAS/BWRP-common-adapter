@@ -685,7 +685,7 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
 
           expect(response.body.body.generatedResult).to.have.property('fromDate', null);
           expect(response.body.body.generatedResult).to.have.property('toDate', null);
-          expect(response.body.body.generatedResult).to.have.property('calculationEngineVersion', '0.0.0');
+          expect(response.body.body.generatedResult).to.have.property('calculationEngineVersion', '0.0.1');
           expect(response.body.body.generatedResult).to.have.property('inbound');
           expect(response.body.body.generatedResult.inbound).to.have.property('tax').that.deep.equals({rate: ''});
           expect(response.body.body.generatedResult.inbound).to.have.property('currency');
@@ -738,7 +738,7 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
 
           expect(response.body.body.generatedResult).to.have.property('fromDate', null);
           expect(response.body.body.generatedResult).to.have.property('toDate', null);
-          expect(response.body.body.generatedResult).to.have.property('calculationEngineVersion', '0.0.0');
+          expect(response.body.body.generatedResult).to.have.property('calculationEngineVersion', '0.0.1');
           expect(response.body.body.generatedResult).to.have.property('inbound');
           expect(response.body.body.generatedResult.inbound).to.have.property('tax').that.deep.equals({rate: ''});
           expect(response.body.body.generatedResult.inbound).to.have.property('currency');
