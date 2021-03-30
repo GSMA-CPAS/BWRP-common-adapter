@@ -5,6 +5,8 @@ const config = require('../config');
 const logger = require('../logger');
 const errorUtils = require('../utils/errorUtils');
 
+const DISCREPANCY_SERVICE_USE_ONLY_INT_IDS = true;
+
 const DISCREPANCY_SERVICE_AXIOS_CONFIG = {
   transformResponse: [(data) => {
     return getAsObject(data);
@@ -139,9 +141,9 @@ class DiscrepancyServiceProvider {
    */
   async getSettlementDiscrepancy(settlement, settlementToCompare) {
     try {
-      const queryString = '?partnerSettlementId=' + settlementToCompare.id;
+      const queryString = '?partnerSettlementId=' + (DISCREPANCY_SERVICE_USE_ONLY_INT_IDS ? 2 : settlementToCompare.id);
       const sentBody = [defineSentSettlement(settlement, 'home'), defineSentSettlement(settlementToCompare, 'partner')];
-      const response = await axiosInstance.put(config.DISCREPANCY_SERVICE_URL + '/settlements/' + settlement.id + queryString, sentBody);
+      const response = await axiosInstance.put(config.DISCREPANCY_SERVICE_URL + '/settlements/' + (DISCREPANCY_SERVICE_USE_ONLY_INT_IDS ? 1 : settlement.id) + queryString, sentBody);
       logger.info(`[DiscrepancyServiceProvider::getSettlementDiscrepancy] response data:${typeof response.data} = ${JSON.stringify(response.data)}`);
       return response.data;
     } catch (error) {
@@ -158,9 +160,9 @@ class DiscrepancyServiceProvider {
    */
   async getUsageDiscrepancy(usage, usageToCompare) {
     try {
-      const queryString = '?partnerUsageId=' + usageToCompare.id;
+      const queryString = '?partnerUsageId=' + (DISCREPANCY_SERVICE_USE_ONLY_INT_IDS ? 2 : usageToCompare.id);
       const sentBody = [defineSentUsage(usage, 'home'), defineSentUsage(usageToCompare, 'partner')];
-      const response = await axiosInstance.put(config.DISCREPANCY_SERVICE_URL + '/usages/' + usage.id + queryString, sentBody);
+      const response = await axiosInstance.put(config.DISCREPANCY_SERVICE_URL + '/usages/' + (DISCREPANCY_SERVICE_USE_ONLY_INT_IDS ? 1 : usage.id) + queryString, sentBody);
       logger.info(`[DiscrepancyServiceProvider::getUsageDiscrepancy] response data:${typeof response.data} = ${JSON.stringify(response.data)}`);
       return response.data;
     } catch (error) {
