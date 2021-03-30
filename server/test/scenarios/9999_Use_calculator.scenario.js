@@ -11,14 +11,22 @@ const debugObjectOnDTAG = require('debug')('spec:DTAG-side:object');
 const chai = require('chai');
 const expect = require('chai').expect;
 
+const skipFlag = (process.env.MOCHA_SCENARIO_FILTER !== '') && (process.env.MOCHA_SCENARIO_FILTER !== '9999');
+
 /* eslint-disable camelcase */
 const CALCULATOR_API = `http://127.0.0.1:6060`;
 
-const configured_JSON_DTAG_contract_body_to_create = require('./0003_data/0003_JSON_DTAG_contract_body_to_create.json');
-const configured_JSON_TMUS_usage_body_to_create = require('./0003_data/0003_JSON_TMUS_usage_body_to_create.json');
+const datasetName = (process.env.MOCHA_SCENARIO_0003_DATASET !== undefined) && (process.env.MOCHA_SCENARIO_0003_DATASET !== '') ? process.env.MOCHA_SCENARIO_0003_DATASET : 'initial_dataset';
+const datasetPath = `./0003_data/${datasetName}`;
+
+const configured_JSON_DTAG_contract_body_to_create = require(`${datasetPath}/0003_JSON_DTAG_contract_body_to_create.json`);
+const configured_JSON_TMUS_usage_body_to_create = require(`${datasetPath}/0003_JSON_TMUS_usage_body_to_create.json`);
 
 describe.skip(`Launch scenario 9999_Use_calculator`, function() {
-  before((done) => {
+  before(function(done) {
+    if (skipFlag) {
+      this.skip();
+    }
     debugSetup('==> verify that CALCULATOR API is UP');
     try {
       chai.request(CALCULATOR_API)

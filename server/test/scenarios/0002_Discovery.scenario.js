@@ -9,6 +9,8 @@ const debugAction = require('debug')('spec:action');
 const chai = require('chai');
 const expect = require('chai').expect;
 
+const skipFlag = (process.env.MOCHA_SCENARIO_FILTER !== '') && (process.env.MOCHA_SCENARIO_FILTER !== '0002');
+
 const DATE_REGEX = testsUtils.getDateRegexp();
 
 /* eslint-disable camelcase */
@@ -16,7 +18,10 @@ const DTAG_API = `http://127.0.0.1:3030/api/v1`;
 const TMUS_API = `http://127.0.0.1:3040/api/v1`;
 
 describe(`Launch scenario 0002_Discovery`, function() {
-  before((done) => {
+  before(function(done) {
+    if (skipFlag) {
+      this.skip();
+    }
     debugSetup('==> verify that DTAG and TMUS APIs are UP');
     try {
       chai.request(DTAG_API)
