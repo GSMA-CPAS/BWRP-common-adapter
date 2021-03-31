@@ -1,0 +1,90 @@
+{
+  "homePerspective": {
+    "general_information": [
+      {
+        "bearer": "Voice",
+        "unit": "min",
+        "own_calculation": 441780,
+        "partner_calculation": 0,
+        "delta_calculation_percent": -100
+      },
+      {
+        "bearer": "SMS",
+        "unit": "#",
+        "own_calculation": 750,
+        "partner_calculation": 0,
+        "delta_calculation_percent": -100
+      },
+      {
+        "bearer": "Data",
+        "unit": "min",
+        "own_calculation": 155250,
+        "partner_calculation": 0,
+        "delta_calculation_percent": -100
+      }
+    ],
+    "details": [
+      {
+        "service": "MOC Back Home",
+        "unit": "min",
+        "own_calculation": 185700,
+        "partner_calculation": 0,
+        "delta_calculation_percent": -100
+      },
+      {
+        "service": "MOC Local",
+        "unit": "min",
+        "own_calculation": 134580,
+        "partner_calculation": 0,
+        "delta_calculation_percent": -100
+      },
+      {
+        "service": "MOC RoW",
+        "unit": "min",
+        "own_calculation": 121500,
+        "partner_calculation": 0,
+        "delta_calculation_percent": -100
+      },
+      {
+        "service": "SMSMO",
+        "unit": "min",
+        "own_calculation": 750,
+        "partner_calculation": 0,
+        "delta_calculation_percent": -100
+      },
+      {
+        "service": "GPRS",
+        "unit": "min",
+        "own_calculation": 155250,
+        "partner_calculation": 0,
+        "delta_calculation_percent": -100
+      }
+    ]
+  },
+  "partnerPerspective": {
+    "general_information": [
+      {
+        "bearer": "Voice",
+        "unit": "min",
+        "own_calculation": 0,
+        "partner_calculation": 0,
+        "delta_calculation_percent": 100
+      },
+      {
+        "bearer": "SMS",
+        "unit": "#",
+        "own_calculation": 0,
+        "partner_calculation": 0,
+        "delta_calculation_percent": 100
+      },
+      {
+        "bearer": "Data",
+        "unit": "min",
+        "own_calculation": 0,
+        "partner_calculation": 0,
+        "delta_calculation_percent": 100
+      }
+    ],
+    "details": []
+  }
+}
