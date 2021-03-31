@@ -5,7 +5,7 @@ const config = require('../config');
 const logger = require('../logger');
 const errorUtils = require('../utils/errorUtils');
 
-const DISCREPANCY_SERVICE_USE_ONLY_INT_IDS = true;
+const DISCREPANCY_SERVICE_USE_ONLY_INT_IDS = false;
 
 const DISCREPANCY_SERVICE_AXIOS_CONFIG = {
   transformResponse: [(data) => {
