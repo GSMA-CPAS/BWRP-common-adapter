@@ -95,7 +95,7 @@ const defineSentUsage = (usage, context) => {
     body: usage.body
   };
   return returnedResponse;
-}
+};
 
 const defineSentSettlement = (settlement, context) => {
   const returnedResponse = {
@@ -105,10 +105,13 @@ const defineSentSettlement = (settlement, context) => {
       mspOwner: settlement.mspOwner,
       context: context
     },
-    body: settlement.body
+    body: {}
   };
+  if (settlement.body !== undefined) {
+    returnedResponse.body.generatedResult = settlement.body.generatedResult;
+  }
   return returnedResponse;
-}
+};
 
 
 class DiscrepancyServiceProvider {
