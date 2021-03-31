@@ -1,5 +1,5 @@
 
-# kong_dataset dependencies
+# oswald_dataset dependencies
 
 This dataset is sending contract and usages using numbers to define all numerical values.
 
