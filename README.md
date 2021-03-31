@@ -94,4 +94,4 @@ Initialized with this content by default:
 
 Setting "MOCHA_SCENARIO_FILTER" with values "0000", "0001", "0002" or "0003", you can launch only the wanted scenario from "test/scenarios" folder.
 
-Setting "MOCHA_SCENARIO_0003_DATASET" with values "initial_dataset", "kong_dataset", or "oswald_dataset", you can choose the dataset from "0003_data" folder to launch during the "0003" scenario. Each of these dataset folders contains a "README.md" file to explain the deployed versions needed to run this dataset. 
+Setting "MOCHA_SCENARIO_0003_DATASET" with values "initial_dataset", "kong_dataset", "oswald_dataset", or "oswald_dataset_on_main_calculator", you can choose the dataset from "0003_data" folder to launch during the "0003" scenario. Each of these dataset folders contains a "README.md" file to explain the deployed versions needed to run this dataset. 
