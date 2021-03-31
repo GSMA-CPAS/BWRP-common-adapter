@@ -143,6 +143,7 @@ class DiscrepancyServiceProvider {
     try {
       const queryString = '?partnerSettlementId=' + (DISCREPANCY_SERVICE_USE_ONLY_INT_IDS ? 2 : settlementToCompare.id);
       const sentBody = [defineSentSettlement(settlement, 'home'), defineSentSettlement(settlementToCompare, 'partner')];
+      logger.info(`[DiscrepancyServiceProvider::getSettlementDiscrepancy] sentBody:${typeof sentBody} = ${JSON.stringify(sentBody)}`);
       const response = await axiosInstance.put(config.DISCREPANCY_SERVICE_URL + '/settlements/' + (DISCREPANCY_SERVICE_USE_ONLY_INT_IDS ? 1 : settlement.id) + queryString, sentBody);
       logger.info(`[DiscrepancyServiceProvider::getSettlementDiscrepancy] response data:${typeof response.data} = ${JSON.stringify(response.data)}`);
       return response.data;
@@ -162,6 +163,7 @@ class DiscrepancyServiceProvider {
     try {
       const queryString = '?partnerUsageId=' + (DISCREPANCY_SERVICE_USE_ONLY_INT_IDS ? 2 : usageToCompare.id);
       const sentBody = [defineSentUsage(usage, 'home'), defineSentUsage(usageToCompare, 'partner')];
+      logger.info(`[DiscrepancyServiceProvider::getUsageDiscrepancy] sentBody:${typeof sentBody} = ${JSON.stringify(sentBody)}`);
       const response = await axiosInstance.put(config.DISCREPANCY_SERVICE_URL + '/usages/' + (DISCREPANCY_SERVICE_USE_ONLY_INT_IDS ? 1 : usage.id) + queryString, sentBody);
       logger.info(`[DiscrepancyServiceProvider::getUsageDiscrepancy] response data:${typeof response.data} = ${JSON.stringify(response.data)}`);
       return response.data;
