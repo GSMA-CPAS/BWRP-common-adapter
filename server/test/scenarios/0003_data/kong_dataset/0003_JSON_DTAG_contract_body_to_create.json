@@ -73,8 +73,8 @@
                   "rate": {
                     "thresholds": [
                       {
-                        "start": "0",
-                        "linearPrice": "0.01"
+                        "start": 0,
+                        "linearPrice": 0.01
                       }
                     ]
                   }
@@ -89,8 +89,8 @@
                   "rate": {
                     "thresholds": [
                       {
-                        "start": "0",
-                        "linearPrice": "0.01"
+                        "start": 0,
+                        "linearPrice": 0.01
                       }
                     ]
                   }
@@ -105,8 +105,8 @@
                   "rate": {
                     "thresholds": [
                       {
-                        "start": "0",
-                        "linearPrice": "0.01"
+                        "start": 0,
+                        "linearPrice": 0.01
                       }
                     ]
                   }
@@ -121,8 +121,8 @@
                   "rate": {
                     "thresholds": [
                       {
-                        "start": "0",
-                        "linearPrice": "0.04"
+                        "start": 0,
+                        "linearPrice": 0.04
                       }
                     ]
                   }
@@ -156,8 +156,8 @@
                   "rate": {
                     "thresholds": [
                       {
-                        "start": "0",
-                        "linearPrice": "0.01"
+                        "start": 0,
+                        "linearPrice": 0.01
                       }
                     ]
                   }
@@ -172,8 +172,8 @@
                   "rate": {
                     "thresholds": [
                       {
-                        "start": "0",
-                        "linearPrice": "0.01"
+                        "start": 0,
+                        "linearPrice": 0.01
                       }
                     ]
                   }
@@ -188,8 +188,8 @@
                   "rate": {
                     "thresholds": [
                       {
-                        "start": "0",
-                        "linearPrice": "0.01"
+                        "start": 0,
+                        "linearPrice": 0.01
                       }
                     ]
                   }
@@ -204,8 +204,8 @@
                   "rate": {
                     "thresholds": [
                       {
-                        "start": "0",
-                        "linearPrice": "0.04"
+                        "start": 0,
+                        "linearPrice": 0.04
                       }
                     ]
                   }

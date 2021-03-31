@@ -11,9 +11,9 @@
       {
         "bearer": "SMS",
         "unit": "#",
-        "own_calculation": 0,
-        "partner_calculation": 0,
-        "delta_calculation_percent": 100
+        "own_calculation": 66966.06,
+        "partner_calculation": 66966.06,
+        "delta_calculation_percent": 0
       },
       {
         "bearer": "Data",
@@ -39,6 +39,13 @@
         "delta_calculation_percent": 0
       },
       {
+        "service": "SMSMO",
+        "unit": "min",
+        "own_calculation": 66966.06,
+        "partner_calculation": 66966.06,
+        "delta_calculation_percent": 0
+      },
+      {
         "service": "GPRS",
         "unit": "min",
         "own_calculation": 299827.45,
@@ -59,9 +66,9 @@
       {
         "bearer": "SMS",
         "unit": "#",
-        "own_calculation": 0,
-        "partner_calculation": 0,
-        "delta_calculation_percent": 100
+        "own_calculation": 53479.75,
+        "partner_calculation": 53479.75,
+        "delta_calculation_percent": 0
       },
       {
         "bearer": "Data",
@@ -84,6 +91,13 @@
         "unit": "min",
         "own_calculation": 13608.24,
         "partner_calculation": 13608.24,
+        "delta_calculation_percent": 0
+      },
+      {
+        "service": "SMSMO",
+        "unit": "min",
+        "own_calculation": 53479.75,
+        "partner_calculation": 53479.75,
         "delta_calculation_percent": 0
       },
       {

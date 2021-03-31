@@ -24,7 +24,7 @@
         "MTC": 0
       },
       "SMS": {
-        "MO": 0,
+        "MO": 53479.75,
         "MT": 0
       },
       "data": [
@@ -84,7 +84,7 @@
         "MTC": 0
       },
       "SMS": {
-        "MO": 0,
+        "MO": 66966.06,
         "MT": 0
       },
       "data": [
@@ -122,8 +122,5 @@
       }
     }
   },
-  "unexpectedServiceNames": [
-    "SMS MO",
-    "SMS MO"
-  ]
+  "unexpectedServiceNames": []
 }

@@ -4,48 +4,48 @@
       "homeTadig": "ALB1",
       "visitorTadig": "BLA1",
       "service": "SMSMO",
-      "usage": "500000",
-      "charges": "1000",
+      "usage": 500000,
+      "charges": 1000,
       "units": "SMS"
     },
     {
       "homeTadig": "ALB1",
       "visitorTadig": "BLA1",
       "service": "GPRS",
-      "usage": "120000000",
-      "charges": "180000",
+      "usage": 120000000,
+      "charges": 180000,
       "units": "MB"
     },
     {
       "homeTadig": "ALB1",
       "visitorTadig": "BLA1",
       "service": "MOC Local",
-      "usage": "2243000",
-      "charges": "79000",
+      "usage": 2243000,
+      "charges": 79000,
       "units": "min"
     },
     {
       "homeTadig": "ALB1",
       "visitorTadig": "BLA1",
       "service": "MOC Back Home",
-      "usage": "1857000",
-      "charges": "225000",
+      "usage": 1857000,
+      "charges": 225000,
       "units": "MB"
     },
     {
       "homeTadig": "ALB1",
       "visitorTadig": "BLA1",
       "service": "MOC RoW",
-      "usage": "810000",
-      "charges": "121500",
+      "usage": 810000,
+      "charges": 121500,
       "units": "min"
     },
     {
       "homeTadig": "ALB1",
       "visitorTadig": "BLA1",
       "service": "MTC",
-      "usage": "0",
-      "charges": "2500000",
+      "usage": 0,
+      "charges": 2500000,
       "units": "min"
     }
   ],

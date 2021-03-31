@@ -30,67 +30,60 @@
       {
         "bearer": "Voice",
         "unit": "min",
-        "own_calculation": 0,
+        "own_calculation": 381780,
         "partner_calculation": 441780,
-        "delta_calculation_percent": 100
+        "delta_calculation_percent": 15.72
       },
       {
         "bearer": "SMS",
         "unit": "#",
-        "own_calculation": 0,
-        "partner_calculation": 1500,
-        "delta_calculation_percent": 100
+        "own_calculation": 750,
+        "partner_calculation": 750,
+        "delta_calculation_percent": 0
       },
       {
         "bearer": "Data",
         "unit": "min",
-        "own_calculation": 0,
+        "own_calculation": 119250,
         "partner_calculation": 155250,
-        "delta_calculation_percent": 100
+        "delta_calculation_percent": 30.19
       }
     ],
     "details": [
       {
         "service": "MOC Back Home",
         "unit": "min",
-        "own_calculation": 0,
+        "own_calculation": 185700,
         "partner_calculation": 185700,
-        "delta_calculation_percent": 100
+        "delta_calculation_percent": 0
       },
       {
         "service": "MOC Local",
         "unit": "min",
-        "own_calculation": 0,
+        "own_calculation": 74580,
         "partner_calculation": 134580,
-        "delta_calculation_percent": 100
+        "delta_calculation_percent": 80.45
       },
       {
         "service": "MOC RoW",
         "unit": "min",
-        "own_calculation": 0,
+        "own_calculation": 121500,
         "partner_calculation": 121500,
-        "delta_calculation_percent": 100
+        "delta_calculation_percent": 0
       },
       {
         "service": "SMSMO",
         "unit": "min",
-        "own_calculation": 0,
+        "own_calculation": 750,
         "partner_calculation": 750,
-        "delta_calculation_percent": 100
-      },
-      {
-        "service": "SMS MO",
-        "unit": "min",
-        "own_calculation": 0,
-        "partner_calculation": 750,
-        "delta_calculation_percent": 100
+        "delta_calculation_percent": 0
       },
       {
         "service": "GPRS",
         "unit": "min",
-        "own_calculation": 0,
+        "own_calculation": 119250,
         "partner_calculation": 155250,
-        "delta_calculation_percent": 100
+        "delta_calculation_percent": 30.19
       }
     ]
   }

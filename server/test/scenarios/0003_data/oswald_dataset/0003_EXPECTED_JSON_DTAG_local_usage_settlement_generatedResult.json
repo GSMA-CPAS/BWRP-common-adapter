@@ -70,11 +70,11 @@
     "services": {
       "voice": {
         "MOC": {
-          "local": 0,
-          "backHome": 0,
+          "local": 74580,
+          "backHome": 185700,
           "international": 0,
           "premium": 0,
-          "ROW": 0,
+          "ROW": 121500,
           "EU": 0,
           "EEA": 0,
           "satellite": 0,
@@ -84,13 +84,13 @@
         "MTC": 0
       },
       "SMS": {
-        "MO": 0,
+        "MO": 750,
         "MT": 0
       },
       "data": [
         {
           "name": "GPRS",
-          "value": 0
+          "value": 119250
         },
         {
           "name": "M2M",

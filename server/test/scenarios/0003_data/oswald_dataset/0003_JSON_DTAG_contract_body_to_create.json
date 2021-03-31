@@ -4,7 +4,7 @@
       "condition": {
         "kind": "Deal Revenue Commitment",
         "commitment": {
-          "value": "555000"
+          "value": 555000
         }
       },
       "serviceGroups": [
@@ -22,7 +22,7 @@
               "usagePricing": {
                 "ratingPlan": {
                   "rate": {
-                    "linearPrice": "0.0015"
+                    "linearPrice": 0.0015
                   }
                 }
               }
@@ -33,7 +33,7 @@
               "usagePricing": {
                 "ratingPlan": {
                   "rate": {
-                    "linearPrice": "0.060"
+                    "linearPrice": 0.060
                   }
                 }
               }
@@ -46,12 +46,12 @@
                   "rate": {
                     "thresholds": [
                       {
-                        "start": "0",
-                        "linearPrice": "0.0015"
+                        "start": 0,
+                        "linearPrice": 0.0015
                       },
                       {
-                        "start": "37500000",
-                        "linearPrice": "0.0012"
+                        "start": 37500000,
+                        "linearPrice": 0.0012
                       }
                     ]
                   }
@@ -64,7 +64,7 @@
               "usagePricing": {
                 "ratingPlan": {
                   "rate": {
-                    "linearPrice": "0.100"
+                    "linearPrice": 0.100
                   }
                 }
               }
@@ -75,7 +75,7 @@
               "usagePricing": {
                 "ratingPlan": {
                   "rate": {
-                    "linearPrice": "0.150"
+                    "linearPrice": 0.150
                   }
                 }
               }
@@ -86,7 +86,7 @@
               "usagePricing": {
                 "ratingPlan": {
                   "rate": {
-                    "linearPrice": "0.0"
+                    "linearPrice": 0.0
                   }
                 }
               }
@@ -99,7 +99,7 @@
       "condition": {
         "kind": "Deal Revenue Commitment",
         "commitment": {
-          "value": "555000"
+          "value": 555000
         }
       },
       "serviceGroups": [
@@ -117,7 +117,7 @@
               "usagePricing": {
                 "ratingPlan": {
                   "rate": {
-                    "linearPrice": "0.0015"
+                    "linearPrice": 0.0015
                   }
                 }
               }
@@ -128,7 +128,7 @@
               "usagePricing": {
                 "ratingPlan": {
                   "rate": {
-                    "linearPrice": "0.060"
+                    "linearPrice": 0.060
                   }
                 }
               }
@@ -141,12 +141,12 @@
                   "rate": {
                     "thresholds": [
                       {
-                        "start": "0",
-                        "linearPrice": "0.0015"
+                        "start": 0,
+                        "linearPrice": 0.0015
                       },
                       {
-                        "start": "37500000",
-                        "linearPrice": "0.0012"
+                        "start": 37500000,
+                        "linearPrice": 0.0012
                       }
                     ]
                   }
@@ -159,7 +159,7 @@
               "usagePricing": {
                 "ratingPlan": {
                   "rate": {
-                    "linearPrice": "0.100"
+                    "linearPrice": 0.100
                   }
                 }
               }
@@ -170,7 +170,7 @@
               "usagePricing": {
                 "ratingPlan": {
                   "rate": {
-                    "linearPrice": "0.150"
+                    "linearPrice": 0.150
                   }
                 }
               }
@@ -181,7 +181,7 @@
               "usagePricing": {
                 "ratingPlan": {
                   "rate": {
-                    "linearPrice": "0.0"
+                    "linearPrice": 0.0
                   }
                 }
               }
