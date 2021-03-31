@@ -5,10 +5,10 @@
       "unit": "min",
       "inbound_own_usage": 47231.29,
       "inbound_partner_usage": 251455,
-      "inbound_discrepancy": 204223.71,
-      "outbound_own_usage": 251541.74,
+      "inbound_discrepancy": 204223.72,
+      "outbound_own_usage": 251541.75,
       "outbound_partner_usage": 47215,
-      "outbound_discrepancy": -204326.74
+      "outbound_discrepancy": 204326.75
     },
     {
       "service": "SMS",
@@ -16,983 +16,983 @@
       "inbound_own_usage": 51840.88,
       "inbound_partner_usage": 214234,
       "inbound_discrepancy": 162393.12,
-      "outbound_own_usage": 214307.91,
+      "outbound_own_usage": 214307.92,
       "outbound_partner_usage": 51823,
-      "outbound_discrepancy": -162484.91
+      "outbound_discrepancy": 162484.92
     },
     {
       "service": "Data",
-      "unit": "min",
-      "inbound_own_usage": 123498.58,
+      "unit": "MB",
+      "inbound_own_usage": 123498.586,
       "inbound_partner_usage": 146235,
-      "inbound_discrepancy": 22736.42,
+      "inbound_discrepancy": 22736.414,
       "outbound_own_usage": 146285.45,
       "outbound_partner_usage": 123456,
-      "outbound_discrepancy": -22829.45
+      "outbound_discrepancy": 22829.453
     }
   ],
   "inbound": [
     {
       "HTMN": "AAZTD",
       "VPMN": "AAZOR",
-      "yearMonth": "202001",
-      "service": "SMSMO",
-      "own_usage": 5208.21,
-      "partner_usage": 21423.4,
-      "delta_usage_abs": 16215.19,
-      "delta_usage_percent": 311.34
-    },
-    {
-      "HTMN": "AAZTD",
-      "VPMN": "AAZOR",
-      "yearMonth": "202001",
-      "service": "MOC EU",
-      "own_usage": 2149.9,
-      "partner_usage": 12310.3,
-      "delta_usage_abs": 10160.4,
-      "delta_usage_percent": 472.6
-    },
-    {
-      "HTMN": "AAZTD",
-      "VPMN": "AAZOR",
-      "yearMonth": "202001",
-      "service": "MOC Local",
-      "own_usage": 2595.21,
-      "partner_usage": 12835.2,
-      "delta_usage_abs": 10239.99,
-      "delta_usage_percent": 394.57
-    },
-    {
-      "HTMN": "AAZTD",
-      "VPMN": "AAZOR",
-      "yearMonth": "202001",
-      "service": "VoLTE",
-      "own_usage": 12407.33,
-      "partner_usage": 14623.5,
-      "delta_usage_abs": 2216.17,
-      "delta_usage_percent": 17.86
-    },
-    {
-      "HTMN": "AAZTD",
-      "VPMN": "AAZOR",
-      "yearMonth": "202002",
-      "service": "MOC EU",
-      "own_usage": 1067.46,
-      "partner_usage": 6155.15,
-      "delta_usage_abs": 5087.69,
-      "delta_usage_percent": 476.62
-    },
-    {
-      "HTMN": "AAZTD",
-      "VPMN": "AAZOR",
-      "yearMonth": "202002",
-      "service": "VoLTE",
-      "own_usage": 6160.45,
-      "partner_usage": 7311.75,
-      "delta_usage_abs": 1151.3,
-      "delta_usage_percent": 18.69
-    },
-    {
-      "HTMN": "AAZTD",
-      "VPMN": "AAZOR",
-      "yearMonth": "202002",
-      "service": "SMSMO",
-      "own_usage": 2585.97,
-      "partner_usage": 10711.7,
-      "delta_usage_abs": 8125.73,
-      "delta_usage_percent": 314.22
-    },
-    {
-      "HTMN": "AAZTD",
-      "VPMN": "AAZOR",
-      "yearMonth": "202002",
-      "service": "MOC Local",
-      "own_usage": 1288.57,
-      "partner_usage": 6417.6,
-      "delta_usage_abs": 5129.03,
-      "delta_usage_percent": 398.04
-    },
-    {
-      "HTMN": "AAZTD",
-      "VPMN": "AAZOR",
-      "yearMonth": "202003",
-      "service": "VoLTE",
-      "own_usage": 3711.09,
-      "partner_usage": 4387.05,
-      "delta_usage_abs": 675.96,
-      "delta_usage_percent": 18.21
-    },
-    {
-      "HTMN": "AAZTD",
-      "VPMN": "AAZOR",
-      "yearMonth": "202003",
-      "service": "MOC EU",
-      "own_usage": 643.04,
-      "partner_usage": 3693.09,
-      "delta_usage_abs": 3050.05,
-      "delta_usage_percent": 474.32
-    },
-    {
-      "HTMN": "AAZTD",
-      "VPMN": "AAZOR",
-      "yearMonth": "202003",
-      "service": "MOC Local",
-      "own_usage": 776.24,
-      "partner_usage": 3850.56,
-      "delta_usage_abs": 3074.32,
-      "delta_usage_percent": 396.05
-    },
-    {
-      "HTMN": "AAZTD",
-      "VPMN": "AAZOR",
-      "yearMonth": "202003",
-      "service": "SMSMO",
-      "own_usage": 1557.8,
-      "partner_usage": 6427.02,
-      "delta_usage_abs": 4869.22,
-      "delta_usage_percent": 312.57
-    },
-    {
-      "HTMN": "AAZTD",
-      "VPMN": "AAZOR",
-      "yearMonth": "202004",
-      "service": "VoLTE",
-      "own_usage": 6169.71,
-      "partner_usage": 7311.75,
-      "delta_usage_abs": 1142.04,
-      "delta_usage_percent": 18.51
-    },
-    {
-      "HTMN": "AAZTD",
-      "VPMN": "AAZOR",
-      "yearMonth": "202004",
-      "service": "SMSMO",
-      "own_usage": 2589.85,
-      "partner_usage": 10711.7,
-      "delta_usage_abs": 8121.85,
-      "delta_usage_percent": 313.6
-    },
-    {
-      "HTMN": "AAZTD",
-      "VPMN": "AAZOR",
-      "yearMonth": "202004",
-      "service": "MOC EU",
-      "own_usage": 1069.07,
-      "partner_usage": 6155.15,
-      "delta_usage_abs": 5086.08,
-      "delta_usage_percent": 475.75
-    },
-    {
-      "HTMN": "AAZTD",
-      "VPMN": "AAZOR",
-      "yearMonth": "202004",
-      "service": "MOC Local",
-      "own_usage": 1290.5,
-      "partner_usage": 6417.6,
-      "delta_usage_abs": 5127.1,
-      "delta_usage_percent": 397.3
-    },
-    {
-      "HTMN": "AAZTD",
-      "VPMN": "AAZOR",
-      "yearMonth": "202005",
-      "service": "SMSMO",
-      "own_usage": 3118.71,
-      "partner_usage": 12854.04,
-      "delta_usage_abs": 9735.33,
-      "delta_usage_percent": 312.16
-    },
-    {
-      "HTMN": "AAZTD",
-      "VPMN": "AAZOR",
-      "yearMonth": "202005",
-      "service": "MOC EU",
-      "own_usage": 1287.37,
-      "partner_usage": 7386.18,
-      "delta_usage_abs": 6098.81,
-      "delta_usage_percent": 473.74
-    },
-    {
-      "HTMN": "AAZTD",
-      "VPMN": "AAZOR",
-      "yearMonth": "202005",
-      "service": "VoLTE",
-      "own_usage": 7429.58,
-      "partner_usage": 8774.1,
-      "delta_usage_abs": 1344.52,
-      "delta_usage_percent": 18.1
-    },
-    {
-      "HTMN": "AAZTD",
-      "VPMN": "AAZOR",
-      "yearMonth": "202005",
-      "service": "MOC Local",
-      "own_usage": 1554.03,
-      "partner_usage": 7701.12,
-      "delta_usage_abs": 6147.09,
-      "delta_usage_percent": 395.56
-    },
-    {
-      "HTMN": "AAZTD",
-      "VPMN": "AAZOR",
-      "yearMonth": "202006",
-      "service": "SMSMO",
-      "own_usage": 4141.69,
-      "partner_usage": 17138.72,
-      "delta_usage_abs": 12997.03,
-      "delta_usage_percent": 313.81
-    },
-    {
-      "HTMN": "AAZTD",
-      "VPMN": "AAZOR",
-      "yearMonth": "202006",
-      "service": "MOC EU",
-      "own_usage": 1709.65,
-      "partner_usage": 9848.24,
-      "delta_usage_abs": 8138.59,
-      "delta_usage_percent": 476.04
-    },
-    {
-      "HTMN": "AAZTD",
-      "VPMN": "AAZOR",
-      "yearMonth": "202006",
-      "service": "MOC Local",
-      "own_usage": 2063.77,
-      "partner_usage": 10268.16,
-      "delta_usage_abs": 8204.39,
-      "delta_usage_percent": 397.54
-    },
-    {
-      "HTMN": "AAZTD",
-      "VPMN": "AAZOR",
-      "yearMonth": "202006",
-      "service": "VoLTE",
-      "own_usage": 9866.6,
-      "partner_usage": 11698.8,
-      "delta_usage_abs": 1832.2,
-      "delta_usage_percent": 18.57
-    },
-    {
-      "HTMN": "AAZTD",
-      "VPMN": "AAZOR",
-      "yearMonth": "202007",
-      "service": "VoLTE",
-      "own_usage": 14829.53,
-      "partner_usage": 17548.2,
-      "delta_usage_abs": 2718.67,
-      "delta_usage_percent": 18.33
-    },
-    {
-      "HTMN": "AAZTD",
-      "VPMN": "AAZOR",
-      "yearMonth": "202007",
-      "service": "MOC Local",
-      "own_usage": 3101.86,
-      "partner_usage": 15402.24,
-      "delta_usage_abs": 12300.38,
-      "delta_usage_percent": 396.55
-    },
-    {
-      "HTMN": "AAZTD",
-      "VPMN": "AAZOR",
-      "yearMonth": "202007",
-      "service": "SMSMO",
-      "own_usage": 6224.98,
-      "partner_usage": 25708.08,
-      "delta_usage_abs": 19483.1,
-      "delta_usage_percent": 312.98
-    },
-    {
-      "HTMN": "AAZTD",
-      "VPMN": "AAZOR",
-      "yearMonth": "202007",
-      "service": "MOC EU",
-      "own_usage": 2569.61,
-      "partner_usage": 14772.36,
-      "delta_usage_abs": 12202.75,
-      "delta_usage_percent": 474.89
-    },
-    {
-      "HTMN": "AAZTD",
-      "VPMN": "AAZOR",
-      "yearMonth": "202008",
-      "service": "VoLTE",
-      "own_usage": 13539.42,
-      "partner_usage": 16085.85,
-      "delta_usage_abs": 2546.43,
-      "delta_usage_percent": 18.81
-    },
-    {
-      "HTMN": "AAZTD",
-      "VPMN": "AAZOR",
-      "yearMonth": "202008",
-      "service": "MOC EU",
-      "own_usage": 2346.06,
-      "partner_usage": 13541.33,
-      "delta_usage_abs": 11195.27,
-      "delta_usage_percent": 477.19
-    },
-    {
-      "HTMN": "AAZTD",
-      "VPMN": "AAZOR",
-      "yearMonth": "202008",
-      "service": "MOC Local",
-      "own_usage": 2832.01,
-      "partner_usage": 14118.72,
-      "delta_usage_abs": 11286.71,
-      "delta_usage_percent": 398.54
-    },
-    {
-      "HTMN": "AAZTD",
-      "VPMN": "AAZOR",
-      "yearMonth": "202008",
-      "service": "SMSMO",
-      "own_usage": 5683.43,
-      "partner_usage": 23565.74,
-      "delta_usage_abs": 17882.31,
-      "delta_usage_percent": 314.64
-    },
-    {
-      "HTMN": "AAZTD",
-      "VPMN": "AAZOR",
-      "yearMonth": "202009",
-      "service": "VoLTE",
-      "own_usage": 12320.91,
-      "partner_usage": 14623.5,
-      "delta_usage_abs": 2302.59,
-      "delta_usage_percent": 18.69
-    },
-    {
-      "HTMN": "AAZTD",
-      "VPMN": "AAZOR",
-      "yearMonth": "202009",
-      "service": "MOC Local",
-      "own_usage": 2577.14,
-      "partner_usage": 12835.2,
-      "delta_usage_abs": 10258.06,
-      "delta_usage_percent": 398.04
-    },
-    {
-      "HTMN": "AAZTD",
-      "VPMN": "AAZOR",
-      "yearMonth": "202009",
-      "service": "SMSMO",
-      "own_usage": 5171.94,
-      "partner_usage": 21423.4,
-      "delta_usage_abs": 16251.46,
-      "delta_usage_percent": 314.22
-    },
-    {
-      "HTMN": "AAZTD",
-      "VPMN": "AAZOR",
-      "yearMonth": "202009",
-      "service": "MOC EU",
-      "own_usage": 2134.92,
-      "partner_usage": 12310.3,
-      "delta_usage_abs": 10175.38,
-      "delta_usage_percent": 476.62
-    },
-    {
-      "HTMN": "AAZTD",
-      "VPMN": "AAZOR",
-      "yearMonth": "202010",
-      "service": "VoLTE",
-      "own_usage": 11099.93,
-      "partner_usage": 13161.15,
-      "delta_usage_abs": 2061.22,
-      "delta_usage_percent": 18.57
-    },
-    {
-      "HTMN": "AAZTD",
-      "VPMN": "AAZOR",
-      "yearMonth": "202010",
-      "service": "MOC Local",
-      "own_usage": 2321.75,
+      "delta_usage_abs": 9229.934,
+      "delta_usage_percent": -397.54282,
+      "own_usage": 2321.7458,
       "partner_usage": 11551.68,
-      "delta_usage_abs": 9229.93,
-      "delta_usage_percent": 397.54
-    },
-    {
-      "HTMN": "AAZTD",
-      "VPMN": "AAZOR",
-      "yearMonth": "202010",
-      "service": "MOC EU",
-      "own_usage": 1923.35,
-      "partner_usage": 11079.27,
-      "delta_usage_abs": 9155.92,
-      "delta_usage_percent": 476.04
-    },
-    {
-      "HTMN": "AAZTD",
-      "VPMN": "AAZOR",
-      "yearMonth": "202010",
-      "service": "SMSMO",
-      "own_usage": 4659.41,
-      "partner_usage": 19281.06,
-      "delta_usage_abs": 14621.65,
-      "delta_usage_percent": 313.81
-    },
-    {
-      "HTMN": "AAZTD",
-      "VPMN": "AAZOR",
-      "yearMonth": "202011",
-      "service": "SMSMO",
-      "own_usage": 5192.66,
-      "partner_usage": 21423.4,
-      "delta_usage_abs": 16230.74,
-      "delta_usage_percent": 312.57
-    },
-    {
-      "HTMN": "AAZTD",
-      "VPMN": "AAZOR",
-      "yearMonth": "202011",
-      "service": "MOC EU",
-      "own_usage": 2143.48,
-      "partner_usage": 12310.3,
-      "delta_usage_abs": 10166.82,
-      "delta_usage_percent": 474.31
-    },
-    {
-      "HTMN": "AAZTD",
-      "VPMN": "AAZOR",
-      "yearMonth": "202011",
       "service": "MOC Local",
-      "own_usage": 2587.46,
-      "partner_usage": 12835.2,
-      "delta_usage_abs": 10247.74,
-      "delta_usage_percent": 396.05
+      "yearMonth": "202010"
     },
     {
       "HTMN": "AAZTD",
       "VPMN": "AAZOR",
-      "yearMonth": "202011",
+      "delta_usage_abs": 1142.0366,
+      "delta_usage_percent": -18.510366,
+      "own_usage": 6169.7134,
+      "partner_usage": 7311.75,
       "service": "VoLTE",
-      "own_usage": 12370.29,
+      "yearMonth": "202004"
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "AAZOR",
+      "delta_usage_abs": 8121.8457,
+      "delta_usage_percent": -313.6024,
+      "own_usage": 2589.8545,
+      "partner_usage": 10711.7,
+      "service": "SMSMO",
+      "yearMonth": "202004"
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "AAZOR",
+      "delta_usage_abs": 12997.026,
+      "delta_usage_percent": -313.8094,
+      "own_usage": 4141.6943,
+      "partner_usage": 17138.72,
+      "service": "SMSMO",
+      "yearMonth": "202006"
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "AAZOR",
+      "delta_usage_abs": 2061.2217,
+      "delta_usage_percent": -18.569683,
+      "own_usage": 11099.929,
+      "partner_usage": 13161.15,
+      "service": "VoLTE",
+      "yearMonth": "202010"
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "AAZOR",
+      "delta_usage_abs": 11185.857,
+      "delta_usage_percent": -474.88794,
+      "own_usage": 2355.4731,
+      "partner_usage": 13541.33,
+      "service": "MOC EU",
+      "yearMonth": "202012"
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "AAZOR",
+      "delta_usage_abs": 16215.189,
+      "delta_usage_percent": -311.33893,
+      "own_usage": 5208.2114,
+      "partner_usage": 21423.4,
+      "service": "SMSMO",
+      "yearMonth": "202001"
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "AAZOR",
+      "delta_usage_abs": 5127.0957,
+      "delta_usage_percent": -397.2939,
+      "own_usage": 1290.5044,
+      "partner_usage": 6417.6,
+      "service": "MOC Local",
+      "yearMonth": "202004"
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "AAZOR",
+      "delta_usage_abs": 1832.1963,
+      "delta_usage_percent": -18.569677,
+      "own_usage": 9866.604,
+      "partner_usage": 11698.8,
+      "service": "VoLTE",
+      "yearMonth": "202006"
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "AAZOR",
+      "delta_usage_abs": 14621.654,
+      "delta_usage_percent": -313.80942,
+      "own_usage": 4659.406,
+      "partner_usage": 19281.06,
+      "service": "SMSMO",
+      "yearMonth": "202010"
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "AAZOR",
+      "delta_usage_abs": 16251.465,
+      "delta_usage_percent": -314.22403,
+      "own_usage": 5171.9355,
+      "partner_usage": 21423.4,
+      "service": "SMSMO",
+      "yearMonth": "202009"
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "AAZOR",
+      "delta_usage_abs": 10166.821,
+      "delta_usage_percent": -474.31412,
+      "own_usage": 2143.4785,
+      "partner_usage": 12310.3,
+      "service": "MOC EU",
+      "yearMonth": "202011"
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "AAZOR",
+      "delta_usage_abs": 3074.3208,
+      "delta_usage_percent": -396.0532,
+      "own_usage": 776.2394,
+      "partner_usage": 3850.56,
+      "service": "MOC Local",
+      "yearMonth": "202003"
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "AAZOR",
+      "delta_usage_abs": 5086.085,
+      "delta_usage_percent": -475.75067,
+      "own_usage": 1069.0652,
+      "partner_usage": 6155.15,
+      "service": "MOC EU",
+      "yearMonth": "202004"
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "AAZOR",
+      "delta_usage_abs": 9735.332,
+      "delta_usage_percent": -312.15912,
+      "own_usage": 3118.7083,
+      "partner_usage": 12854.04,
+      "service": "SMSMO",
+      "yearMonth": "202005"
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "AAZOR",
+      "delta_usage_abs": 19483.102,
+      "delta_usage_percent": -312.9826,
+      "own_usage": 6224.979,
+      "partner_usage": 25708.08,
+      "service": "SMSMO",
+      "yearMonth": "202007"
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "AAZOR",
+      "delta_usage_abs": 11286.711,
+      "delta_usage_percent": -398.5409,
+      "own_usage": 2832.0083,
+      "partner_usage": 14118.72,
+      "service": "MOC Local",
+      "yearMonth": "202008"
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "AAZOR",
+      "delta_usage_abs": 2302.5908,
+      "delta_usage_percent": -18.688482,
+      "own_usage": 12320.909,
       "partner_usage": 14623.5,
-      "delta_usage_abs": 2253.21,
-      "delta_usage_percent": 18.21
+      "service": "VoLTE",
+      "yearMonth": "202009"
     },
     {
       "HTMN": "AAZTD",
       "VPMN": "AAZOR",
-      "yearMonth": "202012",
-      "service": "VoLTE",
+      "delta_usage_abs": 2492.1094,
+      "delta_usage_percent": -18.332771,
       "own_usage": 13593.74,
       "partner_usage": 16085.85,
-      "delta_usage_abs": 2492.11,
-      "delta_usage_percent": 18.33
+      "service": "VoLTE",
+      "yearMonth": "202012"
     },
     {
       "HTMN": "AAZTD",
       "VPMN": "AAZOR",
-      "yearMonth": "202012",
-      "service": "MOC Local",
-      "own_usage": 2843.37,
-      "partner_usage": 14118.72,
-      "delta_usage_abs": 11275.35,
-      "delta_usage_percent": 396.55
-    },
-    {
-      "HTMN": "AAZTD",
-      "VPMN": "AAZOR",
-      "yearMonth": "202012",
-      "service": "SMSMO",
-      "own_usage": 5706.23,
-      "partner_usage": 23565.74,
-      "delta_usage_abs": 17859.51,
-      "delta_usage_percent": 312.98
-    },
-    {
-      "HTMN": "AAZTD",
-      "VPMN": "AAZOR",
-      "yearMonth": "202012",
+      "delta_usage_abs": 6098.8096,
+      "delta_usage_percent": -473.74158,
+      "own_usage": 1287.3706,
+      "partner_usage": 7386.18,
       "service": "MOC EU",
-      "own_usage": 2355.47,
+      "yearMonth": "202005"
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "AAZOR",
+      "delta_usage_abs": 8204.386,
+      "delta_usage_percent": -397.54282,
+      "own_usage": 2063.7742,
+      "partner_usage": 10268.16,
+      "service": "MOC Local",
+      "yearMonth": "202006"
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "AAZOR",
+      "delta_usage_abs": 2718.664,
+      "delta_usage_percent": -18.332766,
+      "own_usage": 14829.535,
+      "partner_usage": 17548.2,
+      "service": "VoLTE",
+      "yearMonth": "202007"
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "AAZOR",
+      "delta_usage_abs": 12300.382,
+      "delta_usage_percent": -396.54874,
+      "own_usage": 3101.8586,
+      "partner_usage": 15402.24,
+      "service": "MOC Local",
+      "yearMonth": "202007"
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "AAZOR",
+      "delta_usage_abs": 5129.032,
+      "delta_usage_percent": -398.04132,
+      "own_usage": 1288.5677,
+      "partner_usage": 6417.6,
+      "service": "MOC Local",
+      "yearMonth": "202002"
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "AAZOR",
+      "delta_usage_abs": 9155.915,
+      "delta_usage_percent": -476.0388,
+      "own_usage": 1923.3547,
+      "partner_usage": 11079.27,
+      "service": "MOC EU",
+      "yearMonth": "202010"
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "AAZOR",
+      "delta_usage_abs": 10247.735,
+      "delta_usage_percent": -396.05316,
+      "own_usage": 2587.4646,
+      "partner_usage": 12835.2,
+      "service": "MOC Local",
+      "yearMonth": "202011"
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "AAZOR",
+      "delta_usage_abs": 1344.5176,
+      "delta_usage_percent": -18.096813,
+      "own_usage": 7429.582,
+      "partner_usage": 8774.1,
+      "service": "VoLTE",
+      "yearMonth": "202005"
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "AAZOR",
+      "delta_usage_abs": 6147.092,
+      "delta_usage_percent": -395.55856,
+      "own_usage": 1554.0282,
+      "partner_usage": 7701.12,
+      "service": "MOC Local",
+      "yearMonth": "202005"
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "AAZOR",
+      "delta_usage_abs": 8138.592,
+      "delta_usage_percent": -476.03885,
+      "own_usage": 1709.6487,
+      "partner_usage": 9848.24,
+      "service": "MOC EU",
+      "yearMonth": "202006"
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "AAZOR",
+      "delta_usage_abs": 16230.736,
+      "delta_usage_percent": -312.57047,
+      "own_usage": 5192.6646,
+      "partner_usage": 21423.4,
+      "service": "SMSMO",
+      "yearMonth": "202011"
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "AAZOR",
+      "delta_usage_abs": 2216.1719,
+      "delta_usage_percent": -17.8618,
+      "own_usage": 12407.328,
+      "partner_usage": 14623.5,
+      "service": "VoLTE",
+      "yearMonth": "202001"
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "AAZOR",
+      "delta_usage_abs": 5087.689,
+      "delta_usage_percent": -476.616,
+      "own_usage": 1067.4608,
+      "partner_usage": 6155.15,
+      "service": "MOC EU",
+      "yearMonth": "202002"
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "AAZOR",
+      "delta_usage_abs": 1151.2954,
+      "delta_usage_percent": -18.688482,
+      "own_usage": 6160.4546,
+      "partner_usage": 7311.75,
+      "service": "VoLTE",
+      "yearMonth": "202002"
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "AAZOR",
+      "delta_usage_abs": 4869.2207,
+      "delta_usage_percent": -312.57047,
+      "own_usage": 1557.7994,
+      "partner_usage": 6427.02,
+      "service": "SMSMO",
+      "yearMonth": "202003"
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "AAZOR",
+      "delta_usage_abs": 2253.209,
+      "delta_usage_percent": -18.21468,
+      "own_usage": 12370.291,
+      "partner_usage": 14623.5,
+      "service": "VoLTE",
+      "yearMonth": "202011"
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "AAZOR",
+      "delta_usage_abs": 11195.27,
+      "delta_usage_percent": -477.1944,
+      "own_usage": 2346.0605,
       "partner_usage": 13541.33,
-      "delta_usage_abs": 11185.86,
-      "delta_usage_percent": 474.89
+      "service": "MOC EU",
+      "yearMonth": "202008"
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "AAZOR",
+      "delta_usage_abs": 17882.312,
+      "delta_usage_percent": -314.63956,
+      "own_usage": 5683.428,
+      "partner_usage": 23565.74,
+      "service": "SMSMO",
+      "yearMonth": "202008"
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "AAZOR",
+      "delta_usage_abs": 11275.35,
+      "delta_usage_percent": -396.54874,
+      "own_usage": 2843.3706,
+      "partner_usage": 14118.72,
+      "service": "MOC Local",
+      "yearMonth": "202012"
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "AAZOR",
+      "delta_usage_abs": 10160.404,
+      "delta_usage_percent": -472.5998,
+      "own_usage": 2149.896,
+      "partner_usage": 12310.3,
+      "service": "MOC EU",
+      "yearMonth": "202001"
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "AAZOR",
+      "delta_usage_abs": 3050.0466,
+      "delta_usage_percent": -474.31418,
+      "own_usage": 643.0435,
+      "partner_usage": 3693.09,
+      "service": "MOC EU",
+      "yearMonth": "202003"
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "AAZOR",
+      "delta_usage_abs": 12202.754,
+      "delta_usage_percent": -474.88794,
+      "own_usage": 2569.607,
+      "partner_usage": 14772.36,
+      "service": "MOC EU",
+      "yearMonth": "202007"
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "AAZOR",
+      "delta_usage_abs": 2546.4297,
+      "delta_usage_percent": -18.807524,
+      "own_usage": 13539.42,
+      "partner_usage": 16085.85,
+      "service": "VoLTE",
+      "yearMonth": "202008"
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "AAZOR",
+      "delta_usage_abs": 10175.378,
+      "delta_usage_percent": -476.616,
+      "own_usage": 2134.9216,
+      "partner_usage": 12310.3,
+      "service": "MOC EU",
+      "yearMonth": "202009"
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "AAZOR",
+      "delta_usage_abs": 17859.51,
+      "delta_usage_percent": -312.98264,
+      "own_usage": 5706.2305,
+      "partner_usage": 23565.74,
+      "service": "SMSMO",
+      "yearMonth": "202012"
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "AAZOR",
+      "delta_usage_abs": 10239.988,
+      "delta_usage_percent": -394.5724,
+      "own_usage": 2595.2114,
+      "partner_usage": 12835.2,
+      "service": "MOC Local",
+      "yearMonth": "202001"
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "AAZOR",
+      "delta_usage_abs": 8125.7324,
+      "delta_usage_percent": -314.22403,
+      "own_usage": 2585.9678,
+      "partner_usage": 10711.7,
+      "service": "SMSMO",
+      "yearMonth": "202002"
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "AAZOR",
+      "delta_usage_abs": 675.9624,
+      "delta_usage_percent": -18.214672,
+      "own_usage": 3711.0874,
+      "partner_usage": 4387.05,
+      "service": "VoLTE",
+      "yearMonth": "202003"
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "AAZOR",
+      "delta_usage_abs": 10258.064,
+      "delta_usage_percent": -398.04132,
+      "own_usage": 2577.1355,
+      "partner_usage": 12835.2,
+      "service": "MOC Local",
+      "yearMonth": "202009"
     }
   ],
   "outbound": [
     {
       "HTMN": "AAZOR",
       "VPMN": "AAZTD",
-      "yearMonth": "202001",
-      "service": "SMSMO",
-      "own_usage": 21530.52,
-      "partner_usage": 5182.3,
-      "delta_usage_abs": -16348.22,
-      "delta_usage_percent": -75.93
-    },
-    {
-      "HTMN": "AAZOR",
-      "VPMN": "AAZTD",
-      "yearMonth": "202001",
-      "service": "VoLTE",
-      "own_usage": 14696.62,
-      "partner_usage": 12345.6,
-      "delta_usage_abs": -2351.02,
-      "delta_usage_percent": -16
-    },
-    {
-      "HTMN": "AAZOR",
-      "VPMN": "AAZTD",
-      "yearMonth": "202001",
-      "service": "MOC Local",
-      "own_usage": 12899.38,
-      "partner_usage": 2582.3,
-      "delta_usage_abs": -10317.08,
-      "delta_usage_percent": -79.98
-    },
-    {
-      "HTMN": "AAZOR",
-      "VPMN": "AAZTD",
-      "yearMonth": "202001",
-      "service": "MOC EU",
-      "own_usage": 12371.85,
-      "partner_usage": 2139.2,
-      "delta_usage_abs": -10232.65,
-      "delta_usage_percent": -82.71
-    },
-    {
-      "HTMN": "AAZOR",
-      "VPMN": "AAZTD",
-      "yearMonth": "202002",
-      "service": "SMSMO",
-      "own_usage": 10690.28,
-      "partner_usage": 2591.15,
-      "delta_usage_abs": -8099.13,
-      "delta_usage_percent": -75.76
-    },
-    {
-      "HTMN": "AAZOR",
-      "VPMN": "AAZTD",
-      "yearMonth": "202002",
-      "service": "VoLTE",
-      "own_usage": 7297.13,
-      "partner_usage": 6172.8,
-      "delta_usage_abs": -1124.33,
-      "delta_usage_percent": -15.41
-    },
-    {
-      "HTMN": "AAZOR",
-      "VPMN": "AAZTD",
-      "yearMonth": "202002",
-      "service": "MOC Local",
-      "own_usage": 6404.76,
-      "partner_usage": 1291.15,
-      "delta_usage_abs": -5113.61,
-      "delta_usage_percent": -79.84
-    },
-    {
-      "HTMN": "AAZOR",
-      "VPMN": "AAZTD",
-      "yearMonth": "202002",
-      "service": "MOC EU",
-      "own_usage": 6142.84,
-      "partner_usage": 1069.6,
-      "delta_usage_abs": -5073.24,
-      "delta_usage_percent": -82.59
-    },
-    {
-      "HTMN": "AAZOR",
-      "VPMN": "AAZTD",
-      "yearMonth": "202003",
-      "service": "VoLTE",
-      "own_usage": 4395.82,
-      "partner_usage": 3703.68,
-      "delta_usage_abs": -692.14,
-      "delta_usage_percent": -15.75
-    },
-    {
-      "HTMN": "AAZOR",
-      "VPMN": "AAZTD",
-      "yearMonth": "202003",
-      "service": "MOC Local",
-      "own_usage": 3858.26,
-      "partner_usage": 774.69,
-      "delta_usage_abs": -3083.57,
-      "delta_usage_percent": -79.92
-    },
-    {
-      "HTMN": "AAZOR",
-      "VPMN": "AAZTD",
-      "yearMonth": "202003",
-      "service": "MOC EU",
-      "own_usage": 3700.48,
-      "partner_usage": 641.76,
-      "delta_usage_abs": -3058.72,
-      "delta_usage_percent": -82.66
-    },
-    {
-      "HTMN": "AAZOR",
-      "VPMN": "AAZTD",
-      "yearMonth": "202003",
-      "service": "SMSMO",
-      "own_usage": 6439.87,
+      "delta_usage_abs": 4885.184,
+      "delta_usage_percent": 75.858376,
+      "own_usage": 6439.874,
       "partner_usage": 1554.69,
-      "delta_usage_abs": -4885.18,
-      "delta_usage_percent": -75.86
+      "service": "SMSMO",
+      "yearMonth": "202003"
     },
     {
       "HTMN": "AAZOR",
       "VPMN": "AAZTD",
-      "yearMonth": "202004",
-      "service": "VoLTE",
-      "own_usage": 7308.09,
+      "delta_usage_abs": 1135.2944,
+      "delta_usage_percent": 15.534754,
+      "own_usage": 7308.094,
       "partner_usage": 6172.8,
-      "delta_usage_abs": -1135.29,
-      "delta_usage_percent": -15.53
-    },
-    {
-      "HTMN": "AAZOR",
-      "VPMN": "AAZTD",
-      "yearMonth": "202004",
-      "service": "MOC Local",
-      "own_usage": 6414.39,
-      "partner_usage": 1291.15,
-      "delta_usage_abs": -5123.24,
-      "delta_usage_percent": -79.87
-    },
-    {
-      "HTMN": "AAZOR",
-      "VPMN": "AAZTD",
-      "yearMonth": "202004",
-      "service": "MOC EU",
-      "own_usage": 6152.07,
-      "partner_usage": 1069.6,
-      "delta_usage_abs": -5082.47,
-      "delta_usage_percent": -82.61
-    },
-    {
-      "HTMN": "AAZOR",
-      "VPMN": "AAZTD",
-      "yearMonth": "202004",
-      "service": "SMSMO",
-      "own_usage": 10706.34,
-      "partner_usage": 2591.15,
-      "delta_usage_abs": -8115.19,
-      "delta_usage_percent": -75.8
-    },
-    {
-      "HTMN": "AAZOR",
-      "VPMN": "AAZTD",
-      "yearMonth": "202005",
       "service": "VoLTE",
-      "own_usage": 8800.42,
-      "partner_usage": 7407.36,
-      "delta_usage_abs": -1393.06,
-      "delta_usage_percent": -15.83
+      "yearMonth": "202004"
     },
     {
       "HTMN": "AAZOR",
       "VPMN": "AAZTD",
-      "yearMonth": "202005",
-      "service": "MOC Local",
-      "own_usage": 7724.22,
-      "partner_usage": 1549.38,
-      "delta_usage_abs": -6174.84,
-      "delta_usage_percent": -79.94
-    },
-    {
-      "HTMN": "AAZOR",
-      "VPMN": "AAZTD",
-      "yearMonth": "202005",
-      "service": "SMSMO",
-      "own_usage": 12892.6,
-      "partner_usage": 3109.38,
-      "delta_usage_abs": -9783.22,
-      "delta_usage_percent": -75.88
-    },
-    {
-      "HTMN": "AAZOR",
-      "VPMN": "AAZTD",
-      "yearMonth": "202005",
-      "service": "MOC EU",
-      "own_usage": 7408.34,
-      "partner_usage": 1283.52,
-      "delta_usage_abs": -6124.82,
-      "delta_usage_percent": -82.67
-    },
-    {
-      "HTMN": "AAZOR",
-      "VPMN": "AAZTD",
-      "yearMonth": "202006",
-      "service": "MOC Local",
-      "own_usage": 10257.89,
-      "partner_usage": 2065.84,
-      "delta_usage_abs": -8192.05,
-      "delta_usage_percent": -79.86
-    },
-    {
-      "HTMN": "AAZOR",
-      "VPMN": "AAZTD",
-      "yearMonth": "202006",
-      "service": "SMSMO",
-      "own_usage": 17121.58,
-      "partner_usage": 4145.84,
-      "delta_usage_abs": -12975.74,
-      "delta_usage_percent": -75.79
-    },
-    {
-      "HTMN": "AAZOR",
-      "VPMN": "AAZTD",
-      "yearMonth": "202006",
-      "service": "MOC EU",
-      "own_usage": 9838.39,
+      "delta_usage_abs": 8127.0317,
+      "delta_usage_percent": 82.60529,
+      "own_usage": 9838.392,
       "partner_usage": 1711.36,
-      "delta_usage_abs": -8127.03,
-      "delta_usage_percent": -82.61
+      "service": "MOC EU",
+      "yearMonth": "202006"
     },
     {
       "HTMN": "AAZOR",
       "VPMN": "AAZTD",
-      "yearMonth": "202006",
-      "service": "VoLTE",
-      "own_usage": 11687.1,
-      "partner_usage": 9876.48,
-      "delta_usage_abs": -1810.62,
-      "delta_usage_percent": -15.49
-    },
-    {
-      "HTMN": "AAZOR",
-      "VPMN": "AAZTD",
-      "yearMonth": "202007",
-      "service": "MOC Local",
-      "own_usage": 15417.64,
-      "partner_usage": 3098.76,
-      "delta_usage_abs": -12318.88,
-      "delta_usage_percent": -79.9
-    },
-    {
-      "HTMN": "AAZOR",
-      "VPMN": "AAZTD",
-      "yearMonth": "202007",
-      "service": "SMSMO",
-      "own_usage": 25733.79,
-      "partner_usage": 6218.76,
-      "delta_usage_abs": -19515.03,
-      "delta_usage_percent": -75.83
-    },
-    {
-      "HTMN": "AAZOR",
-      "VPMN": "AAZTD",
-      "yearMonth": "202007",
-      "service": "VoLTE",
-      "own_usage": 17565.75,
+      "delta_usage_abs": 2751.0283,
+      "delta_usage_percent": 15.661322,
+      "own_usage": 17565.748,
       "partner_usage": 14814.72,
-      "delta_usage_abs": -2751.03,
-      "delta_usage_percent": -15.66
-    },
-    {
-      "HTMN": "AAZOR",
-      "VPMN": "AAZTD",
-      "yearMonth": "202007",
-      "service": "MOC EU",
-      "own_usage": 14787.13,
-      "partner_usage": 2567.04,
-      "delta_usage_abs": -12220.09,
-      "delta_usage_percent": -82.64
-    },
-    {
-      "HTMN": "AAZOR",
-      "VPMN": "AAZTD",
-      "yearMonth": "202008",
-      "service": "MOC Local",
-      "own_usage": 14076.36,
-      "partner_usage": 2840.53,
-      "delta_usage_abs": -11235.83,
-      "delta_usage_percent": -79.82
-    },
-    {
-      "HTMN": "AAZOR",
-      "VPMN": "AAZTD",
-      "yearMonth": "202008",
-      "service": "SMSMO",
-      "own_usage": 23495.04,
-      "partner_usage": 5700.53,
-      "delta_usage_abs": -17794.51,
-      "delta_usage_percent": -75.74
-    },
-    {
-      "HTMN": "AAZOR",
-      "VPMN": "AAZTD",
-      "yearMonth": "202008",
       "service": "VoLTE",
-      "own_usage": 16037.59,
+      "yearMonth": "202007"
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "AAZTD",
+      "delta_usage_abs": 2457.4326,
+      "delta_usage_percent": 15.322952,
+      "own_usage": 16037.593,
       "partner_usage": 13580.16,
-      "delta_usage_abs": -2457.43,
-      "delta_usage_percent": -15.32
-    },
-    {
-      "HTMN": "AAZOR",
-      "VPMN": "AAZTD",
-      "yearMonth": "202008",
-      "service": "MOC EU",
-      "own_usage": 13500.71,
-      "partner_usage": 2353.12,
-      "delta_usage_abs": -11147.59,
-      "delta_usage_percent": -82.57
-    },
-    {
-      "HTMN": "AAZOR",
-      "VPMN": "AAZTD",
-      "yearMonth": "202009",
       "service": "VoLTE",
-      "own_usage": 14594.25,
-      "partner_usage": 12345.6,
-      "delta_usage_abs": -2248.65,
-      "delta_usage_percent": -15.41
+      "yearMonth": "202008"
     },
     {
       "HTMN": "AAZOR",
       "VPMN": "AAZTD",
-      "yearMonth": "202009",
-      "service": "MOC Local",
-      "own_usage": 12809.53,
-      "partner_usage": 2582.3,
-      "delta_usage_abs": -10227.23,
-      "delta_usage_percent": -79.84
-    },
-    {
-      "HTMN": "AAZOR",
-      "VPMN": "AAZTD",
-      "yearMonth": "202009",
-      "service": "MOC EU",
-      "own_usage": 12285.68,
-      "partner_usage": 2139.2,
-      "delta_usage_abs": -10146.48,
-      "delta_usage_percent": -82.59
-    },
-    {
-      "HTMN": "AAZOR",
-      "VPMN": "AAZTD",
-      "yearMonth": "202009",
-      "service": "SMSMO",
-      "own_usage": 21380.55,
-      "partner_usage": 5182.3,
-      "delta_usage_abs": -16198.25,
-      "delta_usage_percent": -75.76
-    },
-    {
-      "HTMN": "AAZOR",
-      "VPMN": "AAZTD",
-      "yearMonth": "202010",
-      "service": "SMSMO",
-      "own_usage": 19261.78,
-      "partner_usage": 4664.07,
-      "delta_usage_abs": -14597.71,
-      "delta_usage_percent": -75.79
-    },
-    {
-      "HTMN": "AAZOR",
-      "VPMN": "AAZTD",
-      "yearMonth": "202010",
-      "service": "MOC EU",
+      "delta_usage_abs": 9142.91,
+      "delta_usage_percent": 82.605286,
       "own_usage": 11068.19,
       "partner_usage": 1925.28,
-      "delta_usage_abs": -9142.91,
-      "delta_usage_percent": -82.61
-    },
-    {
-      "HTMN": "AAZOR",
-      "VPMN": "AAZTD",
-      "yearMonth": "202010",
-      "service": "MOC Local",
-      "own_usage": 11540.13,
-      "partner_usage": 2324.07,
-      "delta_usage_abs": -9216.06,
-      "delta_usage_percent": -79.86
-    },
-    {
-      "HTMN": "AAZOR",
-      "VPMN": "AAZTD",
-      "yearMonth": "202010",
-      "service": "VoLTE",
-      "own_usage": 13147.99,
-      "partner_usage": 11111.04,
-      "delta_usage_abs": -2036.95,
-      "delta_usage_percent": -15.49
-    },
-    {
-      "HTMN": "AAZOR",
-      "VPMN": "AAZTD",
-      "yearMonth": "202011",
       "service": "MOC EU",
-      "own_usage": 12334.92,
-      "partner_usage": 2139.2,
-      "delta_usage_abs": -10195.72,
-      "delta_usage_percent": -82.66
+      "yearMonth": "202010"
     },
     {
       "HTMN": "AAZOR",
       "VPMN": "AAZTD",
-      "yearMonth": "202011",
+      "delta_usage_abs": 16283.946,
+      "delta_usage_percent": 75.858376,
+      "own_usage": 21466.246,
+      "partner_usage": 5182.3,
+      "service": "SMSMO",
+      "yearMonth": "202011"
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "AAZTD",
+      "delta_usage_abs": 16348.218,
+      "delta_usage_percent": 75.93044,
+      "own_usage": 21530.518,
+      "partner_usage": 5182.3,
+      "service": "SMSMO",
+      "yearMonth": "202001"
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "AAZTD",
+      "delta_usage_abs": 11201.751,
+      "delta_usage_percent": 82.64004,
+      "own_usage": 13554.871,
+      "partner_usage": 2353.12,
+      "service": "MOC EU",
+      "yearMonth": "202012"
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "AAZTD",
+      "delta_usage_abs": 2521.7754,
+      "delta_usage_percent": 15.661319,
+      "own_usage": 16101.936,
+      "partner_usage": 13580.16,
       "service": "VoLTE",
-      "own_usage": 14652.75,
-      "partner_usage": 12345.6,
-      "delta_usage_abs": -2307.15,
-      "delta_usage_percent": -15.75
+      "yearMonth": "202012"
     },
     {
       "HTMN": "AAZOR",
       "VPMN": "AAZTD",
-      "yearMonth": "202011",
+      "delta_usage_abs": 10232.651,
+      "delta_usage_percent": 82.70914,
+      "own_usage": 12371.852,
+      "partner_usage": 2139.2,
+      "service": "MOC EU",
+      "yearMonth": "202001"
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "AAZTD",
+      "delta_usage_abs": 5123.241,
+      "delta_usage_percent": 79.87105,
+      "own_usage": 6414.391,
+      "partner_usage": 1291.15,
       "service": "MOC Local",
+      "yearMonth": "202004"
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "AAZTD",
+      "delta_usage_abs": 8192.052,
+      "delta_usage_percent": 79.86097,
+      "own_usage": 10257.892,
+      "partner_usage": 2065.84,
+      "service": "MOC Local",
+      "yearMonth": "202006"
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "AAZTD",
+      "delta_usage_abs": 11235.834,
+      "delta_usage_percent": 79.820564,
+      "own_usage": 14076.364,
+      "partner_usage": 2840.53,
+      "service": "MOC Local",
+      "yearMonth": "202008"
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "AAZTD",
+      "delta_usage_abs": 10195.721,
+      "delta_usage_percent": 82.657364,
+      "own_usage": 12334.921,
+      "partner_usage": 2139.2,
+      "service": "MOC EU",
+      "yearMonth": "202011"
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "AAZTD",
+      "delta_usage_abs": 692.1443,
+      "delta_usage_percent": 15.745495,
+      "own_usage": 4395.824,
+      "partner_usage": 3703.68,
+      "service": "VoLTE",
+      "yearMonth": "202003"
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "AAZTD",
+      "delta_usage_abs": 5113.6147,
+      "delta_usage_percent": 79.84079,
+      "own_usage": 6404.7646,
+      "partner_usage": 1291.15,
+      "service": "MOC Local",
+      "yearMonth": "202002"
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "AAZTD",
+      "delta_usage_abs": 5073.2397,
+      "delta_usage_percent": 82.58785,
+      "own_usage": 6142.84,
+      "partner_usage": 1069.6,
+      "service": "MOC EU",
+      "yearMonth": "202002"
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "AAZTD",
+      "delta_usage_abs": 12220.093,
+      "delta_usage_percent": 82.64004,
+      "own_usage": 14787.133,
+      "partner_usage": 2567.04,
+      "service": "MOC EU",
+      "yearMonth": "202007"
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "AAZTD",
+      "delta_usage_abs": 10146.4795,
+      "delta_usage_percent": 82.58785,
+      "own_usage": 12285.68,
+      "partner_usage": 2139.2,
+      "service": "MOC EU",
+      "yearMonth": "202009"
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "AAZTD",
+      "delta_usage_abs": 2036.9492,
+      "delta_usage_percent": 15.492476,
+      "own_usage": 13147.989,
+      "partner_usage": 11111.04,
+      "service": "VoLTE",
+      "yearMonth": "202010"
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "AAZTD",
+      "delta_usage_abs": 10278.57,
+      "delta_usage_percent": 79.92127,
       "own_usage": 12860.87,
       "partner_usage": 2582.3,
-      "delta_usage_abs": -10278.57,
-      "delta_usage_percent": -79.92
-    },
-    {
-      "HTMN": "AAZOR",
-      "VPMN": "AAZTD",
-      "yearMonth": "202011",
-      "service": "SMSMO",
-      "own_usage": 21466.25,
-      "partner_usage": 5182.3,
-      "delta_usage_abs": -16283.95,
-      "delta_usage_percent": -75.86
-    },
-    {
-      "HTMN": "AAZOR",
-      "VPMN": "AAZTD",
-      "yearMonth": "202012",
       "service": "MOC Local",
-      "own_usage": 14132.84,
+      "yearMonth": "202011"
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "AAZTD",
+      "delta_usage_abs": 11292.309,
+      "delta_usage_percent": 79.90121,
+      "own_usage": 14132.839,
       "partner_usage": 2840.53,
-      "delta_usage_abs": -11292.31,
-      "delta_usage_percent": -79.9
+      "service": "MOC Local",
+      "yearMonth": "202012"
     },
     {
       "HTMN": "AAZOR",
       "VPMN": "AAZTD",
-      "yearMonth": "202012",
-      "service": "MOC EU",
-      "own_usage": 13554.87,
-      "partner_usage": 2353.12,
-      "delta_usage_abs": -11201.75,
-      "delta_usage_percent": -82.64
-    },
-    {
-      "HTMN": "AAZOR",
-      "VPMN": "AAZTD",
-      "yearMonth": "202012",
-      "service": "VoLTE",
-      "own_usage": 16101.94,
-      "partner_usage": 13580.16,
-      "delta_usage_abs": -2521.78,
-      "delta_usage_percent": -15.66
-    },
-    {
-      "HTMN": "AAZOR",
-      "VPMN": "AAZTD",
-      "yearMonth": "202012",
+      "delta_usage_abs": 8099.1265,
+      "delta_usage_percent": 75.76162,
+      "own_usage": 10690.276,
+      "partner_usage": 2591.15,
       "service": "SMSMO",
-      "own_usage": 23589.31,
+      "yearMonth": "202002"
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "AAZTD",
+      "delta_usage_abs": 17888.777,
+      "delta_usage_percent": 75.83426,
+      "own_usage": 23589.307,
       "partner_usage": 5700.53,
-      "delta_usage_abs": -17888.78,
-      "delta_usage_percent": -75.83
+      "service": "SMSMO",
+      "yearMonth": "202012"
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "AAZTD",
+      "delta_usage_abs": 3058.716,
+      "delta_usage_percent": 82.657364,
+      "own_usage": 3700.476,
+      "partner_usage": 641.76,
+      "service": "MOC EU",
+      "yearMonth": "202003"
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "AAZTD",
+      "delta_usage_abs": 6124.8184,
+      "delta_usage_percent": 82.67466,
+      "own_usage": 7408.3384,
+      "partner_usage": 1283.52,
+      "service": "MOC EU",
+      "yearMonth": "202005"
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "AAZTD",
+      "delta_usage_abs": 12975.742,
+      "delta_usage_percent": 75.78588,
+      "own_usage": 17121.582,
+      "partner_usage": 4145.84,
+      "service": "SMSMO",
+      "yearMonth": "202006"
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "AAZTD",
+      "delta_usage_abs": 19515.027,
+      "delta_usage_percent": 75.83426,
+      "own_usage": 25733.787,
+      "partner_usage": 6218.76,
+      "service": "SMSMO",
+      "yearMonth": "202007"
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "AAZTD",
+      "delta_usage_abs": 10227.2295,
+      "delta_usage_percent": 79.84079,
+      "own_usage": 12809.529,
+      "partner_usage": 2582.3,
+      "service": "MOC Local",
+      "yearMonth": "202009"
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "AAZTD",
+      "delta_usage_abs": 10317.076,
+      "delta_usage_percent": 79.9812,
+      "own_usage": 12899.376,
+      "partner_usage": 2582.3,
+      "service": "MOC Local",
+      "yearMonth": "202001"
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "AAZTD",
+      "delta_usage_abs": 1393.062,
+      "delta_usage_percent": 15.829492,
+      "own_usage": 8800.422,
+      "partner_usage": 7407.36,
+      "service": "VoLTE",
+      "yearMonth": "202005"
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "AAZTD",
+      "delta_usage_abs": 6174.8433,
+      "delta_usage_percent": 79.941284,
+      "own_usage": 7724.223,
+      "partner_usage": 1549.38,
+      "service": "MOC Local",
+      "yearMonth": "202005"
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "AAZTD",
+      "delta_usage_abs": 17794.514,
+      "delta_usage_percent": 75.73731,
+      "own_usage": 23495.043,
+      "partner_usage": 5700.53,
+      "service": "SMSMO",
+      "yearMonth": "202008"
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "AAZTD",
+      "delta_usage_abs": 11147.586,
+      "delta_usage_percent": 82.57039,
+      "own_usage": 13500.706,
+      "partner_usage": 2353.12,
+      "service": "MOC EU",
+      "yearMonth": "202008"
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "AAZTD",
+      "delta_usage_abs": 2248.6533,
+      "delta_usage_percent": 15.407801,
+      "own_usage": 14594.253,
+      "partner_usage": 12345.6,
+      "service": "VoLTE",
+      "yearMonth": "202009"
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "AAZTD",
+      "delta_usage_abs": 9216.058,
+      "delta_usage_percent": 79.86097,
+      "own_usage": 11540.128,
+      "partner_usage": 2324.07,
+      "service": "MOC Local",
+      "yearMonth": "202010"
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "AAZTD",
+      "delta_usage_abs": 2307.1475,
+      "delta_usage_percent": 15.745494,
+      "own_usage": 14652.747,
+      "partner_usage": 12345.6,
+      "service": "VoLTE",
+      "yearMonth": "202011"
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "AAZTD",
+      "delta_usage_abs": 1124.3267,
+      "delta_usage_percent": 15.407801,
+      "own_usage": 7297.1265,
+      "partner_usage": 6172.8,
+      "service": "VoLTE",
+      "yearMonth": "202002"
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "AAZTD",
+      "delta_usage_abs": 9783.223,
+      "delta_usage_percent": 75.882454,
+      "own_usage": 12892.603,
+      "partner_usage": 3109.38,
+      "service": "SMSMO",
+      "yearMonth": "202005"
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "AAZTD",
+      "delta_usage_abs": 1810.6211,
+      "delta_usage_percent": 15.492474,
+      "own_usage": 11687.102,
+      "partner_usage": 9876.48,
+      "service": "VoLTE",
+      "yearMonth": "202006"
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "AAZTD",
+      "delta_usage_abs": 12318.883,
+      "delta_usage_percent": 79.90121,
+      "own_usage": 15417.643,
+      "partner_usage": 3098.76,
+      "service": "MOC Local",
+      "yearMonth": "202007"
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "AAZTD",
+      "delta_usage_abs": 16198.253,
+      "delta_usage_percent": 75.76162,
+      "own_usage": 21380.553,
+      "partner_usage": 5182.3,
+      "service": "SMSMO",
+      "yearMonth": "202009"
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "AAZTD",
+      "delta_usage_abs": 8115.194,
+      "delta_usage_percent": 75.798,
+      "own_usage": 10706.344,
+      "partner_usage": 2591.15,
+      "service": "SMSMO",
+      "yearMonth": "202004"
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "AAZTD",
+      "delta_usage_abs": 3083.5713,
+      "delta_usage_percent": 79.92127,
+      "own_usage": 3858.2612,
+      "partner_usage": 774.69,
+      "service": "MOC Local",
+      "yearMonth": "202003"
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "AAZTD",
+      "delta_usage_abs": 5082.472,
+      "delta_usage_percent": 82.61398,
+      "own_usage": 6152.0723,
+      "partner_usage": 1069.6,
+      "service": "MOC EU",
+      "yearMonth": "202004"
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "AAZTD",
+      "delta_usage_abs": 14597.709,
+      "delta_usage_percent": 75.78588,
+      "own_usage": 19261.78,
+      "partner_usage": 4664.07,
+      "service": "SMSMO",
+      "yearMonth": "202010"
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "AAZTD",
+      "delta_usage_abs": 2351.0176,
+      "delta_usage_percent": 15.996999,
+      "own_usage": 14696.617,
+      "partner_usage": 12345.6,
+      "service": "VoLTE",
+      "yearMonth": "202001"
     }
   ]
 }

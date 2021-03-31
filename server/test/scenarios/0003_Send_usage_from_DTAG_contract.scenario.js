@@ -10,6 +10,8 @@ const debugObjectOnDTAG = require('debug')('spec:DTAG-side:object');
 
 const chai = require('chai');
 const expect = require('chai').expect;
+const deepEqualInAnyOrder = require('deep-equal-in-any-order');
+chai.use(deepEqualInAnyOrder);
 
 const skipFlag = (process.env.MOCHA_SCENARIO_FILTER !== '') && (process.env.MOCHA_SCENARIO_FILTER !== '0003');
 
@@ -689,7 +691,7 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           expect(response.body).to.have.property('body').that.is.an('object');
           expect(Object.keys(response.body.body)).have.members(['generatedResult', 'usage']);
 
-          expect(response.body.body.generatedResult).to.deep.equals(configured_EXPECTED_JSON_DTAG_local_usage_settlement_generatedResult);
+          expect(response.body.body.generatedResult).to.deep.equalInAnyOrder(configured_EXPECTED_JSON_DTAG_local_usage_settlement_generatedResult);
 
           expect(response.body.body.generatedResult).to.have.property('fromDate', null);
           expect(response.body.body.generatedResult).to.have.property('toDate', null);
@@ -742,7 +744,7 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           expect(response.body).to.have.property('body').that.is.an('object');
           expect(Object.keys(response.body.body)).have.members(['generatedResult', 'usage']);
 
-          expect(response.body.body.generatedResult).to.deep.equals(configured_EXPECTED_JSON_DTAG_partner_usage_settlement_generatedResult);
+          expect(response.body.body.generatedResult).to.deep.equalInAnyOrder(configured_EXPECTED_JSON_DTAG_partner_usage_settlement_generatedResult);
 
           expect(response.body.body.generatedResult).to.have.property('fromDate', null);
           expect(response.body.body.generatedResult).to.have.property('toDate', null);
@@ -818,7 +820,7 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           expect(response.body).to.have.property('body').that.is.an('object');
           expect(response.body.body).to.have.property('generatedResult').that.is.an('object');
 
-          expect(response.body.body.generatedResult).to.deep.equals(configured_EXPECTED_JSON_TMUS_local_usage_settlement_generatedResult);
+          expect(response.body.body.generatedResult).to.deep.equalInAnyOrder(configured_EXPECTED_JSON_TMUS_local_usage_settlement_generatedResult);
 
           expect(response.body.body).to.have.property('usage').that.is.an('object');
           expect(response.body).to.have.property('creationDate').that.is.a('string').and.match(DATE_REGEX);
@@ -862,7 +864,7 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           expect(response.body).to.have.property('body').that.is.an('object');
           expect(response.body.body).to.have.property('generatedResult').that.is.an('object');
 
-          expect(response.body.body.generatedResult).to.deep.equals(configured_EXPECTED_JSON_TMUS_partner_usage_settlement_generatedResult);
+          expect(response.body.body.generatedResult).to.deep.equalInAnyOrder(configured_EXPECTED_JSON_TMUS_partner_usage_settlement_generatedResult);
 
           expect(response.body.body).to.have.property('usage').that.is.an('object');
           expect(response.body).to.have.property('creationDate').that.is.a('string').and.match(DATE_REGEX);
@@ -932,7 +934,7 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           expect(response.body).to.be.an('object');
 
           debugObjectOnDTAG('Usage Discrepancy calculated : ', JSON.stringify(response.body));
-          expect(response.body).to.deep.equals(configured_EXPECTED_JSON_DTAG_local_usage_discrepancy_body);
+          expect(response.body).to.deep.equalInAnyOrder(configured_EXPECTED_JSON_DTAG_local_usage_discrepancy_body);
 
           if (SHOW_DISCREPANCY_GENERATION_DETAILS && (response.body.localUsage) && (response.body.localUsage.body)) {
             debugObjectOnDTAG('Usage Discrepancy calculated with localUsage metadata : ', response.body.localUsage.body.metadata);
@@ -986,7 +988,7 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           expect(response.body).to.exist;
           expect(response.body).to.be.an('object');
 
-          expect(response.body).to.deep.equals(configured_EXPECTED_JSON_DTAG_partner_usage_discrepancy_body);
+          expect(response.body).to.deep.equalInAnyOrder(configured_EXPECTED_JSON_DTAG_partner_usage_discrepancy_body);
 
           done();
         });
@@ -1014,7 +1016,7 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           expect(response.body).to.be.an('object');
 
           debugObjectOnTMUS('Usage Discrepancy calculated : ', JSON.stringify(response.body));
-          expect(response.body).to.deep.equals(configured_EXPECTED_JSON_TMUS_local_usage_discrepancy_body);
+          expect(response.body).to.deep.equalInAnyOrder(configured_EXPECTED_JSON_TMUS_local_usage_discrepancy_body);
 
           if (SHOW_DISCREPANCY_GENERATION_DETAILS && (response.body.localUsage) && (response.body.localUsage.body)) {
             debugObjectOnTMUS('Usage Discrepancy calculated with localUsage metadata : ', response.body.localUsage.body.metadata);
@@ -1068,7 +1070,7 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           expect(response.body).to.exist;
           expect(response.body).to.be.an('object');
 
-          expect(response.body).to.deep.equals(configured_EXPECTED_JSON_TMUS_partner_usage_discrepancy_body);
+          expect(response.body).to.deep.equalInAnyOrder(configured_EXPECTED_JSON_TMUS_partner_usage_discrepancy_body);
 
           done();
         });
@@ -1098,7 +1100,7 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           expect(response.body).to.be.an('object');
 
           debugObjectOnDTAG('Settlement Discrepancy calculated : ', JSON.stringify(response.body));
-          expect(response.body).to.deep.equals(configured_EXPECTED_JSON_DTAG_local_settlement_discrepancy_body);
+          expect(response.body).to.deep.equalInAnyOrder(configured_EXPECTED_JSON_DTAG_local_settlement_discrepancy_body);
 
           if (SHOW_DISCREPANCY_GENERATION_DETAILS && (response.body.localUsage) && (response.body.localUsage.body)) {
             debugObjectOnDTAG('Settlement Discrepancy calculated with localUsage metadata : ', response.body.localUsage.body.metadata);
@@ -1153,7 +1155,7 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           expect(response.body).to.be.an('object');
 
           debugObjectOnDTAG('Settlement Discrepancy calculated : ', JSON.stringify(response.body));
-          expect(response.body).to.deep.equals(configured_EXPECTED_JSON_DTAG_partner_settlement_discrepancy_body);
+          expect(response.body).to.deep.equalInAnyOrder(configured_EXPECTED_JSON_DTAG_partner_settlement_discrepancy_body);
 
           done();
         });
@@ -1181,7 +1183,7 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           expect(response.body).to.be.an('object');
 
           debugObjectOnTMUS('Settlement Discrepancy calculated : ', JSON.stringify(response.body));
-          expect(response.body).to.deep.equals(configured_EXPECTED_JSON_TMUS_local_settlement_discrepancy_body);
+          expect(response.body).to.deep.equalInAnyOrder(configured_EXPECTED_JSON_TMUS_local_settlement_discrepancy_body);
 
           if (SHOW_DISCREPANCY_GENERATION_DETAILS && (response.body.localUsage) && (response.body.localUsage.body)) {
             debugObjectOnTMUS('Settlement Discrepancy calculated with localUsage metadata : ', response.body.localUsage.body.metadata);
@@ -1236,7 +1238,7 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           expect(response.body).to.be.an('object');
 
           // debugObjectOnTMUS('Settlement Discrepancy calculated : ', JSON.stringify(response.body));
-          expect(response.body).to.deep.equals(configured_EXPECTED_JSON_TMUS_partner_settlement_discrepancy_body);
+          expect(response.body).to.deep.equalInAnyOrder(configured_EXPECTED_JSON_TMUS_partner_settlement_discrepancy_body);
 
           done();
         });
