@@ -1,5 +1,5 @@
 
-# initial_dataset_on_discrepancy_service dependencies
+# kong_dataset_on_discrepancy_service dependencies
 
 This dataset is sending contract and usages using numbers to define all numerical values.
 
