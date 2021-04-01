@@ -35,6 +35,7 @@
     {
       "HTMN": "ALB1",
       "VPMN": "BLA1",
+      "yearMonth": "202001",
       "service": "SMSMO",
       "own_usage": 500000,
       "partner_usage": 500000,
@@ -44,6 +45,7 @@
     {
       "HTMN": "ALB1",
       "VPMN": "BLA1",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 120000000,
       "partner_usage": 90000000,
@@ -53,6 +55,7 @@
     {
       "HTMN": "ALB1",
       "VPMN": "BLA1",
+      "yearMonth": "202001",
       "service": "MOC Local",
       "own_usage": 2243000,
       "partner_usage": 1243000,
@@ -62,6 +65,7 @@
     {
       "HTMN": "ALB1",
       "VPMN": "BLA1",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 1857000,
       "partner_usage": 1857000,
@@ -71,6 +75,7 @@
     {
       "HTMN": "ALB1",
       "VPMN": "BLA1",
+      "yearMonth": "202001",
       "service": "MOC RoW",
       "own_usage": 810000,
       "partner_usage": 810000,
@@ -80,6 +85,7 @@
     {
       "HTMN": "ALB1",
       "VPMN": "BLA1",
+      "yearMonth": "202001",
       "service": "MTC",
       "own_usage": 0,
       "partner_usage": 0,

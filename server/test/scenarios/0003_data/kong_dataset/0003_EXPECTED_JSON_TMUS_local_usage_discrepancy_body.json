@@ -35,438 +35,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "BELMO",
-      "service": "MOC Local",
-      "own_usage": 2490.48,
-      "partner_usage": 2490.48,
-      "delta_usage_abs": 0,
-      "delta_usage_percent": 0
-    },
-    {
-      "HTMN": "DEUD1",
-      "VPMN": "BELMO",
-      "service": "MOC Local",
-      "own_usage": 1232.97,
-      "partner_usage": 0,
-      "delta_usage_abs": -1232.97,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "DEUD1",
-      "VPMN": "BELMO",
-      "service": "MOC Local",
-      "own_usage": 726.53,
-      "partner_usage": 0,
-      "delta_usage_abs": -726.53,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "DEUD1",
-      "VPMN": "BELMO",
-      "service": "MOC Local",
-      "own_usage": 1210.89,
-      "partner_usage": 0,
-      "delta_usage_abs": -1210.89,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "DEUD1",
-      "VPMN": "BELMO",
-      "service": "MOC Local",
-      "own_usage": 1494.29,
-      "partner_usage": 0,
-      "delta_usage_abs": -1494.29,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "DEUD1",
-      "VPMN": "BELMO",
-      "service": "MOC Local",
-      "own_usage": 1992.38,
-      "partner_usage": 0,
-      "delta_usage_abs": -1992.38,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "DEUD1",
-      "VPMN": "BELMO",
-      "service": "MOC Local",
-      "own_usage": 2988.57,
-      "partner_usage": 0,
-      "delta_usage_abs": -2988.57,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "DEUD1",
-      "VPMN": "BELMO",
-      "service": "MOC Local",
-      "own_usage": 2712.53,
-      "partner_usage": 0,
-      "delta_usage_abs": -2712.53,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "DEUD1",
-      "VPMN": "BELMO",
-      "service": "MOC Local",
-      "own_usage": 2421.77,
-      "partner_usage": 0,
-      "delta_usage_abs": -2421.77,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "DEUD1",
-      "VPMN": "BELMO",
-      "service": "MOC Local",
-      "own_usage": 2179.6,
-      "partner_usage": 0,
-      "delta_usage_abs": -2179.6,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "DEUD1",
-      "VPMN": "BELMO",
-      "service": "MOC Local",
-      "own_usage": 2490.48,
-      "partner_usage": 0,
-      "delta_usage_abs": -2490.48,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "DEUD1",
-      "VPMN": "BELMO",
-      "service": "MOC Local",
-      "own_usage": 2739.52,
-      "partner_usage": 0,
-      "delta_usage_abs": -2739.52,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "DEUD1",
-      "VPMN": "FRAF1",
-      "service": "MOC Local",
-      "own_usage": 45085.07,
-      "partner_usage": 45085.07,
-      "delta_usage_abs": 0,
-      "delta_usage_percent": 0
-    },
-    {
-      "HTMN": "DEUD1",
-      "VPMN": "FRAF1",
-      "service": "MOC Local",
-      "own_usage": 22542.54,
-      "partner_usage": 0,
-      "delta_usage_abs": -22542.54,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "DEUD1",
-      "VPMN": "FRAF1",
-      "service": "MOC Local",
-      "own_usage": 13525.52,
-      "partner_usage": 0,
-      "delta_usage_abs": -13525.52,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "DEUD1",
-      "VPMN": "FRAF1",
-      "service": "MOC Local",
-      "own_usage": 22953.65,
-      "partner_usage": 0,
-      "delta_usage_abs": -22953.65,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "DEUD1",
-      "VPMN": "FRAF1",
-      "service": "MOC Local",
-      "own_usage": 27818.45,
-      "partner_usage": 0,
-      "delta_usage_abs": -27818.45,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "DEUD1",
-      "VPMN": "FRAF1",
-      "service": "MOC Local",
-      "own_usage": 36725.84,
-      "partner_usage": 0,
-      "delta_usage_abs": -36725.84,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "DEUD1",
-      "VPMN": "FRAF1",
-      "service": "MOC Local",
-      "own_usage": 54102.09,
-      "partner_usage": 0,
-      "delta_usage_abs": -54102.09,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "DEUD1",
-      "VPMN": "FRAF1",
-      "service": "MOC Local",
-      "own_usage": 49593.58,
-      "partner_usage": 0,
-      "delta_usage_abs": -49593.58,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "DEUD1",
-      "VPMN": "FRAF1",
-      "service": "MOC Local",
-      "own_usage": 45085.07,
-      "partner_usage": 0,
-      "delta_usage_abs": -45085.07,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "DEUD1",
-      "VPMN": "FRAF1",
-      "service": "MOC Local",
-      "own_usage": 41727.68,
-      "partner_usage": 0,
-      "delta_usage_abs": -41727.68,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "DEUD1",
-      "VPMN": "FRAF1",
-      "service": "MOC Local",
-      "own_usage": 46364.08,
-      "partner_usage": 0,
-      "delta_usage_abs": -46364.08,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "DEUD1",
-      "VPMN": "FRAF1",
-      "service": "MOC Local",
-      "own_usage": 50498.02,
-      "partner_usage": 0,
-      "delta_usage_abs": -50498.02,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "NLDDT",
-      "VPMN": "BELMO",
-      "service": "MOC Local",
-      "own_usage": 42994.41,
-      "partner_usage": 42994.41,
-      "delta_usage_abs": 0,
-      "delta_usage_percent": 0
-    },
-    {
-      "HTMN": "NLDDT",
-      "VPMN": "BELMO",
-      "service": "MOC Local",
-      "own_usage": 21889.25,
-      "partner_usage": 0,
-      "delta_usage_abs": -21889.25,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "NLDDT",
-      "VPMN": "BELMO",
-      "service": "MOC Local",
-      "own_usage": 13264.23,
-      "partner_usage": 0,
-      "delta_usage_abs": -13264.23,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "NLDDT",
-      "VPMN": "BELMO",
-      "service": "MOC Local",
-      "own_usage": 21497.21,
-      "partner_usage": 0,
-      "delta_usage_abs": -21497.21,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "NLDDT",
-      "VPMN": "BELMO",
-      "service": "MOC Local",
-      "own_usage": 26528.47,
-      "partner_usage": 0,
-      "delta_usage_abs": -26528.47,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "NLDDT",
-      "VPMN": "BELMO",
-      "service": "MOC Local",
-      "own_usage": 34395.53,
-      "partner_usage": 0,
-      "delta_usage_abs": -34395.53,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "NLDDT",
-      "VPMN": "BELMO",
-      "service": "MOC Local",
-      "own_usage": 51593.29,
-      "partner_usage": 0,
-      "delta_usage_abs": -51593.29,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "NLDDT",
-      "VPMN": "BELMO",
-      "service": "MOC Local",
-      "own_usage": 48156.35,
-      "partner_usage": 0,
-      "delta_usage_abs": -48156.35,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "NLDDT",
-      "VPMN": "BELMO",
-      "service": "MOC Local",
-      "own_usage": 44214.11,
-      "partner_usage": 0,
-      "delta_usage_abs": -44214.11,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "NLDDT",
-      "VPMN": "BELMO",
-      "service": "MOC Local",
-      "own_usage": 38694.97,
-      "partner_usage": 0,
-      "delta_usage_abs": -38694.97,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "NLDDT",
-      "VPMN": "BELMO",
-      "service": "MOC Local",
-      "own_usage": 44214.11,
-      "partner_usage": 0,
-      "delta_usage_abs": -44214.11,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "NLDDT",
-      "VPMN": "BELMO",
-      "service": "MOC Local",
-      "own_usage": 47293.85,
-      "partner_usage": 0,
-      "delta_usage_abs": -47293.85,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "NLDDT",
-      "VPMN": "FRAF1",
-      "service": "MOC Local",
-      "own_usage": 45111.07,
-      "partner_usage": 45111.07,
-      "delta_usage_abs": 0,
-      "delta_usage_percent": 0
-    },
-    {
-      "HTMN": "NLDDT",
-      "VPMN": "FRAF1",
-      "service": "MOC Local",
-      "own_usage": 21933.31,
-      "partner_usage": 0,
-      "delta_usage_abs": -21933.31,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "NLDDT",
-      "VPMN": "FRAF1",
-      "service": "MOC Local",
-      "own_usage": 13533.32,
-      "partner_usage": 0,
-      "delta_usage_abs": -13533.32,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "NLDDT",
-      "VPMN": "FRAF1",
-      "service": "MOC Local",
-      "own_usage": 21933.31,
-      "partner_usage": 0,
-      "delta_usage_abs": -21933.31,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "NLDDT",
-      "VPMN": "FRAF1",
-      "service": "MOC Local",
-      "own_usage": 26319.97,
-      "partner_usage": 0,
-      "delta_usage_abs": -26319.97,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "NLDDT",
-      "VPMN": "FRAF1",
-      "service": "MOC Local",
-      "own_usage": 36088.85,
-      "partner_usage": 0,
-      "delta_usage_abs": -36088.85,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "NLDDT",
-      "VPMN": "FRAF1",
-      "service": "MOC Local",
-      "own_usage": 54133.28,
-      "partner_usage": 0,
-      "delta_usage_abs": -54133.28,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "NLDDT",
-      "VPMN": "FRAF1",
-      "service": "MOC Local",
-      "own_usage": 48253.29,
-      "partner_usage": 0,
-      "delta_usage_abs": -48253.29,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "NLDDT",
-      "VPMN": "FRAF1",
-      "service": "MOC Local",
-      "own_usage": 45111.07,
-      "partner_usage": 0,
-      "delta_usage_abs": -45111.07,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "NLDDT",
-      "VPMN": "FRAF1",
-      "service": "MOC Local",
-      "own_usage": 39479.96,
-      "partner_usage": 0,
-      "delta_usage_abs": -39479.96,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "NLDDT",
-      "VPMN": "FRAF1",
-      "service": "MOC Local",
-      "own_usage": 43866.62,
-      "partner_usage": 0,
-      "delta_usage_abs": -43866.62,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "NLDDT",
-      "VPMN": "FRAF1",
-      "service": "MOC Local",
-      "own_usage": 49622.17,
-      "partner_usage": 0,
-      "delta_usage_abs": -49622.17,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "DEUD1",
-      "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 23574.06,
       "partner_usage": 23574.06,
@@ -476,6 +45,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 11787.03,
       "partner_usage": 0,
@@ -485,6 +55,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 7072.22,
       "partner_usage": 0,
@@ -494,6 +65,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 11904.32,
       "partner_usage": 0,
@@ -503,6 +75,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 14144.44,
       "partner_usage": 0,
@@ -512,6 +85,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 19046.91,
       "partner_usage": 0,
@@ -521,6 +95,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 28288.88,
       "partner_usage": 0,
@@ -530,6 +105,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 25931.47,
       "partner_usage": 0,
@@ -539,6 +115,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 23574.06,
       "partner_usage": 0,
@@ -548,6 +125,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 21427.77,
       "partner_usage": 0,
@@ -557,6 +135,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 23574.06,
       "partner_usage": 0,
@@ -566,6 +145,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 26189.49,
       "partner_usage": 0,
@@ -575,6 +155,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 219453.03,
       "partner_usage": 219453.03,
@@ -584,6 +165,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 111727.61,
       "partner_usage": 0,
@@ -593,6 +175,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 67036.57,
       "partner_usage": 0,
@@ -602,6 +185,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 112839.33,
       "partner_usage": 0,
@@ -611,6 +195,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 131671.82,
       "partner_usage": 0,
@@ -620,6 +205,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 178764.17,
       "partner_usage": 0,
@@ -629,6 +215,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 263343.64,
       "partner_usage": 0,
@@ -638,6 +225,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 245800.74,
       "partner_usage": 0,
@@ -647,6 +235,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 223455.22,
       "partner_usage": 0,
@@ -656,6 +245,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 203110.79,
       "partner_usage": 0,
@@ -665,6 +255,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 219453.03,
       "partner_usage": 0,
@@ -674,6 +265,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 245800.74,
       "partner_usage": 0,
@@ -683,6 +275,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 1240740.64,
       "partner_usage": 1240740.64,
@@ -692,6 +285,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 609259.21,
       "partner_usage": 0,
@@ -701,6 +295,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 375925.9,
       "partner_usage": 0,
@@ -710,6 +305,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 620370.32,
       "partner_usage": 0,
@@ -719,6 +315,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 744444.38,
       "partner_usage": 0,
@@ -728,6 +325,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 992592.51,
       "partner_usage": 0,
@@ -737,6 +335,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 1488888.77,
       "partner_usage": 0,
@@ -746,6 +345,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 1340370.26,
       "partner_usage": 0,
@@ -755,6 +355,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 1253086.32,
       "partner_usage": 0,
@@ -764,6 +365,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 1116666.58,
       "partner_usage": 0,
@@ -773,6 +375,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 1240740.64,
       "partner_usage": 0,
@@ -782,6 +385,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 1364814.7,
       "partner_usage": 0,
@@ -791,6 +395,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 101499.9,
       "partner_usage": 101499.9,
@@ -800,6 +405,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 50749.95,
       "partner_usage": 0,
@@ -809,6 +415,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 30449.97,
       "partner_usage": 0,
@@ -818,6 +425,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 49349.95,
       "partner_usage": 0,
@@ -827,6 +435,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 59219.94,
       "partner_usage": 0,
@@ -836,6 +445,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 81199.92,
       "partner_usage": 0,
@@ -845,6 +455,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 121799.88,
       "partner_usage": 0,
@@ -854,6 +465,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 111649.89,
       "partner_usage": 0,
@@ -863,6 +475,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 101499.9,
       "partner_usage": 0,
@@ -872,6 +485,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 88829.91,
       "partner_usage": 0,
@@ -881,6 +495,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 98699.9,
       "partner_usage": 0,
@@ -890,6 +505,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 111649.89,
       "partner_usage": 0,
@@ -899,6 +515,487 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 2490.48,
+      "partner_usage": 2490.48,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 1232.97,
+      "partner_usage": 0,
+      "delta_usage_abs": -1232.97,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 726.53,
+      "partner_usage": 0,
+      "delta_usage_abs": -726.53,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 1210.89,
+      "partner_usage": 0,
+      "delta_usage_abs": -1210.89,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 1494.29,
+      "partner_usage": 0,
+      "delta_usage_abs": -1494.29,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 1992.38,
+      "partner_usage": 0,
+      "delta_usage_abs": -1992.38,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 2988.57,
+      "partner_usage": 0,
+      "delta_usage_abs": -2988.57,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 2712.53,
+      "partner_usage": 0,
+      "delta_usage_abs": -2712.53,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 2421.77,
+      "partner_usage": 0,
+      "delta_usage_abs": -2421.77,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 2179.6,
+      "partner_usage": 0,
+      "delta_usage_abs": -2179.6,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 2490.48,
+      "partner_usage": 0,
+      "delta_usage_abs": -2490.48,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 2739.52,
+      "partner_usage": 0,
+      "delta_usage_abs": -2739.52,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 45085.07,
+      "partner_usage": 45085.07,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 22542.54,
+      "partner_usage": 0,
+      "delta_usage_abs": -22542.54,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 13525.52,
+      "partner_usage": 0,
+      "delta_usage_abs": -13525.52,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 22953.65,
+      "partner_usage": 0,
+      "delta_usage_abs": -22953.65,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 27818.45,
+      "partner_usage": 0,
+      "delta_usage_abs": -27818.45,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 36725.84,
+      "partner_usage": 0,
+      "delta_usage_abs": -36725.84,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 54102.09,
+      "partner_usage": 0,
+      "delta_usage_abs": -54102.09,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 49593.58,
+      "partner_usage": 0,
+      "delta_usage_abs": -49593.58,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 45085.07,
+      "partner_usage": 0,
+      "delta_usage_abs": -45085.07,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 41727.68,
+      "partner_usage": 0,
+      "delta_usage_abs": -41727.68,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 46364.08,
+      "partner_usage": 0,
+      "delta_usage_abs": -46364.08,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 50498.02,
+      "partner_usage": 0,
+      "delta_usage_abs": -50498.02,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "NLDDT",
+      "VPMN": "BELMO",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 42994.41,
+      "partner_usage": 42994.41,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "NLDDT",
+      "VPMN": "BELMO",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 21889.25,
+      "partner_usage": 0,
+      "delta_usage_abs": -21889.25,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "NLDDT",
+      "VPMN": "BELMO",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 13264.23,
+      "partner_usage": 0,
+      "delta_usage_abs": -13264.23,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "NLDDT",
+      "VPMN": "BELMO",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 21497.21,
+      "partner_usage": 0,
+      "delta_usage_abs": -21497.21,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "NLDDT",
+      "VPMN": "BELMO",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 26528.47,
+      "partner_usage": 0,
+      "delta_usage_abs": -26528.47,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "NLDDT",
+      "VPMN": "BELMO",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 34395.53,
+      "partner_usage": 0,
+      "delta_usage_abs": -34395.53,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "NLDDT",
+      "VPMN": "BELMO",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 51593.29,
+      "partner_usage": 0,
+      "delta_usage_abs": -51593.29,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "NLDDT",
+      "VPMN": "BELMO",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 48156.35,
+      "partner_usage": 0,
+      "delta_usage_abs": -48156.35,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "NLDDT",
+      "VPMN": "BELMO",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 44214.11,
+      "partner_usage": 0,
+      "delta_usage_abs": -44214.11,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "NLDDT",
+      "VPMN": "BELMO",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 38694.97,
+      "partner_usage": 0,
+      "delta_usage_abs": -38694.97,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "NLDDT",
+      "VPMN": "BELMO",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 44214.11,
+      "partner_usage": 0,
+      "delta_usage_abs": -44214.11,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "NLDDT",
+      "VPMN": "BELMO",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 47293.85,
+      "partner_usage": 0,
+      "delta_usage_abs": -47293.85,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "NLDDT",
+      "VPMN": "FRAF1",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 45111.07,
+      "partner_usage": 45111.07,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "NLDDT",
+      "VPMN": "FRAF1",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 21933.31,
+      "partner_usage": 0,
+      "delta_usage_abs": -21933.31,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "NLDDT",
+      "VPMN": "FRAF1",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 13533.32,
+      "partner_usage": 0,
+      "delta_usage_abs": -13533.32,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "NLDDT",
+      "VPMN": "FRAF1",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 21933.31,
+      "partner_usage": 0,
+      "delta_usage_abs": -21933.31,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "NLDDT",
+      "VPMN": "FRAF1",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 26319.97,
+      "partner_usage": 0,
+      "delta_usage_abs": -26319.97,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "NLDDT",
+      "VPMN": "FRAF1",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 36088.85,
+      "partner_usage": 0,
+      "delta_usage_abs": -36088.85,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "NLDDT",
+      "VPMN": "FRAF1",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 54133.28,
+      "partner_usage": 0,
+      "delta_usage_abs": -54133.28,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "NLDDT",
+      "VPMN": "FRAF1",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 48253.29,
+      "partner_usage": 0,
+      "delta_usage_abs": -48253.29,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "NLDDT",
+      "VPMN": "FRAF1",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 45111.07,
+      "partner_usage": 0,
+      "delta_usage_abs": -45111.07,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "NLDDT",
+      "VPMN": "FRAF1",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 39479.96,
+      "partner_usage": 0,
+      "delta_usage_abs": -39479.96,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "NLDDT",
+      "VPMN": "FRAF1",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 43866.62,
+      "partner_usage": 0,
+      "delta_usage_abs": -43866.62,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "NLDDT",
+      "VPMN": "FRAF1",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 49622.17,
+      "partner_usage": 0,
+      "delta_usage_abs": -49622.17,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 2380.86,
       "partner_usage": 2380.86,
@@ -908,6 +1005,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 1190.43,
       "partner_usage": 0,
@@ -917,6 +1015,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 707.22,
       "partner_usage": 0,
@@ -926,6 +1025,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 1157.59,
       "partner_usage": 0,
@@ -935,6 +1035,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 1389.11,
       "partner_usage": 0,
@@ -944,6 +1045,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 1885.92,
       "partner_usage": 0,
@@ -953,6 +1055,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 2857.03,
       "partner_usage": 0,
@@ -962,6 +1065,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 2618.94,
       "partner_usage": 0,
@@ -971,6 +1075,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 2357.4,
       "partner_usage": 0,
@@ -980,6 +1085,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 2121.66,
       "partner_usage": 0,
@@ -989,6 +1095,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 2315.18,
       "partner_usage": 0,
@@ -998,6 +1105,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 2593.14,
       "partner_usage": 0,
@@ -1007,6 +1115,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 34118.42,
       "partner_usage": 34118.42,
@@ -1016,6 +1125,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 17059.21,
       "partner_usage": 0,
@@ -1025,6 +1135,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 10422.19,
       "partner_usage": 0,
@@ -1034,6 +1145,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 17543.16,
       "partner_usage": 0,
@@ -1043,6 +1155,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 21051.79,
       "partner_usage": 0,
@@ -1052,6 +1165,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 27294.73,
       "partner_usage": 0,
@@ -1061,6 +1175,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 40942.1,
       "partner_usage": 0,
@@ -1070,6 +1185,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 37530.26,
       "partner_usage": 0,
@@ -1079,6 +1195,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 34740.64,
       "partner_usage": 0,
@@ -1088,6 +1205,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 30706.58,
       "partner_usage": 0,
@@ -1097,6 +1215,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 35086.32,
       "partner_usage": 0,
@@ -1106,6 +1225,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 37530.26,
       "partner_usage": 0,
@@ -1115,6 +1235,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 33744.28,
       "partner_usage": 33744.28,
@@ -1124,6 +1245,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 16406.7,
       "partner_usage": 0,
@@ -1133,6 +1255,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 9844.02,
       "partner_usage": 0,
@@ -1142,6 +1265,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 16872.14,
       "partner_usage": 0,
@@ -1151,6 +1275,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 19688.04,
       "partner_usage": 0,
@@ -1160,6 +1285,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 26250.73,
       "partner_usage": 0,
@@ -1169,6 +1295,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 40493.14,
       "partner_usage": 0,
@@ -1178,6 +1305,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 36094.75,
       "partner_usage": 0,
@@ -1187,6 +1315,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 32813.41,
       "partner_usage": 0,
@@ -1196,6 +1325,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 30369.86,
       "partner_usage": 0,
@@ -1205,6 +1335,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 32813.41,
       "partner_usage": 0,
@@ -1214,6 +1345,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 36094.75,
       "partner_usage": 0,
@@ -1223,6 +1355,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 32899.97,
       "partner_usage": 32899.97,
@@ -1232,6 +1365,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 16916.65,
       "partner_usage": 0,
@@ -1241,6 +1375,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 10049.99,
       "partner_usage": 0,
@@ -1250,6 +1385,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 16916.65,
       "partner_usage": 0,
@@ -1259,6 +1395,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 20099.98,
       "partner_usage": 0,
@@ -1268,6 +1405,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 26799.97,
       "partner_usage": 0,
@@ -1277,6 +1415,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 39479.96,
       "partner_usage": 0,
@@ -1286,6 +1425,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 37216.63,
       "partner_usage": 0,
@@ -1295,6 +1435,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 33499.97,
       "partner_usage": 0,
@@ -1304,6 +1445,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 30449.97,
       "partner_usage": 0,
@@ -1313,6 +1455,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 33499.97,
       "partner_usage": 0,
@@ -1322,6 +1465,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 36849.96,
       "partner_usage": 0,
@@ -1331,6 +1475,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 5707,
       "partner_usage": 5707,
@@ -1340,6 +1485,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 2802,
       "partner_usage": 0,
@@ -1349,6 +1495,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 1682,
       "partner_usage": 0,
@@ -1358,6 +1505,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 2853,
       "partner_usage": 0,
@@ -1367,6 +1515,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 3424,
       "partner_usage": 0,
@@ -1376,6 +1525,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 4611,
       "partner_usage": 0,
@@ -1385,6 +1535,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 6849,
       "partner_usage": 0,
@@ -1394,6 +1545,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 6166,
       "partner_usage": 0,
@@ -1403,6 +1555,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 5605,
       "partner_usage": 0,
@@ -1412,6 +1565,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 5137,
       "partner_usage": 0,
@@ -1421,6 +1575,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 5707,
       "partner_usage": 0,
@@ -1430,6 +1585,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 6341,
       "partner_usage": 0,
@@ -1439,6 +1595,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 329220,
       "partner_usage": 329220,
@@ -1448,6 +1605,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 164610,
       "partner_usage": 0,
@@ -1457,6 +1615,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 97793,
       "partner_usage": 0,
@@ -1466,6 +1625,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 164610,
       "partner_usage": 0,
@@ -1475,6 +1635,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 195586,
       "partner_usage": 0,
@@ -1484,6 +1645,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 260781,
       "partner_usage": 0,
@@ -1493,6 +1655,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 395064,
       "partner_usage": 0,
@@ -1502,6 +1665,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 362142,
       "partner_usage": 0,
@@ -1511,6 +1675,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 325977,
       "partner_usage": 0,
@@ -1520,6 +1685,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 296298,
       "partner_usage": 0,
@@ -1529,6 +1695,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 325977,
       "partner_usage": 0,
@@ -1538,6 +1705,7 @@
     {
       "HTMN": "DEUD1",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 358574,
       "partner_usage": 0,
@@ -1547,6 +1715,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 146407,
       "partner_usage": 146407,
@@ -1556,6 +1725,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 73203,
       "partner_usage": 0,
@@ -1565,6 +1735,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 43136,
       "partner_usage": 0,
@@ -1574,6 +1745,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 73203,
       "partner_usage": 0,
@@ -1583,6 +1755,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 88718,
       "partner_usage": 0,
@@ -1592,6 +1765,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 115028,
       "partner_usage": 0,
@@ -1601,6 +1775,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 175689,
       "partner_usage": 0,
@@ -1610,6 +1785,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 161048,
       "partner_usage": 0,
@@ -1619,6 +1795,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 143785,
       "partner_usage": 0,
@@ -1628,6 +1805,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 131767,
       "partner_usage": 0,
@@ -1637,6 +1815,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 147864,
       "partner_usage": 0,
@@ -1646,6 +1825,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "BELMO",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 158164,
       "partner_usage": 0,
@@ -1655,6 +1835,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 55834,
       "partner_usage": 55834,
@@ -1664,6 +1845,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 28195,
       "partner_usage": 0,
@@ -1673,6 +1855,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 16917,
       "partner_usage": 0,
@@ -1682,6 +1865,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 27917,
       "partner_usage": 0,
@@ -1691,6 +1875,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 32900,
       "partner_usage": 0,
@@ -1700,6 +1885,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 43866,
       "partner_usage": 0,
@@ -1709,6 +1895,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 67000,
       "partner_usage": 0,
@@ -1718,6 +1905,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 62028,
       "partner_usage": 0,
@@ -1727,6 +1915,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 56389,
       "partner_usage": 0,
@@ -1736,6 +1925,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 50250,
       "partner_usage": 0,
@@ -1745,6 +1935,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 54834,
       "partner_usage": 0,
@@ -1754,6 +1945,7 @@
     {
       "HTMN": "NLDDT",
       "VPMN": "FRAF1",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 60317,
       "partner_usage": 0,
@@ -1765,438 +1957,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "DEUD1",
-      "service": "MOC Local",
-      "own_usage": 15098.14,
-      "partner_usage": 15098.14,
-      "delta_usage_abs": 0,
-      "delta_usage_percent": 0
-    },
-    {
-      "HTMN": "BELMO",
-      "VPMN": "DEUD1",
-      "service": "MOC Local",
-      "own_usage": 7549.07,
-      "partner_usage": 0,
-      "delta_usage_abs": -7549.07,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "BELMO",
-      "VPMN": "DEUD1",
-      "service": "MOC Local",
-      "own_usage": 4448.32,
-      "partner_usage": 0,
-      "delta_usage_abs": -4448.32,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "BELMO",
-      "VPMN": "DEUD1",
-      "service": "MOC Local",
-      "own_usage": 7549.07,
-      "partner_usage": 0,
-      "delta_usage_abs": -7549.07,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "BELMO",
-      "VPMN": "DEUD1",
-      "service": "MOC Local",
-      "own_usage": 9058.88,
-      "partner_usage": 0,
-      "delta_usage_abs": -9058.88,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "BELMO",
-      "VPMN": "DEUD1",
-      "service": "MOC Local",
-      "own_usage": 12078.51,
-      "partner_usage": 0,
-      "delta_usage_abs": -12078.51,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "BELMO",
-      "VPMN": "DEUD1",
-      "service": "MOC Local",
-      "own_usage": 18117.76,
-      "partner_usage": 0,
-      "delta_usage_abs": -18117.76,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "BELMO",
-      "VPMN": "DEUD1",
-      "service": "MOC Local",
-      "own_usage": 16607.95,
-      "partner_usage": 0,
-      "delta_usage_abs": -16607.95,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "BELMO",
-      "VPMN": "DEUD1",
-      "service": "MOC Local",
-      "own_usage": 14827.72,
-      "partner_usage": 0,
-      "delta_usage_abs": -14827.72,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "BELMO",
-      "VPMN": "DEUD1",
-      "service": "MOC Local",
-      "own_usage": 13588.32,
-      "partner_usage": 0,
-      "delta_usage_abs": -13588.32,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "BELMO",
-      "VPMN": "DEUD1",
-      "service": "MOC Local",
-      "own_usage": 15098.14,
-      "partner_usage": 0,
-      "delta_usage_abs": -15098.14,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "BELMO",
-      "VPMN": "DEUD1",
-      "service": "MOC Local",
-      "own_usage": 16607.95,
-      "partner_usage": 0,
-      "delta_usage_abs": -16607.95,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "BELMO",
-      "VPMN": "NLDDT",
-      "service": "MOC Local",
-      "own_usage": 13309.72,
-      "partner_usage": 13309.72,
-      "delta_usage_abs": 0,
-      "delta_usage_percent": 0
-    },
-    {
-      "HTMN": "BELMO",
-      "VPMN": "NLDDT",
-      "service": "MOC Local",
-      "own_usage": 6535.67,
-      "partner_usage": 0,
-      "delta_usage_abs": -6535.67,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "BELMO",
-      "VPMN": "NLDDT",
-      "service": "MOC Local",
-      "own_usage": 3921.4,
-      "partner_usage": 0,
-      "delta_usage_abs": -3921.4,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "BELMO",
-      "VPMN": "NLDDT",
-      "service": "MOC Local",
-      "own_usage": 6654.86,
-      "partner_usage": 0,
-      "delta_usage_abs": -6654.86,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "BELMO",
-      "VPMN": "NLDDT",
-      "service": "MOC Local",
-      "own_usage": 8065.29,
-      "partner_usage": 0,
-      "delta_usage_abs": -8065.29,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "BELMO",
-      "VPMN": "NLDDT",
-      "service": "MOC Local",
-      "own_usage": 10753.72,
-      "partner_usage": 0,
-      "delta_usage_abs": -10753.72,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "BELMO",
-      "VPMN": "NLDDT",
-      "service": "MOC Local",
-      "own_usage": 15971.66,
-      "partner_usage": 0,
-      "delta_usage_abs": -15971.66,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "BELMO",
-      "VPMN": "NLDDT",
-      "service": "MOC Local",
-      "own_usage": 14378.47,
-      "partner_usage": 0,
-      "delta_usage_abs": -14378.47,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "BELMO",
-      "VPMN": "NLDDT",
-      "service": "MOC Local",
-      "own_usage": 13071.33,
-      "partner_usage": 0,
-      "delta_usage_abs": -13071.33,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "BELMO",
-      "VPMN": "NLDDT",
-      "service": "MOC Local",
-      "own_usage": 11978.75,
-      "partner_usage": 0,
-      "delta_usage_abs": -11978.75,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "BELMO",
-      "VPMN": "NLDDT",
-      "service": "MOC Local",
-      "own_usage": 13442.15,
-      "partner_usage": 0,
-      "delta_usage_abs": -13442.15,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "BELMO",
-      "VPMN": "NLDDT",
-      "service": "MOC Local",
-      "own_usage": 14786.37,
-      "partner_usage": 0,
-      "delta_usage_abs": -14786.37,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "FRAF1",
-      "VPMN": "DEUD1",
-      "service": "MOC Local",
-      "own_usage": 23573.98,
-      "partner_usage": 23573.98,
-      "delta_usage_abs": 0,
-      "delta_usage_percent": 0
-    },
-    {
-      "HTMN": "FRAF1",
-      "VPMN": "DEUD1",
-      "service": "MOC Local",
-      "own_usage": 11786.99,
-      "partner_usage": 0,
-      "delta_usage_abs": -11786.99,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "FRAF1",
-      "VPMN": "DEUD1",
-      "service": "MOC Local",
-      "own_usage": 6945.53,
-      "partner_usage": 0,
-      "delta_usage_abs": -6945.53,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "FRAF1",
-      "VPMN": "DEUD1",
-      "service": "MOC Local",
-      "own_usage": 11786.99,
-      "partner_usage": 0,
-      "delta_usage_abs": -11786.99,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "FRAF1",
-      "VPMN": "DEUD1",
-      "service": "MOC Local",
-      "own_usage": 13891.06,
-      "partner_usage": 0,
-      "delta_usage_abs": -13891.06,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "FRAF1",
-      "VPMN": "DEUD1",
-      "service": "MOC Local",
-      "own_usage": 18521.41,
-      "partner_usage": 0,
-      "delta_usage_abs": -18521.41,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "FRAF1",
-      "VPMN": "DEUD1",
-      "service": "MOC Local",
-      "own_usage": 28288.78,
-      "partner_usage": 0,
-      "delta_usage_abs": -28288.78,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "FRAF1",
-      "VPMN": "DEUD1",
-      "service": "MOC Local",
-      "own_usage": 25931.38,
-      "partner_usage": 0,
-      "delta_usage_abs": -25931.38,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "FRAF1",
-      "VPMN": "DEUD1",
-      "service": "MOC Local",
-      "own_usage": 23151.76,
-      "partner_usage": 0,
-      "delta_usage_abs": -23151.76,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "FRAF1",
-      "VPMN": "DEUD1",
-      "service": "MOC Local",
-      "own_usage": 21216.59,
-      "partner_usage": 0,
-      "delta_usage_abs": -21216.59,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "FRAF1",
-      "VPMN": "DEUD1",
-      "service": "MOC Local",
-      "own_usage": 23151.76,
-      "partner_usage": 0,
-      "delta_usage_abs": -23151.76,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "FRAF1",
-      "VPMN": "DEUD1",
-      "service": "MOC Local",
-      "own_usage": 25466.94,
-      "partner_usage": 0,
-      "delta_usage_abs": -25466.94,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "FRAF1",
-      "VPMN": "NLDDT",
-      "service": "MOC Local",
-      "own_usage": 23786.93,
-      "partner_usage": 23786.93,
-      "delta_usage_abs": 0,
-      "delta_usage_percent": 0
-    },
-    {
-      "HTMN": "FRAF1",
-      "VPMN": "NLDDT",
-      "service": "MOC Local",
-      "own_usage": 11565.37,
-      "partner_usage": 0,
-      "delta_usage_abs": -11565.37,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "FRAF1",
-      "VPMN": "NLDDT",
-      "service": "MOC Local",
-      "own_usage": 7065.77,
-      "partner_usage": 0,
-      "delta_usage_abs": -7065.77,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "FRAF1",
-      "VPMN": "NLDDT",
-      "service": "MOC Local",
-      "own_usage": 11893.47,
-      "partner_usage": 0,
-      "delta_usage_abs": -11893.47,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "FRAF1",
-      "VPMN": "NLDDT",
-      "service": "MOC Local",
-      "own_usage": 14272.16,
-      "partner_usage": 0,
-      "delta_usage_abs": -14272.16,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "FRAF1",
-      "VPMN": "NLDDT",
-      "service": "MOC Local",
-      "own_usage": 18504.59,
-      "partner_usage": 0,
-      "delta_usage_abs": -18504.59,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "FRAF1",
-      "VPMN": "NLDDT",
-      "service": "MOC Local",
-      "own_usage": 28544.32,
-      "partner_usage": 0,
-      "delta_usage_abs": -28544.32,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "FRAF1",
-      "VPMN": "NLDDT",
-      "service": "MOC Local",
-      "own_usage": 25443.81,
-      "partner_usage": 0,
-      "delta_usage_abs": -25443.81,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "FRAF1",
-      "VPMN": "NLDDT",
-      "service": "MOC Local",
-      "own_usage": 23552.58,
-      "partner_usage": 0,
-      "delta_usage_abs": -23552.58,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "FRAF1",
-      "VPMN": "NLDDT",
-      "service": "MOC Local",
-      "own_usage": 21408.24,
-      "partner_usage": 0,
-      "delta_usage_abs": -21408.24,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "FRAF1",
-      "VPMN": "NLDDT",
-      "service": "MOC Local",
-      "own_usage": 23786.93,
-      "partner_usage": 0,
-      "delta_usage_abs": -23786.93,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "FRAF1",
-      "VPMN": "NLDDT",
-      "service": "MOC Local",
-      "own_usage": 25443.81,
-      "partner_usage": 0,
-      "delta_usage_abs": -25443.81,
-      "delta_usage_percent": -100
-    },
-    {
-      "HTMN": "BELMO",
-      "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 97481.49,
       "partner_usage": 97481.49,
@@ -2206,6 +1967,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 48740.74,
       "partner_usage": 0,
@@ -2215,6 +1977,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 29777.78,
       "partner_usage": 0,
@@ -2224,6 +1987,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 48740.74,
       "partner_usage": 0,
@@ -2233,6 +1997,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 60148.15,
       "partner_usage": 0,
@@ -2242,6 +2007,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 80197.54,
       "partner_usage": 0,
@@ -2251,6 +2017,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 116977.79,
       "partner_usage": 0,
@@ -2260,6 +2027,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 107229.64,
       "partner_usage": 0,
@@ -2269,6 +2037,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 99259.27,
       "partner_usage": 0,
@@ -2278,6 +2047,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 87733.34,
       "partner_usage": 0,
@@ -2287,6 +2057,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 100246.92,
       "partner_usage": 0,
@@ -2296,6 +2067,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 110271.61,
       "partner_usage": 0,
@@ -2305,6 +2077,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 24037.99,
       "partner_usage": 24037.99,
@@ -2314,6 +2087,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 12019,
       "partner_usage": 0,
@@ -2323,6 +2097,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 7211.4,
       "partner_usage": 0,
@@ -2332,6 +2107,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 12019,
       "partner_usage": 0,
@@ -2341,6 +2117,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 14685.82,
       "partner_usage": 0,
@@ -2350,6 +2127,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 19775.94,
       "partner_usage": 0,
@@ -2359,6 +2137,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 28845.59,
       "partner_usage": 0,
@@ -2368,6 +2147,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 26441.79,
       "partner_usage": 0,
@@ -2377,6 +2157,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 24037.99,
       "partner_usage": 0,
@@ -2386,6 +2167,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 21634.19,
       "partner_usage": 0,
@@ -2395,6 +2177,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 24476.37,
       "partner_usage": 0,
@@ -2404,6 +2187,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 27191.91,
       "partner_usage": 0,
@@ -2413,6 +2197,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 2403804.65,
       "partner_usage": 2403804.65,
@@ -2422,6 +2207,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 1235998.84,
       "partner_usage": 0,
@@ -2431,6 +2217,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 741599.31,
       "partner_usage": 0,
@@ -2440,6 +2227,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 1201902.32,
       "partner_usage": 0,
@@ -2449,6 +2237,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 1468585.82,
       "partner_usage": 0,
@@ -2458,6 +2247,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 1958114.42,
       "partner_usage": 0,
@@ -2467,6 +2257,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 2884565.58,
       "partner_usage": 0,
@@ -2476,6 +2267,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 2719197.45,
       "partner_usage": 0,
@@ -2485,6 +2277,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 2471997.69,
       "partner_usage": 0,
@@ -2494,6 +2287,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 2163424.18,
       "partner_usage": 0,
@@ -2503,6 +2297,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 2447643.03,
       "partner_usage": 0,
@@ -2512,6 +2307,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 2692407.33,
       "partner_usage": 0,
@@ -2521,6 +2317,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 429804.45,
       "partner_usage": 429804.45,
@@ -2530,6 +2327,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 220998.74,
       "partner_usage": 0,
@@ -2539,6 +2337,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 131292.85,
       "partner_usage": 0,
@@ -2548,6 +2347,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 220998.74,
       "partner_usage": 0,
@@ -2557,6 +2357,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 265198.49,
       "partner_usage": 0,
@@ -2566,6 +2367,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 343843.56,
       "partner_usage": 0,
@@ -2575,6 +2377,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 515765.34,
       "partner_usage": 0,
@@ -2584,6 +2387,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 486197.23,
       "partner_usage": 0,
@@ -2593,6 +2397,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 437642.83,
       "partner_usage": 0,
@@ -2602,6 +2407,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 397797.73,
       "partner_usage": 0,
@@ -2611,6 +2417,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 441997.48,
       "partner_usage": 0,
@@ -2620,6 +2427,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "GPRS",
       "own_usage": 472784.89,
       "partner_usage": 0,
@@ -2629,6 +2437,487 @@
     {
       "HTMN": "BELMO",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 15098.14,
+      "partner_usage": 15098.14,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 7549.07,
+      "partner_usage": 0,
+      "delta_usage_abs": -7549.07,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 4448.32,
+      "partner_usage": 0,
+      "delta_usage_abs": -4448.32,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 7549.07,
+      "partner_usage": 0,
+      "delta_usage_abs": -7549.07,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 9058.88,
+      "partner_usage": 0,
+      "delta_usage_abs": -9058.88,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 12078.51,
+      "partner_usage": 0,
+      "delta_usage_abs": -12078.51,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 18117.76,
+      "partner_usage": 0,
+      "delta_usage_abs": -18117.76,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 16607.95,
+      "partner_usage": 0,
+      "delta_usage_abs": -16607.95,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 14827.72,
+      "partner_usage": 0,
+      "delta_usage_abs": -14827.72,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 13588.32,
+      "partner_usage": 0,
+      "delta_usage_abs": -13588.32,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 15098.14,
+      "partner_usage": 0,
+      "delta_usage_abs": -15098.14,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 16607.95,
+      "partner_usage": 0,
+      "delta_usage_abs": -16607.95,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "NLDDT",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 13309.72,
+      "partner_usage": 13309.72,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "NLDDT",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 6535.67,
+      "partner_usage": 0,
+      "delta_usage_abs": -6535.67,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "NLDDT",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 3921.4,
+      "partner_usage": 0,
+      "delta_usage_abs": -3921.4,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "NLDDT",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 6654.86,
+      "partner_usage": 0,
+      "delta_usage_abs": -6654.86,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "NLDDT",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 8065.29,
+      "partner_usage": 0,
+      "delta_usage_abs": -8065.29,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "NLDDT",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 10753.72,
+      "partner_usage": 0,
+      "delta_usage_abs": -10753.72,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "NLDDT",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 15971.66,
+      "partner_usage": 0,
+      "delta_usage_abs": -15971.66,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "NLDDT",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 14378.47,
+      "partner_usage": 0,
+      "delta_usage_abs": -14378.47,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "NLDDT",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 13071.33,
+      "partner_usage": 0,
+      "delta_usage_abs": -13071.33,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "NLDDT",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 11978.75,
+      "partner_usage": 0,
+      "delta_usage_abs": -11978.75,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "NLDDT",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 13442.15,
+      "partner_usage": 0,
+      "delta_usage_abs": -13442.15,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "NLDDT",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 14786.37,
+      "partner_usage": 0,
+      "delta_usage_abs": -14786.37,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 23573.98,
+      "partner_usage": 23573.98,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 11786.99,
+      "partner_usage": 0,
+      "delta_usage_abs": -11786.99,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 6945.53,
+      "partner_usage": 0,
+      "delta_usage_abs": -6945.53,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 11786.99,
+      "partner_usage": 0,
+      "delta_usage_abs": -11786.99,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 13891.06,
+      "partner_usage": 0,
+      "delta_usage_abs": -13891.06,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 18521.41,
+      "partner_usage": 0,
+      "delta_usage_abs": -18521.41,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 28288.78,
+      "partner_usage": 0,
+      "delta_usage_abs": -28288.78,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 25931.38,
+      "partner_usage": 0,
+      "delta_usage_abs": -25931.38,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 23151.76,
+      "partner_usage": 0,
+      "delta_usage_abs": -23151.76,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 21216.59,
+      "partner_usage": 0,
+      "delta_usage_abs": -21216.59,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 23151.76,
+      "partner_usage": 0,
+      "delta_usage_abs": -23151.76,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 25466.94,
+      "partner_usage": 0,
+      "delta_usage_abs": -25466.94,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "NLDDT",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 23786.93,
+      "partner_usage": 23786.93,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "NLDDT",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 11565.37,
+      "partner_usage": 0,
+      "delta_usage_abs": -11565.37,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "NLDDT",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 7065.77,
+      "partner_usage": 0,
+      "delta_usage_abs": -7065.77,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "NLDDT",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 11893.47,
+      "partner_usage": 0,
+      "delta_usage_abs": -11893.47,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "NLDDT",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 14272.16,
+      "partner_usage": 0,
+      "delta_usage_abs": -14272.16,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "NLDDT",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 18504.59,
+      "partner_usage": 0,
+      "delta_usage_abs": -18504.59,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "NLDDT",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 28544.32,
+      "partner_usage": 0,
+      "delta_usage_abs": -28544.32,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "NLDDT",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 25443.81,
+      "partner_usage": 0,
+      "delta_usage_abs": -25443.81,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "NLDDT",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 23552.58,
+      "partner_usage": 0,
+      "delta_usage_abs": -23552.58,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "NLDDT",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 21408.24,
+      "partner_usage": 0,
+      "delta_usage_abs": -21408.24,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "NLDDT",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 23786.93,
+      "partner_usage": 0,
+      "delta_usage_abs": -23786.93,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "NLDDT",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 25443.81,
+      "partner_usage": 0,
+      "delta_usage_abs": -25443.81,
+      "delta_usage_percent": -100
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 12350.03,
       "partner_usage": 12350.03,
@@ -2638,6 +2927,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 6350.19,
       "partner_usage": 0,
@@ -2647,6 +2937,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 3810.11,
       "partner_usage": 0,
@@ -2656,6 +2947,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 6175.01,
       "partner_usage": 0,
@@ -2665,6 +2957,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 7410.02,
       "partner_usage": 0,
@@ -2674,6 +2967,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 10160.3,
       "partner_usage": 0,
@@ -2683,6 +2977,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 14820.03,
       "partner_usage": 0,
@@ -2692,6 +2987,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 13970.42,
       "partner_usage": 0,
@@ -2701,6 +2997,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 12700.38,
       "partner_usage": 0,
@@ -2710,6 +3007,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 11115.02,
       "partner_usage": 0,
@@ -2719,6 +3017,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 12350.03,
       "partner_usage": 0,
@@ -2728,6 +3027,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 13970.42,
       "partner_usage": 0,
@@ -2737,6 +3037,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 12530.79,
       "partner_usage": 12530.79,
@@ -2746,6 +3047,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 6265.4,
       "partner_usage": 0,
@@ -2755,6 +3057,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 3759.24,
       "partner_usage": 0,
@@ -2764,6 +3067,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 6203.67,
       "partner_usage": 0,
@@ -2773,6 +3077,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 7311.07,
       "partner_usage": 0,
@@ -2782,6 +3087,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 9748.09,
       "partner_usage": 0,
@@ -2791,6 +3097,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 15036.95,
       "partner_usage": 0,
@@ -2800,6 +3107,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 13783.87,
       "partner_usage": 0,
@@ -2809,6 +3117,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 12530.79,
       "partner_usage": 0,
@@ -2818,6 +3127,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 11166.6,
       "partner_usage": 0,
@@ -2827,6 +3137,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 12185.12,
       "partner_usage": 0,
@@ -2836,6 +3147,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 13403.63,
       "partner_usage": 0,
@@ -2845,6 +3157,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 12407.33,
       "partner_usage": 12407.33,
@@ -2854,6 +3167,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 6203.66,
       "partner_usage": 0,
@@ -2863,6 +3177,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 3655.53,
       "partner_usage": 0,
@@ -2872,6 +3187,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 6265.39,
       "partner_usage": 0,
@@ -2881,6 +3197,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 7444.4,
       "partner_usage": 0,
@@ -2890,6 +3207,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 9925.86,
       "partner_usage": 0,
@@ -2899,6 +3217,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 14888.79,
       "partner_usage": 0,
@@ -2908,6 +3227,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 13648.06,
       "partner_usage": 0,
@@ -2917,6 +3237,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 12185.11,
       "partner_usage": 0,
@@ -2926,6 +3247,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 11277.71,
       "partner_usage": 0,
@@ -2935,6 +3257,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 12407.33,
       "partner_usage": 0,
@@ -2944,6 +3267,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 13648.06,
       "partner_usage": 0,
@@ -2953,6 +3277,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 23704.92,
       "partner_usage": 23704.92,
@@ -2962,6 +3287,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 11852.46,
       "partner_usage": 0,
@@ -2971,6 +3297,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 7111.48,
       "partner_usage": 0,
@@ -2980,6 +3307,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 11852.46,
       "partner_usage": 0,
@@ -2989,6 +3317,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 14222.95,
       "partner_usage": 0,
@@ -2998,6 +3327,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 18777.1,
       "partner_usage": 0,
@@ -3007,6 +3337,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 28445.9,
       "partner_usage": 0,
@@ -3016,6 +3347,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 26075.41,
       "partner_usage": 0,
@@ -3025,6 +3357,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 23704.92,
       "partner_usage": 0,
@@ -3034,6 +3367,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 21334.43,
       "partner_usage": 0,
@@ -3043,6 +3377,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 23704.92,
       "partner_usage": 0,
@@ -3052,6 +3387,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "MOC Back Home",
       "own_usage": 25818.51,
       "partner_usage": 0,
@@ -3061,6 +3397,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 46364,
       "partner_usage": 46364,
@@ -3070,6 +3407,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 23182,
       "partner_usage": 0,
@@ -3079,6 +3417,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 13910,
       "partner_usage": 0,
@@ -3088,6 +3427,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 23182,
       "partner_usage": 0,
@@ -3097,6 +3437,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 27051,
       "partner_usage": 0,
@@ -3106,6 +3447,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 36068,
       "partner_usage": 0,
@@ -3115,6 +3457,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 55637,
       "partner_usage": 0,
@@ -3124,6 +3467,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 51001,
       "partner_usage": 0,
@@ -3133,6 +3477,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 46364,
       "partner_usage": 0,
@@ -3142,6 +3487,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 41728,
       "partner_usage": 0,
@@ -3151,6 +3497,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 45085,
       "partner_usage": 0,
@@ -3160,6 +3507,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 49594,
       "partner_usage": 0,
@@ -3169,6 +3517,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 24477,
       "partner_usage": 24477,
@@ -3178,6 +3527,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 12019,
       "partner_usage": 0,
@@ -3187,6 +3537,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 7343,
       "partner_usage": 0,
@@ -3196,6 +3547,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 12019,
       "partner_usage": 0,
@@ -3205,6 +3557,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 14832,
       "partner_usage": 0,
@@ -3214,6 +3567,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 19581,
       "partner_usage": 0,
@@ -3223,6 +3577,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 29372,
       "partner_usage": 0,
@@ -3232,6 +3587,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 26442,
       "partner_usage": 0,
@@ -3241,6 +3597,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 24477,
       "partner_usage": 0,
@@ -3250,6 +3607,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 21634,
       "partner_usage": 0,
@@ -3259,6 +3617,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 24720,
       "partner_usage": 0,
@@ -3268,6 +3627,7 @@
     {
       "HTMN": "BELMO",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 26924,
       "partner_usage": 0,
@@ -3277,6 +3637,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 244764,
       "partner_usage": 244764,
@@ -3286,6 +3647,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 122382,
       "partner_usage": 0,
@@ -3295,6 +3657,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 73429,
       "partner_usage": 0,
@@ -3304,6 +3667,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 122382,
       "partner_usage": 0,
@@ -3313,6 +3677,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 146859,
       "partner_usage": 0,
@@ -3322,6 +3687,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 197760,
       "partner_usage": 0,
@@ -3331,6 +3697,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 293717,
       "partner_usage": 0,
@@ -3340,6 +3707,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 269240,
       "partner_usage": 0,
@@ -3349,6 +3717,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 244764,
       "partner_usage": 0,
@@ -3358,6 +3727,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 220288,
       "partner_usage": 0,
@@ -3367,6 +3737,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 244764,
       "partner_usage": 0,
@@ -3376,6 +3747,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 271920,
       "partner_usage": 0,
@@ -3385,6 +3757,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 359963,
       "partner_usage": 359963,
@@ -3394,6 +3767,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 178209,
       "partner_usage": 0,
@@ -3403,6 +3777,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 105010,
       "partner_usage": 0,
@@ -3412,6 +3787,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 178209,
       "partner_usage": 0,
@@ -3421,6 +3797,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 210020,
       "partner_usage": 0,
@@ -3430,6 +3807,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 280027,
       "partner_usage": 0,
@@ -3439,6 +3817,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 431956,
       "partner_usage": 0,
@@ -3448,6 +3827,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 392059,
       "partner_usage": 0,
@@ -3457,6 +3837,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 350033,
       "partner_usage": 0,
@@ -3466,6 +3847,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 320775,
       "partner_usage": 0,
@@ -3475,6 +3857,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 350033,
       "partner_usage": 0,
@@ -3484,6 +3867,7 @@
     {
       "HTMN": "FRAF1",
       "VPMN": "NLDDT",
+      "yearMonth": "202001",
       "service": "SMS MO",
       "own_usage": 385037,
       "partner_usage": 0,
