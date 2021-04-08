@@ -347,22 +347,21 @@ describe(`Tests PUT ${route} API OK`, function() {
             expect(response.body.header).to.have.property('type', 'settlement');
 
             expect(response.body).to.have.property('body').that.is.an('object');
-            expect(Object.keys(response.body.body)).have.members(['generatedResult', 'usage']);
-            expect(response.body.body.usage.body).to.deep.include(usageMinimumData.body);
-            expect(response.body.body.generatedResult).to.have.property('fromDate', 202001);
-            expect(response.body.body.generatedResult).to.have.property('toDate', 202002);
-            expect(response.body.body.generatedResult).to.have.property('calculationEngineVersion', '0.0.0');
-            expect(response.body.body.generatedResult).to.have.property('inbound');
-            expect(response.body.body.generatedResult.inbound).to.have.property('tax').that.deep.equals({rate: ''});
-            expect(response.body.body.generatedResult.inbound).to.have.property('currency');
-            expect(response.body.body.generatedResult.inbound).to.have.property('services');
+            // remove generatedResult field and set this generatedResult in body
+            expect(response.body.body).to.have.property('fromDate', 202001);
+            expect(response.body.body).to.have.property('toDate', 202002);
+            expect(response.body.body).to.have.property('calculationEngineVersion', '0.0.0');
+            expect(response.body.body).to.have.property('inbound');
+            expect(response.body.body.inbound).to.have.property('tax').that.deep.equals({rate: ''});
+            expect(response.body.body.inbound).to.have.property('currency');
+            expect(response.body.body.inbound).to.have.property('services');
             const expectedInboundServices = {voice: {MOC: {local: 5, backHome: 25, international: 0, premium: 0, ROW: 0, EEA: 0, EU: 0, satellite: 0, specialDestinations: 0, videoTelephony: 0}, MTC: 0}, SMS: {MO: 9000, MT: 0}, data: [{name: 'GPRS', value: 2500}, {name: 'M2M', value: 0}, {name: 'NB-IOT', value: 0}, {name: 'LTE-M', value: 0}, {name: 'VoLTE', value: 0}, {name: 'ViLTE', value: 0}, {name: 'signalling', value: 0}], access: {networkAccess: 0}};
-            expect(response.body.body.generatedResult.inbound).to.have.property('services').that.deep.equals(expectedInboundServices);
-            expect(response.body.body.generatedResult.outbound).to.have.property('tax').that.deep.equals({rate: ''});
-            expect(response.body.body.generatedResult.outbound).to.have.property('currency');
-            expect(response.body.body.generatedResult.outbound).to.have.property('services');
+            expect(response.body.body.inbound).to.have.property('services').that.deep.equals(expectedInboundServices);
+            expect(response.body.body.outbound).to.have.property('tax').that.deep.equals({rate: ''});
+            expect(response.body.body.outbound).to.have.property('currency');
+            expect(response.body.body.outbound).to.have.property('services');
             const expectedOutboundServices = {voice: {MOC: {local: 6, backHome: 500, international: 0, premium: 0, ROW: 0, EEA: 0, EU: 0, satellite: 0, specialDestinations: 0, videoTelephony: 0}, MTC: 0}, SMS: {MO: 4500, MT: 0}, data: [{name: 'GPRS', value: 1}, {name: 'M2M', value: 0}, {name: 'NB-IOT', value: 0}, {name: 'LTE-M', value: 0}, {name: 'VoLTE', value: 0}, {name: 'ViLTE', value: 0}, {name: 'signalling', value: 0}], access: {networkAccess: 0}};
-            expect(response.body.body.generatedResult.outbound).to.have.property('services').that.deep.equals(expectedOutboundServices);
+            expect(response.body.body.outbound).to.have.property('services').that.deep.equals(expectedOutboundServices);
             expect(calculationServiceNock.isDone(), 'Unconsumed nock error').to.be.true;
 
             done();
@@ -479,22 +478,21 @@ describe(`Tests PUT ${route} API OK`, function() {
             expect(response.body.blockchainRef).to.have.property('txId', 'b70cef323c0d3b56d44e9b31f16a11cba8dbbdd55c1d255b65f3fd2b3eadf8bb');
             expect(response.body.blockchainRef).to.have.property('timestamp').that.is.a('string');
             expect(response.body).to.have.property('body').that.is.an('object');
-            expect(Object.keys(response.body.body)).have.members(['generatedResult', 'usage']);
-            expect(response.body.body.usage.body).to.deep.include(usageMinimumData.body);
-            expect(response.body.body.generatedResult).to.have.property('fromDate', null);
-            expect(response.body.body.generatedResult).to.have.property('toDate', null);
-            expect(response.body.body.generatedResult).to.have.property('calculationEngineVersion', '0.0.0');
-            expect(response.body.body.generatedResult).to.have.property('inbound');
-            expect(response.body.body.generatedResult.inbound).to.have.property('tax').that.deep.equals({rate: ''});
-            expect(response.body.body.generatedResult.inbound).to.have.property('currency');
-            expect(response.body.body.generatedResult.inbound).to.have.property('services');
+            // remove generatedResult field and set this generatedResult in body
+            expect(response.body.body).to.have.property('fromDate', null);
+            expect(response.body.body).to.have.property('toDate', null);
+            expect(response.body.body).to.have.property('calculationEngineVersion', '0.0.0');
+            expect(response.body.body).to.have.property('inbound');
+            expect(response.body.body.inbound).to.have.property('tax').that.deep.equals({rate: ''});
+            expect(response.body.body.inbound).to.have.property('currency');
+            expect(response.body.body.inbound).to.have.property('services');
             const expectedInboundServices = {voice: {MOC: {local: 5, backHome: 25, international: 0, premium: 0, ROW: 0, EEA: 0, EU: 0, satellite: 0, specialDestinations: 0, videoTelephony: 0}, MTC: 0}, SMS: {MO: 9000, MT: 0}, data: [{name: 'GPRS', value: 2500}, {name: 'M2M', value: 0}, {name: 'NB-IOT', value: 0}, {name: 'LTE-M', value: 0}, {name: 'VoLTE', value: 0}, {name: 'ViLTE', value: 0}, {name: 'signalling', value: 0}], access: {networkAccess: 0}};
-            expect(response.body.body.generatedResult.inbound).to.have.property('services').that.deep.equals(expectedInboundServices);
-            expect(response.body.body.generatedResult.outbound).to.have.property('tax').that.deep.equals({rate: ''});
-            expect(response.body.body.generatedResult.outbound).to.have.property('currency');
-            expect(response.body.body.generatedResult.outbound).to.have.property('services');
+            expect(response.body.body.inbound).to.have.property('services').that.deep.equals(expectedInboundServices);
+            expect(response.body.body.outbound).to.have.property('tax').that.deep.equals({rate: ''});
+            expect(response.body.body.outbound).to.have.property('currency');
+            expect(response.body.body.outbound).to.have.property('services');
             const expectedOutboundServices = {voice: {MOC: {local: 6, backHome: 500, international: 0, premium: 0, ROW: 0, EEA: 0, EU: 0, satellite: 0, specialDestinations: 0, videoTelephony: 0}, MTC: 0}, SMS: {MO: 4500, MT: 0}, data: [{name: 'GPRS', value: 1}, {name: 'M2M', value: 0}, {name: 'NB-IOT', value: 0}, {name: 'LTE-M', value: 0}, {name: 'VoLTE', value: 0}, {name: 'ViLTE', value: 0}, {name: 'signalling', value: 0}], access: {networkAccess: 0}};
-            expect(response.body.body.generatedResult.outbound).to.have.property('services').that.deep.equals(expectedOutboundServices);
+            expect(response.body.body.outbound).to.have.property('services').that.deep.equals(expectedOutboundServices);
 
             expect(calculationServiceNock.isDone(), 'Unconsumed nock error').to.be.true;
             expect(blockchainAdapterNock.isDone(), 'Unconsumed nock error').to.be.true;
@@ -595,22 +593,21 @@ describe(`Tests PUT ${route} API OK`, function() {
                 expect(response.body.header).to.have.property('type', 'settlement');
 
                 expect(response.body).to.have.property('body').that.is.an('object');
-                expect(Object.keys(response.body.body)).have.members(['generatedResult', 'usage']);
-                expect(response.body.body.usage.body).to.deep.include(usageSentData1.body);
-                expect(response.body.body.generatedResult).to.have.property('fromDate', null);
-                expect(response.body.body.generatedResult).to.have.property('toDate', null);
-                expect(response.body.body.generatedResult).to.have.property('calculationEngineVersion', '0.0.0');
-                expect(response.body.body.generatedResult).to.have.property('inbound');
-                expect(response.body.body.generatedResult.inbound).to.have.property('tax').that.deep.equals({rate: ''});
-                expect(response.body.body.generatedResult.inbound).to.have.property('currency');
-                expect(response.body.body.generatedResult.inbound).to.have.property('services');
+                // remove generatedResult field and set this generatedResult in body
+                expect(response.body.body).to.have.property('fromDate', null);
+                expect(response.body.body).to.have.property('toDate', null);
+                expect(response.body.body).to.have.property('calculationEngineVersion', '0.0.0');
+                expect(response.body.body).to.have.property('inbound');
+                expect(response.body.body.inbound).to.have.property('tax').that.deep.equals({rate: ''});
+                expect(response.body.body.inbound).to.have.property('currency');
+                expect(response.body.body.inbound).to.have.property('services');
                 const expectedInboundServices = {voice: {MOC: {local: 5, backHome: 25, international: 0, premium: 0, ROW: 0, EEA: 0, EU: 0, satellite: 0, specialDestinations: 0, videoTelephony: 0}, MTC: 0}, SMS: {MO: 9000, MT: 0}, data: [{name: 'GPRS', value: 2500}, {name: 'M2M', value: 0}, {name: 'NB-IOT', value: 0}, {name: 'LTE-M', value: 0}, {name: 'VoLTE', value: 0}, {name: 'ViLTE', value: 0}, {name: 'signalling', value: 0}], access: {networkAccess: 0}};
-                expect(response.body.body.generatedResult.inbound).to.have.property('services').that.deep.equals(expectedInboundServices);
-                expect(response.body.body.generatedResult.outbound).to.have.property('tax').that.deep.equals({rate: ''});
-                expect(response.body.body.generatedResult.outbound).to.have.property('currency');
-                expect(response.body.body.generatedResult.outbound).to.have.property('services');
+                expect(response.body.body.inbound).to.have.property('services').that.deep.equals(expectedInboundServices);
+                expect(response.body.body.outbound).to.have.property('tax').that.deep.equals({rate: ''});
+                expect(response.body.body.outbound).to.have.property('currency');
+                expect(response.body.body.outbound).to.have.property('services');
                 const expectedOutboundServices = {voice: {MOC: {local: 6, backHome: 500, international: 0, premium: 0, ROW: 0, EEA: 0, EU: 0, satellite: 0, specialDestinations: 0, videoTelephony: 0}, MTC: 0}, SMS: {MO: 4500, MT: 0}, data: [{name: 'GPRS', value: 1}, {name: 'M2M', value: 0}, {name: 'NB-IOT', value: 0}, {name: 'LTE-M', value: 0}, {name: 'VoLTE', value: 0}, {name: 'ViLTE', value: 0}, {name: 'signalling', value: 0}], access: {networkAccess: 0}};
-                expect(response.body.body.generatedResult.outbound).to.have.property('services').that.deep.equals(expectedOutboundServices);
+                expect(response.body.body.outbound).to.have.property('services').that.deep.equals(expectedOutboundServices);
                 expect(calculationServiceNock.isDone(), 'Unconsumed nock error').to.be.true;
 
                 chai.request(testsUtils.getServer())
@@ -723,22 +720,21 @@ describe(`Tests PUT ${route} API OK`, function() {
                 expect(response.body.header).to.have.property('type', 'settlement');
 
                 expect(response.body).to.have.property('body').that.is.an('object');
-                expect(Object.keys(response.body.body)).have.members(['generatedResult', 'usage']);
-                expect(response.body.body.usage.body).to.deep.include(usageSentData2.body);
-                expect(response.body.body.generatedResult).to.have.property('fromDate', null);
-                expect(response.body.body.generatedResult).to.have.property('toDate', null);
-                expect(response.body.body.generatedResult).to.have.property('calculationEngineVersion', '0.0.0');
-                expect(response.body.body.generatedResult).to.have.property('inbound');
-                expect(response.body.body.generatedResult.inbound).to.have.property('tax').that.deep.equals({rate: ''});
-                expect(response.body.body.generatedResult.inbound).to.have.property('currency');
-                expect(response.body.body.generatedResult.inbound).to.have.property('services');
+                // remove generatedResult field and set this generatedResult in body
+                expect(response.body.body).to.have.property('fromDate', null);
+                expect(response.body.body).to.have.property('toDate', null);
+                expect(response.body.body).to.have.property('calculationEngineVersion', '0.0.0');
+                expect(response.body.body).to.have.property('inbound');
+                expect(response.body.body.inbound).to.have.property('tax').that.deep.equals({rate: ''});
+                expect(response.body.body.inbound).to.have.property('currency');
+                expect(response.body.body.inbound).to.have.property('services');
                 const expectedInboundServices = {voice: {MOC: {local: 5, backHome: 25, international: 0, premium: 0, ROW: 0, EEA: 0, EU: 0, satellite: 0, specialDestinations: 0, videoTelephony: 0}, MTC: 0}, SMS: {MO: 9000, MT: 0}, data: [{name: 'GPRS', value: 2500}, {name: 'M2M', value: 0}, {name: 'NB-IOT', value: 0}, {name: 'LTE-M', value: 0}, {name: 'VoLTE', value: 0}, {name: 'ViLTE', value: 0}, {name: 'signalling', value: 0}], access: {networkAccess: 0}};
-                expect(response.body.body.generatedResult.inbound).to.have.property('services').that.deep.equals(expectedInboundServices);
-                expect(response.body.body.generatedResult.outbound).to.have.property('tax').that.deep.equals({rate: ''});
-                expect(response.body.body.generatedResult.outbound).to.have.property('currency');
-                expect(response.body.body.generatedResult.outbound).to.have.property('services');
+                expect(response.body.body.inbound).to.have.property('services').that.deep.equals(expectedInboundServices);
+                expect(response.body.body.outbound).to.have.property('tax').that.deep.equals({rate: ''});
+                expect(response.body.body.outbound).to.have.property('currency');
+                expect(response.body.body.outbound).to.have.property('services');
                 const expectedOutboundServices = {voice: {MOC: {local: 6, backHome: 500, international: 0, premium: 0, ROW: 0, EEA: 0, EU: 0, satellite: 0, specialDestinations: 0, videoTelephony: 0}, MTC: 0}, SMS: {MO: 4500, MT: 0}, data: [{name: 'GPRS', value: 1}, {name: 'M2M', value: 0}, {name: 'NB-IOT', value: 0}, {name: 'LTE-M', value: 0}, {name: 'VoLTE', value: 0}, {name: 'ViLTE', value: 0}, {name: 'signalling', value: 0}], access: {networkAccess: 0}};
-                expect(response.body.body.generatedResult.outbound).to.have.property('services').that.deep.equals(expectedOutboundServices);
+                expect(response.body.body.outbound).to.have.property('services').that.deep.equals(expectedOutboundServices);
                 expect(calculationServiceNock.isDone(), 'Unconsumed nock error').to.be.true;
 
                 chai.request(testsUtils.getServer())

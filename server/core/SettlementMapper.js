@@ -38,8 +38,12 @@ class SettlementMapper {
       };
 
       if (settlement.body.generatedResult !== undefined) {
-        returnedResponseBody.body.generatedResult = settlement.body.generatedResult;
+        // returnedResponseBody.body.generatedResult = settlement.body.generatedResult;
+        // remove generatedResult field and set this generatedResult in body
+        returnedResponseBody.body = settlement.body.generatedResult;
       }
+      // remove usage field
+      /*
       if (settlement.body.usage !== undefined) {
         returnedResponseBody.body.usage = {
           name: settlement.body.usage.name,
@@ -49,6 +53,7 @@ class SettlementMapper {
           body: settlement.body.usage.body,
         };
       }
+      */
     }
     return returnedResponseBody;
   }
@@ -75,7 +80,7 @@ class SettlementMapper {
     return returnedResponseBody;
   }
 
-  static defineGeneratedResult(getCalculateResultResp,usage) {
+  static defineGeneratedResult(getCalculateResultResp, usage) {
     const returnedGeneratedResult = {
       fromDate: undefined,
       toDate: undefined,

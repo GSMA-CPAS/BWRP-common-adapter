@@ -108,7 +108,8 @@ const defineSentSettlement = (settlement, context) => {
     body: {}
   };
   if (settlement.body !== undefined) {
-    returnedResponse.body.generatedResult = settlement.body.generatedResult;
+    // remove generatedResult field and set this generatedResult in body
+    returnedResponse.body = settlement.body.generatedResult;
   }
   return returnedResponse;
 };

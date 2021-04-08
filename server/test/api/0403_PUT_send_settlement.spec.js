@@ -234,10 +234,9 @@ describe(`Tests PUT ${route} API OK`, function() {
             expect(response.body.blockchainRef).to.have.property('txId', 'b70cef323c0d3b56d44e9b31f16a11cba8dbbdd55c1d255b65f3fd2b3eadf8bb');
             expect(response.body.blockchainRef).to.have.property('timestamp').that.is.a('string');
 
+            // remove generatedResult field and set this generatedResult in body
             expect(response.body).to.have.property('body').that.is.an('object');
-            expect(Object.keys(response.body.body)).have.members(['generatedResult', 'usage']);
-            expect(response.body.body.generatedResult).to.deep.include(settlement1.body.generatedResult);
-            expect(response.body.body.usage).to.deep.include(settlement1.body.usage);
+            expect(response.body.body).to.deep.include(settlement1.body.generatedResult);
 
             expect(blockchainAdapterNock.isDone(), 'Unconsumed nock error').to.be.true;
 
