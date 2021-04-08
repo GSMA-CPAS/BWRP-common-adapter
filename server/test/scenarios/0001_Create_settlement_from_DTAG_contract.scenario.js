@@ -527,8 +527,6 @@ describe(`Launch scenario 0001_Create_settlement_from_DTAG_contract`, function()
           expect(response.body).to.have.property('state', 'DRAFT');
           expect(response.body).to.have.property('mspOwner', 'DTAG');
           expect(response.body).to.have.property('body').that.is.an('object');
-          expect(response.body.body).to.have.property('generatedResult').that.is.an('object');
-          expect(response.body.body).to.have.property('usage').that.is.an('object');
           expect(response.body).to.have.property('creationDate').that.is.a('string').and.match(DATE_REGEX);
           expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
 
@@ -655,8 +653,8 @@ describe(`Launch scenario 0001_Create_settlement_from_DTAG_contract`, function()
 
           debugObjectOnTMUS('Settlement received from DTAG : ', response.body);
 
-          if ((response.body.body) && (response.body.body.generatedResult)) {
-            debugObjectOnTMUS('Settlement received from DTAG => embedded generatedResult : ', response.body.body.generatedResult);
+          if (response.body.body) {
+            debugObjectOnTMUS('Settlement received from DTAG => body : ', response.body.body);
           }
 
           done();
@@ -736,8 +734,6 @@ describe(`Launch scenario 0001_Create_settlement_from_DTAG_contract`, function()
           expect(response.body).to.have.property('state', 'DRAFT');
           expect(response.body).to.have.property('mspOwner', 'TMUS');
           expect(response.body).to.have.property('body').that.is.an('object');
-          expect(response.body.body).to.have.property('generatedResult').that.is.an('object');
-          expect(response.body.body).to.have.property('usage').that.is.an('object');
           expect(response.body).to.have.property('creationDate').that.is.a('string').and.match(DATE_REGEX);
           expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
 
@@ -864,8 +860,8 @@ describe(`Launch scenario 0001_Create_settlement_from_DTAG_contract`, function()
 
           debugObjectOnDTAG('Settlement received from TMUS : ', response.body);
 
-          if ((response.body.body) && (response.body.body.generatedResult)) {
-            debugObjectOnDTAG('Settlement received from TMUS => embedded generatedResult : ', response.body.body.generatedResult);
+          if (response.body.body) {
+            debugObjectOnDTAG('Settlement received from TMUS => body : ', response.body.body);
           }
 
           done();

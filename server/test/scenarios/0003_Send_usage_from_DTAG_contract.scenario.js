@@ -681,29 +681,25 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           expect(response.body).to.have.property('settlementId').that.is.a('string');
           expect(response.body).to.have.property('state', 'DRAFT');
           expect(response.body).to.have.property('mspOwner', 'DTAG');
-          expect(response.body).to.have.property('body').that.is.an('object');
-          expect(response.body.body).to.have.property('generatedResult').that.is.an('object');
-          expect(response.body.body).to.have.property('usage').that.is.an('object');
           expect(response.body).to.have.property('creationDate').that.is.a('string').and.match(DATE_REGEX);
           expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
           DTAG_dynamic_data.settlementIdFromLocalUsage = response.body.settlementId;
           debugObjectOnDTAG('Settlement created on DTAG from local usage : ', JSON.stringify(response.body));
           expect(response.body).to.have.property('body').that.is.an('object');
-          expect(Object.keys(response.body.body)).have.members(['generatedResult', 'usage']);
 
-          expect(response.body.body.generatedResult).to.deep.equalInAnyOrder(configured_EXPECTED_JSON_DTAG_local_usage_settlement_generatedResult);
+          expect(response.body.body).to.deep.equalInAnyOrder(configured_EXPECTED_JSON_DTAG_local_usage_settlement_generatedResult);
 
-          expect(response.body.body.generatedResult).to.have.property('fromDate', null);
-          expect(response.body.body.generatedResult).to.have.property('toDate', null);
-          expect(response.body.body.generatedResult).to.have.property('calculationEngineVersion', '0.0.1');
-          expect(response.body.body.generatedResult).to.have.property('inbound');
-          expect(response.body.body.generatedResult.inbound).to.have.property('tax').that.deep.equals({rate: ''});
-          expect(response.body.body.generatedResult.inbound).to.have.property('currency');
-          expect(response.body.body.generatedResult.inbound).to.have.property('services');
+          expect(response.body.body).to.have.property('fromDate', null);
+          expect(response.body.body).to.have.property('toDate', null);
+          expect(response.body.body).to.have.property('calculationEngineVersion', '0.0.1');
+          expect(response.body.body).to.have.property('inbound');
+          expect(response.body.body.inbound).to.have.property('tax').that.deep.equals({rate: ''});
+          expect(response.body.body.inbound).to.have.property('currency');
+          expect(response.body.body.inbound).to.have.property('services');
 
-          expect(response.body.body.generatedResult.outbound).to.have.property('tax').that.deep.equals({rate: ''});
-          expect(response.body.body.generatedResult.outbound).to.have.property('currency');
-          expect(response.body.body.generatedResult.outbound).to.have.property('services');
+          expect(response.body.body.outbound).to.have.property('tax').that.deep.equals({rate: ''});
+          expect(response.body.body.outbound).to.have.property('currency');
+          expect(response.body.body.outbound).to.have.property('services');
           debug(`==> DTAG new created settlement id from local usage: ${DTAG_dynamic_data.settlementIdFromLocalUsage}`);
 
           done();
@@ -734,28 +730,24 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           expect(response.body).to.have.property('settlementId').that.is.a('string');
           expect(response.body).to.have.property('state', 'DRAFT');
           expect(response.body).to.have.property('mspOwner', 'TMUS');
-          expect(response.body).to.have.property('body').that.is.an('object');
-          expect(response.body.body).to.have.property('generatedResult').that.is.an('object');
-          expect(response.body.body).to.have.property('usage').that.is.an('object');
           expect(response.body).to.have.property('creationDate').that.is.a('string').and.match(DATE_REGEX);
           expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
           DTAG_dynamic_data.settlementIdFromReceivedUsage = response.body.settlementId;
           debugObjectOnDTAG('Settlement created on DTAG from received usage : ', JSON.stringify(response.body));
           expect(response.body).to.have.property('body').that.is.an('object');
-          expect(Object.keys(response.body.body)).have.members(['generatedResult', 'usage']);
 
-          expect(response.body.body.generatedResult).to.deep.equalInAnyOrder(configured_EXPECTED_JSON_DTAG_partner_usage_settlement_generatedResult);
+          expect(response.body.body).to.deep.equalInAnyOrder(configured_EXPECTED_JSON_DTAG_partner_usage_settlement_generatedResult);
 
-          expect(response.body.body.generatedResult).to.have.property('fromDate', null);
-          expect(response.body.body.generatedResult).to.have.property('toDate', null);
-          expect(response.body.body.generatedResult).to.have.property('calculationEngineVersion', '0.0.1');
-          expect(response.body.body.generatedResult).to.have.property('inbound');
-          expect(response.body.body.generatedResult.inbound).to.have.property('tax').that.deep.equals({rate: ''});
-          expect(response.body.body.generatedResult.inbound).to.have.property('currency');
-          expect(response.body.body.generatedResult.inbound).to.have.property('services');
-          expect(response.body.body.generatedResult.outbound).to.have.property('tax').that.deep.equals({rate: ''});
-          expect(response.body.body.generatedResult.outbound).to.have.property('currency');
-          expect(response.body.body.generatedResult.outbound).to.have.property('services');
+          expect(response.body.body).to.have.property('fromDate', null);
+          expect(response.body.body).to.have.property('toDate', null);
+          expect(response.body.body).to.have.property('calculationEngineVersion', '0.0.1');
+          expect(response.body.body).to.have.property('inbound');
+          expect(response.body.body.inbound).to.have.property('tax').that.deep.equals({rate: ''});
+          expect(response.body.body.inbound).to.have.property('currency');
+          expect(response.body.body.inbound).to.have.property('services');
+          expect(response.body.body.outbound).to.have.property('tax').that.deep.equals({rate: ''});
+          expect(response.body.body.outbound).to.have.property('currency');
+          expect(response.body.body.outbound).to.have.property('services');
           debug(`==> DTAG new created settlement id from received usage: ${DTAG_dynamic_data.settlementIdFromReceivedUsage}`);
 
           done();
@@ -818,18 +810,16 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           expect(response.body).to.have.property('state', 'DRAFT');
           expect(response.body).to.have.property('mspOwner', 'TMUS');
           expect(response.body).to.have.property('body').that.is.an('object');
-          expect(response.body.body).to.have.property('generatedResult').that.is.an('object');
 
-          expect(response.body.body.generatedResult).to.deep.equalInAnyOrder(configured_EXPECTED_JSON_TMUS_local_usage_settlement_generatedResult);
+          expect(response.body.body).to.deep.equalInAnyOrder(configured_EXPECTED_JSON_TMUS_local_usage_settlement_generatedResult);
 
-          expect(response.body.body).to.have.property('usage').that.is.an('object');
           expect(response.body).to.have.property('creationDate').that.is.a('string').and.match(DATE_REGEX);
           expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
 
           TMUS_dynamic_data.settlementIdFromLocalUsage = response.body.settlementId;
           debugObjectOnTMUS('Settlement created on TMUS from local usage : ', response.body);
-          if ((response.body.body) && (response.body.body.generatedResult)) {
-            debugObjectOnTMUS('Settlement created on TMUS from local usage => embedded generatedResult : ', response.body.body.generatedResult);
+          if (response.body.body) {
+            debugObjectOnTMUS('Settlement created on TMUS from local usage => body : ', response.body.body);
           }
           debug(`==> TMUS new created settlement id from local usage: ${TMUS_dynamic_data.settlementIdFromLocalUsage}`);
 
@@ -862,18 +852,16 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
           expect(response.body).to.have.property('state', 'DRAFT');
           expect(response.body).to.have.property('mspOwner', 'DTAG');
           expect(response.body).to.have.property('body').that.is.an('object');
-          expect(response.body.body).to.have.property('generatedResult').that.is.an('object');
 
-          expect(response.body.body.generatedResult).to.deep.equalInAnyOrder(configured_EXPECTED_JSON_TMUS_partner_usage_settlement_generatedResult);
+          expect(response.body.body).to.deep.equalInAnyOrder(configured_EXPECTED_JSON_TMUS_partner_usage_settlement_generatedResult);
 
-          expect(response.body.body).to.have.property('usage').that.is.an('object');
           expect(response.body).to.have.property('creationDate').that.is.a('string').and.match(DATE_REGEX);
           expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
 
           TMUS_dynamic_data.settlementIdFromReceivedUsage = response.body.settlementId;
           debugObjectOnTMUS('Settlement created on TMUS from received usage : ', response.body);
-          if ((response.body.body) && (response.body.body.generatedResult)) {
-            debugObjectOnTMUS('Settlement created on TMUS from received usage => embedded generatedResult : ', response.body.body.generatedResult);
+          if (response.body.body) {
+            debugObjectOnTMUS('Settlement created on TMUS from received usage => body : ', response.body.body);
           }
           debug(`==> TMUS new created settlement id from received usage: ${TMUS_dynamic_data.settlementIdFromReceivedUsage}`);
 
