@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 <a name="eventReceived"></a>
 # **eventReceived**
-> SuccessResponse eventReceived(body)
+> List eventReceived(body)
 
 
 
@@ -19,11 +19,11 @@ Method | HTTP request | Description
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | **Object**| Webhook event Object Payload |
+ **body** | [**Map**](../Models/object.md)| Webhook event Object Payload |
 
 ### Return type
 
-[**SuccessResponse**](../Models/SuccessResponse.md)
+[**List**](../Models/object.md)
 
 ### Authorization
 

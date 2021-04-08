@@ -64,14 +64,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Msp'
-                x-content-type: application/json
           description: Details about the requested Msp
         "400":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/400ErrorResponse'
-                x-content-type: application/json
           description: Bad Request
         "500":
           content: {}
@@ -124,15 +122,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SuccessResponse'
-                x-content-type: application/json
-          description: Successful operation, returns Status message
+                $ref: '#/components/schemas/EventResponse'
+          description: Successful operation, returns list of uploaded documents
         "400":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/400ErrorResponse'
-                x-content-type: application/json
           description: Bad Request
         "500":
           content: {}
@@ -1252,6 +1248,26 @@ components:
     Event:
       title: Event JSON
       type: object
+      additionalProperties: true
+      properties:
+        msp:
+          type: string
+        eventName:
+          type: string
+        timestamp:
+          type: string
+        data:
+          type: object
+          additionalProperties: true
+          properties:
+            storageKey:
+              type: string
+      example:
+        msp: eventMsp
+        eventName: STORE:PAYLOADLINK
+        timestamp: '2020-11-30T16:59:35Z'
+        data:
+          storageKey: storageKey
 
     ContractResponse:
       title: Contract JSON
@@ -1539,20 +1555,24 @@ components:
       title: Settlement JSON
       type: object
 
-    SuccessResponse:
-      title: Success Response JSON
-      type: object
-      properties:
-        status:
-          type: string
-          description: Outcome of the operation
-          example: OK
-        description:
-          type: string
-          description: Description of the operation
-          example: XXXX Operation successful
-      required:
-        - status
+    EventResponse:
+      title: Event Response JSON
+      type: array
+      items:
+        type: object
+        additionalProperties: false
+        properties:
+          id:
+            type: string
+          type:
+            type: string
+          referenceId:
+            type: string
+        example:
+          id: id
+          type: contract
+          referenceId: referenceId
+
     400ErrorResponse:
       title: 400 Error Response JSON
       type: object

@@ -123,8 +123,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SuccessResponse'
-          description: Successful operation, returns Status message
+                $ref: '#/components/schemas/EventResponse'
+          description: Successful operation, returns list of uploaded documents
         "400":
           content:
             application/json:
@@ -1239,6 +1239,26 @@ components:
       title: Msp JSON
       type: object
     Event:
+      additionalProperties: true
+      example:
+        msp: eventMsp
+        eventName: STORE:PAYLOADLINK
+        timestamp: 2020-11-30T16:59:35Z
+        data:
+          storageKey: storageKey
+      properties:
+        msp:
+          type: string
+        eventName:
+          type: string
+        timestamp:
+          type: string
+        data:
+          additionalProperties: true
+          properties:
+            storageKey:
+              type: string
+          type: object
       title: Event JSON
       type: object
     ContractResponse:
@@ -1529,23 +1549,23 @@ components:
     Settlement:
       title: Settlement JSON
       type: object
-    SuccessResponse:
-      example:
-        description: XXXX Operation successful
-        status: OK
-      properties:
-        status:
-          description: Outcome of the operation
-          example: OK
-          type: string
-        description:
-          description: Description of the operation
-          example: XXXX Operation successful
-          type: string
-      required:
-      - status
-      title: Success Response JSON
-      type: object
+    EventResponse:
+      items:
+        additionalProperties: false
+        example:
+          id: id
+          type: contract
+          referenceId: referenceId
+        properties:
+          id:
+            type: string
+          type:
+            type: string
+          referenceId:
+            type: string
+        type: object
+      title: Event Response JSON
+      type: array
     "400ErrorResponse":
       properties:
         error:
