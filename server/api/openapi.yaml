@@ -32,9 +32,13 @@ paths:
         "200":
           content:
             application/json:
+              example:
+              - GSMA
+              - AnotherMSP
               schema:
-                type: string
-                x-content-type: application/json
+                items:
+                  type: string
+                type: array
           description: A list of all discovered Msps
         "500":
           content: {}
@@ -60,8 +64,7 @@ paths:
           content:
             application/json:
               schema:
-                type: string
-                x-content-type: application/json
+                $ref: '#/components/schemas/Msp'
           description: Details about the requested Msp
         "400":
           content:
@@ -84,8 +87,19 @@ paths:
           content:
             application/json:
               schema:
-                type: string
-                x-content-type: application/json
+                additionalProperties: true
+                example:
+                  commitHash: unknown
+                  apiHash: unknown
+                  apiVersion: ?.?.?
+                properties:
+                  commitHash:
+                    type: string
+                  apiHash:
+                    type: string
+                  apiVersion:
+                    type: string
+                type: object
           description: The status of the service
         "500":
           content: {}
@@ -1186,6 +1200,44 @@ paths:
       x-eov-operation-handler: controllers/SettlementController
 components:
   schemas:
+    Msp:
+      additionalProperties: true
+      example:
+        id: GSMA
+        name: GSMA
+        organizationalUnitIdentifiers: []
+        rootCerts: |
+          -----BEGIN CERTIFICATE-----
+          MIIC...==
+          -----END CERTIFICATE-----
+        intermediateCerts: intermediateCerts
+        admins: admins
+        tlsRootCerts: |
+          -----BEGIN CERTIFICATE-----
+          MIIC...==
+          -----END CERTIFICATE-----
+        tlsIntermediateCerts: tlsIntermediateCerts
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        organizationalUnitIdentifiers:
+          items:
+            type: string
+          type: array
+        rootCerts:
+          type: string
+        intermediateCerts:
+          type: string
+        admins:
+          type: string
+        tlsRootCerts:
+          type: string
+        tlsIntermediateCerts:
+          type: string
+      title: Msp JSON
+      type: object
     Event:
       title: Event JSON
       type: object

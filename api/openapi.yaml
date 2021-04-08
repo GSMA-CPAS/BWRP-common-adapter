@@ -34,8 +34,10 @@ paths:
           content:
             application/json:
               schema:
-                type: string
-                x-content-type: application/json
+                type: array
+                items:
+                  type: string
+              example: ['GSMA', 'AnotherMSP']
           description: A list of all discovered Msps
         "500":
           content: {}
@@ -61,7 +63,7 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/Msp'
                 x-content-type: application/json
           description: Details about the requested Msp
         "400":
@@ -86,8 +88,19 @@ paths:
           content:
             application/json:
               schema:
-                type: string
-                x-content-type: application/json
+                type: object
+                additionalProperties: true
+                properties:
+                  commitHash:
+                    type: string
+                  apiHash:
+                    type: string
+                  apiVersion:
+                    type: string
+                example:
+                  commitHash: "unknown"
+                  apiHash: "unknown"
+                  apiVersion: "?.?.?"
           description: The status of the service
         "500":
           content: {}
@@ -1203,6 +1216,39 @@ paths:
 
 components:
   schemas:
+    Msp:
+      title: Msp JSON
+      type: object
+      additionalProperties: true
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        organizationalUnitIdentifiers:
+          type: array
+          items:
+            type: string
+        rootCerts:
+          type: string
+        intermediateCerts:
+          type: string
+        admins:
+          type: string
+        tlsRootCerts:
+          type: string
+        tlsIntermediateCerts:
+          type: string
+      example:
+        id: GSMA
+        name: GSMA
+        organizationalUnitIdentifiers: []
+        rootCerts: "-----BEGIN CERTIFICATE-----\nMIIC...==\n-----END CERTIFICATE-----\n"
+        intermediateCerts: intermediateCerts
+        admins: admins
+        tlsRootCerts: "-----BEGIN CERTIFICATE-----\nMIIC...==\n-----END CERTIFICATE-----\n"
+        tlsIntermediateCerts: tlsIntermediateCerts
+
     Event:
       title: Event JSON
       type: object

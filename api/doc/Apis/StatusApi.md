@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 <a name="getApiStatus"></a>
 # **getApiStatus**
-> String getApiStatus()
+> Map getApiStatus()
 
 
 
@@ -20,7 +20,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**String**](../Models/string.md)
+[**Map**](../Models/object.md)
 
 ### Authorization
 
