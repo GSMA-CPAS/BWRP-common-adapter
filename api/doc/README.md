@@ -43,9 +43,15 @@ Class | Method | HTTP request | Description
 ## Documentation for Models
 
  - [400ErrorResponse](./Models/400ErrorResponse.md)
+ - [ContractBody](./Models/ContractBody.md)
+ - [ContractBodyMspDiscount](./Models/ContractBodyMspDiscount.md)
+ - [ContractBodyMspDiscountServiceGroup](./Models/ContractBodyMspDiscountServiceGroup.md)
+ - [ContractBodyMspDiscountServiceGroupService](./Models/ContractBodyMspDiscountServiceGroupService.md)
+ - [ContractBodyMspDiscountServiceGroupServiceRateThreshold](./Models/ContractBodyMspDiscountServiceGroupServiceRateThreshold.md)
  - [ContractRequest](./Models/ContractRequest.md)
  - [ContractRequestHeader](./Models/ContractRequestHeader.md)
  - [ContractRequestHeader2](./Models/ContractRequestHeader2.md)
+ - [ContractRequestHeader2Msp](./Models/ContractRequestHeader2Msp.md)
  - [ContractRequestHeaderFromMsp](./Models/ContractRequestHeaderFromMsp.md)
  - [ContractRequestHeaderToMsp](./Models/ContractRequestHeaderToMsp.md)
  - [ContractResponse](./Models/ContractResponse.md)

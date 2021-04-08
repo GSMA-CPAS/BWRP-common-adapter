@@ -1324,7 +1324,7 @@ components:
             - fromMsp
             - toMsp
         body:
-          additionalProperties: true
+          $ref: '#/components/schemas/ContractBody'
         state:
           type: string
           description: The State of the Contract.
@@ -1363,38 +1363,36 @@ components:
       type: object
       example:
         header:
-          fromMsp:
-            mspId: DTAG
-            signatures:
-            - role: role
-              name: name
-              id: id
-            - role: role
-              name: name
-              id: id
           name: Contract with XYZ
-          toMsp:
-            mspId: TMUS
-            signatures:
-            - role: role
-              name: name
-              id: id
-            - role: role
-              name: name
-              id: id
           type: contract
           version: "1.0"
+          msps:
+            DTAG:
+              signatures:
+              - role: role
+                name: name
+                id: id
+              - role: role
+                name: name
+                id: id
+            TMUS:
+              signatures:
+              - role: role
+                name: name
+                id: id
+              - role: role
+                name: name
+                id: id
         body:
-          key: '{}'
+          key: {}
       properties:
         header:
           type: object
           oneOf:
           - $ref: '#/components/schemas/ContractRequest_header'
           - $ref: '#/components/schemas/ContractRequest_header2'
-
         body:
-          additionalProperties: true
+          $ref: '#/components/schemas/ContractBody'
       additionalProperties: false
       required:
         - header
@@ -1679,7 +1677,26 @@ components:
         - fromMsp
         - toMsp
 
+    ContractRequest_header2_msp:
+      type: object
+      additionalProperties: true
+      properties:
+        signatures:
+          type: array
+          items:
+            $ref: '#/components/schemas/SignatureBase'
+      example:
+        signatures:
+        - role: role
+          name: name
+          id: id
+        - role: role
+          name: name
+          id: id
+
     ContractRequest_header2:
+      type: object
+      additionalProperties: true
       properties:
         name:
           description: Human readable name for the contract.
@@ -1696,9 +1713,145 @@ components:
           type: string
         msps:
           type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ContractRequest_header2_msp'
       required:
-      - msps
-      - type
       - version
+      - type
+      - msps
+
+    ContractBody_msp_discount_serviceGroup_service_rate_threshold:
       type: object
+      additionalProperties: true
+      properties:
+        start:
+          type: number
+        fixedPrice:
+          type: number
+        linearPrice:
+          type: number
+
+    ContractBody_msp_discount_serviceGroup_service:
+      type: object
+      additionalProperties: true
+      properties:
+        service:
+          type: string
+        usagePricing:
+          type: object
+          additionalProperties: true
+          properties:
+            unit:
+              type: string
+            ratingPlan:
+              type: object
+              additionalProperties: true
+              properties:
+                kind:
+                  type: string
+                balancedRate:
+                  type: object
+                  additionalProperties: true
+                  properties:
+                    thresholds:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/ContractBody_msp_discount_serviceGroup_service_rate_threshold'
+                unbalancedRate:
+                  type: object
+                  additionalProperties: true
+                  properties:
+                    thresholds:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/ContractBody_msp_discount_serviceGroup_service_rate_threshold'
+                rate:
+                  type: object
+                  additionalProperties: true
+                  properties:
+                    thresholds:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/ContractBody_msp_discount_serviceGroup_service_rate_threshold'
+        accessPricing:
+          type: object
+          additionalProperties: true
+          properties:
+            unit:
+              type: string
+            ratingPlan:
+              type: object
+              additionalProperties: true
+              properties:
+                kind:
+                  type: string
+                rate:
+                  type: object
+                  additionalProperties: true
+                  properties:
+                    thresholds:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/ContractBody_msp_discount_serviceGroup_service_rate_threshold'
+                        
+    ContractBody_msp_discount_serviceGroup:
+      type: object
+      additionalProperties: true
+      properties:
+        services:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContractBody_msp_discount_serviceGroup_service'
+        homeTadigs:
+          type: array
+          items:
+            type: string
+        visitorTadigs:
+          type: array
+          items:
+            type: string
+
+    ContractBody_msp_discount:
+      type: object
+      additionalProperties: true
+      properties:
+        condition:
+          type: object
+          additionalProperties: true
+        serviceGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContractBody_msp_discount_serviceGroup'
+
+    ContractBody:
+      type: object
+      additionalProperties: true
+      properties:
+        version:
+          type: string
+        metadata:
+          type: object
+          additionalProperties: true
+          properties:
+            name:
+              type: string
+            authors:
+              type: string
+        discounts:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ContractBody_msp_discount'
+        framework:
+          type: object
+          additionalProperties: true
+          properties:
+            term:
+              type: object
+              additionalProperties: true
+            payment:
+              type: object
+              additionalProperties: true
+            partyInformation:
+              type: object
+              additionalProperties: true
 
