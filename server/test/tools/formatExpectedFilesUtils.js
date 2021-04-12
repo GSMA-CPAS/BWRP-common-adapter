@@ -24,10 +24,10 @@ const USAGE_DISCREPANCY_USAGE_SERVICE_ORDER = ['SMSMO', 'GPRS', 'MOC EU', 'MOC L
 const USAGE_DISCREPANCY_USAGE_FIELDS_ORDER = ['HTMN', 'VPMN', 'yearMonth', 'service', 'own_usage', 'partner_usage', 'delta_usage_abs', 'delta_usage_percent'];
 
 const SETTLEMENT_DISCREPANCY_SERVICE_ORDER_IN_GENERAL_INFORMATION = ['Voice', 'SMS', 'Data'];
-const SETTLEMENT_DISCREPANCY_SERVICE_FIELDS_ORDER_IN_GENERAL_INFORMATION = ['bearer', 'unit', 'own_calculation', 'partner_calculation', 'delta_calculation_percent'];
+const SETTLEMENT_DISCREPANCY_SERVICE_FIELDS_ORDER_IN_GENERAL_INFORMATION = ['bearer', 'service', 'unit', 'own_calculation', 'partner_calculation', 'delta_calculation_percent', 'own_usage', 'partner_usage', 'delta_usage_abs', 'delta_usage_percent'];
 
 const SETTLEMENT_DISCREPANCY_SERVICE_ORDER_IN_DETAILS = ['MOC Back Home', 'MOC Local', 'MOC EU', 'MOC RoW', 'SMSMO', 'VoLTE'];
-const SETTLEMENT_DISCREPANCY_SERVICE_FIELDS_ORDER_IN_DETAILS = ['service', 'unit', 'own_calculation', 'partner_calculation', 'delta_calculation_percent'];
+const SETTLEMENT_DISCREPANCY_SERVICE_FIELDS_ORDER_IN_DETAILS = ['service', 'unit', 'own_calculation', 'partner_calculation', 'delta_calculation_percent', 'own_usage', 'partner_usage', 'delta_usage_abs', 'delta_usage_percent'];
 
 const sortObjByKey = (value, order) => {
   if (typeof value !== 'object') {

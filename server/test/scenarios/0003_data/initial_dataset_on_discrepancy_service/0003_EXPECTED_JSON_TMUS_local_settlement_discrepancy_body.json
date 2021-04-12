@@ -2,25 +2,37 @@
   "homePerspective": {
     "general_information": [
       {
-        "bearer": "Voice",
+        "service": "Voice",
         "unit": "min",
-        "own_calculation": 258204,
-        "partner_calculation": 1479245.65,
-        "delta_calculation_percent": 472.9
+        "own_calculation": 1500,
+        "partner_calculation": 1500,
+        "delta_calculation_percent": 0,
+        "own_usage": 47215.000549316406,
+        "partner_usage": 251541.75146484375,
+        "delta_usage_abs": 204326.75091552734,
+        "delta_usage_percent": 0
       },
       {
-        "bearer": "SMS",
-        "unit": "#",
+        "service": "SMS",
+        "unit": "SMS",
         "own_calculation": 158469,
-        "partner_calculation": 645923.73,
-        "delta_calculation_percent": 307.6
+        "partner_calculation": 645923.75,
+        "delta_calculation_percent": -307.6026,
+        "own_usage": 51822.998046875,
+        "partner_usage": 214307.9111328125,
+        "delta_usage_abs": 162484.9130859375,
+        "delta_usage_percent": 0
       },
       {
-        "bearer": "Data",
-        "unit": "min",
+        "service": "Data",
+        "unit": "MB",
         "own_calculation": 1851840,
-        "partner_calculation": 2309216.06,
-        "delta_calculation_percent": 24.7
+        "partner_calculation": 2309216,
+        "delta_calculation_percent": -24.698462,
+        "own_usage": 123455.99877929688,
+        "partner_usage": 146285.451171875,
+        "delta_usage_abs": 22829.452392578125,
+        "delta_usage_percent": 0
       }
     ],
     "details": [
@@ -29,53 +41,70 @@
         "unit": "min",
         "own_calculation": 1500,
         "partner_calculation": 1500,
-        "delta_calculation_percent": 0
-      },
-      {
-        "service": "MOC EU",
-        "unit": "min",
-        "own_calculation": 256704,
-        "partner_calculation": 1477745.65,
-        "delta_calculation_percent": 475.66
+        "delta_calculation_percent": 0,
+        "own_usage": 25823.000427246094,
+        "partner_usage": 128396.28076171875,
+        "delta_usage_abs": 102573.28033447266,
+        "delta_usage_percent": 0
       },
       {
         "service": "SMSMO",
-        "unit": "min",
+        "unit": "SMS",
         "own_calculation": 158469,
-        "partner_calculation": 645923.73,
-        "delta_calculation_percent": 307.6
+        "partner_calculation": 645923.75,
+        "delta_calculation_percent": -307.6026,
+        "own_usage": 51822.998046875,
+        "partner_usage": 214307.9111328125,
+        "delta_usage_abs": 162484.9130859375,
+        "delta_usage_percent": 0
       },
       {
         "service": "VoLTE",
-        "unit": "min",
+        "unit": "MB",
         "own_calculation": 1851840,
-        "partner_calculation": 2309216.06,
-        "delta_calculation_percent": 24.7
+        "partner_calculation": 2309216,
+        "delta_calculation_percent": -24.698462,
+        "own_usage": 123455.99877929688,
+        "partner_usage": 146285.451171875,
+        "delta_usage_abs": 22829.452392578125,
+        "delta_usage_percent": 0
       }
     ]
   },
   "partnerPerspective": {
     "general_information": [
       {
-        "bearer": "Voice",
+        "service": "Voice",
         "unit": "min",
-        "own_calculation": 1849545,
-        "partner_calculation": 323990.7,
-        "delta_calculation_percent": -82.48
+        "own_calculation": 3000,
+        "partner_calculation": 3000,
+        "delta_calculation_percent": 0,
+        "own_usage": 47231.289123535156,
+        "partner_usage": 251455.00024414062,
+        "delta_usage_abs": 204223.71112060547,
+        "delta_usage_percent": 0
       },
       {
-        "bearer": "SMS",
-        "unit": "#",
+        "service": "SMS",
+        "unit": "SMS",
         "own_calculation": 5000,
         "partner_calculation": 5000,
-        "delta_calculation_percent": 0
+        "delta_calculation_percent": 0,
+        "own_usage": 51840.87927246094,
+        "partner_usage": 214234.00341796875,
+        "delta_usage_abs": 162393.1241455078,
+        "delta_usage_percent": 0
       },
       {
-        "bearer": "Data",
-        "unit": "min",
-        "own_calculation": 2319809.5,
-        "partner_calculation": 1852478.88,
-        "delta_calculation_percent": -20.15
+        "service": "Data",
+        "unit": "MB",
+        "own_calculation": 1852478.9,
+        "partner_calculation": 2319809.5,
+        "delta_calculation_percent": -25.227312,
+        "own_usage": 123498.59326171875,
+        "partner_usage": 146234.998046875,
+        "delta_usage_abs": 22736.40478515625,
+        "delta_usage_percent": 0
       }
     ],
     "details": [
@@ -84,28 +113,33 @@
         "unit": "min",
         "own_calculation": 3000,
         "partner_calculation": 3000,
-        "delta_calculation_percent": 0
-      },
-      {
-        "service": "MOC EU",
-        "unit": "min",
-        "own_calculation": 1846545,
-        "partner_calculation": 320990.7,
-        "delta_calculation_percent": -82.62
+        "delta_calculation_percent": 0,
+        "own_usage": 25831.908813476562,
+        "partner_usage": 128352.00048828125,
+        "delta_usage_abs": 102520.09167480469,
+        "delta_usage_percent": 0
       },
       {
         "service": "SMSMO",
-        "unit": "min",
+        "unit": "SMS",
         "own_calculation": 5000,
         "partner_calculation": 5000,
-        "delta_calculation_percent": 0
+        "delta_calculation_percent": 0,
+        "own_usage": 51840.87927246094,
+        "partner_usage": 214234.00341796875,
+        "delta_usage_abs": 162393.1241455078,
+        "delta_usage_percent": 0
       },
       {
         "service": "VoLTE",
-        "unit": "min",
-        "own_calculation": 2319809.5,
-        "partner_calculation": 1852478.88,
-        "delta_calculation_percent": -20.15
+        "unit": "MB",
+        "own_calculation": 1852478.9,
+        "partner_calculation": 2319809.5,
+        "delta_calculation_percent": -25.227312,
+        "own_usage": 123498.59326171875,
+        "partner_usage": 146234.998046875,
+        "delta_usage_abs": 22736.40478515625,
+        "delta_usage_percent": 0
       }
     ]
   }
