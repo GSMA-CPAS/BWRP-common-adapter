@@ -7,7 +7,7 @@ const logger = createLogger({
     format.splat(),
     format.simple(),
     format.timestamp(),
-    format.json(),
+    // format.json(),
   ),
   defaultMeta: { service: 'user-service' },
   transports: [

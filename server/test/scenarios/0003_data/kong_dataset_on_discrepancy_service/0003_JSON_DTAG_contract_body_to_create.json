@@ -1,0 +1,220 @@
+{
+  "version": "gsma-bwr-roaming-v1",
+  "metadata": {
+    "name": "20210322 - EXAMPLE - FH",
+    "type": null,
+    "authors": "Federico"
+  },
+  "framework": {
+    "contractParties": [
+      "DTAG",
+      "TMUS"
+    ],
+    "term": {
+      "start": "2019-01-01T00:00:00.000Z",
+      "end": "2019-12-31T00:00:00.000Z"
+    },
+    "payment": {
+      "taxesIncluded": false
+    },
+    "signers": {
+      "DTAG": [
+        {
+          "name": "aaa",
+          "role": "bbb"
+        }
+      ],
+      "TMUS": [
+        {
+          "name": "aaa",
+          "role": "bbb"
+        }
+      ]
+    },
+    "partyInformation": {
+      "DTAG": {
+        "contractCurrency": "EUR",
+        "defaultTadigCodes": [
+          "AAZTD",
+          "DEUD1"
+        ]
+      },
+      "TMUS": {
+        "contractCurrency": "EUR",
+        "defaultTadigCodes": [
+          "AAZOR",
+          "BELMO",
+          "FRAF1"
+        ]
+      }
+    }
+  },
+  "discounts": {
+    "DTAG": {
+      "condition": {
+        "kind": "Unconditional"
+      },
+      "serviceGroups": [
+        {
+          "homeTadigs": [
+            "BELMO",
+            "FRAF1"
+          ],
+          "visitorTadigs": [
+            "NLDDT",
+            "DEUD1"
+          ],
+          "services": [
+            {
+              "service": "SMS MO",
+              "includedInCommitment": true,
+              "usagePricing": {
+                "ratingPlan": {
+                  "rate": {
+                    "thresholds": [
+                      {
+                        "start": 0,
+                        "linearPrice": 0.01
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "service": "MOC Local",
+              "includedInCommitment": true,
+              "usagePricing": {
+                "ratingPlan": {
+                  "rate": {
+                    "thresholds": [
+                      {
+                        "start": 0,
+                        "linearPrice": 0.01
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "service": "GPRS",
+              "includedInCommitment": true,
+              "usagePricing": {
+                "ratingPlan": {
+                  "rate": {
+                    "thresholds": [
+                      {
+                        "start": 0,
+                        "linearPrice": 0.01
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "service": "MOC Back Home",
+              "includedInCommitment": true,
+              "usagePricing": {
+                "ratingPlan": {
+                  "rate": {
+                    "thresholds": [
+                      {
+                        "start": 0,
+                        "linearPrice": 0.04
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "TMUS": {
+      "condition": {
+        "kind": "Unconditional"
+      },
+      "serviceGroups": [
+        {
+          "homeTadigs": [
+            "NLDDT",
+            "DEUD1"
+          ],
+          "visitorTadigs": [
+            "BELMO",
+            "FRAF1"
+          ],
+          "services": [
+            {
+              "service": "SMS MO",
+              "includedInCommitment": true,
+              "usagePricing": {
+                "ratingPlan": {
+                  "rate": {
+                    "thresholds": [
+                      {
+                        "start": 0,
+                        "linearPrice": 0.01
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "service": "MOC Local",
+              "includedInCommitment": true,
+              "usagePricing": {
+                "ratingPlan": {
+                  "rate": {
+                    "thresholds": [
+                      {
+                        "start": 0,
+                        "linearPrice": 0.01
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "service": "GPRS",
+              "includedInCommitment": true,
+              "usagePricing": {
+                "ratingPlan": {
+                  "rate": {
+                    "thresholds": [
+                      {
+                        "start": 0,
+                        "linearPrice": 0.01
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "service": "MOC Back Home",
+              "includedInCommitment": true,
+              "usagePricing": {
+                "ratingPlan": {
+                  "rate": {
+                    "thresholds": [
+                      {
+                        "start": 0,
+                        "linearPrice": 0.04
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

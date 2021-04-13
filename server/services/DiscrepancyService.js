@@ -1,8 +1,15 @@
 /* eslint-disable no-unused-vars */
 const Service = require('./Service');
+const config = require('../config');
+
+
 const DiscrepancyMapper = require('../core/DiscrepancyMapper');
 const LocalStorageProvider = require('../providers/LocalStorageProvider');
-const DiscrepencyServiceProvider = require('../providers/StubDiscrepancyServiceProvider');
+
+
+const DiscrepencyServiceProvider = config.DISCREPANCY_SERVICE_URL ? require('../providers/DiscrepancyServiceProvider') : require('../providers/StubDiscrepancyServiceProvider');
+
+
 const discrepencyServiceProviderConnection = new DiscrepencyServiceProvider();
 const errorUtils = require('../utils/errorUtils');
 

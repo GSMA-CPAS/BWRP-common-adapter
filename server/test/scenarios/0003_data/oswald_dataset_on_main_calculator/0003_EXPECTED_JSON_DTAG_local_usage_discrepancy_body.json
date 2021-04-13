@@ -1,0 +1,97 @@
+{
+  "general_information": [
+    {
+      "service": "MOC",
+      "unit": "min",
+      "inbound_own_usage": 0,
+      "inbound_partner_usage": 0,
+      "inbound_discrepancy": 0,
+      "outbound_own_usage": 3910000,
+      "outbound_partner_usage": 4910000,
+      "outbound_discrepancy": 1000000
+    },
+    {
+      "service": "SMS",
+      "unit": "#",
+      "inbound_own_usage": 0,
+      "inbound_partner_usage": 0,
+      "inbound_discrepancy": 0,
+      "outbound_own_usage": 500000,
+      "outbound_partner_usage": 500000,
+      "outbound_discrepancy": 0
+    },
+    {
+      "service": "Data",
+      "unit": "min",
+      "inbound_own_usage": 0,
+      "inbound_partner_usage": 0,
+      "inbound_discrepancy": 0,
+      "outbound_own_usage": 90000000,
+      "outbound_partner_usage": 120000000,
+      "outbound_discrepancy": 30000000
+    }
+  ],
+  "inbound": [],
+  "outbound": [
+    {
+      "HTMN": "ALB1",
+      "VPMN": "BLA1",
+      "yearMonth": "202001",
+      "service": "SMSMO",
+      "own_usage": 500000,
+      "partner_usage": 500000,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "ALB1",
+      "VPMN": "BLA1",
+      "yearMonth": "202001",
+      "service": "GPRS",
+      "own_usage": 90000000,
+      "partner_usage": 120000000,
+      "delta_usage_abs": 30000000,
+      "delta_usage_percent": 33.33
+    },
+    {
+      "HTMN": "ALB1",
+      "VPMN": "BLA1",
+      "yearMonth": "202001",
+      "service": "MOC Local",
+      "own_usage": 1243000,
+      "partner_usage": 2243000,
+      "delta_usage_abs": 1000000,
+      "delta_usage_percent": 80.45
+    },
+    {
+      "HTMN": "ALB1",
+      "VPMN": "BLA1",
+      "yearMonth": "202001",
+      "service": "MOC Back Home",
+      "own_usage": 1857000,
+      "partner_usage": 1857000,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "ALB1",
+      "VPMN": "BLA1",
+      "yearMonth": "202001",
+      "service": "MOC RoW",
+      "own_usage": 810000,
+      "partner_usage": 810000,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "ALB1",
+      "VPMN": "BLA1",
+      "yearMonth": "202001",
+      "service": "MTC",
+      "own_usage": 0,
+      "partner_usage": 0,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 100
+    }
+  ]
+}

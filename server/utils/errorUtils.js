@@ -191,6 +191,42 @@ class ErrorUtils {
     }
   };
 
+  static ERROR_DISCREPANCY_SERVICE_RESPONSE_PARSING_ERROR = {
+    code: 500,
+    error: {
+      internalErrorCode: 3200,
+      message: 'Discrepancy Service response parsing error',
+      description: 'It\'s not possible to parse the Discrepancy Service response.'
+    }
+  };
+
+  static ERROR_DISCREPANCY_SERVICE_NO_RESPONSE = {
+    code: 500,
+    error: {
+      internalErrorCode: 3201,
+      message: 'No response received from Discrepancy Service',
+      description: 'The Discrepancy Service does not respond.'
+    }
+  };
+
+  static ERROR_DISCREPANCY_SERVICE_REQUEST_ERROR = {
+    code: 500,
+    error: {
+      internalErrorCode: 3202,
+      message: 'Discrepancy Service request error',
+      description: 'Something happened in setting up the Discrepancy Service request.'
+    }
+  };
+
+  static ERROR_DISCREPANCY_SERVICE_RESPONSE_UNEXPECTED_ERROR = {
+    code: 500,
+    error: {
+      internalErrorCode: 3204,
+      message: 'Discrepancy Service response error',
+      description: 'An unexpected response has been received from the Discrepancy Service.'
+    }
+  };
+
   static ERROR_BUSINESS_CREATE_USAGE_ON_CONTRACT_ONLY_ALLOWED_IN_STATE_SENT_SIGNED_OR_RECEIVED = {
     code: 422,
     error: {

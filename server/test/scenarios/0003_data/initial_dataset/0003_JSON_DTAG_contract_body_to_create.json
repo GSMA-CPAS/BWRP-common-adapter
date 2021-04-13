@@ -40,12 +40,12 @@
                   "rate": {
                     "thresholds": [
                       {
-                        "start": "0",
-                        "linearPrice": "5"
+                        "start": 0,
+                        "linearPrice": 5
                       },
                       {
-                        "start":"1500",
-                        "linearPrice":"3"
+                        "start": 1500,
+                        "linearPrice": 3
                       }
                     ]
                   }
@@ -59,8 +59,8 @@
                   "rate": {
                     "thresholds": [
                       {
-                        "start": "0",
-                        "fixedPrice": "1500"
+                        "start": 0,
+                        "fixedPrice": 1500
                       }
                     ]
                   }
@@ -74,17 +74,17 @@
                   "balancedRate": {
                     "thresholds": [
                       {
-                        "start": "0",
-                        "linearPrice": "15"
+                        "start": 0,
+                        "linearPrice": 15
                       }
                     ]
                   },
                   "unbalancedRate": {
                     "thresholds": [
                       {
-                        "start": "0",
-                        "linearPrice": "20",
-                        "fixedPrice": "1000"
+                        "start": 0,
+                        "linearPrice": 20,
+                        "fixedPrice": 1000
                       }
                     ]
                   }
@@ -98,8 +98,8 @@
                   "rate": {
                     "thresholds": [
                       {
-                        "start": "0",
-                        "linearPrice": "12"
+                        "start": 0,
+                        "linearPrice": 12
                       }
                     ]
                   }
@@ -126,8 +126,8 @@
                   "rate": {
                     "thresholds": [
                       {
-                        "start": "0",
-                        "fixedPrice": "5000"
+                        "start": 0,
+                        "fixedPrice": 5000
                       }
                     ]
                   }
@@ -141,8 +141,8 @@
                   "rate": {
                     "thresholds": [
                       {
-                        "start": "0",
-                        "fixedPrice": "3000"
+                        "start": 0,
+                        "fixedPrice": 3000
                       }
                     ]
                   }
@@ -156,17 +156,17 @@
                   "balancedRate": {
                     "thresholds": [
                       {
-                        "start": "0",
-                        "linearPrice": "15"
+                        "start": 0,
+                        "linearPrice": 15
                       }
                     ]
                   },
                   "unbalancedRate": {
                     "thresholds": [
                       {
-                        "start": "0",
-                        "linearPrice": "20.5",
-                        "fixedPrice":"1000"
+                        "start": 0,
+                        "linearPrice": 20.5,
+                        "fixedPrice": 1000
                       }
                     ]
                   }
@@ -180,8 +180,8 @@
                   "rate": {
                     "thresholds": [
                       {
-                        "start": "0",
-                        "linearPrice": "15"
+                        "start": 0,
+                        "linearPrice": 15
                       }
                     ]
                   }

@@ -1,0 +1,112 @@
+{
+  "homePerspective": {
+    "general_information": [
+      {
+        "bearer": "Voice",
+        "unit": "min",
+        "own_calculation": 54958.84,
+        "partner_calculation": 54958.84,
+        "delta_calculation_percent": 0
+      },
+      {
+        "bearer": "SMS",
+        "unit": "#",
+        "own_calculation": 53479.75,
+        "partner_calculation": 53479.75,
+        "delta_calculation_percent": 0
+      },
+      {
+        "bearer": "Data",
+        "unit": "min",
+        "own_calculation": 158534.71,
+        "partner_calculation": 158534.71,
+        "delta_calculation_percent": 0
+      }
+    ],
+    "details": [
+      {
+        "service": "MOC Back Home",
+        "unit": "min",
+        "own_calculation": 41350.6,
+        "partner_calculation": 41350.6,
+        "delta_calculation_percent": 0
+      },
+      {
+        "service": "MOC Local",
+        "unit": "min",
+        "own_calculation": 13608.24,
+        "partner_calculation": 13608.24,
+        "delta_calculation_percent": 0
+      },
+      {
+        "service": "SMSMO",
+        "unit": "min",
+        "own_calculation": 53479.75,
+        "partner_calculation": 53479.75,
+        "delta_calculation_percent": 0
+      },
+      {
+        "service": "GPRS",
+        "unit": "min",
+        "own_calculation": 158534.71,
+        "partner_calculation": 158534.71,
+        "delta_calculation_percent": 0
+      }
+    ]
+  },
+  "partnerPerspective": {
+    "general_information": [
+      {
+        "bearer": "Voice",
+        "unit": "min",
+        "own_calculation": 31911.59,
+        "partner_calculation": 31911.59,
+        "delta_calculation_percent": 0
+      },
+      {
+        "bearer": "SMS",
+        "unit": "#",
+        "own_calculation": 66966.06,
+        "partner_calculation": 66966.06,
+        "delta_calculation_percent": 0
+      },
+      {
+        "bearer": "Data",
+        "unit": "min",
+        "own_calculation": 299827.45,
+        "partner_calculation": 299827.45,
+        "delta_calculation_percent": 0
+      }
+    ],
+    "details": [
+      {
+        "service": "MOC Back Home",
+        "unit": "min",
+        "own_calculation": 24386.79,
+        "partner_calculation": 24386.79,
+        "delta_calculation_percent": 0
+      },
+      {
+        "service": "MOC Local",
+        "unit": "min",
+        "own_calculation": 7524.8,
+        "partner_calculation": 7524.8,
+        "delta_calculation_percent": 0
+      },
+      {
+        "service": "SMSMO",
+        "unit": "min",
+        "own_calculation": 66966.06,
+        "partner_calculation": 66966.06,
+        "delta_calculation_percent": 0
+      },
+      {
+        "service": "GPRS",
+        "unit": "min",
+        "own_calculation": 299827.45,
+        "partner_calculation": 299827.45,
+        "delta_calculation_percent": 0
+      }
+    ]
+  }
+}

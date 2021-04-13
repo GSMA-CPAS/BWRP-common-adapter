@@ -98,10 +98,10 @@ describe(`Tests PUT ${route} API OK`, function() {
             homeTadig: 'TMUS',
             visitorTadig: 'DTAG',
             service: 'SMS MO',
-            usage: '5208.2115',
+            usage: 5208.2115,
             units: 'SMS',
-            charges: '104.16423',
-            taxes: '0',
+            charges: 104.16423,
+            taxes: 0,
             currency: 'EUR'
           },
           {
@@ -109,10 +109,10 @@ describe(`Tests PUT ${route} API OK`, function() {
             homeTadig: 'TMUS',
             visitorTadig: 'DTAG',
             service: 'MOC Back Home',
-            usage: '2149.896',
+            usage: 2149.896,
             units: 'min',
-            charges: '322.4844',
-            taxes: '0',
+            charges: 322.4844,
+            taxes: 0,
             currency: 'EUR'
           }
         ],
@@ -122,10 +122,10 @@ describe(`Tests PUT ${route} API OK`, function() {
             homeTadig: 'DTAG',
             visitorTadig: 'TMUS',
             service: 'SMS MO',
-            usage: '21530.517',
+            usage: 21530.517,
             units: 'SMS',
-            charges: '430.61034',
-            taxes: '0',
+            charges: 430.61034,
+            taxes: 0,
             currency: 'EUR'
           },
           {
@@ -133,10 +133,10 @@ describe(`Tests PUT ${route} API OK`, function() {
             homeTadig: 'DTAG',
             visitorTadig: 'TMUS',
             service: 'GPRS',
-            usage: '14696.6175',
+            usage: 14696.6175,
             units: 'MB',
-            charges: '4408.98525',
-            taxes: '0',
+            charges: 4408.98525,
+            taxes: 0,
             currency: 'EUR'
           }
         ]
@@ -160,10 +160,10 @@ describe(`Tests PUT ${route} API OK`, function() {
             homeTadig: 'TMUS',
             visitorTadig: 'DTAG',
             service: 'SMS MO',
-            usage: '5208.2115',
+            usage: 5208.2115,
             units: 'SMS',
-            charges: '104.16423',
-            taxes: '0',
+            charges: 104.16423,
+            taxes: 0,
             currency: 'EUR'
           },
           {
@@ -171,10 +171,10 @@ describe(`Tests PUT ${route} API OK`, function() {
             homeTadig: 'TMUS',
             visitorTadig: 'DTAG',
             service: 'MOC Back Home',
-            usage: '2149.896',
+            usage: 2149.896,
             units: 'min',
-            charges: '322.4844',
-            taxes: '0',
+            charges: 322.4844,
+            taxes: 0,
             currency: 'EUR'
           }
         ],
@@ -184,10 +184,10 @@ describe(`Tests PUT ${route} API OK`, function() {
             homeTadig: 'DTAG',
             visitorTadig: 'TMUS',
             service: 'SMS MO',
-            usage: '21530.517',
+            usage: 21530.517,
             units: 'SMS',
-            charges: '430.61034',
-            taxes: '0',
+            charges: 430.61034,
+            taxes: 0,
             currency: 'EUR'
           },
           {
@@ -195,10 +195,10 @@ describe(`Tests PUT ${route} API OK`, function() {
             homeTadig: 'DTAG',
             visitorTadig: 'TMUS',
             service: 'GPRS',
-            usage: '14696.6175',
+            usage: 14696.6175,
             units: 'MB',
-            charges: '4408.98525',
-            taxes: '0',
+            charges: 4408.98525,
+            taxes: 0,
             currency: 'EUR'
           }
         ]
@@ -302,15 +302,15 @@ describe(`Tests PUT ${route} API OK`, function() {
                 md5hash: 'd8a67bdb368d59766b362265530d32e8'
               },
               intermediateResults: [
-                {yearMonth: 202001, service: 'SMSMO', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: '9000', type: 'inbound'},
-                {yearMonth: 202001, service: 'SMSMO', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '4500', type: 'outbound'},
-                {yearMonth: 202001, service: 'GPRS', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '1', type: 'outbound'},
-                {yearMonth: 202001, service: 'GPRS', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '2500', type: 'inbound'},
-                {yearMonth: 202001, service: 'MOC Back Home', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '25', type: 'inbound'},
-                {yearMonth: 202001, service: 'MOC Back Home', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '500', type: 'outbound'},
-                {yearMonth: 202001, service: 'MOC Local', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '5', type: 'inbound'},
-                {yearMonth: 202002, service: 'MOC Local', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '6', type: 'outbound'},
-                {yearMonth: 202002, service: 'MOC', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '2500', type: 'outbound'}
+                {yearMonth: 202001, service: 'SMSMO', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: 9000, type: 'inbound'},
+                {yearMonth: 202001, service: 'SMSMO', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 4500, type: 'outbound'},
+                {yearMonth: 202001, service: 'GPRS', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 1, type: 'outbound'},
+                {yearMonth: 202001, service: 'GPRS', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 2500, type: 'inbound'},
+                {yearMonth: 202001, service: 'MOC Back Home', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 25, type: 'inbound'},
+                {yearMonth: 202001, service: 'MOC Back Home', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 500, type: 'outbound'},
+                {yearMonth: 202001, service: 'MOC Local', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 5, type: 'inbound'},
+                {yearMonth: 202002, service: 'MOC Local', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 6, type: 'outbound'},
+                {yearMonth: 202002, service: 'MOC', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 2500, type: 'outbound'}
               ]
             },
             undefined
@@ -347,22 +347,21 @@ describe(`Tests PUT ${route} API OK`, function() {
             expect(response.body.header).to.have.property('type', 'settlement');
 
             expect(response.body).to.have.property('body').that.is.an('object');
-            expect(Object.keys(response.body.body)).have.members(['generatedResult', 'usage']);
-            expect(response.body.body.usage.body).to.deep.include(usageMinimumData.body);
-            expect(response.body.body.generatedResult).to.have.property('fromDate', 202001);
-            expect(response.body.body.generatedResult).to.have.property('toDate', 202002);
-            expect(response.body.body.generatedResult).to.have.property('calculationEngineVersion', '0.0.0');
-            expect(response.body.body.generatedResult).to.have.property('inbound');
-            expect(response.body.body.generatedResult.inbound).to.have.property('tax').that.deep.equals({rate: ''});
-            expect(response.body.body.generatedResult.inbound).to.have.property('currency');
-            expect(response.body.body.generatedResult.inbound).to.have.property('services');
+            // remove generatedResult field and set this generatedResult in body
+            expect(response.body.body).to.have.property('fromDate', 202001);
+            expect(response.body.body).to.have.property('toDate', 202002);
+            expect(response.body.body).to.have.property('calculationEngineVersion', '0.0.0');
+            expect(response.body.body).to.have.property('inbound');
+            expect(response.body.body.inbound).to.have.property('tax').that.deep.equals({rate: ''});
+            expect(response.body.body.inbound).to.have.property('currency');
+            expect(response.body.body.inbound).to.have.property('services');
             const expectedInboundServices = {voice: {MOC: {local: 5, backHome: 25, international: 0, premium: 0, ROW: 0, EEA: 0, EU: 0, satellite: 0, specialDestinations: 0, videoTelephony: 0}, MTC: 0}, SMS: {MO: 9000, MT: 0}, data: [{name: 'GPRS', value: 2500}, {name: 'M2M', value: 0}, {name: 'NB-IOT', value: 0}, {name: 'LTE-M', value: 0}, {name: 'VoLTE', value: 0}, {name: 'ViLTE', value: 0}, {name: 'signalling', value: 0}], access: {networkAccess: 0}};
-            expect(response.body.body.generatedResult.inbound).to.have.property('services').that.deep.equals(expectedInboundServices);
-            expect(response.body.body.generatedResult.outbound).to.have.property('tax').that.deep.equals({rate: ''});
-            expect(response.body.body.generatedResult.outbound).to.have.property('currency');
-            expect(response.body.body.generatedResult.outbound).to.have.property('services');
+            expect(response.body.body.inbound).to.have.property('services').that.deep.equals(expectedInboundServices);
+            expect(response.body.body.outbound).to.have.property('tax').that.deep.equals({rate: ''});
+            expect(response.body.body.outbound).to.have.property('currency');
+            expect(response.body.body.outbound).to.have.property('services');
             const expectedOutboundServices = {voice: {MOC: {local: 6, backHome: 500, international: 0, premium: 0, ROW: 0, EEA: 0, EU: 0, satellite: 0, specialDestinations: 0, videoTelephony: 0}, MTC: 0}, SMS: {MO: 4500, MT: 0}, data: [{name: 'GPRS', value: 1}, {name: 'M2M', value: 0}, {name: 'NB-IOT', value: 0}, {name: 'LTE-M', value: 0}, {name: 'VoLTE', value: 0}, {name: 'ViLTE', value: 0}, {name: 'signalling', value: 0}], access: {networkAccess: 0}};
-            expect(response.body.body.generatedResult.outbound).to.have.property('services').that.deep.equals(expectedOutboundServices);
+            expect(response.body.body.outbound).to.have.property('services').that.deep.equals(expectedOutboundServices);
             expect(calculationServiceNock.isDone(), 'Unconsumed nock error').to.be.true;
 
             done();
@@ -404,15 +403,15 @@ describe(`Tests PUT ${route} API OK`, function() {
                 md5hash: 'd8a67bdb368d59766b362265530d32e8'
               },
               intermediateResults: [
-                {service: 'SMSMO', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: '9000', type: 'inbound'},
-                {service: 'SMSMO', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '4500', type: 'outbound'},
-                {service: 'GPRS', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '1', type: 'outbound'},
-                {service: 'GPRS', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '2500', type: 'inbound'},
-                {service: 'MOC Back Home', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '25', type: 'inbound'},
-                {service: 'MOC Back Home', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '500', type: 'outbound'},
-                {service: 'MOC Local', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '5', type: 'inbound'},
-                {service: 'MOC Local', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '6', type: 'outbound'},
-                {service: 'MOC', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '2500', type: 'outbound'}
+                {service: 'SMSMO', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: 9000, type: 'inbound'},
+                {service: 'SMSMO', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 4500, type: 'outbound'},
+                {service: 'GPRS', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 1, type: 'outbound'},
+                {service: 'GPRS', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 2500, type: 'inbound'},
+                {service: 'MOC Back Home', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 25, type: 'inbound'},
+                {service: 'MOC Back Home', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 500, type: 'outbound'},
+                {service: 'MOC Local', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 5, type: 'inbound'},
+                {service: 'MOC Local', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 6, type: 'outbound'},
+                {service: 'MOC', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 2500, type: 'outbound'}
               ]
             },
             undefined
@@ -479,22 +478,21 @@ describe(`Tests PUT ${route} API OK`, function() {
             expect(response.body.blockchainRef).to.have.property('txId', 'b70cef323c0d3b56d44e9b31f16a11cba8dbbdd55c1d255b65f3fd2b3eadf8bb');
             expect(response.body.blockchainRef).to.have.property('timestamp').that.is.a('string');
             expect(response.body).to.have.property('body').that.is.an('object');
-            expect(Object.keys(response.body.body)).have.members(['generatedResult', 'usage']);
-            expect(response.body.body.usage.body).to.deep.include(usageMinimumData.body);
-            expect(response.body.body.generatedResult).to.have.property('fromDate', null);
-            expect(response.body.body.generatedResult).to.have.property('toDate', null);
-            expect(response.body.body.generatedResult).to.have.property('calculationEngineVersion', '0.0.0');
-            expect(response.body.body.generatedResult).to.have.property('inbound');
-            expect(response.body.body.generatedResult.inbound).to.have.property('tax').that.deep.equals({rate: ''});
-            expect(response.body.body.generatedResult.inbound).to.have.property('currency');
-            expect(response.body.body.generatedResult.inbound).to.have.property('services');
+            // remove generatedResult field and set this generatedResult in body
+            expect(response.body.body).to.have.property('fromDate', null);
+            expect(response.body.body).to.have.property('toDate', null);
+            expect(response.body.body).to.have.property('calculationEngineVersion', '0.0.0');
+            expect(response.body.body).to.have.property('inbound');
+            expect(response.body.body.inbound).to.have.property('tax').that.deep.equals({rate: ''});
+            expect(response.body.body.inbound).to.have.property('currency');
+            expect(response.body.body.inbound).to.have.property('services');
             const expectedInboundServices = {voice: {MOC: {local: 5, backHome: 25, international: 0, premium: 0, ROW: 0, EEA: 0, EU: 0, satellite: 0, specialDestinations: 0, videoTelephony: 0}, MTC: 0}, SMS: {MO: 9000, MT: 0}, data: [{name: 'GPRS', value: 2500}, {name: 'M2M', value: 0}, {name: 'NB-IOT', value: 0}, {name: 'LTE-M', value: 0}, {name: 'VoLTE', value: 0}, {name: 'ViLTE', value: 0}, {name: 'signalling', value: 0}], access: {networkAccess: 0}};
-            expect(response.body.body.generatedResult.inbound).to.have.property('services').that.deep.equals(expectedInboundServices);
-            expect(response.body.body.generatedResult.outbound).to.have.property('tax').that.deep.equals({rate: ''});
-            expect(response.body.body.generatedResult.outbound).to.have.property('currency');
-            expect(response.body.body.generatedResult.outbound).to.have.property('services');
+            expect(response.body.body.inbound).to.have.property('services').that.deep.equals(expectedInboundServices);
+            expect(response.body.body.outbound).to.have.property('tax').that.deep.equals({rate: ''});
+            expect(response.body.body.outbound).to.have.property('currency');
+            expect(response.body.body.outbound).to.have.property('services');
             const expectedOutboundServices = {voice: {MOC: {local: 6, backHome: 500, international: 0, premium: 0, ROW: 0, EEA: 0, EU: 0, satellite: 0, specialDestinations: 0, videoTelephony: 0}, MTC: 0}, SMS: {MO: 4500, MT: 0}, data: [{name: 'GPRS', value: 1}, {name: 'M2M', value: 0}, {name: 'NB-IOT', value: 0}, {name: 'LTE-M', value: 0}, {name: 'VoLTE', value: 0}, {name: 'ViLTE', value: 0}, {name: 'signalling', value: 0}], access: {networkAccess: 0}};
-            expect(response.body.body.generatedResult.outbound).to.have.property('services').that.deep.equals(expectedOutboundServices);
+            expect(response.body.body.outbound).to.have.property('services').that.deep.equals(expectedOutboundServices);
 
             expect(calculationServiceNock.isDone(), 'Unconsumed nock error').to.be.true;
             expect(blockchainAdapterNock.isDone(), 'Unconsumed nock error').to.be.true;
@@ -538,15 +536,15 @@ describe(`Tests PUT ${route} API OK`, function() {
                 md5hash: 'd8a67bdb368d59766b362265530d32e8'
               },
               intermediateResults: [
-                {service: 'SMSMO', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: '9000', type: 'inbound'},
-                {service: 'SMSMO', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '4500', type: 'outbound'},
-                {service: 'GPRS', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '1', type: 'outbound'},
-                {service: 'GPRS', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '2500', type: 'inbound'},
-                {service: 'MOC Back Home', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '25', type: 'inbound'},
-                {service: 'MOC Back Home', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '500', type: 'outbound'},
-                {service: 'MOC Local', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '5', type: 'inbound'},
-                {service: 'MOC Local', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '6', type: 'outbound'},
-                {service: 'MOC', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '2500', type: 'outbound'}
+                {service: 'SMSMO', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: 9000, type: 'inbound'},
+                {service: 'SMSMO', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 4500, type: 'outbound'},
+                {service: 'GPRS', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 1, type: 'outbound'},
+                {service: 'GPRS', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 2500, type: 'inbound'},
+                {service: 'MOC Back Home', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 25, type: 'inbound'},
+                {service: 'MOC Back Home', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 500, type: 'outbound'},
+                {service: 'MOC Local', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 5, type: 'inbound'},
+                {service: 'MOC Local', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 6, type: 'outbound'},
+                {service: 'MOC', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 2500, type: 'outbound'}
               ]
             },
             undefined
@@ -595,22 +593,21 @@ describe(`Tests PUT ${route} API OK`, function() {
                 expect(response.body.header).to.have.property('type', 'settlement');
 
                 expect(response.body).to.have.property('body').that.is.an('object');
-                expect(Object.keys(response.body.body)).have.members(['generatedResult', 'usage']);
-                expect(response.body.body.usage.body).to.deep.include(usageSentData1.body);
-                expect(response.body.body.generatedResult).to.have.property('fromDate', null);
-                expect(response.body.body.generatedResult).to.have.property('toDate', null);
-                expect(response.body.body.generatedResult).to.have.property('calculationEngineVersion', '0.0.0');
-                expect(response.body.body.generatedResult).to.have.property('inbound');
-                expect(response.body.body.generatedResult.inbound).to.have.property('tax').that.deep.equals({rate: ''});
-                expect(response.body.body.generatedResult.inbound).to.have.property('currency');
-                expect(response.body.body.generatedResult.inbound).to.have.property('services');
+                // remove generatedResult field and set this generatedResult in body
+                expect(response.body.body).to.have.property('fromDate', null);
+                expect(response.body.body).to.have.property('toDate', null);
+                expect(response.body.body).to.have.property('calculationEngineVersion', '0.0.0');
+                expect(response.body.body).to.have.property('inbound');
+                expect(response.body.body.inbound).to.have.property('tax').that.deep.equals({rate: ''});
+                expect(response.body.body.inbound).to.have.property('currency');
+                expect(response.body.body.inbound).to.have.property('services');
                 const expectedInboundServices = {voice: {MOC: {local: 5, backHome: 25, international: 0, premium: 0, ROW: 0, EEA: 0, EU: 0, satellite: 0, specialDestinations: 0, videoTelephony: 0}, MTC: 0}, SMS: {MO: 9000, MT: 0}, data: [{name: 'GPRS', value: 2500}, {name: 'M2M', value: 0}, {name: 'NB-IOT', value: 0}, {name: 'LTE-M', value: 0}, {name: 'VoLTE', value: 0}, {name: 'ViLTE', value: 0}, {name: 'signalling', value: 0}], access: {networkAccess: 0}};
-                expect(response.body.body.generatedResult.inbound).to.have.property('services').that.deep.equals(expectedInboundServices);
-                expect(response.body.body.generatedResult.outbound).to.have.property('tax').that.deep.equals({rate: ''});
-                expect(response.body.body.generatedResult.outbound).to.have.property('currency');
-                expect(response.body.body.generatedResult.outbound).to.have.property('services');
+                expect(response.body.body.inbound).to.have.property('services').that.deep.equals(expectedInboundServices);
+                expect(response.body.body.outbound).to.have.property('tax').that.deep.equals({rate: ''});
+                expect(response.body.body.outbound).to.have.property('currency');
+                expect(response.body.body.outbound).to.have.property('services');
                 const expectedOutboundServices = {voice: {MOC: {local: 6, backHome: 500, international: 0, premium: 0, ROW: 0, EEA: 0, EU: 0, satellite: 0, specialDestinations: 0, videoTelephony: 0}, MTC: 0}, SMS: {MO: 4500, MT: 0}, data: [{name: 'GPRS', value: 1}, {name: 'M2M', value: 0}, {name: 'NB-IOT', value: 0}, {name: 'LTE-M', value: 0}, {name: 'VoLTE', value: 0}, {name: 'ViLTE', value: 0}, {name: 'signalling', value: 0}], access: {networkAccess: 0}};
-                expect(response.body.body.generatedResult.outbound).to.have.property('services').that.deep.equals(expectedOutboundServices);
+                expect(response.body.body.outbound).to.have.property('services').that.deep.equals(expectedOutboundServices);
                 expect(calculationServiceNock.isDone(), 'Unconsumed nock error').to.be.true;
 
                 chai.request(testsUtils.getServer())
@@ -664,15 +661,15 @@ describe(`Tests PUT ${route} API OK`, function() {
                 md5hash: 'd8a67bdb368d59766b362265530d32e8'
               },
               intermediateResults: [
-                {service: 'SMSMO', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: '9000', type: 'inbound'},
-                {service: 'SMSMO', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '4500', type: 'outbound'},
-                {service: 'GPRS', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '1', type: 'outbound'},
-                {service: 'GPRS', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '2500', type: 'inbound'},
-                {service: 'MOC Back Home', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '25', type: 'inbound'},
-                {service: 'MOC Back Home', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '500', type: 'outbound'},
-                {service: 'MOC Local', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '5', type: 'inbound'},
-                {service: 'MOC Local', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '6', type: 'outbound'},
-                {service: 'MOC', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: '2500', type: 'outbound'}
+                {service: 'SMSMO', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: 9000, type: 'inbound'},
+                {service: 'SMSMO', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 4500, type: 'outbound'},
+                {service: 'GPRS', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 1, type: 'outbound'},
+                {service: 'GPRS', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 2500, type: 'inbound'},
+                {service: 'MOC Back Home', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 25, type: 'inbound'},
+                {service: 'MOC Back Home', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 500, type: 'outbound'},
+                {service: 'MOC Local', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 5, type: 'inbound'},
+                {service: 'MOC Local', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 6, type: 'outbound'},
+                {service: 'MOC', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 2500, type: 'outbound'}
               ]
             },
             undefined
@@ -723,22 +720,21 @@ describe(`Tests PUT ${route} API OK`, function() {
                 expect(response.body.header).to.have.property('type', 'settlement');
 
                 expect(response.body).to.have.property('body').that.is.an('object');
-                expect(Object.keys(response.body.body)).have.members(['generatedResult', 'usage']);
-                expect(response.body.body.usage.body).to.deep.include(usageSentData2.body);
-                expect(response.body.body.generatedResult).to.have.property('fromDate', null);
-                expect(response.body.body.generatedResult).to.have.property('toDate', null);
-                expect(response.body.body.generatedResult).to.have.property('calculationEngineVersion', '0.0.0');
-                expect(response.body.body.generatedResult).to.have.property('inbound');
-                expect(response.body.body.generatedResult.inbound).to.have.property('tax').that.deep.equals({rate: ''});
-                expect(response.body.body.generatedResult.inbound).to.have.property('currency');
-                expect(response.body.body.generatedResult.inbound).to.have.property('services');
+                // remove generatedResult field and set this generatedResult in body
+                expect(response.body.body).to.have.property('fromDate', null);
+                expect(response.body.body).to.have.property('toDate', null);
+                expect(response.body.body).to.have.property('calculationEngineVersion', '0.0.0');
+                expect(response.body.body).to.have.property('inbound');
+                expect(response.body.body.inbound).to.have.property('tax').that.deep.equals({rate: ''});
+                expect(response.body.body.inbound).to.have.property('currency');
+                expect(response.body.body.inbound).to.have.property('services');
                 const expectedInboundServices = {voice: {MOC: {local: 5, backHome: 25, international: 0, premium: 0, ROW: 0, EEA: 0, EU: 0, satellite: 0, specialDestinations: 0, videoTelephony: 0}, MTC: 0}, SMS: {MO: 9000, MT: 0}, data: [{name: 'GPRS', value: 2500}, {name: 'M2M', value: 0}, {name: 'NB-IOT', value: 0}, {name: 'LTE-M', value: 0}, {name: 'VoLTE', value: 0}, {name: 'ViLTE', value: 0}, {name: 'signalling', value: 0}], access: {networkAccess: 0}};
-                expect(response.body.body.generatedResult.inbound).to.have.property('services').that.deep.equals(expectedInboundServices);
-                expect(response.body.body.generatedResult.outbound).to.have.property('tax').that.deep.equals({rate: ''});
-                expect(response.body.body.generatedResult.outbound).to.have.property('currency');
-                expect(response.body.body.generatedResult.outbound).to.have.property('services');
+                expect(response.body.body.inbound).to.have.property('services').that.deep.equals(expectedInboundServices);
+                expect(response.body.body.outbound).to.have.property('tax').that.deep.equals({rate: ''});
+                expect(response.body.body.outbound).to.have.property('currency');
+                expect(response.body.body.outbound).to.have.property('services');
                 const expectedOutboundServices = {voice: {MOC: {local: 6, backHome: 500, international: 0, premium: 0, ROW: 0, EEA: 0, EU: 0, satellite: 0, specialDestinations: 0, videoTelephony: 0}, MTC: 0}, SMS: {MO: 4500, MT: 0}, data: [{name: 'GPRS', value: 1}, {name: 'M2M', value: 0}, {name: 'NB-IOT', value: 0}, {name: 'LTE-M', value: 0}, {name: 'VoLTE', value: 0}, {name: 'ViLTE', value: 0}, {name: 'signalling', value: 0}], access: {networkAccess: 0}};
-                expect(response.body.body.generatedResult.outbound).to.have.property('services').that.deep.equals(expectedOutboundServices);
+                expect(response.body.body.outbound).to.have.property('services').that.deep.equals(expectedOutboundServices);
                 expect(calculationServiceNock.isDone(), 'Unconsumed nock error').to.be.true;
 
                 chai.request(testsUtils.getServer())

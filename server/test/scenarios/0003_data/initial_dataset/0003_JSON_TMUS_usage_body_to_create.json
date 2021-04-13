@@ -8,10 +8,10 @@
       "homeTadig": "AAZOR",
       "visitorTadig": "AAZTD",
       "service": "SMSMO",
-      "usage": "5182.3",
+      "usage": 5182.3,
       "units": "SMS",
-      "charges": "103.646",
-      "taxes": "0",
+      "charges": 103.646,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -19,10 +19,10 @@
       "homeTadig": "AAZOR",
       "visitorTadig": "AAZTD",
       "service": "MOC EU",
-      "usage": "2139.2",
+      "usage": 2139.2,
       "units": "min",
-      "charges": "320.88",
-      "taxes": "0",
+      "charges": 320.88,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -30,10 +30,10 @@
       "homeTadig": "AAZOR",
       "visitorTadig": "AAZTD",
       "service": "MOC Local",
-      "usage": "2582.3",
+      "usage": 2582.3,
       "units": "min",
-      "charges": "464.814",
-      "taxes": "0",
+      "charges": 464.814,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -41,10 +41,10 @@
       "homeTadig": "AAZOR",
       "visitorTadig": "AAZTD",
       "service": "VoLTE",
-      "usage": "12345.6",
+      "usage": 12345.6,
       "units": "MB",
-      "charges": "3703.68",
-      "taxes": "0",
+      "charges": 3703.68,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -52,10 +52,10 @@
       "homeTadig": "AAZOR",
       "visitorTadig": "AAZTD",
       "service": "MOC EU",
-      "usage": "1069.6",
+      "usage": 1069.6,
       "units": "min",
-      "charges": "160.44",
-      "taxes": "0",
+      "charges": 160.44,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -63,10 +63,10 @@
       "homeTadig": "AAZOR",
       "visitorTadig": "AAZTD",
       "service": "VoLTE",
-      "usage": "6172.8",
+      "usage": 6172.8,
       "units": "MB",
-      "charges": "1851.84",
-      "taxes": "0",
+      "charges": 1851.84,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -74,10 +74,10 @@
       "homeTadig": "AAZOR",
       "visitorTadig": "AAZTD",
       "service": "SMSMO",
-      "usage": "2591.15",
+      "usage": 2591.15,
       "units": "SMS",
-      "charges": "51.823",
-      "taxes": "0",
+      "charges": 51.823,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -85,10 +85,10 @@
       "homeTadig": "AAZOR",
       "visitorTadig": "AAZTD",
       "service": "MOC Local",
-      "usage": "1291.15",
+      "usage": 1291.15,
       "units": "min",
-      "charges": "232.407",
-      "taxes": "0",
+      "charges": 232.407,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -96,10 +96,10 @@
       "homeTadig": "AAZOR",
       "visitorTadig": "AAZTD",
       "service": "VoLTE",
-      "usage": "3703.68",
+      "usage": 3703.68,
       "units": "MB",
-      "charges": "1111.104",
-      "taxes": "0",
+      "charges": 1111.104,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -107,10 +107,10 @@
       "homeTadig": "AAZOR",
       "visitorTadig": "AAZTD",
       "service": "MOC EU",
-      "usage": "641.76",
+      "usage": 641.76,
       "units": "min",
-      "charges": "96.264",
-      "taxes": "0",
+      "charges": 96.264,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -118,10 +118,10 @@
       "homeTadig": "AAZOR",
       "visitorTadig": "AAZTD",
       "service": "MOC Local",
-      "usage": "774.69",
+      "usage": 774.69,
       "units": "min",
-      "charges": "139.4442",
-      "taxes": "0",
+      "charges": 139.4442,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -129,10 +129,10 @@
       "homeTadig": "AAZOR",
       "visitorTadig": "AAZTD",
       "service": "SMSMO",
-      "usage": "1554.69",
+      "usage": 1554.69,
       "units": "SMS",
-      "charges": "31.0938",
-      "taxes": "0",
+      "charges": 31.0938,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -140,10 +140,10 @@
       "homeTadig": "AAZOR",
       "visitorTadig": "AAZTD",
       "service": "VoLTE",
-      "usage": "6172.8",
+      "usage": 6172.8,
       "units": "MB",
-      "charges": "1851.84",
-      "taxes": "0",
+      "charges": 1851.84,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -151,10 +151,10 @@
       "homeTadig": "AAZOR",
       "visitorTadig": "AAZTD",
       "service": "SMSMO",
-      "usage": "2591.15",
+      "usage": 2591.15,
       "units": "SMS",
-      "charges": "51.823",
-      "taxes": "0",
+      "charges": 51.823,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -162,10 +162,10 @@
       "homeTadig": "AAZOR",
       "visitorTadig": "AAZTD",
       "service": "MOC EU",
-      "usage": "1069.6",
+      "usage": 1069.6,
       "units": "min",
-      "charges": "160.44",
-      "taxes": "0",
+      "charges": 160.44,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -173,10 +173,10 @@
       "homeTadig": "AAZOR",
       "visitorTadig": "AAZTD",
       "service": "MOC Local",
-      "usage": "1291.15",
+      "usage": 1291.15,
       "units": "min",
-      "charges": "232.407",
-      "taxes": "0",
+      "charges": 232.407,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -184,10 +184,10 @@
       "homeTadig": "AAZOR",
       "visitorTadig": "AAZTD",
       "service": "SMSMO",
-      "usage": "3109.38",
+      "usage": 3109.38,
       "units": "SMS",
-      "charges": "62.1876",
-      "taxes": "0",
+      "charges": 62.1876,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -195,10 +195,10 @@
       "homeTadig": "AAZOR",
       "visitorTadig": "AAZTD",
       "service": "MOC EU",
-      "usage": "1283.52",
+      "usage": 1283.52,
       "units": "min",
-      "charges": "192.528",
-      "taxes": "0",
+      "charges": 192.528,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -206,10 +206,10 @@
       "homeTadig": "AAZOR",
       "visitorTadig": "AAZTD",
       "service": "VoLTE",
-      "usage": "7407.36",
+      "usage": 7407.36,
       "units": "MB",
-      "charges": "2222.208",
-      "taxes": "0",
+      "charges": 2222.208,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -217,10 +217,10 @@
       "homeTadig": "AAZOR",
       "visitorTadig": "AAZTD",
       "service": "MOC Local",
-      "usage": "1549.38",
+      "usage": 1549.38,
       "units": "min",
-      "charges": "278.8884",
-      "taxes": "0",
+      "charges": 278.8884,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -228,10 +228,10 @@
       "homeTadig": "AAZOR",
       "visitorTadig": "AAZTD",
       "service": "SMSMO",
-      "usage": "4145.84",
+      "usage": 4145.84,
       "units": "SMS",
-      "charges": "82.9168",
-      "taxes": "0",
+      "charges": 82.9168,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -239,10 +239,10 @@
       "homeTadig": "AAZOR",
       "visitorTadig": "AAZTD",
       "service": "MOC EU",
-      "usage": "1711.36",
+      "usage": 1711.36,
       "units": "min",
-      "charges": "256.704",
-      "taxes": "0",
+      "charges": 256.704,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -250,10 +250,10 @@
       "homeTadig": "AAZOR",
       "visitorTadig": "AAZTD",
       "service": "MOC Local",
-      "usage": "2065.84",
+      "usage": 2065.84,
       "units": "min",
-      "charges": "371.8512",
-      "taxes": "0",
+      "charges": 371.8512,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -261,10 +261,10 @@
       "homeTadig": "AAZOR",
       "visitorTadig": "AAZTD",
       "service": "VoLTE",
-      "usage": "9876.48",
+      "usage": 9876.48,
       "units": "MB",
-      "charges": "2962.944",
-      "taxes": "0",
+      "charges": 2962.944,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -272,10 +272,10 @@
       "homeTadig": "AAZOR",
       "visitorTadig": "AAZTD",
       "service": "VoLTE",
-      "usage": "14814.72",
+      "usage": 14814.72,
       "units": "MB",
-      "charges": "4444.416",
-      "taxes": "0",
+      "charges": 4444.416,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -283,10 +283,10 @@
       "homeTadig": "AAZOR",
       "visitorTadig": "AAZTD",
       "service": "MOC Local",
-      "usage": "3098.76",
+      "usage": 3098.76,
       "units": "min",
-      "charges": "557.7768",
-      "taxes": "0",
+      "charges": 557.7768,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -294,10 +294,10 @@
       "homeTadig": "AAZOR",
       "visitorTadig": "AAZTD",
       "service": "SMSMO",
-      "usage": "6218.76",
+      "usage": 6218.76,
       "units": "SMS",
-      "charges": "124.3752",
-      "taxes": "0",
+      "charges": 124.3752,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -305,10 +305,10 @@
       "homeTadig": "AAZOR",
       "visitorTadig": "AAZTD",
       "service": "MOC EU",
-      "usage": "2567.04",
+      "usage": 2567.04,
       "units": "min",
-      "charges": "385.056",
-      "taxes": "0",
+      "charges": 385.056,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -316,10 +316,10 @@
       "homeTadig": "AAZOR",
       "visitorTadig": "AAZTD",
       "service": "VoLTE",
-      "usage": "13580.16",
+      "usage": 13580.16,
       "units": "MB",
-      "charges": "4074.048",
-      "taxes": "0",
+      "charges": 4074.048,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -327,10 +327,10 @@
       "homeTadig": "AAZOR",
       "visitorTadig": "AAZTD",
       "service": "MOC EU",
-      "usage": "2353.12",
+      "usage": 2353.12,
       "units": "min",
-      "charges": "352.968",
-      "taxes": "0",
+      "charges": 352.968,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -338,10 +338,10 @@
       "homeTadig": "AAZOR",
       "visitorTadig": "AAZTD",
       "service": "MOC Local",
-      "usage": "2840.53",
+      "usage": 2840.53,
       "units": "min",
-      "charges": "511.2954",
-      "taxes": "0",
+      "charges": 511.2954,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -349,10 +349,10 @@
       "homeTadig": "AAZOR",
       "visitorTadig": "AAZTD",
       "service": "SMSMO",
-      "usage": "5700.53",
+      "usage": 5700.53,
       "units": "SMS",
-      "charges": "114.0106",
-      "taxes": "0",
+      "charges": 114.0106,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -360,10 +360,10 @@
       "homeTadig": "AAZOR",
       "visitorTadig": "AAZTD",
       "service": "VoLTE",
-      "usage": "12345.6",
+      "usage": 12345.6,
       "units": "MB",
-      "charges": "3703.68",
-      "taxes": "0",
+      "charges": 3703.68,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -371,10 +371,10 @@
       "homeTadig": "AAZOR",
       "visitorTadig": "AAZTD",
       "service": "MOC Local",
-      "usage": "2582.3",
+      "usage": 2582.3,
       "units": "min",
-      "charges": "464.814",
-      "taxes": "0",
+      "charges": 464.814,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -382,10 +382,10 @@
       "homeTadig": "AAZOR",
       "visitorTadig": "AAZTD",
       "service": "SMSMO",
-      "usage": "5182.3",
+      "usage": 5182.3,
       "units": "SMS",
-      "charges": "103.646",
-      "taxes": "0",
+      "charges": 103.646,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -393,10 +393,10 @@
       "homeTadig": "AAZOR",
       "visitorTadig": "AAZTD",
       "service": "MOC EU",
-      "usage": "2139.2",
+      "usage": 2139.2,
       "units": "min",
-      "charges": "320.88",
-      "taxes": "0",
+      "charges": 320.88,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -404,10 +404,10 @@
       "homeTadig": "AAZOR",
       "visitorTadig": "AAZTD",
       "service": "VoLTE",
-      "usage": "11111.04",
+      "usage": 11111.04,
       "units": "MB",
-      "charges": "3333.312",
-      "taxes": "0",
+      "charges": 3333.312,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -415,10 +415,10 @@
       "homeTadig": "AAZOR",
       "visitorTadig": "AAZTD",
       "service": "MOC Local",
-      "usage": "2324.07",
+      "usage": 2324.07,
       "units": "min",
-      "charges": "418.3326",
-      "taxes": "0",
+      "charges": 418.3326,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -426,10 +426,10 @@
       "homeTadig": "AAZOR",
       "visitorTadig": "AAZTD",
       "service": "MOC EU",
-      "usage": "1925.28",
+      "usage": 1925.28,
       "units": "min",
-      "charges": "288.792",
-      "taxes": "0",
+      "charges": 288.792,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -437,10 +437,10 @@
       "homeTadig": "AAZOR",
       "visitorTadig": "AAZTD",
       "service": "SMSMO",
-      "usage": "4664.07",
+      "usage": 4664.07,
       "units": "SMS",
-      "charges": "93.2814",
-      "taxes": "0",
+      "charges": 93.2814,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -448,10 +448,10 @@
       "homeTadig": "AAZOR",
       "visitorTadig": "AAZTD",
       "service": "SMSMO",
-      "usage": "5182.3",
+      "usage": 5182.3,
       "units": "SMS",
-      "charges": "103.646",
-      "taxes": "0",
+      "charges": 103.646,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -459,10 +459,10 @@
       "homeTadig": "AAZOR",
       "visitorTadig": "AAZTD",
       "service": "MOC EU",
-      "usage": "2139.2",
+      "usage": 2139.2,
       "units": "min",
-      "charges": "320.88",
-      "taxes": "0",
+      "charges": 320.88,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -470,10 +470,10 @@
       "homeTadig": "AAZOR",
       "visitorTadig": "AAZTD",
       "service": "MOC Local",
-      "usage": "2582.3",
+      "usage": 2582.3,
       "units": "min",
-      "charges": "464.814",
-      "taxes": "0",
+      "charges": 464.814,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -481,10 +481,10 @@
       "homeTadig": "AAZOR",
       "visitorTadig": "AAZTD",
       "service": "VoLTE",
-      "usage": "12345.6",
+      "usage": 12345.6,
       "units": "MB",
-      "charges": "3703.68",
-      "taxes": "0",
+      "charges": 3703.68,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -492,10 +492,10 @@
       "homeTadig": "AAZOR",
       "visitorTadig": "AAZTD",
       "service": "VoLTE",
-      "usage": "13580.16",
+      "usage": 13580.16,
       "units": "MB",
-      "charges": "4074.048",
-      "taxes": "0",
+      "charges": 4074.048,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -503,10 +503,10 @@
       "homeTadig": "AAZOR",
       "visitorTadig": "AAZTD",
       "service": "MOC Local",
-      "usage": "2840.53",
+      "usage": 2840.53,
       "units": "min",
-      "charges": "511.2954",
-      "taxes": "0",
+      "charges": 511.2954,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -514,10 +514,10 @@
       "homeTadig": "AAZOR",
       "visitorTadig": "AAZTD",
       "service": "SMSMO",
-      "usage": "5700.53",
+      "usage": 5700.53,
       "units": "SMS",
-      "charges": "114.0106",
-      "taxes": "0",
+      "charges": 114.0106,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -525,10 +525,10 @@
       "homeTadig": "AAZOR",
       "visitorTadig": "AAZTD",
       "service": "MOC EU",
-      "usage": "2353.12",
+      "usage": 2353.12,
       "units": "min",
-      "charges": "352.968",
-      "taxes": "0",
+      "charges": 352.968,
+      "taxes": 0,
       "currency": "EUR"
     }
   ],
@@ -538,10 +538,10 @@
       "homeTadig": "AAZTD",
       "visitorTadig": "AAZOR",
       "service": "SMSMO",
-      "usage": "21423.4",
+      "usage": 21423.4,
       "units": "SMS",
-      "charges": "428.468",
-      "taxes": "0",
+      "charges": 428.468,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -549,10 +549,10 @@
       "homeTadig": "AAZTD",
       "visitorTadig": "AAZOR",
       "service": "VoLTE",
-      "usage": "14623.5",
+      "usage": 14623.5,
       "units": "MB",
-      "charges": "4387.05",
-      "taxes": "0",
+      "charges": 4387.05,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -560,10 +560,10 @@
       "homeTadig": "AAZTD",
       "visitorTadig": "AAZOR",
       "service": "MOC Local",
-      "usage": "12835.2",
+      "usage": 12835.2,
       "units": "min",
-      "charges": "2310.336",
-      "taxes": "0",
+      "charges": 2310.336,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -571,10 +571,10 @@
       "homeTadig": "AAZTD",
       "visitorTadig": "AAZOR",
       "service": "MOC EU",
-      "usage": "12310.3",
+      "usage": 12310.3,
       "units": "min",
-      "charges": "1846.545",
-      "taxes": "0",
+      "charges": 1846.545,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -582,10 +582,10 @@
       "homeTadig": "AAZTD",
       "visitorTadig": "AAZOR",
       "service": "SMSMO",
-      "usage": "10711.7",
+      "usage": 10711.7,
       "units": "SMS",
-      "charges": "214.234",
-      "taxes": "0",
+      "charges": 214.234,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -593,10 +593,10 @@
       "homeTadig": "AAZTD",
       "visitorTadig": "AAZOR",
       "service": "VoLTE",
-      "usage": "7311.75",
+      "usage": 7311.75,
       "units": "MB",
-      "charges": "2193.525",
-      "taxes": "0",
+      "charges": 2193.525,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -604,10 +604,10 @@
       "homeTadig": "AAZTD",
       "visitorTadig": "AAZOR",
       "service": "MOC Local",
-      "usage": "6417.6",
+      "usage": 6417.6,
       "units": "min",
-      "charges": "1155.168",
-      "taxes": "0",
+      "charges": 1155.168,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -615,10 +615,10 @@
       "homeTadig": "AAZTD",
       "visitorTadig": "AAZOR",
       "service": "MOC EU",
-      "usage": "6155.15",
+      "usage": 6155.15,
       "units": "min",
-      "charges": "923.2725",
-      "taxes": "0",
+      "charges": 923.2725,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -626,10 +626,10 @@
       "homeTadig": "AAZTD",
       "visitorTadig": "AAZOR",
       "service": "VoLTE",
-      "usage": "4387.05",
+      "usage": 4387.05,
       "units": "MB",
-      "charges": "1316.115",
-      "taxes": "0",
+      "charges": 1316.115,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -637,10 +637,10 @@
       "homeTadig": "AAZTD",
       "visitorTadig": "AAZOR",
       "service": "MOC Local",
-      "usage": "3850.56",
+      "usage": 3850.56,
       "units": "min",
-      "charges": "693.1008",
-      "taxes": "0",
+      "charges": 693.1008,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -648,10 +648,10 @@
       "homeTadig": "AAZTD",
       "visitorTadig": "AAZOR",
       "service": "MOC EU",
-      "usage": "3693.09",
+      "usage": 3693.09,
       "units": "min",
-      "charges": "553.9635",
-      "taxes": "0",
+      "charges": 553.9635,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -659,10 +659,10 @@
       "homeTadig": "AAZTD",
       "visitorTadig": "AAZOR",
       "service": "SMSMO",
-      "usage": "6427.02",
+      "usage": 6427.02,
       "units": "SMS",
-      "charges": "128.5404",
-      "taxes": "0",
+      "charges": 128.5404,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -670,10 +670,10 @@
       "homeTadig": "AAZTD",
       "visitorTadig": "AAZOR",
       "service": "VoLTE",
-      "usage": "7311.75",
+      "usage": 7311.75,
       "units": "MB",
-      "charges": "2193.525",
-      "taxes": "0",
+      "charges": 2193.525,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -681,10 +681,10 @@
       "homeTadig": "AAZTD",
       "visitorTadig": "AAZOR",
       "service": "MOC Local",
-      "usage": "6417.6",
+      "usage": 6417.6,
       "units": "min",
-      "charges": "1155.168",
-      "taxes": "0",
+      "charges": 1155.168,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -692,10 +692,10 @@
       "homeTadig": "AAZTD",
       "visitorTadig": "AAZOR",
       "service": "MOC EU",
-      "usage": "6155.15",
+      "usage": 6155.15,
       "units": "min",
-      "charges": "923.2725",
-      "taxes": "0",
+      "charges": 923.2725,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -703,10 +703,10 @@
       "homeTadig": "AAZTD",
       "visitorTadig": "AAZOR",
       "service": "SMSMO",
-      "usage": "10711.7",
+      "usage": 10711.7,
       "units": "SMS",
-      "charges": "214.234",
-      "taxes": "0",
+      "charges": 214.234,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -714,10 +714,10 @@
       "homeTadig": "AAZTD",
       "visitorTadig": "AAZOR",
       "service": "VoLTE",
-      "usage": "8774.1",
+      "usage": 8774.1,
       "units": "MB",
-      "charges": "2632.23",
-      "taxes": "0",
+      "charges": 2632.23,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -725,10 +725,10 @@
       "homeTadig": "AAZTD",
       "visitorTadig": "AAZOR",
       "service": "MOC Local",
-      "usage": "7701.12",
+      "usage": 7701.12,
       "units": "min",
-      "charges": "1386.2016",
-      "taxes": "0",
+      "charges": 1386.2016,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -736,10 +736,10 @@
       "homeTadig": "AAZTD",
       "visitorTadig": "AAZOR",
       "service": "SMSMO",
-      "usage": "12854.04",
+      "usage": 12854.04,
       "units": "SMS",
-      "charges": "257.0808",
-      "taxes": "0",
+      "charges": 257.0808,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -747,10 +747,10 @@
       "homeTadig": "AAZTD",
       "visitorTadig": "AAZOR",
       "service": "MOC EU",
-      "usage": "7386.18",
+      "usage": 7386.18,
       "units": "min",
-      "charges": "1107.927",
-      "taxes": "0",
+      "charges": 1107.927,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -758,10 +758,10 @@
       "homeTadig": "AAZTD",
       "visitorTadig": "AAZOR",
       "service": "MOC Local",
-      "usage": "10268.16",
+      "usage": 10268.16,
       "units": "min",
-      "charges": "1848.2688",
-      "taxes": "0",
+      "charges": 1848.2688,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -769,10 +769,10 @@
       "homeTadig": "AAZTD",
       "visitorTadig": "AAZOR",
       "service": "SMSMO",
-      "usage": "17138.72",
+      "usage": 17138.72,
       "units": "SMS",
-      "charges": "342.7744",
-      "taxes": "0",
+      "charges": 342.7744,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -780,10 +780,10 @@
       "homeTadig": "AAZTD",
       "visitorTadig": "AAZOR",
       "service": "MOC EU",
-      "usage": "9848.24",
+      "usage": 9848.24,
       "units": "min",
-      "charges": "1477.236",
-      "taxes": "0",
+      "charges": 1477.236,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -791,10 +791,10 @@
       "homeTadig": "AAZTD",
       "visitorTadig": "AAZOR",
       "service": "VoLTE",
-      "usage": "11698.8",
+      "usage": 11698.8,
       "units": "MB",
-      "charges": "3509.64",
-      "taxes": "0",
+      "charges": 3509.64,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -802,10 +802,10 @@
       "homeTadig": "AAZTD",
       "visitorTadig": "AAZOR",
       "service": "MOC Local",
-      "usage": "15402.24",
+      "usage": 15402.24,
       "units": "min",
-      "charges": "2772.4032",
-      "taxes": "0",
+      "charges": 2772.4032,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -813,10 +813,10 @@
       "homeTadig": "AAZTD",
       "visitorTadig": "AAZOR",
       "service": "SMSMO",
-      "usage": "25708.08",
+      "usage": 25708.08,
       "units": "SMS",
-      "charges": "514.1616",
-      "taxes": "0",
+      "charges": 514.1616,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -824,10 +824,10 @@
       "homeTadig": "AAZTD",
       "visitorTadig": "AAZOR",
       "service": "VoLTE",
-      "usage": "17548.2",
+      "usage": 17548.2,
       "units": "MB",
-      "charges": "5264.46",
-      "taxes": "0",
+      "charges": 5264.46,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -835,10 +835,10 @@
       "homeTadig": "AAZTD",
       "visitorTadig": "AAZOR",
       "service": "MOC EU",
-      "usage": "14772.36",
+      "usage": 14772.36,
       "units": "min",
-      "charges": "2215.854",
-      "taxes": "0",
+      "charges": 2215.854,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -846,10 +846,10 @@
       "homeTadig": "AAZTD",
       "visitorTadig": "AAZOR",
       "service": "MOC Local",
-      "usage": "14118.72",
+      "usage": 14118.72,
       "units": "min",
-      "charges": "2541.3696",
-      "taxes": "0",
+      "charges": 2541.3696,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -857,10 +857,10 @@
       "homeTadig": "AAZTD",
       "visitorTadig": "AAZOR",
       "service": "SMSMO",
-      "usage": "23565.74",
+      "usage": 23565.74,
       "units": "SMS",
-      "charges": "471.3148",
-      "taxes": "0",
+      "charges": 471.3148,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -868,10 +868,10 @@
       "homeTadig": "AAZTD",
       "visitorTadig": "AAZOR",
       "service": "VoLTE",
-      "usage": "16085.85",
+      "usage": 16085.85,
       "units": "MB",
-      "charges": "4825.755",
-      "taxes": "0",
+      "charges": 4825.755,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -879,10 +879,10 @@
       "homeTadig": "AAZTD",
       "visitorTadig": "AAZOR",
       "service": "MOC EU",
-      "usage": "13541.33",
+      "usage": 13541.33,
       "units": "min",
-      "charges": "2031.1995",
-      "taxes": "0",
+      "charges": 2031.1995,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -890,10 +890,10 @@
       "homeTadig": "AAZTD",
       "visitorTadig": "AAZOR",
       "service": "VoLTE",
-      "usage": "14623.5",
+      "usage": 14623.5,
       "units": "MB",
-      "charges": "4387.05",
-      "taxes": "0",
+      "charges": 4387.05,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -901,10 +901,10 @@
       "homeTadig": "AAZTD",
       "visitorTadig": "AAZOR",
       "service": "MOC Local",
-      "usage": "12835.2",
+      "usage": 12835.2,
       "units": "min",
-      "charges": "2310.336",
-      "taxes": "0",
+      "charges": 2310.336,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -912,10 +912,10 @@
       "homeTadig": "AAZTD",
       "visitorTadig": "AAZOR",
       "service": "MOC EU",
-      "usage": "12310.3",
+      "usage": 12310.3,
       "units": "min",
-      "charges": "1846.545",
-      "taxes": "0",
+      "charges": 1846.545,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -923,10 +923,10 @@
       "homeTadig": "AAZTD",
       "visitorTadig": "AAZOR",
       "service": "SMSMO",
-      "usage": "21423.4",
+      "usage": 21423.4,
       "units": "SMS",
-      "charges": "428.468",
-      "taxes": "0",
+      "charges": 428.468,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -934,10 +934,10 @@
       "homeTadig": "AAZTD",
       "visitorTadig": "AAZOR",
       "service": "SMSMO",
-      "usage": "19281.06",
+      "usage": 19281.06,
       "units": "SMS",
-      "charges": "385.6212",
-      "taxes": "0",
+      "charges": 385.6212,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -945,10 +945,10 @@
       "homeTadig": "AAZTD",
       "visitorTadig": "AAZOR",
       "service": "MOC EU",
-      "usage": "11079.27",
+      "usage": 11079.27,
       "units": "min",
-      "charges": "1661.8905",
-      "taxes": "0",
+      "charges": 1661.8905,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -956,10 +956,10 @@
       "homeTadig": "AAZTD",
       "visitorTadig": "AAZOR",
       "service": "MOC Local",
-      "usage": "11551.68",
+      "usage": 11551.68,
       "units": "min",
-      "charges": "2079.3024",
-      "taxes": "0",
+      "charges": 2079.3024,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -967,10 +967,10 @@
       "homeTadig": "AAZTD",
       "visitorTadig": "AAZOR",
       "service": "VoLTE",
-      "usage": "13161.15",
+      "usage": 13161.15,
       "units": "MB",
-      "charges": "3948.345",
-      "taxes": "0",
+      "charges": 3948.345,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -978,10 +978,10 @@
       "homeTadig": "AAZTD",
       "visitorTadig": "AAZOR",
       "service": "MOC EU",
-      "usage": "12310.3",
+      "usage": 12310.3,
       "units": "min",
-      "charges": "1846.545",
-      "taxes": "0",
+      "charges": 1846.545,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -989,10 +989,10 @@
       "homeTadig": "AAZTD",
       "visitorTadig": "AAZOR",
       "service": "VoLTE",
-      "usage": "14623.5",
+      "usage": 14623.5,
       "units": "MB",
-      "charges": "4387.05",
-      "taxes": "0",
+      "charges": 4387.05,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -1000,10 +1000,10 @@
       "homeTadig": "AAZTD",
       "visitorTadig": "AAZOR",
       "service": "MOC Local",
-      "usage": "12835.2",
+      "usage": 12835.2,
       "units": "min",
-      "charges": "2310.336",
-      "taxes": "0",
+      "charges": 2310.336,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -1011,10 +1011,10 @@
       "homeTadig": "AAZTD",
       "visitorTadig": "AAZOR",
       "service": "SMSMO",
-      "usage": "21423.4",
+      "usage": 21423.4,
       "units": "SMS",
-      "charges": "428.468",
-      "taxes": "0",
+      "charges": 428.468,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -1022,10 +1022,10 @@
       "homeTadig": "AAZTD",
       "visitorTadig": "AAZOR",
       "service": "MOC Local",
-      "usage": "14118.72",
+      "usage": 14118.72,
       "units": "min",
-      "charges": "2541.3696",
-      "taxes": "0",
+      "charges": 2541.3696,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -1033,10 +1033,10 @@
       "homeTadig": "AAZTD",
       "visitorTadig": "AAZOR",
       "service": "MOC EU",
-      "usage": "13541.33",
+      "usage": 13541.33,
       "units": "min",
-      "charges": "2031.1995",
-      "taxes": "0",
+      "charges": 2031.1995,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -1044,10 +1044,10 @@
       "homeTadig": "AAZTD",
       "visitorTadig": "AAZOR",
       "service": "VoLTE",
-      "usage": "16085.85",
+      "usage": 16085.85,
       "units": "MB",
-      "charges": "4825.755",
-      "taxes": "0",
+      "charges": 4825.755,
+      "taxes": 0,
       "currency": "EUR"
     },
     {
@@ -1055,10 +1055,10 @@
       "homeTadig": "AAZTD",
       "visitorTadig": "AAZOR",
       "service": "SMSMO",
-      "usage": "23565.74",
+      "usage": 23565.74,
       "units": "SMS",
-      "charges": "471.3148",
-      "taxes": "0",
+      "charges": 471.3148,
+      "taxes": 0,
       "currency": "EUR"
     }
   ]
