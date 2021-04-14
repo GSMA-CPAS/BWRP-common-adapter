@@ -3,11 +3,11 @@
     {
       "service": "MOC",
       "unit": "min",
-      "inbound_own_usage": 2394588.5,
-      "inbound_partner_usage": 2394588.5,
+      "inbound_own_usage": 2394588.64,
+      "inbound_partner_usage": 2394588.64,
       "inbound_discrepancy": 0,
-      "outbound_own_usage": 1362150,
-      "outbound_partner_usage": 1362150,
+      "outbound_own_usage": 1362150.24,
+      "outbound_partner_usage": 1362150.24,
       "outbound_discrepancy": 0
     },
     {
@@ -23,15 +23,55 @@
     {
       "service": "Data",
       "unit": "MB",
-      "inbound_own_usage": 15853471,
-      "inbound_partner_usage": 15853471,
+      "inbound_own_usage": 15853470.63,
+      "inbound_partner_usage": 15853470.63,
       "inbound_discrepancy": 0,
-      "outbound_own_usage": 29982748,
-      "outbound_partner_usage": 29982748,
+      "outbound_own_usage": 29982744.950000007,
+      "outbound_partner_usage": 29982744.950000007,
       "outbound_discrepancy": 0
     }
   ],
   "inbound": [
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "202001",
+      "service": "GPRS",
+      "own_usage": 26189.49,
+      "partner_usage": 26189.49,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "202001",
+      "service": "GPRS",
+      "own_usage": 245800.74,
+      "partner_usage": 245800.74,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "NLDDT",
+      "VPMN": "BELMO",
+      "yearMonth": "202001",
+      "service": "GPRS",
+      "own_usage": 1364814.7,
+      "partner_usage": 1364814.7,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "NLDDT",
+      "VPMN": "FRAF1",
+      "yearMonth": "202001",
+      "service": "GPRS",
+      "own_usage": 111649.89,
+      "partner_usage": 111649.89,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
     {
       "HTMN": "DEUD1",
       "VPMN": "BELMO",
@@ -69,46 +109,6 @@
       "service": "MOC Local",
       "own_usage": 49622.17,
       "partner_usage": 49622.17,
-      "delta_usage_abs": 0,
-      "delta_usage_percent": 0
-    },
-    {
-      "HTMN": "DEUD1",
-      "VPMN": "BELMO",
-      "yearMonth": "202001",
-      "service": "GPRS",
-      "own_usage": 26189.49,
-      "partner_usage": 26189.49,
-      "delta_usage_abs": 0,
-      "delta_usage_percent": 0
-    },
-    {
-      "HTMN": "DEUD1",
-      "VPMN": "FRAF1",
-      "yearMonth": "202001",
-      "service": "GPRS",
-      "own_usage": 245800.73,
-      "partner_usage": 245800.73,
-      "delta_usage_abs": 0,
-      "delta_usage_percent": 0
-    },
-    {
-      "HTMN": "NLDDT",
-      "VPMN": "BELMO",
-      "yearMonth": "202001",
-      "service": "GPRS",
-      "own_usage": 1364814.8,
-      "partner_usage": 1364814.8,
-      "delta_usage_abs": 0,
-      "delta_usage_percent": 0
-    },
-    {
-      "HTMN": "NLDDT",
-      "VPMN": "FRAF1",
-      "yearMonth": "202001",
-      "service": "GPRS",
-      "own_usage": 111649.89,
-      "partner_usage": 111649.89,
       "delta_usage_abs": 0,
       "delta_usage_percent": 0
     },
@@ -198,6 +198,46 @@
       "HTMN": "BELMO",
       "VPMN": "DEUD1",
       "yearMonth": "202001",
+      "service": "GPRS",
+      "own_usage": 110271.61,
+      "partner_usage": 110271.61,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "NLDDT",
+      "yearMonth": "202001",
+      "service": "GPRS",
+      "own_usage": 27191.91,
+      "partner_usage": 27191.91,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "202001",
+      "service": "GPRS",
+      "own_usage": 2692407.33,
+      "partner_usage": 2692407.33,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "NLDDT",
+      "yearMonth": "202001",
+      "service": "GPRS",
+      "own_usage": 472784.89,
+      "partner_usage": 472784.89,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "202001",
       "service": "MOC Local",
       "own_usage": 16607.95,
       "partner_usage": 16607.95,
@@ -231,46 +271,6 @@
       "service": "MOC Local",
       "own_usage": 25443.81,
       "partner_usage": 25443.81,
-      "delta_usage_abs": 0,
-      "delta_usage_percent": 0
-    },
-    {
-      "HTMN": "BELMO",
-      "VPMN": "DEUD1",
-      "yearMonth": "202001",
-      "service": "GPRS",
-      "own_usage": 110271.61,
-      "partner_usage": 110271.61,
-      "delta_usage_abs": 0,
-      "delta_usage_percent": 0
-    },
-    {
-      "HTMN": "BELMO",
-      "VPMN": "NLDDT",
-      "yearMonth": "202001",
-      "service": "GPRS",
-      "own_usage": 27191.91,
-      "partner_usage": 27191.91,
-      "delta_usage_abs": 0,
-      "delta_usage_percent": 0
-    },
-    {
-      "HTMN": "FRAF1",
-      "VPMN": "DEUD1",
-      "yearMonth": "202001",
-      "service": "GPRS",
-      "own_usage": 2692407.2,
-      "partner_usage": 2692407.2,
-      "delta_usage_abs": 0,
-      "delta_usage_percent": 0
-    },
-    {
-      "HTMN": "FRAF1",
-      "VPMN": "NLDDT",
-      "yearMonth": "202001",
-      "service": "GPRS",
-      "own_usage": 472784.88,
-      "partner_usage": 472784.88,
       "delta_usage_abs": 0,
       "delta_usage_percent": 0
     },
