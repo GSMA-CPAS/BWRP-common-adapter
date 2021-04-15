@@ -1,0 +1,325 @@
+{
+  "version": "gsma-bwr-roaming-v1",
+  "metadata": {
+    "name": "vf-dt-test2",
+    "authors": "Elira Klosi"
+  },
+  "framework": {
+    "contractParties": [
+      "DTSTMSP",
+      "DTAGMSP"
+    ],
+    "term": {
+      "start": "2020-01-01T00:00:00.000Z",
+      "end": "2020-12-31T00:00:00.000Z"
+    },
+    "payment": {
+      "taxesIncluded": false
+    },
+    "partyInformation": {
+      "DTSTMSP": {
+        "contractCurrency": "EUR",
+        "defaultTadigCodes": [
+          "AAZVF",
+          "CZECM",
+          "DEUD2",
+          "ESPAT",
+          "ESPVV",
+          "GRCCT",
+          "GRCPF",
+          "HUNVR",
+          "ITAOM",
+          "NLDLT",
+          "IRLEC",
+          "PRTTL",
+          "ROMMF"
+        ]
+      },
+      "DTAGMSP": {
+        "contractCurrency": "EUR",
+        "defaultTadigCodes": [
+          "AUTMM",
+          "AUTTR",
+          "CZERM",
+          "DEUD1",
+          "AAZTD",
+          "GRCCO",
+          "HRVCN",
+          "HUNH2",
+          "NLDPN",
+          "NLDDT",
+          "ROMCS",
+          "POL02",
+          "SVKET"
+        ]
+      }
+    }
+  },
+  "discounts": {
+    "DTSTMSP": {
+      "condition": {
+        "kind": "Deal Revenue Commitment",
+        "commitment": {
+          "value": 30000000,
+          "currency": "EUR",
+          "includingTaxes": false
+        }
+      },
+      "serviceGroups": [
+        {
+          "homeTadigs": [
+            "AUTMM",
+            "AUTTR",
+            "CZERM",
+            "DEUD1",
+            "AAZTD",
+            "GRCCO",
+            "HRVCN",
+            "HUNH2",
+            "NLDPN",
+            "NLDDT",
+            "ROMCS",
+            "POL02",
+            "SVKET"
+          ],
+          "visitorTadigs": [
+            "AAZVF",
+            "CZECM",
+            "DEUD2",
+            "ESPAT",
+            "ESPVV",
+            "GRCCT",
+            "GRCPF",
+            "HUNVR",
+            "ITAOM",
+            "NLDLT",
+            "IRLEC",
+            "PRTTL",
+            "ROMMF"
+          ],
+          "services": [
+            {
+              "service": "MOC Back Home",
+              "includedInCommitment": true,
+              "usagePricing": {
+                "unit": "Min",
+                "ratingPlan": {
+                  "kind": "Linear rate",
+                  "rate": {
+                    "linearPrice": 0.08
+                  }
+                }
+              }
+            },
+            {
+              "service": "MOC Local",
+              "includedInCommitment": true,
+              "usagePricing": {
+                "unit": "Min",
+                "ratingPlan": {
+                  "kind": "Linear rate",
+                  "rate": {
+                    "linearPrice": 0.08
+                  }
+                }
+              }
+            },
+            {
+              "service": "MOC International",
+              "includedInCommitment": true,
+              "usagePricing": {
+                "unit": "Min",
+                "ratingPlan": {
+                  "kind": "Linear rate",
+                  "rate": {
+                    "linearPrice": 1
+                  }
+                }
+              }
+            },
+            {
+              "service": "MOC Special Destinations",
+              "includedInCommitment": true,
+              "usagePricing": {
+                "unit": "Min",
+                "ratingPlan": {
+                  "kind": "Linear rate"
+                }
+              }
+            },
+            {
+              "service": "SMSMO",
+              "includedInCommitment": true,
+              "usagePricing": {
+                "unit": "SMS",
+                "ratingPlan": {
+                  "kind": "Linear rate",
+                  "rate": {
+                    "linearPrice": 0.012
+                  }
+                }
+              }
+            },
+            {
+              "service": "MTC",
+              "includedInCommitment": false,
+              "usagePricing": {
+                "unit": "Min",
+                "ratingPlan": {
+                  "kind": "Linear rate"
+                }
+              }
+            },
+            {
+              "service": "GPRS",
+              "includedInCommitment": true,
+              "usagePricing": {
+                "unit": "MB",
+                "ratingPlan": {
+                  "kind": "Linear rate",
+                  "rate": {
+                    "linearPrice": 0.012
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "DTAGMSP": {
+      "condition": {
+        "kind": "Deal Revenue Commitment",
+        "commitment": {
+          "value": 30000000,
+          "currency": "EUR",
+          "includingTaxes": false
+        }
+      },
+      "serviceGroups": [
+        {
+          "homeTadigs": [
+            "AAZVF",
+            "CZECM",
+            "DEUD2",
+            "ESPAT",
+            "ESPVV",
+            "GRCCT",
+            "GRCPF",
+            "HUNVR",
+            "ITAOM",
+            "NLDLT",
+            "IRLEC",
+            "PRTTL",
+            "ROMMF"
+          ],
+          "visitorTadigs": [
+            "AUTMM",
+            "AUTTR",
+            "CZERM",
+            "DEUD1",
+            "AAZTD",
+            "GRCCO",
+            "HRVCN",
+            "HUNH2",
+            "NLDPN",
+            "NLDDT",
+            "ROMCS",
+            "POL02",
+            "SVKET"
+          ],
+          "services": [
+            {
+              "service": "MOC Back Home",
+              "includedInCommitment": true,
+              "usagePricing": {
+                "unit": "Min",
+                "ratingPlan": {
+                  "kind": "Linear rate",
+                  "rate": {
+                    "linearPrice": 0.08
+                  }
+                }
+              }
+            },
+            {
+              "service": "MOC Local",
+              "includedInCommitment": true,
+              "usagePricing": {
+                "unit": "Min",
+                "ratingPlan": {
+                  "kind": "Linear rate",
+                  "rate": {
+                    "linearPrice": 0.08
+                  }
+                }
+              }
+            },
+            {
+              "service": "MOC International",
+              "includedInCommitment": true,
+              "usagePricing": {
+                "unit": "Min",
+                "ratingPlan": {
+                  "kind": "Linear rate",
+                  "rate": {
+                    "linearPrice": 1
+                  }
+                }
+              }
+            },
+            {
+              "service": "MOC Special Destinations",
+              "includedInCommitment": true,
+              "usagePricing": {
+                "unit": "Min",
+                "ratingPlan": {
+                  "kind": "Linear rate",
+                  "rate": {
+                    "linearPrice": 0.1
+                  }
+                }
+              }
+            },
+            {
+              "service": "SMSMO",
+              "includedInCommitment": true,
+              "usagePricing": {
+                "unit": "SMS",
+                "ratingPlan": {
+                  "kind": "Linear rate",
+                  "rate": {
+                    "linearPrice": 0.012
+                  }
+                }
+              }
+            },
+            {
+              "service": "MTC",
+              "includedInCommitment": false,
+              "usagePricing": {
+                "unit": "Min",
+                "ratingPlan": {
+                  "kind": "Linear rate"
+                }
+              }
+            },
+            {
+              "service": "GPRS",
+              "includedInCommitment": true,
+              "usagePricing": {
+                "unit": "MB",
+                "ratingPlan": {
+                  "kind": "Linear rate",
+                  "rate": {
+                    "linearPrice": 0.012
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
