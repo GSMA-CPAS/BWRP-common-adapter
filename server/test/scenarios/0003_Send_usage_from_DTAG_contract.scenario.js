@@ -903,6 +903,64 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
     }
   });
 
+  it(`Get DTAG settlements linked to contract`, function(done) {
+    debugAction(`${this.test.title}`);
+    if ((DTAG_dynamic_data.contractId === undefined) || (DTAG_dynamic_data.settlementIdFromReceivedUsage === undefined) || (DTAG_dynamic_data.settlementIdFromLocalUsage === undefined)) {
+      expect.fail('This scenario step should use an undefined data');
+    }
+    try {
+      chai.request(DTAG_API)
+        .get(`/contracts/${DTAG_dynamic_data.contractId}/settlements/`)
+        .send()
+        .end((error, response) => {
+          expect(error).to.be.null;
+          expect(response).to.have.status(200);
+          expect(response).to.be.json;
+
+          expect(response.body).to.exist;
+          expect(response.body).to.be.an('array');
+          expect(response.body.length).to.equals(2);
+
+          expect(response.body.map((content) => content.settlementId)).to.deep.equalInAnyOrder([DTAG_dynamic_data.settlementIdFromReceivedUsage, DTAG_dynamic_data.settlementIdFromLocalUsage]),
+
+          done();
+        });
+    } catch (exception) {
+      debug('exception: %s', exception.stack);
+      expect.fail('it test throws an exception');
+      done();
+    }
+  });
+
+  it(`Get TMUS settlements linked to contract`, function(done) {
+    debugAction(`${this.test.title}`);
+    if ((TMUS_dynamic_data.receivedContractId === undefined) || (TMUS_dynamic_data.settlementIdFromReceivedUsage === undefined) || (TMUS_dynamic_data.settlementIdFromLocalUsage === undefined)) {
+      expect.fail('This scenario step should use an undefined data');
+    }
+    try {
+      chai.request(TMUS_API)
+        .get(`/contracts/${TMUS_dynamic_data.receivedContractId}/settlements/`)
+        .send()
+        .end((error, response) => {
+          expect(error).to.be.null;
+          expect(response).to.have.status(200);
+          expect(response).to.be.json;
+
+          expect(response.body).to.exist;
+          expect(response.body).to.be.an('array');
+          expect(response.body.length).to.equals(2);
+
+          expect(response.body.map((content) => content.settlementId)).to.deep.equalInAnyOrder([TMUS_dynamic_data.settlementIdFromReceivedUsage, TMUS_dynamic_data.settlementIdFromLocalUsage]),
+
+          done();
+        });
+    } catch (exception) {
+      debug('exception: %s', exception.stack);
+      expect.fail('it test throws an exception');
+      done();
+    }
+  });
+
   // Now calculate usage discrepancy
 
   // Launch 'Get DTAG usage discrepancy on TMUS usage' before 'Get DTAG usage discrepancy on local usage'
