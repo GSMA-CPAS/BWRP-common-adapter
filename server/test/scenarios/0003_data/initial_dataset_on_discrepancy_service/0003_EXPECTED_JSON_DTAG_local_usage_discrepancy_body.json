@@ -29,6 +29,16 @@
       "outbound_own_usage": 146285.451075,
       "outbound_partner_usage": 123456.00000000003,
       "outbound_discrepancy": 22829.45107499996
+    },
+    {
+      "service": "MTC",
+      "unit": "min",
+      "inbound_own_usage": 0,
+      "inbound_partner_usage": 0,
+      "inbound_discrepancy": 0,
+      "outbound_own_usage": 0,
+      "outbound_partner_usage": 0,
+      "outbound_discrepancy": 0
     }
   ],
   "inbound": [

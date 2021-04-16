@@ -3,11 +3,11 @@
     {
       "service": "MOC",
       "unit": "min",
-      "inbound_own_usage": 208594585.24999988,
-      "inbound_partner_usage": 208594585.24999988,
+      "inbound_own_usage": 109888639.04999995,
+      "inbound_partner_usage": 109888639.04999995,
       "inbound_discrepancy": 0,
-      "outbound_own_usage": 146857630.60000008,
-      "outbound_partner_usage": 146857630.60000008,
+      "outbound_own_usage": 78883740.15000007,
+      "outbound_partner_usage": 78883740.15000007,
       "outbound_discrepancy": 0
     },
     {
@@ -29,6 +29,16 @@
       "outbound_own_usage": 1434032331.7315726,
       "outbound_partner_usage": 1434032316.7315726,
       "outbound_discrepancy": 15
+    },
+    {
+      "service": "MTC",
+      "unit": "min",
+      "inbound_own_usage": 98705946.19999993,
+      "inbound_partner_usage": 98705946.19999993,
+      "inbound_discrepancy": 0,
+      "outbound_own_usage": 67973890.45000003,
+      "outbound_partner_usage": 67973890.45000003,
+      "outbound_discrepancy": 0
     }
   ],
   "inbound": [

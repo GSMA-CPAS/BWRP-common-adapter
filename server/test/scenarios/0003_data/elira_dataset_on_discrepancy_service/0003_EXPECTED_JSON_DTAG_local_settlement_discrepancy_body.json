@@ -1,5 +1,40 @@
 {
   "homePerspective": {
+    "general_information": [
+      {
+        "service": "Voice",
+        "unit": "min",
+        "own_calculation": 8295927.694000002,
+        "partner_calculation": 8295927.694000002,
+        "delta_calculation_percent": 0,
+        "own_usage": 146857630.6,
+        "partner_usage": 146857630.6,
+        "delta_usage_abs": 0,
+        "delta_usage_percent": 0
+      },
+      {
+        "service": "SMS",
+        "unit": "SMS",
+        "own_calculation": 166353.732,
+        "partner_calculation": 166353.732,
+        "delta_calculation_percent": 0,
+        "own_usage": 13862811,
+        "partner_usage": 13862811,
+        "delta_usage_abs": 0,
+        "delta_usage_percent": 0
+      },
+      {
+        "service": "Data",
+        "unit": "MB",
+        "own_calculation": 17208387.800778873,
+        "partner_calculation": 17208387.980778873,
+        "delta_calculation_percent": -0.0000010460015301016739,
+        "own_usage": 1434032314.3083034,
+        "partner_usage": 1434032329.3083034,
+        "delta_usage_abs": 15,
+        "delta_usage_percent": -0.000001046001533601086
+      }
+    ],
     "details": [
       {
         "service": "MOC Back Home",
@@ -56,44 +91,44 @@
         "delta_usage_abs": 0,
         "delta_usage_percent": 0
       }
-    ],
+    ]
+  },
+  "partnerPerspective": {
     "general_information": [
       {
         "service": "Voice",
         "unit": "min",
-        "own_calculation": 8295927.694000002,
-        "partner_calculation": 8295927.694000002,
+        "own_calculation": 19120680.994,
+        "partner_calculation": 19120680.994,
         "delta_calculation_percent": 0,
-        "own_usage": 146857630.6,
-        "partner_usage": 146857630.6,
+        "own_usage": 208594585.25,
+        "partner_usage": 208594585.25,
         "delta_usage_abs": 0,
         "delta_usage_percent": 0
       },
       {
         "service": "SMS",
         "unit": "SMS",
-        "own_calculation": 166353.732,
-        "partner_calculation": 166353.732,
+        "own_calculation": 198984.852,
+        "partner_calculation": 198984.852,
         "delta_calculation_percent": 0,
-        "own_usage": 13862811,
-        "partner_usage": 13862811,
+        "own_usage": 16582071,
+        "partner_usage": 16582071,
         "delta_usage_abs": 0,
         "delta_usage_percent": 0
       },
       {
         "service": "Data",
         "unit": "MB",
-        "own_calculation": 17208387.800778873,
-        "partner_calculation": 17208387.980778873,
-        "delta_calculation_percent": -0.0000010460015301016739,
-        "own_usage": 1434032314.3083034,
-        "partner_usage": 1434032329.3083034,
-        "delta_usage_abs": 15,
-        "delta_usage_percent": -0.000001046001533601086
+        "own_calculation": 30146061.547672395,
+        "partner_calculation": 30146061.547672395,
+        "delta_calculation_percent": 0,
+        "own_usage": 2512171795.639366,
+        "partner_usage": 2512171795.639366,
+        "delta_usage_abs": 0,
+        "delta_usage_percent": 0
       }
-    ]
-  },
-  "partnerPerspective": {
+    ],
     "details": [
       {
         "service": "MOC Back Home",
@@ -149,39 +184,15 @@
         "partner_usage": 11226413.799999999,
         "delta_usage_abs": 0,
         "delta_usage_percent": 0
-      }
-    ],
-    "general_information": [
+      },
       {
-        "service": "Voice",
+        "service": "MOC Special Destinations",
         "unit": "min",
-        "own_calculation": 19114235.123999998,
-        "partner_calculation": 19114235.123999998,
+        "own_calculation": 6445.8700000000035,
+        "partner_calculation": 6445.8700000000035,
         "delta_calculation_percent": 0,
-        "own_usage": 208594585.25,
-        "partner_usage": 208594585.25,
-        "delta_usage_abs": 0,
-        "delta_usage_percent": 0
-      },
-      {
-        "service": "SMS",
-        "unit": "SMS",
-        "own_calculation": 198984.852,
-        "partner_calculation": 198984.852,
-        "delta_calculation_percent": 0,
-        "own_usage": 16582071,
-        "partner_usage": 16582071,
-        "delta_usage_abs": 0,
-        "delta_usage_percent": 0
-      },
-      {
-        "service": "Data",
-        "unit": "MB",
-        "own_calculation": 30146061.547672395,
-        "partner_calculation": 30146061.547672395,
-        "delta_calculation_percent": 0,
-        "own_usage": 2512171795.639366,
-        "partner_usage": 2512171795.639366,
+        "own_usage": 64458.70000000004,
+        "partner_usage": 64458.70000000004,
         "delta_usage_abs": 0,
         "delta_usage_percent": 0
       }
