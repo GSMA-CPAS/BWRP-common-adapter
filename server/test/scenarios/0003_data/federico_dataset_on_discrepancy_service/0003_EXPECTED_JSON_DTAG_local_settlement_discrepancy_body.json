@@ -1,0 +1,168 @@
+{
+  "homePerspective": {
+    "general_information": [
+      {
+        "service": "Voice",
+        "unit": "min",
+        "own_calculation": 810639.8300000001,
+        "partner_calculation": 852818.5780000001,
+        "delta_calculation_percent": -5.203142806343481,
+        "own_usage": 34035837,
+        "partner_usage": 35789273.2,
+        "delta_usage_abs": 1753436.200000003,
+        "delta_usage_percent": -5.151735213680812
+      },
+      {
+        "service": "SMS",
+        "unit": "SMS",
+        "own_calculation": 95889.85,
+        "partner_calculation": 95889.85,
+        "delta_calculation_percent": 0,
+        "own_usage": 19177970,
+        "partner_usage": 19177970,
+        "delta_usage_abs": 0,
+        "delta_usage_percent": 0
+      },
+      {
+        "service": "Data",
+        "unit": "MB",
+        "own_calculation": 2403275.5040348815,
+        "partner_calculation": 2403275.5040348815,
+        "delta_calculation_percent": 0,
+        "own_usage": 1402183669.3565874,
+        "partner_usage": 1402183669.3565874,
+        "delta_usage_abs": 0,
+        "delta_usage_percent": 0
+      }
+    ],
+    "details": [
+      {
+        "service": "MOC Local",
+        "unit": "min",
+        "own_calculation": 145865.43,
+        "partner_calculation": 152292.258,
+        "delta_calculation_percent": -4.405998049023685,
+        "own_usage": 1620727,
+        "partner_usage": 1692136.2,
+        "delta_usage_abs": 71409.19999999995,
+        "delta_usage_percent": -4.405998049023676
+      },
+      {
+        "service": "SMSMO",
+        "unit": "SMS",
+        "own_calculation": 95889.85,
+        "partner_calculation": 95889.85,
+        "delta_calculation_percent": 0,
+        "own_usage": 19177970,
+        "partner_usage": 19177970,
+        "delta_usage_abs": 0,
+        "delta_usage_percent": 0
+      },
+      {
+        "service": "GPRS",
+        "unit": "MB",
+        "own_calculation": 2403275.5040348815,
+        "partner_calculation": 2403275.5040348815,
+        "delta_calculation_percent": 0,
+        "own_usage": 1402183669.3565874,
+        "partner_usage": 1402183669.3565874,
+        "delta_usage_abs": 0,
+        "delta_usage_percent": 0
+      },
+      {
+        "service": "MOC International",
+        "unit": "min",
+        "own_calculation": 664774.4,
+        "partner_calculation": 700526.3200000001,
+        "delta_calculation_percent": -5.378053065822035,
+        "own_usage": 1661936,
+        "partner_usage": 1751315.8,
+        "delta_usage_abs": 89379.80000000005,
+        "delta_usage_percent": -5.378053065822032
+      }
+    ]
+  },
+  "partnerPerspective": {
+    "general_information": [
+      {
+        "service": "Voice",
+        "unit": "min",
+        "own_calculation": 2346198.034,
+        "partner_calculation": 2215608.2,
+        "delta_calculation_percent": 5.566019240812295,
+        "own_usage": 139932827.6,
+        "partner_usage": 135223746,
+        "delta_usage_abs": 4709081.599999994,
+        "delta_usage_percent": 3.365244368148532
+      },
+      {
+        "service": "SMS",
+        "unit": "SMS",
+        "own_calculation": 32499.15,
+        "partner_calculation": 32499.15,
+        "delta_calculation_percent": 0,
+        "own_usage": 6499830,
+        "partner_usage": 6499830,
+        "delta_usage_abs": 0,
+        "delta_usage_percent": 0
+      },
+      {
+        "service": "Data",
+        "unit": "MB",
+        "own_calculation": 4433262.04884311,
+        "partner_calculation": 4433262.04884311,
+        "delta_calculation_percent": 0,
+        "own_usage": 2755508032.562073,
+        "partner_usage": 2755508032.562073,
+        "delta_usage_abs": 0,
+        "delta_usage_percent": 0
+      }
+    ],
+    "details": [
+      {
+        "service": "MOC Local",
+        "unit": "min",
+        "own_calculation": 539402.634,
+        "partner_calculation": 508609.8,
+        "delta_calculation_percent": 5.708691811838645,
+        "own_usage": 5993362.600000001,
+        "partner_usage": 5651220,
+        "delta_usage_abs": 342142.60000000056,
+        "delta_usage_percent": 5.7086918118386585
+      },
+      {
+        "service": "SMSMO",
+        "unit": "SMS",
+        "own_calculation": 32499.15,
+        "partner_calculation": 32499.15,
+        "delta_calculation_percent": 0,
+        "own_usage": 6499830,
+        "partner_usage": 6499830,
+        "delta_usage_abs": 0,
+        "delta_usage_percent": 0
+      },
+      {
+        "service": "GPRS",
+        "unit": "MB",
+        "own_calculation": 4433262.04884311,
+        "partner_calculation": 4433262.04884311,
+        "delta_calculation_percent": 0,
+        "own_usage": 2755508032.562073,
+        "partner_usage": 2755508032.562073,
+        "delta_usage_abs": 0,
+        "delta_usage_percent": 0
+      },
+      {
+        "service": "MOC International",
+        "unit": "min",
+        "own_calculation": 1806795.4000000001,
+        "partner_calculation": 1706998.4000000001,
+        "delta_calculation_percent": 5.523425618639497,
+        "own_usage": 4516988.5,
+        "partner_usage": 4267496,
+        "delta_usage_abs": 249492.5,
+        "delta_usage_percent": 5.523425618639498
+      }
+    ]
+  }
+}

@@ -1,0 +1,4278 @@
+{
+  "general_information": [
+    {
+      "service": "MOC",
+      "unit": "min",
+      "inbound_own_usage": 20012944,
+      "inbound_partner_usage": 21766380.200000003,
+      "inbound_discrepancy": 1753436.200000003,
+      "outbound_own_usage": 78943043,
+      "outbound_partner_usage": 83652124.60000001,
+      "outbound_discrepancy": 4709081.600000009
+    },
+    {
+      "service": "SMS",
+      "unit": "#",
+      "inbound_own_usage": 19177970,
+      "inbound_partner_usage": 19177970,
+      "inbound_discrepancy": 0,
+      "outbound_own_usage": 6499830,
+      "outbound_partner_usage": 6499830,
+      "outbound_discrepancy": 0
+    },
+    {
+      "service": "Data",
+      "unit": "MB",
+      "inbound_own_usage": 1402183669.3565874,
+      "inbound_partner_usage": 1402183669.3565874,
+      "inbound_discrepancy": 0,
+      "outbound_own_usage": 2755508032.562073,
+      "outbound_partner_usage": 2755508032.562073,
+      "outbound_discrepancy": 0
+    },
+    {
+      "service": "MTC",
+      "unit": "min",
+      "inbound_own_usage": 14022893,
+      "inbound_partner_usage": 14022893,
+      "inbound_discrepancy": 0,
+      "outbound_own_usage": 56280703,
+      "outbound_partner_usage": 56280703,
+      "outbound_discrepancy": 0
+    }
+  ],
+  "inbound": [
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43466",
+      "service": "SMSMO",
+      "own_usage": 3,
+      "partner_usage": 3,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43466",
+      "service": "SMSMO",
+      "own_usage": 310498,
+      "partner_usage": 310498,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43466",
+      "service": "SMSMO",
+      "own_usage": 718837,
+      "partner_usage": 718837,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43466",
+      "service": "GPRS",
+      "own_usage": 473.467745780945,
+      "partner_usage": 473.467745780945,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43466",
+      "service": "GPRS",
+      "own_usage": 22415144.4472198,
+      "partner_usage": 22415144.4472198,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43466",
+      "service": "GPRS",
+      "own_usage": 60073867.1981945,
+      "partner_usage": 60073867.1981945,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43466",
+      "service": "MOC Local",
+      "own_usage": 1010,
+      "partner_usage": 1212,
+      "delta_usage_abs": 202,
+      "delta_usage_percent": -20
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43466",
+      "service": "MOC Local",
+      "own_usage": 45084,
+      "partner_usage": 54100.8,
+      "delta_usage_abs": 9016.800000000003,
+      "delta_usage_percent": -20.000000000000007
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43466",
+      "service": "MOC Local",
+      "own_usage": 80638,
+      "partner_usage": 72574.2,
+      "delta_usage_abs": 8063.800000000003,
+      "delta_usage_percent": 10.000000000000004
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43466",
+      "service": "MOC Home",
+      "own_usage": 554020,
+      "partner_usage": 554020,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43466",
+      "service": "MOC Home",
+      "own_usage": 802220,
+      "partner_usage": 962664,
+      "delta_usage_abs": 160444,
+      "delta_usage_percent": -20
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43466",
+      "service": "MOC International",
+      "own_usage": 59665,
+      "partner_usage": 61780.3,
+      "delta_usage_abs": 2115.300000000003,
+      "delta_usage_percent": -3.5452945613006
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43466",
+      "service": "MOC International",
+      "own_usage": 68368,
+      "partner_usage": 73730.3,
+      "delta_usage_abs": 5362.300000000003,
+      "delta_usage_percent": -7.843289258132464
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43466",
+      "service": "MTC",
+      "own_usage": 365,
+      "partner_usage": 365,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43466",
+      "service": "MTC",
+      "own_usage": 504787,
+      "partner_usage": 504787,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43466",
+      "service": "MTC",
+      "own_usage": 560547,
+      "partner_usage": 560547,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43497",
+      "service": "SMSMO",
+      "own_usage": 2,
+      "partner_usage": 2,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43497",
+      "service": "SMSMO",
+      "own_usage": 420596,
+      "partner_usage": 420596,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43497",
+      "service": "SMSMO",
+      "own_usage": 759770,
+      "partner_usage": 759770,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43497",
+      "service": "GPRS",
+      "own_usage": 332.798179626465,
+      "partner_usage": 332.798179626465,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43497",
+      "service": "GPRS",
+      "own_usage": 24128338.6976023,
+      "partner_usage": 24128338.6976023,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43497",
+      "service": "GPRS",
+      "own_usage": 64153904.6383715,
+      "partner_usage": 64153904.6383715,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43497",
+      "service": "MOC Local",
+      "own_usage": 490,
+      "partner_usage": 539,
+      "delta_usage_abs": 49,
+      "delta_usage_percent": -10
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43497",
+      "service": "MOC Local",
+      "own_usage": 58767,
+      "partner_usage": 70520.4,
+      "delta_usage_abs": 11753.399999999994,
+      "delta_usage_percent": -19.99999999999999
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43497",
+      "service": "MOC Local",
+      "own_usage": 84270,
+      "partner_usage": 92697,
+      "delta_usage_abs": 8427,
+      "delta_usage_percent": -10
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43497",
+      "service": "MOC Home",
+      "own_usage": 677246,
+      "partner_usage": 812695.2,
+      "delta_usage_abs": 135449.19999999995,
+      "delta_usage_percent": -19.999999999999993
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43497",
+      "service": "MOC Home",
+      "own_usage": 853756,
+      "partner_usage": 939131.6,
+      "delta_usage_abs": 85375.59999999998,
+      "delta_usage_percent": -9.999999999999998
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43497",
+      "service": "MOC International",
+      "own_usage": 42,
+      "partner_usage": 50.4,
+      "delta_usage_abs": 8.399999999999999,
+      "delta_usage_percent": -19.999999999999996
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43497",
+      "service": "MOC International",
+      "own_usage": 80434,
+      "partner_usage": 87206.4,
+      "delta_usage_abs": 6772.399999999994,
+      "delta_usage_percent": -8.419822463137471
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43497",
+      "service": "MOC International",
+      "own_usage": 69013,
+      "partner_usage": 72514.8,
+      "delta_usage_abs": 3501.800000000003,
+      "delta_usage_percent": -5.074116470809852
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43497",
+      "service": "MTC",
+      "own_usage": 357,
+      "partner_usage": 357,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43497",
+      "service": "MTC",
+      "own_usage": 642569,
+      "partner_usage": 642569,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43497",
+      "service": "MTC",
+      "own_usage": 605454,
+      "partner_usage": 605454,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43525",
+      "service": "SMSMO",
+      "own_usage": 1,
+      "partner_usage": 1,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43525",
+      "service": "SMSMO",
+      "own_usage": 729705,
+      "partner_usage": 729705,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43525",
+      "service": "SMSMO",
+      "own_usage": 859790,
+      "partner_usage": 859790,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43525",
+      "service": "GPRS",
+      "own_usage": 1259.10724925995,
+      "partner_usage": 1259.10724925995,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43525",
+      "service": "GPRS",
+      "own_usage": 36089944.3115406,
+      "partner_usage": 36089944.3115406,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43525",
+      "service": "GPRS",
+      "own_usage": 83742461.9362345,
+      "partner_usage": 83742461.9362345,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43525",
+      "service": "MOC Local",
+      "own_usage": 21,
+      "partner_usage": 18.9,
+      "delta_usage_abs": 2.1000000000000014,
+      "delta_usage_percent": 10.000000000000005
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43525",
+      "service": "MOC Local",
+      "own_usage": 64738,
+      "partner_usage": 64738,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43525",
+      "service": "MOC Local",
+      "own_usage": 85770,
+      "partner_usage": 77193,
+      "delta_usage_abs": 8577,
+      "delta_usage_percent": 10
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43525",
+      "service": "MOC Home",
+      "own_usage": 743403,
+      "partner_usage": 669062.7,
+      "delta_usage_abs": 74340.30000000005,
+      "delta_usage_percent": 10.000000000000005
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43525",
+      "service": "MOC Home",
+      "own_usage": 857757,
+      "partner_usage": 943532.7,
+      "delta_usage_abs": 85775.69999999995,
+      "delta_usage_percent": -9.999999999999995
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43525",
+      "service": "MOC International",
+      "own_usage": 87720,
+      "partner_usage": 90711.5,
+      "delta_usage_abs": 2991.5,
+      "delta_usage_percent": -3.410282717738258
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43525",
+      "service": "MOC International",
+      "own_usage": 72196,
+      "partner_usage": 72237.3,
+      "delta_usage_abs": 41.30000000000291,
+      "delta_usage_percent": -0.057205385339912054
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43525",
+      "service": "MTC",
+      "own_usage": 3,
+      "partner_usage": 3,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43525",
+      "service": "MTC",
+      "own_usage": 724876,
+      "partner_usage": 724876,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43525",
+      "service": "MTC",
+      "own_usage": 617398,
+      "partner_usage": 617398,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43556",
+      "service": "SMSMO",
+      "own_usage": 1,
+      "partner_usage": 1,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43556",
+      "service": "SMSMO",
+      "own_usage": 862970,
+      "partner_usage": 862970,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43556",
+      "service": "SMSMO",
+      "own_usage": 965264,
+      "partner_usage": 965264,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43556",
+      "service": "GPRS",
+      "own_usage": 7853.72899627686,
+      "partner_usage": 7853.72899627686,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43556",
+      "service": "GPRS",
+      "own_usage": 39145737.400979,
+      "partner_usage": 39145737.400979,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43556",
+      "service": "GPRS",
+      "own_usage": 84904231.205595,
+      "partner_usage": 84904231.205595,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43556",
+      "service": "MOC Local",
+      "own_usage": 4,
+      "partner_usage": 3.6,
+      "delta_usage_abs": 0.3999999999999999,
+      "delta_usage_percent": 9.999999999999998
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43556",
+      "service": "MOC Local",
+      "own_usage": 62376,
+      "partner_usage": 56138.4,
+      "delta_usage_abs": 6237.5999999999985,
+      "delta_usage_percent": 9.999999999999998
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43556",
+      "service": "MOC Local",
+      "own_usage": 81375,
+      "partner_usage": 97650,
+      "delta_usage_abs": 16275,
+      "delta_usage_percent": -20
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43556",
+      "service": "MOC Home",
+      "own_usage": 763344,
+      "partner_usage": 839678.4,
+      "delta_usage_abs": 76334.40000000002,
+      "delta_usage_percent": -10.000000000000004
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43556",
+      "service": "MOC Home",
+      "own_usage": 841637,
+      "partner_usage": 1009964.4,
+      "delta_usage_abs": 168327.40000000002,
+      "delta_usage_percent": -20.000000000000004
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43556",
+      "service": "MOC International",
+      "own_usage": 1,
+      "partner_usage": 1,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43556",
+      "service": "MOC International",
+      "own_usage": 86266,
+      "partner_usage": 87112.3,
+      "delta_usage_abs": 846.3000000000029,
+      "delta_usage_percent": -0.9810354021283042
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43556",
+      "service": "MOC International",
+      "own_usage": 72269,
+      "partner_usage": 79201.8,
+      "delta_usage_abs": 6932.800000000003,
+      "delta_usage_percent": -9.59304819493836
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43556",
+      "service": "MTC",
+      "own_usage": 1,
+      "partner_usage": 1,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43556",
+      "service": "MTC",
+      "own_usage": 757509,
+      "partner_usage": 757509,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43556",
+      "service": "MTC",
+      "own_usage": 616153,
+      "partner_usage": 616153,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43586",
+      "service": "SMSMO",
+      "own_usage": 1,
+      "partner_usage": 1,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43586",
+      "service": "SMSMO",
+      "own_usage": 560769,
+      "partner_usage": 560769,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43586",
+      "service": "SMSMO",
+      "own_usage": 985685,
+      "partner_usage": 985685,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43586",
+      "service": "GPRS",
+      "own_usage": 13436.7055072784,
+      "partner_usage": 13436.7055072784,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43586",
+      "service": "GPRS",
+      "own_usage": 32585651.9911337,
+      "partner_usage": 32585651.9911337,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43586",
+      "service": "GPRS",
+      "own_usage": 89721587.5036488,
+      "partner_usage": 89721587.5036488,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43586",
+      "service": "MOC Local",
+      "own_usage": 2,
+      "partner_usage": 2.2,
+      "delta_usage_abs": 0.20000000000000018,
+      "delta_usage_percent": -10.000000000000009
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43586",
+      "service": "MOC Local",
+      "own_usage": 64385,
+      "partner_usage": 57946.6,
+      "delta_usage_abs": 6438.4000000000015,
+      "delta_usage_percent": 9.999844684320884
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43586",
+      "service": "MOC Local",
+      "own_usage": 84242,
+      "partner_usage": 84242,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43586",
+      "service": "MOC Home",
+      "own_usage": 718794,
+      "partner_usage": 862552.8,
+      "delta_usage_abs": 143758.80000000005,
+      "delta_usage_percent": -20.000000000000007
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43586",
+      "service": "MOC Home",
+      "own_usage": 853581,
+      "partner_usage": 1024297.2,
+      "delta_usage_abs": 170716.19999999995,
+      "delta_usage_percent": -19.999999999999996
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43586",
+      "service": "MOC International",
+      "own_usage": 1,
+      "partner_usage": 0.9,
+      "delta_usage_abs": 0.09999999999999998,
+      "delta_usage_percent": 9.999999999999998
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43586",
+      "service": "MOC International",
+      "own_usage": 87151,
+      "partner_usage": 95493.6,
+      "delta_usage_abs": 8342.600000000006,
+      "delta_usage_percent": -9.57258092276624
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43586",
+      "service": "MOC International",
+      "own_usage": 68449,
+      "partner_usage": 72840,
+      "delta_usage_abs": 4391,
+      "delta_usage_percent": -6.414995105845228
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43586",
+      "service": "MTC",
+      "own_usage": 1,
+      "partner_usage": 1,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43586",
+      "service": "MTC",
+      "own_usage": 683274,
+      "partner_usage": 683274,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43586",
+      "service": "MTC",
+      "own_usage": 618719,
+      "partner_usage": 618719,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43617",
+      "service": "SMSMO",
+      "own_usage": 2,
+      "partner_usage": 2,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43617",
+      "service": "SMSMO",
+      "own_usage": 531021,
+      "partner_usage": 531021,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43617",
+      "service": "SMSMO",
+      "own_usage": 934597,
+      "partner_usage": 934597,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43617",
+      "service": "GPRS",
+      "own_usage": 12892.9884729385,
+      "partner_usage": 12892.9884729385,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43617",
+      "service": "GPRS",
+      "own_usage": 36299918.7878046,
+      "partner_usage": 36299918.7878046,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43617",
+      "service": "GPRS",
+      "own_usage": 87112782.257905,
+      "partner_usage": 87112782.257905,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43617",
+      "service": "MOC Local",
+      "own_usage": 63,
+      "partner_usage": 63,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43617",
+      "service": "MOC Local",
+      "own_usage": 61862,
+      "partner_usage": 68047.8,
+      "delta_usage_abs": 6185.800000000003,
+      "delta_usage_percent": -9.999353399502123
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43617",
+      "service": "MOC Local",
+      "own_usage": 80821,
+      "partner_usage": 96985.1,
+      "delta_usage_abs": 16164.100000000006,
+      "delta_usage_percent": -19.999876269781375
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43617",
+      "service": "MOC Home",
+      "own_usage": 665180,
+      "partner_usage": 665180,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43617",
+      "service": "MOC Home",
+      "own_usage": 797463,
+      "partner_usage": 877209.3,
+      "delta_usage_abs": 79746.30000000005,
+      "delta_usage_percent": -10.000000000000005
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43617",
+      "service": "MOC International",
+      "own_usage": 2,
+      "partner_usage": 2.2,
+      "delta_usage_abs": 0.20000000000000018,
+      "delta_usage_percent": -10.000000000000009
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43617",
+      "service": "MOC International",
+      "own_usage": 81392,
+      "partner_usage": 82599.5000000001,
+      "delta_usage_abs": 1207.5000000001019,
+      "delta_usage_percent": -1.483561037939972
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43617",
+      "service": "MOC International",
+      "own_usage": 63414,
+      "partner_usage": 66083.6,
+      "delta_usage_abs": 2669.600000000006,
+      "delta_usage_percent": -4.209795944113297
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43617",
+      "service": "MTC",
+      "own_usage": 2,
+      "partner_usage": 2,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43617",
+      "service": "MTC",
+      "own_usage": 635282,
+      "partner_usage": 635282,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43617",
+      "service": "MTC",
+      "own_usage": 564049,
+      "partner_usage": 564049,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43647",
+      "service": "SMSMO",
+      "own_usage": 2,
+      "partner_usage": 2,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43647",
+      "service": "SMSMO",
+      "own_usage": 1020166,
+      "partner_usage": 1020166,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43647",
+      "service": "SMSMO",
+      "own_usage": 1020997,
+      "partner_usage": 1020997,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43647",
+      "service": "GPRS",
+      "own_usage": 18860.1373434067,
+      "partner_usage": 18860.1373434067,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43647",
+      "service": "GPRS",
+      "own_usage": 54350203.0526581,
+      "partner_usage": 54350203.0526581,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43647",
+      "service": "GPRS",
+      "own_usage": 89786911.5580015,
+      "partner_usage": 89786911.5580015,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43647",
+      "service": "MOC Local",
+      "own_usage": 19,
+      "partner_usage": 19,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43647",
+      "service": "MOC Local",
+      "own_usage": 67572,
+      "partner_usage": 67572,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43647",
+      "service": "MOC Local",
+      "own_usage": 84534,
+      "partner_usage": 76080.6,
+      "delta_usage_abs": 8453.399999999994,
+      "delta_usage_percent": 9.999999999999993
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43647",
+      "service": "MOC Home",
+      "own_usage": 706284,
+      "partner_usage": 776912.4,
+      "delta_usage_abs": 70628.40000000002,
+      "delta_usage_percent": -10.000000000000004
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43647",
+      "service": "MOC Home",
+      "own_usage": 784441,
+      "partner_usage": 705996.9,
+      "delta_usage_abs": 78444.09999999998,
+      "delta_usage_percent": 9.999999999999996
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43647",
+      "service": "MOC International",
+      "own_usage": 32,
+      "partner_usage": 29.4,
+      "delta_usage_abs": 2.6000000000000014,
+      "delta_usage_percent": 8.125000000000004
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43647",
+      "service": "MOC International",
+      "own_usage": 86581,
+      "partner_usage": 90482,
+      "delta_usage_abs": 3901,
+      "delta_usage_percent": -4.505607465841235
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43647",
+      "service": "MOC International",
+      "own_usage": 62700,
+      "partner_usage": 64336.2,
+      "delta_usage_abs": 1636.199999999997,
+      "delta_usage_percent": -2.609569377990426
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43647",
+      "service": "MTC",
+      "own_usage": 3,
+      "partner_usage": 3,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43647",
+      "service": "MTC",
+      "own_usage": 757619,
+      "partner_usage": 757619,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43647",
+      "service": "MTC",
+      "own_usage": 601992,
+      "partner_usage": 601992,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43678",
+      "service": "SMSMO",
+      "own_usage": 5,
+      "partner_usage": 5,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43678",
+      "service": "SMSMO",
+      "own_usage": 1589022,
+      "partner_usage": 1589022,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43678",
+      "service": "SMSMO",
+      "own_usage": 958303,
+      "partner_usage": 958303,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43678",
+      "service": "GPRS",
+      "own_usage": 17868.6335382462,
+      "partner_usage": 17868.6335382462,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43678",
+      "service": "GPRS",
+      "own_usage": 60168812.4862967,
+      "partner_usage": 60168812.4862967,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43678",
+      "service": "GPRS",
+      "own_usage": 91324890.5645189,
+      "partner_usage": 91324890.5645189,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43678",
+      "service": "MOC Local",
+      "own_usage": 141,
+      "partner_usage": 126.9,
+      "delta_usage_abs": 14.099999999999994,
+      "delta_usage_percent": 9.999999999999996
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43678",
+      "service": "MOC Local",
+      "own_usage": 73499,
+      "partner_usage": 88198.8,
+      "delta_usage_abs": 14699.800000000003,
+      "delta_usage_percent": -20.000000000000004
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43678",
+      "service": "MOC Local",
+      "own_usage": 70503,
+      "partner_usage": 70503,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43678",
+      "service": "MOC Home",
+      "own_usage": 818603,
+      "partner_usage": 900463.3,
+      "delta_usage_abs": 81860.30000000005,
+      "delta_usage_percent": -10.000000000000005
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43678",
+      "service": "MOC Home",
+      "own_usage": 589317,
+      "partner_usage": 648248.7,
+      "delta_usage_abs": 58931.69999999995,
+      "delta_usage_percent": -9.999999999999993
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43678",
+      "service": "MOC International",
+      "own_usage": 9,
+      "partner_usage": 8.1,
+      "delta_usage_abs": 0.9000000000000004,
+      "delta_usage_percent": 10.000000000000004
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43678",
+      "service": "MOC International",
+      "own_usage": 90925,
+      "partner_usage": 97985,
+      "delta_usage_abs": 7060,
+      "delta_usage_percent": -7.764641187792136
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43678",
+      "service": "MOC International",
+      "own_usage": 49428,
+      "partner_usage": 51937,
+      "delta_usage_abs": 2509,
+      "delta_usage_percent": -5.076070243586631
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43678",
+      "service": "MTC",
+      "own_usage": 100,
+      "partner_usage": 100,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43678",
+      "service": "MTC",
+      "own_usage": 787234,
+      "partner_usage": 787234,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43678",
+      "service": "MTC",
+      "own_usage": 432037,
+      "partner_usage": 432037,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43709",
+      "service": "SMSMO",
+      "own_usage": 1,
+      "partner_usage": 1,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43709",
+      "service": "SMSMO",
+      "own_usage": 1705676,
+      "partner_usage": 1705676,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43709",
+      "service": "SMSMO",
+      "own_usage": 770660,
+      "partner_usage": 770660,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43709",
+      "service": "GPRS",
+      "own_usage": 47601.2087850571,
+      "partner_usage": 47601.2087850571,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43709",
+      "service": "GPRS",
+      "own_usage": 38201405.3129539,
+      "partner_usage": 38201405.3129539,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43709",
+      "service": "GPRS",
+      "own_usage": 82921981.3100719,
+      "partner_usage": 82921981.3100719,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43709",
+      "service": "MOC Local",
+      "own_usage": 153,
+      "partner_usage": 137.7,
+      "delta_usage_abs": 15.300000000000011,
+      "delta_usage_percent": 10.000000000000007
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43709",
+      "service": "MOC Local",
+      "own_usage": 75028,
+      "partner_usage": 75028,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43709",
+      "service": "MOC Local",
+      "own_usage": 66755,
+      "partner_usage": 60081.3,
+      "delta_usage_abs": 6673.699999999997,
+      "delta_usage_percent": 9.99730357276608
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43709",
+      "service": "MOC Home",
+      "own_usage": 830904,
+      "partner_usage": 997084.8,
+      "delta_usage_abs": 166180.80000000005,
+      "delta_usage_percent": -20.000000000000007
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43709",
+      "service": "MOC Home",
+      "own_usage": 642803,
+      "partner_usage": 642803,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43709",
+      "service": "MOC International",
+      "own_usage": 19,
+      "partner_usage": 22.8,
+      "delta_usage_abs": 3.8000000000000007,
+      "delta_usage_percent": -20.000000000000004
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43709",
+      "service": "MOC International",
+      "own_usage": 95602,
+      "partner_usage": 105925.2,
+      "delta_usage_abs": 10323.199999999997,
+      "delta_usage_percent": -10.798100458149408
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43709",
+      "service": "MOC International",
+      "own_usage": 51108,
+      "partner_usage": 53252.5,
+      "delta_usage_abs": 2144.5,
+      "delta_usage_percent": -4.19601627925178
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43709",
+      "service": "MTC",
+      "own_usage": 112,
+      "partner_usage": 112,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43709",
+      "service": "MTC",
+      "own_usage": 815751,
+      "partner_usage": 815751,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43709",
+      "service": "MTC",
+      "own_usage": 462567,
+      "partner_usage": 462567,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43739",
+      "service": "SMSMO",
+      "own_usage": 3,
+      "partner_usage": 3,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43739",
+      "service": "SMSMO",
+      "own_usage": 363784,
+      "partner_usage": 363784,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43739",
+      "service": "SMSMO",
+      "own_usage": 855354,
+      "partner_usage": 855354,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43739",
+      "service": "GPRS",
+      "own_usage": 66259.0333185196,
+      "partner_usage": 66259.0333185196,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43739",
+      "service": "GPRS",
+      "own_usage": 26174042.3959608,
+      "partner_usage": 26174042.3959608,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43739",
+      "service": "GPRS",
+      "own_usage": 85972773.0936537,
+      "partner_usage": 85972773.0936537,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43739",
+      "service": "MOC Local",
+      "own_usage": 27,
+      "partner_usage": 32.4,
+      "delta_usage_abs": 5.399999999999999,
+      "delta_usage_percent": -19.999999999999996
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43739",
+      "service": "MOC Local",
+      "own_usage": 55287,
+      "partner_usage": 55287,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43739",
+      "service": "MOC Local",
+      "own_usage": 65428,
+      "partner_usage": 71970.8,
+      "delta_usage_abs": 6542.800000000003,
+      "delta_usage_percent": -10.000000000000005
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43739",
+      "service": "MOC Home",
+      "own_usage": 626334,
+      "partner_usage": 751600.8,
+      "delta_usage_abs": 125266.80000000005,
+      "delta_usage_percent": -20.000000000000007
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43739",
+      "service": "MOC Home",
+      "own_usage": 643086,
+      "partner_usage": 578777.4,
+      "delta_usage_abs": 64308.59999999998,
+      "delta_usage_percent": 9.999999999999996
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43739",
+      "service": "MOC International",
+      "own_usage": 20,
+      "partner_usage": 18.4,
+      "delta_usage_abs": 1.6000000000000014,
+      "delta_usage_percent": 8.000000000000007
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43739",
+      "service": "MOC International",
+      "own_usage": 74455,
+      "partner_usage": 77588.1,
+      "delta_usage_abs": 3133.100000000006,
+      "delta_usage_percent": -4.20804512792963
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43739",
+      "service": "MOC International",
+      "own_usage": 54376,
+      "partner_usage": 58768.3,
+      "delta_usage_abs": 4392.300000000003,
+      "delta_usage_percent": -8.07764454906577
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43739",
+      "service": "MTC",
+      "own_usage": 3,
+      "partner_usage": 3,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43739",
+      "service": "MTC",
+      "own_usage": 589701,
+      "partner_usage": 589701,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43739",
+      "service": "MTC",
+      "own_usage": 437157,
+      "partner_usage": 437157,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43770",
+      "service": "SMSMO",
+      "own_usage": 8,
+      "partner_usage": 8,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43770",
+      "service": "SMSMO",
+      "own_usage": 292098,
+      "partner_usage": 292098,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43770",
+      "service": "SMSMO",
+      "own_usage": 760400,
+      "partner_usage": 760400,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43770",
+      "service": "GPRS",
+      "own_usage": 90622.4543275833,
+      "partner_usage": 90622.4543275833,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43770",
+      "service": "GPRS",
+      "own_usage": 23256865.6695118,
+      "partner_usage": 23256865.6695118,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43770",
+      "service": "GPRS",
+      "own_usage": 74279083.724597,
+      "partner_usage": 74279083.724597,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43770",
+      "service": "MOC Local",
+      "own_usage": 898,
+      "partner_usage": 987.8,
+      "delta_usage_abs": 89.79999999999995,
+      "delta_usage_percent": -9.999999999999995
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43770",
+      "service": "MOC Local",
+      "own_usage": 43919,
+      "partner_usage": 48310.3,
+      "delta_usage_abs": 4391.300000000003,
+      "delta_usage_percent": -9.998633848675977
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43770",
+      "service": "MOC Local",
+      "own_usage": 59121,
+      "partner_usage": 65033.1,
+      "delta_usage_abs": 5912.0999999999985,
+      "delta_usage_percent": -9.999999999999998
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43770",
+      "service": "MOC Home",
+      "own_usage": 465677,
+      "partner_usage": 558812.4,
+      "delta_usage_abs": 93135.40000000002,
+      "delta_usage_percent": -20.000000000000004
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43770",
+      "service": "MOC Home",
+      "own_usage": 548622,
+      "partner_usage": 603484.2,
+      "delta_usage_abs": 54862.19999999995,
+      "delta_usage_percent": -9.999999999999991
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43770",
+      "service": "MOC International",
+      "own_usage": 22,
+      "partner_usage": 25.5,
+      "delta_usage_abs": 3.5,
+      "delta_usage_percent": -15.909090909090908
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43770",
+      "service": "MOC International",
+      "own_usage": 57327,
+      "partner_usage": 58090.3,
+      "delta_usage_abs": 763.3000000000029,
+      "delta_usage_percent": -1.3314842918694558
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43770",
+      "service": "MOC International",
+      "own_usage": 47208,
+      "partner_usage": 50678.9,
+      "delta_usage_abs": 3470.9000000000015,
+      "delta_usage_percent": -7.352355532960518
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43770",
+      "service": "MTC",
+      "own_usage": 658,
+      "partner_usage": 658,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43770",
+      "service": "MTC",
+      "own_usage": 448091,
+      "partner_usage": 448091,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43770",
+      "service": "MTC",
+      "own_usage": 381249,
+      "partner_usage": 381249,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43800",
+      "service": "SMSMO",
+      "own_usage": 8,
+      "partner_usage": 8,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43800",
+      "service": "SMSMO",
+      "own_usage": 377919,
+      "partner_usage": 377919,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43800",
+      "service": "SMSMO",
+      "own_usage": 824052,
+      "partner_usage": 824052,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43800",
+      "service": "GPRS",
+      "own_usage": 158282.467362404,
+      "partner_usage": 158282.467362404,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43800",
+      "service": "GPRS",
+      "own_usage": 29676358.9800224,
+      "partner_usage": 29676358.9800224,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43800",
+      "service": "GPRS",
+      "own_usage": 85261028.101285,
+      "partner_usage": 85261028.101285,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43800",
+      "service": "MOC Local",
+      "own_usage": 149,
+      "partner_usage": 134.1,
+      "delta_usage_abs": 14.900000000000006,
+      "delta_usage_percent": 10.000000000000004
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43800",
+      "service": "MOC Local",
+      "own_usage": 41698,
+      "partner_usage": 45867.8,
+      "delta_usage_abs": 4169.800000000003,
+      "delta_usage_percent": -10.000000000000007
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43800",
+      "service": "MOC Local",
+      "own_usage": 60078,
+      "partner_usage": 72093.6,
+      "delta_usage_abs": 12015.600000000006,
+      "delta_usage_percent": -20.00000000000001
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43800",
+      "service": "MOC Home",
+      "own_usage": 416339,
+      "partner_usage": 416339,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43800",
+      "service": "MOC Home",
+      "own_usage": 529470,
+      "partner_usage": 582417,
+      "delta_usage_abs": 52947,
+      "delta_usage_percent": -10
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43800",
+      "service": "MOC International",
+      "own_usage": 10,
+      "partner_usage": 9.9,
+      "delta_usage_abs": 0.09999999999999964,
+      "delta_usage_percent": 0.9999999999999963
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43800",
+      "service": "MOC International",
+      "own_usage": 51150,
+      "partner_usage": 53453.7,
+      "delta_usage_abs": 2303.699999999997,
+      "delta_usage_percent": -4.503812316715536
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43800",
+      "service": "MOC International",
+      "own_usage": 44581,
+      "partner_usage": 47138.6,
+      "delta_usage_abs": 2557.5999999999985,
+      "delta_usage_percent": -5.736973149996632
+    },
+    {
+      "HTMN": "AAZOR",
+      "VPMN": "DEUD1",
+      "yearMonth": "43800",
+      "service": "MTC",
+      "own_usage": 45,
+      "partner_usage": 45,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "BELMO",
+      "VPMN": "DEUD1",
+      "yearMonth": "43800",
+      "service": "MTC",
+      "own_usage": 421568,
+      "partner_usage": 421568,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43800",
+      "service": "MTC",
+      "own_usage": 355660,
+      "partner_usage": 355660,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    }
+  ],
+  "outbound": [
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "BELMO",
+      "yearMonth": "43466",
+      "service": "SMSMO",
+      "own_usage": 0,
+      "partner_usage": 0,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "FRAF1",
+      "yearMonth": "43466",
+      "service": "SMSMO",
+      "own_usage": 72,
+      "partner_usage": 72,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43466",
+      "service": "SMSMO",
+      "own_usage": 88416,
+      "partner_usage": 88416,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43466",
+      "service": "SMSMO",
+      "own_usage": 370471,
+      "partner_usage": 370471,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "BELMO",
+      "yearMonth": "43466",
+      "service": "GPRS",
+      "own_usage": 51100.1228237152,
+      "partner_usage": 51100.1228237152,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "FRAF1",
+      "yearMonth": "43466",
+      "service": "GPRS",
+      "own_usage": 191669.397181511,
+      "partner_usage": 191669.397181511,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43466",
+      "service": "GPRS",
+      "own_usage": 28878722.2204723,
+      "partner_usage": 28878722.2204723,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43466",
+      "service": "GPRS",
+      "own_usage": 87345896.434164,
+      "partner_usage": 87345896.434164,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43466",
+      "service": "MOC Local",
+      "own_usage": 122636,
+      "partner_usage": 122636,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43466",
+      "service": "MOC Local",
+      "own_usage": 343645,
+      "partner_usage": 312051.9,
+      "delta_usage_abs": 31593.099999999977,
+      "delta_usage_percent": 9.193528204978968
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43466",
+      "service": "MOC Home",
+      "own_usage": 1314366,
+      "partner_usage": 1182929.4,
+      "delta_usage_abs": 131436.6000000001,
+      "delta_usage_percent": 10.000000000000007
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43466",
+      "service": "MOC Home",
+      "own_usage": 3212696,
+      "partner_usage": 3855235.2,
+      "delta_usage_abs": 642539.2000000002,
+      "delta_usage_percent": -20.000000000000007
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43466",
+      "service": "MOC International",
+      "own_usage": 130272,
+      "partner_usage": 134374.9,
+      "delta_usage_abs": 4102.899999999994,
+      "delta_usage_percent": -3.1494872267256153
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43466",
+      "service": "MOC International",
+      "own_usage": 255583,
+      "partner_usage": 268945.4,
+      "delta_usage_abs": 13362.400000000023,
+      "delta_usage_percent": -5.2282037537708
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "BELMO",
+      "yearMonth": "43466",
+      "service": "MTC",
+      "own_usage": 0,
+      "partner_usage": 0,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "FRAF1",
+      "yearMonth": "43466",
+      "service": "MTC",
+      "own_usage": 0,
+      "partner_usage": 0,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43466",
+      "service": "MTC",
+      "own_usage": 1278934,
+      "partner_usage": 1278934,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43466",
+      "service": "MTC",
+      "own_usage": 3277204,
+      "partner_usage": 3277204,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "BELMO",
+      "yearMonth": "43497",
+      "service": "SMSMO",
+      "own_usage": 1,
+      "partner_usage": 1,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "FRAF1",
+      "yearMonth": "43497",
+      "service": "SMSMO",
+      "own_usage": 83,
+      "partner_usage": 83,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43497",
+      "service": "SMSMO",
+      "own_usage": 79136,
+      "partner_usage": 79136,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43497",
+      "service": "SMSMO",
+      "own_usage": 288014,
+      "partner_usage": 288014,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "BELMO",
+      "yearMonth": "43497",
+      "service": "GPRS",
+      "own_usage": 47790.2492685318,
+      "partner_usage": 47790.2492685318,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "FRAF1",
+      "yearMonth": "43497",
+      "service": "GPRS",
+      "own_usage": 169162.120947838,
+      "partner_usage": 169162.120947838,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43497",
+      "service": "GPRS",
+      "own_usage": 29146697.9417868,
+      "partner_usage": 29146697.9417868,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43497",
+      "service": "GPRS",
+      "own_usage": 73656131.0360765,
+      "partner_usage": 73656131.0360765,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43497",
+      "service": "MOC Local",
+      "own_usage": 117822,
+      "partner_usage": 129878.2,
+      "delta_usage_abs": 12056.199999999997,
+      "delta_usage_percent": -10.232554191916618
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43497",
+      "service": "MOC Local",
+      "own_usage": 275979,
+      "partner_usage": 329381,
+      "delta_usage_abs": 53402,
+      "delta_usage_percent": -19.35002300899706
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43497",
+      "service": "MOC Home",
+      "own_usage": 1333336,
+      "partner_usage": 1600003.2,
+      "delta_usage_abs": 266667.19999999995,
+      "delta_usage_percent": -19.999999999999996
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43497",
+      "service": "MOC Home",
+      "own_usage": 2823314,
+      "partner_usage": 3387976.8,
+      "delta_usage_abs": 564662.7999999998,
+      "delta_usage_percent": -19.999999999999993
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43497",
+      "service": "MOC International",
+      "own_usage": 123632,
+      "partner_usage": 128183.7,
+      "delta_usage_abs": 4551.699999999997,
+      "delta_usage_percent": -3.681651999482332
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43497",
+      "service": "MOC International",
+      "own_usage": 212863,
+      "partner_usage": 213687.9,
+      "delta_usage_abs": 824.8999999999942,
+      "delta_usage_percent": -0.3875262492777017
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "BELMO",
+      "yearMonth": "43497",
+      "service": "MTC",
+      "own_usage": 0,
+      "partner_usage": 0,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "FRAF1",
+      "yearMonth": "43497",
+      "service": "MTC",
+      "own_usage": 0,
+      "partner_usage": 0,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43497",
+      "service": "MTC",
+      "own_usage": 1295619,
+      "partner_usage": 1295619,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43497",
+      "service": "MTC",
+      "own_usage": 2791745,
+      "partner_usage": 2791745,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "BELMO",
+      "yearMonth": "43525",
+      "service": "SMSMO",
+      "own_usage": 0,
+      "partner_usage": 0,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "FRAF1",
+      "yearMonth": "43525",
+      "service": "SMSMO",
+      "own_usage": 159,
+      "partner_usage": 159,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43525",
+      "service": "SMSMO",
+      "own_usage": 91864,
+      "partner_usage": 91864,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43525",
+      "service": "SMSMO",
+      "own_usage": 335489,
+      "partner_usage": 335489,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "BELMO",
+      "yearMonth": "43525",
+      "service": "GPRS",
+      "own_usage": 51982.2074155808,
+      "partner_usage": 51982.2074155808,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "FRAF1",
+      "yearMonth": "43525",
+      "service": "GPRS",
+      "own_usage": 141315.33293438,
+      "partner_usage": 141315.33293438,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43525",
+      "service": "GPRS",
+      "own_usage": 36459791.2322149,
+      "partner_usage": 36459791.2322149,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43525",
+      "service": "GPRS",
+      "own_usage": 98612907.0223799,
+      "partner_usage": 98612907.0223799,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43525",
+      "service": "MOC Local",
+      "own_usage": 125051,
+      "partner_usage": 149177.1,
+      "delta_usage_abs": 24126.100000000006,
+      "delta_usage_percent": -19.293008452551362
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43525",
+      "service": "MOC Local",
+      "own_usage": 286899,
+      "partner_usage": 314761.9,
+      "delta_usage_abs": 27862.900000000023,
+      "delta_usage_percent": -9.711745248327817
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43525",
+      "service": "MOC Home",
+      "own_usage": 1619210,
+      "partner_usage": 1781131,
+      "delta_usage_abs": 161921,
+      "delta_usage_percent": -10
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43525",
+      "service": "MOC Home",
+      "own_usage": 3553528,
+      "partner_usage": 3553528,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43525",
+      "service": "MOC International",
+      "own_usage": 144721,
+      "partner_usage": 147550.1,
+      "delta_usage_abs": 2829.100000000006,
+      "delta_usage_percent": -1.9548648779375528
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43525",
+      "service": "MOC International",
+      "own_usage": 223117,
+      "partner_usage": 241786.2,
+      "delta_usage_abs": 18669.20000000001,
+      "delta_usage_percent": -8.367448468740621
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "BELMO",
+      "yearMonth": "43525",
+      "service": "MTC",
+      "own_usage": 0,
+      "partner_usage": 0,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "FRAF1",
+      "yearMonth": "43525",
+      "service": "MTC",
+      "own_usage": 0,
+      "partner_usage": 0,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43525",
+      "service": "MTC",
+      "own_usage": 1332488,
+      "partner_usage": 1332488,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43525",
+      "service": "MTC",
+      "own_usage": 2911549,
+      "partner_usage": 2911549,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "BELMO",
+      "yearMonth": "43556",
+      "service": "SMSMO",
+      "own_usage": 37,
+      "partner_usage": 37,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "FRAF1",
+      "yearMonth": "43556",
+      "service": "SMSMO",
+      "own_usage": 181,
+      "partner_usage": 181,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43556",
+      "service": "SMSMO",
+      "own_usage": 105059,
+      "partner_usage": 105059,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43556",
+      "service": "SMSMO",
+      "own_usage": 433509,
+      "partner_usage": 433509,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "BELMO",
+      "yearMonth": "43556",
+      "service": "GPRS",
+      "own_usage": 70249.2812786102,
+      "partner_usage": 70249.2812786102,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "FRAF1",
+      "yearMonth": "43556",
+      "service": "GPRS",
+      "own_usage": 120939.299059868,
+      "partner_usage": 120939.299059868,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43556",
+      "service": "GPRS",
+      "own_usage": 46724031.5938063,
+      "partner_usage": 46724031.5938063,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43556",
+      "service": "GPRS",
+      "own_usage": 145123018.95044,
+      "partner_usage": 145123018.95044,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43556",
+      "service": "MOC Local",
+      "own_usage": 126848,
+      "partner_usage": 151657,
+      "delta_usage_abs": 24809,
+      "delta_usage_percent": -19.55805373360242
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43556",
+      "service": "MOC Local",
+      "own_usage": 311976,
+      "partner_usage": 281642.5,
+      "delta_usage_abs": 30333.5,
+      "delta_usage_percent": 9.723023565915327
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43556",
+      "service": "MOC Home",
+      "own_usage": 1672039,
+      "partner_usage": 1839242.9,
+      "delta_usage_abs": 167203.8999999999,
+      "delta_usage_percent": -9.999999999999995
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43556",
+      "service": "MOC Home",
+      "own_usage": 3628165,
+      "partner_usage": 3265348.5,
+      "delta_usage_abs": 362816.5,
+      "delta_usage_percent": 10
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "BELMO",
+      "yearMonth": "43556",
+      "service": "MOC International",
+      "own_usage": 39,
+      "partner_usage": 39,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43556",
+      "service": "MOC International",
+      "own_usage": 134272,
+      "partner_usage": 142113.2,
+      "delta_usage_abs": 7841.200000000012,
+      "delta_usage_percent": -5.839787893231658
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43556",
+      "service": "MOC International",
+      "own_usage": 200443,
+      "partner_usage": 216251.5,
+      "delta_usage_abs": 15808.5,
+      "delta_usage_percent": -7.886780780571036
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "BELMO",
+      "yearMonth": "43556",
+      "service": "MTC",
+      "own_usage": 33,
+      "partner_usage": 33,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "FRAF1",
+      "yearMonth": "43556",
+      "service": "MTC",
+      "own_usage": 0,
+      "partner_usage": 0,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43556",
+      "service": "MTC",
+      "own_usage": 1421074,
+      "partner_usage": 1421074,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43556",
+      "service": "MTC",
+      "own_usage": 2945759,
+      "partner_usage": 2945759,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "BELMO",
+      "yearMonth": "43586",
+      "service": "SMSMO",
+      "own_usage": 6,
+      "partner_usage": 6,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "FRAF1",
+      "yearMonth": "43586",
+      "service": "SMSMO",
+      "own_usage": 107,
+      "partner_usage": 107,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43586",
+      "service": "SMSMO",
+      "own_usage": 103464,
+      "partner_usage": 103464,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43586",
+      "service": "SMSMO",
+      "own_usage": 398657,
+      "partner_usage": 398657,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "BELMO",
+      "yearMonth": "43586",
+      "service": "GPRS",
+      "own_usage": 61756.9758491516,
+      "partner_usage": 61756.9758491516,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "FRAF1",
+      "yearMonth": "43586",
+      "service": "GPRS",
+      "own_usage": 142850.335541725,
+      "partner_usage": 142850.335541725,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43586",
+      "service": "GPRS",
+      "own_usage": 45814064.1971827,
+      "partner_usage": 45814064.1971827,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43586",
+      "service": "GPRS",
+      "own_usage": 143672309.476617,
+      "partner_usage": 143672309.476617,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "BELMO",
+      "yearMonth": "43586",
+      "service": "MOC Local",
+      "own_usage": 0,
+      "partner_usage": 0,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43586",
+      "service": "MOC Local",
+      "own_usage": 129313,
+      "partner_usage": 155175.6,
+      "delta_usage_abs": 25862.600000000006,
+      "delta_usage_percent": -20.000000000000004
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43586",
+      "service": "MOC Local",
+      "own_usage": 298736,
+      "partner_usage": 357610.4,
+      "delta_usage_abs": 58874.40000000002,
+      "delta_usage_percent": -19.707835681002635
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43586",
+      "service": "MOC Home",
+      "own_usage": 1734651,
+      "partner_usage": 1908116.1,
+      "delta_usage_abs": 173465.1000000001,
+      "delta_usage_percent": -10.000000000000005
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43586",
+      "service": "MOC Home",
+      "own_usage": 3784539,
+      "partner_usage": 4162992.9,
+      "delta_usage_abs": 378453.8999999999,
+      "delta_usage_percent": -9.999999999999998
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "BELMO",
+      "yearMonth": "43586",
+      "service": "MOC International",
+      "own_usage": 2,
+      "partner_usage": 2.2,
+      "delta_usage_abs": 0.20000000000000018,
+      "delta_usage_percent": -10.000000000000009
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43586",
+      "service": "MOC International",
+      "own_usage": 135841,
+      "partner_usage": 135352.5,
+      "delta_usage_abs": 488.5,
+      "delta_usage_percent": 0.3596116047437813
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43586",
+      "service": "MOC International",
+      "own_usage": 201086,
+      "partner_usage": 211291.2,
+      "delta_usage_abs": 10205.200000000012,
+      "delta_usage_percent": -5.075042519121178
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "BELMO",
+      "yearMonth": "43586",
+      "service": "MTC",
+      "own_usage": 17,
+      "partner_usage": 17,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "FRAF1",
+      "yearMonth": "43586",
+      "service": "MTC",
+      "own_usage": 0,
+      "partner_usage": 0,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43586",
+      "service": "MTC",
+      "own_usage": 1423635,
+      "partner_usage": 1423635,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43586",
+      "service": "MTC",
+      "own_usage": 3090948,
+      "partner_usage": 3090948,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "BELMO",
+      "yearMonth": "43617",
+      "service": "SMSMO",
+      "own_usage": 0,
+      "partner_usage": 0,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "FRAF1",
+      "yearMonth": "43617",
+      "service": "SMSMO",
+      "own_usage": 41,
+      "partner_usage": 41,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43617",
+      "service": "SMSMO",
+      "own_usage": 114471,
+      "partner_usage": 114471,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43617",
+      "service": "SMSMO",
+      "own_usage": 578599,
+      "partner_usage": 578599,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "BELMO",
+      "yearMonth": "43617",
+      "service": "GPRS",
+      "own_usage": 72458.9793205261,
+      "partner_usage": 72458.9793205261,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "FRAF1",
+      "yearMonth": "43617",
+      "service": "GPRS",
+      "own_usage": 154898.934317589,
+      "partner_usage": 154898.934317589,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43617",
+      "service": "GPRS",
+      "own_usage": 58891347.2486391,
+      "partner_usage": 58891347.2486391,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43617",
+      "service": "GPRS",
+      "own_usage": 260362056.312874,
+      "partner_usage": 260362056.312874,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43617",
+      "service": "MOC Local",
+      "own_usage": 118474,
+      "partner_usage": 118977,
+      "delta_usage_abs": 503,
+      "delta_usage_percent": -0.4245657275013927
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43617",
+      "service": "MOC Local",
+      "own_usage": 404671,
+      "partner_usage": 403588.1,
+      "delta_usage_abs": 1082.9000000000233,
+      "delta_usage_percent": 0.26760009983419203
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43617",
+      "service": "MOC Home",
+      "own_usage": 1617350,
+      "partner_usage": 1779085,
+      "delta_usage_abs": 161735,
+      "delta_usage_percent": -10
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43617",
+      "service": "MOC Home",
+      "own_usage": 4624428,
+      "partner_usage": 4624428,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43617",
+      "service": "MOC International",
+      "own_usage": 129930,
+      "partner_usage": 137858.5,
+      "delta_usage_abs": 7928.5,
+      "delta_usage_percent": -6.102131917186178
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43617",
+      "service": "MOC International",
+      "own_usage": 242655,
+      "partner_usage": 251555.9,
+      "delta_usage_abs": 8900.899999999994,
+      "delta_usage_percent": -3.6681296490902695
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "BELMO",
+      "yearMonth": "43617",
+      "service": "MTC",
+      "own_usage": 0,
+      "partner_usage": 0,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "FRAF1",
+      "yearMonth": "43617",
+      "service": "MTC",
+      "own_usage": 0,
+      "partner_usage": 0,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43617",
+      "service": "MTC",
+      "own_usage": 1330498,
+      "partner_usage": 1330498,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43617",
+      "service": "MTC",
+      "own_usage": 3907637,
+      "partner_usage": 3907637,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "BELMO",
+      "yearMonth": "43647",
+      "service": "SMSMO",
+      "own_usage": 1,
+      "partner_usage": 1,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "FRAF1",
+      "yearMonth": "43647",
+      "service": "SMSMO",
+      "own_usage": 24,
+      "partner_usage": 24,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43647",
+      "service": "SMSMO",
+      "own_usage": 119640,
+      "partner_usage": 119640,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43647",
+      "service": "SMSMO",
+      "own_usage": 648991,
+      "partner_usage": 648991,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "BELMO",
+      "yearMonth": "43647",
+      "service": "GPRS",
+      "own_usage": 62065.9128799438,
+      "partner_usage": 62065.9128799438,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "FRAF1",
+      "yearMonth": "43647",
+      "service": "GPRS",
+      "own_usage": 163504.392095566,
+      "partner_usage": 163504.392095566,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43647",
+      "service": "GPRS",
+      "own_usage": 68041515.5345535,
+      "partner_usage": 68041515.5345535,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43647",
+      "service": "GPRS",
+      "own_usage": 293397856.69561,
+      "partner_usage": 293397856.69561,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43647",
+      "service": "MOC Local",
+      "own_usage": 119477,
+      "partner_usage": 107529.3,
+      "delta_usage_abs": 11947.699999999997,
+      "delta_usage_percent": 9.999999999999998
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43647",
+      "service": "MOC Local",
+      "own_usage": 442096,
+      "partner_usage": 484958,
+      "delta_usage_abs": 42862,
+      "delta_usage_percent": -9.695179327566864
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43647",
+      "service": "MOC Home",
+      "own_usage": 1885107,
+      "partner_usage": 1885107,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43647",
+      "service": "MOC Home",
+      "own_usage": 5601121,
+      "partner_usage": 6161233.1,
+      "delta_usage_abs": 560112.0999999996,
+      "delta_usage_percent": -9.999999999999993
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "BELMO",
+      "yearMonth": "43647",
+      "service": "MOC International",
+      "own_usage": 1,
+      "partner_usage": 1.1,
+      "delta_usage_abs": 0.10000000000000009,
+      "delta_usage_percent": -10.000000000000009
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43647",
+      "service": "MOC International",
+      "own_usage": 128811,
+      "partner_usage": 139273.6,
+      "delta_usage_abs": 10462.600000000006,
+      "delta_usage_percent": -8.12244295906406
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43647",
+      "service": "MOC International",
+      "own_usage": 241338,
+      "partner_usage": 255181.2,
+      "delta_usage_abs": 13843.200000000012,
+      "delta_usage_percent": -5.736021679138806
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "BELMO",
+      "yearMonth": "43647",
+      "service": "MTC",
+      "own_usage": 1,
+      "partner_usage": 1,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "FRAF1",
+      "yearMonth": "43647",
+      "service": "MTC",
+      "own_usage": 0,
+      "partner_usage": 0,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43647",
+      "service": "MTC",
+      "own_usage": 1275536,
+      "partner_usage": 1275536,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43647",
+      "service": "MTC",
+      "own_usage": 4002468,
+      "partner_usage": 4002468,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "BELMO",
+      "yearMonth": "43678",
+      "service": "SMSMO",
+      "own_usage": 1,
+      "partner_usage": 1,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "FRAF1",
+      "yearMonth": "43678",
+      "service": "SMSMO",
+      "own_usage": 80,
+      "partner_usage": 80,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43678",
+      "service": "SMSMO",
+      "own_usage": 98079,
+      "partner_usage": 98079,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43678",
+      "service": "SMSMO",
+      "own_usage": 609107,
+      "partner_usage": 609107,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "BELMO",
+      "yearMonth": "43678",
+      "service": "GPRS",
+      "own_usage": 58859.1868047714,
+      "partner_usage": 58859.1868047714,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "FRAF1",
+      "yearMonth": "43678",
+      "service": "GPRS",
+      "own_usage": 145742.045410156,
+      "partner_usage": 145742.045410156,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43678",
+      "service": "GPRS",
+      "own_usage": 58291087.4703665,
+      "partner_usage": 58291087.4703665,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43678",
+      "service": "GPRS",
+      "own_usage": 309035724.387955,
+      "partner_usage": 309035724.387955,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43678",
+      "service": "MOC Local",
+      "own_usage": 106807,
+      "partner_usage": 106428.9,
+      "delta_usage_abs": 378.1000000000058,
+      "delta_usage_percent": 0.3540030147836807
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43678",
+      "service": "MOC Local",
+      "own_usage": 410671,
+      "partner_usage": 373104.9,
+      "delta_usage_abs": 37566.09999999998,
+      "delta_usage_percent": 9.147492761845852
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43678",
+      "service": "MOC Home",
+      "own_usage": 1523339,
+      "partner_usage": 1828006.8,
+      "delta_usage_abs": 304667.80000000005,
+      "delta_usage_percent": -20.000000000000004
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43678",
+      "service": "MOC Home",
+      "own_usage": 5095501,
+      "partner_usage": 5095501,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43678",
+      "service": "MOC International",
+      "own_usage": 97004,
+      "partner_usage": 104113.2,
+      "delta_usage_abs": 7109.199999999997,
+      "delta_usage_percent": -7.328769947631023
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43678",
+      "service": "MOC International",
+      "own_usage": 212623,
+      "partner_usage": 221141.9,
+      "delta_usage_abs": 8518.899999999994,
+      "delta_usage_percent": -4.006575017754426
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "BELMO",
+      "yearMonth": "43678",
+      "service": "MTC",
+      "own_usage": 0,
+      "partner_usage": 0,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "FRAF1",
+      "yearMonth": "43678",
+      "service": "MTC",
+      "own_usage": 0,
+      "partner_usage": 0,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43678",
+      "service": "MTC",
+      "own_usage": 1271702,
+      "partner_usage": 1271702,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43678",
+      "service": "MTC",
+      "own_usage": 3687152,
+      "partner_usage": 3687152,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "BELMO",
+      "yearMonth": "43709",
+      "service": "SMSMO",
+      "own_usage": 8,
+      "partner_usage": 8,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "FRAF1",
+      "yearMonth": "43709",
+      "service": "SMSMO",
+      "own_usage": 208,
+      "partner_usage": 208,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43709",
+      "service": "SMSMO",
+      "own_usage": 107966,
+      "partner_usage": 107966,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43709",
+      "service": "SMSMO",
+      "own_usage": 583571,
+      "partner_usage": 583571,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "BELMO",
+      "yearMonth": "43709",
+      "service": "GPRS",
+      "own_usage": 45039.682888031,
+      "partner_usage": 45039.682888031,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "FRAF1",
+      "yearMonth": "43709",
+      "service": "GPRS",
+      "own_usage": 119699.693309784,
+      "partner_usage": 119699.693309784,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43709",
+      "service": "GPRS",
+      "own_usage": 57198023.8977604,
+      "partner_usage": 57198023.8977604,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43709",
+      "service": "GPRS",
+      "own_usage": 312288970.220663,
+      "partner_usage": 312288970.220663,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43709",
+      "service": "MOC Local",
+      "own_usage": 127802,
+      "partner_usage": 115920.2,
+      "delta_usage_abs": 11881.800000000003,
+      "delta_usage_percent": 9.297037605045306
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43709",
+      "service": "MOC Local",
+      "own_usage": 465118,
+      "partner_usage": 555738.4,
+      "delta_usage_abs": 90620.40000000002,
+      "delta_usage_percent": -19.48331391173853
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43709",
+      "service": "MOC Home",
+      "own_usage": 1751300,
+      "partner_usage": 1751300,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43709",
+      "service": "MOC Home",
+      "own_usage": 6322572,
+      "partner_usage": 6954829.2,
+      "delta_usage_abs": 632257.2000000002,
+      "delta_usage_percent": -10.000000000000004
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43709",
+      "service": "MOC International",
+      "own_usage": 134823,
+      "partner_usage": 139713.6,
+      "delta_usage_abs": 4890.600000000006,
+      "delta_usage_percent": -3.6274226207694578
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43709",
+      "service": "MOC International",
+      "own_usage": 312057,
+      "partner_usage": 337083.9,
+      "delta_usage_abs": 25026.900000000023,
+      "delta_usage_percent": -8.019977119564704
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "BELMO",
+      "yearMonth": "43709",
+      "service": "MTC",
+      "own_usage": 0,
+      "partner_usage": 0,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "FRAF1",
+      "yearMonth": "43709",
+      "service": "MTC",
+      "own_usage": 0,
+      "partner_usage": 0,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43709",
+      "service": "MTC",
+      "own_usage": 1412169,
+      "partner_usage": 1412169,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43709",
+      "service": "MTC",
+      "own_usage": 4615253,
+      "partner_usage": 4615253,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "BELMO",
+      "yearMonth": "43739",
+      "service": "SMSMO",
+      "own_usage": 9,
+      "partner_usage": 9,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "FRAF1",
+      "yearMonth": "43739",
+      "service": "SMSMO",
+      "own_usage": 122,
+      "partner_usage": 122,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43739",
+      "service": "SMSMO",
+      "own_usage": 114431,
+      "partner_usage": 114431,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43739",
+      "service": "SMSMO",
+      "own_usage": 506657,
+      "partner_usage": 506657,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "BELMO",
+      "yearMonth": "43739",
+      "service": "GPRS",
+      "own_usage": 53497.9902992249,
+      "partner_usage": 53497.9902992249,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "FRAF1",
+      "yearMonth": "43739",
+      "service": "GPRS",
+      "own_usage": 153973.596611023,
+      "partner_usage": 153973.596611023,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43739",
+      "service": "GPRS",
+      "own_usage": 62427589.3289127,
+      "partner_usage": 62427589.3289127,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43739",
+      "service": "GPRS",
+      "own_usage": 244764566.754526,
+      "partner_usage": 244764566.754526,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "BELMO",
+      "yearMonth": "43739",
+      "service": "MOC Local",
+      "own_usage": 191,
+      "partner_usage": 210.1,
+      "delta_usage_abs": 19.099999999999994,
+      "delta_usage_percent": -9.999999999999996
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43739",
+      "service": "MOC Local",
+      "own_usage": 125687,
+      "partner_usage": 125687,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43739",
+      "service": "MOC Local",
+      "own_usage": 453931,
+      "partner_usage": 542484.4,
+      "delta_usage_abs": 88553.40000000002,
+      "delta_usage_percent": -19.508119075366086
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43739",
+      "service": "MOC Home",
+      "own_usage": 1737254,
+      "partner_usage": 1910979.4,
+      "delta_usage_abs": 173725.3999999999,
+      "delta_usage_percent": -9.999999999999995
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43739",
+      "service": "MOC Home",
+      "own_usage": 5347279,
+      "partner_usage": 5882006.9,
+      "delta_usage_abs": 534727.9000000004,
+      "delta_usage_percent": -10.000000000000007
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43739",
+      "service": "MOC International",
+      "own_usage": 138618,
+      "partner_usage": 154609.9,
+      "delta_usage_abs": 15991.899999999994,
+      "delta_usage_percent": -11.536669119450572
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43739",
+      "service": "MOC International",
+      "own_usage": 305360,
+      "partner_usage": 340038.4,
+      "delta_usage_abs": 34678.40000000002,
+      "delta_usage_percent": -11.356562745611745
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "BELMO",
+      "yearMonth": "43739",
+      "service": "MTC",
+      "own_usage": 0,
+      "partner_usage": 0,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "FRAF1",
+      "yearMonth": "43739",
+      "service": "MTC",
+      "own_usage": 0,
+      "partner_usage": 0,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43739",
+      "service": "MTC",
+      "own_usage": 1484926,
+      "partner_usage": 1484926,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43739",
+      "service": "MTC",
+      "own_usage": 4283245,
+      "partner_usage": 4283245,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "BELMO",
+      "yearMonth": "43770",
+      "service": "SMSMO",
+      "own_usage": 11,
+      "partner_usage": 11,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "FRAF1",
+      "yearMonth": "43770",
+      "service": "SMSMO",
+      "own_usage": 72,
+      "partner_usage": 72,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43770",
+      "service": "SMSMO",
+      "own_usage": 92765,
+      "partner_usage": 92765,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43770",
+      "service": "SMSMO",
+      "own_usage": 323289,
+      "partner_usage": 323289,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "BELMO",
+      "yearMonth": "43770",
+      "service": "GPRS",
+      "own_usage": 55287.9368562698,
+      "partner_usage": 55287.9368562698,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "FRAF1",
+      "yearMonth": "43770",
+      "service": "GPRS",
+      "own_usage": 158694.042787552,
+      "partner_usage": 158694.042787552,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43770",
+      "service": "GPRS",
+      "own_usage": 43749568.6120377,
+      "partner_usage": 43749568.6120377,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43770",
+      "service": "GPRS",
+      "own_usage": 135521001.355375,
+      "partner_usage": 135521001.355375,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43770",
+      "service": "MOC Local",
+      "own_usage": 116731,
+      "partner_usage": 117129.4,
+      "delta_usage_abs": 398.3999999999942,
+      "delta_usage_percent": -0.34129751308563633
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43770",
+      "service": "MOC Local",
+      "own_usage": 340011,
+      "partner_usage": 372801.7,
+      "delta_usage_abs": 32790.70000000001,
+      "delta_usage_percent": -9.644011517274445
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43770",
+      "service": "MOC Home",
+      "own_usage": 1571965,
+      "partner_usage": 1886358,
+      "delta_usage_abs": 314393,
+      "delta_usage_percent": -20
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43770",
+      "service": "MOC Home",
+      "own_usage": 4060462,
+      "partner_usage": 3654415.8,
+      "delta_usage_abs": 406046.2000000002,
+      "delta_usage_percent": 10.000000000000005
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43770",
+      "service": "MOC International",
+      "own_usage": 110450,
+      "partner_usage": 118956.4,
+      "delta_usage_abs": 8506.399999999994,
+      "delta_usage_percent": -7.7015844273426834
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43770",
+      "service": "MOC International",
+      "own_usage": 245969,
+      "partner_usage": 267263.9,
+      "delta_usage_abs": 21294.900000000023,
+      "delta_usage_percent": -8.657554407262714
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "BELMO",
+      "yearMonth": "43770",
+      "service": "MTC",
+      "own_usage": 0,
+      "partner_usage": 0,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "FRAF1",
+      "yearMonth": "43770",
+      "service": "MTC",
+      "own_usage": 0,
+      "partner_usage": 0,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43770",
+      "service": "MTC",
+      "own_usage": 1277926,
+      "partner_usage": 1277926,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43770",
+      "service": "MTC",
+      "own_usage": 3398386,
+      "partner_usage": 3398386,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "BELMO",
+      "yearMonth": "43800",
+      "service": "SMSMO",
+      "own_usage": 31,
+      "partner_usage": 31,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "FRAF1",
+      "yearMonth": "43800",
+      "service": "SMSMO",
+      "own_usage": 43,
+      "partner_usage": 43,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43800",
+      "service": "SMSMO",
+      "own_usage": 95241,
+      "partner_usage": 95241,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43800",
+      "service": "SMSMO",
+      "own_usage": 211647,
+      "partner_usage": 211647,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "BELMO",
+      "yearMonth": "43800",
+      "service": "GPRS",
+      "own_usage": 44595.3789148331,
+      "partner_usage": 44595.3789148331,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "FRAF1",
+      "yearMonth": "43800",
+      "service": "GPRS",
+      "own_usage": 163416.174536705,
+      "partner_usage": 163416.174536705,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43800",
+      "service": "GPRS",
+      "own_usage": 52432044.0703774,
+      "partner_usage": 52432044.0703774,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43800",
+      "service": "GPRS",
+      "own_usage": 61172561.2979498,
+      "partner_usage": 61172561.2979498,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43800",
+      "service": "MOC Local",
+      "own_usage": 117194,
+      "partner_usage": 117194,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43800",
+      "service": "MOC Local",
+      "own_usage": 163454,
+      "partner_usage": 147639.6,
+      "delta_usage_abs": 15814.399999999994,
+      "delta_usage_percent": 9.675137959303532
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43800",
+      "service": "MOC Home",
+      "own_usage": 1511474,
+      "partner_usage": 1662621.4,
+      "delta_usage_abs": 151147.3999999999,
+      "delta_usage_percent": -9.999999999999993
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43800",
+      "service": "MOC Home",
+      "own_usage": 1699331,
+      "partner_usage": 1529397.9,
+      "delta_usage_abs": 169933.1000000001,
+      "delta_usage_percent": 10.000000000000005
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43800",
+      "service": "MOC International",
+      "own_usage": 107082,
+      "partner_usage": 107556.6,
+      "delta_usage_abs": 474.6000000000058,
+      "delta_usage_percent": -0.4432117442707512
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43800",
+      "service": "MOC International",
+      "own_usage": 98904,
+      "partner_usage": 103062.6,
+      "delta_usage_abs": 4158.600000000006,
+      "delta_usage_percent": -4.204683329289013
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "BELMO",
+      "yearMonth": "43800",
+      "service": "MTC",
+      "own_usage": 0,
+      "partner_usage": 0,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "AAZTD",
+      "VPMN": "FRAF1",
+      "yearMonth": "43800",
+      "service": "MTC",
+      "own_usage": 0,
+      "partner_usage": 0,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "BELMO",
+      "yearMonth": "43800",
+      "service": "MTC",
+      "own_usage": 1128790,
+      "partner_usage": 1128790,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    },
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43800",
+      "service": "MTC",
+      "own_usage": 1436009,
+      "partner_usage": 1436009,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    }
+  ]
+}
