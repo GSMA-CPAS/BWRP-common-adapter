@@ -1753,6 +1753,8 @@ components:
                   type: object
                   additionalProperties: true
                   properties:
+                    linearPrice:
+                      type: number
                     thresholds:
                       type: array
                       items:
@@ -1789,27 +1791,50 @@ components:
                   type: object
                   additionalProperties: true
                   properties:
+                    linearPrice:
+                      type: number
                     thresholds:
                       type: array
                       items:
                         $ref: '#/components/schemas/ContractBody_msp_discount_serviceGroup_service_rate_threshold'
-                        
+
     ContractBody_msp_discount_serviceGroup:
       type: object
       additionalProperties: true
       properties:
-        services:
-          type: array
-          items:
-            $ref: '#/components/schemas/ContractBody_msp_discount_serviceGroup_service'
         homeTadigs:
           type: array
           items:
             type: string
+          example: ['GSMA-TADIG-1', 'GSMA-TADIG-2']
         visitorTadigs:
           type: array
           items:
             type: string
+          example: ['AnotherMSP-TADIG-1', 'AnotherMSP-TADIG-2', 'AnotherMSP-TADIG-3']
+        services:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContractBody_msp_discount_serviceGroup_service'
+          example:
+          - service: "MOC Local"
+            usagePricing:
+              unit: "eur"
+              ratingPlan:
+                kind: "Linear rate"
+                rate:
+                  linearPrice: 0.145
+          - service: "SMSMO"
+            usagePricing:
+              unit: "eur"
+              ratingPlan:
+                kind: "Linear rate"
+                rate:
+                  thresholds:
+                  - start: 0
+                    linearPrice: 0.256
+                  - start: 5000
+                    linearPrice: 0.050
 
     ContractBody_msp_discount:
       type: object
@@ -1818,6 +1843,8 @@ components:
         condition:
           type: object
           additionalProperties: true
+          example:
+            kind: "Unconditional"
         serviceGroups:
           type: array
           items:
@@ -1829,6 +1856,7 @@ components:
       properties:
         version:
           type: string
+          example: 0.0.2-MVP1
         metadata:
           type: object
           additionalProperties: true
@@ -1837,6 +1865,9 @@ components:
               type: string
             authors:
               type: string
+          example:
+            name: Contract-Name-Chosen
+            authors: author1 & author2
         discounts:
           type: object
           additionalProperties:
@@ -1854,4 +1885,10 @@ components:
             partyInformation:
               type: object
               additionalProperties: true
-
+          example:
+            term:
+              start: 2020-01-01T00:00:00.000Z
+              end: 2020-12-31T00:00:00.000Z
+            payment:
+              taxesIncluded: false
+              
