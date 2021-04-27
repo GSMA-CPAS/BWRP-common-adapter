@@ -2075,6 +2075,8 @@ components:
         discounts:
           additionalProperties:
             $ref: '#/components/schemas/ContractBody_msp_discount'
+          maxProperties: 2
+          minProperties: 2
           type: object
         framework:
           additionalProperties: true

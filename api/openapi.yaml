@@ -1870,6 +1870,8 @@ components:
             authors: author1 & author2
         discounts:
           type: object
+          minProperties: 2
+          maxProperties: 2
           additionalProperties:
             $ref: '#/components/schemas/ContractBody_msp_discount'
         framework:

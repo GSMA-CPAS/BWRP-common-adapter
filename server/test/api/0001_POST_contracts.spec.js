@@ -334,6 +334,98 @@ describe(`Tests POST ${route} API FAILED`, function() {
         }
       },
       {
+        description: '"body.discounts should NOT have fewer than 2 properties',
+        sentBody: {
+          header: {
+            name: 'Contract name between A1 and B1',
+            version: '1.1',
+            type: 'contract',
+            fromMsp: {mspId: 'A1'},
+            toMsp: {mspId: 'B1'}
+          },
+          body: {
+            version: "1",
+            metadata: {
+              name: "ContractName",
+              authors: "ME"
+            },
+            discounts: {
+              msp1: {
+                condition: {
+                  kind: "Unconditional"
+                },
+                serviceGroups: []
+              }
+            }
+          }
+        },
+        response: {
+          status: 400,
+          body: {
+            message: "request.body.body.discounts should NOT have fewer than 2 properties",
+            errors: [
+              {
+                errorCode: "minProperties.openapi.validation",
+                message: "should NOT have fewer than 2 properties",
+                path: ".body.body.discounts"
+              }
+            ]
+          }
+        }
+      },
+      {
+        description: '"body.discounts should NOT have more than 2 properties',
+        sentBody: {
+          header: {
+            name: 'Contract name between A1 and B1',
+            version: '1.1',
+            type: 'contract',
+            fromMsp: {mspId: 'A1'},
+            toMsp: {mspId: 'B1'}
+          },
+          body: {
+            version: "1",
+            metadata: {
+              name: "ContractName",
+              authors: "ME"
+            },
+            discounts: {
+              msp1: {
+                condition: {
+                  kind: "Unconditional"
+                },
+                serviceGroups: []
+              },
+              msp2: {
+                condition: {
+                  kind: "Unconditional"
+                },
+                serviceGroups: []
+              },
+              msp3: {
+                condition: {
+                  kind: "Unconditional"
+                },
+                serviceGroups: []
+              }
+            }
+          }
+        },
+        response: {
+          status: 400,
+          body: {
+            message: "request.body.body.discounts should NOT have more than 2 properties",
+            errors: [
+              {
+                errorCode: "maxProperties.openapi.validation",
+                message: "should NOT have more than 2 properties",
+                path: ".body.body.discounts"
+              }
+            ]
+          }
+        }
+      },
+      {
         description: '"body.discounts[\'msp2\'].serviceGroups[0].services[0].usagePricing.ratingPlan.rate.thresholds[1].linearPrice" should be number',
         sentBody: {
           header: {
