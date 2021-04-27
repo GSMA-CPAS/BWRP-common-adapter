@@ -174,3 +174,263 @@ describe(`Tests POST ${route} API OK`, function() {
     });
   });
 });
+
+describe(`Tests POST ${route} API FAILED`, function() {
+  describe(`Setup and Test POST ${route} API FAILED`, function() {
+    const path = globalVersion + route;
+    /* eslint-disable quotes */
+    const testArray = [
+      {
+        description: 'Empty contract',
+        sentBody: {},
+        response: {
+          status: 400,
+          body: {
+            message: "request.body should have required property 'header', request.body should have required property 'body'",
+            errors: [
+              {
+                errorCode: "required.openapi.validation",
+                message: "should have required property 'header'",
+                path: ".body.header"
+              },
+              {
+                errorCode: "required.openapi.validation",
+                message: "should have required property 'body'",
+                path: ".body.body"
+              }
+            ]
+          }
+        }
+      },
+      {
+        description: '"header" and "body" should be objects',
+        sentBody: {
+          header: "",
+          body: []
+        },
+        response: {
+          status: 400,
+          body: {
+            message: "request.body.header should be object, request.body.body should be object",
+            errors: [
+              {
+                errorCode: "type.openapi.validation",
+                message: "should be object",
+                path: ".body.header"
+              },
+              {
+                errorCode: "type.openapi.validation",
+                message: "should be object",
+                path: ".body.body"
+              }
+            ]
+          }
+        }
+      },
+      {
+        description: '"body.version" should be string',
+        sentBody: {
+          header: {
+            name: 'Contract name between A1 and B1',
+            version: '1.1',
+            type: 'contract',
+            fromMsp: {mspId: 'A1'},
+            toMsp: {mspId: 'B1'}
+          },
+          body: {
+            version: 1
+          }
+        },
+        response: {
+          status: 400,
+          body: {
+            message: "request.body.body.version should be string",
+            errors: [
+              {
+                errorCode: "type.openapi.validation",
+                message: "should be string",
+                path: ".body.body.version"
+              }
+            ]
+          }
+        }
+      },
+      {
+        description: '"body.metadata.authors" should be string',
+        sentBody: {
+          header: {
+            name: 'Contract name between A1 and B1',
+            version: '1.1',
+            type: 'contract',
+            fromMsp: {mspId: 'A1'},
+            toMsp: {mspId: 'B1'}
+          },
+          body: {
+            version: "1",
+            metadata: {
+              name: "ContractName",
+              authors: ["AAA", "BBB"]
+            }
+          }
+        },
+        response: {
+          status: 400,
+          body: {
+            message: "request.body.body.metadata.authors should be string",
+            errors: [
+              {
+                errorCode: "type.openapi.validation",
+                message: "should be string",
+                path: ".body.body.metadata.authors"
+              }
+            ]
+          }
+        }
+      },
+      {
+        description: '"body.discounts[\'msp2\'].serviceGroups" should be array',
+        sentBody: {
+          header: {
+            name: 'Contract name between A1 and B1',
+            version: '1.1',
+            type: 'contract',
+            fromMsp: {mspId: 'A1'},
+            toMsp: {mspId: 'B1'}
+          },
+          body: {
+            version: "1",
+            metadata: {
+              name: "ContractName",
+              authors: "ME"
+            },
+            discounts: {
+              msp1: {
+                condition: {
+                  kind: "Unconditional"
+                },
+                serviceGroups: []
+              },
+              msp2: {
+                condition: {
+                  kind: "Unconditional"
+                },
+                serviceGroups: {}
+              }
+            }
+          }
+        },
+        response: {
+          status: 400,
+          body: {
+            message: "request.body.body.discounts['msp2'].serviceGroups should be array",
+            errors: [
+              {
+                errorCode: "type.openapi.validation",
+                message: "should be array",
+                path: ".body.body.discounts['msp2'].serviceGroups"
+              }
+            ]
+          }
+        }
+      },
+      {
+        description: '"body.discounts[\'msp2\'].serviceGroups[0].services[0].usagePricing.ratingPlan.rate.thresholds[1].linearPrice" should be number',
+        sentBody: {
+          header: {
+            name: 'Contract name between A1 and B1',
+            version: '1.1',
+            type: 'contract',
+            fromMsp: {mspId: 'A1'},
+            toMsp: {mspId: 'B1'}
+          },
+          body: {
+            version: "1",
+            metadata: {
+              name: "ContractName",
+              authors: "ME"
+            },
+            discounts: {
+              msp1: {
+                condition: {
+                  kind: "Unconditional"
+                },
+                serviceGroups: []
+              },
+              msp2: {
+                condition: {
+                  kind: "Unconditional"
+                },
+                serviceGroups: [
+                  {
+                    homeTadigs: [],
+                    visitorTadigs: [],
+                    services: [
+                      {
+                        service: "SMSMO",
+                        usagePricing: {
+                          unit: "eur",
+                          ratingPlan: {
+                            kind: "Linear rate",
+                            rate: {
+                              thresholds: [
+                                {
+                                  start: 0,
+                                  linearPrice: 0.256
+                                },
+                                {
+                                  start: 5000,
+                                  linearPrice: "0.050"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        response: {
+          status: 400,
+          body: {
+            message: "request.body.body.discounts['msp2'].serviceGroups[0].services[0].usagePricing.ratingPlan.rate.thresholds[1].linearPrice should be number",
+            errors: [
+              {
+                errorCode: "type.openapi.validation",
+                message: "should be number",
+                path: ".body.body.discounts['msp2'].serviceGroups[0].services[0].usagePricing.ratingPlan.rate.thresholds[1].linearPrice"
+              }
+            ]
+          }
+        }
+      }
+    ];
+    /* eslint-enable quotes */
+
+    testArray.forEach(function(test, index) {
+      it(`Post contracts FAILED. Case : ${test.description}`, function(done) {
+        try {
+          chai.request(testsUtils.getServer())
+            .post(`${path}`)
+            .send(test.sentBody)
+            .end((error, response) => {
+              debug('response.body: %s', JSON.stringify(response.body));
+              expect(error).to.be.null;
+              expect(response).to.have.status(test.response.status);
+              expect(response).to.be.json;
+              expect(response.body).to.exist;
+              expect(response.body).to.deep.equal(test.response.body);
+              done();
+            });
+        } catch (exception) {
+          debug('exception: %s', exception.stack);
+          expect.fail('it test throws an exception');
+          done();
+        }
+      });
+    });
+  });
+});

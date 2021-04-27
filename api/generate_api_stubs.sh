@@ -18,7 +18,7 @@
 #!/bin/bash
 set -e
 
-OPENAPI_VERSION="5.0.0-beta2"
+OPENAPI_VERSION="5.1.0"
 OPENAPI_JAR=openapi-generator-cli-${OPENAPI_VERSION}.jar
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"

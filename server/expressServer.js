@@ -83,6 +83,7 @@ class ExpressServer {
       apiSpec: this.openApiPath,
       operationHandlers: path.join(__dirname),
       fileUploader: {dest: config.FILE_UPLOAD_PATH},
+      coerceTypes: false
     }).install(this.app)
       .catch((e) => console.log(e))
       .then(() => {
