@@ -426,7 +426,7 @@ describe(`Tests POST ${route} API FAILED`, function() {
         }
       },
       {
-        description: '"body.discounts[\'msp2\'].serviceGroups[0].services[0].usagePricing.ratingPlan.rate.thresholds[1].linearPrice" should be number',
+        description: '"body.discounts[\'msp2\'].serviceGroups[0].homeTadigs should NOT have fewer than 1 items',
         sentBody: {
           header: {
             name: 'Contract name between A1 and B1',
@@ -455,7 +455,77 @@ describe(`Tests POST ${route} API FAILED`, function() {
                 serviceGroups: [
                   {
                     homeTadigs: [],
-                    visitorTadigs: [],
+                    visitorTadigs: ["msp1-tadig1", "msp1-tadig2"],
+                    services: [
+                      {
+                        service: "SMSMO",
+                        usagePricing: {
+                          unit: "eur",
+                          ratingPlan: {
+                            kind: "Linear rate",
+                            rate: {
+                              thresholds: [
+                                {
+                                  start: 0,
+                                  linearPrice: 0.256
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        response: {
+          status: 400,
+          body: {
+            message: "request.body.body.discounts['msp2'].serviceGroups[0].homeTadigs should NOT have fewer than 1 items",
+            errors: [
+              {
+                errorCode: "minItems.openapi.validation",
+                message: "should NOT have fewer than 1 items",
+                path: ".body.body.discounts['msp2'].serviceGroups[0].homeTadigs"
+              }
+            ]
+          }
+        }
+      },
+      {
+        description: '"body.discounts[\'msp2\'].serviceGroups[0].services[0].usagePricing.ratingPlan.rate.thresholds[1].linearPrice" should be number',
+        sentBody: {
+          header: {
+            name: 'Contract name between A1 and B1',
+            version: '1.1',
+            type: 'contract',
+            fromMsp: {mspId: 'A1'},
+            toMsp: {mspId: 'B1'}
+          },
+          body: {
+            version: "1",
+            metadata: {
+              name: "ContractName",
+              authors: "ME"
+            },
+            discounts: {
+              msp1: {
+                condition: {
+                  kind: "Unconditional"
+                },
+                serviceGroups: []
+              },
+              msp2: {
+                condition: {
+                  kind: "Unconditional"
+                },
+                serviceGroups: [
+                  {
+                    homeTadigs: ["msp2-tadig1"],
+                    visitorTadigs: ["msp1-tadig1", "msp1-tadig2"],
                     services: [
                       {
                         service: "SMSMO",

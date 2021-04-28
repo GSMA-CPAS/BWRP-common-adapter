@@ -1804,6 +1804,7 @@ components:
                     thresholds:
                       items:
                         $ref: '#/components/schemas/ContractBody_msp_discount_serviceGroup_service_rate_threshold'
+                      minItems: 1
                       type: array
                   type: object
                 unbalancedRate:
@@ -1812,6 +1813,7 @@ components:
                     thresholds:
                       items:
                         $ref: '#/components/schemas/ContractBody_msp_discount_serviceGroup_service_rate_threshold'
+                      minItems: 1
                       type: array
                   type: object
                 rate:
@@ -1822,6 +1824,7 @@ components:
                     thresholds:
                       items:
                         $ref: '#/components/schemas/ContractBody_msp_discount_serviceGroup_service_rate_threshold'
+                      minItems: 1
                       type: array
                   type: object
               type: object
@@ -1885,6 +1888,7 @@ components:
           - GSMA-TADIG-2
           items:
             type: string
+          minItems: 1
           type: array
         visitorTadigs:
           example:
@@ -1893,6 +1897,7 @@ components:
           - AnotherMSP-TADIG-3
           items:
             type: string
+          minItems: 1
           type: array
         services:
           example:
