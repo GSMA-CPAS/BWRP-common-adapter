@@ -1282,16 +1282,13 @@ components:
             name:
               type: string
               description: Human readable name for the contract.
-              example: Contract with XYZ
             version:
               type: string
               description: Version of the contract
-              example: 1.0
             type:
               type: string
               description: Type of document. MUST be "contract"
               enum: [contract]
-
             fromMsp:
               type: object
               properties:
@@ -1304,7 +1301,6 @@ components:
                   items:
                     $ref: '#/components/schemas/SignatureBase'
                   minItems: 1
-              
             toMsp:
               type: object
               properties:
@@ -1317,12 +1313,29 @@ components:
                   items:
                     $ref: '#/components/schemas/SignatureBase'
                   minItems: 1
-
           required:
             - version
             - type
             - fromMsp
             - toMsp
+          example:
+            name: Contract with XYZ
+            version: "1.0"
+            type: contract
+            msps:
+              DTAG:
+                signatures:
+                - id: id-signature-DTAG-1
+                  name: name-signature-DTAG-1
+                  role: role-signature-DTAG-1
+                - id: id-signature-DTAG-2
+                  name: name-signature-DTAG-2
+                  role: role-signature-DTAG-2
+              TMUS:
+                signatures:
+                - id: id-signature-TMUS-1
+                  name: name-signature-TMUS-1
+                  role: role-signature-TMUS-1
         body:
           $ref: '#/components/schemas/ContractBody'
         state:
@@ -1361,36 +1374,30 @@ components:
     ContractRequest:
       title: Contract JSON for POST/PUT
       type: object
-      example:
-        header:
-          name: Contract with XYZ
-          type: contract
-          version: "1.0"
-          msps:
-            DTAG:
-              signatures:
-              - role: role
-                name: name
-                id: id
-              - role: role
-                name: name
-                id: id
-            TMUS:
-              signatures:
-              - role: role
-                name: name
-                id: id
-              - role: role
-                name: name
-                id: id
-        body:
-          key: {}
       properties:
         header:
           type: object
           oneOf:
           - $ref: '#/components/schemas/ContractRequest_header'
           - $ref: '#/components/schemas/ContractRequest_header2'
+          example:
+            name: Contract with XYZ
+            type: contract
+            version: "1.0"
+            msps:
+              DTAG:
+                signatures:
+                - id: id-signature-DTAG-1
+                  name: name-signature-DTAG-1
+                  role: role-signature-DTAG-1
+                - id: id-signature-DTAG-2
+                  name: name-signature-DTAG-2
+                  role: role-signature-DTAG-2
+              TMUS:
+                signatures:
+                - id: id-signature-TMUS-1
+                  name: name-signature-TMUS-1
+                  role: role-signature-TMUS-1
         body:
           $ref: '#/components/schemas/ContractBody'
       additionalProperties: false
@@ -1809,37 +1816,16 @@ components:
           type: array
           items:
             type: string
-          example: ['GSMA-TADIG-1', 'GSMA-TADIG-2']
           minItems: 1
         visitorTadigs:
           type: array
           items:
             type: string
-          example: ['AnotherMSP-TADIG-1', 'AnotherMSP-TADIG-2', 'AnotherMSP-TADIG-3']
           minItems: 1
         services:
           type: array
           items:
             $ref: '#/components/schemas/ContractBody_msp_discount_serviceGroup_service'
-          example:
-          - service: "MOC Local"
-            usagePricing:
-              unit: "eur"
-              ratingPlan:
-                kind: "Linear rate"
-                rate:
-                  linearPrice: 0.145
-          - service: "SMSMO"
-            usagePricing:
-              unit: "eur"
-              ratingPlan:
-                kind: "Linear rate"
-                rate:
-                  thresholds:
-                  - start: 0
-                    linearPrice: 0.256
-                  - start: 5000
-                    linearPrice: 0.050
 
     ContractBody_msp_discount:
       type: object
@@ -1848,8 +1834,6 @@ components:
         condition:
           type: object
           additionalProperties: true
-          example:
-            kind: "Unconditional"
         serviceGroups:
           type: array
           items:
@@ -1861,7 +1845,6 @@ components:
       properties:
         version:
           type: string
-          example: 0.0.2-MVP1
         metadata:
           type: object
           additionalProperties: true
@@ -1870,9 +1853,6 @@ components:
               type: string
             authors:
               type: string
-          example:
-            name: Contract-Name-Chosen
-            authors: author1 & author2
         discounts:
           type: object
           minProperties: 2
@@ -1892,12 +1872,80 @@ components:
             partyInformation:
               type: object
               additionalProperties: true
-          example:
-            term:
-              start: 2020-01-01T00:00:00.000Z
-              end: 2020-12-31T00:00:00.000Z
-            payment:
-              taxesIncluded: false
+      example:
+        version: 0.0.2-MVP1
+        metadata:
+          name: Contract-Name-Chosen
+          authors: author1 & author2
+        framework:
+          term:
+            start: 2020-01-01T00:00:00.000Z
+            end: 2020-12-31T00:00:00.000Z
+          payment:
+            taxesIncluded: false
+        discounts:
+          MSP-1:
+            condition:
+              kind: "Unconditional"
+            serviceGroups:
+            - homeTadigs:
+              - "MSP-1--TADIG-1"
+              - "MSP-1--TADIG-2"
+              visitorTadigs:
+              - "MSP-23--TADIG-7"
+              - "MSP-23--TADIG-8"
+              - "MSP-23--TADIG-9"
+              services:
+              - service: "MOC Local"
+                usagePricing:
+                  unit: "Min"
+                  ratingPlan:
+                    kind: "Linear rate"
+                    rate:
+                      linearPrice: 0.145
+              - service: "SMSMO"
+                usagePricing:
+                  unit: "SMS"
+                  ratingPlan:
+                    rate:
+                      thresholds:
+                      - start: 0
+                        linearPrice: 0.256
+                      - start: 5000
+                        linearPrice: 0.050
+          MSP-23:
+            condition:
+              kind: "Deal Revenue Commitment"
+              commitment:
+                value: 235000,
+                currency: "EUR"
+                includingTaxes: false
+            serviceGroups:
+            - homeTadigs:
+              - "MSP-23--TADIG-7"
+              - "MSP-23--TADIG-8"
+              - "MSP-23--TADIG-9"
+              visitorTadigs:
+              - "MSP-1--TADIG-1"
+              - "MSP-1--TADIG-2"
+              services:
+              - service: "MOC Back Home"
+                usagePricing:
+                  unit: "Min"
+                  ratingPlan:
+                    kind: "Linear rate"
+                    rate:
+                      linearPrice: 0.023
+              - service: "GPRS"
+                usagePricing:
+                  unit: "MB"
+                  ratingPlan:
+                    rate:
+                      thresholds:
+                      - start: 0
+                        linearPrice: 0.0035
+                      - start: 70000
+                        linearPrice: 0.0015
               
     UsageBody_usage_item:
       type: object

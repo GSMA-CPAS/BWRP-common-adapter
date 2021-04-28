@@ -1265,9 +1265,27 @@ components:
       additionalProperties: false
       example:
         contractId: 05552c4c-e52f-4bb5-83d2-f50c86115bc8
-        header: '{}'
+        header:
+          name: Contract with XYZ
+          version: "1.0"
+          type: contract
+          msps:
+            DTAG:
+              signatures:
+              - id: id-signature-DTAG-1
+                name: name-signature-DTAG-1
+                role: role-signature-DTAG-1
+              - id: id-signature-DTAG-2
+                name: name-signature-DTAG-2
+                role: role-signature-DTAG-2
+            TMUS:
+              signatures:
+              - id: id-signature-TMUS-1
+                name: name-signature-TMUS-1
+                role: role-signature-TMUS-1
         state: DRAFT
         body:
+          version: 0.0.2-MVP1
           metadata:
             name: Contract-Name-Chosen
             authors: author1 & author2
@@ -1278,77 +1296,98 @@ components:
             payment:
               taxesIncluded: false
           discounts:
-            key:
+            MSP-1:
               condition:
                 kind: Unconditional
               serviceGroups:
               - homeTadigs:
-                - GSMA-TADIG-1
-                - GSMA-TADIG-2
+                - MSP-1--TADIG-1
+                - MSP-1--TADIG-2
                 visitorTadigs:
-                - AnotherMSP-TADIG-1
-                - AnotherMSP-TADIG-2
-                - AnotherMSP-TADIG-3
+                - MSP-23--TADIG-7
+                - MSP-23--TADIG-8
+                - MSP-23--TADIG-9
                 services:
                 - service: MOC Local
                   usagePricing:
-                    unit: eur
+                    unit: Min
                     ratingPlan:
                       kind: Linear rate
                       rate:
                         linearPrice: 0.145
                 - service: SMSMO
                   usagePricing:
-                    unit: eur
+                    unit: SMS
                     ratingPlan:
-                      kind: Linear rate
                       rate:
                         thresholds:
                         - start: 0
                           linearPrice: 0.256
                         - start: 5000
                           linearPrice: 0.05
+            MSP-23:
+              condition:
+                kind: Deal Revenue Commitment
+                commitment:
+                  value: 235000,
+                  currency: EUR
+                  includingTaxes: false
+              serviceGroups:
               - homeTadigs:
-                - GSMA-TADIG-1
-                - GSMA-TADIG-2
+                - MSP-23--TADIG-7
+                - MSP-23--TADIG-8
+                - MSP-23--TADIG-9
                 visitorTadigs:
-                - AnotherMSP-TADIG-1
-                - AnotherMSP-TADIG-2
-                - AnotherMSP-TADIG-3
+                - MSP-1--TADIG-1
+                - MSP-1--TADIG-2
                 services:
-                - service: MOC Local
+                - service: MOC Back Home
                   usagePricing:
-                    unit: eur
+                    unit: Min
                     ratingPlan:
                       kind: Linear rate
                       rate:
-                        linearPrice: 0.145
-                - service: SMSMO
+                        linearPrice: 0.023
+                - service: GPRS
                   usagePricing:
-                    unit: eur
+                    unit: MB
                     ratingPlan:
-                      kind: Linear rate
                       rate:
                         thresholds:
                         - start: 0
-                          linearPrice: 0.256
-                        - start: 5000
-                          linearPrice: 0.05
-          version: 0.0.2-MVP1
+                          linearPrice: 0.0035
+                        - start: 70000
+                          linearPrice: 0.0015
       properties:
         contractId:
           description: ContractId in GUID format
           example: 05552c4c-e52f-4bb5-83d2-f50c86115bc8
           type: string
         header:
+          example:
+            name: Contract with XYZ
+            version: "1.0"
+            type: contract
+            msps:
+              DTAG:
+                signatures:
+                - id: id-signature-DTAG-1
+                  name: name-signature-DTAG-1
+                  role: role-signature-DTAG-1
+                - id: id-signature-DTAG-2
+                  name: name-signature-DTAG-2
+                  role: role-signature-DTAG-2
+              TMUS:
+                signatures:
+                - id: id-signature-TMUS-1
+                  name: name-signature-TMUS-1
+                  role: role-signature-TMUS-1
           properties:
             name:
               description: Human readable name for the contract.
-              example: Contract with XYZ
               type: string
             version:
               description: Version of the contract
-              example: "1.0"
               type: string
             type:
               description: Type of document. MUST be "contract"
@@ -1437,24 +1476,111 @@ components:
           msps:
             DTAG:
               signatures:
-              - role: role
-                name: name
-                id: id
-              - role: role
-                name: name
-                id: id
+              - id: id-signature-DTAG-1
+                name: name-signature-DTAG-1
+                role: role-signature-DTAG-1
+              - id: id-signature-DTAG-2
+                name: name-signature-DTAG-2
+                role: role-signature-DTAG-2
             TMUS:
               signatures:
-              - role: role
-                name: name
-                id: id
-              - role: role
-                name: name
-                id: id
+              - id: id-signature-TMUS-1
+                name: name-signature-TMUS-1
+                role: role-signature-TMUS-1
         body:
-          key: {}
+          version: 0.0.2-MVP1
+          metadata:
+            name: Contract-Name-Chosen
+            authors: author1 & author2
+          framework:
+            term:
+              start: 2020-01-01T00:00:00.000Z
+              end: 2020-12-31T00:00:00.000Z
+            payment:
+              taxesIncluded: false
+          discounts:
+            MSP-1:
+              condition:
+                kind: Unconditional
+              serviceGroups:
+              - homeTadigs:
+                - MSP-1--TADIG-1
+                - MSP-1--TADIG-2
+                visitorTadigs:
+                - MSP-23--TADIG-7
+                - MSP-23--TADIG-8
+                - MSP-23--TADIG-9
+                services:
+                - service: MOC Local
+                  usagePricing:
+                    unit: Min
+                    ratingPlan:
+                      kind: Linear rate
+                      rate:
+                        linearPrice: 0.145
+                - service: SMSMO
+                  usagePricing:
+                    unit: SMS
+                    ratingPlan:
+                      rate:
+                        thresholds:
+                        - start: 0
+                          linearPrice: 0.256
+                        - start: 5000
+                          linearPrice: 0.05
+            MSP-23:
+              condition:
+                kind: Deal Revenue Commitment
+                commitment:
+                  value: 235000,
+                  currency: EUR
+                  includingTaxes: false
+              serviceGroups:
+              - homeTadigs:
+                - MSP-23--TADIG-7
+                - MSP-23--TADIG-8
+                - MSP-23--TADIG-9
+                visitorTadigs:
+                - MSP-1--TADIG-1
+                - MSP-1--TADIG-2
+                services:
+                - service: MOC Back Home
+                  usagePricing:
+                    unit: Min
+                    ratingPlan:
+                      kind: Linear rate
+                      rate:
+                        linearPrice: 0.023
+                - service: GPRS
+                  usagePricing:
+                    unit: MB
+                    ratingPlan:
+                      rate:
+                        thresholds:
+                        - start: 0
+                          linearPrice: 0.0035
+                        - start: 70000
+                          linearPrice: 0.0015
       properties:
         header:
+          example:
+            name: Contract with XYZ
+            type: contract
+            version: "1.0"
+            msps:
+              DTAG:
+                signatures:
+                - id: id-signature-DTAG-1
+                  name: name-signature-DTAG-1
+                  role: role-signature-DTAG-1
+                - id: id-signature-DTAG-2
+                  name: name-signature-DTAG-2
+                  role: role-signature-DTAG-2
+              TMUS:
+                signatures:
+                - id: id-signature-TMUS-1
+                  name: name-signature-TMUS-1
+                  role: role-signature-TMUS-1
           oneOf:
           - $ref: '#/components/schemas/ContractRequest_header'
           - $ref: '#/components/schemas/ContractRequest_header2'
@@ -1930,138 +2056,27 @@ components:
       type: object
     ContractBody_msp_discount_serviceGroup:
       additionalProperties: true
-      example:
-        homeTadigs:
-        - GSMA-TADIG-1
-        - GSMA-TADIG-2
-        visitorTadigs:
-        - AnotherMSP-TADIG-1
-        - AnotherMSP-TADIG-2
-        - AnotherMSP-TADIG-3
-        services:
-        - service: MOC Local
-          usagePricing:
-            unit: eur
-            ratingPlan:
-              kind: Linear rate
-              rate:
-                linearPrice: 0.145
-        - service: SMSMO
-          usagePricing:
-            unit: eur
-            ratingPlan:
-              kind: Linear rate
-              rate:
-                thresholds:
-                - start: 0
-                  linearPrice: 0.256
-                - start: 5000
-                  linearPrice: 0.05
       properties:
         homeTadigs:
-          example:
-          - GSMA-TADIG-1
-          - GSMA-TADIG-2
           items:
             type: string
           minItems: 1
           type: array
         visitorTadigs:
-          example:
-          - AnotherMSP-TADIG-1
-          - AnotherMSP-TADIG-2
-          - AnotherMSP-TADIG-3
           items:
             type: string
           minItems: 1
           type: array
         services:
-          example:
-          - service: MOC Local
-            usagePricing:
-              unit: eur
-              ratingPlan:
-                kind: Linear rate
-                rate:
-                  linearPrice: 0.145
-          - service: SMSMO
-            usagePricing:
-              unit: eur
-              ratingPlan:
-                kind: Linear rate
-                rate:
-                  thresholds:
-                  - start: 0
-                    linearPrice: 0.256
-                  - start: 5000
-                    linearPrice: 0.05
           items:
             $ref: '#/components/schemas/ContractBody_msp_discount_serviceGroup_service'
           type: array
       type: object
     ContractBody_msp_discount:
       additionalProperties: true
-      example:
-        condition:
-          kind: Unconditional
-        serviceGroups:
-        - homeTadigs:
-          - GSMA-TADIG-1
-          - GSMA-TADIG-2
-          visitorTadigs:
-          - AnotherMSP-TADIG-1
-          - AnotherMSP-TADIG-2
-          - AnotherMSP-TADIG-3
-          services:
-          - service: MOC Local
-            usagePricing:
-              unit: eur
-              ratingPlan:
-                kind: Linear rate
-                rate:
-                  linearPrice: 0.145
-          - service: SMSMO
-            usagePricing:
-              unit: eur
-              ratingPlan:
-                kind: Linear rate
-                rate:
-                  thresholds:
-                  - start: 0
-                    linearPrice: 0.256
-                  - start: 5000
-                    linearPrice: 0.05
-        - homeTadigs:
-          - GSMA-TADIG-1
-          - GSMA-TADIG-2
-          visitorTadigs:
-          - AnotherMSP-TADIG-1
-          - AnotherMSP-TADIG-2
-          - AnotherMSP-TADIG-3
-          services:
-          - service: MOC Local
-            usagePricing:
-              unit: eur
-              ratingPlan:
-                kind: Linear rate
-                rate:
-                  linearPrice: 0.145
-          - service: SMSMO
-            usagePricing:
-              unit: eur
-              ratingPlan:
-                kind: Linear rate
-                rate:
-                  thresholds:
-                  - start: 0
-                    linearPrice: 0.256
-                  - start: 5000
-                    linearPrice: 0.05
       properties:
         condition:
           additionalProperties: true
-          example:
-            kind: Unconditional
           type: object
         serviceGroups:
           items:
@@ -2071,6 +2086,7 @@ components:
     ContractBody:
       additionalProperties: true
       example:
+        version: 0.0.2-MVP1
         metadata:
           name: Contract-Name-Chosen
           authors: author1 & author2
@@ -2081,72 +2097,73 @@ components:
           payment:
             taxesIncluded: false
         discounts:
-          key:
+          MSP-1:
             condition:
               kind: Unconditional
             serviceGroups:
             - homeTadigs:
-              - GSMA-TADIG-1
-              - GSMA-TADIG-2
+              - MSP-1--TADIG-1
+              - MSP-1--TADIG-2
               visitorTadigs:
-              - AnotherMSP-TADIG-1
-              - AnotherMSP-TADIG-2
-              - AnotherMSP-TADIG-3
+              - MSP-23--TADIG-7
+              - MSP-23--TADIG-8
+              - MSP-23--TADIG-9
               services:
               - service: MOC Local
                 usagePricing:
-                  unit: eur
+                  unit: Min
                   ratingPlan:
                     kind: Linear rate
                     rate:
                       linearPrice: 0.145
               - service: SMSMO
                 usagePricing:
-                  unit: eur
+                  unit: SMS
                   ratingPlan:
-                    kind: Linear rate
                     rate:
                       thresholds:
                       - start: 0
                         linearPrice: 0.256
                       - start: 5000
                         linearPrice: 0.05
+          MSP-23:
+            condition:
+              kind: Deal Revenue Commitment
+              commitment:
+                value: 235000,
+                currency: EUR
+                includingTaxes: false
+            serviceGroups:
             - homeTadigs:
-              - GSMA-TADIG-1
-              - GSMA-TADIG-2
+              - MSP-23--TADIG-7
+              - MSP-23--TADIG-8
+              - MSP-23--TADIG-9
               visitorTadigs:
-              - AnotherMSP-TADIG-1
-              - AnotherMSP-TADIG-2
-              - AnotherMSP-TADIG-3
+              - MSP-1--TADIG-1
+              - MSP-1--TADIG-2
               services:
-              - service: MOC Local
+              - service: MOC Back Home
                 usagePricing:
-                  unit: eur
+                  unit: Min
                   ratingPlan:
                     kind: Linear rate
                     rate:
-                      linearPrice: 0.145
-              - service: SMSMO
+                      linearPrice: 0.023
+              - service: GPRS
                 usagePricing:
-                  unit: eur
+                  unit: MB
                   ratingPlan:
-                    kind: Linear rate
                     rate:
                       thresholds:
                       - start: 0
-                        linearPrice: 0.256
-                      - start: 5000
-                        linearPrice: 0.05
-        version: 0.0.2-MVP1
+                        linearPrice: 0.0035
+                      - start: 70000
+                        linearPrice: 0.0015
       properties:
         version:
-          example: 0.0.2-MVP1
           type: string
         metadata:
           additionalProperties: true
-          example:
-            name: Contract-Name-Chosen
-            authors: author1 & author2
           properties:
             name:
               type: string
@@ -2161,12 +2178,6 @@ components:
           type: object
         framework:
           additionalProperties: true
-          example:
-            term:
-              start: 2020-01-01T00:00:00.000Z
-              end: 2020-12-31T00:00:00.000Z
-            payment:
-              taxesIncluded: false
           properties:
             term:
               additionalProperties: true
