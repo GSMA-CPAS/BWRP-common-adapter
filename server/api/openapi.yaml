@@ -188,8 +188,7 @@ paths:
           content:
             application/json:
               schema:
-                type: string
-                x-content-type: application/json
+                $ref: '#/components/schemas/ContractListResponse'
           description: The status of the service
         "500":
           content: {}
@@ -281,10 +280,7 @@ paths:
           content:
             application/json:
               schema:
-                oneOf:
-                - $ref: '#/components/schemas/ContractResponse'
-                - $ref: '#/components/schemas/RAWContractResponse'
-                x-content-type: application/json
+                $ref: '#/components/schemas/ContractResponseOrRAWContractResponse'
           description: The Selected Contract Object
         "400":
           content:
@@ -1200,6 +1196,13 @@ paths:
       x-eov-operation-handler: controllers/SettlementController
 components:
   schemas:
+    stringOrNull:
+      title: A string value or null
+      type: string
+    objectOrNull:
+      additionalProperties: true
+      title: An object or null
+      type: object
     Msp:
       additionalProperties: true
       example:
@@ -1261,6 +1264,79 @@ components:
           type: object
       title: Event JSON
       type: object
+    ContractListResponse:
+      example:
+      - contractId: 6086ec7f7146de001fefc02004cf
+        header:
+          type: contract
+          version: "1.1"
+          msps:
+            DTAG:
+              signatures: []
+            TMUS:
+              signatures: []
+        body:
+          metadata:
+            name: Contract number 1
+            authors: null
+          framework:
+            term:
+              start: 2020-01-01T00:00:00.000Z
+              end: 2020-12-31T00:00:00.000Z
+            partyInformation: null
+        state: SENT
+      - contractId: 6086a6e990658f001f8fdf5e40f3
+        header:
+          type: contract
+          version: "2.4"
+          msps:
+            DTAG:
+              signatures: []
+            TMUS:
+              signatures: []
+        body:
+          metadata:
+            name: Another contract number 8
+            authors: me
+          framework:
+            term:
+              start: 2019-01-01T00:00:00.000Z
+              end: 2019-12-31T00:00:00.000Z
+            partyInformation: null
+        state: DRAFT
+      items:
+        properties:
+          contractId:
+            type: string
+          header:
+            $ref: '#/components/schemas/ContractRequest_header2'
+          body:
+            properties:
+              metadata:
+                properties:
+                  name:
+                    $ref: '#/components/schemas/stringOrNull'
+                  authors:
+                    $ref: '#/components/schemas/stringOrNull'
+                type: object
+              framework:
+                properties:
+                  term:
+                    $ref: '#/components/schemas/objectOrNull'
+                  partyInformation:
+                    $ref: '#/components/schemas/objectOrNull'
+                type: object
+            type: object
+          state:
+            enum:
+            - DRAFT
+            - PENDING
+            - SENT
+            - RECEIVED
+            type: string
+        type: object
+      title: List of contracts JSON
+      type: array
     ContractResponse:
       additionalProperties: false
       example:
@@ -1465,6 +1541,11 @@ components:
       - raw
       - state
       title: Contract RAW
+      type: object
+    ContractResponseOrRAWContractResponse:
+      oneOf:
+      - $ref: '#/components/schemas/ContractResponse'
+      - $ref: '#/components/schemas/RAWContractResponse'
       type: object
     ContractRequest:
       additionalProperties: false

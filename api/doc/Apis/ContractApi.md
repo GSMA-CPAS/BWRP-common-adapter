@@ -68,7 +68,7 @@ No authorization required
 
 <a name="getContractById"></a>
 # **getContractById**
-> oneOf&lt;ContractResponse,RAWContractResponse&gt; getContractById(contractId, format)
+> ContractResponseOrRAWContractResponse getContractById(contractId, format)
 
 
 
@@ -83,7 +83,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**oneOf&lt;ContractResponse,RAWContractResponse&gt;**](../Models/oneOf&lt;ContractResponse,RAWContractResponse&gt;.md)
+[**ContractResponseOrRAWContractResponse**](../Models/ContractResponseOrRAWContractResponse.md)
 
 ### Authorization
 
@@ -96,7 +96,7 @@ No authorization required
 
 <a name="getContracts"></a>
 # **getContracts**
-> String getContracts(withMSPs, states)
+> List getContracts(withMSPs, states)
 
 
 
@@ -111,7 +111,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**String**](../Models/string.md)
+[**List**](../Models/object.md)
 
 ### Authorization
 
