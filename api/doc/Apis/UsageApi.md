@@ -159,7 +159,7 @@ No authorization required
 
 <a name="getUsages"></a>
 # **getUsages**
-> String getUsages(contractId, states)
+> List getUsages(contractId, states)
 
 
 
@@ -174,7 +174,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**String**](../Models/string.md)
+[**List**](../Models/object.md)
 
 ### Authorization
 

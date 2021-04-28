@@ -640,8 +640,7 @@ paths:
           content:
             application/json:
               schema:
-                type: string
-                x-content-type: application/json
+                $ref: '#/components/schemas/UsageListResponse'
           description: List of available Usages
         "500":
           content: {}
@@ -1755,6 +1754,53 @@ components:
       - signature
       title: Signature JSON for PUT
       type: object
+    UsageListResponse:
+      example:
+      - usageId: 6086a6f090658f001f8fdf601ce3
+        contractId: 6086ec7f7146de001fefc02004cf
+        header:
+          type: usage
+          version: "1.1"
+          name: Usage from DTAG to TMUS created the 2021-04-26T11:41:29.112Z
+        state: DRAFT
+        mspOwner: DTAG
+      - usageId: 7086a6f090658f001f8fdf601ce3
+        contractId: 7086ec7f7146de001fefc02004cf
+        header:
+          type: usage
+          version: "3.2"
+          name: Usage from TMUS to DTAG created the 2020-03-29T17:11:22.012Z
+        state: RECEIVED
+        mspOwner: TMUS
+      items:
+        properties:
+          usageId:
+            type: string
+          contractId:
+            type: string
+          header:
+            properties:
+              name:
+                type: string
+              version:
+                type: string
+              type:
+                enum:
+                - usage
+                type: string
+            type: object
+          state:
+            enum:
+            - DRAFT
+            - PENDING
+            - SENT
+            - RECEIVED
+            type: string
+          mspOwner:
+            type: string
+        type: object
+      title: List of usages JSON
+      type: array
     UsageResponse:
       example:
         usageId: 05552c4c-e52f-4bb5-83d2-f50c86115bc8
