@@ -334,7 +334,7 @@ describe(`Tests POST ${route} API FAILED`, function() {
         }
       },
       {
-        description: '"body.discounts should NOT have fewer than 2 properties',
+        description: '"body.discounts" should NOT have fewer than 2 properties',
         sentBody: {
           header: {
             name: 'Contract name between A1 and B1',
@@ -374,7 +374,7 @@ describe(`Tests POST ${route} API FAILED`, function() {
         }
       },
       {
-        description: '"body.discounts should NOT have more than 2 properties',
+        description: '"body.discounts" should NOT have more than 2 properties',
         sentBody: {
           header: {
             name: 'Contract name between A1 and B1',
@@ -426,7 +426,7 @@ describe(`Tests POST ${route} API FAILED`, function() {
         }
       },
       {
-        description: '"body.discounts[\'msp2\'].serviceGroups[0].homeTadigs should NOT have fewer than 1 items',
+        description: '"body.discounts[\'msp2\'].serviceGroups[0].homeTadigs" should NOT have fewer than 1 items',
         sentBody: {
           header: {
             name: 'Contract name between A1 and B1',

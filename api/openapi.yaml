@@ -333,7 +333,7 @@ paths:
       x-codegen-request-body-name: body
       x-eov-operation-handler: controllers/ContractController
   /contracts/{contractId}/send/:
-   put:
+    put:
       description: Set State to "SEND" and POST to Blochain adapter towards TargetMsp of the Contract 
       operationId: sendContractById
       parameters:
@@ -1502,7 +1502,7 @@ components:
             - version
             - type
         body:
-          additionalProperties: true
+          $ref: '#/components/schemas/UsageBody'
         state:
           type: string
           description: The State of the Usage.
@@ -1536,7 +1536,7 @@ components:
             - version
             - type
         body:
-          additionalProperties: true
+          $ref: '#/components/schemas/UsageBody'
       required:
         - header
         - body
@@ -1899,3 +1899,89 @@ components:
             payment:
               taxesIncluded: false
               
+    UsageBody_usage_item:
+      type: object
+      additionalProperties: true
+      properties:
+        yearMonth:
+          type: string
+        homeTadig:
+          type: string
+        visitorTadig:
+          type: string
+        service:
+          type: string
+        usage:
+          type: number
+        units:
+          type: string
+        currency:
+          type: string
+      required:
+        - yearMonth
+        - homeTadig
+        - visitorTadig
+        - service
+        - usage
+
+    UsageBody:
+      type: object
+      additionalProperties: true
+      properties:
+        metadata:
+          type: object
+          additionalProperties: true
+          properties:
+            name:
+              type: string
+            authors:
+              type: string
+          example:
+            name: Usage-Name-Chosen
+            authors: author3
+        inbound:
+          type: array
+          items:
+            $ref: '#/components/schemas/UsageBody_usage_item'
+          example:
+          - yearMonth: "20200103"
+            homeTadig: "mspB-tadig4"
+            visitorTadig: "mspA-tadig8"
+            service: "MOC Local"
+            usage: 490
+            units: "min"
+            currency: "EUR"
+          - yearMonth: "20200104"
+            homeTadig: "mspB-tadig7"
+            visitorTadig: "mspA-tadig6"
+            service: "MOC Home"
+            usage: 677246
+            units: "min"
+            currency: "EUR"
+          - yearMonth: "20200104"
+            homeTadig: "mspB-tadig6"
+            visitorTadig: "mspA-tadig1"
+            service: "MOC International"
+            usage: 80434
+            units: "min"
+            currency: "EUR"
+        outbound:
+          type: array
+          items:
+            $ref: '#/components/schemas/UsageBody_usage_item'
+          example:
+          - yearMonth: "20200101"
+            homeTadig: "mspA-tadig1"
+            visitorTadig: "mspB-tadig9"
+            service: "SMSMO"
+            usage: 3
+            units: "SMS"
+            currency: "EUR"
+          - yearMonth: "20200101"
+            homeTadig: "mspA-tadig2"
+            visitorTadig: "mspB-tadig5"
+            service: "GPRS"
+            usage: 60073867.55
+            units: "MB"
+            currency: "EUR"
+

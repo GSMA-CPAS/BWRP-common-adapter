@@ -269,3 +269,312 @@ describe(`Tests POST ${route} API OK`, function() {
     });
   });
 });
+
+describe(`Tests POST ${route} API FAILED`, function() {
+  describe(`Setup and Test POST ${route} API FAILED`, function() {
+    const contractDraft = {
+      name: `Contract name between ${selfMspId} and B1`,
+      state: 'DRAFT',
+      type: 'contract',
+      version: '1.1.0',
+      fromMsp: {mspId: selfMspId},
+      toMsp: {mspId: 'B1'},
+      body: {
+        bankDetails: {A1: {iban: null, bankName: null, currency: null}, B1: {iban: null, bankName: null, currency: null}},
+        discountModels: 'someData',
+        generalInformation: {name: 'test1', type: 'Normal', endDate: '2021-01-01T00:00:00.000Z', startDate: '2020-12-01T00:00:00.000Z'}
+      },
+      rawData: 'Ctr_raw-data-1'
+    };
+
+    before((done) => {
+      debugSetup('==> init db with 1 contract');
+      testsDbUtils.initDbWithContracts([contractDraft])
+        .then((initDbWithContractsResp) => {
+          debugSetup('1 contract is added in db ', initDbWithContractsResp);
+          contractDraft.id = initDbWithContractsResp[0].id;
+
+          debugSetup('==> done!');
+          done();
+        })
+        .catch((initDbWithContractsError) => {
+          debugSetup('Error initializing the db content : ', initDbWithContractsError);
+          debugSetup('==> failed!');
+          done(initDbWithContractsError);
+        });
+    });
+
+    /* eslint-disable quotes */
+    const testArray = [
+      {
+        description: 'Empty usage',
+        sentBody: {},
+        response: {
+          status: 400,
+          body: {
+            message: "request.body should have required property 'header', request.body should have required property 'body'",
+            errors: [
+              {
+                errorCode: "required.openapi.validation",
+                message: "should have required property 'header'",
+                path: ".body.header"
+              },
+              {
+                errorCode: "required.openapi.validation",
+                message: "should have required property 'body'",
+                path: ".body.body"
+              }
+            ]
+          }
+        }
+      },
+      {
+        description: '"header" and "body" should be objects',
+        sentBody: {
+          header: "",
+          body: []
+        },
+        response: {
+          status: 400,
+          body: {
+            message: "request.body.header should be object, request.body.body should be object",
+            errors: [
+              {
+                errorCode: "type.openapi.validation",
+                message: "should be object",
+                path: ".body.header"
+              },
+              {
+                errorCode: "type.openapi.validation",
+                message: "should be object",
+                path: ".body.body"
+              }
+            ]
+          }
+        }
+      },
+      {
+        description: '"body.metadata" should be object',
+        sentBody: {
+          header: {
+            name: 'Usage name between A1 and B1',
+            version: '1.1',
+            type: 'usage'
+          },
+          body: {
+            metadata: [],
+            inbound: []
+          }
+        },
+        response: {
+          status: 400,
+          body: {
+            message: "request.body.body.metadata should be object",
+            errors: [
+              {
+                errorCode: "type.openapi.validation",
+                message: "should be object",
+                path: ".body.body.metadata"
+              }
+            ]
+          }
+        }
+      },
+      {
+        description: '"body.metadata.authors" should be string',
+        sentBody: {
+          header: {
+            name: 'Usage name between A1 and B1',
+            version: '1.1',
+            type: 'usage'
+          },
+          body: {
+            metadata: {
+              name: "UsageName",
+              authors: ["AAA", "BBB"]
+            },
+            inbound: [],
+            outbound: []
+          }
+        },
+        response: {
+          status: 400,
+          body: {
+            message: "request.body.body.metadata.authors should be string",
+            errors: [
+              {
+                errorCode: "type.openapi.validation",
+                message: "should be string",
+                path: ".body.body.metadata.authors"
+              }
+            ]
+          }
+        }
+      },
+      {
+        description: '"body.inbound[0].usage" should be number',
+        sentBody: {
+          header: {
+            name: 'Usage name between A1 and B1',
+            version: '1.1',
+            type: 'usage'
+          },
+          body: {
+            inbound: [
+              {
+                yearMonth: "202012",
+                homeTadig: "A_TADIG",
+                visitorTadig: "ANOTHER_TADIG",
+                service: "SMSMO",
+                usage: "10"
+              }
+            ],
+            outbound: []
+          }
+        },
+        response: {
+          status: 400,
+          body: {
+            message: "request.body.body.inbound[0].usage should be number",
+            errors: [
+              {
+                errorCode: "type.openapi.validation",
+                message: "should be number",
+                path: ".body.body.inbound[0].usage"
+              }
+            ]
+          }
+        }
+      },
+      {
+        description: '"body.outbound[0]" should have required property "homeTadig"',
+        sentBody: {
+          header: {
+            name: 'Usage name between A1 and B1',
+            version: '1.1',
+            type: 'usage'
+          },
+          body: {
+            inbound: [],
+            outbound: [
+              {
+                yearMonth: "202012",
+                visitorTadig: "ANOTHER_TADIG",
+                service: "SMSMO",
+                usage: 10
+              }
+            ]
+          }
+        },
+        response: {
+          status: 400,
+          body: {
+            message: "request.body.body.outbound[0] should have required property 'homeTadig'",
+            errors: [
+              {
+                errorCode: "required.openapi.validation",
+                message: "should have required property 'homeTadig'",
+                path: ".body.body.outbound[0].homeTadig"
+              }
+            ]
+          }
+        }
+      },
+      {
+        description: '"body.outbound[0].visitorTadig" should be string',
+        sentBody: {
+          header: {
+            name: 'Usage name between A1 and B1',
+            version: '1.1',
+            type: 'usage'
+          },
+          body: {
+            inbound: [],
+            outbound: [
+              {
+                yearMonth: "202012",
+                homeTadig: "A_TADIG",
+                visitorTadig: ["ANOTHER_TADIG1", "ANOTHER_TADIG2"],
+                service: "SMSMO",
+                usage: 10
+              }
+            ]
+          }
+        },
+        response: {
+          status: 400,
+          body: {
+            message: "request.body.body.outbound[0].visitorTadig should be string",
+            errors: [
+              {
+                errorCode: "type.openapi.validation",
+                message: "should be string",
+                path: ".body.body.outbound[0].visitorTadig"
+              }
+            ]
+          }
+        }
+      },
+      {
+        description: '"body.inbound[0]" should have required property "yearMonth"',
+        sentBody: {
+          header: {
+            name: 'Usage name between A1 and B1',
+            version: '1.1',
+            type: 'usage'
+          },
+          body: {
+            inbound: [
+              {
+                homeTadig: "A_TADIG",
+                visitorTadig: "ANOTHER_TADIG",
+                service: "SMSMO",
+                usage: 10
+              }
+            ],
+            outbound: []
+          }
+        },
+        response: {
+          status: 400,
+          body: {
+            message: "request.body.body.inbound[0] should have required property 'yearMonth'",
+            errors: [
+              {
+                errorCode: "required.openapi.validation",
+                message: "should have required property 'yearMonth'",
+                path: ".body.body.inbound[0].yearMonth"
+              }
+            ]
+          }
+        }
+      }
+    ];
+    /* eslint-enable quotes */
+
+    testArray.forEach(function(test, index) {
+      it(`Post usages FAILED. Case : ${test.description}`, function(done) {
+        try {
+          const path = globalVersion + '/contracts/' + contractDraft.id + '/usages/';
+
+          chai.request(testsUtils.getServer())
+            .post(`${path}`)
+            .send(test.sentBody)
+            .end((error, response) => {
+              debug('response.body: %s', JSON.stringify(response.body));
+              expect(error).to.be.null;
+              expect(response).to.have.status(test.response.status);
+              expect(response).to.be.json;
+              expect(response.body).to.exist;
+              expect(response.body).to.deep.equal(test.response.body);
+              done();
+            });
+        } catch (exception) {
+          debug('exception: %s', exception.stack);
+          expect.fail('it test throws an exception');
+          done();
+        }
+      });
+    });
+  });
+});

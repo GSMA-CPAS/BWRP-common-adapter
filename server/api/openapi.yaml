@@ -1559,7 +1559,46 @@ components:
           version: "1.0"
         state: DRAFT
         body:
-          key: '{}'
+          metadata:
+            name: Usage-Name-Chosen
+            authors: author3
+          inbound:
+          - yearMonth: "20200103"
+            homeTadig: mspB-tadig4
+            visitorTadig: mspA-tadig8
+            service: MOC Local
+            usage: 490
+            units: min
+            currency: EUR
+          - yearMonth: "20200104"
+            homeTadig: mspB-tadig7
+            visitorTadig: mspA-tadig6
+            service: MOC Home
+            usage: 677246
+            units: min
+            currency: EUR
+          - yearMonth: "20200104"
+            homeTadig: mspB-tadig6
+            visitorTadig: mspA-tadig1
+            service: MOC International
+            usage: 80434
+            units: min
+            currency: EUR
+          outbound:
+          - yearMonth: "20200101"
+            homeTadig: mspA-tadig1
+            visitorTadig: mspB-tadig9
+            service: SMSMO
+            usage: 3
+            units: SMS
+            currency: EUR
+          - yearMonth: "20200101"
+            homeTadig: mspA-tadig2
+            visitorTadig: mspB-tadig5
+            service: GPRS
+            usage: 6.007386755E7
+            units: MB
+            currency: EUR
       properties:
         usageId:
           description: usageId in GUID format
@@ -1568,8 +1607,7 @@ components:
         header:
           $ref: '#/components/schemas/UsageResponse_header'
         body:
-          additionalProperties: true
-          type: object
+          $ref: '#/components/schemas/UsageBody'
         state:
           description: The State of the Usage.
           enum:
@@ -1591,13 +1629,51 @@ components:
           type: usage
           version: "1.0"
         body:
-          key: '{}'
+          metadata:
+            name: Usage-Name-Chosen
+            authors: author3
+          inbound:
+          - yearMonth: "20200103"
+            homeTadig: mspB-tadig4
+            visitorTadig: mspA-tadig8
+            service: MOC Local
+            usage: 490
+            units: min
+            currency: EUR
+          - yearMonth: "20200104"
+            homeTadig: mspB-tadig7
+            visitorTadig: mspA-tadig6
+            service: MOC Home
+            usage: 677246
+            units: min
+            currency: EUR
+          - yearMonth: "20200104"
+            homeTadig: mspB-tadig6
+            visitorTadig: mspA-tadig1
+            service: MOC International
+            usage: 80434
+            units: min
+            currency: EUR
+          outbound:
+          - yearMonth: "20200101"
+            homeTadig: mspA-tadig1
+            visitorTadig: mspB-tadig9
+            service: SMSMO
+            usage: 3
+            units: SMS
+            currency: EUR
+          - yearMonth: "20200101"
+            homeTadig: mspA-tadig2
+            visitorTadig: mspB-tadig5
+            service: GPRS
+            usage: 6.007386755E7
+            units: MB
+            currency: EUR
       properties:
         header:
           $ref: '#/components/schemas/UsageRequest_header'
         body:
-          additionalProperties: true
-          type: object
+          $ref: '#/components/schemas/UsageBody'
       required:
       - body
       - header
@@ -2102,6 +2178,131 @@ components:
               additionalProperties: true
               type: object
           type: object
+      type: object
+    UsageBody_usage_item:
+      additionalProperties: true
+      properties:
+        yearMonth:
+          type: string
+        homeTadig:
+          type: string
+        visitorTadig:
+          type: string
+        service:
+          type: string
+        usage:
+          type: number
+        units:
+          type: string
+        currency:
+          type: string
+      required:
+      - homeTadig
+      - service
+      - usage
+      - visitorTadig
+      - yearMonth
+      type: object
+    UsageBody:
+      additionalProperties: true
+      example:
+        metadata:
+          name: Usage-Name-Chosen
+          authors: author3
+        inbound:
+        - yearMonth: "20200103"
+          homeTadig: mspB-tadig4
+          visitorTadig: mspA-tadig8
+          service: MOC Local
+          usage: 490
+          units: min
+          currency: EUR
+        - yearMonth: "20200104"
+          homeTadig: mspB-tadig7
+          visitorTadig: mspA-tadig6
+          service: MOC Home
+          usage: 677246
+          units: min
+          currency: EUR
+        - yearMonth: "20200104"
+          homeTadig: mspB-tadig6
+          visitorTadig: mspA-tadig1
+          service: MOC International
+          usage: 80434
+          units: min
+          currency: EUR
+        outbound:
+        - yearMonth: "20200101"
+          homeTadig: mspA-tadig1
+          visitorTadig: mspB-tadig9
+          service: SMSMO
+          usage: 3
+          units: SMS
+          currency: EUR
+        - yearMonth: "20200101"
+          homeTadig: mspA-tadig2
+          visitorTadig: mspB-tadig5
+          service: GPRS
+          usage: 6.007386755E7
+          units: MB
+          currency: EUR
+      properties:
+        metadata:
+          additionalProperties: true
+          example:
+            name: Usage-Name-Chosen
+            authors: author3
+          properties:
+            name:
+              type: string
+            authors:
+              type: string
+          type: object
+        inbound:
+          example:
+          - yearMonth: "20200103"
+            homeTadig: mspB-tadig4
+            visitorTadig: mspA-tadig8
+            service: MOC Local
+            usage: 490
+            units: min
+            currency: EUR
+          - yearMonth: "20200104"
+            homeTadig: mspB-tadig7
+            visitorTadig: mspA-tadig6
+            service: MOC Home
+            usage: 677246
+            units: min
+            currency: EUR
+          - yearMonth: "20200104"
+            homeTadig: mspB-tadig6
+            visitorTadig: mspA-tadig1
+            service: MOC International
+            usage: 80434
+            units: min
+            currency: EUR
+          items:
+            $ref: '#/components/schemas/UsageBody_usage_item'
+          type: array
+        outbound:
+          example:
+          - yearMonth: "20200101"
+            homeTadig: mspA-tadig1
+            visitorTadig: mspB-tadig9
+            service: SMSMO
+            usage: 3
+            units: SMS
+            currency: EUR
+          - yearMonth: "20200101"
+            homeTadig: mspA-tadig2
+            visitorTadig: mspB-tadig5
+            service: GPRS
+            usage: 6.007386755E7
+            units: MB
+            currency: EUR
+          items:
+            $ref: '#/components/schemas/UsageBody_usage_item'
+          type: array
       type: object
     UsageResponse_header:
       example:

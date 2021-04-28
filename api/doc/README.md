@@ -61,6 +61,8 @@ Class | Method | HTTP request | Description
  - [SignatureBase](./Models/SignatureBase.md)
  - [SignatureRequest](./Models/SignatureRequest.md)
  - [SignatureResponse](./Models/SignatureResponse.md)
+ - [UsageBody](./Models/UsageBody.md)
+ - [UsageBodyUsageItem](./Models/UsageBodyUsageItem.md)
  - [UsageRequest](./Models/UsageRequest.md)
  - [UsageRequestHeader](./Models/UsageRequestHeader.md)
  - [UsageResponse](./Models/UsageResponse.md)
