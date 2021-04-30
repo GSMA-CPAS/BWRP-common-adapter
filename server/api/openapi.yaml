@@ -902,7 +902,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Settlement'
+                $ref: '#/components/schemas/SettlementResponse'
           description: Successful operation, returns sent Usage Object
         "400":
           content:
@@ -1050,7 +1050,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Settlement'
+                $ref: '#/components/schemas/SettlementResponse'
           description: The Settlement Object
         "400":
           content:
@@ -1139,7 +1139,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Settlement'
+                $ref: '#/components/schemas/SettlementResponse'
           description: Successful operation, returns sent Settlement Object
         "400":
           content:
@@ -1274,6 +1274,7 @@ components:
               signatures: []
             TMUS:
               signatures: []
+        state: SENT
         body:
           metadata:
             name: Contract number 1
@@ -1283,7 +1284,6 @@ components:
               start: 2020-01-01T00:00:00.000Z
               end: 2020-12-31T00:00:00.000Z
             partyInformation: null
-        state: SENT
       - contractId: 6086a6e990658f001f8fdf5e40f3
         header:
           type: contract
@@ -1293,6 +1293,7 @@ components:
               signatures: []
             TMUS:
               signatures: []
+        state: DRAFT
         body:
           metadata:
             name: Another contract number 8
@@ -1302,13 +1303,19 @@ components:
               start: 2019-01-01T00:00:00.000Z
               end: 2019-12-31T00:00:00.000Z
             partyInformation: null
-        state: DRAFT
       items:
         properties:
           contractId:
             type: string
           header:
             $ref: '#/components/schemas/ContractRequest_header2'
+          state:
+            enum:
+            - DRAFT
+            - PENDING
+            - SENT
+            - RECEIVED
+            type: string
           body:
             properties:
               metadata:
@@ -1326,13 +1333,6 @@ components:
                     $ref: '#/components/schemas/objectOrNull'
                 type: object
             type: object
-          state:
-            enum:
-            - DRAFT
-            - PENDING
-            - SENT
-            - RECEIVED
-            type: string
         type: object
       title: List of contracts JSON
       type: array
@@ -1498,8 +1498,6 @@ components:
           - toMsp
           - type
           - version
-        body:
-          $ref: '#/components/schemas/ContractBody'
         state:
           description: The State of the Contract.
           enum:
@@ -1508,6 +1506,8 @@ components:
           - SENT
           - RECEIVED
           type: string
+        body:
+          $ref: '#/components/schemas/ContractBody'
       required:
       - body
       - contractId
@@ -1522,11 +1522,6 @@ components:
           description: ContractId in GUID format
           example: 05552c4c-e52f-4bb5-83d2-f50c86115bc8
           type: string
-        raw:
-          description: Original Base64 encoded RAW payload, Used for Hash calculation
-            or Signing.
-          example: eyJoZWFkZXIiOnsidmVyc2lvbiI6IjEuM....
-          type: string
         state:
           description: The State of the Contract.
           enum:
@@ -1535,6 +1530,11 @@ components:
           - SENT
           - RECEIVED
           type: string
+        raw:
+          description: Original Base64 encoded RAW payload, Used for Hash calculation
+            or Signing.
+          example: eyJoZWFkZXIiOnsidmVyc2lvbiI6IjEuM....
+          type: string
       required:
       - contractId
       - raw
@@ -1542,6 +1542,101 @@ components:
       title: Contract RAW
       type: object
     ContractResponseOrRAWContractResponse:
+      example:
+        contractId: 05552c4c-e52f-4bb5-83d2-f50c86115bc8
+        header:
+          name: Contract with XYZ
+          version: "1.0"
+          type: contract
+          msps:
+            DTAG:
+              signatures:
+              - id: id-signature-DTAG-1
+                name: name-signature-DTAG-1
+                role: role-signature-DTAG-1
+              - id: id-signature-DTAG-2
+                name: name-signature-DTAG-2
+                role: role-signature-DTAG-2
+            TMUS:
+              signatures:
+              - id: id-signature-TMUS-1
+                name: name-signature-TMUS-1
+                role: role-signature-TMUS-1
+        state: DRAFT
+        body:
+          version: 0.0.2-MVP1
+          metadata:
+            name: Contract-Name-Chosen
+            authors: author1 & author2
+          framework:
+            term:
+              start: 2020-01-01T00:00:00.000Z
+              end: 2020-12-31T00:00:00.000Z
+            payment:
+              taxesIncluded: false
+          discounts:
+            MSP-1:
+              condition:
+                kind: Unconditional
+              serviceGroups:
+              - homeTadigs:
+                - MSP-1--TADIG-1
+                - MSP-1--TADIG-2
+                visitorTadigs:
+                - MSP-23--TADIG-7
+                - MSP-23--TADIG-8
+                - MSP-23--TADIG-9
+                services:
+                - service: MOC Local
+                  usagePricing:
+                    unit: Min
+                    ratingPlan:
+                      kind: Linear rate
+                      rate:
+                        linearPrice: 0.145
+                - service: SMSMO
+                  usagePricing:
+                    unit: SMS
+                    ratingPlan:
+                      rate:
+                        thresholds:
+                        - start: 0
+                          linearPrice: 0.256
+                        - start: 5000
+                          linearPrice: 0.05
+            MSP-23:
+              condition:
+                kind: Deal Revenue Commitment
+                commitment:
+                  value: 235000,
+                  currency: EUR
+                  includingTaxes: false
+              serviceGroups:
+              - homeTadigs:
+                - MSP-23--TADIG-7
+                - MSP-23--TADIG-8
+                - MSP-23--TADIG-9
+                visitorTadigs:
+                - MSP-1--TADIG-1
+                - MSP-1--TADIG-2
+                services:
+                - service: MOC Back Home
+                  usagePricing:
+                    unit: Min
+                    ratingPlan:
+                      kind: Linear rate
+                      rate:
+                        linearPrice: 0.023
+                - service: GPRS
+                  usagePricing:
+                    unit: MB
+                    ratingPlan:
+                      rate:
+                        thresholds:
+                        - start: 0
+                          linearPrice: 0.0035
+                        - start: 70000
+                          linearPrice: 0.0015
       oneOf:
       - $ref: '#/components/schemas/ContractResponse'
       - $ref: '#/components/schemas/RAWContractResponse'
@@ -1859,8 +1954,6 @@ components:
           type: string
         header:
           $ref: '#/components/schemas/UsageResponse_header'
-        body:
-          $ref: '#/components/schemas/UsageBody'
         state:
           description: The State of the Usage.
           enum:
@@ -1868,6 +1961,8 @@ components:
           - SENT
           - RECEIVED
           type: string
+        body:
+          $ref: '#/components/schemas/UsageBody'
       required:
       - body
       - header
@@ -1938,7 +2033,124 @@ components:
     SettlementDiscrepancy:
       title: Settlement Discrepancy JSON
       type: object
-    Settlement:
+    SettlementResponse:
+      example:
+        settlementId: 608a6e60a01f88001e80a3fb4de1
+        contractId: 6086a6e990658f001f8fdf5e40f3
+        header:
+          type: settlement
+          version: 1.0.0
+        state: DRAFT
+        mspOwner: DTAG
+        body:
+          fromDate: 202001
+          toDate: 202012
+          calculationEngineVersion: 0.0.1
+          inbound:
+            tax:
+              rate: ""
+            currency: EUR
+            services:
+              voice:
+                MOC:
+                  local: 0
+                  backHome: 0
+                  international: 0
+                  premium: 0
+                  ROW: 0
+                  EU: 0
+                  EEA: 0
+                  satellite: 0
+                  videoTelephony: 0
+                  specialDestinations: 0
+                MTC: 0
+              SMS:
+                MO: 0
+                MT: 0
+              data:
+              - name: GPRS
+                value: 0
+              - name: M2M
+                value: 0
+              - name: NB-IOT
+                value: 0
+              - name: LTE-M
+                value: 0
+              - name: VoLTE
+                value: 0
+              - name: ViLTE
+                value: 0
+              - name: signalling
+                value: 0
+              access:
+                networkAccess: 0
+          outbound:
+            tax:
+              rate: ""
+            currency: EUR
+            services:
+              voice:
+                MOC:
+                  local: 0
+                  backHome: 0
+                  international: 0
+                  premium: 0
+                  ROW: 0
+                  EU: 0
+                  EEA: 0
+                  satellite: 0
+                  videoTelephony: 0
+                  specialDestinations: 0
+                MTC: 0
+              SMS:
+                MO: 0
+                MT: 0
+              data:
+              - name: GPRS
+                value: 0
+              - name: M2M
+                value: 0
+              - name: NB-IOT
+                value: 0
+              - name: LTE-M
+                value: 0
+              - name: VoLTE
+                value: 0
+              - name: ViLTE
+                value: 0
+              - name: signalling
+                value: 0
+              access:
+                networkAccess: 0
+          unexpectedServiceNames: []
+      properties:
+        settlementId:
+          example: 608a6e60a01f88001e80a3fb4de1
+          type: string
+        contractId:
+          example: 6086a6e990658f001f8fdf5e40f3
+          type: string
+        header:
+          $ref: '#/components/schemas/SettlementResponse_header'
+        state:
+          enum:
+          - DRAFT
+          - SENT
+          - RECEIVED
+          example: DRAFT
+          type: string
+        mspOwner:
+          example: DTAG
+          type: string
+        body:
+          $ref: '#/components/schemas/SettlementBody'
+      required:
+      - body
+      - contractId
+      - header
+      - mspOwner
+      - settlementId
+      - state
       title: Settlement JSON
       type: object
     EventResponse:
@@ -2442,6 +2654,131 @@ components:
             $ref: '#/components/schemas/UsageBody_usage_item'
           type: array
       type: object
+    SettlementBody_settlement_item:
+      additionalProperties: true
+      properties:
+        tax:
+          $ref: '#/components/schemas/SettlementBody_settlement_item_tax'
+        currency:
+          type: string
+        services:
+          $ref: '#/components/schemas/SettlementBody_settlement_item_services'
+      required:
+      - currency
+      - services
+      - tax
+      type: object
+    SettlementBody:
+      additionalProperties: true
+      example:
+        fromDate: 202001
+        toDate: 202012
+        calculationEngineVersion: 0.0.1
+        inbound:
+          tax:
+            rate: ""
+          currency: EUR
+          services:
+            voice:
+              MOC:
+                local: 0
+                backHome: 0
+                international: 0
+                premium: 0
+                ROW: 0
+                EU: 0
+                EEA: 0
+                satellite: 0
+                videoTelephony: 0
+                specialDestinations: 0
+              MTC: 0
+            SMS:
+              MO: 0
+              MT: 0
+            data:
+            - name: GPRS
+              value: 0
+            - name: M2M
+              value: 0
+            - name: NB-IOT
+              value: 0
+            - name: LTE-M
+              value: 0
+            - name: VoLTE
+              value: 0
+            - name: ViLTE
+              value: 0
+            - name: signalling
+              value: 0
+            access:
+              networkAccess: 0
+        outbound:
+          tax:
+            rate: ""
+          currency: EUR
+          services:
+            voice:
+              MOC:
+                local: 0
+                backHome: 0
+                international: 0
+                premium: 0
+                ROW: 0
+                EU: 0
+                EEA: 0
+                satellite: 0
+                videoTelephony: 0
+                specialDestinations: 0
+              MTC: 0
+            SMS:
+              MO: 0
+              MT: 0
+            data:
+            - name: GPRS
+              value: 0
+            - name: M2M
+              value: 0
+            - name: NB-IOT
+              value: 0
+            - name: LTE-M
+              value: 0
+            - name: VoLTE
+              value: 0
+            - name: ViLTE
+              value: 0
+            - name: signalling
+              value: 0
+            access:
+              networkAccess: 0
+        unexpectedServiceNames: []
+      properties:
+        fromDate:
+          example: 202001
+          type: number
+        toDate:
+          example: 202012
+          type: number
+        calculationEngineVersion:
+          example: 0.0.1
+          type: string
+        inbound:
+          $ref: '#/components/schemas/SettlementBody_settlement_item'
+        outbound:
+          $ref: '#/components/schemas/SettlementBody_settlement_item'
+        unexpectedServiceNames:
+          example:
+          - UNKNOWN SERVICE NAME IN USAGE
+          items:
+            type: string
+          type: array
+      required:
+      - calculationEngineVersion
+      - fromDate
+      - inbound
+      - outbound
+      - toDate
+      - unexpectedServiceNames
+      type: object
     UsageResponse_header:
       example:
         mspOwner:
@@ -2493,4 +2830,125 @@ components:
       required:
       - type
       - version
+      type: object
+    SettlementResponse_header:
+      example:
+        type: settlement
+        version: 1.0.0
+      properties:
+        name:
+          type: string
+        version:
+          type: string
+        type:
+          enum:
+          - settlement
+          type: string
+      required:
+      - type
+      - version
+      type: object
+    SettlementBody_settlement_item_tax:
+      properties:
+        rate:
+          type: string
+      type: object
+    SettlementBody_settlement_item_services_voice_MOC:
+      properties:
+        local:
+          type: number
+        backHome:
+          type: number
+        international:
+          type: number
+        premium:
+          type: number
+        ROW:
+          type: number
+        EU:
+          type: number
+        EEA:
+          type: number
+        satellite:
+          type: number
+        videoTelephony:
+          type: number
+        specialDestinations:
+          type: number
+      required:
+      - EEA
+      - EU
+      - ROW
+      - backHome
+      - international
+      - local
+      - premium
+      - satellite
+      - specialDestinations
+      - videoTelephony
+      type: object
+    SettlementBody_settlement_item_services_voice:
+      properties:
+        MOC:
+          $ref: '#/components/schemas/SettlementBody_settlement_item_services_voice_MOC'
+        MTC:
+          type: number
+      required:
+      - MOC
+      - MTC
+      type: object
+    SettlementBody_settlement_item_services_SMS:
+      properties:
+        MO:
+          type: number
+        MT:
+          type: number
+      required:
+      - MO
+      - MT
+      type: object
+    SettlementBody_settlement_item_services_data:
+      properties:
+        name:
+          enum:
+          - GPRS
+          - M2M
+          - NB-IOT
+          - LTE-M
+          - VoLTE
+          - ViLTE
+          - signalling
+          type: string
+        value:
+          type: number
+      required:
+      - name
+      - value
+      type: object
+    SettlementBody_settlement_item_services_access:
+      properties:
+        networkAccess:
+          type: number
+      required:
+      - networkAccess
+      type: object
+    SettlementBody_settlement_item_services:
+      properties:
+        voice:
+          $ref: '#/components/schemas/SettlementBody_settlement_item_services_voice'
+        SMS:
+          $ref: '#/components/schemas/SettlementBody_settlement_item_services_SMS'
+        data:
+          items:
+            $ref: '#/components/schemas/SettlementBody_settlement_item_services_data'
+          maxItems: 7
+          minItems: 7
+          type: array
+        access:
+          $ref: '#/components/schemas/SettlementBody_settlement_item_services_access'
+      required:
+      - SMS
+      - access
+      - data
+      - voice
       type: object

@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 <a name="getSettlementById"></a>
 # **getSettlementById**
-> Object getSettlementById(contractId, settlementId)
+> SettlementResponse getSettlementById(contractId, settlementId)
 
 
 
@@ -28,7 +28,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Object**](../Models/object.md)
+[**SettlementResponse**](../Models/SettlementResponse.md)
 
 ### Authorization
 
@@ -125,7 +125,7 @@ No authorization required
 
 <a name="sendSettlementById"></a>
 # **sendSettlementById**
-> Object sendSettlementById(contractId, settlementId)
+> SettlementResponse sendSettlementById(contractId, settlementId)
 
 
 
@@ -140,7 +140,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Object**](../Models/object.md)
+[**SettlementResponse**](../Models/SettlementResponse.md)
 
 ### Authorization
 

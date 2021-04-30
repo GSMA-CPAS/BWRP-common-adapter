@@ -73,7 +73,7 @@ No authorization required
 
 <a name="generateUsageById"></a>
 # **generateUsageById**
-> Object generateUsageById(contractId, usageId, mode)
+> SettlementResponse generateUsageById(contractId, usageId, mode)
 
 
 
@@ -89,7 +89,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Object**](../Models/object.md)
+[**SettlementResponse**](../Models/SettlementResponse.md)
 
 ### Authorization
 
