@@ -114,8 +114,8 @@ class ContractMapper {
         referenceId: contract.referenceId,
         blockchainRef: contract.blockchainRef,
         raw: contract.rawData,
-        creationDate: contract.creationDate,
-        lastModificationDate: contract.lastModificationDate,
+        creationDate: contract.creationDate ? contract.creationDate.toJSON() : contract.creationDate,
+        lastModificationDate: contract.lastModificationDate ? contract.lastModificationDate.toJSON() : contract.lastModificationDate,
       };
     } else if (format === 'JSON') {
       returnedResponseBody = {
@@ -153,8 +153,8 @@ class ContractMapper {
         state: contract.state,
         referenceId: contract.referenceId,
         blockchainRef: contract.blockchainRef,
-        creationDate: contract.creationDate,
-        lastModificationDate: contract.lastModificationDate
+        creationDate: contract.creationDate ? contract.creationDate.toJSON() : contract.creationDate,
+        lastModificationDate: contract.lastModificationDate ? contract.lastModificationDate.toJSON() : contract.lastModificationDate
       };
       returnedResponseBody = ContractMapper.convertOldToNew(returnedResponseBody);
     }
@@ -229,8 +229,8 @@ class ContractMapper {
           },
           state: contract.state,
           referenceId: contract.referenceId,
-          creationDate: contract.creationDate,
-          lastModificationDate: contract.lastModificationDate
+          creationDate: contract.creationDate ? contract.creationDate.toJSON() : contract.creationDate,
+          lastModificationDate: contract.lastModificationDate ? contract.lastModificationDate.toJSON() : contract.lastModificationDate
         }));
       });
     }

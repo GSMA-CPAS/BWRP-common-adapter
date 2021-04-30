@@ -199,7 +199,7 @@ paths:
         description: Contract Object Payload
         required: true
       responses:
-        "200":
+        "201":
           content:
             application/json:
               schema:
@@ -666,7 +666,7 @@ paths:
         description: Usage Object Payload
         required: true
       responses:
-        "200":
+        "201":
           content:
             application/json:
               schema:
@@ -1021,7 +1021,7 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/SettlementListResponse'
                 x-content-type: application/json
           description: List of available Settlements
         "500":
@@ -1189,7 +1189,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Settlement'
+                $ref: '#/components/schemas/SettlementResponse'
                 x-content-type: application/json
           description: Successful operation, returns sent Settlement Object
         "400":
@@ -1209,15 +1209,27 @@ paths:
 
 components:
   schemas:
-    stringOrNull:
+    StringOrNull:
       title: A string value or null
       type: string
+      nullable: true
 
-    objectOrNull:
+    ObjectOrNull:
       title: An object or null
       type: object
+      nullable: true
       additionalProperties: true
     
+    Date:
+      title: Formatted date JSON
+      type: string
+      example: 2021-01-01T15:30:10.801Z
+    
+    BlockchainRef:
+      title: BlockchainRef object JSON
+      type: object
+      additionalProperties: true
+
     Msp:
       title: Msp JSON
       type: object
@@ -1280,6 +1292,12 @@ components:
       type: array
       items:
         type: object
+        additionalProperties: false
+        required:
+          - contractId
+          - header
+          - state
+          - body
         properties:
           contractId:
             type: string
@@ -1288,23 +1306,35 @@ components:
           state:
             type: string
             enum: [DRAFT, PENDING, SENT, RECEIVED]
+          referenceId:
+            type: string
           body:
             type: object
+            additionalProperties: false
+            required:
+              - metadata
+              - framework
             properties:
               metadata:
                 type: object
+                additionalProperties: false
                 properties:
                   name:
-                    $ref: '#/components/schemas/stringOrNull'
+                    $ref: '#/components/schemas/StringOrNull'
                   authors:
-                    $ref: '#/components/schemas/stringOrNull'
+                    $ref: '#/components/schemas/StringOrNull'
               framework:
                 type: object
+                additionalProperties: false
                 properties:
                   term:
-                    $ref: '#/components/schemas/objectOrNull'
+                    $ref: '#/components/schemas/ObjectOrNull'
                   partyInformation:
-                    $ref: '#/components/schemas/objectOrNull'
+                    $ref: '#/components/schemas/ObjectOrNull'
+          creationDate:
+            $ref: '#/components/schemas/Date'
+          lastModificationDate:
+            $ref: '#/components/schemas/Date'
       example:
       - contractId: "6086ec7f7146de001fefc02004cf"
         header:
@@ -1348,12 +1378,24 @@ components:
     ContractResponse:
       title: Contract JSON
       type: object
+      additionalProperties: false
+      required:
+        - contractId
+        - header
+        - state
+        - body
       properties:
         contractId:
           type: string
           description: ContractId in GUID format
           example: 05552c4c-e52f-4bb5-83d2-f50c86115bc8
         header:
+          type: object
+          additionalProperties: false
+          required:
+            - version
+            - type
+            - msps
           properties:
             name:
               type: string
@@ -1365,35 +1407,11 @@ components:
               type: string
               description: Type of document. MUST be "contract"
               enum: [contract]
-            fromMsp:
+            msps:
               type: object
-              properties:
-                mspId:
-                  type: string
-                  description: mspId of the contract creator.
-                  example: DTAG
-                signatures:
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/SignatureBase'
-                  minItems: 1
-            toMsp:
-              type: object
-              properties:
-                mspId:
-                  type: string
-                  description: mspId of the contract creator.
-                  example: TMUS
-                signatures:
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/SignatureBase'
-                  minItems: 1
-          required:
-            - version
-            - type
-            - fromMsp
-            - toMsp
+              minProperties: 2
+              additionalProperties:
+                $ref: '#/components/schemas/ContractRequest_header2_msp'
           example:
             name: Contract with XYZ
             version: "1.0"
@@ -1416,18 +1434,27 @@ components:
           type: string
           description: The State of the Contract.
           enum: [DRAFT, PENDING, SENT, RECEIVED]
+        referenceId:
+            type: string
+        blockchainRef:
+          $ref: '#/components/schemas/BlockchainRef'
         body:
           $ref: '#/components/schemas/ContractBody'
-      additionalProperties: false
-      required:
-        - contractId
-        - header
-        - body
-        - state
+        creationDate:
+          $ref: '#/components/schemas/Date'
+        lastModificationDate:
+          $ref: '#/components/schemas/Date'
 
     RAWContractResponse:
       title: Contract RAW
       type: object
+      additionalProperties: false
+      required:
+        - contractId
+        - state
+        - referenceId
+        - blockchainRef
+        - raw
       properties:
         contractId:
           type: string
@@ -1437,15 +1464,18 @@ components:
           type: string
           description: The State of the Contract.
           enum: [DRAFT, PENDING, SENT, RECEIVED]
+        referenceId:
+            type: string
+        blockchainRef:
+          $ref: '#/components/schemas/BlockchainRef'
         raw:
           type: string
           description: Original Base64 encoded RAW payload, Used for Hash calculation or Signing.
           example: eyJoZWFkZXIiOnsidmVyc2lvbiI6IjEuM....
-      additionalProperties: false
-      required:
-        - contractId
-        - raw
-        - state
+        creationDate:
+          $ref: '#/components/schemas/Date'
+        lastModificationDate:
+          $ref: '#/components/schemas/Date'
 
     ContractResponseOrRAWContractResponse:
       type: object
@@ -1700,12 +1730,27 @@ components:
     UsageResponse:
       title: Usage JSON
       type: object
+      additionalProperties: false
+      required:
+        - usageId
+        - contractId
+        - header
+        - state
+        - mspOwner
+        - body
       properties:
         usageId:
           type: string
-          description: usageId in GUID format
           example: 05552c4c-e52f-4bb5-83d2-f50c86115bc8
+        contractId:
+          type: string
+          example: 04552c4c-e52f-4bb5-83d2-f50c86115bc0
         header:
+          type: object
+          additionalProperties: false
+          required:
+            - version
+            - type
           properties:
             name:
               type: string
@@ -1722,28 +1767,39 @@ components:
             mspOwner:
               type: string
               description: the Msp which gives the Inbound traffic data
-              additionalProperties: true    
-          additionalProperties: false
-          required:
-            - version
-            - type
         state:
           type: string
           description: The State of the Usage.
           enum: [DRAFT, SENT, RECEIVED]
+        mspOwner:
+            type: string
+        referenceId:
+            type: string
+        blockchainRef:
+          $ref: '#/components/schemas/BlockchainRef'
+        settlementId:
+            type: string
         body:
           $ref: '#/components/schemas/UsageBody'
-      required:
-        - usageId
-        - header
-        - body
-        - state
+        creationDate:
+          $ref: '#/components/schemas/Date'
+        lastModificationDate:
+          $ref: '#/components/schemas/Date'
 
     UsageRequest:
       title: Usage JSON for POST/PUT
       type: object
+      additionalProperties: false
+      required:
+        - header
+        - body
       properties:
         header:
+          type: object
+          additionalProperties: false
+          required:
+            - version
+            - type
           properties:
             name:
               type: string
@@ -1757,15 +1813,12 @@ components:
               type: string
               description: Type of document. MUST be "usage"
               enum: [usage]
-          additionalProperties: false
-          required:
-            - version
-            - type
+        state:
+          type: string
+          description: The State of the Usage.
+          enum: [DRAFT, SENT, RECEIVED]
         body:
           $ref: '#/components/schemas/UsageBody'
-      required:
-        - header
-        - body
 
     UsageDiscrepancy:
       title: Usage Discrepancy JSON
@@ -1774,10 +1827,74 @@ components:
     SettlementDiscrepancy:
       title: Settlement Discrepancy JSON
       type: object
-
+                  
+    SettlementListResponse:
+      title: List of settlements JSON
+      type: array
+      items:
+        type: object
+        additionalProperties: false
+        required:
+          - settlementId
+          - contractId
+          - header
+          - state
+        properties:
+          settlementId:
+            type: string
+            example: "608a6e60a01f88001e80a3fb4de1"
+          contractId:
+            type: string
+            example: "6086a6e990658f001f8fdf5e40f3"
+          header:
+            type: object
+            additionalProperties: false
+            required:
+              - version
+              - type
+            properties:
+              name:
+                type: string
+              version:
+                type: string
+              type:
+                type: string
+                enum: [settlement]
+            example:
+              type: "settlement"
+              version: "1.0.0"
+          state:
+            type: string
+            enum: [DRAFT, SENT, RECEIVED]
+            example: DRAFT
+          creationDate:
+            $ref: '#/components/schemas/Date'
+          lastModificationDate:
+            $ref: '#/components/schemas/Date'
+      example:
+      - settlementId: 398a6e60a01f88001e80a3fb4de1
+        contractId: 3986a6e990658f001f8fdf5e40f3
+        header:
+          type: settlement
+          version: 1.0.0
+        state: SENT
+      - settlementId: 608a6e60a01f88001e80a3fb4de2
+        contractId: 6086a6e990658f001f8fdf5e40f4
+        header:
+          type: settlement
+          version: 5.2.0
+        state: RECEIVED
+      
     SettlementResponse:
       title: Settlement JSON
       type: object
+      additionalProperties: false
+      required:
+        - contractId
+        - header
+        - state
+        - mspOwner
+        - body
       properties:
         settlementId:
           type: string
@@ -1787,6 +1904,10 @@ components:
           example: "6086a6e990658f001f8fdf5e40f3"
         header:
           type: object
+          additionalProperties: false
+          required:
+            - version
+            - type
           properties:
             name:
               type: string
@@ -1795,9 +1916,6 @@ components:
             type:
               type: string
               enum: [settlement]
-          required:
-            - version
-            - type
           example:
             type: "settlement"
             version: "1.0.0"
@@ -1808,15 +1926,18 @@ components:
         mspOwner:
           type: string
           example: DTAG
+        referenceId:
+            type: string
+        blockchainRef:
+          $ref: '#/components/schemas/BlockchainRef'
+        usageId:
+            type: string
         body:
           $ref: '#/components/schemas/SettlementBody'
-      required:
-        - settlementId
-        - contractId
-        - header
-        - body
-        - state
-        - mspOwner
+        creationDate:
+          $ref: '#/components/schemas/Date'
+        lastModificationDate:
+          $ref: '#/components/schemas/Date'
       # Define example to force the fields order ( but not needed otherwise )
       example:
         settlementId: 608a6e60a01f88001e80a3fb4de1
@@ -1914,12 +2035,18 @@ components:
       items:
         type: object
         additionalProperties: false
+        required:
+          - id
+          - type
+          - referenceId
         properties:
           id:
             type: string
           type:
             type: string
           referenceId:
+            type: string
+          contractId:
             type: string
         example:
           id: id

@@ -11,6 +11,8 @@ services/SettlementService.js
 services/Service.js
 
 controllers/Controller.js
+controllers/SettlementController.js
+controllers/UsageController.js
 
 expressServer.js
 index.js

@@ -667,7 +667,7 @@ describe(`Tests POST ${route} API OK`, function() {
             expect(blockchainAdapterNock.isDone(), 'Unconsumed nock error').to.be.true;
 
             chai.request(testsUtils.getServer())
-              .get(`${globalVersion}/contracts/${response.body[0].contractId}/settlements/${response.body[0].id}`)
+              .get(`${globalVersion}/contracts/${response.body[0].contractId}/settlements/`)
               .send()
               .end((getError1, getResponse1) => {
                 debug('response.body: %s', JSON.stringify(getResponse1.body));
@@ -675,8 +675,13 @@ describe(`Tests POST ${route} API OK`, function() {
                 expect(getResponse1).to.have.status(200);
                 expect(getResponse1).to.be.json;
                 expect(getResponse1.body).to.exist;
-                expect(getResponse1.body).to.be.an('object');
-                expect(getResponse1.body).to.have.property('state', 'RECEIVED');
+                expect(getResponse1.body).to.be.an('array');
+
+                getResponse1.body.forEach((currentSettlement) => {
+                  if (currentSettlement.id === response.body[0].id) {
+                    expect(currentSettlement).to.have.property('state', 'RECEIVED');
+                  }
+                });
 
                 done();
               });
@@ -845,7 +850,8 @@ describe(`Tests POST ${route} API OK`, function() {
             expect(response).to.have.status(200);
             expect(response).to.be.json;
             expect(response.body).to.exist;
-            expect(response.body).to.be.an('object').that.is.empty;
+            expect(response.body).to.be.an('array');
+            expect(response.body.length).to.equal(0);
             // for SENt contract, nothing should be done
             expect(blockchainAdapterNock.isDone(), 'Unconsumed nock error').to.be.true;
 
@@ -898,7 +904,8 @@ describe(`Tests POST ${route} API OK`, function() {
             expect(response).to.have.status(200);
             expect(response).to.be.json;
             expect(response.body).to.exist;
-            expect(response.body).to.be.an('object').that.is.empty;
+            expect(response.body).to.be.an('array');
+            expect(response.body.length).to.equal(0);
             expect(blockchainAdapterNock.isDone(), 'Unconsumed nock error').to.be.true;
 
             testsDbUtils.verifyContract(receivedContract.id,
@@ -972,7 +979,8 @@ describe(`Tests POST ${route} API OK`, function() {
             expect(response).to.have.status(200);
             expect(response).to.be.json;
             expect(response.body).to.exist;
-            expect(response.body).to.be.an('object').that.is.empty;
+            expect(response.body).to.be.an('array');
+            expect(response.body.length).to.equal(0);
             expect(blockchainAdapterNock.isDone(), 'Unconsumed nock error').to.be.true;
 
             testsDbUtils.verifyContract(otherReceivedContract.id,
@@ -1044,7 +1052,8 @@ describe(`Tests POST ${route} API OK`, function() {
             expect(response).to.have.status(200);
             expect(response).to.be.json;
             expect(response.body).to.exist;
-            expect(response.body).to.be.an('object').that.is.empty;
+            expect(response.body).to.be.an('array');
+            expect(response.body.length).to.equal(0);
             expect(blockchainAdapterNock.isDone(), 'Unconsumed nock error').to.be.true;
 
             done();

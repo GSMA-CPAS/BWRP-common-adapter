@@ -55,6 +55,7 @@ Class | Method | HTTP request | Description
  - [ContractRequestHeaderFromMsp](./Models/ContractRequestHeaderFromMsp.md)
  - [ContractRequestHeaderToMsp](./Models/ContractRequestHeaderToMsp.md)
  - [ContractResponse](./Models/ContractResponse.md)
+ - [ContractResponseHeader](./Models/ContractResponseHeader.md)
  - [ContractResponseOrRAWContractResponse](./Models/ContractResponseOrRAWContractResponse.md)
  - [Event](./Models/Event.md)
  - [Msp](./Models/Msp.md)

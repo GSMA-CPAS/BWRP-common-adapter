@@ -53,8 +53,8 @@ class UsageMapper {
       mspOwner: usage.mspOwner,
       body: usage.body,
       // history: usage.history,
-      creationDate: usage.creationDate,
-      lastModificationDate: usage.lastModificationDate
+      creationDate: usage.creationDate ? usage.creationDate.toJSON() : usage.creationDate,
+      lastModificationDate: usage.lastModificationDate ? usage.lastModificationDate.toJSON() : usage.lastModificationDate
     };
 
     if ( usage.partnerUsageId) {
@@ -83,8 +83,8 @@ class UsageMapper {
           state: usage.state,
           referenceId: usage.referenceId,
           mspOwner: usage.mspOwner,
-          creationDate: usage.creationDate,
-          lastModificationDate: usage.lastModificationDate
+          creationDate: usage.creationDate ? usage.creationDate.toJSON() : usage.creationDate,
+          lastModificationDate: usage.lastModificationDate ? usage.lastModificationDate.toJSON() : usage.lastModificationDate
         };
         if (usage.partnerUsageId) {
           usageResp.partnerUsageId = usage.partnerUsageId;

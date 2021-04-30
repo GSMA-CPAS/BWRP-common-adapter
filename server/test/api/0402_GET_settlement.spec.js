@@ -70,6 +70,54 @@ describe(`Tests GET ${route} API OK`, function() {
       mspOwner: undefined,
       mspReceiver: undefined,
       body: {
+        generatedResult: {
+          fromDate: 202001,
+          toDate: 202012,
+          calculationEngineVersion: '0.0.1',
+          inbound: {
+            tax: {rate: ''},
+            currency: 'EUR',
+            services: {
+              voice: {
+                MOC: {local: 0, backHome: 0, international: 0, premium: 0, ROW: 0, EU: 0, EEA: 0, satellite: 0, videoTelephony: 0, specialDestinations: 0},
+                MTC: 0
+              },
+              SMS: {MO: 0, MT: 0},
+              data: [
+                {name: 'GPRS', value: 0},
+                {name: 'M2M', value: 0},
+                {name: 'NB-IOT', value: 0},
+                {name: 'LTE-M', value: 0},
+                {name: 'VoLTE', value: 0},
+                {name: 'ViLTE', value: 0},
+                {name: 'signalling', value: 0}
+              ],
+              access: {networkAccess: 0}
+            }
+          },
+          outbound: {
+            tax: {rate: ''},
+            currency: 'EUR',
+            services: {
+              voice: {
+                MOC: {local: 0, backHome: 0, international: 0, premium: 0, ROW: 0, EU: 0, EEA: 0, satellite: 0, videoTelephony: 0, specialDestinations: 0},
+                MTC: 0
+              },
+              SMS: {MO: 0, MT: 0},
+              data: [
+                {name: 'GPRS', value: 0},
+                {name: 'M2M', value: 0},
+                {name: 'NB-IOT', value: 0},
+                {name: 'LTE-M', value: 0},
+                {name: 'VoLTE', value: 0},
+                {name: 'ViLTE', value: 0},
+                {name: 'signalling', value: 0}
+              ],
+              access: {networkAccess: 0}
+            }
+          },
+          unexpectedServiceNames: []
+        },
         data: []
       },
       state: 'DRAFT'
@@ -135,7 +183,7 @@ describe(`Tests GET ${route} API OK`, function() {
             expect(response.body.header).to.have.property('version', settlement1.version);
 
             expect(response.body).to.have.property('body').that.is.an('object');
-            expect(Object.keys(response.body.body)).have.members([]);
+            expect(Object.keys(response.body.body)).have.members(['fromDate', 'toDate', 'calculationEngineVersion', 'inbound', 'outbound', 'unexpectedServiceNames']);
 
             done();
           });

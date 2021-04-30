@@ -31,8 +31,8 @@ class SettlementMapper {
         blockchainRef: settlement.blockchainRef,
         mspOwner: settlement.mspOwner,
         raw: settlement.rawData,
-        creationDate: settlement.creationDate,
-        lastModificationDate: settlement.lastModificationDate,
+        creationDate: settlement.creationDate ? settlement.creationDate.toJSON() : settlement.creationDate,
+        lastModificationDate: settlement.lastModificationDate ? settlement.lastModificationDate.toJSON() : settlement.lastModificationDate,
       };
     } else if (format === 'JSON') {
       returnedResponseBody = {
@@ -50,8 +50,8 @@ class SettlementMapper {
         mspOwner: settlement.mspOwner,
         body: {},
         // history: usage.history,
-        creationDate: settlement.creationDate,
-        lastModificationDate: settlement.lastModificationDate
+        creationDate: settlement.creationDate ? settlement.creationDate.toJSON() : settlement.creationDate,
+        lastModificationDate: settlement.lastModificationDate ? settlement.lastModificationDate.toJSON() : settlement.lastModificationDate
       };
 
       if (settlement.body.generatedResult !== undefined) {
@@ -92,8 +92,8 @@ class SettlementMapper {
             version: settlement.version,
           },
           state: settlement.state,
-          creationDate: settlement.creationDate,
-          lastModificationDate: settlement.lastModificationDate
+          creationDate: settlement.creationDate ? settlement.creationDate.toJSON() : settlement.creationDate,
+          lastModificationDate: settlement.lastModificationDate ? settlement.lastModificationDate.toJSON() : settlement.lastModificationDate
         };
         if ( settlement.tag) {
           settlementResp.tag = settlement.tag;

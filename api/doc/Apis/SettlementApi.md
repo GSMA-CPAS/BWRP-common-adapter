@@ -70,7 +70,7 @@ No authorization required
 
 <a name="getSettlements"></a>
 # **getSettlements**
-> String getSettlements(contractId)
+> List getSettlements(contractId)
 
 
 
@@ -84,7 +84,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**String**](../Models/string.md)
+[**List**](../Models/object.md)
 
 ### Authorization
 
@@ -97,7 +97,7 @@ No authorization required
 
 <a name="rejectSettlementById"></a>
 # **rejectSettlementById**
-> Object rejectSettlementById(contractId, settlementId)
+> SettlementResponse rejectSettlementById(contractId, settlementId)
 
 
 
@@ -112,7 +112,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Object**](../Models/object.md)
+[**SettlementResponse**](../Models/SettlementResponse.md)
 
 ### Authorization
 

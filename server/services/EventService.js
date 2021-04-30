@@ -286,7 +286,7 @@ const eventSignatureReceived = ({body}) => new Promise(
           }
         }
       }
-      resolve(Service.successResponse({}, 200));
+      resolve(Service.successResponse([], 200));
     } catch (e) {
       reject(Service.rejectResponse(e));
     }

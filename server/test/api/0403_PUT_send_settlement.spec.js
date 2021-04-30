@@ -75,11 +75,52 @@ describe(`Tests PUT ${route} API OK`, function() {
       mspReceiver: undefined,
       body: {
         generatedResult: {
-          complexObject: {
-            a: 'a',
-            b: 'b'
+          fromDate: 202001,
+          toDate: 202012,
+          calculationEngineVersion: '0.0.1',
+          inbound: {
+            tax: {rate: ''},
+            currency: 'EUR',
+            services: {
+              voice: {
+                MOC: {local: 0, backHome: 0, international: 0, premium: 0, ROW: 0, EU: 0, EEA: 0, satellite: 0, videoTelephony: 0, specialDestinations: 0},
+                MTC: 0
+              },
+              SMS: {MO: 0, MT: 0},
+              data: [
+                {name: 'GPRS', value: 0},
+                {name: 'M2M', value: 0},
+                {name: 'NB-IOT', value: 0},
+                {name: 'LTE-M', value: 0},
+                {name: 'VoLTE', value: 0},
+                {name: 'ViLTE', value: 0},
+                {name: 'signalling', value: 0}
+              ],
+              access: {networkAccess: 0}
+            }
           },
-          otherValue: 'other'
+          outbound: {
+            tax: {rate: ''},
+            currency: 'EUR',
+            services: {
+              voice: {
+                MOC: {local: 0, backHome: 0, international: 0, premium: 0, ROW: 0, EU: 0, EEA: 0, satellite: 0, videoTelephony: 0, specialDestinations: 0},
+                MTC: 0
+              },
+              SMS: {MO: 0, MT: 0},
+              data: [
+                {name: 'GPRS', value: 0},
+                {name: 'M2M', value: 0},
+                {name: 'NB-IOT', value: 0},
+                {name: 'LTE-M', value: 0},
+                {name: 'VoLTE', value: 0},
+                {name: 'ViLTE', value: 0},
+                {name: 'signalling', value: 0}
+              ],
+              access: {networkAccess: 0}
+            }
+          },
+          unexpectedServiceNames: []
         },
         usage: {
           name: 'usageName1',
@@ -108,7 +149,54 @@ describe(`Tests PUT ${route} API OK`, function() {
       mspOwner: undefined,
       mspReceiver: undefined,
       body: {
-        generatedResult: 'objectOrString',
+        generatedResult: {
+          fromDate: 202001,
+          toDate: 202012,
+          calculationEngineVersion: '0.0.1',
+          inbound: {
+            tax: {rate: ''},
+            currency: 'EUR',
+            services: {
+              voice: {
+                MOC: {local: 0, backHome: 0, international: 0, premium: 0, ROW: 0, EU: 0, EEA: 0, satellite: 0, videoTelephony: 0, specialDestinations: 0},
+                MTC: 0
+              },
+              SMS: {MO: 0, MT: 0},
+              data: [
+                {name: 'GPRS', value: 0},
+                {name: 'M2M', value: 0},
+                {name: 'NB-IOT', value: 0},
+                {name: 'LTE-M', value: 0},
+                {name: 'VoLTE', value: 0},
+                {name: 'ViLTE', value: 0},
+                {name: 'signalling', value: 0}
+              ],
+              access: {networkAccess: 0}
+            }
+          },
+          outbound: {
+            tax: {rate: ''},
+            currency: 'EUR',
+            services: {
+              voice: {
+                MOC: {local: 0, backHome: 0, international: 0, premium: 0, ROW: 0, EU: 0, EEA: 0, satellite: 0, videoTelephony: 0, specialDestinations: 0},
+                MTC: 0
+              },
+              SMS: {MO: 0, MT: 0},
+              data: [
+                {name: 'GPRS', value: 0},
+                {name: 'M2M', value: 0},
+                {name: 'NB-IOT', value: 0},
+                {name: 'LTE-M', value: 0},
+                {name: 'VoLTE', value: 0},
+                {name: 'ViLTE', value: 0},
+                {name: 'signalling', value: 0}
+              ],
+              access: {networkAccess: 0}
+            }
+          },
+          unexpectedServiceNames: []
+        },
         usage: {
           name: 'usageName1',
           version: 'usageVersion1',
@@ -130,7 +218,54 @@ describe(`Tests PUT ${route} API OK`, function() {
       mspOwner: undefined,
       mspReceiver: undefined,
       body: {
-        generatedResult: 'objectOrString',
+        generatedResult: {
+          fromDate: 202001,
+          toDate: 202012,
+          calculationEngineVersion: '0.0.1',
+          inbound: {
+            tax: {rate: ''},
+            currency: 'EUR',
+            services: {
+              voice: {
+                MOC: {local: 0, backHome: 0, international: 0, premium: 0, ROW: 0, EU: 0, EEA: 0, satellite: 0, videoTelephony: 0, specialDestinations: 0},
+                MTC: 0
+              },
+              SMS: {MO: 0, MT: 0},
+              data: [
+                {name: 'GPRS', value: 0},
+                {name: 'M2M', value: 0},
+                {name: 'NB-IOT', value: 0},
+                {name: 'LTE-M', value: 0},
+                {name: 'VoLTE', value: 0},
+                {name: 'ViLTE', value: 0},
+                {name: 'signalling', value: 0}
+              ],
+              access: {networkAccess: 0}
+            }
+          },
+          outbound: {
+            tax: {rate: ''},
+            currency: 'EUR',
+            services: {
+              voice: {
+                MOC: {local: 0, backHome: 0, international: 0, premium: 0, ROW: 0, EU: 0, EEA: 0, satellite: 0, videoTelephony: 0, specialDestinations: 0},
+                MTC: 0
+              },
+              SMS: {MO: 0, MT: 0},
+              data: [
+                {name: 'GPRS', value: 0},
+                {name: 'M2M', value: 0},
+                {name: 'NB-IOT', value: 0},
+                {name: 'LTE-M', value: 0},
+                {name: 'VoLTE', value: 0},
+                {name: 'ViLTE', value: 0},
+                {name: 'signalling', value: 0}
+              ],
+              access: {networkAccess: 0}
+            }
+          },
+          unexpectedServiceNames: []
+        },
         usage: {
           name: 'usageNameAA',
           version: 'usageVersionAA',
