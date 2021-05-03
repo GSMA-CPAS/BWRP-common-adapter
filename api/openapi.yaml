@@ -382,7 +382,7 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/SignatureListResponse'
                 x-content-type: application/json
           description: List of available Signatures
         "500":
@@ -1627,24 +1627,59 @@ components:
         role:
           type: string
 
+    SignatureListResponse:
+      title: List of signatures JSON
+      type: array
+      items:
+        type: object
+        additionalProperties: false
+        required:
+          - signatureId
+          - contractId
+          - msp
+          - state
+        properties:
+          signatureId:
+            type: string
+          contractId:
+            type: string
+          msp:
+            type: string
+          state:
+            type: string
+      example:
+      - signatureId: "6086a6e990658f001f8fdf5e40f3"
+        contractId: "6086ec7f7146de001fefc02004cf"
+        msp: DTAG
+        state: SIGNED
+      - signatureId: "7196a6e990658f001f8fdf5e40f3"
+        contractId: "7196ec7f7146de001fefc02004cf"
+        msp: TMUS
+        state: SIGNED
 
     SignatureResponse:
       title: Signature JSON
       type: object
+      additionalProperties: false
+      required:
+        - signatureId
+        - contractId
+        - msp
+        - state
       properties:
         signatureId:
           type: string
-          description: signatureId from \"signature\"->\"\<mspId\>\"[X]->\"id\"
-          example: XXXXXX
+        contractId:
+          type: string
+        msp:
+          type: string
+        state:
+          type: string
         algorithm:
           description: The algorithm used to sign
-          example: secp384r1
           type: string
         certificate:
           description: The certificate of the signer in pem format
-          example: |-
-            -----BEGIN CERTIFICATE-----
-            MIICYjCCAemgAwIBA...
           type: string
         signature:
           description: The digital signature over the document
@@ -1652,14 +1687,19 @@ components:
         extra:
           type: object
           description: Additional Key/Value from \"signature\"->\"\<mspId\>\"[X]->XXX, eg name, role
-          example: '{"name":"john doe", "role":"manager"}'
-      additionalProperties: false
-      required:
-      - signatureId
-      - algorithm
-      - certificate
-      - signature
-      - extra
+        blockchainRef:
+          $ref: '#/components/schemas/BlockchainRef'
+      example:
+        signatureId: "6086a6e990658f001f8fdf5e40f3"
+        contractId: "6086ec7f7146de001fefc02004cf"
+        msp: DTAG
+        state: SIGNED
+        algorithm: secp384r1
+        certificate: |-
+            -----BEGIN CERTIFICATE-----
+            MIICYjCCAemgAwIBA...
+        signature: signature
+        extra: '{"name":"john doe", "role":"manager"}'
 
     SignatureRequest:
       title: Signature JSON for PUT

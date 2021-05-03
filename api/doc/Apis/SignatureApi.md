@@ -99,7 +99,7 @@ No authorization required
 
 <a name="getSignatures"></a>
 # **getSignatures**
-> String getSignatures(contractId)
+> List getSignatures(contractId)
 
 
 
@@ -113,7 +113,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**String**](../Models/string.md)
+[**List**](../Models/object.md)
 
 ### Authorization
 
