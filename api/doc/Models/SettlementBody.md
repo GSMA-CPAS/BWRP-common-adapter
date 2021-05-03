@@ -3,8 +3,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**fromDate** | [**BigDecimal**](number.md) |  | [default to null]
-**toDate** | [**BigDecimal**](number.md) |  | [default to null]
+**fromDate** | [**StringOrNumber**](StringOrNumber.md) |  | [default to null]
+**toDate** | [**StringOrNumber**](StringOrNumber.md) |  | [default to null]
 **calculationEngineVersion** | [**String**](string.md) |  | [default to null]
 **inbound** | [**SettlementBody_settlement_item**](SettlementBody_settlement_item.md) |  | [default to null]
 **outbound** | [**SettlementBody_settlement_item**](SettlementBody_settlement_item.md) |  | [default to null]

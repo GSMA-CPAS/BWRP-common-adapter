@@ -78,6 +78,7 @@ Class | Method | HTTP request | Description
  - [SignatureBase](./Models/SignatureBase.md)
  - [SignatureRequest](./Models/SignatureRequest.md)
  - [SignatureResponse](./Models/SignatureResponse.md)
+ - [StringOrNumber](./Models/StringOrNumber.md)
  - [UsageBody](./Models/UsageBody.md)
  - [UsageBodyUsageItem](./Models/UsageBodyUsageItem.md)
  - [UsageDiscrepancy](./Models/UsageDiscrepancy.md)

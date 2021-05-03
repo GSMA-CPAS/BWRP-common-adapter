@@ -1202,6 +1202,11 @@ components:
       nullable: true
       title: An object or null
       type: object
+    StringOrNumber:
+      oneOf:
+      - type: string
+      - type: number
+      title: A string value or a number value
     Date:
       example: 2021-01-01T15:30:10.801Z
       title: Formatted date JSON
@@ -2464,8 +2469,8 @@ components:
         state: DRAFT
         mspOwner: DTAG
         body:
-          fromDate: 202001
-          toDate: 202012
+          fromDate: "202001"
+          toDate: "202012"
           calculationEngineVersion: 0.0.1
           inbound:
             tax:
@@ -3113,8 +3118,8 @@ components:
     SettlementBody:
       additionalProperties: true
       example:
-        fromDate: 202001
-        toDate: 202012
+        fromDate: "202001"
+        toDate: "202012"
         calculationEngineVersion: 0.0.1
         inbound:
           tax:
@@ -3195,11 +3200,9 @@ components:
         unexpectedServiceNames: []
       properties:
         fromDate:
-          example: 202001
-          type: number
+          $ref: '#/components/schemas/StringOrNumber'
         toDate:
-          example: 202012
-          type: number
+          $ref: '#/components/schemas/StringOrNumber'
         calculationEngineVersion:
           example: 0.0.1
           type: string
