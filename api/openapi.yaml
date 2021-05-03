@@ -1435,7 +1435,7 @@ components:
           description: The State of the Contract.
           enum: [DRAFT, PENDING, SENT, RECEIVED]
         referenceId:
-            type: string
+          type: string
         blockchainRef:
           $ref: '#/components/schemas/BlockchainRef'
         body:
@@ -1444,6 +1444,104 @@ components:
           $ref: '#/components/schemas/Date'
         lastModificationDate:
           $ref: '#/components/schemas/Date'
+      # Define example to force the fields order ( but not needed otherwise )
+      example:
+        contractId: 05552c4c-e52f-4bb5-83d2-f50c86115bc8
+        header:
+          name: Contract with XYZ
+          version: "1.0"
+          type: contract
+          msps:
+            DTAG:
+              signatures:
+              - id: id-signature-DTAG-1
+                name: name-signature-DTAG-1
+                role: role-signature-DTAG-1
+              - id: id-signature-DTAG-2
+                name: name-signature-DTAG-2
+                role: role-signature-DTAG-2
+            TMUS:
+              signatures:
+              - id: id-signature-TMUS-1
+                name: name-signature-TMUS-1
+                role: role-signature-TMUS-1
+        state: DRAFT
+        body:
+          version: 0.0.2-MVP1
+          metadata:
+            name: Contract-Name-Chosen
+            authors: author1 & author2
+          framework:
+            term:
+              start: 2020-01-01T00:00:00.000Z
+              end: 2020-12-31T00:00:00.000Z
+            payment:
+              taxesIncluded: false
+          discounts:
+            MSP-1:
+              condition:
+                kind: Unconditional
+              serviceGroups:
+              - homeTadigs:
+                - MSP-1--TADIG-1
+                - MSP-1--TADIG-2
+                visitorTadigs:
+                - MSP-23--TADIG-7
+                - MSP-23--TADIG-8
+                - MSP-23--TADIG-9
+                services:
+                - service: MOC Local
+                  usagePricing:
+                    unit: Min
+                    ratingPlan:
+                      kind: Linear rate
+                      rate:
+                        linearPrice: 0.145
+                - service: SMSMO
+                  usagePricing:
+                    unit: SMS
+                    ratingPlan:
+                      rate:
+                        thresholds:
+                        - start: 0
+                          linearPrice: 0.256
+                        - start: 5000
+                          linearPrice: 0.05
+            MSP-23:
+              condition:
+                kind: Deal Revenue Commitment
+                commitment:
+                  value: 235000,
+                  currency: EUR
+                  includingTaxes: false
+              serviceGroups:
+              - homeTadigs:
+                - MSP-23--TADIG-7
+                - MSP-23--TADIG-8
+                - MSP-23--TADIG-9
+                visitorTadigs:
+                - MSP-1--TADIG-1
+                - MSP-1--TADIG-2
+                services:
+                - service: MOC Back Home
+                  usagePricing:
+                    unit: Min
+                    ratingPlan:
+                      kind: Linear rate
+                      rate:
+                        linearPrice: 0.023
+                - service: GPRS
+                  usagePricing:
+                    unit: MB
+                    ratingPlan:
+                      rate:
+                        thresholds:
+                        - start: 0
+                          linearPrice: 0.0035
+                        - start: 70000
+                          linearPrice: 0.0015
+        creationDate: 2021-01-01T15:30:10.801Z
+        lastModificationDate: 2021-01-01T15:30:10.801Z
 
     RAWContractResponse:
       title: Contract RAW
@@ -1825,6 +1923,61 @@ components:
           $ref: '#/components/schemas/Date'
         lastModificationDate:
           $ref: '#/components/schemas/Date'
+      # Define example to force the fields order ( but not needed otherwise )
+      example:
+        usageId: 05552c4c-e52f-4bb5-83d2-f50c86115bc8
+        contractId: 04552c4c-e52f-4bb5-83d2-f50c86115bc0
+        header:
+          mspOwner: mspOwner
+          name: Usage, from ABC to XYZ
+          type: usage
+          version: "1.0"
+        state: DRAFT
+        mspOwner: mspOwner
+        settlementId: settlementId
+        body:
+          metadata:
+            name: Usage-Name-Chosen
+            authors: author3
+          inbound:
+          - yearMonth: "20200103"
+            homeTadig: mspB-tadig4
+            visitorTadig: mspA-tadig8
+            service: MOC Local
+            usage: 490
+            units: min
+            currency: EUR
+          - yearMonth: "20200104"
+            homeTadig: mspB-tadig7
+            visitorTadig: mspA-tadig6
+            service: MOC Home
+            usage: 677246
+            units: min
+            currency: EUR
+          - yearMonth: "20200104"
+            homeTadig: mspB-tadig6
+            visitorTadig: mspA-tadig1
+            service: MOC International
+            usage: 80434
+            units: min
+            currency: EUR
+          outbound:
+          - yearMonth: "20200101"
+            homeTadig: mspA-tadig1
+            visitorTadig: mspB-tadig9
+            service: SMSMO
+            usage: 3
+            units: SMS
+            currency: EUR
+          - yearMonth: "20200101"
+            homeTadig: mspA-tadig2
+            visitorTadig: mspB-tadig5
+            service: GPRS
+            usage: 6.007386755E7
+            units: MB
+            currency: EUR
+        creationDate: 2021-01-01T15:30:10.801Z
+        lastModificationDate: 2021-01-01T15:30:10.801Z
 
     UsageRequest:
       title: Usage JSON for POST/PUT

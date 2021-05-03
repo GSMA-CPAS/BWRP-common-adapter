@@ -1365,7 +1365,6 @@ components:
     ContractResponse:
       additionalProperties: false
       example:
-        lastModificationDate: 2021-01-01T15:30:10.801Z
         contractId: 05552c4c-e52f-4bb5-83d2-f50c86115bc8
         header:
           name: Contract with XYZ
@@ -1461,9 +1460,7 @@ components:
                         - start: 70000
                           linearPrice: 0.0015
         creationDate: 2021-01-01T15:30:10.801Z
-        blockchainRef:
-          key: '{}'
-        referenceId: referenceId
+        lastModificationDate: 2021-01-01T15:30:10.801Z
       properties:
         contractId:
           description: ContractId in GUID format
@@ -1937,8 +1934,6 @@ components:
       additionalProperties: false
       example:
         usageId: 05552c4c-e52f-4bb5-83d2-f50c86115bc8
-        lastModificationDate: 2021-01-01T15:30:10.801Z
-        mspOwner: mspOwner
         contractId: 04552c4c-e52f-4bb5-83d2-f50c86115bc0
         header:
           mspOwner: mspOwner
@@ -1946,6 +1941,7 @@ components:
           type: usage
           version: "1.0"
         state: DRAFT
+        mspOwner: mspOwner
         settlementId: settlementId
         body:
           metadata:
@@ -1989,9 +1985,7 @@ components:
             units: MB
             currency: EUR
         creationDate: 2021-01-01T15:30:10.801Z
-        blockchainRef:
-          key: '{}'
-        referenceId: referenceId
+        lastModificationDate: 2021-01-01T15:30:10.801Z
       properties:
         usageId:
           example: 05552c4c-e52f-4bb5-83d2-f50c86115bc8
@@ -3269,11 +3263,6 @@ components:
       - version
       type: object
     UsageResponse_header:
-      example:
-        mspOwner: mspOwner
-        name: Usage, from ABC to XYZ
-        type: usage
-        version: "1.0"
       properties:
         name:
           description: Human readable name for the usage.
