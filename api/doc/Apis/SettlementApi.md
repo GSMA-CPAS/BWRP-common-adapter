@@ -41,7 +41,7 @@ No authorization required
 
 <a name="getSettlementDiscrepancy"></a>
 # **getSettlementDiscrepancy**
-> Object getSettlementDiscrepancy(contractId, settlementId, partnerSettlementId)
+> SettlementDiscrepancy getSettlementDiscrepancy(contractId, settlementId, partnerSettlementId)
 
 
 
@@ -57,7 +57,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Object**](../Models/object.md)
+[**SettlementDiscrepancy**](../Models/SettlementDiscrepancy.md)
 
 ### Authorization
 

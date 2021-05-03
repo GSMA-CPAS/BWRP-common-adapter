@@ -854,7 +854,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/UsageDiscrepancy'
                 x-content-type: application/json
-          description: Successful operation, returns sent Usage Object
+          description: Successful operation, returns the usage discrepancy Object
         "400":
           content:
             application/json:
@@ -1107,7 +1107,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/SettlementDiscrepancy'
                 x-content-type: application/json
-          description: Successful operation, returns sent Usage Object
+          description: Successful operation, returns the settlement discrepancy Object
         "400":
           content:
             application/json:
@@ -1860,13 +1860,304 @@ components:
         body:
           $ref: '#/components/schemas/UsageBody'
 
+    UsageDiscrepancy_general_information_item:
+      type: object
+      additionalProperties: false
+      required:
+        - service
+        - unit
+        - inbound_own_usage
+        - inbound_partner_usage
+        - inbound_discrepancy
+        - outbound_own_usage
+        - outbound_partner_usage
+        - outbound_discrepancy
+      properties:
+        service:
+          type: string
+          enum: [MOC, SMS, Data, MTC]
+        unit:
+          type: string
+        inbound_own_usage:
+          type: number
+        inbound_partner_usage:
+          type: number
+        inbound_discrepancy:
+          type: number
+        outbound_own_usage:
+          type: number
+        outbound_partner_usage:
+          type: number
+        outbound_discrepancy:
+          type: number
+
+    UsageDiscrepancy_service_item:
+      type: object
+      additionalProperties: false
+      required:
+        - HTMN
+        - VPMN
+        - yearMonth
+        - service
+        - own_usage
+        - partner_usage
+        - delta_usage_abs
+        - delta_usage_percent
+      properties:
+        HTMN:
+          type: string
+        VPMN:
+          type: string
+        yearMonth:
+          type: string
+        service:
+          type: string
+        own_usage:
+          type: number
+        partner_usage:
+          type: number
+        delta_usage_abs:
+          type: number
+        delta_usage_percent:
+          type: number
+
     UsageDiscrepancy:
       title: Usage Discrepancy JSON
       type: object
+      additionalProperties: false
+      required:
+        - general_information
+        - inbound
+        - outbound
+      properties:
+        general_information:
+          type: array
+          minItems: 3
+          maxItems: 4
+          items:
+            $ref: '#/components/schemas/UsageDiscrepancy_general_information_item'
+        inbound:
+          type: array
+          items:
+            $ref: '#/components/schemas/UsageDiscrepancy_service_item'
+        outbound:
+          type: array
+          items:
+            $ref: '#/components/schemas/UsageDiscrepancy_service_item'
+      example:
+        general_information:
+        - service: MOC
+          unit: unit
+          inbound_own_usage: 109888639.04999995
+          inbound_partner_usage: 109888639.04999995
+          inbound_discrepancy: 0
+          outbound_own_usage: 78883740.15000007
+          outbound_partner_usage: 78883740.15000007
+          outbound_discrepancy: 0
+        - service: SMS
+          unit: SMS
+          inbound_own_usage: 16582071
+          inbound_partner_usage: 16582071
+          inbound_discrepancy: 0
+          outbound_own_usage: 13862811
+          outbound_partner_usage: 13862811
+          outbound_discrepancy: 0
+        - service: Data
+          unit: MB
+          inbound_own_usage: 512171795.639366
+          inbound_partner_usage: 512171795.639366
+          inbound_discrepancy: 0
+          outbound_own_usage: 434032331.7315726
+          outbound_partner_usage: 434032331.7315726
+          outbound_discrepancy: 0
+        - service: MTC
+          unit: min
+          inbound_own_usage: 705946.19999993
+          inbound_partner_usage: 705946.19999993
+          inbound_discrepancy: 0
+          outbound_own_usage: 73890.45
+          outbound_partner_usage: 73890.45
+          outbound_discrepancy: 0
+        inbound:
+        - HTMN: HTMN
+          VPMN: VPMN
+          yearMonth: "202001"
+          service: SMSMO
+          own_usage: 702
+          partner_usage: 702
+          delta_usage_abs: 0
+          delta_usage_percent: 0
+        - HTMN: HTMN
+          VPMN: VPMN
+          yearMonth: "202002"
+          service: GPRS
+          own_usage: 2757833.36439228
+          partner_usage: 2757833.36439228
+          delta_usage_abs: 0
+          delta_usage_percent: 0
+        outbound:
+        - HTMN: HTMN
+          VPMN: VPMN
+          yearMonth: "202010"
+          service: MOC International
+          own_usage: 226.85
+          partner_usage: 226.85
+          delta_usage_abs: 0
+          delta_usage_percent: 0
+        - HTMN: HTMN
+          VPMN: VPMN
+          yearMonth: "202011"
+          service: MTC
+          own_usage: 9854.300
+          partner_usage: 9854.300
+          delta_usage_abs: 0
+          delta_usage_percent: 0
+
+    SettlementDiscrepancy_general_information_item:
+      type: object
+      additionalProperties: false
+      required:
+        - own_calculation
+        - partner_calculation
+        - delta_calculation_percent
+      properties:
+        bearer:
+          type: string
+        service:
+          type: string
+        unit:
+          type: string
+        own_calculation:
+          type: number
+        partner_calculation:
+          type: number
+        delta_calculation_percent:
+          type: number
+        own_usage:
+          type: number
+        partner_usage:
+          type: number
+        delta_usage_abs:
+          type: number
+        delta_usage_percent:
+          type: number
+
+    SettlementDiscrepancy_details_item:
+      type: object
+      additionalProperties: false
+      required:
+        - service
+        - unit
+        - own_calculation
+        - partner_calculation
+        - delta_calculation_percent
+      properties:
+        service:
+          type: string
+        unit:
+          type: string
+        own_calculation:
+          type: number
+        partner_calculation:
+          type: number
+        delta_calculation_percent:
+          type: number
+        own_usage:
+          type: number
+        partner_usage:
+          type: number
+        delta_usage_abs:
+          type: number
+        delta_usage_percent:
+          type: number
+
+    SettlementDiscrepancy_perspective:
+      type: object
+      additionalProperties: false
+      required:
+        - general_information
+        - details
+      properties:
+        general_information:
+          type: array
+          minItems: 3
+          maxItems: 3
+          items:
+            $ref: '#/components/schemas/SettlementDiscrepancy_general_information_item'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/SettlementDiscrepancy_details_item'
 
     SettlementDiscrepancy:
       title: Settlement Discrepancy JSON
       type: object
+      additionalProperties: false
+      required:
+        - homePerspective
+        - partnerPerspective
+      properties:
+        homePerspective:
+          $ref: '#/components/schemas/SettlementDiscrepancy_perspective'
+        partnerPerspective:
+          $ref: '#/components/schemas/SettlementDiscrepancy_perspective'
+      example:
+        homePerspective:
+          general_information:
+          - service: Voice
+            unit: min
+            own_calculation: 19120680.994
+            partner_calculation: 19120680.994
+            delta_calculation_percent: 0
+          - service: SMS
+            unit: SMS
+            own_calculation: 198984.852
+            partner_calculation: 198984.852
+            delta_calculation_percent: 0
+          - service: Data
+            unit: MB
+            own_calculation: 30146061.547672395
+            partner_calculation: 30146061.547672395
+            delta_calculation_percent: 0
+          details:
+          - service: MOC Local
+            unit: min
+            own_calculation: 668295.9319999999
+            partner_calculation: 668295.9319999999
+            delta_calculation_percent: 0
+          - service: SMSMO
+            unit: SMS
+            own_calculation: 198984.852
+            partner_calculation: 198984.852
+            delta_calculation_percent: 0
+        partnerPerspective:
+          general_information:
+          - service: Voice
+            unit: min
+            own_calculation: 19120680.994
+            partner_calculation: 19120680.994
+            delta_calculation_percent: 0
+          - service: SMS
+            unit: SMS
+            own_calculation: 198984.852
+            partner_calculation: 198984.852
+            delta_calculation_percent: 0
+          - service: Data
+            unit: MB
+            own_calculation: 30146061.547672395
+            partner_calculation: 30146061.547672395
+            delta_calculation_percent: 0
+          details:
+          - service: MOC Local
+            unit: min
+            own_calculation: 668295.9319999999
+            partner_calculation: 668295.9319999999
+            delta_calculation_percent: 0
+          - service: SMSMO
+            unit: SMS
+            own_calculation: 198984.852
+            partner_calculation: 198984.852
+            delta_calculation_percent: 0
                   
     SettlementListResponse:
       title: List of settlements JSON

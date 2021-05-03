@@ -130,7 +130,7 @@ No authorization required
 
 <a name="getUsageDiscrepancy"></a>
 # **getUsageDiscrepancy**
-> Object getUsageDiscrepancy(contractId, usageId, partnerUsageId)
+> UsageDiscrepancy getUsageDiscrepancy(contractId, usageId, partnerUsageId)
 
 
 
@@ -146,7 +146,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Object**](../Models/object.md)
+[**UsageDiscrepancy**](../Models/UsageDiscrepancy.md)
 
 ### Authorization
 
