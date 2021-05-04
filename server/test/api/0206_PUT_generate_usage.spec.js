@@ -365,8 +365,8 @@ describe(`Tests PUT ${route} API OK`, function() {
 
             expect(response.body).to.have.property('body').that.is.an('object');
             // remove generatedResult field and set this generatedResult in body
-            expect(response.body.body).to.have.property('fromDate', 202001);
-            expect(response.body.body).to.have.property('toDate', 202002);
+            // expect(response.body.body).to.have.property('fromDate', 202001);
+            // expect(response.body.body).to.have.property('toDate', 202002);
             expect(response.body.body).to.have.property('calculationEngineVersion', '0.0.0');
             expect(response.body.body).to.have.property('inbound');
             expect(response.body.body.inbound).to.have.property('tax').that.deep.equals({rate: ''});
@@ -496,8 +496,8 @@ describe(`Tests PUT ${route} API OK`, function() {
             expect(response.body.blockchainRef).to.have.property('timestamp').that.is.a('string');
             expect(response.body).to.have.property('body').that.is.an('object');
             // remove generatedResult field and set this generatedResult in body
-            expect(response.body.body).to.have.property('fromDate', null);
-            expect(response.body.body).to.have.property('toDate', null);
+            // expect(response.body.body).to.have.property('fromDate', null);
+            // expect(response.body.body).to.have.property('toDate', null);
             expect(response.body.body).to.have.property('calculationEngineVersion', '0.0.0');
             expect(response.body.body).to.have.property('inbound');
             expect(response.body.body.inbound).to.have.property('tax').that.deep.equals({rate: ''});
@@ -611,8 +611,8 @@ describe(`Tests PUT ${route} API OK`, function() {
 
                 expect(response.body).to.have.property('body').that.is.an('object');
                 // remove generatedResult field and set this generatedResult in body
-                expect(response.body.body).to.have.property('fromDate', null);
-                expect(response.body.body).to.have.property('toDate', null);
+                // expect(response.body.body).to.have.property('fromDate', null);
+                // expect(response.body.body).to.have.property('toDate', null);
                 expect(response.body.body).to.have.property('calculationEngineVersion', '0.0.0');
                 expect(response.body.body).to.have.property('inbound');
                 expect(response.body.body.inbound).to.have.property('tax').that.deep.equals({rate: ''});
@@ -738,8 +738,8 @@ describe(`Tests PUT ${route} API OK`, function() {
 
                 expect(response.body).to.have.property('body').that.is.an('object');
                 // remove generatedResult field and set this generatedResult in body
-                expect(response.body.body).to.have.property('fromDate', null);
-                expect(response.body.body).to.have.property('toDate', null);
+                // expect(response.body.body).to.have.property('fromDate', null);
+                // expect(response.body.body).to.have.property('toDate', null);
                 expect(response.body.body).to.have.property('calculationEngineVersion', '0.0.0');
                 expect(response.body.body).to.have.property('inbound');
                 expect(response.body.body.inbound).to.have.property('tax').that.deep.equals({rate: ''});

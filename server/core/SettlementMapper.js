@@ -232,9 +232,10 @@ class SettlementMapper {
     const yearMonthArray = getCalculateResultResp.intermediateResults
       .filter((intermediateResult) => (intermediateResult.yearMonth)).map((intermediateResult) => parseInt(intermediateResult.yearMonth));
 
-    returnedGeneratedResult.fromDate = Math.min(...yearMonthArray);
-    returnedGeneratedResult.toDate = Math.max(...yearMonthArray);
-
+    if (yearMonthArray && yearMonthArray.length > 0) {
+      returnedGeneratedResult.fromDate = Math.min(...yearMonthArray);
+      returnedGeneratedResult.toDate = Math.max(...yearMonthArray);
+    }
 
     getCalculateResultResp.intermediateResults
       .filter((intermediateResult) => ((intermediateResult.type === 'inbound') || (intermediateResult.type === 'outbound')))

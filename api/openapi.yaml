@@ -3120,8 +3120,6 @@ components:
           example:
           - "UNKNOWN SERVICE NAME IN USAGE"
       required:
-        - fromDate
-        - toDate
         - calculationEngineVersion
         - inbound
         - outbound

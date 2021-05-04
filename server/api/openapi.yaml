@@ -3218,10 +3218,8 @@ components:
           type: array
       required:
       - calculationEngineVersion
-      - fromDate
       - inbound
       - outbound
-      - toDate
       - unexpectedServiceNames
       type: object
     ContractResponse_header:
