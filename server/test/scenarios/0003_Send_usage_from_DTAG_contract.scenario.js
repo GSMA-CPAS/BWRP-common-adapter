@@ -718,8 +718,8 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
 
           expect(response.body.body).to.deep.equalInAnyOrder(configured_EXPECTED_JSON_DTAG_local_usage_settlement_generatedResult);
 
-          expect(response.body.body).to.have.property('fromDate', null);
-          expect(response.body.body).to.have.property('toDate', null);
+          // expect(response.body.body).to.have.property('fromDate', null);
+          // expect(response.body.body).to.have.property('toDate', null);
           expect(response.body.body).to.have.property('calculationEngineVersion', '0.0.1');
           expect(response.body.body).to.have.property('inbound');
           expect(response.body.body.inbound).to.have.property('tax').that.deep.equals({rate: ''});
@@ -767,8 +767,8 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
 
           expect(response.body.body).to.deep.equalInAnyOrder(configured_EXPECTED_JSON_DTAG_partner_usage_settlement_generatedResult);
 
-          expect(response.body.body).to.have.property('fromDate', null);
-          expect(response.body.body).to.have.property('toDate', null);
+          // expect(response.body.body).to.have.property('fromDate', null);
+          // expect(response.body.body).to.have.property('toDate', null);
           expect(response.body.body).to.have.property('calculationEngineVersion', '0.0.1');
           expect(response.body.body).to.have.property('inbound');
           expect(response.body.body.inbound).to.have.property('tax').that.deep.equals({rate: ''});

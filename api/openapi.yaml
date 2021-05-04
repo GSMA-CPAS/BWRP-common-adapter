@@ -2240,7 +2240,7 @@ components:
         general_information:
           type: array
           minItems: 3
-          maxItems: 3
+          maxItems: 4
           items:
             $ref: '#/components/schemas/SettlementDiscrepancy_general_information_item'
         details:
