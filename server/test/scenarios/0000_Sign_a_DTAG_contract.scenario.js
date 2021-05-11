@@ -395,7 +395,7 @@ describe(`Launch scenario 0000_Sign_a_DTAG_contract`, function() {
       }
     };
 
-    waitContract(DTAG_dynamic_data.contractReferenceId, 10, 5000);
+    waitContract(DTAG_dynamic_data.contractReferenceId, 20, 5000);
   });
 
   // Now create and use 'signature' endpoints
