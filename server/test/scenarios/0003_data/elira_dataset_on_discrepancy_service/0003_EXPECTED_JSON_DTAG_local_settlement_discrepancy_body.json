@@ -2,13 +2,24 @@
   "homePerspective": {
     "general_information": [
       {
-        "service": "Voice",
+        "service": "MOC",
         "unit": "min",
         "own_calculation": 8295927.694000002,
         "partner_calculation": 8295927.694000002,
         "delta_calculation_percent": 0,
-        "own_usage": 146857630.6,
-        "partner_usage": 146857630.6,
+        "own_usage": 78883740.14999999,
+        "partner_usage": 78883740.14999999,
+        "delta_usage_abs": 0,
+        "delta_usage_percent": 0
+      },
+      {
+        "service": "MTC",
+        "unit": "min",
+        "own_calculation": 0,
+        "partner_calculation": 0,
+        "delta_calculation_percent": 0,
+        "own_usage": 67973890.45,
+        "partner_usage": 67973890.45,
         "delta_usage_abs": 0,
         "delta_usage_percent": 0
       },
@@ -90,19 +101,52 @@
         "partner_usage": 2158211.85,
         "delta_usage_abs": 0,
         "delta_usage_percent": 0
+      },
+      {
+        "service": "MOC Special Destinations",
+        "unit": "min",
+        "own_calculation": 0,
+        "partner_calculation": 0,
+        "delta_calculation_percent": 0,
+        "own_usage": 4080.25,
+        "partner_usage": 4080.25,
+        "delta_usage_abs": 0,
+        "delta_usage_percent": 0
+      },
+      {
+        "service": "MTC",
+        "unit": "min",
+        "own_calculation": 0,
+        "partner_calculation": 0,
+        "delta_calculation_percent": 0,
+        "own_usage": 67973890.45,
+        "partner_usage": 67973890.45,
+        "delta_usage_abs": 0,
+        "delta_usage_percent": 0
       }
     ]
   },
   "partnerPerspective": {
     "general_information": [
       {
-        "service": "Voice",
+        "service": "MOC",
         "unit": "min",
         "own_calculation": 19120680.994,
         "partner_calculation": 19120680.994,
         "delta_calculation_percent": 0,
-        "own_usage": 208594585.25,
-        "partner_usage": 208594585.25,
+        "own_usage": 109888639.05000001,
+        "partner_usage": 109888639.05000001,
+        "delta_usage_abs": 0,
+        "delta_usage_percent": 0
+      },
+      {
+        "service": "MTC",
+        "unit": "min",
+        "own_calculation": 0,
+        "partner_calculation": 0,
+        "delta_calculation_percent": 0,
+        "own_usage": 98705946.19999999,
+        "partner_usage": 98705946.19999999,
         "delta_usage_abs": 0,
         "delta_usage_percent": 0
       },
@@ -193,6 +237,17 @@
         "delta_calculation_percent": 0,
         "own_usage": 64458.70000000004,
         "partner_usage": 64458.70000000004,
+        "delta_usage_abs": 0,
+        "delta_usage_percent": 0
+      },
+      {
+        "service": "MTC",
+        "unit": "min",
+        "own_calculation": 0,
+        "partner_calculation": 0,
+        "delta_calculation_percent": 0,
+        "own_usage": 98705946.19999999,
+        "partner_usage": 98705946.19999999,
         "delta_usage_abs": 0,
         "delta_usage_percent": 0
       }
