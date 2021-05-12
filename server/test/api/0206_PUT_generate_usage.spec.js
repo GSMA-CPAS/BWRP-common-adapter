@@ -319,15 +319,15 @@ describe(`Tests PUT ${route} API OK`, function() {
                 md5hash: 'd8a67bdb368d59766b362265530d32e8'
               },
               intermediateResults: [
-                {yearMonth: 202001, service: 'SMSMO', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: 9000, type: 'inbound'},
-                {yearMonth: 202001, service: 'SMSMO', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 4500, type: 'outbound'},
-                {yearMonth: 202001, service: 'GPRS', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 1, type: 'outbound'},
-                {yearMonth: 202001, service: 'GPRS', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 2500, type: 'inbound'},
-                {yearMonth: 202001, service: 'MOC Back Home', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 25, type: 'inbound'},
-                {yearMonth: 202001, service: 'MOC Back Home', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 500, type: 'outbound'},
-                {yearMonth: 202001, service: 'MOC Local', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 5, type: 'inbound'},
-                {yearMonth: 202002, service: 'MOC Local', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 6, type: 'outbound'},
-                {yearMonth: 202002, service: 'MOC', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 2500, type: 'outbound'}
+                {yearMonth: 202001, service: 'SMSMO', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: 9000, shortOfCommitment: 0, usage: 0, type: 'inbound'},
+                {yearMonth: 202001, service: 'SMSMO', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 4500, shortOfCommitment: 0, usage: 0, type: 'outbound'},
+                {yearMonth: 202001, service: 'GPRS', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 1, shortOfCommitment: 0, usage: 0, type: 'outbound'},
+                {yearMonth: 202001, service: 'GPRS', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 2500, shortOfCommitment: 0, usage: 0, type: 'inbound'},
+                {yearMonth: 202001, service: 'MOC Back Home', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 25, shortOfCommitment: 0, usage: 0, type: 'inbound'},
+                {yearMonth: 202001, service: 'MOC Back Home', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 500, shortOfCommitment: 0, usage: 0, type: 'outbound'},
+                {yearMonth: 202001, service: 'MOC Local', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 5, shortOfCommitment: 0, usage: 0, type: 'inbound'},
+                {yearMonth: 202002, service: 'MOC Local', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 6, shortOfCommitment: 0, usage: 0, type: 'outbound'},
+                {yearMonth: 202002, service: 'MOC', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], shortOfCommitment: 0, usage: 0, dealValue: 2500, type: 'outbound'}
               ]
             },
             undefined
@@ -372,12 +372,12 @@ describe(`Tests PUT ${route} API OK`, function() {
             expect(response.body.body.inbound).to.have.property('tax').that.deep.equals({rate: ''});
             expect(response.body.body.inbound).to.have.property('currency');
             expect(response.body.body.inbound).to.have.property('services');
-            const expectedInboundServices = {voice: {MOC: {local: 5, backHome: 25, international: 0, premium: 0, ROW: 0, EEA: 0, EU: 0, satellite: 0, specialDestinations: 0, videoTelephony: 0}, MTC: 0}, SMS: {MO: 9000, MT: 0}, data: [{name: 'GPRS', value: 2500}, {name: 'M2M', value: 0}, {name: 'NB-IOT', value: 0}, {name: 'LTE-M', value: 0}, {name: 'VoLTE', value: 0}, {name: 'ViLTE', value: 0}, {name: 'signalling', value: 0}], access: {networkAccess: 0}};
+            const expectedInboundServices = {'voice': {'MOC': {'local': {'dealValue': 5, 'shortOfCommitment': 0, 'usage': 0}, 'backHome': {'dealValue': 25, 'shortOfCommitment': 0, 'usage': 0}, 'international': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'premium': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'ROW': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'EU': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'EEA': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'satellite': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'videoTelephony': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'specialDestinations': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, 'MTC': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, 'SMS': {'MO': {'dealValue': 9000, 'shortOfCommitment': 0, 'usage': 0}, 'MT': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, 'data': [{'name': 'GPRS', 'value': {'dealValue': 2500, 'shortOfCommitment': 0, 'usage': 0}}, {'name': 'M2M', 'value': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, {'name': 'NB-IOT', 'value': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, {'name': 'LTE-M', 'value': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, {'name': 'VoLTE', 'value': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, {'name': 'ViLTE', 'value': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, {'name': 'signalling', 'value': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}], 'access': {'networkAccess': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}};
             expect(response.body.body.inbound).to.have.property('services').that.deep.equals(expectedInboundServices);
             expect(response.body.body.outbound).to.have.property('tax').that.deep.equals({rate: ''});
             expect(response.body.body.outbound).to.have.property('currency');
             expect(response.body.body.outbound).to.have.property('services');
-            const expectedOutboundServices = {voice: {MOC: {local: 6, backHome: 500, international: 0, premium: 0, ROW: 0, EEA: 0, EU: 0, satellite: 0, specialDestinations: 0, videoTelephony: 0}, MTC: 0}, SMS: {MO: 4500, MT: 0}, data: [{name: 'GPRS', value: 1}, {name: 'M2M', value: 0}, {name: 'NB-IOT', value: 0}, {name: 'LTE-M', value: 0}, {name: 'VoLTE', value: 0}, {name: 'ViLTE', value: 0}, {name: 'signalling', value: 0}], access: {networkAccess: 0}};
+            const expectedOutboundServices ={'voice': {'MOC': {'local': {'dealValue': 6, 'shortOfCommitment': 0, 'usage': 0}, 'backHome': {'dealValue': 500, 'shortOfCommitment': 0, 'usage': 0}, 'international': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'premium': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'ROW': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'EU': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'EEA': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'satellite': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'videoTelephony': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'specialDestinations': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, 'MTC': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, 'SMS': {'MO': {'dealValue': 4500, 'shortOfCommitment': 0, 'usage': 0}, 'MT': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, 'data': [{'name': 'GPRS', 'value': {'dealValue': 1, 'shortOfCommitment': 0, 'usage': 0}}, {'name': 'M2M', 'value': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, {'name': 'NB-IOT', 'value': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, {'name': 'LTE-M', 'value': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, {'name': 'VoLTE', 'value': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, {'name': 'ViLTE', 'value': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, {'name': 'signalling', 'value': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}], 'access': {'networkAccess': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}};
             expect(response.body.body.outbound).to.have.property('services').that.deep.equals(expectedOutboundServices);
             expect(calculationServiceNock.isDone(), 'Unconsumed nock error').to.be.true;
 
@@ -420,15 +420,15 @@ describe(`Tests PUT ${route} API OK`, function() {
                 md5hash: 'd8a67bdb368d59766b362265530d32e8'
               },
               intermediateResults: [
-                {service: 'SMSMO', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: 9000, type: 'inbound'},
-                {service: 'SMSMO', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 4500, type: 'outbound'},
-                {service: 'GPRS', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 1, type: 'outbound'},
-                {service: 'GPRS', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 2500, type: 'inbound'},
-                {service: 'MOC Back Home', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 25, type: 'inbound'},
-                {service: 'MOC Back Home', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 500, type: 'outbound'},
-                {service: 'MOC Local', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 5, type: 'inbound'},
-                {service: 'MOC Local', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 6, type: 'outbound'},
-                {service: 'MOC', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 2500, type: 'outbound'}
+                {service: 'SMSMO', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: 9000, shortOfCommitment: 0, usage: 0, type: 'inbound'},
+                {service: 'SMSMO', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 4500, shortOfCommitment: 0, usage: 0, type: 'outbound'},
+                {service: 'GPRS', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 1, shortOfCommitment: 0, usage: 0, type: 'outbound'},
+                {service: 'GPRS', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 2500, shortOfCommitment: 0, usage: 0, type: 'inbound'},
+                {service: 'MOC Back Home', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 25, shortOfCommitment: 0, usage: 0, type: 'inbound'},
+                {service: 'MOC Back Home', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 500, shortOfCommitment: 0, usage: 0, type: 'outbound'},
+                {service: 'MOC Local', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 5, shortOfCommitment: 0, usage: 0, type: 'inbound'},
+                {service: 'MOC Local', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 6, shortOfCommitment: 0, usage: 0, type: 'outbound'},
+                {service: 'MOC', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 2500, shortOfCommitment: 0, usage: 0, type: 'outbound'}
               ]
             },
             undefined
@@ -503,12 +503,12 @@ describe(`Tests PUT ${route} API OK`, function() {
             expect(response.body.body.inbound).to.have.property('tax').that.deep.equals({rate: ''});
             expect(response.body.body.inbound).to.have.property('currency');
             expect(response.body.body.inbound).to.have.property('services');
-            const expectedInboundServices = {voice: {MOC: {local: 5, backHome: 25, international: 0, premium: 0, ROW: 0, EEA: 0, EU: 0, satellite: 0, specialDestinations: 0, videoTelephony: 0}, MTC: 0}, SMS: {MO: 9000, MT: 0}, data: [{name: 'GPRS', value: 2500}, {name: 'M2M', value: 0}, {name: 'NB-IOT', value: 0}, {name: 'LTE-M', value: 0}, {name: 'VoLTE', value: 0}, {name: 'ViLTE', value: 0}, {name: 'signalling', value: 0}], access: {networkAccess: 0}};
+            const expectedInboundServices ={'voice': {'MOC': {'local': {'dealValue': 5, 'shortOfCommitment': 0, 'usage': 0}, 'backHome': {'dealValue': 25, 'shortOfCommitment': 0, 'usage': 0}, 'international': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'premium': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'ROW': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'EU': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'EEA': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'satellite': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'videoTelephony': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'specialDestinations': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, 'MTC': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, 'SMS': {'MO': {'dealValue': 9000, 'shortOfCommitment': 0, 'usage': 0}, 'MT': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, 'data': [{'name': 'GPRS', 'value': {'dealValue': 2500, 'shortOfCommitment': 0, 'usage': 0}}, {'name': 'M2M', 'value': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, {'name': 'NB-IOT', 'value': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, {'name': 'LTE-M', 'value': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, {'name': 'VoLTE', 'value': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, {'name': 'ViLTE', 'value': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, {'name': 'signalling', 'value': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}], 'access': {'networkAccess': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}};
             expect(response.body.body.inbound).to.have.property('services').that.deep.equals(expectedInboundServices);
             expect(response.body.body.outbound).to.have.property('tax').that.deep.equals({rate: ''});
             expect(response.body.body.outbound).to.have.property('currency');
             expect(response.body.body.outbound).to.have.property('services');
-            const expectedOutboundServices = {voice: {MOC: {local: 6, backHome: 500, international: 0, premium: 0, ROW: 0, EEA: 0, EU: 0, satellite: 0, specialDestinations: 0, videoTelephony: 0}, MTC: 0}, SMS: {MO: 4500, MT: 0}, data: [{name: 'GPRS', value: 1}, {name: 'M2M', value: 0}, {name: 'NB-IOT', value: 0}, {name: 'LTE-M', value: 0}, {name: 'VoLTE', value: 0}, {name: 'ViLTE', value: 0}, {name: 'signalling', value: 0}], access: {networkAccess: 0}};
+            const expectedOutboundServices ={'voice': {'MOC': {'local': {'dealValue': 6, 'shortOfCommitment': 0, 'usage': 0}, 'backHome': {'dealValue': 500, 'shortOfCommitment': 0, 'usage': 0}, 'international': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'premium': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'ROW': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'EU': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'EEA': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'satellite': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'videoTelephony': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'specialDestinations': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, 'MTC': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, 'SMS': {'MO': {'dealValue': 4500, 'shortOfCommitment': 0, 'usage': 0}, 'MT': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, 'data': [{'name': 'GPRS', 'value': {'dealValue': 1, 'shortOfCommitment': 0, 'usage': 0}}, {'name': 'M2M', 'value': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, {'name': 'NB-IOT', 'value': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, {'name': 'LTE-M', 'value': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, {'name': 'VoLTE', 'value': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, {'name': 'ViLTE', 'value': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, {'name': 'signalling', 'value': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}], 'access': {'networkAccess': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}};
             expect(response.body.body.outbound).to.have.property('services').that.deep.equals(expectedOutboundServices);
 
             expect(calculationServiceNock.isDone(), 'Unconsumed nock error').to.be.true;
@@ -553,15 +553,15 @@ describe(`Tests PUT ${route} API OK`, function() {
                 md5hash: 'd8a67bdb368d59766b362265530d32e8'
               },
               intermediateResults: [
-                {service: 'SMSMO', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: 9000, type: 'inbound'},
-                {service: 'SMSMO', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 4500, type: 'outbound'},
-                {service: 'GPRS', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 1, type: 'outbound'},
-                {service: 'GPRS', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 2500, type: 'inbound'},
-                {service: 'MOC Back Home', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 25, type: 'inbound'},
-                {service: 'MOC Back Home', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 500, type: 'outbound'},
-                {service: 'MOC Local', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 5, type: 'inbound'},
-                {service: 'MOC Local', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 6, type: 'outbound'},
-                {service: 'MOC', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 2500, type: 'outbound'}
+                {service: 'SMSMO', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: 9000, shortOfCommitment: 0, usage: 0, type: 'inbound'},
+                {service: 'SMSMO', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 4500, shortOfCommitment: 0, usage: 0, type: 'outbound'},
+                {service: 'GPRS', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 1, shortOfCommitment: 0, usage: 0, type: 'outbound'},
+                {service: 'GPRS', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 2500, shortOfCommitment: 0, usage: 0, type: 'inbound'},
+                {service: 'MOC Back Home', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 25, shortOfCommitment: 0, usage: 0, type: 'inbound'},
+                {service: 'MOC Back Home', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 500, shortOfCommitment: 0, usage: 0, type: 'outbound'},
+                {service: 'MOC Local', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 5, shortOfCommitment: 0, usage: 0, type: 'inbound'},
+                {service: 'MOC Local', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 6, shortOfCommitment: 0, usage: 0, type: 'outbound'},
+                {service: 'MOC', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 2500, shortOfCommitment: 0, usage: 0, type: 'outbound'}
               ]
             },
             undefined
@@ -618,12 +618,12 @@ describe(`Tests PUT ${route} API OK`, function() {
                 expect(response.body.body.inbound).to.have.property('tax').that.deep.equals({rate: ''});
                 expect(response.body.body.inbound).to.have.property('currency');
                 expect(response.body.body.inbound).to.have.property('services');
-                const expectedInboundServices = {voice: {MOC: {local: 5, backHome: 25, international: 0, premium: 0, ROW: 0, EEA: 0, EU: 0, satellite: 0, specialDestinations: 0, videoTelephony: 0}, MTC: 0}, SMS: {MO: 9000, MT: 0}, data: [{name: 'GPRS', value: 2500}, {name: 'M2M', value: 0}, {name: 'NB-IOT', value: 0}, {name: 'LTE-M', value: 0}, {name: 'VoLTE', value: 0}, {name: 'ViLTE', value: 0}, {name: 'signalling', value: 0}], access: {networkAccess: 0}};
+                const expectedInboundServices = {'voice': {'MOC': {'local': {'dealValue': 5, 'shortOfCommitment': 0, 'usage': 0}, 'backHome': {'dealValue': 25, 'shortOfCommitment': 0, 'usage': 0}, 'international': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'premium': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'ROW': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'EU': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'EEA': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'satellite': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'videoTelephony': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'specialDestinations': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, 'MTC': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, 'SMS': {'MO': {'dealValue': 9000, 'shortOfCommitment': 0, 'usage': 0}, 'MT': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, 'data': [{'name': 'GPRS', 'value': {'dealValue': 2500, 'shortOfCommitment': 0, 'usage': 0}}, {'name': 'M2M', 'value': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, {'name': 'NB-IOT', 'value': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, {'name': 'LTE-M', 'value': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, {'name': 'VoLTE', 'value': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, {'name': 'ViLTE', 'value': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, {'name': 'signalling', 'value': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}], 'access': {'networkAccess': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}};
                 expect(response.body.body.inbound).to.have.property('services').that.deep.equals(expectedInboundServices);
                 expect(response.body.body.outbound).to.have.property('tax').that.deep.equals({rate: ''});
                 expect(response.body.body.outbound).to.have.property('currency');
                 expect(response.body.body.outbound).to.have.property('services');
-                const expectedOutboundServices = {voice: {MOC: {local: 6, backHome: 500, international: 0, premium: 0, ROW: 0, EEA: 0, EU: 0, satellite: 0, specialDestinations: 0, videoTelephony: 0}, MTC: 0}, SMS: {MO: 4500, MT: 0}, data: [{name: 'GPRS', value: 1}, {name: 'M2M', value: 0}, {name: 'NB-IOT', value: 0}, {name: 'LTE-M', value: 0}, {name: 'VoLTE', value: 0}, {name: 'ViLTE', value: 0}, {name: 'signalling', value: 0}], access: {networkAccess: 0}};
+                const expectedOutboundServices = {'voice': {'MOC': {'local': {'dealValue': 6, 'shortOfCommitment': 0, 'usage': 0}, 'backHome': {'dealValue': 500, 'shortOfCommitment': 0, 'usage': 0}, 'international': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'premium': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'ROW': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'EU': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'EEA': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'satellite': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'videoTelephony': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'specialDestinations': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, 'MTC': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, 'SMS': {'MO': {'dealValue': 4500, 'shortOfCommitment': 0, 'usage': 0}, 'MT': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, 'data': [{'name': 'GPRS', 'value': {'dealValue': 1, 'shortOfCommitment': 0, 'usage': 0}}, {'name': 'M2M', 'value': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, {'name': 'NB-IOT', 'value': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, {'name': 'LTE-M', 'value': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, {'name': 'VoLTE', 'value': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, {'name': 'ViLTE', 'value': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, {'name': 'signalling', 'value': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}], 'access': {'networkAccess': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}};
                 expect(response.body.body.outbound).to.have.property('services').that.deep.equals(expectedOutboundServices);
                 expect(calculationServiceNock.isDone(), 'Unconsumed nock error').to.be.true;
 
@@ -678,15 +678,15 @@ describe(`Tests PUT ${route} API OK`, function() {
                 md5hash: 'd8a67bdb368d59766b362265530d32e8'
               },
               intermediateResults: [
-                {service: 'SMSMO', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: 9000, type: 'inbound'},
-                {service: 'SMSMO', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 4500, type: 'outbound'},
-                {service: 'GPRS', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 1, type: 'outbound'},
-                {service: 'GPRS', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 2500, type: 'inbound'},
-                {service: 'MOC Back Home', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 25, type: 'inbound'},
-                {service: 'MOC Back Home', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 500, type: 'outbound'},
-                {service: 'MOC Local', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 5, type: 'inbound'},
-                {service: 'MOC Local', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 6, type: 'outbound'},
-                {service: 'MOC', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 2500, type: 'outbound'}
+                {service: 'SMSMO', homeTadigs: ['HOR2'], visitorTadigs: ['HOR1'], dealValue: 9000, shortOfCommitment: 0, usage: 0, type: 'inbound'},
+                {service: 'SMSMO', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 4500, shortOfCommitment: 0, usage: 0, type: 'outbound'},
+                {service: 'GPRS', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 1, shortOfCommitment: 0, usage: 0, type: 'outbound'},
+                {service: 'GPRS', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 2500, shortOfCommitment: 0, usage: 0, type: 'inbound'},
+                {service: 'MOC Back Home', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 25, shortOfCommitment: 0, usage: 0, type: 'inbound'},
+                {service: 'MOC Back Home', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 500, shortOfCommitment: 0, usage: 0, type: 'outbound'},
+                {service: 'MOC Local', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 5, shortOfCommitment: 0, usage: 0, type: 'inbound'},
+                {service: 'MOC Local', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 6, shortOfCommitment: 0, usage: 0, type: 'outbound'},
+                {service: 'MOC', homeTadigs: ['HOR1'], visitorTadigs: ['HOR2'], dealValue: 2500, shortOfCommitment: 0, usage: 0, type: 'outbound'}
               ]
             },
             undefined
@@ -745,12 +745,12 @@ describe(`Tests PUT ${route} API OK`, function() {
                 expect(response.body.body.inbound).to.have.property('tax').that.deep.equals({rate: ''});
                 expect(response.body.body.inbound).to.have.property('currency');
                 expect(response.body.body.inbound).to.have.property('services');
-                const expectedInboundServices = {voice: {MOC: {local: 5, backHome: 25, international: 0, premium: 0, ROW: 0, EEA: 0, EU: 0, satellite: 0, specialDestinations: 0, videoTelephony: 0}, MTC: 0}, SMS: {MO: 9000, MT: 0}, data: [{name: 'GPRS', value: 2500}, {name: 'M2M', value: 0}, {name: 'NB-IOT', value: 0}, {name: 'LTE-M', value: 0}, {name: 'VoLTE', value: 0}, {name: 'ViLTE', value: 0}, {name: 'signalling', value: 0}], access: {networkAccess: 0}};
+                const expectedInboundServices = {'voice': {'MOC': {'local': {'dealValue': 5, 'shortOfCommitment': 0, 'usage': 0}, 'backHome': {'dealValue': 25, 'shortOfCommitment': 0, 'usage': 0}, 'international': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'premium': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'ROW': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'EU': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'EEA': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'satellite': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'videoTelephony': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'specialDestinations': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, 'MTC': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, 'SMS': {'MO': {'dealValue': 9000, 'shortOfCommitment': 0, 'usage': 0}, 'MT': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, 'data': [{'name': 'GPRS', 'value': {'dealValue': 2500, 'shortOfCommitment': 0, 'usage': 0}}, {'name': 'M2M', 'value': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, {'name': 'NB-IOT', 'value': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, {'name': 'LTE-M', 'value': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, {'name': 'VoLTE', 'value': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, {'name': 'ViLTE', 'value': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, {'name': 'signalling', 'value': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}], 'access': {'networkAccess': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}};
                 expect(response.body.body.inbound).to.have.property('services').that.deep.equals(expectedInboundServices);
                 expect(response.body.body.outbound).to.have.property('tax').that.deep.equals({rate: ''});
                 expect(response.body.body.outbound).to.have.property('currency');
                 expect(response.body.body.outbound).to.have.property('services');
-                const expectedOutboundServices = {voice: {MOC: {local: 6, backHome: 500, international: 0, premium: 0, ROW: 0, EEA: 0, EU: 0, satellite: 0, specialDestinations: 0, videoTelephony: 0}, MTC: 0}, SMS: {MO: 4500, MT: 0}, data: [{name: 'GPRS', value: 1}, {name: 'M2M', value: 0}, {name: 'NB-IOT', value: 0}, {name: 'LTE-M', value: 0}, {name: 'VoLTE', value: 0}, {name: 'ViLTE', value: 0}, {name: 'signalling', value: 0}], access: {networkAccess: 0}};
+                const expectedOutboundServices = {'voice': {'MOC': {'local': {'dealValue': 6, 'shortOfCommitment': 0, 'usage': 0}, 'backHome': {'dealValue': 500, 'shortOfCommitment': 0, 'usage': 0}, 'international': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'premium': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'ROW': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'EU': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'EEA': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'satellite': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'videoTelephony': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}, 'specialDestinations': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, 'MTC': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, 'SMS': {'MO': {'dealValue': 4500, 'shortOfCommitment': 0, 'usage': 0}, 'MT': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, 'data': [{'name': 'GPRS', 'value': {'dealValue': 1, 'shortOfCommitment': 0, 'usage': 0}}, {'name': 'M2M', 'value': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, {'name': 'NB-IOT', 'value': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, {'name': 'LTE-M', 'value': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, {'name': 'VoLTE', 'value': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, {'name': 'ViLTE', 'value': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}, {'name': 'signalling', 'value': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}], 'access': {'networkAccess': {'dealValue': 0, 'shortOfCommitment': 0, 'usage': 0}}};
                 expect(response.body.body.outbound).to.have.property('services').that.deep.equals(expectedOutboundServices);
                 expect(calculationServiceNock.isDone(), 'Unconsumed nock error').to.be.true;
 

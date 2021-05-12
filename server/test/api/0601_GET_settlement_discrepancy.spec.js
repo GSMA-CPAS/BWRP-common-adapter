@@ -79,34 +79,34 @@ describe(`Tests GET ${route} API OK`, function() {
             services: {
               voice: {
                 MOC: {
-                  local: 10234,
-                  backHome: 6780,
-                  international: 0,
-                  premium: 0,
-                  ROW: 0,
-                  EU: 0,
-                  EEA: 0,
-                  satellite: 0,
-                  videoTelephony: 0,
-                  specialDestinations: 0
+                  local: {dealValue: 10234, shortOfCommitment: 0, usage: 0},
+                  backHome: {dealValue: 6780, shortOfCommitment: 0, usage: 0},
+                  international: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  premium: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  ROW: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  EU: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  EEA: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  satellite: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  videoTelephony: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  specialDestinations: {dealValue: 0, shortOfCommitment: 0, usage: 0},
                 },
-                MTC: 0
+                MTC: {dealValue: 0, shortOfCommitment: 0, usage: 0},
               },
               SMS: {
-                MO: 5000,
-                MT: 0
+                MO: {dealValue: 5000, shortOfCommitment: 0, usage: 0},
+                MT: {dealValue: 0, shortOfCommitment: 0, usage: 0},
               },
               data: [
-                {name: 'GPRS', value: 951},
-                {name: 'M2M', value: 0},
-                {name: 'NB-IOT', value: 0},
-                {name: 'LTE-M', value: 0},
-                {name: 'VoLTE', value: 0},
-                {name: 'ViLTE', value: 0},
-                {name: 'signalling', value: 0}
+                {name: 'GPRS', value: {dealValue: 951}, shortOfCommitment: 0, usage: 0},
+                {name: 'M2M', value: {dealValue: 0}, shortOfCommitment: 0, usage: 0},
+                {name: 'NB-IOT', value: {dealValue: 0}, shortOfCommitment: 0, usage: 0},
+                {name: 'LTE-M', value: {dealValue: 0}, shortOfCommitment: 0, usage: 0},
+                {name: 'VoLTE', value: {dealValue: 0}, shortOfCommitment: 0, usage: 0},
+                {name: 'ViLTE', value: {dealValue: 0}, shortOfCommitment: 0, usage: 0},
+                {name: 'signalling', value: {dealValue: 0, shortOfCommitment: 0, usage: 0}}
               ],
               access: {
-                networkAccess: 0
+                networkAccess: {dealValue: 0, shortOfCommitment: 0, usage: 0},
               }
             }
           },
@@ -116,34 +116,34 @@ describe(`Tests GET ${route} API OK`, function() {
             services: {
               voice: {
                 MOC: {
-                  local: 9456,
-                  backHome: 1289,
-                  international: 0,
-                  premium: 0,
-                  ROW: 0,
-                  EU: 0,
-                  EEA: 0,
-                  satellite: 0,
-                  videoTelephony: 0,
-                  specialDestinations: 0
+                  local: {dealValue: 9456, shortOfCommitment: 0, usage: 0},
+                  backHome: {dealValue: 1289, shortOfCommitment: 0, usage: 0},
+                  international: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  premium: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  ROW: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  EU: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  EEA: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  satellite: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  videoTelephony: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  specialDestinations: {dealValue: 0, shortOfCommitment: 0, usage: 0}
                 },
-                MTC: 0
+                MTC: {dealValue: 0, shortOfCommitment: 0, usage: 0}
               },
               SMS: {
-                MO: 5000,
-                MT: 0
+                MO: {dealValue: 5000, shortOfCommitment: 0, usage: 0},
+                MT: {dealValue: 0, shortOfCommitment: 0, usage: 0}
               },
               data: [
-                {name: 'GPRS', value: 0},
-                {name: 'M2M', value: 0},
-                {name: 'NB-IOT', value: 0},
-                {name: 'LTE-M', value: 0},
-                {name: 'VoLTE', value: 389},
-                {name: 'ViLTE', value: 0},
-                {name: 'signalling', value: 0}
+                {name: 'GPRS', value: {dealValue: 0, shortOfCommitment: 0, usage: 0}},
+                {name: 'M2M', value: {dealValue: 0, shortOfCommitment: 0, usage: 0}},
+                {name: 'NB-IOT', value: {dealValue: 0, shortOfCommitment: 0, usage: 0}},
+                {name: 'LTE-M', value: {dealValue: 0, shortOfCommitment: 0, usage: 0}},
+                {name: 'VoLTE', value: {dealValue: 389, shortOfCommitment: 0, usage: 0}},
+                {name: 'ViLTE', value: {dealValue: 0, shortOfCommitment: 0, usage: 0}},
+                {name: 'signalling', value: {dealValue: 0, shortOfCommitment: 0, usage: 0}}
               ],
               access: {
-                networkAccess: 0
+                networkAccess: {dealValue: 0, shortOfCommitment: 0, usage: 0}
               }
             }
           },
@@ -186,34 +186,34 @@ describe(`Tests GET ${route} API OK`, function() {
             services: {
               voice: {
                 MOC: {
-                  local: 9336,
-                  backHome: 2389,
-                  international: 0,
-                  premium: 0,
-                  ROW: 0,
-                  EU: 0,
-                  EEA: 134,
-                  satellite: 0,
-                  videoTelephony: 0,
-                  specialDestinations: 0
+                  local: {dealValue: 9336, shortOfCommitment: 0, usage: 0},
+                  backHome: {dealValue: 2389, shortOfCommitment: 0, usage: 0},
+                  international: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  premium: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  ROW: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  EU: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  EEA: {dealValue: 134, shortOfCommitment: 0, usage: 0},
+                  satellite: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  videoTelephony: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  specialDestinations: {dealValue: 0, shortOfCommitment: 0, usage: 0}
                 },
-                MTC: 0
+                MTC: {dealValue: 0, shortOfCommitment: 0, usage: 0}
               },
               SMS: {
-                MO: 5040,
-                MT: 0
+                MO: {dealValue: 5040, shortOfCommitment: 0, usage: 0},
+                MT: {dealValue: 0, shortOfCommitment: 0, usage: 0}
               },
               data: [
-                {name: 'GPRS', value: 0},
-                {name: 'M2M', value: 0},
-                {name: 'NB-IOT', value: 0},
-                {name: 'LTE-M', value: 0},
-                {name: 'VoLTE', value: 189},
-                {name: 'ViLTE', value: 0},
-                {name: 'signalling', value: 0}
+                {name: 'GPRS', value: {dealValue: 0, shortOfCommitment: 0, usage: 0}},
+                {name: 'M2M', value: {dealValue: 0, shortOfCommitment: 0, usage: 0}},
+                {name: 'NB-IOT', value: {dealValue: 0, shortOfCommitment: 0, usage: 0}},
+                {name: 'LTE-M', value: {dealValue: 0, shortOfCommitment: 0, usage: 0}},
+                {name: 'VoLTE', value: {dealValue: 189, shortOfCommitment: 0, usage: 0}},
+                {name: 'ViLTE', value: {dealValue: 0, shortOfCommitment: 0, usage: 0}},
+                {name: 'signalling', value: {dealValue: 0, shortOfCommitment: 0, usage: 0}}
               ],
               access: {
-                networkAccess: 0
+                networkAccess: {dealValue: 0, shortOfCommitment: 0, usage: 0}
               }
             }
           },
@@ -223,34 +223,34 @@ describe(`Tests GET ${route} API OK`, function() {
             services: {
               voice: {
                 MOC: {
-                  local: 10238,
-                  backHome: 6980,
-                  international: 0,
-                  premium: 0,
-                  ROW: 0,
-                  EU: 0,
-                  EEA: 0,
-                  satellite: 234,
-                  videoTelephony: 0,
-                  specialDestinations: 0
+                  local: {dealValue: 10238, shortOfCommitment: 0, usage: 0},
+                  backHome: {dealValue: 6980, shortOfCommitment: 0, usage: 0},
+                  international: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  premium: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  ROW: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  EU: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  EEA: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  satellite: {dealValue: 234, shortOfCommitment: 0, usage: 0},
+                  videoTelephony: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  specialDestinations: {dealValue: 0, shortOfCommitment: 0, usage: 0}
                 },
-                MTC: 0
+                MTC: {dealValue: 0, shortOfCommitment: 0, usage: 0}
               },
               SMS: {
-                MO: 5200,
-                MT: 0
+                MO: {dealValue: 5200, shortOfCommitment: 0, usage: 0},
+                MT: {dealValue: 0, shortOfCommitment: 0, usage: 0}
               },
               data: [
-                {name: 'GPRS', value: 972},
-                {name: 'M2M', value: 0},
-                {name: 'NB-IOT', value: 23},
-                {name: 'LTE-M', value: 0},
-                {name: 'VoLTE', value: 0},
-                {name: 'ViLTE', value: 0},
-                {name: 'signalling', value: 0}
+                {name: 'GPRS', value: {dealValue: 972, shortOfCommitment: 0, usage: 0}},
+                {name: 'M2M', value: {dealValue: 0, shortOfCommitment: 0, usage: 0}},
+                {name: 'NB-IOT', value: {dealValue: 23, shortOfCommitment: 0, usage: 0}},
+                {name: 'LTE-M', value: {dealValue: 0, shortOfCommitment: 0, usage: 0}},
+                {name: 'VoLTE', value: {dealValue: 0, shortOfCommitment: 0, usage: 0}},
+                {name: 'ViLTE', value: {dealValue: 0, shortOfCommitment: 0, usage: 0}},
+                {name: 'signalling', value: {dealValue: 0, shortOfCommitment: 0, usage: 0}}
               ],
               access: {
-                networkAccess: 0
+                networkAccess: {dealValue: 0, shortOfCommitment: 0, usage: 0}
               }
             }
           },

@@ -260,47 +260,47 @@ const getStubReturnForGetSettlementDiscrepancy = (homeSettlement, partnerSettlem
     try {
       switch (key) {
       case 'MOC Back Home':
-        return oneWaySettlement.services.voice.MOC.backHome;
+        return oneWaySettlement.services.voice.MOC.backHome.dealValue;
       case 'MOC Local':
-        return oneWaySettlement.services.voice.MOC.local;
+        return oneWaySettlement.services.voice.MOC.local.dealValue;
       case 'MOC International':
-        return oneWaySettlement.services.voice.MOC.international;
+        return oneWaySettlement.services.voice.MOC.international.dealValue;
       case 'MOC EU':
-        return oneWaySettlement.services.voice.MOC.EU;
+        return oneWaySettlement.services.voice.MOC.EU.dealValue;
       case 'MOC EEA':
-        return oneWaySettlement.services.voice.MOC.EEA;
+        return oneWaySettlement.services.voice.MOC.EEA.dealValue;
       case 'MOC RoW':
-        return oneWaySettlement.services.voice.MOC.ROW;
+        return oneWaySettlement.services.voice.MOC.ROW.dealValue;
       case 'MOC Premium':
-        return oneWaySettlement.services.voice.MOC.premium;
+        return oneWaySettlement.services.voice.MOC.premium.dealValue;
       case 'MOC Satellite':
-        return oneWaySettlement.services.voice.MOC.satellite;
+        return oneWaySettlement.services.voice.MOC.satellite.dealValue;
       case 'MOC Video Telephony':
-        return oneWaySettlement.services.voice.MOC.videoTelephony;
+        return oneWaySettlement.services.voice.MOC.videoTelephony.dealValue;
       case 'MOC Special Destinations':
-        return oneWaySettlement.services.voice.MOC.specialDestinations;
+        return oneWaySettlement.services.voice.MOC.specialDestinations.dealValue;
       case 'MTC':
-        return oneWaySettlement.services.voice.MTC;
+        return oneWaySettlement.services.voice.MTC.dealValue;
       case 'SMSMO':
-        return oneWaySettlement.services.SMS.MO;
+        return oneWaySettlement.services.SMS.MO.dealValue;
       case 'SMSMT':
-        return oneWaySettlement.services.SMS.MT;
+        return oneWaySettlement.services.SMS.MT.dealValue;
       case 'M2M':
-        return oneWaySettlement.services.data.filter((d) => (d.name === 'M2M'))[0].value;
+        return oneWaySettlement.services.data.filter((d) => (d.name === 'M2M'))[0].value.dealValue;
       case 'NB-IoT':
-        return oneWaySettlement.services.data.filter((d) => (d.name === 'NB-IOT'))[0].value;
+        return oneWaySettlement.services.data.filter((d) => (d.name === 'NB-IOT'))[0].value.dealValue;
       case 'LTE-M':
-        return oneWaySettlement.services.data.filter((d) => (d.name === 'LTE-M'))[0].value;
+        return oneWaySettlement.services.data.filter((d) => (d.name === 'LTE-M'))[0].value.dealValue;
       case 'VoLTE':
-        return oneWaySettlement.services.data.filter((d) => (d.name === 'VoLTE'))[0].value;
+        return oneWaySettlement.services.data.filter((d) => (d.name === 'VoLTE'))[0].value.dealValue;
       case 'ViLTE':
-        return oneWaySettlement.services.data.filter((d) => (d.name === 'ViLTE'))[0].value;
+        return oneWaySettlement.services.data.filter((d) => (d.name === 'ViLTE'))[0].value.dealValue;
       case 'IMS Signalling':
-        return oneWaySettlement.services.data.filter((d) => (d.name === 'signalling'))[0].value;
+        return oneWaySettlement.services.data.filter((d) => (d.name === 'signalling'))[0].value.dealValue;
       case 'GPRS':
-        return oneWaySettlement.services.data.filter((d) => (d.name === 'GPRS'))[0].value;
+        return oneWaySettlement.services.data.filter((d) => (d.name === 'GPRS'))[0].value.dealValue;
       case 'Network Access':
-        return oneWaySettlement.services.access.networkAccess;
+        return oneWaySettlement.services.access.networkAccess.dealValue;
       default:
         return 0;
       }
