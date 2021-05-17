@@ -143,7 +143,16 @@ const sendUsageById = ({contractId, usageId}) => new Promise(
           }
           const uploadUsageResp = await blockchainAdapterConnection.uploadUsage(usageToSend);
           const getStorageKeysResp = await blockchainAdapterConnection.getStorageKeys(uploadUsageResp.referenceId, [uploadUsageResp.mspOwner, uploadUsageResp.mspReceiver]);
-          const updateUsageResp = await LocalStorageProvider.updateSentUsage(usageId, uploadUsageResp.rawData, uploadUsageResp.referenceId, getStorageKeysResp, uploadUsageResp.blockchainRef);
+          // set last received usage as partnerUsageId if exists
+          const lastReceivedUsage = await LocalStorageProvider.getLastReceivedUsage(contractId, {state: 'RECEIVED'});
+
+          const updateUsageResp = await LocalStorageProvider.updateSentUsage(
+            usageId,
+            uploadUsageResp.rawData,
+            uploadUsageResp.referenceId,
+            getStorageKeysResp,
+            uploadUsageResp.blockchainRef,
+            lastReceivedUsage);
           const returnedResponse = UsageMapper.getResponseBodyForSendUsage(updateUsageResp);
           resolve(Service.successResponse(returnedResponse, 200));
         }

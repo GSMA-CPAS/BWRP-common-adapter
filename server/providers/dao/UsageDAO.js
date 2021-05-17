@@ -293,7 +293,7 @@ class UsageDAO {
     });
   }
 
-  static findOneAndUpdateToSentUsage(usageId, rawData, referenceId, storageKeys, blockchainRef) {
+  static findOneAndUpdateToSentUsage(usageId, rawData, referenceId, storageKeys, blockchainRef, lastReceivedUsage) {
     return new Promise((resolve, reject) => {
       // Verify parameters
       if (usageId === undefined) {
@@ -327,6 +327,7 @@ class UsageDAO {
         state: 'DRAFT'
       };
 
+
       const updateCommand = {
         $set: {
           rawData: rawData,
@@ -340,6 +341,10 @@ class UsageDAO {
           history: {date: lastModificationDate, action: 'SENT'}
         }
       };
+
+      if (lastReceivedUsage) {
+        updateCommand['$set'].partnerUsageId = lastReceivedUsage.id;
+      }
 
       // Launch database request
       UsageMongoRequester.findOneAndUpdate(condition, updateCommand, (err, usage) => {

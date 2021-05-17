@@ -57,6 +57,9 @@ class UsageMapper {
       lastModificationDate: usage.lastModificationDate
     };
 
+    if ( usage.partnerUsageId) {
+      returnedResponseBody.partnerUsageId = usage.partnerUsageId;
+    }
     return returnedResponseBody;
   }
 

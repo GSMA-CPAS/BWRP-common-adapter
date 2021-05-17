@@ -174,6 +174,29 @@ class LocalStorageProvider {
 
   /**
    *
+   * @param {String} contractId
+   * @param {Object} matchingConditions
+   * @return {Promise<[string]>}
+   */
+  static async getLastReceivedUsage(contractId, matchingConditions = {}) {
+    try {
+      const receivedUsages = await LocalStorageProvider.getUsages(contractId, {state: 'RECEIVED'});
+      if (receivedUsages.length > 0 ) {
+        const receivedUsage = receivedUsages.sort(function(a, b) {
+          return new Date(b.lastModificationDate) - new Date(a.lastModificationDate);
+        })[0];
+        return receivedUsage;
+      } else {
+        return undefined;
+      }
+    } catch (error) {
+      logger.error('[LocalStorageProvider::getUsages] failed to get usages - %s', error.message);
+      throw error;
+    }
+  }
+
+  /**
+   *
    * @param {Object} usage
    * @return {Promise<object>}
    */
@@ -267,9 +290,9 @@ class LocalStorageProvider {
    * @param {JSON} blockchainRef
    * @return {Promise<object>}
    */
-  static async updateSentUsage(usageId, rawData, referenceId, storageKeys, blockchainRef) {
+  static async updateSentUsage(usageId, rawData, referenceId, storageKeys, blockchainRef, lastReceivedUsage) {
     try {
-      return await UsageDAO.findOneAndUpdateToSentUsage(usageId, rawData, referenceId, storageKeys, blockchainRef);
+      return await UsageDAO.findOneAndUpdateToSentUsage(usageId, rawData, referenceId, storageKeys, blockchainRef, lastReceivedUsage);
     } catch (error) {
       logger.error('[LocalStorageProvider::updateSentUsage] failed to update sent usage - %s', error.message);
       throw error;
