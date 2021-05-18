@@ -115,6 +115,12 @@ const storeBlockchainDocumentInLocalStorage = (document) => new Promise(
         } else {
           document.storageKeys = await blockchainAdapterConnection.getStorageKeys(document.referenceId, [document.mspOwner, document.mspReceiver]);
           returnedResponse = await LocalStorageProvider.saveReceivedUsage(document);
+
+          // set this usage as partnerUsage of the last send usage
+          const lastSentUsage = await LocalStorageProvider.getLastSentUsage(returnedResponse.contractId);
+          if ( lastSentUsage ) {
+            const updateUsageWithPartnerUsageIdResp = await LocalStorageProvider.updateUsageWithPartnerUsageId(lastSentUsage.id, returnedResponse.id);
+          }
         }
       } else if (document.type === 'settlement') {
         // storePromises.push(LocalStorageProvider.createSettlement(document));

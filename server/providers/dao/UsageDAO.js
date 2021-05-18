@@ -293,6 +293,50 @@ class UsageDAO {
     });
   }
 
+  static addPartnerUsageId(id, partnerUsageId) {
+    return new Promise((resolve, reject) => {
+      // Verify parameters
+      if (id === undefined) {
+        logger.error('[UsageDAO::addPartnerUsageId] [FAILED] : id undefined');
+        reject(MISSING_MANDATORY_PARAM_ERROR);
+      }
+      if (partnerUsageId === undefined) {
+        logger.error('[UsageDAO::addPartnerUsageId] [FAILED] : addPartnerUsageId undefined');
+        reject(MISSING_MANDATORY_PARAM_ERROR);
+      }
+
+      // Define automatic values
+      const lastModificationDate = Date.now();
+
+      // Defined update condition and update command
+      const condition = {
+        id: id,
+        state: 'SENT'
+      };
+
+      const updateCommand = {
+        $set: {
+          partnerUsageId: partnerUsageId
+        },
+        $push: {
+          history: {date: lastModificationDate, action: 'UPDATE_PARTNER_USAGE_ID'}
+        }
+      };
+
+      // Launch database request
+      UsageMongoRequester.findOneAndUpdate(condition, updateCommand, (err, usage) => {
+        DAOErrorManager.handleErrorOrNullObject(err, usage)
+          .then((objectReturned) => {
+            resolve(objectReturned);
+          })
+          .catch((errorReturned) => {
+            logger.error('[UsageDAO::addPartnerUsageId] [FAILED] errorReturned:' + typeof errorReturned + ' = ' + JSON.stringify(errorReturned));
+            reject(errorReturned);
+          });
+      });
+    });
+  }
+
   static findOneAndUpdateToSentUsage(usageId, rawData, referenceId, storageKeys, blockchainRef, lastReceivedUsage) {
     return new Promise((resolve, reject) => {
       // Verify parameters

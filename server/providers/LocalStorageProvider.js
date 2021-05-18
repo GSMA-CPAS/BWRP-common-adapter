@@ -175,10 +175,9 @@ class LocalStorageProvider {
   /**
    *
    * @param {String} contractId
-   * @param {Object} matchingConditions
    * @return {Promise<[string]>}
    */
-  static async getLastReceivedUsage(contractId, matchingConditions = {}) {
+  static async getLastReceivedUsage(contractId) {
     try {
       const receivedUsages = await LocalStorageProvider.getUsages(contractId, {state: 'RECEIVED'});
       if (receivedUsages.length > 0 ) {
@@ -186,6 +185,28 @@ class LocalStorageProvider {
           return new Date(b.lastModificationDate) - new Date(a.lastModificationDate);
         })[0];
         return receivedUsage;
+      } else {
+        return undefined;
+      }
+    } catch (error) {
+      logger.error('[LocalStorageProvider::getUsages] failed to get usages - %s', error.message);
+      throw error;
+    }
+  }
+
+  /**
+   *
+   * @param {String} contractId
+   * @return {Promise<[string]>}
+   */
+  static async getLastSentUsage(contractId) {
+    try {
+      const sentUsages = await LocalStorageProvider.getUsages(contractId, {state: 'SENT'});
+      if (sentUsages.length > 0 ) {
+        const sentUsage = sentUsages.sort(function(a, b) {
+          return new Date(b.lastModificationDate) - new Date(a.lastModificationDate);
+        })[0];
+        return sentUsage;
       } else {
         return undefined;
       }
@@ -283,11 +304,27 @@ class LocalStorageProvider {
 
   /**
    *
+   * @param {Object} id
+   * @param {Object} partnerUsageId
+   * @return {Promise<object>}
+   */
+  static async updateUsageWithPartnerUsageId(id, partnerUsageId) {
+    try {
+      return await UsageDAO.addPartnerUsageId(id, partnerUsageId);
+    } catch (error) {
+      logger.error('[LocalStorageProvider::updateUsageWithPartnerUsageId] failed to updateUsageWithPartnerUsageId - ', error.message);
+      throw error;
+    }
+  }
+
+  /**
+   *
    * @param {String} usageId
    * @param {String} rawData
    * @param {String} referenceId
    * @param {Array<String>} storageKeys
    * @param {JSON} blockchainRef
+   * @param {JSON} lastReceivedUsage
    * @return {Promise<object>}
    */
   static async updateSentUsage(usageId, rawData, referenceId, storageKeys, blockchainRef, lastReceivedUsage) {
