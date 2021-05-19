@@ -39,6 +39,10 @@ const getSettlements = async (request, response) => {
   await Controller.handleRequest(request, response, service.getSettlements);
 };
 
+const rejectSettlementById = async (request, response) => {
+  await Controller.handleRequest(request, response, service.rejectSettlementById);
+};
+
 const sendSettlementById = async (request, response) => {
   await Controller.handleRequest(request, response, service.sendSettlementById);
 };
@@ -48,5 +52,6 @@ module.exports = {
   getSettlementById,
   getSettlementDiscrepancy,
   getSettlements,
+  rejectSettlementById,
   sendSettlementById,
 };

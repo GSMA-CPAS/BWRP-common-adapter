@@ -143,9 +143,30 @@ const generateUsageById = ({contractId, usageId, mode}) => new Promise(
   },
 );
 
+/**
+ * Set Tag to \"REJECTED\"
+ *
+ * @param {String} contractId The contract Id
+ * @param {String} settlementId The Settlement Id
+ * @return {Promise<ServiceResponse>}
+ */
+const rejectSettlementById = ({contractId, settlementId}) => new Promise(
+  async (resolve, reject) => {
+    try {
+      const getSettlementByIdResp = await LocalStorageProvider.getSettlement(contractId, settlementId);
+      const updateSettlementResp = await LocalStorageProvider.updateSettlementWithTag(settlementId, 'REJECTED');
+      const returnedResponse = SettlementMapper.getResponseBodyForRejectSettlement(updateSettlementResp);
+      resolve(Service.successResponse(returnedResponse, 200));
+    } catch (e) {
+      reject(Service.rejectResponse(e));
+    }
+  },
+);
+
 module.exports = {
   getSettlementById,
   sendSettlementById,
   getSettlements,
   generateUsageById,
+  rejectSettlementById
 };

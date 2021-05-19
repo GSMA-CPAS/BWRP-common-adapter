@@ -72,6 +72,9 @@ class SettlementMapper {
       }
       */
     }
+    if ( settlement.tag) {
+      returnedResponseBody.tag = settlement.tag;
+    }
     return returnedResponseBody;
   }
 
@@ -80,7 +83,7 @@ class SettlementMapper {
     const returnedResponseBody = [];
     if ((settlements !== undefined) && (Array.isArray(settlements))) {
       settlements.forEach((settlement) => {
-        returnedResponseBody.push({
+        const settlementResp = {
           settlementId: settlement.id,
           contractId: settlement.contractId,
           header: {
@@ -91,7 +94,11 @@ class SettlementMapper {
           state: settlement.state,
           creationDate: settlement.creationDate,
           lastModificationDate: settlement.lastModificationDate
-        });
+        };
+        if ( settlement.tag) {
+          settlementResp.tag = settlement.tag;
+        }
+        returnedResponseBody.push(settlementResp);
       });
     }
     return returnedResponseBody;
@@ -339,6 +346,12 @@ class SettlementMapper {
   }
 
   static getResponseBodyForSendSettlement(settlement) {
+    // By default, use mapper getResponseBodyForGetSettlement
+    const returnedResponseBody = SettlementMapper.getResponseBodyForGetSettlement(settlement, 'JSON');
+    return returnedResponseBody;
+  }
+
+  static getResponseBodyForRejectSettlement(settlement) {
     // By default, use mapper getResponseBodyForGetSettlement
     const returnedResponseBody = SettlementMapper.getResponseBodyForGetSettlement(settlement, 'JSON');
     return returnedResponseBody;

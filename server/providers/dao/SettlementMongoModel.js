@@ -49,6 +49,7 @@ const SettlementSchema = new Schema({
   blockchainRef: {type: BlockchainRefSchema, required: false},
   storageKeys: {type: [String], required: false},
   state: {type: String, required: true},
+  tag: {type: String, required: false},
   history: {type: [HistorySchema], required: true},
   creationDate: {type: Date, required: true},
   lastModificationDate: {type: Date, required: true, default: Date.now},

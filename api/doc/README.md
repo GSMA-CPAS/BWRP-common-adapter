@@ -19,6 +19,7 @@ Class | Method | HTTP request | Description
 *SettlementApi* | [**getSettlementById**](Apis/SettlementApi.md#getsettlementbyid) | **GET** /contracts/{contractId}/settlements/{settlementId} | Get Settlement Object by its Id
 *SettlementApi* | [**getSettlementDiscrepancy**](Apis/SettlementApi.md#getsettlementdiscrepancy) | **GET** /contracts/{contractId}/settlements/{settlementId}/discrepancy/ | Get the discrepancy between a settlement and a given partner settlement.
 *SettlementApi* | [**getSettlements**](Apis/SettlementApi.md#getsettlements) | **GET** /contracts/{contractId}/settlements/ | Get All Settlement of a given Contract
+*SettlementApi* | [**rejectSettlementById**](Apis/SettlementApi.md#rejectsettlementbyid) | **PUT** /contracts/{contractId}/settlements/{settlementId}/reject/ | Set Tag to \"REJECT\"
 *SettlementApi* | [**sendSettlementById**](Apis/SettlementApi.md#sendsettlementbyid) | **PUT** /contracts/{contractId}/settlements/{settlementId}/send/ | Set State to \"SEND\" and POST to Blockchain adapter towards TargetMsp of the Usage
 *SignatureApi* | [**createSignature**](Apis/SignatureApi.md#createsignature) | **POST** /contracts/{contractId}/signatures/ | Create/Upload Signature
 *SignatureApi* | [**getSignatureById**](Apis/SignatureApi.md#getsignaturebyid) | **GET** /contracts/{contractId}/signatures/{signatureId} | Get Signature Object by its Id
@@ -30,6 +31,7 @@ Class | Method | HTTP request | Description
 *UsageApi* | [**getUsageById**](Apis/UsageApi.md#getusagebyid) | **GET** /contracts/{contractId}/usages/{usageId} | Get Usage Object by its Id
 *UsageApi* | [**getUsageDiscrepancy**](Apis/UsageApi.md#getusagediscrepancy) | **GET** /contracts/{contractId}/usages/{usageId}/discrepancy/ | Get the discrepancy between an usage and a given partner usage.
 *UsageApi* | [**getUsages**](Apis/UsageApi.md#getusages) | **GET** /contracts/{contractId}/usages/ | Get All usage of a given Contract
+*UsageApi* | [**rejectUsageById**](Apis/UsageApi.md#rejectusagebyid) | **PUT** /contracts/{contractId}/usages/{usageId}/reject/ | Set Tag to \"REJECTED\"
 *UsageApi* | [**sendUsageById**](Apis/UsageApi.md#sendusagebyid) | **PUT** /contracts/{contractId}/usages/{usageId}/send/ | Set State to \"SEND\" and POST to Blockchain adapter towards TargetMsp of the Usage
 *UsageApi* | [**updateUsageById**](Apis/UsageApi.md#updateusagebyid) | **PUT** /contracts/{contractId}/usages/{usageId} | Update Usage Object by its Id
 

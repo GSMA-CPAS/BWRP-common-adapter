@@ -450,6 +450,51 @@ class UsageDAO {
     });
   }
 
+  static addTag(usageId, tag) {
+    return new Promise((resolve, reject) => {
+      // Verify parameters
+      if (usageId === undefined) {
+        logger.error('[UsageDAO::addTag] [FAILED] : usageId undefined');
+        reject(MISSING_MANDATORY_PARAM_ERROR);
+      }
+      if (tag === undefined) {
+        logger.error('[UsageDAO::addTag] [FAILED] : tag undefined');
+        reject(MISSING_MANDATORY_PARAM_ERROR);
+      }
+
+      // Define automatic values
+      const lastModificationDate = Date.now();
+
+      // Defined update condition and update command
+      const condition = {
+        id: usageId,
+        type: 'usage'
+      };
+
+      const updateCommand = {
+        $set: {
+          tag: tag,
+          lastModificationDate: lastModificationDate
+        },
+        $push: {
+          history: {date: lastModificationDate, action: 'ADD_TAG'}
+        }
+      };
+
+      // Launch database request
+      UsageMongoRequester.findOneAndUpdate(condition, updateCommand, (err, usage) => {
+        DAOErrorManager.handleErrorOrNullObject(err, usage)
+          .then((objectReturned) => {
+            resolve(objectReturned);
+          })
+          .catch((errorReturned) => {
+            logger.error('[UsageDAO::addTag] [FAILED] errorReturned:' + typeof errorReturned + ' = ' + JSON.stringify(errorReturned));
+            reject(errorReturned);
+          });
+      });
+    });
+  }
+
   static findOneAndRemove(id, matchingConditions = {}) {
     return new Promise((resolve, reject) => {
       // Verify parameters

@@ -339,6 +339,21 @@ class LocalStorageProvider {
   /**
    *
    * @param {Object} usageId
+   * @param {Object} tag
+   * @return {Promise<object>}
+   */
+  static async updateUsageWithTag(usageId, tag) {
+    try {
+      return await UsageDAO.addTag(usageId, tag);
+    } catch (error) {
+      logger.error('[LocalStorageProvider::updateUsageWithTag] failed to updateUsageWithTag - ', error.message);
+      throw error;
+    }
+  }
+
+  /**
+   *
+   * @param {Object} usageId
    * @param {Object} settlementId
    * @return {Promise<object>}
    */
@@ -481,6 +496,21 @@ class LocalStorageProvider {
       return await SettlementDAO.findOneAndUpdateToSentSettlement(settlementId, rawData, referenceId, storageKeys, blockchainRef);
     } catch (error) {
       logger.error('[LocalStorageProvider::updateSentSettlement] failed to update sent settlement - %s', error.message);
+      throw error;
+    }
+  }
+
+  /**
+   *
+   * @param {String} settlementId
+   * @param {String} tag
+   * @return {Promise<object>}
+   */
+  static async updateSettlementWithTag(settlementId, tag) {
+    try {
+      return await SettlementDAO.addTag(settlementId, tag);
+    } catch (error) {
+      logger.error('[LocalStorageProvider::updateSettlementWithTag] failed to update tag in settlement - %s', error.message);
       throw error;
     }
   }

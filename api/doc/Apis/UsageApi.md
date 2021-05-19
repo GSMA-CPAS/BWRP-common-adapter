@@ -10,6 +10,7 @@ Method | HTTP request | Description
 [**getUsageById**](UsageApi.md#getUsageById) | **GET** /contracts/{contractId}/usages/{usageId} | 
 [**getUsageDiscrepancy**](UsageApi.md#getUsageDiscrepancy) | **GET** /contracts/{contractId}/usages/{usageId}/discrepancy/ | 
 [**getUsages**](UsageApi.md#getUsages) | **GET** /contracts/{contractId}/usages/ | 
+[**rejectUsageById**](UsageApi.md#rejectUsageById) | **PUT** /contracts/{contractId}/usages/{usageId}/reject/ | 
 [**sendUsageById**](UsageApi.md#sendUsageById) | **PUT** /contracts/{contractId}/usages/{usageId}/send/ | 
 [**updateUsageById**](UsageApi.md#updateUsageById) | **PUT** /contracts/{contractId}/usages/{usageId} | 
 
@@ -174,6 +175,34 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**String**](../Models/string.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="rejectUsageById"></a>
+# **rejectUsageById**
+> UsageResponse rejectUsageById(contractId, usageId)
+
+
+
+    Set Tag to \&quot;REJECTED\&quot;
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **contractId** | **String**| The contract Id | [default to null]
+ **usageId** | **String**| The Usage Id | [default to null]
+
+### Return type
+
+[**UsageResponse**](../Models/UsageResponse.md)
 
 ### Authorization
 

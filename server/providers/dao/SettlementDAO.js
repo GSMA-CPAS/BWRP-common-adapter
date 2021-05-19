@@ -167,7 +167,7 @@ class SettlementDAO {
     return new Promise((resolve, reject) => {
       // Verify parameters
       if (settlementId === undefined) {
-        logger.error('[SettlementDAO::findOneAndUpdateToSentSettlement] [FAILED] : contractId undefined');
+        logger.error('[SettlementDAO::findOneAndUpdateToSentSettlement] [FAILED] : settlementId undefined');
         reject(MISSING_MANDATORY_PARAM_ERROR);
       }
       if (rawData === undefined) {
@@ -219,6 +219,51 @@ class SettlementDAO {
           })
           .catch((errorReturned) => {
             logger.error('[SettlementDAO::findOneAndUpdateToSentSettlement] [FAILED] errorReturned:' + typeof errorReturned + ' = ' + JSON.stringify(errorReturned));
+            reject(errorReturned);
+          });
+      });
+    });
+  }
+
+  static addTag(settlementId, tag) {
+    return new Promise((resolve, reject) => {
+      // Verify parameters
+      if (settlementId === undefined) {
+        logger.error('[SettlementDAO::addTag] [FAILED] : settlementId undefined');
+        reject(MISSING_MANDATORY_PARAM_ERROR);
+      }
+      if (tag === undefined) {
+        logger.error('[SettlementDAO::addTag] [FAILED] : tag undefined');
+        reject(MISSING_MANDATORY_PARAM_ERROR);
+      }
+
+      // Define automatic values
+      const lastModificationDate = Date.now();
+
+      // Defined update condition and update command
+      const condition = {
+        id: settlementId,
+        type: 'settlement',
+      };
+
+      const updateCommand = {
+        $set: {
+          tag: tag,
+          lastModificationDate: lastModificationDate
+        },
+        $push: {
+          history: {date: lastModificationDate, action: 'ADD_TAG'}
+        }
+      };
+
+      // Launch database request
+      SettlementMongoRequester.findOneAndUpdate(condition, updateCommand, (err, settlement) => {
+        DAOErrorManager.handleErrorOrNullObject(err, settlement)
+          .then((objectReturned) => {
+            resolve(objectReturned);
+          })
+          .catch((errorReturned) => {
+            logger.error('[SettlementDAO::addTag] [FAILED] errorReturned:' + typeof errorReturned + ' = ' + JSON.stringify(errorReturned));
             reject(errorReturned);
           });
       });

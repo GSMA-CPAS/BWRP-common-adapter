@@ -189,6 +189,27 @@ const updateUsageById = ({contractId, usageId, body}) => new Promise(
   },
 );
 
+/**
+ * Set Tag to \"REJECTED\"
+ *
+ * @param {String} contractId The contract Id
+ * @param {String} usageId The Usage Id
+ * @return {Promise<ServiceResponse>}
+ */
+const rejectUsageById = ({contractId, usageId}) => new Promise(
+  async (resolve, reject) => {
+    try {
+      let usageToReject = await LocalStorageProvider.getUsage(contractId, usageId);
+      usageToReject = await LocalStorageProvider.updateUsageWithTag(usageId, 'REJECTED');
+      const returnedResponse = UsageMapper.getResponseBodyForRejectUsage(usageToReject);
+      resolve(Service.successResponse(returnedResponse, 200));
+    } catch (e) {
+      reject(Service.rejectResponse(e));
+    }
+  },
+);
+
+
 module.exports = {
   createUsage,
   deleteUsageById,
@@ -196,4 +217,5 @@ module.exports = {
   getUsages,
   sendUsageById,
   updateUsageById,
+  rejectUsageById
 };
