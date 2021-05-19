@@ -271,7 +271,7 @@ describe(`Tests POST ${route} API OK`, function() {
       }
     });
 
-    it('Post event OK with minimum event details and only usages in blockchain', function(done) {
+    it('Post event OK with minimum event details and only usages in blockchain and set partnerUsageId', function(done) {
       try {
         const path = globalVersion + route;
 
@@ -535,6 +535,7 @@ describe(`Tests POST ${route} API OK`, function() {
                         expect(getResponse3.body).to.exist;
                         expect(getResponse3.body).to.be.an('object');
                         expect(getResponse3.body).to.have.property('state', 'SENT');
+                        expect(getResponse3.body).to.have.property('partnerUsageId', bodyArrayContentFromDocument2.id);
 
                         done();
                       });
