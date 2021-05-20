@@ -1159,7 +1159,7 @@ paths:
       x-eov-operation-handler: controllers/SettlementController
   /contracts/{contractId}/settlements/{settlementId}/reject/:
     put:
-      description: Set Tag to "REJECT"
+      description: Set Tag to "REJECTED"
       operationId: rejectSettlementById
       parameters:
         - description: The contract Id
@@ -1359,7 +1359,7 @@ components:
       properties:
         signatureId:
           type: string
-          description: signatureId from \"contract"->\"signature\"->\"\<mspId\>\"[X]->\"id\"
+          description: signatureId from \"signature\"->\"\<mspId\>\"[X]->\"id\"
           example: XXXXXX
 
         algorithm:
@@ -1377,7 +1377,7 @@ components:
           type: string
         extra:
           type: object
-          description: Additional Key/Value from \"contract"->\"signature\"->\"\<mspId\>\"[X]->XXX, eg name, role
+          description: Additional Key/Value from \"signature\"->\"\<mspId\>\"[X]->XXX, eg name, role
           example: '{"name":"john doe", "role":"manager"}'
       additionalProperties: false
       required:

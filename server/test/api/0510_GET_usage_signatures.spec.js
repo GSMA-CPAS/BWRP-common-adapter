@@ -31,7 +31,7 @@ const blockchainAdapterNock = nock(testsUtils.getBlockchainAdapterUrl());
 const globalVersion = '/api/v1';
 const route = '/contracts/{contractId}/usages/{usageId}/signatures/';
 
-describe.only(`Tests GET ${route} API OK`, function() {
+describe(`Tests GET ${route} API OK`, function() {
   describe(`Setup and Test GET ${route} `, function() {
     /* eslint-disable max-len */
     const draftContract = {

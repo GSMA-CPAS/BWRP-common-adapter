@@ -101,7 +101,7 @@ No authorization required
 
 
 
-    Set Tag to \&quot;REJECT\&quot;
+    Set Tag to \&quot;REJECTED\&quot;
 
 ### Parameters
 

@@ -19,7 +19,7 @@ Class | Method | HTTP request | Description
 *SettlementApi* | [**getSettlementById**](Apis/SettlementApi.md#getsettlementbyid) | **GET** /contracts/{contractId}/settlements/{settlementId} | Get Settlement Object by its Id
 *SettlementApi* | [**getSettlementDiscrepancy**](Apis/SettlementApi.md#getsettlementdiscrepancy) | **GET** /contracts/{contractId}/settlements/{settlementId}/discrepancy/ | Get the discrepancy between a settlement and a given partner settlement.
 *SettlementApi* | [**getSettlements**](Apis/SettlementApi.md#getsettlements) | **GET** /contracts/{contractId}/settlements/ | Get All Settlement of a given Contract
-*SettlementApi* | [**rejectSettlementById**](Apis/SettlementApi.md#rejectsettlementbyid) | **PUT** /contracts/{contractId}/settlements/{settlementId}/reject/ | Set Tag to \"REJECT\"
+*SettlementApi* | [**rejectSettlementById**](Apis/SettlementApi.md#rejectsettlementbyid) | **PUT** /contracts/{contractId}/settlements/{settlementId}/reject/ | Set Tag to \"REJECTED\"
 *SettlementApi* | [**sendSettlementById**](Apis/SettlementApi.md#sendsettlementbyid) | **PUT** /contracts/{contractId}/settlements/{settlementId}/send/ | Set State to \"SEND\" and POST to Blockchain adapter towards TargetMsp of the Usage
 *SignatureApi* | [**createSignature**](Apis/SignatureApi.md#createsignature) | **POST** /contracts/{contractId}/signatures/ | Create/Upload Signature
 *SignatureApi* | [**createUsageSignature**](Apis/SignatureApi.md#createusagesignature) | **POST** /contracts/{contractId}/usages/{usageId}/signatures/ | Create/Upload Signature
