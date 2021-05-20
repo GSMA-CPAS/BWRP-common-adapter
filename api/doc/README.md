@@ -22,8 +22,11 @@ Class | Method | HTTP request | Description
 *SettlementApi* | [**rejectSettlementById**](Apis/SettlementApi.md#rejectsettlementbyid) | **PUT** /contracts/{contractId}/settlements/{settlementId}/reject/ | Set Tag to \"REJECT\"
 *SettlementApi* | [**sendSettlementById**](Apis/SettlementApi.md#sendsettlementbyid) | **PUT** /contracts/{contractId}/settlements/{settlementId}/send/ | Set State to \"SEND\" and POST to Blockchain adapter towards TargetMsp of the Usage
 *SignatureApi* | [**createSignature**](Apis/SignatureApi.md#createsignature) | **POST** /contracts/{contractId}/signatures/ | Create/Upload Signature
+*SignatureApi* | [**createUsageSignature**](Apis/SignatureApi.md#createusagesignature) | **POST** /contracts/{contractId}/usages/{usageId}/signatures/ | Create/Upload Signature
 *SignatureApi* | [**getSignatureById**](Apis/SignatureApi.md#getsignaturebyid) | **GET** /contracts/{contractId}/signatures/{signatureId} | Get Signature Object by its Id
 *SignatureApi* | [**getSignatures**](Apis/SignatureApi.md#getsignatures) | **GET** /contracts/{contractId}/signatures/ | Get All signatures of a given Contract
+*SignatureApi* | [**getUsageSignatureById**](Apis/SignatureApi.md#getusagesignaturebyid) | **GET** /contracts/{contractId}/usages/{usageId}/signatures/{signatureId} | Get Signature Object by its Id
+*SignatureApi* | [**getUsageSignatures**](Apis/SignatureApi.md#getusagesignatures) | **GET** /contracts/{contractId}/usages/{usageId}/signatures/ | Get All signatures of a given Usage
 *StatusApi* | [**getApiStatus**](Apis/StatusApi.md#getapistatus) | **GET** /status | Show version information of the API
 *UsageApi* | [**createUsage**](Apis/UsageApi.md#createusage) | **POST** /contracts/{contractId}/usages/ | Create a new Usage
 *UsageApi* | [**deleteUsageById**](Apis/UsageApi.md#deleteusagebyid) | **DELETE** /contracts/{contractId}/usages/{usageId} | Delete a Usage By its Id

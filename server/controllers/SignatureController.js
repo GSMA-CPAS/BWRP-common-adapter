@@ -29,6 +29,10 @@ const createSignature = async (request, response) => {
   await Controller.handleRequest(request, response, service.createSignature);
 };
 
+const createUsageSignature = async (request, response) => {
+  await Controller.handleRequest(request, response, service.createUsageSignature);
+};
+
 const getSignatureById = async (request, response) => {
   await Controller.handleRequest(request, response, service.getSignatureById);
 };
@@ -37,9 +41,20 @@ const getSignatures = async (request, response) => {
   await Controller.handleRequest(request, response, service.getSignatures);
 };
 
+const getUsageSignatureById = async (request, response) => {
+  await Controller.handleRequest(request, response, service.getUsageSignatureById);
+};
+
+const getUsageSignatures = async (request, response) => {
+  await Controller.handleRequest(request, response, service.getUsageSignatures);
+};
+
 
 module.exports = {
   createSignature,
+  createUsageSignature,
   getSignatureById,
   getSignatures,
+  getUsageSignatureById,
+  getUsageSignatures,
 };

@@ -49,6 +49,12 @@ const UsageBodySchema = new Schema({
 }, {_id: false});
 
 const MixUsageBodySchema = Schema.Types.Mixed;
+const SignatureLinkSchema = new Schema({
+  id: {type: String, required: true},
+  msp: {type: String, required: true},
+  index: {type: Number, required: true},
+  txId: {type: String, required: false}
+}, {_id: false});
 
 const UsageSchema = new Schema({
   id: {type: String, required: true},
@@ -71,6 +77,7 @@ const UsageSchema = new Schema({
   history: {type: [HistorySchema], required: true},
   creationDate: {type: Date, required: true},
   lastModificationDate: {type: Date, required: true, default: Date.now},
+  signatureLink: {type: [SignatureLinkSchema], required: false}
 });
 
 UsageSchema.index({id: 1}, {unique: true});
