@@ -1,0 +1,3816 @@
+{
+  "metadata": {
+    "name": "OTHER_local_usage_file"
+  },
+  "inbound": [
+    {
+      "yearMonth": "43466",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "BELMO",
+      "service": "GPRS",
+      "usage": 51100.1228237152,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43466",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "BELMO",
+      "service": "MTC",
+      "usage": 0,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43466",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "BELMO",
+      "service": "SMSMO",
+      "usage": 0,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43466",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "FRAF1",
+      "service": "GPRS",
+      "usage": 191669.397181511,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43466",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "FRAF1",
+      "service": "MTC",
+      "usage": 0,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43466",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "FRAF1",
+      "service": "SMSMO",
+      "usage": 72,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43466",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "GPRS",
+      "usage": 28878722.2204723,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43466",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "MOC Home",
+      "usage": 1182929.4,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43466",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "MOC International",
+      "usage": 134374.9,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43466",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "MOC Local",
+      "usage": 122636,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43466",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "MTC",
+      "usage": 1278934,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43466",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "SMSMO",
+      "usage": 88416,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43466",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "GPRS",
+      "usage": 87345896.434164,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43466",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "MOC Home",
+      "usage": 3855235.2,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43466",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "MOC International",
+      "usage": 268945.4,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43466",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "MOC Local",
+      "usage": 312051.9,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43466",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "MTC",
+      "usage": 3277204,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43466",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "SMSMO",
+      "usage": 370471,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43497",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "BELMO",
+      "service": "GPRS",
+      "usage": 47790.2492685318,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43497",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "BELMO",
+      "service": "MTC",
+      "usage": 0,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43497",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "BELMO",
+      "service": "SMSMO",
+      "usage": 1,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43497",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "FRAF1",
+      "service": "GPRS",
+      "usage": 169162.120947838,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43497",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "FRAF1",
+      "service": "MTC",
+      "usage": 0,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43497",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "FRAF1",
+      "service": "SMSMO",
+      "usage": 83,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43497",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "GPRS",
+      "usage": 29146697.9417868,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43497",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "MOC Home",
+      "usage": 1600003.2,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43497",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "MOC International",
+      "usage": 128183.7,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43497",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "MOC Local",
+      "usage": 129878.2,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43497",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "MTC",
+      "usage": 1295619,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43497",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "SMSMO",
+      "usage": 79136,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43497",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "GPRS",
+      "usage": 73656131.0360765,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43497",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "MOC Home",
+      "usage": 3387976.8,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43497",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "MOC International",
+      "usage": 213687.9,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43497",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "MOC Local",
+      "usage": 329381,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43497",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "MTC",
+      "usage": 2791745,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43497",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "SMSMO",
+      "usage": 288014,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43525",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "BELMO",
+      "service": "GPRS",
+      "usage": 51982.2074155808,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43525",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "BELMO",
+      "service": "MTC",
+      "usage": 0,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43525",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "BELMO",
+      "service": "SMSMO",
+      "usage": 0,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43525",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "FRAF1",
+      "service": "GPRS",
+      "usage": 141315.33293438,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43525",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "FRAF1",
+      "service": "MTC",
+      "usage": 0,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43525",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "FRAF1",
+      "service": "SMSMO",
+      "usage": 159,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43525",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "GPRS",
+      "usage": 36459791.2322149,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43525",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "MOC Home",
+      "usage": 1781131,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43525",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "MOC International",
+      "usage": 147550.1,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43525",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "MOC Local",
+      "usage": 149177.1,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43525",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "MTC",
+      "usage": 1332488,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43525",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "SMSMO",
+      "usage": 91864,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43525",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "GPRS",
+      "usage": 98612907.0223799,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43525",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "MOC Home",
+      "usage": 3553528,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43525",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "MOC International",
+      "usage": 241786.2,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43525",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "MOC Local",
+      "usage": 314761.9,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43525",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "MTC",
+      "usage": 2911549,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43525",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "SMSMO",
+      "usage": 335489,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43556",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "BELMO",
+      "service": "GPRS",
+      "usage": 70249.2812786102,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43556",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "BELMO",
+      "service": "MOC International",
+      "usage": 39,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43556",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "BELMO",
+      "service": "MTC",
+      "usage": 33,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43556",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "BELMO",
+      "service": "SMSMO",
+      "usage": 37,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43556",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "FRAF1",
+      "service": "GPRS",
+      "usage": 120939.299059868,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43556",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "FRAF1",
+      "service": "MTC",
+      "usage": 0,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43556",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "FRAF1",
+      "service": "SMSMO",
+      "usage": 181,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43556",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "GPRS",
+      "usage": 46724031.5938063,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43556",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "MOC Home",
+      "usage": 1839242.9,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43556",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "MOC International",
+      "usage": 142113.2,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43556",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "MOC Local",
+      "usage": 151657,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43556",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "MTC",
+      "usage": 1421074,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43556",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "SMSMO",
+      "usage": 105059,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43556",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "GPRS",
+      "usage": 145123018.95044,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43556",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "MOC Home",
+      "usage": 3265348.5,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43556",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "MOC International",
+      "usage": 216251.5,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43556",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "MOC Local",
+      "usage": 281642.5,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43556",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "MTC",
+      "usage": 2945759,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43556",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "SMSMO",
+      "usage": 433509,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43586",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "BELMO",
+      "service": "GPRS",
+      "usage": 61756.9758491516,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43586",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "BELMO",
+      "service": "MOC International",
+      "usage": 2.2,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43586",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "BELMO",
+      "service": "MOC Local",
+      "usage": 0,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43586",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "BELMO",
+      "service": "MTC",
+      "usage": 17,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43586",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "BELMO",
+      "service": "SMSMO",
+      "usage": 6,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43586",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "FRAF1",
+      "service": "GPRS",
+      "usage": 142850.335541725,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43586",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "FRAF1",
+      "service": "MTC",
+      "usage": 0,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43586",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "FRAF1",
+      "service": "SMSMO",
+      "usage": 107,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43586",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "GPRS",
+      "usage": 45814064.1971827,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43586",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "MOC Home",
+      "usage": 1908116.1,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43586",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "MOC International",
+      "usage": 135352.5,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43586",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "MOC Local",
+      "usage": 155175.6,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43586",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "MTC",
+      "usage": 1423635,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43586",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "SMSMO",
+      "usage": 103464,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43586",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "GPRS",
+      "usage": 143672309.476617,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43586",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "MOC Home",
+      "usage": 4162992.9,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43586",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "MOC International",
+      "usage": 211291.2,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43586",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "MOC Local",
+      "usage": 357610.4,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43586",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "MTC",
+      "usage": 3090948,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43586",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "SMSMO",
+      "usage": 398657,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43617",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "BELMO",
+      "service": "GPRS",
+      "usage": 72458.9793205261,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43617",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "BELMO",
+      "service": "MTC",
+      "usage": 0,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43617",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "BELMO",
+      "service": "SMSMO",
+      "usage": 0,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43617",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "FRAF1",
+      "service": "GPRS",
+      "usage": 154898.934317589,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43617",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "FRAF1",
+      "service": "MTC",
+      "usage": 0,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43617",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "FRAF1",
+      "service": "SMSMO",
+      "usage": 41,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43617",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "GPRS",
+      "usage": 58891347.2486391,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43617",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "MOC Home",
+      "usage": 1779085,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43617",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "MOC International",
+      "usage": 137858.5,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43617",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "MOC Local",
+      "usage": 118977,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43617",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "MTC",
+      "usage": 1330498,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43617",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "SMSMO",
+      "usage": 114471,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43617",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "GPRS",
+      "usage": 260362056.312874,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43617",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "MOC Home",
+      "usage": 4624428,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43617",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "MOC International",
+      "usage": 251555.9,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43617",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "MOC Local",
+      "usage": 403588.1,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43617",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "MTC",
+      "usage": 3907637,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43617",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "SMSMO",
+      "usage": 578599,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43647",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "BELMO",
+      "service": "GPRS",
+      "usage": 62065.9128799438,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43647",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "BELMO",
+      "service": "MOC International",
+      "usage": 1.1,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43647",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "BELMO",
+      "service": "MTC",
+      "usage": 1,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43647",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "BELMO",
+      "service": "SMSMO",
+      "usage": 1,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43647",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "FRAF1",
+      "service": "GPRS",
+      "usage": 163504.392095566,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43647",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "FRAF1",
+      "service": "MTC",
+      "usage": 0,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43647",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "FRAF1",
+      "service": "SMSMO",
+      "usage": 24,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43647",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "GPRS",
+      "usage": 68041515.5345535,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43647",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "MOC Home",
+      "usage": 1885107,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43647",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "MOC International",
+      "usage": 139273.6,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43647",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "MOC Local",
+      "usage": 107529.3,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43647",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "MTC",
+      "usage": 1275536,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43647",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "SMSMO",
+      "usage": 119640,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43647",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "GPRS",
+      "usage": 293397856.69561,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43647",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "MOC Home",
+      "usage": 6161233.1,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43647",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "MOC International",
+      "usage": 255181.2,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43647",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "MOC Local",
+      "usage": 484958,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43647",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "MTC",
+      "usage": 4002468,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43647",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "SMSMO",
+      "usage": 648991,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43678",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "BELMO",
+      "service": "GPRS",
+      "usage": 58859.1868047714,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43678",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "BELMO",
+      "service": "MTC",
+      "usage": 0,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43678",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "BELMO",
+      "service": "SMSMO",
+      "usage": 1,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43678",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "FRAF1",
+      "service": "GPRS",
+      "usage": 145742.045410156,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43678",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "FRAF1",
+      "service": "MTC",
+      "usage": 0,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43678",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "FRAF1",
+      "service": "SMSMO",
+      "usage": 80,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43678",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "GPRS",
+      "usage": 58291087.4703665,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43678",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "MOC Home",
+      "usage": 1828006.8,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43678",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "MOC International",
+      "usage": 104113.2,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43678",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "MOC Local",
+      "usage": 106428.9,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43678",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "MTC",
+      "usage": 1271702,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43678",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "SMSMO",
+      "usage": 98079,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43678",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "GPRS",
+      "usage": 309035724.387955,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43678",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "MOC Home",
+      "usage": 5095501,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43678",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "MOC International",
+      "usage": 221141.9,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43678",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "MOC Local",
+      "usage": 373104.9,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43678",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "MTC",
+      "usage": 3687152,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43678",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "SMSMO",
+      "usage": 609107,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43709",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "BELMO",
+      "service": "GPRS",
+      "usage": 45039.682888031,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43709",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "BELMO",
+      "service": "MTC",
+      "usage": 0,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43709",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "BELMO",
+      "service": "SMSMO",
+      "usage": 8,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43709",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "FRAF1",
+      "service": "GPRS",
+      "usage": 119699.693309784,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43709",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "FRAF1",
+      "service": "MTC",
+      "usage": 0,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43709",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "FRAF1",
+      "service": "SMSMO",
+      "usage": 208,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43709",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "GPRS",
+      "usage": 57198023.8977604,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43709",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "MOC Home",
+      "usage": 1751300,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43709",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "MOC International",
+      "usage": 139713.6,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43709",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "MOC Local",
+      "usage": 115920.2,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43709",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "MTC",
+      "usage": 1412169,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43709",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "SMSMO",
+      "usage": 107966,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43709",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "GPRS",
+      "usage": 312288970.220663,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43709",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "MOC Home",
+      "usage": 6954829.2,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43709",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "MOC International",
+      "usage": 337083.9,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43709",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "MOC Local",
+      "usage": 555738.4,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43709",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "MTC",
+      "usage": 4615253,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43709",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "SMSMO",
+      "usage": 583571,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43739",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "BELMO",
+      "service": "GPRS",
+      "usage": 53497.9902992249,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43739",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "BELMO",
+      "service": "MOC Local",
+      "usage": 210.1,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43739",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "BELMO",
+      "service": "MTC",
+      "usage": 0,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43739",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "BELMO",
+      "service": "SMSMO",
+      "usage": 9,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43739",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "FRAF1",
+      "service": "GPRS",
+      "usage": 153973.596611023,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43739",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "FRAF1",
+      "service": "MTC",
+      "usage": 0,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43739",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "FRAF1",
+      "service": "SMSMO",
+      "usage": 122,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43739",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "GPRS",
+      "usage": 62427589.3289127,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43739",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "MOC Home",
+      "usage": 1910979.4,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43739",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "MOC International",
+      "usage": 154609.9,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43739",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "MOC Local",
+      "usage": 125687,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43739",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "MTC",
+      "usage": 1484926,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43739",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "SMSMO",
+      "usage": 114431,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43739",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "GPRS",
+      "usage": 244764566.754526,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43739",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "MOC Home",
+      "usage": 5882006.9,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43739",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "MOC International",
+      "usage": 340038.4,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43739",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "MOC Local",
+      "usage": 542484.4,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43739",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "MTC",
+      "usage": 4283245,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43739",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "SMSMO",
+      "usage": 506657,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43770",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "BELMO",
+      "service": "GPRS",
+      "usage": 55287.9368562698,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43770",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "BELMO",
+      "service": "MTC",
+      "usage": 0,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43770",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "BELMO",
+      "service": "SMSMO",
+      "usage": 11,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43770",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "FRAF1",
+      "service": "GPRS",
+      "usage": 158694.042787552,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43770",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "FRAF1",
+      "service": "MTC",
+      "usage": 0,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43770",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "FRAF1",
+      "service": "SMSMO",
+      "usage": 72,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43770",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "GPRS",
+      "usage": 43749568.6120377,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43770",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "MOC Home",
+      "usage": 1886358,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43770",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "MOC International",
+      "usage": 118956.4,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43770",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "MOC Local",
+      "usage": 117129.4,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43770",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "MTC",
+      "usage": 1277926,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43770",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "SMSMO",
+      "usage": 92765,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43770",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "GPRS",
+      "usage": 135521001.355375,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43770",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "MOC Home",
+      "usage": 3654415.8,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43770",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "MOC International",
+      "usage": 267263.9,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43770",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "MOC Local",
+      "usage": 372801.7,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43770",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "MTC",
+      "usage": 3398386,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43770",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "SMSMO",
+      "usage": 323289,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43800",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "BELMO",
+      "service": "GPRS",
+      "usage": 44595.3789148331,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43800",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "BELMO",
+      "service": "MTC",
+      "usage": 0,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43800",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "BELMO",
+      "service": "SMSMO",
+      "usage": 31,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43800",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "FRAF1",
+      "service": "GPRS",
+      "usage": 163416.174536705,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43800",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "FRAF1",
+      "service": "MTC",
+      "usage": 0,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43800",
+      "homeTadig": "AAZTD",
+      "visitorTadig": "FRAF1",
+      "service": "SMSMO",
+      "usage": 43,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43800",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "GPRS",
+      "usage": 52432044.0703774,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43800",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "MOC Home",
+      "usage": 1662621.4,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43800",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "MOC International",
+      "usage": 107556.6,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43800",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "MOC Local",
+      "usage": 117194,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43800",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "MTC",
+      "usage": 1128790,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43800",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "BELMO",
+      "service": "SMSMO",
+      "usage": 95241,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43800",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "GPRS",
+      "usage": 61172561.2979498,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43800",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "MOC Home",
+      "usage": 1529397.9,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43800",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "MOC International",
+      "usage": 103062.6,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43800",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "MOC Local",
+      "usage": 147639.6,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43800",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "MTC",
+      "usage": 1436009,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43800",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "SMSMO",
+      "usage": 211647,
+      "units": "SMS",
+      "currency": "EUR"
+    }
+  ],
+  "outbound": [
+    {
+      "yearMonth": "43466",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "GPRS",
+      "usage": 473.467745780945,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43466",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Local",
+      "usage": 1212,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43466",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "MTC",
+      "usage": 365,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43466",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "SMSMO",
+      "usage": 3,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43466",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "GPRS",
+      "usage": 22415144.4472198,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43466",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Home",
+      "usage": 554020,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43466",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "MOC International",
+      "usage": 61780.3,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43466",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Local",
+      "usage": 54100.8,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43466",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "MTC",
+      "usage": 504787,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43466",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "SMSMO",
+      "usage": 310498,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43466",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "GPRS",
+      "usage": 60073867.1981945,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43466",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Home",
+      "usage": 962664,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43466",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "MOC International",
+      "usage": 73730.3,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43466",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Local",
+      "usage": 72574.2,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43466",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "MTC",
+      "usage": 560547,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43466",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "SMSMO",
+      "usage": 718837,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43497",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "GPRS",
+      "usage": 332.798179626465,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43497",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "MOC International",
+      "usage": 50.4,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43497",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Local",
+      "usage": 539,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43497",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "MTC",
+      "usage": 357,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43497",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "SMSMO",
+      "usage": 2,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43497",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "GPRS",
+      "usage": 24128338.6976023,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43497",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Home",
+      "usage": 812695.2,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43497",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "MOC International",
+      "usage": 87206.4,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43497",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Local",
+      "usage": 70520.4,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43497",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "MTC",
+      "usage": 642569,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43497",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "SMSMO",
+      "usage": 420596,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43497",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "GPRS",
+      "usage": 64153904.6383715,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43497",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Home",
+      "usage": 939131.6,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43497",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "MOC International",
+      "usage": 72514.8,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43497",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Local",
+      "usage": 92697,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43497",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "MTC",
+      "usage": 605454,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43497",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "SMSMO",
+      "usage": 759770,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43525",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "GPRS",
+      "usage": 1259.10724925995,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43525",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Local",
+      "usage": 18.9,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43525",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "MTC",
+      "usage": 3,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43525",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "SMSMO",
+      "usage": 1,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43525",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "GPRS",
+      "usage": 36089944.3115406,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43525",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Home",
+      "usage": 669062.7,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43525",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "MOC International",
+      "usage": 90711.5,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43525",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Local",
+      "usage": 64738,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43525",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "MTC",
+      "usage": 724876,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43525",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "SMSMO",
+      "usage": 729705,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43525",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "GPRS",
+      "usage": 83742461.9362345,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43525",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Home",
+      "usage": 943532.7,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43525",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "MOC International",
+      "usage": 72237.3,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43525",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Local",
+      "usage": 77193,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43525",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "MTC",
+      "usage": 617398,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43525",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "SMSMO",
+      "usage": 859790,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43556",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "GPRS",
+      "usage": 7853.72899627686,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43556",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "MOC International",
+      "usage": 1,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43556",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Local",
+      "usage": 3.6,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43556",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "MTC",
+      "usage": 1,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43556",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "SMSMO",
+      "usage": 1,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43556",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "GPRS",
+      "usage": 39145737.400979,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43556",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Home",
+      "usage": 839678.4,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43556",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "MOC International",
+      "usage": 87112.3,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43556",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Local",
+      "usage": 56138.4,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43556",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "MTC",
+      "usage": 757509,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43556",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "SMSMO",
+      "usage": 862970,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43556",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "GPRS",
+      "usage": 84904231.205595,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43556",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Home",
+      "usage": 1009964.4,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43556",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "MOC International",
+      "usage": 79201.8,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43556",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Local",
+      "usage": 97650,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43556",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "MTC",
+      "usage": 616153,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43556",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "SMSMO",
+      "usage": 965264,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43586",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "GPRS",
+      "usage": 13436.7055072784,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43586",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "MOC International",
+      "usage": 0.9,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43586",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Local",
+      "usage": 2.2,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43586",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "MTC",
+      "usage": 1,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43586",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "SMSMO",
+      "usage": 1,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43586",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "GPRS",
+      "usage": 32585651.9911337,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43586",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Home",
+      "usage": 862552.8,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43586",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "MOC International",
+      "usage": 95493.6,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43586",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Local",
+      "usage": 57946.6,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43586",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "MTC",
+      "usage": 683274,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43586",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "SMSMO",
+      "usage": 560769,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43586",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "GPRS",
+      "usage": 89721587.5036488,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43586",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Home",
+      "usage": 1024297.2,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43586",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "MOC International",
+      "usage": 72840,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43586",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Local",
+      "usage": 84242,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43586",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "MTC",
+      "usage": 618719,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43586",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "SMSMO",
+      "usage": 985685,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43617",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "GPRS",
+      "usage": 12892.9884729385,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43617",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "MOC International",
+      "usage": 2.2,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43617",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Local",
+      "usage": 63,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43617",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "MTC",
+      "usage": 2,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43617",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "SMSMO",
+      "usage": 2,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43617",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "GPRS",
+      "usage": 36299918.7878046,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43617",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Home",
+      "usage": 665180,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43617",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "MOC International",
+      "usage": 82599.5000000001,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43617",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Local",
+      "usage": 68047.8,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43617",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "MTC",
+      "usage": 635282,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43617",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "SMSMO",
+      "usage": 531021,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43617",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "GPRS",
+      "usage": 87112782.257905,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43617",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Home",
+      "usage": 877209.3,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43617",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "MOC International",
+      "usage": 66083.6,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43617",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Local",
+      "usage": 96985.1,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43617",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "MTC",
+      "usage": 564049,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43617",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "SMSMO",
+      "usage": 934597,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43647",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "GPRS",
+      "usage": 18860.1373434067,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43647",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "MOC International",
+      "usage": 29.4,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43647",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Local",
+      "usage": 19,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43647",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "MTC",
+      "usage": 3,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43647",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "SMSMO",
+      "usage": 2,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43647",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "GPRS",
+      "usage": 54350203.0526581,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43647",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Home",
+      "usage": 776912.4,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43647",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "MOC International",
+      "usage": 90482,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43647",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Local",
+      "usage": 67572,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43647",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "MTC",
+      "usage": 757619,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43647",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "SMSMO",
+      "usage": 1020166,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43647",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "GPRS",
+      "usage": 89786911.5580015,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43647",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Home",
+      "usage": 705996.9,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43647",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "MOC International",
+      "usage": 64336.2,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43647",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Local",
+      "usage": 76080.6,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43647",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "MTC",
+      "usage": 601992,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43647",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "SMSMO",
+      "usage": 1020997,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43678",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "GPRS",
+      "usage": 17868.6335382462,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43678",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "MOC International",
+      "usage": 8.1,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43678",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Local",
+      "usage": 126.9,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43678",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "MTC",
+      "usage": 100,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43678",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "SMSMO",
+      "usage": 5,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43678",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "GPRS",
+      "usage": 60168812.4862967,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43678",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Home",
+      "usage": 900463.3,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43678",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "MOC International",
+      "usage": 97985,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43678",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Local",
+      "usage": 88198.8,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43678",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "MTC",
+      "usage": 787234,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43678",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "SMSMO",
+      "usage": 1589022,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43678",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "GPRS",
+      "usage": 91324890.5645189,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43678",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Home",
+      "usage": 648248.7,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43678",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "MOC International",
+      "usage": 51937,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43678",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Local",
+      "usage": 70503,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43678",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "MTC",
+      "usage": 432037,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43678",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "SMSMO",
+      "usage": 958303,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43709",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "GPRS",
+      "usage": 47601.2087850571,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43709",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "MOC International",
+      "usage": 22.8,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43709",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Local",
+      "usage": 137.7,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43709",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "MTC",
+      "usage": 112,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43709",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "SMSMO",
+      "usage": 1,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43709",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "GPRS",
+      "usage": 38201405.3129539,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43709",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Home",
+      "usage": 997084.8,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43709",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "MOC International",
+      "usage": 105925.2,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43709",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Local",
+      "usage": 75028,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43709",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "MTC",
+      "usage": 815751,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43709",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "SMSMO",
+      "usage": 1705676,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43709",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "GPRS",
+      "usage": 82921981.3100719,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43709",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Home",
+      "usage": 642803,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43709",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "MOC International",
+      "usage": 53252.5,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43709",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Local",
+      "usage": 60081.3,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43709",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "MTC",
+      "usage": 462567,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43709",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "SMSMO",
+      "usage": 770660,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43739",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "GPRS",
+      "usage": 66259.0333185196,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43739",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "MOC International",
+      "usage": 18.4,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43739",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Local",
+      "usage": 32.4,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43739",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "MTC",
+      "usage": 3,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43739",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "SMSMO",
+      "usage": 3,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43739",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "GPRS",
+      "usage": 26174042.3959608,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43739",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Home",
+      "usage": 751600.8,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43739",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "MOC International",
+      "usage": 77588.1,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43739",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Local",
+      "usage": 55287,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43739",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "MTC",
+      "usage": 589701,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43739",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "SMSMO",
+      "usage": 363784,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43739",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "GPRS",
+      "usage": 85972773.0936537,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43739",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Home",
+      "usage": 578777.4,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43739",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "MOC International",
+      "usage": 58768.3,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43739",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Local",
+      "usage": 71970.8,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43739",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "MTC",
+      "usage": 437157,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43739",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "SMSMO",
+      "usage": 855354,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43770",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "GPRS",
+      "usage": 90622.4543275833,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43770",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "MOC International",
+      "usage": 25.5,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43770",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Local",
+      "usage": 987.8,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43770",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "MTC",
+      "usage": 658,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43770",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "SMSMO",
+      "usage": 8,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43770",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "GPRS",
+      "usage": 23256865.6695118,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43770",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Home",
+      "usage": 558812.4,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43770",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "MOC International",
+      "usage": 58090.3,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43770",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Local",
+      "usage": 48310.3,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43770",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "MTC",
+      "usage": 448091,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43770",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "SMSMO",
+      "usage": 292098,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43770",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "GPRS",
+      "usage": 74279083.724597,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43770",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Home",
+      "usage": 603484.2,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43770",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "MOC International",
+      "usage": 50678.9,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43770",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Local",
+      "usage": 65033.1,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43770",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "MTC",
+      "usage": 381249,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43770",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "SMSMO",
+      "usage": 760400,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43800",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "GPRS",
+      "usage": 158282.467362404,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43800",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "MOC International",
+      "usage": 9.9,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43800",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Local",
+      "usage": 134.1,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43800",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "MTC",
+      "usage": 45,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43800",
+      "homeTadig": "AAZOR",
+      "visitorTadig": "DEUD1",
+      "service": "SMSMO",
+      "usage": 8,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43800",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "GPRS",
+      "usage": 29676358.9800224,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43800",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Home",
+      "usage": 416339,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43800",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "MOC International",
+      "usage": 53453.7,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43800",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Local",
+      "usage": 45867.8,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43800",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "MTC",
+      "usage": 421568,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43800",
+      "homeTadig": "BELMO",
+      "visitorTadig": "DEUD1",
+      "service": "SMSMO",
+      "usage": 377919,
+      "units": "SMS",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43800",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "GPRS",
+      "usage": 85261028.101285,
+      "units": "MB",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43800",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Home",
+      "usage": 582417,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43800",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "MOC International",
+      "usage": 47138.6,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43800",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "MOC Local",
+      "usage": 72093.6,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43800",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "MTC",
+      "usage": 355660,
+      "units": "min",
+      "currency": "EUR"
+    },
+    {
+      "yearMonth": "43800",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "SMSMO",
+      "usage": 824052,
+      "units": "SMS",
+      "currency": "EUR"
+    }
+  ]
+}

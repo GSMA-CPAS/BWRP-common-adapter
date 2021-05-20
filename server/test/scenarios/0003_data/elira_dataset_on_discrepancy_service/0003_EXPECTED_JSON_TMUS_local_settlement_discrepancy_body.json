@@ -1,0 +1,256 @@
+{
+  "homePerspective": {
+    "general_information": [
+      {
+        "service": "MOC",
+        "unit": "min",
+        "own_calculation": 19120680.994,
+        "partner_calculation": 19120680.994,
+        "delta_calculation_percent": 0,
+        "own_usage": 109888639.05000001,
+        "partner_usage": 109888639.05000001,
+        "delta_usage_abs": 0,
+        "delta_usage_percent": 0
+      },
+      {
+        "service": "MTC",
+        "unit": "min",
+        "own_calculation": 0,
+        "partner_calculation": 0,
+        "delta_calculation_percent": 0,
+        "own_usage": 98705946.19999999,
+        "partner_usage": 98705946.19999999,
+        "delta_usage_abs": 0,
+        "delta_usage_percent": 0
+      },
+      {
+        "service": "SMS",
+        "unit": "SMS",
+        "own_calculation": 198984.852,
+        "partner_calculation": 198984.852,
+        "delta_calculation_percent": 0,
+        "own_usage": 16582071,
+        "partner_usage": 16582071,
+        "delta_usage_abs": 0,
+        "delta_usage_percent": 0
+      },
+      {
+        "service": "Data",
+        "unit": "MB",
+        "own_calculation": 30146061.547672395,
+        "partner_calculation": 30146061.547672395,
+        "delta_calculation_percent": 0,
+        "own_usage": 2512171795.639366,
+        "partner_usage": 2512171795.639366,
+        "delta_usage_abs": 0,
+        "delta_usage_percent": 0
+      }
+    ],
+    "details": [
+      {
+        "service": "MOC Back Home",
+        "unit": "min",
+        "own_calculation": 7219525.392000001,
+        "partner_calculation": 7219525.392000001,
+        "delta_calculation_percent": 0,
+        "own_usage": 90244067.4,
+        "partner_usage": 90244067.4,
+        "delta_usage_abs": 0,
+        "delta_usage_percent": 0
+      },
+      {
+        "service": "MOC Local",
+        "unit": "min",
+        "own_calculation": 668295.9319999999,
+        "partner_calculation": 668295.9319999999,
+        "delta_calculation_percent": 0,
+        "own_usage": 8353699.149999999,
+        "partner_usage": 8353699.149999999,
+        "delta_usage_abs": 0,
+        "delta_usage_percent": 0
+      },
+      {
+        "service": "SMSMO",
+        "unit": "SMS",
+        "own_calculation": 198984.852,
+        "partner_calculation": 198984.852,
+        "delta_calculation_percent": 0,
+        "own_usage": 16582071,
+        "partner_usage": 16582071,
+        "delta_usage_abs": 0,
+        "delta_usage_percent": 0
+      },
+      {
+        "service": "GPRS",
+        "unit": "MB",
+        "own_calculation": 30146061.547672395,
+        "partner_calculation": 30146061.547672395,
+        "delta_calculation_percent": 0,
+        "own_usage": 2512171795.639366,
+        "partner_usage": 2512171795.639366,
+        "delta_usage_abs": 0,
+        "delta_usage_percent": 0
+      },
+      {
+        "service": "MOC International",
+        "unit": "min",
+        "own_calculation": 11226413.799999999,
+        "partner_calculation": 11226413.799999999,
+        "delta_calculation_percent": 0,
+        "own_usage": 11226413.799999999,
+        "partner_usage": 11226413.799999999,
+        "delta_usage_abs": 0,
+        "delta_usage_percent": 0
+      },
+      {
+        "service": "MOC Special Destinations",
+        "unit": "min",
+        "own_calculation": 6445.8700000000035,
+        "partner_calculation": 6445.8700000000035,
+        "delta_calculation_percent": 0,
+        "own_usage": 64458.70000000004,
+        "partner_usage": 64458.70000000004,
+        "delta_usage_abs": 0,
+        "delta_usage_percent": 0
+      },
+      {
+        "service": "MTC",
+        "unit": "min",
+        "own_calculation": 0,
+        "partner_calculation": 0,
+        "delta_calculation_percent": 0,
+        "own_usage": 98705946.19999999,
+        "partner_usage": 98705946.19999999,
+        "delta_usage_abs": 0,
+        "delta_usage_percent": 0
+      }
+    ]
+  },
+  "partnerPerspective": {
+    "general_information": [
+      {
+        "service": "MOC",
+        "unit": "min",
+        "own_calculation": 8295927.694000002,
+        "partner_calculation": 8295927.694000002,
+        "delta_calculation_percent": 0,
+        "own_usage": 78883740.14999999,
+        "partner_usage": 78883740.14999999,
+        "delta_usage_abs": 0,
+        "delta_usage_percent": 0
+      },
+      {
+        "service": "MTC",
+        "unit": "min",
+        "own_calculation": 0,
+        "partner_calculation": 0,
+        "delta_calculation_percent": 0,
+        "own_usage": 67973890.45,
+        "partner_usage": 67973890.45,
+        "delta_usage_abs": 0,
+        "delta_usage_percent": 0
+      },
+      {
+        "service": "SMS",
+        "unit": "SMS",
+        "own_calculation": 166353.732,
+        "partner_calculation": 166353.732,
+        "delta_calculation_percent": 0,
+        "own_usage": 13862811,
+        "partner_usage": 13862811,
+        "delta_usage_abs": 0,
+        "delta_usage_percent": 0
+      },
+      {
+        "service": "Data",
+        "unit": "MB",
+        "own_calculation": 17208387.800778873,
+        "partner_calculation": 17208387.980778873,
+        "delta_calculation_percent": -0.0000010460015301016739,
+        "own_usage": 1434032314.3083034,
+        "partner_usage": 1434032329.3083034,
+        "delta_usage_abs": 15,
+        "delta_usage_percent": -0.000001046001533601086
+      }
+    ],
+    "details": [
+      {
+        "service": "MOC Back Home",
+        "unit": "min",
+        "own_calculation": 5797195.3680000035,
+        "partner_calculation": 5797195.3680000035,
+        "delta_calculation_percent": 0,
+        "own_usage": 72464942.10000001,
+        "partner_usage": 72464942.10000001,
+        "delta_usage_abs": 0,
+        "delta_usage_percent": 0
+      },
+      {
+        "service": "MOC Local",
+        "unit": "min",
+        "own_calculation": 340520.476,
+        "partner_calculation": 340520.476,
+        "delta_calculation_percent": 0,
+        "own_usage": 4256505.95,
+        "partner_usage": 4256505.95,
+        "delta_usage_abs": 0,
+        "delta_usage_percent": 0
+      },
+      {
+        "service": "SMSMO",
+        "unit": "SMS",
+        "own_calculation": 166353.732,
+        "partner_calculation": 166353.732,
+        "delta_calculation_percent": 0,
+        "own_usage": 13862811,
+        "partner_usage": 13862811,
+        "delta_usage_abs": 0,
+        "delta_usage_percent": 0
+      },
+      {
+        "service": "GPRS",
+        "unit": "MB",
+        "own_calculation": 17208387.800778873,
+        "partner_calculation": 17208387.980778873,
+        "delta_calculation_percent": -0.0000010460015301016739,
+        "own_usage": 1434032316.7315726,
+        "partner_usage": 1434032331.7315726,
+        "delta_usage_abs": 15,
+        "delta_usage_percent": -0.0000010460015318335225
+      },
+      {
+        "service": "MOC International",
+        "unit": "min",
+        "own_calculation": 2158211.849999999,
+        "partner_calculation": 2158211.849999999,
+        "delta_calculation_percent": 0,
+        "own_usage": 2158211.85,
+        "partner_usage": 2158211.85,
+        "delta_usage_abs": 0,
+        "delta_usage_percent": 0
+      },
+      {
+        "service": "MOC Special Destinations",
+        "unit": "min",
+        "own_calculation": 0,
+        "partner_calculation": 0,
+        "delta_calculation_percent": 0,
+        "own_usage": 4080.25,
+        "partner_usage": 4080.25,
+        "delta_usage_abs": 0,
+        "delta_usage_percent": 0
+      },
+      {
+        "service": "MTC",
+        "unit": "min",
+        "own_calculation": 0,
+        "partner_calculation": 0,
+        "delta_calculation_percent": 0,
+        "own_usage": 67973890.45,
+        "partner_usage": 67973890.45,
+        "delta_usage_abs": 0,
+        "delta_usage_percent": 0
+      }
+    ]
+  }
+}
