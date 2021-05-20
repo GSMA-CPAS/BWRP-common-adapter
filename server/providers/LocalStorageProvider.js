@@ -181,8 +181,11 @@ class LocalStorageProvider {
     try {
       let receivedUsages = await LocalStorageProvider.getUsages(contractId, {state: 'RECEIVED'});
       receivedUsages = receivedUsages.filter((usage) => {
-        if ((usage.tag) && (usage.tag === 'REJECTED') ) return false;
-        return true;
+        if ((usage.tag) && (usage.tag === 'REJECTED') ) {
+          return false;
+        } else {
+          return true;
+        }
       });
       if (receivedUsages.length > 0 ) {
         const receivedUsage = receivedUsages.sort(function(a, b) {
@@ -207,8 +210,11 @@ class LocalStorageProvider {
     try {
       let sentUsages = await LocalStorageProvider.getUsages(contractId, {state: 'SENT'});
       sentUsages = sentUsages.filter((usage) => {
-        if ((usage.tag) && (usage.tag === 'REJECTED') ) return false;
-        return true;
+        if ((usage.tag) && (usage.tag === 'REJECTED') ) {
+          return false;
+        } else {
+          return true;
+        }
       });
       if (sentUsages.length > 0 ) {
         const sentUsage = sentUsages.sort(function(a, b) {
