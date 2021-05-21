@@ -247,6 +247,48 @@ const eventSignatureReceived = ({body}) => new Promise(
           await LocalStorageProvider.updateContract(contractToUpdate);
         }
       }
+
+      const getUsageResp = await LocalStorageProvider.findUsages({state: ['RECEIVED', 'SENT'], storageKey: body.data.storageKey});
+      console.log('Found usages for storageKey: ' + JSON.stringify(getUsageResp));
+      if ((getUsageResp !== undefined) && (Array.isArray(getUsageResp)) && (getUsageResp.length === 1)) {
+        const usage = getUsageResp[0];
+        const getUsageByIdResp = await LocalStorageProvider.getUsageByUsageId(usage.id);
+
+        const getSignaturesByIdAndMspResp = await blockchainAdapterConnection.getSignatures(usage.referenceId, body.msp);
+        const mspParamName = (getUsageByIdResp.mspOwner === body.msp) ? 'fromMsp' : 'toMsp';
+        let update = false;
+        Object.keys(getSignaturesByIdAndMspResp).forEach((getSignaturesByIdAndMspRespKey) => {
+          const alreadyExistingSignatureLink = getUsageByIdResp.signatureLink.filter((signatureLink) => {
+            return ((signatureLink.msp === mspParamName) && (signatureLink.txId === getSignaturesByIdAndMspRespKey));
+          })[0];
+          if (alreadyExistingSignatureLink !== undefined) {
+            // This signature already exists
+            // Do nothing more
+          } else {
+            // This signature must be added
+            const firstSignatureLinkWithoutTxId = getUsageByIdResp.signatureLink.filter((signatureLink) => {
+              return ((signatureLink.msp === mspParamName) && (signatureLink.txId === undefined));
+            })[0];
+            console.log('0')
+            if (firstSignatureLinkWithoutTxId === undefined) {
+              console.log('1')
+
+              // There is no more signatureLink without txId
+              // Do nothing for this new incoming unexpected signature
+            } else {
+              console.log('2')
+
+              firstSignatureLinkWithoutTxId.txId = getSignaturesByIdAndMspRespKey;
+              update = true;
+            }
+          }
+        });
+        if (update) {
+          const usageToUpdate = getUsageByIdResp;
+          usageToUpdate.signatureLink = getUsageByIdResp.signatureLink;
+          await LocalStorageProvider.updateUsage(usageToUpdate);
+        }
+      }
       resolve(Service.successResponse({}, 200));
     } catch (e) {
       reject(Service.rejectResponse(e));

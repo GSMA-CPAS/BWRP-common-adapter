@@ -397,6 +397,20 @@ class LocalStorageProvider {
 
   /**
    *
+   * @param {String} usageId
+   * @return {Promise<object>}
+   */
+  static async getUsageByUsageId(usageId) {
+    try {
+      return await UsageDAO.findOne(usageId);
+    } catch (error) {
+      logger.error('[LocalStorageProvider::getUsage] failed to get usage - ' + error.message);
+      throw error;
+    }
+  }
+
+  /**
+   *
    * @param {String} contractId
    * @param {String} usageId
    * @return {Promise<object>}
@@ -406,6 +420,20 @@ class LocalStorageProvider {
       return await UsageDAO.findOneAndRemove(usageId, {contractId: contractId});
     } catch (error) {
       logger.error('[LocalStorageProvider::deleteUsage] failed to delete usage - ' + error.message);
+      throw error;
+    }
+  }
+
+  /**
+   *
+   * @param {Object} matchingConditions
+   * @return {Promise<object>}
+   */
+  static async findUsages( matchingConditions = {}) {
+    try {
+      return await UsageDAO.findUsages( matchingConditions);
+    } catch (error) {
+      logger.error('[LocalStorageProvider::findUsages] failed to get usages - %s', error.message);
       throw error;
     }
   }
