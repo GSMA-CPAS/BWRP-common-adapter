@@ -486,7 +486,7 @@ const getUsageSignatures = ({contractId, usageId}) => new Promise(
             signatures.push({
               signatureId: signature.id,
               usageId: getUsageByIdResp.id,
-              msp: getUsageByIdResp[signature.msp].mspId,
+              msp: getUsageByIdResp[(signature.msp == 'fromMsp')? 'mspOwner': 'mspReceiver'].mspId,
               state: 'SIGNED'
             });
           }
