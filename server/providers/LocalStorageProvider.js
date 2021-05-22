@@ -181,7 +181,7 @@ class LocalStorageProvider {
     try {
       let receivedUsages = await LocalStorageProvider.getUsages(contractId, {state: 'RECEIVED'});
       receivedUsages = receivedUsages.filter((usage) => {
-        if ((usage.tag) && (usage.tag === 'REJECTED') ) {
+        if ((usage.tag) && ((usage.tag === 'REJECTED') || (usage.tag === 'APPROVED'))) {
           return false;
         } else {
           return true;
@@ -210,7 +210,7 @@ class LocalStorageProvider {
     try {
       let sentUsages = await LocalStorageProvider.getUsages(contractId, {state: 'SENT'});
       sentUsages = sentUsages.filter((usage) => {
-        if ((usage.tag) && (usage.tag === 'REJECTED') ) {
+        if ((usage.tag) && ((usage.tag === 'REJECTED') || (usage.tag === 'APPROVED')) ) {
           return false;
         } else {
           return true;
