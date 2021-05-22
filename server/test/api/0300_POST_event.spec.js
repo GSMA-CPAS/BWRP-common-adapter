@@ -1131,7 +1131,7 @@ describe(`Tests POST ${route} API OK`, function() {
       storageKeys: ['573ba6643181fb8487dcc14f26587e3c2d54a2271aff4965785ca7a70d52c579', 'aadaef3e3d0756b69ff352a82ae52c8a025f208bfafd946b09fff43c7b89c4b1'],
       signatureLink: [
         {id: '5fd8d6070cc5feb0fc0cb9e433ff', msp: 'fromMsp', index: 0},
-        {id: '5fd8d6070cc5feb0fc0cb9e5d45f', msp: 'toMsp', index: 0}
+        {id: '5fd8d6070cc5feb0fc0cb9e5d45f', msp: 'toMsp', index: 0, txId: 'f6c847b990945996a6c13e21713d76c982ef79779c43c8f9183cb30c3822e3d7'}
       ],
     };
 

@@ -371,6 +371,12 @@ const createUsageSignature = ({url, contractId, usageId, body}) => new Promise(
                 'Content-Location': `${url.replace(/\/$/, '')}/${signatureId}`
               };
 
+              // BUSINESS rule: if all signatures are signed, set tag to APPROVED
+              const unsignedNumber = signatureLink.filter((signature) => (signature['txId'] === undefined)).length;
+              if (unsignedNumber == 0) {
+                const updateUsageWithTagResp = await LocalStorageProvider.updateUsageWithTag(usageId, 'APPROVED');
+              }
+
               resolve(Service.successResponse(mySignature, 201, returnedHeaders));
             }
           } else {
@@ -401,6 +407,12 @@ const createUsageSignature = ({url, contractId, usageId, body}) => new Promise(
               const returnedHeaders = {
                 'Content-Location': `${url.replace(/\/$/, '')}/${signatureId}`
               };
+
+              // BUSINESS rule: if all signatures are signed, set tag to APPROVED
+              const unsignedNumber = signatureLink.filter((signature) => (signature['txId'] === undefined)).length;
+              if (unsignedNumber == 0) {
+                const updateUsageWithTagResp = await LocalStorageProvider.updateUsageWithTag(usageId, 'APPROVED');
+              }
 
               resolve(Service.successResponse(mySignature, 201, returnedHeaders));
             }

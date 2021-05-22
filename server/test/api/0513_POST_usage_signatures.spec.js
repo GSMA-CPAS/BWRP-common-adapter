@@ -79,7 +79,7 @@ describe(`Tests POST ${route} API OK`, function() {
       storageKeys: ['b70af48b18681d2b51c77c7ed3bf63217caafc91a593d5d1b4f9bbb1c93c2273'],
       signatureLink: [
         {id: '5fd8d6070cc5feb0fc0cb9e433ff', msp: 'fromMsp', index: 0},
-        {id: '5fd8d6070cc5feb0fc0cb9e5d45f', msp: 'toMsp', index: 0}
+        {id: '5fd8d6070cc5feb0fc0cb9e5d45f', msp: 'toMsp', index: 0, txId: 'f6c847b990945996a6c13e21713d76c982ef79779c43c8f9183cb30c3822e3d7'}
       ],
     };
     const usageReceived = {
@@ -127,12 +127,15 @@ describe(`Tests POST ${route} API OK`, function() {
       ],
       lastModificationDate: '2020-12-15T15:28:07.077Z',
       contractReferenceId: '0326796a8cad50871c0311d88b492805a7e39880e33a09e5ee90472750281565',
-
+      signatureLink: [
+        {id: '5fd8d6070cc5feb0fc0cb9e433ff', msp: 'fromMsp', index: 0},
+        {id: '5fd8d6070cc5feb0fc0cb9e5d45f', msp: 'toMsp', index: 0}
+      ],
     };
     const usageSentFullySigned = {
       type: 'usage',
       version: '1.1.0',
-      name: 'Usage data - sent',
+      name: 'Usage data - sent fullu signed',
       contractId: undefined,
       mspOwner: 'ORAGR',
       mspReceiver: 'DTAG',
@@ -155,11 +158,12 @@ describe(`Tests POST ${route} API OK`, function() {
         {id: '5fd8d6070cc5feb0fc0cb9e433ff', msp: 'fromMsp', index: 0, txId: 'af6c847b990945996a6c13e21713d76c982ef79779c43c8f9183cb30c3822e3d7'},
         {id: '5fd8d6070cc5feb0fc0cb9e5d45f', msp: 'toMsp', index: 0, txId: 'bf6c847b990945996a6c13e21713d76c982ef79779c43c8f9183cb30c3822e3d7'}
       ],
+      tag: 'APPROVED'
     };
     const usageReceivedFullySigned = {
       type: 'usage',
       version: '1.1.0',
-      name: 'Usage data - received',
+      name: 'Usage data - received fully signed',
       contractId: undefined,
       mspOwner: 'DTAG',
       mspReceiver: 'ORAGR',
@@ -182,6 +186,7 @@ describe(`Tests POST ${route} API OK`, function() {
         {id: '5fd8d6070cc5feb0fc0cb9e433ff', msp: 'fromMsp', index: 0, txId: 'af6c847b990945996a6c13e21713d76c982ef79779c43c8f9183cb30c3822e3d7'},
         {id: '5fd8d6070cc5feb0fc0cb9e5d45f', msp: 'toMsp', index: 0, txId: 'bf6c847b990945996a6c13e21713d76c982ef79779c43c8f9183cb30c3822e3d7'}
       ],
+      tag: 'APPROVED'
     };
     /* eslint-enable max-len */
 

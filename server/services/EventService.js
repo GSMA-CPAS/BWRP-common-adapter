@@ -249,7 +249,6 @@ const eventSignatureReceived = ({body}) => new Promise(
       }
 
       const getUsageResp = await LocalStorageProvider.findUsages({state: ['RECEIVED', 'SENT'], storageKey: body.data.storageKey});
-      console.log('Found usages for storageKey: ' + JSON.stringify(getUsageResp));
       if ((getUsageResp !== undefined) && (Array.isArray(getUsageResp)) && (getUsageResp.length === 1)) {
         const usage = getUsageResp[0];
         const getUsageByIdResp = await LocalStorageProvider.getUsageByUsageId(usage.id);
@@ -269,15 +268,10 @@ const eventSignatureReceived = ({body}) => new Promise(
             const firstSignatureLinkWithoutTxId = getUsageByIdResp.signatureLink.filter((signatureLink) => {
               return ((signatureLink.msp === mspParamName) && (signatureLink.txId === undefined));
             })[0];
-            console.log('0')
             if (firstSignatureLinkWithoutTxId === undefined) {
-              console.log('1')
-
               // There is no more signatureLink without txId
               // Do nothing for this new incoming unexpected signature
             } else {
-              console.log('2')
-
               firstSignatureLinkWithoutTxId.txId = getSignaturesByIdAndMspRespKey;
               update = true;
             }
@@ -286,7 +280,13 @@ const eventSignatureReceived = ({body}) => new Promise(
         if (update) {
           const usageToUpdate = getUsageByIdResp;
           usageToUpdate.signatureLink = getUsageByIdResp.signatureLink;
-          await LocalStorageProvider.updateUsage(usageToUpdate);
+          const updateUsageResp = await LocalStorageProvider.updateUsage(usageToUpdate);
+
+          // BUSINESS rule: if all signatures are signed, set tag to APPROVED
+          const unsignedNumber = updateUsageResp.signatureLink.filter((signature) => (signature['txId'] === undefined)).length;
+          if (unsignedNumber == 0) {
+            const updateUsageWithTagResp = await LocalStorageProvider.updateUsageWithTag(updateUsageResp.id, 'APPROVED');
+          }
         }
       }
       resolve(Service.successResponse({}, 200));
