@@ -133,7 +133,6 @@ const sendUsageById = ({contractId, usageId}) => new Promise(
       } else {
         let usageToSend = await LocalStorageProvider.getUsage(contractId, usageId);
         const isMspOwnerMyMspId = await blockchainAdapterConnection.isMyMspId(usageToSend.mspOwner);
-        console.log(isMspOwnerMyMspId)
         if (usageToSend.state !== 'DRAFT') {
           reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_SEND_USAGE_ONLY_ALLOWED_IN_STATE_DRAFT));
         } else if (!isMspOwnerMyMspId) {

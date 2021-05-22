@@ -292,6 +292,8 @@ describe(`Tests GET ${route} API OK`, function() {
             expect(response.body).to.exist;
             expect(response.body).to.be.an('array');
             expect(response.body.length).to.equal(1);
+            expect(response.body[0]).to.have.property('msp', usageSent.mspOwner);
+
             done();
           });
       } catch (exception) {

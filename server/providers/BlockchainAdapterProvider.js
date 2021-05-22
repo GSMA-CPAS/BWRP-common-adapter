@@ -73,7 +73,6 @@ class BlockchainAdapterProvider {
    * @return {Promise<boolean>}
    */
   async isMyMspId(mspId) {
-    console.log(config.SELF_MSPID)
     if ((config.SELF_MSPID === undefined) || (typeof config.SELF_MSPID !== 'string') || (config.SELF_MSPID.length <= 0)) {
       logger.warn('[BlockchainAdapterProvider::isMyMspId] config.SELF_MSPID not defined : ', config.SELF_MSPID);
       throw errorUtils.ERROR_INVALID_DEFINED_SELF_MSPID_ERROR;
