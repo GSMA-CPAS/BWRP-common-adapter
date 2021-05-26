@@ -211,6 +211,8 @@ const eventDocumentReceived = ({body}) => new Promise(
 
 const eventSignatureReceived = ({body}) => new Promise(
   async (resolve, reject) => {
+    logger.debug(`[EventService::eventSignatureReceived]: ${JSON.stringify(body.data)}`);
+
     try {
       const getContractsResp = await LocalStorageProvider.getContracts({state: ['RECEIVED', 'SENT'], storageKey: body.data.storageKey});
       if ((getContractsResp !== undefined) && (Array.isArray(getContractsResp)) && (getContractsResp.length === 1)) {
@@ -249,25 +251,34 @@ const eventSignatureReceived = ({body}) => new Promise(
       }
 
       const getUsageResp = await LocalStorageProvider.findUsages({state: ['RECEIVED', 'SENT'], storageKey: body.data.storageKey});
+
       if ((getUsageResp !== undefined) && (Array.isArray(getUsageResp)) && (getUsageResp.length === 1)) {
+
         const usage = getUsageResp[0];
         const getUsageByIdResp = await LocalStorageProvider.getUsageByUsageId(usage.id);
 
         const getSignaturesByIdAndMspResp = await blockchainAdapterConnection.getSignatures(usage.referenceId, body.msp);
+
         const mspParamName = (getUsageByIdResp.mspOwner === body.msp) ? 'fromMsp' : 'toMsp';
+
         let update = false;
         Object.keys(getSignaturesByIdAndMspResp).forEach((getSignaturesByIdAndMspRespKey) => {
           const alreadyExistingSignatureLink = getUsageByIdResp.signatureLink.filter((signatureLink) => {
             return ((signatureLink.msp === mspParamName) && (signatureLink.txId === getSignaturesByIdAndMspRespKey));
           })[0];
+
           if (alreadyExistingSignatureLink !== undefined) {
             // This signature already exists
             // Do nothing more
           } else {
             // This signature must be added
+
+
+
             const firstSignatureLinkWithoutTxId = getUsageByIdResp.signatureLink.filter((signatureLink) => {
               return ((signatureLink.msp === mspParamName) && (signatureLink.txId === undefined));
             })[0];
+
             if (firstSignatureLinkWithoutTxId === undefined) {
               // There is no more signatureLink without txId
               // Do nothing for this new incoming unexpected signature

@@ -1,0 +1,27 @@
+{
+  "metadata": {
+    "name": "OTHER_local_usage_file"
+  },
+  "inbound": [
+    {
+      "yearMonth": "43800",
+      "homeTadig": "DEUD1",
+      "visitorTadig": "FRAF1",
+      "service": "SMSMO",
+      "usage": 211647,
+      "units": "SMS",
+      "currency": "EUR"
+    }
+  ],
+  "outbound": [
+    {
+      "yearMonth": "43800",
+      "homeTadig": "FRAF1",
+      "visitorTadig": "DEUD1",
+      "service": "SMSMO",
+      "usage": 824052,
+      "units": "SMS",
+      "currency": "EUR"
+    }
+  ]
+}

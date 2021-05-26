@@ -74,6 +74,16 @@ const TMUS_create_usage_body = {
   },
   body: configured_JSON_TMUS_usage_body_to_create
 };
+const DTAG_create_signature_A_body = {
+  signature: 'signature',
+  certificate: '-----BEGIN CERTIFICATE-----\nMIICYjCCAemgAwIBA..AAAA...',
+  algorithm: 'secp384r1'
+};
+const TMUS_create_signature_A_body = {
+  signature: 'signature',
+  certificate: '-----BEGIN CERTIFICATE-----\nMIICYjCCAemgAwIBA..AAAA...',
+  algorithm: 'secp384r2'
+};
 
 const DTAG_dynamic_data = {
   contractId: undefined,
@@ -82,7 +92,13 @@ const DTAG_dynamic_data = {
   usageId: undefined,
   usageTxId: undefined,
   usageReferenceId: undefined,
-  receivedUsageId: undefined
+  receivedUsageId: undefined,
+  DTAG: {
+    firstSignatureId: undefined,
+  },
+  TMUS: {
+    firstSignatureId: undefined,
+  }
 };
 
 const TMUS_dynamic_data = {
@@ -90,7 +106,13 @@ const TMUS_dynamic_data = {
   usageId: undefined,
   usageTxId: undefined,
   usageReferenceId: undefined,
-  receivedUsageId: undefined
+  receivedUsageId: undefined,
+  DTAG: {
+    firstSignatureId: undefined,
+  },
+  TMUS: {
+    firstSignatureId: undefined,
+  }
 };
 
 const configured_EXPECTED_JSON_DTAG_local_usage_settlement_generatedResult = require(`${datasetPath}/0003_EXPECTED_JSON_DTAG_local_usage_settlement_generatedResult.json`);
@@ -108,7 +130,7 @@ const configured_EXPECTED_JSON_DTAG_partner_settlement_discrepancy_body = requir
 const configured_EXPECTED_JSON_TMUS_local_settlement_discrepancy_body = configured_EXPECTED_JSON_DTAG_partner_settlement_discrepancy_body;
 const configured_EXPECTED_JSON_TMUS_partner_settlement_discrepancy_body = configured_EXPECTED_JSON_DTAG_local_settlement_discrepancy_body;
 
-describe.only(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
+describe.only(`Launch scenario 0004_Settlement_completion`, function() {
   before(function(done) {
     if (skipFlag) {
       this.skip();
@@ -437,7 +459,7 @@ describe.only(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
     waitSettlement(DTAG_dynamic_data.usageReferenceId, 20, 5000);
   });
 
-  it(`Get TMUS usage from DTAG`, function(done) {
+  it(`On TMUS - Get usage received from DTAG`, function(done) {
     debugAction(`${this.test.title}`);
     if ((TMUS_dynamic_data.receivedContractId === undefined) || (TMUS_dynamic_data.receivedUsageId === undefined)) {
       expect.fail('This scenario step should use an undefined data');
@@ -489,8 +511,6 @@ describe.only(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
       done();
     }
   });
-
-  // Now create an usage in TMUS and send it to DTAG
 
   it(`Create a new TMUS usage for this contract`, function(done) {
     debugAction(`${this.test.title}`);
@@ -620,7 +640,7 @@ describe.only(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
     waitSettlement(TMUS_dynamic_data.usageReferenceId, 20, 5000);
   });
 
-  it(`Get DTAG usage from TMUS`, function(done) {
+  it(`On DTAG - Get usage received from TMUS`, function(done) {
     debugAction(`${this.test.title}`);
     if ((DTAG_dynamic_data.contractId === undefined) || (DTAG_dynamic_data.receivedUsageId === undefined)) {
       expect.fail('This scenario step should use an undefined data');
@@ -673,268 +693,24 @@ describe.only(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
     }
   });
 
-  // Now on DTAG side create the 2 settlements
-
-  it.skip(`Generate DTAG settlement on DTAG usage for this contract`, function(done) {
+  it(`On DTAG - Get the signatures on usage sent by DTAG`, function(done) {
     debugAction(`${this.test.title}`);
-    if ((DTAG_dynamic_data.contractId === undefined) || (DTAG_dynamic_data.usageId === undefined)) {
+    if (DTAG_dynamic_data.contractId === undefined) {
       expect.fail('This scenario step should use an undefined data');
     }
     try {
       chai.request(DTAG_API)
-        .put(`/contracts/${DTAG_dynamic_data.contractId}/usages/${DTAG_dynamic_data.usageId}/generate/`)
+        .get(`/contracts/${DTAG_dynamic_data.contractId}/usages/${DTAG_dynamic_data.usageId}/signatures/`)
         .send()
         .end((error, response) => {
           expect(error).to.be.null;
           expect(response).to.have.status(200);
           expect(response).to.be.json;
-          expect(response.body).to.exist;
-          expect(response.body).to.be.an('object');
-
-          expect(response.body).to.have.property('settlementId').that.is.a('string');
-          expect(response.body).to.have.property('state', 'DRAFT');
-          expect(response.body).to.have.property('mspOwner', 'DTAG');
-          expect(response.body).to.have.property('creationDate').that.is.a('string').and.match(DATE_REGEX);
-          expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
-          DTAG_dynamic_data.settlementIdFromLocalUsage = response.body.settlementId;
-          debugObjectOnDTAG('Settlement created on DTAG from local usage : ', JSON.stringify(response.body));
-          expect(response.body).to.have.property('body').that.is.an('object');
-
-          expect(response.body.body).to.deep.equalInAnyOrder(configured_EXPECTED_JSON_DTAG_local_usage_settlement_generatedResult);
-
-          expect(response.body.body).to.have.property('fromDate', null);
-          expect(response.body.body).to.have.property('toDate', null);
-          expect(response.body.body).to.have.property('calculationEngineVersion', '0.0.1');
-          expect(response.body.body).to.have.property('inbound');
-          expect(response.body.body.inbound).to.have.property('tax').that.deep.equals({rate: ''});
-          expect(response.body.body.inbound).to.have.property('currency');
-          expect(response.body.body.inbound).to.have.property('services');
-
-          expect(response.body.body.outbound).to.have.property('tax').that.deep.equals({rate: ''});
-          expect(response.body.body.outbound).to.have.property('currency');
-          expect(response.body.body.outbound).to.have.property('services');
-          debug(`==> DTAG new created settlement id from local usage: ${DTAG_dynamic_data.settlementIdFromLocalUsage}`);
-
-          done();
-        });
-    } catch (exception) {
-      debug('exception: %s', exception.stack);
-      expect.fail('it test throws an exception');
-      done();
-    }
-  });
-
-  it.skip(`Generate DTAG settlement on TMUS usage for this contract`, function(done) {
-    debugAction(`${this.test.title}`);
-    if ((DTAG_dynamic_data.contractId === undefined) || (DTAG_dynamic_data.receivedUsageId === undefined)) {
-      expect.fail('This scenario step should use an undefined data');
-    }
-    try {
-      chai.request(DTAG_API)
-        .put(`/contracts/${DTAG_dynamic_data.contractId}/usages/${DTAG_dynamic_data.receivedUsageId}/generate/`)
-        .send()
-        .end((error, response) => {
-          expect(error).to.be.null;
-          expect(response).to.have.status(200);
-          expect(response).to.be.json;
-          expect(response.body).to.exist;
-          expect(response.body).to.be.an('object');
-
-          expect(response.body).to.have.property('settlementId').that.is.a('string');
-          expect(response.body).to.have.property('state', 'DRAFT');
-          expect(response.body).to.have.property('mspOwner', 'TMUS');
-          expect(response.body).to.have.property('creationDate').that.is.a('string').and.match(DATE_REGEX);
-          expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
-          DTAG_dynamic_data.settlementIdFromReceivedUsage = response.body.settlementId;
-          debugObjectOnDTAG('Settlement created on DTAG from received usage : ', JSON.stringify(response.body));
-          expect(response.body).to.have.property('body').that.is.an('object');
-
-          expect(response.body.body).to.deep.equalInAnyOrder(configured_EXPECTED_JSON_DTAG_partner_usage_settlement_generatedResult);
-
-          expect(response.body.body).to.have.property('fromDate', null);
-          expect(response.body.body).to.have.property('toDate', null);
-          expect(response.body.body).to.have.property('calculationEngineVersion', '0.0.1');
-          expect(response.body.body).to.have.property('inbound');
-          expect(response.body.body.inbound).to.have.property('tax').that.deep.equals({rate: ''});
-          expect(response.body.body.inbound).to.have.property('currency');
-          expect(response.body.body.inbound).to.have.property('services');
-          expect(response.body.body.outbound).to.have.property('tax').that.deep.equals({rate: ''});
-          expect(response.body.body.outbound).to.have.property('currency');
-          expect(response.body.body.outbound).to.have.property('services');
-          debug(`==> DTAG new created settlement id from received usage: ${DTAG_dynamic_data.settlementIdFromReceivedUsage}`);
-
-          done();
-        });
-    } catch (exception) {
-      debug('exception: %s', exception.stack);
-      expect.fail('it test throws an exception');
-      done();
-    }
-  });
-
-  it.skip(`Reject DTAG send settlement to TMUS on TMUS usage`, function(done) {
-    debugAction(`${this.test.title}`);
-    if ((DTAG_dynamic_data.contractId === undefined) || (DTAG_dynamic_data.settlementIdFromReceivedUsage === undefined)) {
-      expect.fail('This scenario step should use an undefined data');
-    }
-    try {
-      chai.request(DTAG_API)
-        .put(`/contracts/${DTAG_dynamic_data.contractId}/settlements/${DTAG_dynamic_data.settlementIdFromReceivedUsage}/send/`)
-        .send()
-        .end((error, response) => {
-          expect(error).to.be.null;
-          expect(response).to.have.status(422);
-          expect(response).to.be.json;
-          expect(response.body).to.exist;
-          expect(response.body).to.be.an('object');
-
-          expect(response.body).to.have.property('internalErrorCode', 2024);
-          expect(response.body).to.have.property('message', 'Send settlement not allowed');
-          expect(response.body).to.have.property('description', 'It\'s not allowed to send this settlement.');
-
-          done();
-        });
-    } catch (exception) {
-      debug('exception: %s', exception.stack);
-      expect.fail('it test throws an exception');
-      done();
-    }
-  });
-
-  // Now on TMUS side create the 2 settlements
-
-  it.skip(`Generate TMUS settlement on TMUS usage for this contract`, function(done) {
-    debugAction(`${this.test.title}`);
-    if ((TMUS_dynamic_data.receivedContractId === undefined) || (TMUS_dynamic_data.usageId === undefined)) {
-      expect.fail('This scenario step should use an undefined data');
-    }
-    try {
-      chai.request(TMUS_API)
-        .put(`/contracts/${TMUS_dynamic_data.receivedContractId}/usages/${TMUS_dynamic_data.usageId}/generate/`)
-        .send()
-        .end((error, response) => {
-          expect(error).to.be.null;
-          expect(response).to.have.status(200);
-          expect(response).to.be.json;
-          expect(response.body).to.exist;
-          expect(response.body).to.be.an('object');
-
-          expect(response.body).to.have.property('settlementId').that.is.a('string');
-          expect(response.body).to.have.property('state', 'DRAFT');
-          expect(response.body).to.have.property('mspOwner', 'TMUS');
-          expect(response.body).to.have.property('body').that.is.an('object');
-
-          expect(response.body.body).to.deep.equalInAnyOrder(configured_EXPECTED_JSON_TMUS_local_usage_settlement_generatedResult);
-
-          expect(response.body).to.have.property('creationDate').that.is.a('string').and.match(DATE_REGEX);
-          expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
-
-          TMUS_dynamic_data.settlementIdFromLocalUsage = response.body.settlementId;
-          debugObjectOnTMUS('Settlement created on TMUS from local usage : ', response.body);
-          if (response.body.body) {
-            debugObjectOnTMUS('Settlement created on TMUS from local usage => body : ', response.body.body);
-          }
-          debug(`==> TMUS new created settlement id from local usage: ${TMUS_dynamic_data.settlementIdFromLocalUsage}`);
-
-          done();
-        });
-    } catch (exception) {
-      debug('exception: %s', exception.stack);
-      expect.fail('it test throws an exception');
-      done();
-    }
-  });
-
-  it.skip(`Generate TMUS settlement on DTAG usage for this contract`, function(done) {
-    debugAction(`${this.test.title}`);
-    if ((TMUS_dynamic_data.receivedContractId === undefined) || (TMUS_dynamic_data.receivedUsageId === undefined)) {
-      expect.fail('This scenario step should use an undefined data');
-    }
-    try {
-      chai.request(TMUS_API)
-        .put(`/contracts/${TMUS_dynamic_data.receivedContractId}/usages/${TMUS_dynamic_data.receivedUsageId}/generate/`)
-        .send()
-        .end((error, response) => {
-          expect(error).to.be.null;
-          expect(response).to.have.status(200);
-          expect(response).to.be.json;
-          expect(response.body).to.exist;
-          expect(response.body).to.be.an('object');
-
-          expect(response.body).to.have.property('settlementId').that.is.a('string');
-          expect(response.body).to.have.property('state', 'DRAFT');
-          expect(response.body).to.have.property('mspOwner', 'DTAG');
-          expect(response.body).to.have.property('body').that.is.an('object');
-
-          expect(response.body.body).to.deep.equalInAnyOrder(configured_EXPECTED_JSON_TMUS_partner_usage_settlement_generatedResult);
-
-          expect(response.body).to.have.property('creationDate').that.is.a('string').and.match(DATE_REGEX);
-          expect(response.body).to.have.property('lastModificationDate').that.is.a('string').and.match(DATE_REGEX);
-
-          TMUS_dynamic_data.settlementIdFromReceivedUsage = response.body.settlementId;
-          debugObjectOnTMUS('Settlement created on TMUS from received usage : ', response.body);
-          if (response.body.body) {
-            debugObjectOnTMUS('Settlement created on TMUS from received usage => body : ', response.body.body);
-          }
-          debug(`==> TMUS new created settlement id from received usage: ${TMUS_dynamic_data.settlementIdFromReceivedUsage}`);
-
-          done();
-        });
-    } catch (exception) {
-      debug('exception: %s', exception.stack);
-      expect.fail('it test throws an exception');
-      done();
-    }
-  });
-
-  it.skip(`Reject TMUS send settlement to DTAG on DTAG usage`, function(done) {
-    debugAction(`${this.test.title}`);
-    if ((TMUS_dynamic_data.receivedContractId === undefined) || (TMUS_dynamic_data.settlementIdFromReceivedUsage === undefined)) {
-      expect.fail('This scenario step should use an undefined data');
-    }
-    try {
-      chai.request(TMUS_API)
-        .put(`/contracts/${TMUS_dynamic_data.receivedContractId}/settlements/${TMUS_dynamic_data.settlementIdFromReceivedUsage}/send/`)
-        .send()
-        .end((error, response) => {
-          expect(error).to.be.null;
-          expect(response).to.have.status(422);
-          expect(response).to.be.json;
-          expect(response.body).to.exist;
-          expect(response.body).to.be.an('object');
-
-          expect(response.body).to.have.property('internalErrorCode', 2024);
-          expect(response.body).to.have.property('message', 'Send settlement not allowed');
-          expect(response.body).to.have.property('description', 'It\'s not allowed to send this settlement.');
-
-          done();
-        });
-    } catch (exception) {
-      debug('exception: %s', exception.stack);
-      expect.fail('it test throws an exception');
-      done();
-    }
-  });
-
-  it.skip(`Get DTAG settlements linked to contract`, function(done) {
-    debugAction(`${this.test.title}`);
-    if ((DTAG_dynamic_data.contractId === undefined) || (DTAG_dynamic_data.settlementIdFromReceivedUsage === undefined) || (DTAG_dynamic_data.settlementIdFromLocalUsage === undefined)) {
-      expect.fail('This scenario step should use an undefined data');
-    }
-    try {
-      chai.request(DTAG_API)
-        .get(`/contracts/${DTAG_dynamic_data.contractId}/settlements/`)
-        .send()
-        .end((error, response) => {
-          expect(error).to.be.null;
-          expect(response).to.have.status(200);
-          expect(response).to.be.json;
-
           expect(response.body).to.exist;
           expect(response.body).to.be.an('array');
-          expect(response.body.length).to.equals(2);
 
-          expect(response.body.map((content) => content.settlementId)).to.deep.equalInAnyOrder([DTAG_dynamic_data.settlementIdFromReceivedUsage, DTAG_dynamic_data.settlementIdFromLocalUsage]),
+          expect(response.body.length).to.equals(0);
+          debugObjectOnDTAG('signatures : ', response.body);
 
           done();
         });
@@ -945,56 +721,24 @@ describe.only(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
     }
   });
 
-  it.skip(`Get TMUS settlements linked to contract`, function(done) {
+  it(`On DTAG - Get the signatures on usage received from TMUS`, function(done) {
     debugAction(`${this.test.title}`);
-    if ((TMUS_dynamic_data.receivedContractId === undefined) || (TMUS_dynamic_data.settlementIdFromReceivedUsage === undefined) || (TMUS_dynamic_data.settlementIdFromLocalUsage === undefined)) {
+    if (DTAG_dynamic_data.contractId === undefined) {
       expect.fail('This scenario step should use an undefined data');
     }
     try {
-      chai.request(TMUS_API)
-        .get(`/contracts/${TMUS_dynamic_data.receivedContractId}/settlements/`)
+      chai.request(DTAG_API)
+        .get(`/contracts/${DTAG_dynamic_data.contractId}/usages/${DTAG_dynamic_data.receivedUsageId}/signatures/`)
         .send()
         .end((error, response) => {
           expect(error).to.be.null;
           expect(response).to.have.status(200);
           expect(response).to.be.json;
-
           expect(response.body).to.exist;
           expect(response.body).to.be.an('array');
-          expect(response.body.length).to.equals(2);
 
-          expect(response.body.map((content) => content.settlementId)).to.deep.equalInAnyOrder([TMUS_dynamic_data.settlementIdFromReceivedUsage, TMUS_dynamic_data.settlementIdFromLocalUsage]),
-
-          done();
-        });
-    } catch (exception) {
-      debug('exception: %s', exception.stack);
-      expect.fail('it test throws an exception');
-      done();
-    }
-  });
-
-  // Now calculate usage discrepancy
-
-  // Launch 'Get DTAG usage discrepancy on TMUS usage' before 'Get DTAG usage discrepancy on local usage'
-  // To return a good reponse on Discrepancy Service requests
-  it.skip(`Get DTAG usage discrepancy on TMUS usage with local usage as partnerUsage`, function(done) {
-    debugAction(`${this.test.title}`);
-    if ((DTAG_dynamic_data.contractId === undefined) || (DTAG_dynamic_data.usageId === undefined) || (DTAG_dynamic_data.receivedUsageId === undefined)) {
-      expect.fail('This scenario step should use an undefined data');
-    }
-    try {
-      chai.request(DTAG_API)
-        .get(`/contracts/${DTAG_dynamic_data.contractId}/usages/${DTAG_dynamic_data.receivedUsageId}/discrepancy/?partnerUsageId=${DTAG_dynamic_data.usageId}`)
-        .send()
-        .end((error, response) => {
-          expect(error).to.be.null;
-          expect(response).to.have.status(200);
-          expect(response).to.be.json;
-          expect(response.body).to.exist;
-          expect(response.body).to.be.an('object');
-
-          expect(response.body).to.deep.equalInAnyOrder(configured_EXPECTED_JSON_DTAG_partner_usage_discrepancy_body);
+          expect(response.body.length).to.equals(0);
+          debugObjectOnDTAG('signatures : ', response.body);
 
           done();
         });
@@ -1005,80 +749,24 @@ describe.only(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
     }
   });
 
-  it.skip(`Get DTAG usage discrepancy on local usage with TMUS usage as partnerUsage`, function(done) {
+  it(`On TMUS - Get the signatures on usage sent by TMUS`, function(done) {
     debugAction(`${this.test.title}`);
-    if ((DTAG_dynamic_data.contractId === undefined) || (DTAG_dynamic_data.usageId === undefined) || (DTAG_dynamic_data.receivedUsageId === undefined)) {
-      expect.fail('This scenario step should use an undefined data');
-    }
-    try {
-      chai.request(DTAG_API)
-        .get(`/contracts/${DTAG_dynamic_data.contractId}/usages/${DTAG_dynamic_data.usageId}/discrepancy/?partnerUsageId=${DTAG_dynamic_data.receivedUsageId}`)
-        .send()
-        .end((error, response) => {
-          expect(error).to.be.null;
-          expect(response).to.have.status(200);
-          expect(response).to.be.json;
-          expect(response.body).to.exist;
-          expect(response.body).to.be.an('object');
-
-          debugObjectOnDTAG('Usage Discrepancy calculated : ', JSON.stringify(response.body));
-          expect(response.body).to.deep.equalInAnyOrder(configured_EXPECTED_JSON_DTAG_local_usage_discrepancy_body);
-
-          if (SHOW_DISCREPANCY_GENERATION_DETAILS && (response.body.localUsage) && (response.body.localUsage.body)) {
-            debugObjectOnDTAG('Usage Discrepancy calculated with localUsage metadata : ', response.body.localUsage.body.metadata);
-            if ((response.body.localUsage.body.inbound) && (Array.isArray(response.body.localUsage.body.inbound))) {
-              debugObjectOnDTAG('Usage Discrepancy calculated with localUsage inbound first rows : ', response.body.localUsage.body.inbound.slice(0, 2));
-            } else {
-              debugObjectOnDTAG('Usage Discrepancy calculated with localUsage inbound : ', response.body.localUsage.body.inbound);
-            }
-            if ((response.body.localUsage.body.outbound) && (Array.isArray(response.body.localUsage.body.outbound))) {
-              debugObjectOnDTAG('Usage Discrepancy calculated with localUsage outbound first rows : ', response.body.localUsage.body.outbound.slice(0, 2));
-            } else {
-              debugObjectOnDTAG('Usage Discrepancy calculated with localUsage outbound : ', response.body.localUsage.body.outbound);
-            }
-          }
-          if (SHOW_DISCREPANCY_GENERATION_DETAILS && (response.body.remoteUsage) && (response.body.remoteUsage.body)) {
-            debugObjectOnDTAG('Usage Discrepancy calculated with remoteUsage metadata : ', response.body.remoteUsage.body.metadata);
-            if ((response.body.remoteUsage.body.inbound) && (Array.isArray(response.body.remoteUsage.body.inbound))) {
-              debugObjectOnDTAG('Usage Discrepancy calculated with remoteUsage inbound first rows : ', response.body.remoteUsage.body.inbound.slice(0, 2));
-            } else {
-              debugObjectOnDTAG('Usage Discrepancy calculated with remoteUsage inbound : ', response.body.remoteUsage.body.inbound);
-            }
-            if ((response.body.remoteUsage.body.outbound) && (Array.isArray(response.body.remoteUsage.body.outbound))) {
-              debugObjectOnDTAG('Usage Discrepancy calculated with remoteUsage outbound first rows : ', response.body.remoteUsage.body.outbound.slice(0, 2));
-            } else {
-              debugObjectOnDTAG('Usage Discrepancy calculated with remoteUsage outbound : ', response.body.remoteUsage.body.outbound);
-            }
-          }
-
-          done();
-        });
-    } catch (exception) {
-      debug('exception: %s', exception.stack);
-      expect.fail('it test throws an exception');
-      done();
-    }
-  });
-
-  // Launch 'Get TMUS usage discrepancy on DTAG usage' before 'Get TMUS usage discrepancy on local usage'
-  // To return a good reponse on Discrepancy Service requests
-  it.skip(`Get TMUS usage discrepancy on DTAG usage with local usage as partnerUsage`, function(done) {
-    debugAction(`${this.test.title}`);
-    if ((TMUS_dynamic_data.receivedContractId === undefined) || (TMUS_dynamic_data.usageId === undefined) || (TMUS_dynamic_data.receivedUsageId === undefined)) {
+    if (DTAG_dynamic_data.contractId === undefined) {
       expect.fail('This scenario step should use an undefined data');
     }
     try {
       chai.request(TMUS_API)
-        .get(`/contracts/${TMUS_dynamic_data.receivedContractId}/usages/${TMUS_dynamic_data.receivedUsageId}/discrepancy/?partnerUsageId=${TMUS_dynamic_data.usageId}`)
+        .get(`/contracts/${TMUS_dynamic_data.receivedContractId}/usages/${TMUS_dynamic_data.usageId}/signatures/`)
         .send()
         .end((error, response) => {
           expect(error).to.be.null;
           expect(response).to.have.status(200);
           expect(response).to.be.json;
           expect(response.body).to.exist;
-          expect(response.body).to.be.an('object');
+          expect(response.body).to.be.an('array');
 
-          expect(response.body).to.deep.equalInAnyOrder(configured_EXPECTED_JSON_TMUS_partner_usage_discrepancy_body);
+          expect(response.body.length).to.equals(0);
+          debugObjectOnDTAG('signatures : ', response.body);
 
           done();
         });
@@ -1089,51 +777,24 @@ describe.only(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
     }
   });
 
-  it.skip(`Get TMUS usage discrepancy on local usage with DTAG usage as partnerUsage`, function(done) {
+  it(`On TMUS - Get the signatures on usage received from DTAG`, function(done) {
     debugAction(`${this.test.title}`);
-    if ((TMUS_dynamic_data.receivedContractId === undefined) || (TMUS_dynamic_data.usageId === undefined) || (TMUS_dynamic_data.receivedUsageId === undefined)) {
+    if (DTAG_dynamic_data.contractId === undefined) {
       expect.fail('This scenario step should use an undefined data');
     }
     try {
       chai.request(TMUS_API)
-        .get(`/contracts/${TMUS_dynamic_data.receivedContractId}/usages/${TMUS_dynamic_data.usageId}/discrepancy/?partnerUsageId=${TMUS_dynamic_data.receivedUsageId}`)
+        .get(`/contracts/${TMUS_dynamic_data.receivedContractId}/usages/${TMUS_dynamic_data.receivedUsageId}/signatures/`)
         .send()
         .end((error, response) => {
           expect(error).to.be.null;
           expect(response).to.have.status(200);
           expect(response).to.be.json;
           expect(response.body).to.exist;
-          expect(response.body).to.be.an('object');
+          expect(response.body).to.be.an('array');
 
-          debugObjectOnTMUS('Usage Discrepancy calculated : ', JSON.stringify(response.body));
-          expect(response.body).to.deep.equalInAnyOrder(configured_EXPECTED_JSON_TMUS_local_usage_discrepancy_body);
-
-          if (SHOW_DISCREPANCY_GENERATION_DETAILS && (response.body.localUsage) && (response.body.localUsage.body)) {
-            debugObjectOnTMUS('Usage Discrepancy calculated with localUsage metadata : ', response.body.localUsage.body.metadata);
-            if ((response.body.localUsage.body.inbound) && (Array.isArray(response.body.localUsage.body.inbound))) {
-              debugObjectOnTMUS('Usage Discrepancy calculated with localUsage inbound first rows : ', response.body.localUsage.body.inbound.slice(0, 2));
-            } else {
-              debugObjectOnTMUS('Usage Discrepancy calculated with localUsage inbound : ', response.body.localUsage.body.inbound);
-            }
-            if ((response.body.localUsage.body.outbound) && (Array.isArray(response.body.localUsage.body.outbound))) {
-              debugObjectOnTMUS('Usage Discrepancy calculated with localUsage outbound first rows : ', response.body.localUsage.body.outbound.slice(0, 2));
-            } else {
-              debugObjectOnTMUS('Usage Discrepancy calculated with localUsage outbound : ', response.body.localUsage.body.outbound);
-            }
-          }
-          if (SHOW_DISCREPANCY_GENERATION_DETAILS && (response.body.remoteUsage) && (response.body.remoteUsage.body)) {
-            debugObjectOnTMUS('Usage Discrepancy calculated with remoteUsage metadata : ', response.body.remoteUsage.body.metadata);
-            if ((response.body.remoteUsage.body.inbound) && (Array.isArray(response.body.remoteUsage.body.inbound))) {
-              debugObjectOnTMUS('Usage Discrepancy calculated with remoteUsage inbound first rows : ', response.body.remoteUsage.body.inbound.slice(0, 2));
-            } else {
-              debugObjectOnTMUS('Usage Discrepancy calculated with remoteUsage inbound : ', response.body.remoteUsage.body.inbound);
-            }
-            if ((response.body.remoteUsage.body.outbound) && (Array.isArray(response.body.remoteUsage.body.outbound))) {
-              debugObjectOnTMUS('Usage Discrepancy calculated with remoteUsage outbound first rows : ', response.body.remoteUsage.body.outbound.slice(0, 2));
-            } else {
-              debugObjectOnTMUS('Usage Discrepancy calculated with remoteUsage outbound : ', response.body.remoteUsage.body.outbound);
-            }
-          }
+          expect(response.body.length).to.equals(0);
+          debugObjectOnDTAG('signatures : ', response.body);
 
           done();
         });
@@ -1144,54 +805,31 @@ describe.only(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
     }
   });
 
-  // Now calculate settlement discrepancy
-
-  it.skip(`Get DTAG settlement discrepancy on local settlement with TMUS settlement as partnerSettlement`, function(done) {
+  it(`On DTAG - Post a signature on DTAG sent usage`, function(done) {
     debugAction(`${this.test.title}`);
-    testsUtils.debugWarning(`This response should not vary based on the last Usage Discrepancy request received`, '!');
-    if ((DTAG_dynamic_data.contractId === undefined) || (DTAG_dynamic_data.settlementIdFromLocalUsage === undefined) || (DTAG_dynamic_data.settlementIdFromReceivedUsage === undefined)) {
+    if (DTAG_dynamic_data.contractId === undefined) {
       expect.fail('This scenario step should use an undefined data');
     }
     try {
       chai.request(DTAG_API)
-        .get(`/contracts/${DTAG_dynamic_data.contractId}/settlements/${DTAG_dynamic_data.settlementIdFromLocalUsage}/discrepancy/?partnerSettlementId=${DTAG_dynamic_data.settlementIdFromReceivedUsage}`)
-        .send()
+        .post(`/contracts/${DTAG_dynamic_data.contractId}/usages/${DTAG_dynamic_data.usageId}/signatures/`)
+        .send(DTAG_create_signature_A_body)
         .end((error, response) => {
           expect(error).to.be.null;
-          expect(response).to.have.status(200);
+          expect(response).to.have.status(201);
           expect(response).to.be.json;
           expect(response.body).to.exist;
           expect(response.body).to.be.an('object');
 
-          debugObjectOnDTAG('Settlement Discrepancy calculated : ', JSON.stringify(response.body));
-          expect(response.body).to.deep.equalInAnyOrder(configured_EXPECTED_JSON_DTAG_local_settlement_discrepancy_body);
+          expect(response.body).to.have.property('usageId', DTAG_dynamic_data.usageId);
+          expect(response.body).to.have.property('signatureId').that.is.a('string');
+          expect(response.body).to.have.property('msp', 'DTAG');
+          expect(response.body).to.have.property('algorithm', DTAG_create_signature_A_body.algorithm);
+          expect(response.body).to.have.property('certificate', DTAG_create_signature_A_body.certificate);
+          expect(response.body).to.have.property('signature', DTAG_create_signature_A_body.signature);
+          expect(response.body).to.have.property('state', 'SIGNED');
 
-          if (SHOW_DISCREPANCY_GENERATION_DETAILS && (response.body.localUsage) && (response.body.localUsage.body)) {
-            debugObjectOnDTAG('Settlement Discrepancy calculated with localUsage metadata : ', response.body.localUsage.body.metadata);
-            if ((response.body.localUsage.body.inbound) && (Array.isArray(response.body.localUsage.body.inbound))) {
-              debugObjectOnDTAG('Settlement Discrepancy calculated with localUsage inbound first rows : ', response.body.localUsage.body.inbound.slice(0, 2));
-            } else {
-              debugObjectOnDTAG('Settlement Discrepancy calculated with localUsage inbound : ', response.body.localUsage.body.inbound);
-            }
-            if ((response.body.localUsage.body.outbound) && (Array.isArray(response.body.localUsage.body.outbound))) {
-              debugObjectOnDTAG('Settlement Discrepancy calculated with localUsage outbound first rows : ', response.body.localUsage.body.outbound.slice(0, 2));
-            } else {
-              debugObjectOnDTAG('Settlement Discrepancy calculated with localUsage outbound : ', response.body.localUsage.body.outbound);
-            }
-          }
-          if (SHOW_DISCREPANCY_GENERATION_DETAILS && (response.body.remoteUsage) && (response.body.remoteUsage.body)) {
-            debugObjectOnDTAG('Settlement Discrepancy calculated with remoteUsage metadata : ', response.body.remoteUsage.body.metadata);
-            if ((response.body.remoteUsage.body.inbound) && (Array.isArray(response.body.remoteUsage.body.inbound))) {
-              debugObjectOnDTAG('Settlement Discrepancy calculated with remoteUsage inbound first rows : ', response.body.remoteUsage.body.inbound.slice(0, 2));
-            } else {
-              debugObjectOnDTAG('Settlement Discrepancy calculated with remoteUsage inbound : ', response.body.remoteUsage.body.inbound);
-            }
-            if ((response.body.remoteUsage.body.outbound) && (Array.isArray(response.body.remoteUsage.body.outbound))) {
-              debugObjectOnDTAG('Settlement Discrepancy calculated with remoteUsage outbound first rows : ', response.body.remoteUsage.body.outbound.slice(0, 2));
-            } else {
-              debugObjectOnDTAG('Settlement Discrepancy calculated with remoteUsage outbound : ', response.body.remoteUsage.body.outbound);
-            }
-          }
+          DTAG_dynamic_data.DTAG.firstSignatureId = response.body.signatureId;
 
           done();
         });
@@ -1202,31 +840,24 @@ describe.only(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
     }
   });
 
-  // Do not launch 'Get DTAG settlement discrepancy on TMUS settlement with local settlement as partnerSettlement'
-  // This reponse of Discrepancy Service is not valid
-  it.skip(`Get DTAG settlement discrepancy on TMUS settlement with local settlement as partnerSettlement`, function(done) {
+  it(`On DTAG - Get the signatures on usage sent by DTAG`, function(done) {
     debugAction(`${this.test.title}`);
-    testsUtils.debugWarning(`The response received using Discrepancy Service is not valid: skipped test`, '!');
-    done();
-  });
-  it.skip(`Get DTAG settlement discrepancy on TMUS settlement with local settlement as partnerSettlement`, function(done) {
-    debugAction(`${this.test.title}`);
-    if ((DTAG_dynamic_data.contractId === undefined) || (DTAG_dynamic_data.settlementIdFromLocalUsage === undefined) || (DTAG_dynamic_data.settlementIdFromReceivedUsage === undefined)) {
+    if (DTAG_dynamic_data.contractId === undefined) {
       expect.fail('This scenario step should use an undefined data');
     }
     try {
       chai.request(DTAG_API)
-        .get(`/contracts/${DTAG_dynamic_data.contractId}/settlements/${DTAG_dynamic_data.settlementIdFromReceivedUsage}/discrepancy/?partnerSettlementId=${DTAG_dynamic_data.settlementIdFromLocalUsage}`)
+        .get(`/contracts/${DTAG_dynamic_data.contractId}/usages/${DTAG_dynamic_data.usageId}/signatures/`)
         .send()
         .end((error, response) => {
           expect(error).to.be.null;
           expect(response).to.have.status(200);
           expect(response).to.be.json;
           expect(response.body).to.exist;
-          expect(response.body).to.be.an('object');
+          expect(response.body).to.be.an('array');
 
-          debugObjectOnDTAG('Settlement Discrepancy calculated : ', JSON.stringify(response.body));
-          expect(response.body).to.deep.equalInAnyOrder(configured_EXPECTED_JSON_DTAG_partner_settlement_discrepancy_body);
+          expect(response.body.length).to.equals(1);
+          debugObjectOnDTAG('signatures : ', response.body);
 
           done();
         });
@@ -1237,52 +868,24 @@ describe.only(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
     }
   });
 
-  it.skip(`Get TMUS settlement discrepancy on local settlement with DTAG settlement as partnerSettlement`, function(done) {
+  it(`On TMUS - Get the signatures on usage received from DTAG`, function(done) {
     debugAction(`${this.test.title}`);
-    testsUtils.debugWarning(`This response should not vary based on the last Usage Discrepancy request received`, '!');
-    if ((TMUS_dynamic_data.receivedContractId === undefined) || (TMUS_dynamic_data.settlementIdFromLocalUsage === undefined) || (TMUS_dynamic_data.settlementIdFromReceivedUsage === undefined)) {
+    if (DTAG_dynamic_data.contractId === undefined) {
       expect.fail('This scenario step should use an undefined data');
     }
     try {
       chai.request(TMUS_API)
-        .get(`/contracts/${TMUS_dynamic_data.receivedContractId}/settlements/${TMUS_dynamic_data.settlementIdFromLocalUsage}/discrepancy/?partnerSettlementId=${TMUS_dynamic_data.settlementIdFromReceivedUsage}`)
+        .get(`/contracts/${TMUS_dynamic_data.receivedContractId}/usages/${TMUS_dynamic_data.receivedUsageId}/signatures/`)
         .send()
         .end((error, response) => {
           expect(error).to.be.null;
           expect(response).to.have.status(200);
           expect(response).to.be.json;
           expect(response.body).to.exist;
-          expect(response.body).to.be.an('object');
+          expect(response.body).to.be.an('array');
 
-          debugObjectOnTMUS('Settlement Discrepancy calculated : ', JSON.stringify(response.body));
-          expect(response.body).to.deep.equalInAnyOrder(configured_EXPECTED_JSON_TMUS_local_settlement_discrepancy_body);
-
-          if (SHOW_DISCREPANCY_GENERATION_DETAILS && (response.body.localUsage) && (response.body.localUsage.body)) {
-            debugObjectOnTMUS('Settlement Discrepancy calculated with localUsage metadata : ', response.body.localUsage.body.metadata);
-            if ((response.body.localUsage.body.inbound) && (Array.isArray(response.body.localUsage.body.inbound))) {
-              debugObjectOnTMUS('Settlement Discrepancy calculated with localUsage inbound first rows : ', response.body.localUsage.body.inbound.slice(0, 2));
-            } else {
-              debugObjectOnTMUS('Settlement Discrepancy calculated with localUsage inbound : ', response.body.localUsage.body.inbound);
-            }
-            if ((response.body.localUsage.body.outbound) && (Array.isArray(response.body.localUsage.body.outbound))) {
-              debugObjectOnTMUS('Settlement Discrepancy calculated with localUsage outbound first rows : ', response.body.localUsage.body.outbound.slice(0, 2));
-            } else {
-              debugObjectOnTMUS('Settlement Discrepancy calculated with localUsage outbound : ', response.body.localUsage.body.outbound);
-            }
-          }
-          if (SHOW_DISCREPANCY_GENERATION_DETAILS && (response.body.remoteUsage) && (response.body.remoteUsage.body)) {
-            debugObjectOnTMUS('Settlement Discrepancy calculated with remoteUsage metadata : ', response.body.remoteUsage.body.metadata);
-            if ((response.body.remoteUsage.body.inbound) && (Array.isArray(response.body.remoteUsage.body.inbound))) {
-              debugObjectOnTMUS('Settlement Discrepancy calculated with remoteUsage inbound first rows : ', response.body.remoteUsage.body.inbound.slice(0, 2));
-            } else {
-              debugObjectOnTMUS('Settlement Discrepancy calculated with remoteUsage inbound : ', response.body.remoteUsage.body.inbound);
-            }
-            if ((response.body.remoteUsage.body.outbound) && (Array.isArray(response.body.remoteUsage.body.outbound))) {
-              debugObjectOnTMUS('Settlement Discrepancy calculated with remoteUsage outbound first rows : ', response.body.remoteUsage.body.outbound.slice(0, 2));
-            } else {
-              debugObjectOnTMUS('Settlement Discrepancy calculated with remoteUsage outbound : ', response.body.remoteUsage.body.outbound);
-            }
-          }
+          expect(response.body.length).to.equals(0);
+          debugObjectOnDTAG('signatures : ', response.body);
 
           done();
         });
@@ -1293,31 +896,56 @@ describe.only(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
     }
   });
 
-  // Do not launch 'Get TMUS settlement discrepancy on DTAG settlement with local settlement as partnerSettlement'
-  // This reponse of Discrepancy Service is not valid
-  it.skip(`Get TMUS settlement discrepancy on DTAG settlement with local settlement as partnerSettlement`, function(done) {
+  it(`On TMUS - Post a signature on usage received from DTAG`, function(done) {
     debugAction(`${this.test.title}`);
-    testsUtils.debugWarning(`The response received using Discrepancy Service is not valid: skipped test`, '!');
-    done();
+    try {
+      chai.request(TMUS_API)
+        .post(`/contracts/${TMUS_dynamic_data.receivedContractId}/usages/${TMUS_dynamic_data.receivedUsageId}/signatures/`)
+        .send(TMUS_create_signature_A_body)
+        .end((error, response) => {
+          expect(error).to.be.null;
+          expect(response).to.have.status(201);
+          expect(response).to.be.json;
+          expect(response.body).to.exist;
+          expect(response.body).to.be.an('object');
+
+          expect(response.body).to.have.property('usageId', TMUS_dynamic_data.receivedUsageId);
+          expect(response.body).to.have.property('signatureId').that.is.a('string');
+          expect(response.body).to.have.property('msp', 'TMUS');
+          expect(response.body).to.have.property('algorithm', TMUS_create_signature_A_body.algorithm);
+          expect(response.body).to.have.property('certificate', TMUS_create_signature_A_body.certificate);
+          expect(response.body).to.have.property('signature', TMUS_create_signature_A_body.signature);
+          expect(response.body).to.have.property('state', 'SIGNED');
+
+          DTAG_dynamic_data.DTAG.firstSignatureId = response.body.signatureId;
+
+          done();
+        });
+    } catch (exception) {
+      debug('exception: %s', exception.stack);
+      expect.fail('it test throws an exception');
+      done();
+    }
   });
-  it.skip(`Get TMUS settlement discrepancy on DTAG settlement with local settlement as partnerSettlement`, function(done) {
+
+  it(`On TMUS - Get the signatures on usage received from DTAG`, function(done) {
     debugAction(`${this.test.title}`);
-    if ((TMUS_dynamic_data.receivedContractId === undefined) || (TMUS_dynamic_data.settlementIdFromLocalUsage === undefined) || (TMUS_dynamic_data.settlementIdFromReceivedUsage === undefined)) {
+    if (DTAG_dynamic_data.contractId === undefined) {
       expect.fail('This scenario step should use an undefined data');
     }
     try {
       chai.request(TMUS_API)
-        .get(`/contracts/${TMUS_dynamic_data.receivedContractId}/settlements/${TMUS_dynamic_data.settlementIdFromReceivedUsage}/discrepancy/?partnerSettlementId=${TMUS_dynamic_data.settlementIdFromLocalUsage}`)
+        .get(`/contracts/${TMUS_dynamic_data.receivedContractId}/usages/${TMUS_dynamic_data.receivedUsageId}/signatures/`)
         .send()
         .end((error, response) => {
           expect(error).to.be.null;
           expect(response).to.have.status(200);
           expect(response).to.be.json;
           expect(response.body).to.exist;
-          expect(response.body).to.be.an('object');
+          expect(response.body).to.be.an('array');
 
-          // debugObjectOnTMUS('Settlement Discrepancy calculated : ', JSON.stringify(response.body));
-          expect(response.body).to.deep.equalInAnyOrder(configured_EXPECTED_JSON_TMUS_partner_settlement_discrepancy_body);
+          expect(response.body.length).to.equals(1);
+          debugObjectOnDTAG('signatures : ', response.body);
 
           done();
         });
@@ -1328,23 +956,41 @@ describe.only(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
     }
   });
 
-  // Now delete the created settlement resources
+  it(`On DTAG - Post a signature on usage received from TMUS`, function(done) {
+    debugAction(`${this.test.title}`);
+    if (DTAG_dynamic_data.contractId === undefined) {
+      expect.fail('This scenario step should use an undefined data');
+    }
+    try {
+      chai.request(DTAG_API)
+        .post(`/contracts/${DTAG_dynamic_data.contractId}/usages/${DTAG_dynamic_data.receivedUsageId}/signatures/`)
+        .send(DTAG_create_signature_A_body)
+        .end((error, response) => {
+          expect(error).to.be.null;
+          expect(response).to.have.status(201);
+          expect(response).to.be.json;
+          expect(response.body).to.exist;
+          expect(response.body).to.be.an('object');
 
-  it.skip(`Delete DTAG sent settlement`, function(done) {
-    // Does not exist
+          expect(response.body).to.have.property('usageId', DTAG_dynamic_data.receivedUsageId);
+          expect(response.body).to.have.property('signatureId').that.is.a('string');
+          expect(response.body).to.have.property('msp', 'DTAG');
+          expect(response.body).to.have.property('algorithm', DTAG_create_signature_A_body.algorithm);
+          expect(response.body).to.have.property('certificate', DTAG_create_signature_A_body.certificate);
+          expect(response.body).to.have.property('signature', DTAG_create_signature_A_body.signature);
+          expect(response.body).to.have.property('state', 'SIGNED');
+
+          DTAG_dynamic_data.DTAG.firstSignatureId = response.body.signatureId;
+
+          done();
+        });
+    } catch (exception) {
+      debug('exception: %s', exception.stack);
+      expect.fail('it test throws an exception');
+      done();
+    }
   });
 
-  it.skip(`Delete DTAG received settlement`, function(done) {
-    // Does not exist
-  });
-
-  it.skip(`Delete TMUS sent settlement`, function(done) {
-    // Does not exist
-  });
-
-  it.skip(`Delete TMUS received settlement`, function(done) {
-    // Does not exist
-  });
 
   // Now delete the created usage resources
 
@@ -1407,8 +1053,6 @@ describe.only(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
       done();
     }
   });
-
-  // Now delete the created contract resources
 
   it.skip(`Delete the DTAG contract created by this scenario`, function(done) {
     debugAction(`${this.test.title}`);

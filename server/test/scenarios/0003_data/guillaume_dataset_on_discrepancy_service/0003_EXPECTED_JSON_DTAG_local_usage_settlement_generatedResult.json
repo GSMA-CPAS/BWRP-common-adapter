@@ -1,0 +1,126 @@
+{
+  "fromDate": null,
+  "toDate": null,
+  "calculationEngineVersion": "0.0.1",
+  "inbound": {
+    "tax": {
+      "rate": ""
+    },
+    "currency": "EURO",
+    "services": {
+      "voice": {
+        "MOC": {
+          "local": 340520.476,
+          "backHome": 5797195.3680000035,
+          "international": 2158211.849999999,
+          "premium": 0,
+          "ROW": 0,
+          "EU": 0,
+          "EEA": 0,
+          "satellite": 0,
+          "videoTelephony": 0,
+          "specialDestinations": 0
+        },
+        "MTC": 0
+      },
+      "SMS": {
+        "MO": 166353.732,
+        "MT": 0
+      },
+      "data": [
+        {
+          "name": "GPRS",
+          "value": 17208387.800778873
+        },
+        {
+          "name": "M2M",
+          "value": 0
+        },
+        {
+          "name": "NB-IOT",
+          "value": 0
+        },
+        {
+          "name": "LTE-M",
+          "value": 0
+        },
+        {
+          "name": "VoLTE",
+          "value": 0
+        },
+        {
+          "name": "ViLTE",
+          "value": 0
+        },
+        {
+          "name": "signalling",
+          "value": 0
+        }
+      ],
+      "access": {
+        "networkAccess": 0
+      }
+    }
+  },
+  "outbound": {
+    "tax": {
+      "rate": ""
+    },
+    "currency": "EURO",
+    "services": {
+      "voice": {
+        "MOC": {
+          "local": 668295.9319999999,
+          "backHome": 7219525.392000001,
+          "international": 11226413.799999999,
+          "premium": 0,
+          "ROW": 0,
+          "EU": 0,
+          "EEA": 0,
+          "satellite": 0,
+          "videoTelephony": 0,
+          "specialDestinations": 6445.8700000000035
+        },
+        "MTC": 0
+      },
+      "SMS": {
+        "MO": 198984.852,
+        "MT": 0
+      },
+      "data": [
+        {
+          "name": "GPRS",
+          "value": 30146061.547672395
+        },
+        {
+          "name": "M2M",
+          "value": 0
+        },
+        {
+          "name": "NB-IOT",
+          "value": 0
+        },
+        {
+          "name": "LTE-M",
+          "value": 0
+        },
+        {
+          "name": "VoLTE",
+          "value": 0
+        },
+        {
+          "name": "ViLTE",
+          "value": 0
+        },
+        {
+          "name": "signalling",
+          "value": 0
+        }
+      ],
+      "access": {
+        "networkAccess": 0
+      }
+    }
+  },
+  "unexpectedServiceNames": []
+}

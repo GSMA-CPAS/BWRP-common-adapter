@@ -1,0 +1,245 @@
+{
+  "version": "gsma-bwr-roaming-v1",
+  "metadata": {
+    "name": "20210420 FH Test V0",
+    "authors": "Federico Homberg"
+  },
+  "framework": {
+    "contractParties": [
+      "DTSTMSP",
+      "DTAGMSP"
+    ],
+    "term": {
+      "start": "2019-01-01T00:00:00.000Z",
+      "end": "2019-12-31T00:00:00.000Z"
+    },
+    "payment": {
+      "taxesIncluded": false
+    },
+    "partyInformation": {
+      "DTSTMSP": {
+        "contractCurrency": "EUR",
+        "defaultTadigCodes": [
+          "AAZOR",
+          "BELMO",
+          "FRAF1"
+        ]
+      },
+      "DTAGMSP": {
+        "contractCurrency": "EUR",
+        "defaultTadigCodes": [
+          "AAZTD",
+          "DEUD1"
+        ]
+      }
+    }
+  },
+  "discounts": {
+    "DTSTMSP": {
+      "condition": {
+        "kind": "Deal Revenue Commitment",
+        "commitment": {
+          "value": 7000000,
+          "currency": "EUR",
+          "includingTaxes": false
+        }
+      },
+      "serviceGroups": [
+        {
+          "homeTadigs": [
+            "AAZOR",
+            "BELMO",
+            "FRAF1"
+         ],
+          "visitorTadigs": [
+            "AAZTD",
+            "DEUD1"
+         ],
+          "services": [
+            {
+              "service": "MOC Back Home",
+              "includedInCommitment": true,
+              "usagePricing": {
+                "unit": "Min",
+                "ratingPlan": {
+                  "kind": "Linear rate",
+                  "rate": {
+                    "linearPrice": 0.023
+                  }
+                }
+              }
+            },
+            {
+              "service": "MOC Local",
+              "includedInCommitment": true,
+              "usagePricing": {
+                "unit": "Min",
+                "ratingPlan": {
+                  "kind": "Linear rate",
+                  "rate": {
+                    "linearPrice": 0.09
+                  }
+                }
+              }
+            },
+            {
+              "service": "MOC International",
+              "includedInCommitment": true,
+              "usagePricing": {
+                "unit": "Min",
+                "ratingPlan": {
+                  "kind": "Linear rate",
+                  "rate": {
+                    "linearPrice": 0.4
+                  }
+                }
+              }
+            },
+            {
+              "service": "SMSMO",
+              "includedInCommitment": true,
+              "usagePricing": {
+                "unit": "SMS",
+                "ratingPlan": {
+                  "kind": "Linear rate",
+                  "rate": {
+                    "linearPrice": 0.005
+                  }
+                }
+              }
+            },
+            {
+              "service": "GPRS",
+              "includedInCommitment": true,
+              "usagePricing": {
+                "unit": "MB",
+                "ratingPlan": {
+                  "rate": {
+                    "thresholds": [
+                      {
+                        "start": 0,
+                        "linearPrice": 0.0035
+                      },
+                      {
+                        "start": 150000000,
+                        "linearPrice": 0.0015
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "DTAGMSP": {
+      "condition": {
+        "kind": "Deal Revenue Commitment",
+        "commitment": {
+          "value": 10000000,
+          "currency": "EUR",
+          "includingTaxes": false
+        }
+      },
+      "serviceGroups": [
+        {
+          "homeTadigs": [
+            "AAZTD",
+            "DEUD1"
+         ],
+          "visitorTadigs": [
+            "AAZOR",
+            "BELMO",
+            "FRAF1"
+         ],
+          "services": [
+            {
+              "service": "MOC Back Home",
+              "includedInCommitment": true,
+              "usagePricing": {
+                "unit": "Min",
+                "ratingPlan": {
+                  "kind": "Linear rate",
+                  "rate": {
+                    "linearPrice": 0.023
+                  }
+                }
+              }
+            },
+            {
+              "service": "MOC Local",
+              "includedInCommitment": true,
+              "usagePricing": {
+                "unit": "Min",
+                "ratingPlan": {
+                  "kind": "Linear rate",
+                  "rate": {
+                    "linearPrice": 0.09
+                  }
+                }
+              }
+            },
+            {
+              "service": "MOC International",
+              "includedInCommitment": true,
+              "usagePricing": {
+                "unit": "Min",
+                "ratingPlan": {
+                  "kind": "Linear rate",
+                  "rate": {
+                    "linearPrice": 0.4
+                  }
+                }
+              }
+            },
+            {
+              "service": "SMSMO",
+              "includedInCommitment": true,
+              "usagePricing": {
+                "unit": "SMS",
+                "ratingPlan": {
+                  "kind": "Linear rate",
+                  "rate": {
+                    "linearPrice": 0.005
+                  }
+                }
+              }
+            },
+            {
+              "service": "MTC",
+              "includedInCommitment": false,
+              "usagePricing": {
+                "unit": "Min",
+                "ratingPlan": {
+                  "kind": "Linear rate"
+                }
+              }
+            },
+            {
+              "service": "GPRS",
+              "includedInCommitment": true,
+              "usagePricing": {
+                "unit": "MB",
+                "ratingPlan": {
+                  "rate": {
+                    "thresholds": [
+                      {
+                        "start": 0,
+                        "linearPrice": 0.0035
+                      },
+                      {
+                        "start": 150000000,
+                        "linearPrice": 0.0015
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1103,7 +1103,7 @@ describe(`Tests POST ${route} API OK`, function() {
       rawData: 'Ctr_raw-data',
       storageKeys: ['b70af48b18681d2b51c77c7ed3bf63217caafc91a593d5d1b4f9bbb1c93c2273'],
       signatureLink: [
-        {id: '5fd8d6070cc5feb0fc0cb9e433ff', msp: 'fromMsp', index: 0, txId: 'f6c847b990945996a6c13e21713d76c982ef79779c43c8f9183cb30c3822e3d7'},
+        {id: '5fd8d6070cc5feb0fc0cb9e433ff', msp: 'fromMsp', index: 0, txId: 'af6c847b990945996a6c13e21713d76c982ef79779c43c8f9183cb30c3822e3d7'},
         {id: '5fd8d6070cc5feb0fc0cb9e5d45f', msp: 'toMsp', index: 0}
       ],
     };
@@ -1134,6 +1134,33 @@ describe(`Tests POST ${route} API OK`, function() {
         {id: '5fd8d6070cc5feb0fc0cb9e5d45f', msp: 'toMsp', index: 0, txId: 'f6c847b990945996a6c13e21713d76c982ef79779c43c8f9183cb30c3822e3d7'}
       ],
     };
+    const usageSentNotSigned = {
+      type: 'usage',
+      version: '1.1.0',
+      name: 'Usage data - sent - not signed',
+      contractId: undefined,
+      mspOwner: 'TMUS',
+      mspReceiver: 'DTAG',
+      body: {
+        data: []
+      },
+      state: 'SENT',
+      creationDate: '2020-12-15T15:28:06.968Z',
+      history: [
+        {date: '2020-12-15T15:28:06.968Z', action: 'CREATION'},
+        {date: '2020-12-15T15:28:07.077Z', action: 'SENT'}
+      ],
+      lastModificationDate: '2020-12-15T15:28:07.077Z',
+      contractReferenceId: '0326796a8cad50871c0311d88b492805a7e39880e33a09e5ee90472750281565',
+      referenceId: '9fa8484695bb8e2406d1e8ac5bcae6bbb8af08e3c887c2d3a0efd11ea61fa0a7',
+      blockchainRef: {type: 'hlf', txId: '149615f8dee35617a491dfb54d463a45617becc7f1aa5c3712e683d7688213d0', timestamp: new Date().toJSON()},
+      rawData: 'Ctr_raw-data',
+      storageKeys: ['notsignedb70af48b18681d2b51c77c7ed3bf63217caafc91a593d5d1b4f9bbb1c93c2273'],
+      signatureLink: [
+        {id: '5fd8d6070cc5feb0fc0cb9e433ff', msp: 'fromMsp', index: 0},
+        {id: '5fd8d6070cc5feb0fc0cb9e5d45f', msp: 'toMsp', index: 0}
+      ],
+    };
 
     /* eslint-enable max-len */
 
@@ -1145,13 +1172,15 @@ describe(`Tests POST ${route} API OK`, function() {
           sentContract.id = initDbWithContractsResp[0].id;
           usageSent.contractId = sentContract.id;
           usageReceived.contractId = sentContract.id;
-          debugSetup('==> init db with 2 usages');
+          usageSentNotSigned.contractId = sentContract.id;
+          debugSetup('==> init db with 3 usages');
 
-          testsDbUtils.initDbWithUsages([usageSent, usageReceived])
+          testsDbUtils.initDbWithUsages([usageSent, usageReceived, usageSentNotSigned])
             .then((initDbWithUsagesResp) => {
-              debugSetup('2 usages documents linked to contract ', initDbWithUsagesResp);
+              debugSetup('3 usages documents linked to contract ', initDbWithUsagesResp);
               usageSent.id = initDbWithUsagesResp[0].id;
               usageReceived.id = initDbWithUsagesResp[1].id;
+              usageSentNotSigned.id = initDbWithUsagesResp[2].id;
               debugSetup('==> done!');
               done();
             })
@@ -1210,6 +1239,58 @@ describe(`Tests POST ${route} API OK`, function() {
             expect(response.body).to.exist;
             expect(response.body).to.be.an('object').that.is.empty;
             expect(blockchainAdapterNock.isDone(), 'Unconsumed nock error').to.be.true;
+
+            done();
+          });
+      } catch (exception) {
+        debug('exception: %s', exception.stack);
+        expect.fail('it test throws an exception');
+        done();
+      }
+    });
+
+    it('Post SIGN event OK on SENT document that we did not sign', function(done) {
+      try {
+        const path = globalVersion + route;
+        const storageKey = 'notsignedb70af48b18681d2b51c77c7ed3bf63217caafc91a593d5d1b4f9bbb1c93c2273';
+
+        const getSignatureFromBlockchainAdapterResponse = {
+          'f6c847b990945996a6c13e21713d76c982ef79779c43c8f9183cb30c3822e3d7': {
+            algorithm: 'secp384r1',
+            certificate: '-----BEGIN CERTIFICATE-----\nMIICYjCCAemgAwIBA...',
+            signature: 'signature'
+          }
+        };
+        blockchainAdapterNock.get('/signatures/' + usageSentNotSigned.referenceId + '/' + usageSentNotSigned.mspOwner)
+          .times(1)
+          .reply((pathReceived, bodyReceived) => {
+            return [
+              200,
+              getSignatureFromBlockchainAdapterResponse,
+              undefined
+            ];
+          });
+
+        const sentBody = {
+          msp: 'TMUS',
+          eventName: 'STORE:SIGNATURE',
+          timestamp: '2020-11-30T16:59:35Z',
+          data: {
+            storageKey: storageKey
+          }
+        };
+
+        chai.request(testsUtils.getServer())
+          .post(`${path}`)
+          .send(sentBody)
+          .end(async (error, response) => {
+            debug('response.body: %s', JSON.stringify(response.body));
+            expect(error).to.be.null;
+            expect(response).to.have.status(200);
+            expect(response).to.be.json;
+            expect(response.body).to.exist;
+            expect(response.body).to.be.an('object').that.is.empty;
+            // expect(blockchainAdapterNock.isDone(), 'Unconsumed nock error').to.be.true;
 
             done();
           });
