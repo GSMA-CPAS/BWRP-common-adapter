@@ -292,7 +292,7 @@ describe.only(`Launch scenario 0004_Settlement_completion`, function() {
     waitContract(DTAG_dynamic_data.contractReferenceId, 10, 5000);
   });
 
-  it(`Get TMUS contract in state RECEIVED`, function(done) {
+  it.skip(`Get TMUS contract in state RECEIVED`, function(done) {
     debugAction(`${this.test.title}`);
     if (TMUS_dynamic_data.receivedContractId === undefined) {
       expect.fail('This scenario step should use an undefined data');
@@ -459,7 +459,7 @@ describe.only(`Launch scenario 0004_Settlement_completion`, function() {
     waitSettlement(DTAG_dynamic_data.usageReferenceId, 20, 5000);
   });
 
-  it(`On TMUS - Get usage received from DTAG`, function(done) {
+  it.skip(`On TMUS - Get usage received from DTAG`, function(done) {
     debugAction(`${this.test.title}`);
     if ((TMUS_dynamic_data.receivedContractId === undefined) || (TMUS_dynamic_data.receivedUsageId === undefined)) {
       expect.fail('This scenario step should use an undefined data');
@@ -512,7 +512,7 @@ describe.only(`Launch scenario 0004_Settlement_completion`, function() {
     }
   });
 
-  it(`Create a new TMUS usage for this contract`, function(done) {
+  it.skip(`Create a new TMUS usage for this contract`, function(done) {
     debugAction(`${this.test.title}`);
     if (TMUS_dynamic_data.receivedContractId === undefined) {
       expect.fail('This scenario step should use an undefined data');
@@ -558,7 +558,7 @@ describe.only(`Launch scenario 0004_Settlement_completion`, function() {
     }
   });
 
-  it(`Send TMUS usage to DTAG`, function(done) {
+  it.skip(`Send TMUS usage to DTAG`, function(done) {
     debugAction(`${this.test.title}`);
     if ((TMUS_dynamic_data.receivedContractId === undefined) || (TMUS_dynamic_data.usageId === undefined)) {
       expect.fail('This scenario step should use an undefined data');
@@ -597,7 +597,7 @@ describe.only(`Launch scenario 0004_Settlement_completion`, function() {
     }
   });
 
-  it(`Wait this usage on DTAG`, function(done) {
+  it.skip(`Wait this usage on DTAG`, function(done) {
     debugAction(`${this.test.title}`);
     if ((DTAG_dynamic_data.contractId === undefined) || (TMUS_dynamic_data.usageReferenceId === undefined)) {
       expect.fail('This scenario step should use an undefined data');
@@ -640,7 +640,7 @@ describe.only(`Launch scenario 0004_Settlement_completion`, function() {
     waitSettlement(TMUS_dynamic_data.usageReferenceId, 20, 5000);
   });
 
-  it(`On DTAG - Get usage received from TMUS`, function(done) {
+  it.skip(`On DTAG - Get usage received from TMUS`, function(done) {
     debugAction(`${this.test.title}`);
     if ((DTAG_dynamic_data.contractId === undefined) || (DTAG_dynamic_data.receivedUsageId === undefined)) {
       expect.fail('This scenario step should use an undefined data');
@@ -693,7 +693,7 @@ describe.only(`Launch scenario 0004_Settlement_completion`, function() {
     }
   });
 
-  it(`On DTAG - Get the signatures on usage sent by DTAG`, function(done) {
+  it.skip(`On DTAG - Get the signatures on usage sent by DTAG`, function(done) {
     debugAction(`${this.test.title}`);
     if (DTAG_dynamic_data.contractId === undefined) {
       expect.fail('This scenario step should use an undefined data');
@@ -721,7 +721,7 @@ describe.only(`Launch scenario 0004_Settlement_completion`, function() {
     }
   });
 
-  it(`On DTAG - Get the signatures on usage received from TMUS`, function(done) {
+  it.skip(`On DTAG - Get the signatures on usage received from TMUS`, function(done) {
     debugAction(`${this.test.title}`);
     if (DTAG_dynamic_data.contractId === undefined) {
       expect.fail('This scenario step should use an undefined data');
@@ -749,7 +749,7 @@ describe.only(`Launch scenario 0004_Settlement_completion`, function() {
     }
   });
 
-  it(`On TMUS - Get the signatures on usage sent by TMUS`, function(done) {
+  it.skip(`On TMUS - Get the signatures on usage sent by TMUS`, function(done) {
     debugAction(`${this.test.title}`);
     if (DTAG_dynamic_data.contractId === undefined) {
       expect.fail('This scenario step should use an undefined data');
@@ -777,7 +777,7 @@ describe.only(`Launch scenario 0004_Settlement_completion`, function() {
     }
   });
 
-  it(`On TMUS - Get the signatures on usage received from DTAG`, function(done) {
+  it.skip(`On TMUS - Get the signatures on usage received from DTAG`, function(done) {
     debugAction(`${this.test.title}`);
     if (DTAG_dynamic_data.contractId === undefined) {
       expect.fail('This scenario step should use an undefined data');
@@ -896,7 +896,7 @@ describe.only(`Launch scenario 0004_Settlement_completion`, function() {
     }
   });
 
-  it(`On TMUS - Post a signature on usage received from DTAG`, function(done) {
+  it.skip(`On TMUS - Post a signature on usage received from DTAG`, function(done) {
     debugAction(`${this.test.title}`);
     try {
       chai.request(TMUS_API)
@@ -955,8 +955,35 @@ describe.only(`Launch scenario 0004_Settlement_completion`, function() {
       done();
     }
   });
+  it(`On DTAG - Get the signatures on usage sent by DTAG`, function(done) {
+    debugAction(`${this.test.title}`);
+    if (DTAG_dynamic_data.contractId === undefined) {
+      expect.fail('This scenario step should use an undefined data');
+    }
+    try {
+      chai.request(DTAG_API)
+        .get(`/contracts/${DTAG_dynamic_data.contractId}/usages/${DTAG_dynamic_data.usageId}/signatures/`)
+        .send()
+        .end((error, response) => {
+          expect(error).to.be.null;
+          expect(response).to.have.status(200);
+          expect(response).to.be.json;
+          expect(response.body).to.exist;
+          expect(response.body).to.be.an('array');
 
-  it(`On DTAG - Post a signature on usage received from TMUS`, function(done) {
+          expect(response.body.length).to.equals(1);
+          debugObjectOnDTAG('signatures : ', response.body);
+
+          done();
+        });
+    } catch (exception) {
+      debug('exception: %s', exception.stack);
+      expect.fail('it test throws an exception');
+      done();
+    }
+  });
+
+  it.skip(`On DTAG - Post a signature on usage received from TMUS`, function(done) {
     debugAction(`${this.test.title}`);
     if (DTAG_dynamic_data.contractId === undefined) {
       expect.fail('This scenario step should use an undefined data');

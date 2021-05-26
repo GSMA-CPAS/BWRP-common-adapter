@@ -252,40 +252,30 @@ const eventSignatureReceived = ({body}) => new Promise(
 
       const getUsageResp = await LocalStorageProvider.findUsages({state: ['RECEIVED', 'SENT'], storageKey: body.data.storageKey});
       logger.debug(`[EventService::eventSignatureReceived] getUsageResp: ${JSON.stringify(getUsageResp)}`);
-
       if ((getUsageResp !== undefined) && (Array.isArray(getUsageResp)) && (getUsageResp.length === 1)) {
-
         const usage = getUsageResp[0];
         const getUsageByIdResp = await LocalStorageProvider.getUsageByUsageId(usage.id);
         logger.debug(`[EventService::eventSignatureReceived] getUsageByIdResp: ${JSON.stringify(getUsageByIdResp)}`);
-
         const getSignaturesByIdAndMspResp = await blockchainAdapterConnection.getSignatures(usage.referenceId, body.msp);
         logger.debug(`[EventService::eventSignatureReceived] getSignaturesByIdAndMspResp: ${JSON.stringify(getSignaturesByIdAndMspResp)}`);
-
         const mspParamName = (getUsageByIdResp.mspOwner === body.msp) ? 'fromMsp' : 'toMsp';
         logger.debug(`[EventService::eventSignatureReceived] mspParamName: ${mspParamName}`);
-
         let update = false;
         Object.keys(getSignaturesByIdAndMspResp).forEach((getSignaturesByIdAndMspRespKey) => {
           const alreadyExistingSignatureLink = getUsageByIdResp.signatureLink.filter((signatureLink) => {
             return ((signatureLink.msp === mspParamName) && (signatureLink.txId === getSignaturesByIdAndMspRespKey));
           })[0];
-
           if (alreadyExistingSignatureLink !== undefined) {
             logger.debug(`[EventService::eventSignatureReceived] alreadyExistingSignatureLink !== undefined`);
-
             // This signature already exists
             // Do nothing more
           } else {
             // This signature must be added
             logger.debug(`[EventService::eventSignatureReceived] alreadyExistingSignatureLink == undefined`);
-
-
             const firstSignatureLinkWithoutTxId = getUsageByIdResp.signatureLink.filter((signatureLink) => {
               return ((signatureLink.msp === mspParamName) && (signatureLink.txId === undefined));
             })[0];
             logger.debug(`[EventService::eventSignatureReceived] firstSignatureLinkWithoutTxId ${JSON.stringify(firstSignatureLinkWithoutTxId)}`);
-
             if (firstSignatureLinkWithoutTxId === undefined) {
               // There is no more signatureLink without txId
               // Do nothing for this new incoming unexpected signature
@@ -299,11 +289,14 @@ const eventSignatureReceived = ({body}) => new Promise(
           const usageToUpdate = getUsageByIdResp;
           usageToUpdate.signatureLink = getUsageByIdResp.signatureLink;
           const updateUsageResp = await LocalStorageProvider.updateUsage(usageToUpdate);
+          logger.debug(`[EventService::eventSignatureReceived] updateUsageResp:  ${JSON.stringify(updateUsageResp)}`);
 
           // BUSINESS rule: if all signatures are signed, set tag to APPROVED
           const unsignedNumber = updateUsageResp.signatureLink.filter((signature) => (signature['txId'] === undefined)).length;
           if (unsignedNumber == 0) {
             const updateUsageWithTagResp = await LocalStorageProvider.updateUsageWithTag(updateUsageResp.id, 'APPROVED');
+            logger.debug(`[EventService::eventSignatureReceived] updateUsageWithTagResp:  ${JSON.stringify(updateUsageWithTagResp)}`);
+
           }
         }
       }
