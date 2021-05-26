@@ -1161,7 +1161,33 @@ describe(`Tests POST ${route} API OK`, function() {
         {id: '5fd8d6070cc5feb0fc0cb9e5d45f', msp: 'toMsp', index: 0}
       ],
     };
-
+    const usageReceivedSignedBySender = {
+      type: 'usage',
+      version: '1.1.0',
+      name: 'Usage data - received signed by sender',
+      contractId: undefined,
+      mspOwner: 'DTAG',
+      mspReceiver: 'TMUS',
+      body: {
+        data: []
+      },
+      state: 'RECEIVED',
+      creationDate: '2020-12-15T15:28:06.968Z',
+      history: [
+        {date: '2020-12-15T15:28:06.968Z', action: 'CREATION'},
+        {date: '2020-12-15T15:28:07.077Z', action: 'SENT'}
+      ],
+      lastModificationDate: '2020-12-15T15:28:07.077Z',
+      contractReferenceId: '0326796a8cad50871c0311d88b492805a7e39880e33a09e5ee90472750281565',
+      referenceId: '9ff46be1d3e0160689875e7383e584eb9394518982e94d58d7b944a632178cee',
+      blockchainRef: {type: 'hlf', txId: '7089e51144c8e70f48bfecd34d5c39c6d9150b4f4b962884037d392fe8748f3e', timestamp: new Date().toJSON()},
+      rawData: 'Ctr_raw-data',
+      storageKeys: ['bbb573ba6643181fb8487dcc14f26587e3c2d54a2271aff4965785ca7a70d52c579', 'aadaef3e3d0756b69ff352a82ae52c8a025f208bfafd946b09fff43c7b89c4b1'],
+      signatureLink: [
+        {id: '5fd8d6070cc5feb0fc0cb9e433ff', msp: 'fromMsp', index: 0, txId: 'f6c847b990945996a6c13e21713d76c982ef79779c43c8f9183cb30c3822e3d7'},
+        {id: '5fd8d6070cc5feb0fc0cb9e5d45f', msp: 'toMsp', index: 0}
+      ],
+    };
     /* eslint-enable max-len */
 
     before((done) => {
@@ -1173,14 +1199,16 @@ describe(`Tests POST ${route} API OK`, function() {
           usageSent.contractId = sentContract.id;
           usageReceived.contractId = sentContract.id;
           usageSentNotSigned.contractId = sentContract.id;
+          usageReceivedSignedBySender.contractId = sentContract.id;
           debugSetup('==> init db with 3 usages');
 
-          testsDbUtils.initDbWithUsages([usageSent, usageReceived, usageSentNotSigned])
+          testsDbUtils.initDbWithUsages([usageSent, usageReceived, usageSentNotSigned, usageReceivedSignedBySender])
             .then((initDbWithUsagesResp) => {
               debugSetup('3 usages documents linked to contract ', initDbWithUsagesResp);
               usageSent.id = initDbWithUsagesResp[0].id;
               usageReceived.id = initDbWithUsagesResp[1].id;
               usageSentNotSigned.id = initDbWithUsagesResp[2].id;
+              usageReceivedSignedBySender.id = initDbWithUsagesResp[3].id;
               debugSetup('==> done!');
               done();
             })
@@ -1371,6 +1399,78 @@ describe(`Tests POST ${route} API OK`, function() {
         done();
       }
     });
+
+    it('Post SIGN event OK on RECEIVED usage signed by sender', function(done) {
+      try {
+        const path = globalVersion + route;
+        const storageKey = 'bbb573ba6643181fb8487dcc14f26587e3c2d54a2271aff4965785ca7a70d52c579';
+
+        const getSignatureFromBlockchainAdapterResponse = {
+          'af6c847b990945996a6c13e21713d76c982ef79779c43c8f9183cb30c3822e3d7': {
+            algorithm: 'secp384r1',
+            certificate: '-----BEGIN CERTIFICATE-----\nMIICYjCCAemgAwIBA...',
+            signature: 'signature'
+          }
+        };
+        blockchainAdapterNock.get('/signatures/' + usageReceivedSignedBySender.referenceId + '/' + usageReceivedSignedBySender.mspReceiver)
+          .times(1)
+          .reply((pathReceived, bodyReceived) => {
+            return [
+              200,
+              getSignatureFromBlockchainAdapterResponse,
+              undefined
+            ];
+          });
+
+        const sentBody = {
+          msp: 'TMUS',
+          eventName: 'STORE:SIGNATURE',
+          timestamp: '2020-11-30T16:59:35Z',
+          data: {
+            storageKey: storageKey
+          }
+        };
+
+        chai.request(testsUtils.getServer())
+          .post(`${path}`)
+          .send(sentBody)
+          .end(async (error, response) => {
+            debug('response.body: %s', JSON.stringify(response.body));
+            expect(error).to.be.null;
+            expect(response).to.have.status(200);
+            expect(response).to.be.json;
+            expect(response.body).to.exist;
+            expect(response.body).to.be.an('object').that.is.empty;
+            expect(blockchainAdapterNock.isDone(), 'Unconsumed nock error').to.be.true;
+
+            // testsDbUtils.verifyContract(receivedContract.id,
+            //   {
+            //     'signatureLink': {
+            //       $elemMatch: {
+            //         msp: 'fromMsp',
+            //         index: 0,
+            //         txId: 'f6c847b990945996a6c13e21713d76c982ef79779c43c8f9183cb30c3822e3d7'
+            //       }
+            //     }
+            //   })
+            //   .then((verifyContractResp) => {
+            //     debug('Verified contract : ', verifyContractResp);
+            //     done();
+            //   })
+            //   .catch((verifyContractError) => {
+            //     debug('Contract verification error : ', verifyContractError);
+            //     done(verifyContractError);
+            //   });
+
+            done();
+          });
+      } catch (exception) {
+        debug('exception: %s', exception.stack);
+        expect.fail('it test throws an exception');
+        done();
+      }
+    });
+
 
     it('Post SIGN event OK on UNKNOWN document storageKey', function(done) {
       try {

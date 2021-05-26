@@ -135,7 +135,7 @@ describe(`Tests POST ${route} API OK`, function() {
     const usageSentFullySigned = {
       type: 'usage',
       version: '1.1.0',
-      name: 'Usage data - sent fullu signed',
+      name: 'Usage data - sent fully signed',
       contractId: undefined,
       mspOwner: 'ORAGR',
       mspReceiver: 'DTAG',
