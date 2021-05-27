@@ -142,14 +142,9 @@ const sendUsageById = ({contractId, usageId}) => new Promise(
             usageToSend = await LocalStorageProvider.updateUsageWithContractReferenceId(usageId, contract.referenceId);
           }
           const uploadUsageResp = await blockchainAdapterConnection.uploadUsage(usageToSend);
-
-          // console.log('uploadUsageResp.mspOwner' + uploadUsageResp.mspOwner);
-          // console.log('uploadUsageResp.mspReceiver' + uploadUsageResp.mspReceiver);
-          // console.log('usageToSend.mspOwner' + usageToSend.mspOwner);
-          // console.log('usageToSend.mspReceiver' + usageToSend.mspReceiver);
           const getStorageKeysResp = await blockchainAdapterConnection.getStorageKeys(uploadUsageResp.referenceId, [usageToSend.mspOwner, usageToSend.mspReceiver]);
           // set last received usage as partnerUsageId if exists
-          const lastReceivedUsage = await LocalStorageProvider.getLastReceivedUsage(contractId, {state: 'RECEIVED'});
+          const lastReceivedUsage = await LocalStorageProvider.getLastReceivedUsage(contractId);
 
           const updateUsageResp = await LocalStorageProvider.updateSentUsage(
             usageId,
