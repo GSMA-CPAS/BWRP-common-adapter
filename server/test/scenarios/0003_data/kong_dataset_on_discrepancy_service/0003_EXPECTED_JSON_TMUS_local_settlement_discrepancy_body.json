@@ -2,13 +2,24 @@
   "homePerspective": {
     "general_information": [
       {
-        "service": "Voice",
+        "service": "MOC",
         "unit": "min",
         "own_calculation": 54958.8376,
         "partner_calculation": 54958.8376,
         "delta_calculation_percent": 0,
         "own_usage": 2394588.64,
         "partner_usage": 2394588.64,
+        "delta_usage_abs": 0,
+        "delta_usage_percent": 0
+      },
+      {
+        "service": "MTC",
+        "unit": "min",
+        "own_calculation": 0,
+        "partner_calculation": 0,
+        "delta_calculation_percent": 0,
+        "own_usage": 0,
+        "partner_usage": 0,
         "delta_usage_abs": 0,
         "delta_usage_percent": 0
       },
@@ -85,13 +96,24 @@
   "partnerPerspective": {
     "general_information": [
       {
-        "service": "Voice",
+        "service": "MOC",
         "unit": "min",
         "own_calculation": 31911.5985,
         "partner_calculation": 31911.5985,
         "delta_calculation_percent": 0,
         "own_usage": 1362150.24,
         "partner_usage": 1362150.24,
+        "delta_usage_abs": 0,
+        "delta_usage_percent": 0
+      },
+      {
+        "service": "MTC",
+        "unit": "min",
+        "own_calculation": 0,
+        "partner_calculation": 0,
+        "delta_calculation_percent": 0,
+        "own_usage": 0,
+        "partner_usage": 0,
         "delta_usage_abs": 0,
         "delta_usage_percent": 0
       },
@@ -164,5 +186,13 @@
         "delta_usage_percent": 0
       }
     ]
+  },
+  "settlementReport": {
+    "homeCharges": 398705.108,
+    "homeDeltaCommitment": 0,
+    "homeRevenue": 266973.29390000005,
+    "partnerCharges": 266973.29390000005,
+    "partnerDeltaCommitment": 0,
+    "partnerRevenue": 398705.108
   }
 }
