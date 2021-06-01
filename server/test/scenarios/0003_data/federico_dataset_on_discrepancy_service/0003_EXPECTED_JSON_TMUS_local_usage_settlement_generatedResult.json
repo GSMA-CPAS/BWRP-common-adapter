@@ -10,55 +10,139 @@
     "services": {
       "voice": {
         "MOC": {
-          "local": 539402.634,
-          "backHome": 0,
-          "international": 1806795.4000000001,
-          "premium": 0,
-          "ROW": 0,
-          "EU": 0,
-          "EEA": 0,
-          "satellite": 0,
-          "videoTelephony": 0,
-          "specialDestinations": 0
+          "local": {
+            "dealValue": 539402.634,
+            "shortOfCommitment": 637608.153431378,
+            "usage": 5993362.6
+          },
+          "backHome": {
+            "dealValue": 0,
+            "shortOfCommitment": 0,
+            "usage": 0
+          },
+          "international": {
+            "dealValue": 1806795.4000000001,
+            "shortOfCommitment": 637608.153431378,
+            "usage": 4516988.5
+          },
+          "premium": {
+            "dealValue": 0,
+            "shortOfCommitment": 0,
+            "usage": 0
+          },
+          "ROW": {
+            "dealValue": 0,
+            "shortOfCommitment": 0,
+            "usage": 0
+          },
+          "EU": {
+            "dealValue": 0,
+            "shortOfCommitment": 0,
+            "usage": 0
+          },
+          "EEA": {
+            "dealValue": 0,
+            "shortOfCommitment": 0,
+            "usage": 0
+          },
+          "satellite": {
+            "dealValue": 0,
+            "shortOfCommitment": 0,
+            "usage": 0
+          },
+          "videoTelephony": {
+            "dealValue": 0,
+            "shortOfCommitment": 0,
+            "usage": 0
+          },
+          "specialDestinations": {
+            "dealValue": 0,
+            "shortOfCommitment": 0,
+            "usage": 0
+          }
         },
-        "MTC": 0
+        "MTC": {
+          "dealValue": 0,
+          "shortOfCommitment": 0,
+          "usage": 0
+        }
       },
       "SMS": {
-        "MO": 32499.15,
-        "MT": 0
+        "MO": {
+          "dealValue": 32499.15,
+          "shortOfCommitment": 637608.153431378,
+          "usage": 6499830
+        },
+        "MT": {
+          "dealValue": 0,
+          "shortOfCommitment": 0,
+          "usage": 0
+        }
       },
       "data": [
         {
           "name": "GPRS",
-          "value": 4433262.04884311
+          "value": {
+            "dealValue": 4433262.04884311,
+            "shortOfCommitment": 637608.153431378,
+            "usage": 2755508032.562073
+          }
         },
         {
           "name": "M2M",
-          "value": 0
+          "value": {
+            "dealValue": 0,
+            "shortOfCommitment": 0,
+            "usage": 0
+          }
         },
         {
           "name": "NB-IOT",
-          "value": 0
+          "value": {
+            "dealValue": 0,
+            "shortOfCommitment": 0,
+            "usage": 0
+          }
         },
         {
           "name": "LTE-M",
-          "value": 0
+          "value": {
+            "dealValue": 0,
+            "shortOfCommitment": 0,
+            "usage": 0
+          }
         },
         {
           "name": "VoLTE",
-          "value": 0
+          "value": {
+            "dealValue": 0,
+            "shortOfCommitment": 0,
+            "usage": 0
+          }
         },
         {
           "name": "ViLTE",
-          "value": 0
+          "value": {
+            "dealValue": 0,
+            "shortOfCommitment": 0,
+            "usage": 0
+          }
         },
         {
           "name": "signalling",
-          "value": 0
+          "value": {
+            "dealValue": 0,
+            "shortOfCommitment": 0,
+            "usage": 0
+          }
         }
       ],
       "access": {
-        "networkAccess": 0
+        "networkAccess": {
+          "dealValue": 0,
+          "shortOfCommitment": 0,
+          "usage": 0
+        }
       }
     }
   },
@@ -70,55 +154,139 @@
     "services": {
       "voice": {
         "MOC": {
-          "local": 152292.258,
-          "backHome": 0,
-          "international": 700526.3200000001,
-          "premium": 0,
-          "ROW": 0,
-          "EU": 0,
-          "EEA": 0,
-          "satellite": 0,
-          "videoTelephony": 0,
-          "specialDestinations": 0
+          "local": {
+            "dealValue": 152292.258,
+            "shortOfCommitment": 729603.2135930236,
+            "usage": 1692136.2000000002
+          },
+          "backHome": {
+            "dealValue": 0,
+            "shortOfCommitment": 0,
+            "usage": 0
+          },
+          "international": {
+            "dealValue": 700526.3200000001,
+            "shortOfCommitment": 729603.2135930236,
+            "usage": 1751315.8
+          },
+          "premium": {
+            "dealValue": 0,
+            "shortOfCommitment": 0,
+            "usage": 0
+          },
+          "ROW": {
+            "dealValue": 0,
+            "shortOfCommitment": 0,
+            "usage": 0
+          },
+          "EU": {
+            "dealValue": 0,
+            "shortOfCommitment": 0,
+            "usage": 0
+          },
+          "EEA": {
+            "dealValue": 0,
+            "shortOfCommitment": 0,
+            "usage": 0
+          },
+          "satellite": {
+            "dealValue": 0,
+            "shortOfCommitment": 0,
+            "usage": 0
+          },
+          "videoTelephony": {
+            "dealValue": 0,
+            "shortOfCommitment": 0,
+            "usage": 0
+          },
+          "specialDestinations": {
+            "dealValue": 0,
+            "shortOfCommitment": 0,
+            "usage": 0
+          }
         },
-        "MTC": 0
+        "MTC": {
+          "dealValue": 0,
+          "shortOfCommitment": 0,
+          "usage": 0
+        }
       },
       "SMS": {
-        "MO": 95889.85,
-        "MT": 0
+        "MO": {
+          "dealValue": 95889.85,
+          "shortOfCommitment": 729603.2135930236,
+          "usage": 19177970
+        },
+        "MT": {
+          "dealValue": 0,
+          "shortOfCommitment": 0,
+          "usage": 0
+        }
       },
       "data": [
         {
           "name": "GPRS",
-          "value": 2403275.5040348815
+          "value": {
+            "dealValue": 2403275.5040348815,
+            "shortOfCommitment": 729603.2135930236,
+            "usage": 1402183669.3565874
+          }
         },
         {
           "name": "M2M",
-          "value": 0
+          "value": {
+            "dealValue": 0,
+            "shortOfCommitment": 0,
+            "usage": 0
+          }
         },
         {
           "name": "NB-IOT",
-          "value": 0
+          "value": {
+            "dealValue": 0,
+            "shortOfCommitment": 0,
+            "usage": 0
+          }
         },
         {
           "name": "LTE-M",
-          "value": 0
+          "value": {
+            "dealValue": 0,
+            "shortOfCommitment": 0,
+            "usage": 0
+          }
         },
         {
           "name": "VoLTE",
-          "value": 0
+          "value": {
+            "dealValue": 0,
+            "shortOfCommitment": 0,
+            "usage": 0
+          }
         },
         {
           "name": "ViLTE",
-          "value": 0
+          "value": {
+            "dealValue": 0,
+            "shortOfCommitment": 0,
+            "usage": 0
+          }
         },
         {
           "name": "signalling",
-          "value": 0
+          "value": {
+            "dealValue": 0,
+            "shortOfCommitment": 0,
+            "usage": 0
+          }
         }
       ],
       "access": {
-        "networkAccess": 0
+        "networkAccess": {
+          "dealValue": 0,
+          "shortOfCommitment": 0,
+          "usage": 0
+        }
       }
     }
   },
