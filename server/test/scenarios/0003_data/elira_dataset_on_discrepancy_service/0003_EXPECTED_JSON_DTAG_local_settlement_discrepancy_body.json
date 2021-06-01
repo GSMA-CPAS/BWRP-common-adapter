@@ -252,5 +252,13 @@
         "delta_usage_percent": 0
       }
     ]
+  },
+  "settlementReport": {
+    "homeCharges": 49465727.39367239,
+    "homeDeltaCommitment": 4329330.773221124,
+    "homeRevenue": 25670669.226778876,
+    "partnerCharges": 25670669.406778876,
+    "partnerDeltaCommitment": -19465727.39367239,
+    "partnerRevenue": 49465727.39367239
   }
 }
