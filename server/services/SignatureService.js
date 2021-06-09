@@ -41,12 +41,7 @@ const getSignatureById = ({contractId, signatureId}) => new Promise(
       if ((getContractByIdResp.state !== 'SENT') && (getContractByIdResp.state !== 'RECEIVED')) {
         reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_GET_SIGNATURES_ONLY_ALLOWED_IN_STATE_SENT_OR_RECEIVED));
       } else {
-        let indexOfSignatureToGet = -1;
-        for (let i = 0; i < getContractByIdResp.signatureLink.length; i++) {
-          if (getContractByIdResp.signatureLink[i]['id'] === signatureId) {
-            indexOfSignatureToGet = i;
-          }
-        }
+        const indexOfSignatureToGet = getContractByIdResp.signatureLink.findIndex((signature) => (signature['id'] === signatureId));
         if (indexOfSignatureToGet === -1) {
           reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_GET_SIGNATURE_WITH_WRONG_SIGNATURE_ID));
         } else {
@@ -127,75 +122,33 @@ const updateSignatureById = ({contractId, signatureId, body}) => new Promise(
         reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_UPDATE_SIGNATURES_ONLY_ALLOWED_IN_STATE_SENT_OR_RECEIVED));
       } else {
         const signatureLink = getContractByIdResp.signatureLink;
-        let indexOfSignatureToUpdate = -1;
-        for (let i = 0; i < signatureLink.length; i++) {
-          if (signatureLink[i]['id'] === signatureId) {
-            indexOfSignatureToUpdate = i;
-          }
-        }
+        const indexOfSignatureToUpdate = signatureLink.findIndex((signature) => (signature['id'] === signatureId));
         if (indexOfSignatureToUpdate === -1) {
           reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_UPDATE_SIGNATURES_WITH_WRONG_SIGNATURE_ID));
         } else {
-          if (getContractByIdResp.state === 'SENT') {
-            // only Updates on fromMSP allowed
-            if (signatureLink[indexOfSignatureToUpdate].msp !== 'fromMsp') {
-              reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_UPDATE_SIGNATURES_ON_SENT_CONTRACT));
-            } else {
-              // TODO: additional check if "signature" is valid.
-
-              const bcSignatures = await blockchainAdapterConnection.uploadSignature(getContractByIdResp.referenceId, body.certificate, body.algorithm, body.signature);
-
-              signatureLink[indexOfSignatureToUpdate]['txId'] = bcSignatures.txID;
-
-              const contractToUpdate = getContractByIdResp;
-              contractToUpdate.signatureLink = signatureLink;
-
-              const updateContractResp = await LocalStorageProvider.updateContract(contractToUpdate);
-
-              const mySignature = {
-                signatureId: signatureId,
-                contractId: getContractByIdResp.id,
-                msp: updateContractResp[signatureLink[indexOfSignatureToUpdate]['msp']].mspId,
-                name: updateContractResp[signatureLink[indexOfSignatureToUpdate]['msp']]['signatures'][signatureLink[indexOfSignatureToUpdate]['index']].name,
-                role: updateContractResp[signatureLink[indexOfSignatureToUpdate]['msp']]['signatures'][signatureLink[indexOfSignatureToUpdate]['index']].role,
-                algorithm: body.algorithm,
-                certificate: body.certificate,
-                signature: body.signature,
-                state: 'SIGNED'
-              };
-
-              resolve(Service.successResponse(mySignature));
-            }
+          if ((getContractByIdResp.state === 'SENT') && (signatureLink[indexOfSignatureToUpdate].msp !== 'fromMsp')) {
+            reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_UPDATE_SIGNATURES_ON_SENT_CONTRACT));
+          } else if ((getContractByIdResp.state === 'RECEIVED') && (signatureLink[indexOfSignatureToUpdate].msp !== 'toMsp')) {
+            reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_UPDATE_SIGNATURES_ON_RECEIVED_CONTRACT));
           } else {
-            // getContractByIdResp.state == 'RECEIVED'
-            // only Updates on toMSP allowed
-            if (signatureLink[indexOfSignatureToUpdate].msp !== 'toMsp') {
-              reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_UPDATE_SIGNATURES_ON_RECEIVED_CONTRACT));
-            } else {
-              // TODO: additional check if "signature" is valid.
-
-              const bcSignatures = await blockchainAdapterConnection.uploadSignature(getContractByIdResp.referenceId, body.certificate, body.algorithm, body.signature);
-              signatureLink[indexOfSignatureToUpdate]['txId'] = bcSignatures.txID;
-
-              const contractToUpdate = getContractByIdResp;
-              contractToUpdate.signatureLink = signatureLink;
-
-              const updateContractResp = await LocalStorageProvider.updateContract(contractToUpdate);
-
-              const mySignature = {
-                signatureId: signatureId,
-                contractId: getContractByIdResp.id,
-                msp: updateContractResp[signatureLink[indexOfSignatureToUpdate]['msp']].mspId,
-                name: updateContractResp[signatureLink[indexOfSignatureToUpdate]['msp']]['signatures'][signatureLink[indexOfSignatureToUpdate]['index']].name,
-                role: updateContractResp[signatureLink[indexOfSignatureToUpdate]['msp']]['signatures'][signatureLink[indexOfSignatureToUpdate]['index']].role,
-                algorithm: body.algorithm,
-                certificate: body.certificate,
-                signature: body.signature,
-                state: 'SIGNED'
-              };
-
-              resolve(Service.successResponse(mySignature));
-            }
+            // TODO: additional check if "signature" is valid.
+            const bcSignatures = await blockchainAdapterConnection.uploadSignature(getContractByIdResp.referenceId, body.certificate, body.algorithm, body.signature);
+            signatureLink[indexOfSignatureToUpdate]['txId'] = bcSignatures.txID;
+            const contractToUpdate = getContractByIdResp;
+            contractToUpdate.signatureLink = signatureLink;
+            const updateContractResp = await LocalStorageProvider.updateContract(contractToUpdate);
+            const mySignature = {
+              signatureId: signatureId,
+              contractId: getContractByIdResp.id,
+              msp: updateContractResp[signatureLink[indexOfSignatureToUpdate]['msp']].mspId,
+              name: updateContractResp[signatureLink[indexOfSignatureToUpdate]['msp']]['signatures'][signatureLink[indexOfSignatureToUpdate]['index']].name,
+              role: updateContractResp[signatureLink[indexOfSignatureToUpdate]['msp']]['signatures'][signatureLink[indexOfSignatureToUpdate]['index']].role,
+              algorithm: body.algorithm,
+              certificate: body.certificate,
+              signature: body.signature,
+              state: 'SIGNED'
+            };
+            resolve(Service.successResponse(mySignature));
           }
         }
       }
@@ -221,7 +174,7 @@ const createSignature = ({url, contractId, body}) => new Promise(
         reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_UPDATE_SIGNATURES_ONLY_ALLOWED_IN_STATE_SENT_OR_RECEIVED));
       } else {
         const signatureLink = getContractByIdResp.signatureLink;
-        const msp = (getContractByIdResp.state === 'RECEIVED') ? 'toMsp': 'fromMsp';
+        const msp = (getContractByIdResp.state === 'RECEIVED') ? 'toMsp' : 'fromMsp';
         const isNotSigned = (signature) => ((signature['txId'] === undefined) && (signature['msp'] === msp));
         const indexOfSignatureToUpdate = signatureLink.findIndex(isNotSigned);
         if (indexOfSignatureToUpdate === -1) {
@@ -310,7 +263,7 @@ const createUsageSignature = ({url, contractId, usageId, body}) => new Promise(
               const mySignature = {
                 signatureId: signatureId,
                 usageId: getUsageByIdResp.id,
-                msp: updateUsageResp[(signatureLink[indexOfSignatureToUpdate]['msp'] == 'fromMsp')? 'mspOwner': 'mspReceiver'],
+                msp: updateUsageResp[(signatureLink[indexOfSignatureToUpdate]['msp'] == 'fromMsp') ? 'mspOwner' : 'mspReceiver'],
                 algorithm: body.algorithm,
                 certificate: body.certificate,
                 signature: body.signature,
@@ -347,7 +300,7 @@ const createUsageSignature = ({url, contractId, usageId, body}) => new Promise(
               const mySignature = {
                 signatureId: signatureId,
                 usageId: getUsageByIdResp.id,
-                msp: updateUsageResp[(signatureLink[indexOfSignatureToUpdate]['msp'] == 'fromMsp')? 'mspOwner': 'mspReceiver'],
+                msp: updateUsageResp[(signatureLink[indexOfSignatureToUpdate]['msp'] == 'fromMsp') ? 'mspOwner' : 'mspReceiver'],
                 algorithm: body.algorithm,
                 certificate: body.certificate,
                 signature: body.signature,
@@ -401,12 +354,12 @@ const getUsageSignatureById = ({contractId, usageId, signatureId}) => new Promis
           reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_GET_SIGNATURE_WITH_WRONG_SIGNATURE_ID));
         } else {
           const signature = getUsageByIdResp.signatureLink[indexOfSignatureToGet];
-          const bcSignatures = await blockchainAdapterConnection.getSignatures(getUsageByIdResp.referenceId, getUsageByIdResp[(signature.msp == 'fromMsp')? 'mspOwner': 'mspReceiver']);
+          const bcSignatures = await blockchainAdapterConnection.getSignatures(getUsageByIdResp.referenceId, getUsageByIdResp[(signature.msp == 'fromMsp') ? 'mspOwner' : 'mspReceiver']);
           let state = 'UNSIGNED';
           const mySignature = {
             signatureId: signatureId,
             usageId: getUsageByIdResp.id,
-            msp: getUsageByIdResp[(signature.msp == 'fromMsp')? 'mspOwner': 'mspReceiver']
+            msp: getUsageByIdResp[(signature.msp == 'fromMsp') ? 'mspOwner' : 'mspReceiver']
           };
           if (signature.txId !== undefined && bcSignatures[signature.txId] !== undefined) {
             state = 'SIGNED';
@@ -445,7 +398,7 @@ const getUsageSignatures = ({contractId, usageId}) => new Promise(
             signatures.push({
               signatureId: signature.id,
               usageId: getUsageByIdResp.id,
-              msp: getUsageByIdResp[(signature.msp == 'fromMsp')? 'mspOwner': 'mspReceiver'],
+              msp: getUsageByIdResp[(signature.msp == 'fromMsp') ? 'mspOwner' : 'mspReceiver'],
               state: 'SIGNED'
             });
           }
