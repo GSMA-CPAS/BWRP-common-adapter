@@ -57,6 +57,12 @@ class UsageMapper {
       lastModificationDate: usage.lastModificationDate
     };
 
+    if ( usage.partnerUsageId) {
+      returnedResponseBody.partnerUsageId = usage.partnerUsageId;
+    }
+    if ( usage.tag) {
+      returnedResponseBody.tag = usage.tag;
+    }
     return returnedResponseBody;
   }
 
@@ -65,7 +71,7 @@ class UsageMapper {
     const returnedResponseBody = [];
     if ((usages !== undefined) && (Array.isArray(usages))) {
       usages.forEach((usage) => {
-        returnedResponseBody.push({
+        const usageResp = {
           usageId: usage.id,
           contractId: usage.contractId,
           settlementId: usage.settlementId,
@@ -79,13 +85,26 @@ class UsageMapper {
           mspOwner: usage.mspOwner,
           creationDate: usage.creationDate,
           lastModificationDate: usage.lastModificationDate
-        });
+        };
+        if (usage.partnerUsageId) {
+          usageResp.partnerUsageId = usage.partnerUsageId;
+        }
+        if (usage.tag) {
+          usageResp.tag = usage.tag;
+        }
+        returnedResponseBody.push(usageResp);
       });
     }
     return returnedResponseBody;
   }
 
   static getResponseBodyForSendUsage(usage) {
+    // By default, use mapper getResponseBodyForGetUsage
+    const returnedResponseBody = UsageMapper.getResponseBodyForGetUsage(usage);
+    return returnedResponseBody;
+  }
+
+  static getResponseBodyForRejectUsage(usage) {
     // By default, use mapper getResponseBodyForGetUsage
     const returnedResponseBody = UsageMapper.getResponseBodyForGetUsage(usage);
     return returnedResponseBody;

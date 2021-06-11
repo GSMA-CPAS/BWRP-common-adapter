@@ -174,6 +174,64 @@ class LocalStorageProvider {
 
   /**
    *
+   * @param {String} contractId
+   * @return {Promise<[string]>}
+   */
+  static async getLastReceivedUsage(contractId) {
+    try {
+      let receivedUsages = await LocalStorageProvider.getUsages(contractId, {state: 'RECEIVED'});
+      receivedUsages = receivedUsages.filter((usage) => {
+        if ((usage.tag) && ((usage.tag === 'REJECTED') || (usage.tag === 'APPROVED'))) {
+          return false;
+        } else {
+          return true;
+        }
+      });
+      if (receivedUsages.length > 0 ) {
+        const receivedUsage = receivedUsages.sort(function(a, b) {
+          return new Date(b.lastModificationDate) - new Date(a.lastModificationDate);
+        })[0];
+        return receivedUsage;
+      } else {
+        return undefined;
+      }
+    } catch (error) {
+      logger.error('[LocalStorageProvider::getUsages] failed to get usages - %s', error.message);
+      throw error;
+    }
+  }
+
+  /**
+   *
+   * @param {String} contractId
+   * @return {Promise<[string]>}
+   */
+  static async getLastSentUsage(contractId) {
+    try {
+      let sentUsages = await LocalStorageProvider.getUsages(contractId, {state: 'SENT'});
+      sentUsages = sentUsages.filter((usage) => {
+        if ((usage.tag) && ((usage.tag === 'REJECTED') || (usage.tag === 'APPROVED')) ) {
+          return false;
+        } else {
+          return true;
+        }
+      });
+      if (sentUsages.length > 0 ) {
+        const sentUsage = sentUsages.sort(function(a, b) {
+          return new Date(b.lastModificationDate) - new Date(a.lastModificationDate);
+        })[0];
+        return sentUsage;
+      } else {
+        return undefined;
+      }
+    } catch (error) {
+      logger.error('[LocalStorageProvider::getUsages] failed to get usages - %s', error.message);
+      throw error;
+    }
+  }
+
+  /**
+   *
    * @param {Object} usage
    * @return {Promise<object>}
    */
@@ -260,18 +318,49 @@ class LocalStorageProvider {
 
   /**
    *
+   * @param {Object} id
+   * @param {Object} partnerUsageId
+   * @return {Promise<object>}
+   */
+  static async updateUsageWithPartnerUsageId(id, partnerUsageId) {
+    try {
+      return await UsageDAO.addPartnerUsageId(id, partnerUsageId);
+    } catch (error) {
+      logger.error('[LocalStorageProvider::updateUsageWithPartnerUsageId] failed to updateUsageWithPartnerUsageId - ', error.message);
+      throw error;
+    }
+  }
+
+  /**
+   *
    * @param {String} usageId
    * @param {String} rawData
    * @param {String} referenceId
    * @param {Array<String>} storageKeys
    * @param {JSON} blockchainRef
+   * @param {JSON} lastReceivedUsage
    * @return {Promise<object>}
    */
-  static async updateSentUsage(usageId, rawData, referenceId, storageKeys, blockchainRef) {
+  static async updateSentUsage(usageId, rawData, referenceId, storageKeys, blockchainRef, lastReceivedUsage) {
     try {
-      return await UsageDAO.findOneAndUpdateToSentUsage(usageId, rawData, referenceId, storageKeys, blockchainRef);
+      return await UsageDAO.findOneAndUpdateToSentUsage(usageId, rawData, referenceId, storageKeys, blockchainRef, lastReceivedUsage);
     } catch (error) {
       logger.error('[LocalStorageProvider::updateSentUsage] failed to update sent usage - %s', error.message);
+      throw error;
+    }
+  }
+
+  /**
+   *
+   * @param {Object} usageId
+   * @param {Object} tag
+   * @return {Promise<object>}
+   */
+  static async updateUsageWithTag(usageId, tag) {
+    try {
+      return await UsageDAO.addTag(usageId, tag);
+    } catch (error) {
+      logger.error('[LocalStorageProvider::updateUsageWithTag] failed to updateUsageWithTag - ', error.message);
       throw error;
     }
   }
@@ -308,6 +397,20 @@ class LocalStorageProvider {
 
   /**
    *
+   * @param {String} usageId
+   * @return {Promise<object>}
+   */
+  static async getUsageByUsageId(usageId) {
+    try {
+      return await UsageDAO.findOne(usageId);
+    } catch (error) {
+      logger.error('[LocalStorageProvider::getUsage] failed to get usage - ' + error.message);
+      throw error;
+    }
+  }
+
+  /**
+   *
    * @param {String} contractId
    * @param {String} usageId
    * @return {Promise<object>}
@@ -317,6 +420,20 @@ class LocalStorageProvider {
       return await UsageDAO.findOneAndRemove(usageId, {contractId: contractId});
     } catch (error) {
       logger.error('[LocalStorageProvider::deleteUsage] failed to delete usage - ' + error.message);
+      throw error;
+    }
+  }
+
+  /**
+   *
+   * @param {Object} matchingConditions
+   * @return {Promise<object>}
+   */
+  static async findUsages( matchingConditions = {}) {
+    try {
+      return await UsageDAO.findUsages( matchingConditions);
+    } catch (error) {
+      logger.error('[LocalStorageProvider::findUsages] failed to get usages - %s', error.message);
       throw error;
     }
   }
@@ -421,6 +538,21 @@ class LocalStorageProvider {
       return await SettlementDAO.findOneAndUpdateToSentSettlement(settlementId, rawData, referenceId, storageKeys, blockchainRef);
     } catch (error) {
       logger.error('[LocalStorageProvider::updateSentSettlement] failed to update sent settlement - %s', error.message);
+      throw error;
+    }
+  }
+
+  /**
+   *
+   * @param {String} settlementId
+   * @param {String} tag
+   * @return {Promise<object>}
+   */
+  static async updateSettlementWithTag(settlementId, tag) {
+    try {
+      return await SettlementDAO.addTag(settlementId, tag);
+    } catch (error) {
+      logger.error('[LocalStorageProvider::updateSettlementWithTag] failed to update tag in settlement - %s', error.message);
       throw error;
     }
   }

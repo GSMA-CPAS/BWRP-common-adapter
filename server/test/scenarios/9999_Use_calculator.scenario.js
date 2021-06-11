@@ -86,13 +86,15 @@ describe.skip(`Launch scenario 9999_Use_calculator`, function() {
 
           debug('response.body.intermediateResults = ', response.body.intermediateResults);
 
-          expect(response.body.intermediateResults.length).to.equals(8);
+          expect(response.body.intermediateResults.length).to.equals(11);
           response.body.intermediateResults.forEach((element) => {
-            expect(Object.keys(element)).have.members(['service', 'homeTadigs', 'visitorTadigs', 'dealValue', 'type']);
+            expect(Object.keys(element)).have.members(['service', 'homeTadigs', 'visitorTadigs', 'dealValue', 'shortOfCommitment', 'usage', 'type']);
             expect(element).to.have.property('service').that.is.a('string');
             expect(element).to.have.property('homeTadigs').that.is.a('array');
             expect(element).to.have.property('visitorTadigs').that.is.a('array');
-            expect(element).to.have.property('dealValue').that.is.a('string');
+            expect(element).to.have.property('dealValue').that.is.a('number');
+            expect(element).to.have.property('shortOfCommitment').that.is.a('number');
+            expect(element).to.have.property('usage').that.is.a('number');
             expect(element).to.have.property('type').that.matches(new RegExp('^(inbound|outbound|)$'));
           });
 

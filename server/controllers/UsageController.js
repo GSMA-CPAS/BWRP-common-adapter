@@ -52,6 +52,10 @@ const getUsages = async (request, response) => {
   await Controller.handleRequest(request, response, service.getUsages);
 };
 
+const rejectUsageById = async (request, response) => {
+  await Controller.handleRequest(request, response, service.rejectUsageById);
+};
+
 const sendUsageById = async (request, response) => {
   await Controller.handleRequest(request, response, service.sendUsageById);
 };
@@ -68,6 +72,7 @@ module.exports = {
   getUsageById,
   getUsageDiscrepancy,
   getUsages,
+  rejectUsageById,
   sendUsageById,
   updateUsageById,
 };

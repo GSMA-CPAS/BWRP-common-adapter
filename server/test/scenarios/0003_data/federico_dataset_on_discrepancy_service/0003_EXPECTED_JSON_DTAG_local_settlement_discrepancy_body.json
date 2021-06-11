@@ -2,15 +2,26 @@
   "homePerspective": {
     "general_information": [
       {
-        "service": "Voice",
+        "service": "MOC",
         "unit": "min",
         "own_calculation": 810639.8300000001,
         "partner_calculation": 852818.5780000001,
         "delta_calculation_percent": -5.203142806343481,
-        "own_usage": 34035837,
-        "partner_usage": 35789273.2,
+        "own_usage": 20012944,
+        "partner_usage": 21766380.200000003,
         "delta_usage_abs": 1753436.200000003,
-        "delta_usage_percent": -5.151735213680812
+        "delta_usage_percent": -8.761510550371815
+      },
+      {
+        "service": "MTC",
+        "unit": "min",
+        "own_calculation": 0,
+        "partner_calculation": 0,
+        "delta_calculation_percent": 0,
+        "own_usage": 14022893,
+        "partner_usage": 14022893,
+        "delta_usage_abs": 0,
+        "delta_usage_percent": 0
       },
       {
         "service": "SMS",
@@ -79,21 +90,43 @@
         "partner_usage": 1751315.8,
         "delta_usage_abs": 89379.80000000005,
         "delta_usage_percent": -5.378053065822032
+      },
+      {
+        "service": "MTC",
+        "unit": "min",
+        "own_calculation": 0,
+        "partner_calculation": 0,
+        "delta_calculation_percent": 0,
+        "own_usage": 14022893,
+        "partner_usage": 14022893,
+        "delta_usage_abs": 0,
+        "delta_usage_percent": 0
       }
     ]
   },
   "partnerPerspective": {
     "general_information": [
       {
-        "service": "Voice",
+        "service": "MOC",
         "unit": "min",
         "own_calculation": 2346198.034,
         "partner_calculation": 2215608.2,
         "delta_calculation_percent": 5.566019240812295,
-        "own_usage": 139932827.6,
-        "partner_usage": 135223746,
+        "own_usage": 83652124.6,
+        "partner_usage": 78943043,
         "delta_usage_abs": 4709081.599999994,
-        "delta_usage_percent": 3.365244368148532
+        "delta_usage_percent": 5.6293628195547285
+      },
+      {
+        "service": "MTC",
+        "unit": "min",
+        "own_calculation": 0,
+        "partner_calculation": 0,
+        "delta_calculation_percent": 0,
+        "own_usage": 56280703,
+        "partner_usage": 56280703,
+        "delta_usage_abs": 0,
+        "delta_usage_percent": 0
       },
       {
         "service": "SMS",
@@ -162,7 +195,26 @@
         "partner_usage": 4267496,
         "delta_usage_abs": 249492.5,
         "delta_usage_percent": 5.523425618639498
+      },
+      {
+        "service": "MTC",
+        "unit": "min",
+        "own_calculation": 0,
+        "partner_calculation": 0,
+        "delta_calculation_percent": 0,
+        "own_usage": 56280703,
+        "partner_usage": 56280703,
+        "delta_usage_abs": 0,
+        "delta_usage_percent": 0
       }
     ]
+  },
+  "settlementReport": {
+    "homeCharges": 6681369.39884311,
+    "homeDeltaCommitment": 2952155.852772095,
+    "homeRevenue": 3309805.1840348816,
+    "partnerCharges": 3351983.932034882,
+    "partnerDeltaCommitment": 2550432.613725512,
+    "partnerRevenue": 6811959.23284311
   }
 }

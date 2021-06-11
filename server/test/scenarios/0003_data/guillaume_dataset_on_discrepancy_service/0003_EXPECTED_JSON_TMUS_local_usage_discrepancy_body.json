@@ -1,0 +1,68 @@
+{
+  "general_information": [
+    {
+      "service": "MOC",
+      "unit": "min",
+      "inbound_own_usage": 0,
+      "inbound_partner_usage": 0,
+      "inbound_discrepancy": 0,
+      "outbound_own_usage": 0,
+      "outbound_partner_usage": 0,
+      "outbound_discrepancy": 0
+    },
+    {
+      "service": "SMS",
+      "unit": "#",
+      "inbound_own_usage": 211647,
+      "inbound_partner_usage": 211647,
+      "inbound_discrepancy": 0,
+      "outbound_own_usage": 824052,
+      "outbound_partner_usage": 824052,
+      "outbound_discrepancy": 0
+    },
+    {
+      "service": "Data",
+      "unit": "MB",
+      "inbound_own_usage": 0,
+      "inbound_partner_usage": 0,
+      "inbound_discrepancy": 0,
+      "outbound_own_usage": 0,
+      "outbound_partner_usage": 0,
+      "outbound_discrepancy": 0
+    },
+    {
+      "service": "MTC",
+      "unit": "min",
+      "inbound_own_usage": 0,
+      "inbound_partner_usage": 1436009,
+      "inbound_discrepancy": 1436009,
+      "outbound_own_usage": 0,
+      "outbound_partner_usage": 355660,
+      "outbound_discrepancy": 355660
+    }
+  ],
+  "inbound": [
+    {
+      "HTMN": "DEUD1",
+      "VPMN": "FRAF1",
+      "yearMonth": "43800",
+      "service": "SMSMO",
+      "own_usage": 211647,
+      "partner_usage": 211647,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    }
+  ],
+  "outbound": [
+    {
+      "HTMN": "FRAF1",
+      "VPMN": "DEUD1",
+      "yearMonth": "43800",
+      "service": "SMSMO",
+      "own_usage": 824052,
+      "partner_usage": 824052,
+      "delta_usage_abs": 0,
+      "delta_usage_percent": 0
+    }
+  ]
+}

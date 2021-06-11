@@ -1,0 +1,154 @@
+{
+  "homePerspective": {
+    "general_information": [
+      {
+        "service": "MOC",
+        "unit": "min",
+        "own_calculation": 0,
+        "partner_calculation": 0,
+        "delta_calculation_percent": 0,
+        "own_usage": 0,
+        "partner_usage": 0,
+        "delta_usage_abs": 0,
+        "delta_usage_percent": 0
+      },
+      {
+        "service": "MTC",
+        "unit": "min",
+        "own_calculation": 0,
+        "partner_calculation": 0,
+        "delta_calculation_percent": 0,
+        "own_usage": 0,
+        "partner_usage": 1436009,
+        "delta_usage_abs": 1436009,
+        "delta_usage_percent": 100
+      },
+      {
+        "service": "SMS",
+        "unit": "SMS",
+        "own_calculation": 1058.2350000000001,
+        "partner_calculation": 1058.2350000000001,
+        "delta_calculation_percent": 0,
+        "own_usage": 211647,
+        "partner_usage": 211647,
+        "delta_usage_abs": 0,
+        "delta_usage_percent": 0
+      },
+      {
+        "service": "Data",
+        "unit": "MB",
+        "own_calculation": 0,
+        "partner_calculation": 0,
+        "delta_calculation_percent": 0,
+        "own_usage": 0,
+        "partner_usage": 0,
+        "delta_usage_abs": 0,
+        "delta_usage_percent": 0
+      }
+    ],
+    "details": [
+      {
+        "service": "SMSMO",
+        "unit": "SMS",
+        "own_calculation": 1058.2350000000001,
+        "partner_calculation": 1058.2350000000001,
+        "delta_calculation_percent": 0,
+        "own_usage": 211647,
+        "partner_usage": 211647,
+        "delta_usage_abs": 0,
+        "delta_usage_percent": 0
+      },
+      {
+        "service": "MTC",
+        "unit": "min",
+        "own_calculation": 0,
+        "partner_calculation": 0,
+        "delta_calculation_percent": 0,
+        "own_usage": 0,
+        "partner_usage": 1436009,
+        "delta_usage_abs": 1436009,
+        "delta_usage_percent": 100
+      }
+    ]
+  },
+  "partnerPerspective": {
+    "general_information": [
+      {
+        "service": "MOC",
+        "unit": "min",
+        "own_calculation": 0,
+        "partner_calculation": 0,
+        "delta_calculation_percent": 0,
+        "own_usage": 0,
+        "partner_usage": 0,
+        "delta_usage_abs": 0,
+        "delta_usage_percent": 0
+      },
+      {
+        "service": "MTC",
+        "unit": "min",
+        "own_calculation": 0,
+        "partner_calculation": 0,
+        "delta_calculation_percent": 0,
+        "own_usage": 355660,
+        "partner_usage": 0,
+        "delta_usage_abs": 355660,
+        "delta_usage_percent": 100
+      },
+      {
+        "service": "SMS",
+        "unit": "SMS",
+        "own_calculation": 4120.26,
+        "partner_calculation": 4120.26,
+        "delta_calculation_percent": 0,
+        "own_usage": 824052,
+        "partner_usage": 824052,
+        "delta_usage_abs": 0,
+        "delta_usage_percent": 0
+      },
+      {
+        "service": "Data",
+        "unit": "MB",
+        "own_calculation": 0,
+        "partner_calculation": 0,
+        "delta_calculation_percent": 0,
+        "own_usage": 0,
+        "partner_usage": 0,
+        "delta_usage_abs": 0,
+        "delta_usage_percent": 0
+      }
+    ],
+    "details": [
+      {
+        "service": "SMSMO",
+        "unit": "SMS",
+        "own_calculation": 4120.26,
+        "partner_calculation": 4120.26,
+        "delta_calculation_percent": 0,
+        "own_usage": 824052,
+        "partner_usage": 824052,
+        "delta_usage_abs": 0,
+        "delta_usage_percent": 0
+      },
+      {
+        "service": "MTC",
+        "unit": "min",
+        "own_calculation": 0,
+        "partner_calculation": 0,
+        "delta_calculation_percent": 0,
+        "own_usage": 355660,
+        "partner_usage": 0,
+        "delta_usage_abs": 355660,
+        "delta_usage_percent": 100
+      }
+    ]
+  },
+  "settlementReport": {
+    "homeCharges": 4120.26,
+    "homeDeltaCommitment": 1999788.3530000001,
+    "homeRevenue": 1058.2350000000001,
+    "partnerCharges": 1058.2350000000001,
+    "partnerDeltaCommitment": 1399175.948,
+    "partnerRevenue": 4120.26
+  }
+}

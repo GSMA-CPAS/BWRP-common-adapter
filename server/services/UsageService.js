@@ -142,8 +142,17 @@ const sendUsageById = ({contractId, usageId}) => new Promise(
             usageToSend = await LocalStorageProvider.updateUsageWithContractReferenceId(usageId, contract.referenceId);
           }
           const uploadUsageResp = await blockchainAdapterConnection.uploadUsage(usageToSend);
-          const getStorageKeysResp = await blockchainAdapterConnection.getStorageKeys(uploadUsageResp.referenceId, [uploadUsageResp.mspOwner, uploadUsageResp.mspReceiver]);
-          const updateUsageResp = await LocalStorageProvider.updateSentUsage(usageId, uploadUsageResp.rawData, uploadUsageResp.referenceId, getStorageKeysResp, uploadUsageResp.blockchainRef);
+          const getStorageKeysResp = await blockchainAdapterConnection.getStorageKeys(uploadUsageResp.referenceId, [usageToSend.mspOwner, usageToSend.mspReceiver]);
+          // set last received usage as partnerUsageId if exists
+          const lastReceivedUsage = await LocalStorageProvider.getLastReceivedUsage(contractId);
+
+          const updateUsageResp = await LocalStorageProvider.updateSentUsage(
+            usageId,
+            uploadUsageResp.rawData,
+            uploadUsageResp.referenceId,
+            getStorageKeysResp,
+            uploadUsageResp.blockchainRef,
+            lastReceivedUsage);
           const returnedResponse = UsageMapper.getResponseBodyForSendUsage(updateUsageResp);
           resolve(Service.successResponse(returnedResponse, 200));
         }
@@ -180,6 +189,27 @@ const updateUsageById = ({contractId, usageId, body}) => new Promise(
   },
 );
 
+/**
+ * Set Tag to \"REJECTED\"
+ *
+ * @param {String} contractId The contract Id
+ * @param {String} usageId The Usage Id
+ * @return {Promise<ServiceResponse>}
+ */
+const rejectUsageById = ({contractId, usageId}) => new Promise(
+  async (resolve, reject) => {
+    try {
+      let usageToReject = await LocalStorageProvider.getUsage(contractId, usageId);
+      usageToReject = await LocalStorageProvider.updateUsageWithTag(usageId, 'REJECTED');
+      const returnedResponse = UsageMapper.getResponseBodyForRejectUsage(usageToReject);
+      resolve(Service.successResponse(returnedResponse, 200));
+    } catch (e) {
+      reject(Service.rejectResponse(e));
+    }
+  },
+);
+
+
 module.exports = {
   createUsage,
   deleteUsageById,
@@ -187,4 +217,5 @@ module.exports = {
   getUsages,
   sendUsageById,
   updateUsageById,
+  rejectUsageById
 };

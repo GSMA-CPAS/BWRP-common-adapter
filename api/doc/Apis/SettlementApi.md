@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**getSettlementById**](SettlementApi.md#getSettlementById) | **GET** /contracts/{contractId}/settlements/{settlementId} | 
 [**getSettlementDiscrepancy**](SettlementApi.md#getSettlementDiscrepancy) | **GET** /contracts/{contractId}/settlements/{settlementId}/discrepancy/ | 
 [**getSettlements**](SettlementApi.md#getSettlements) | **GET** /contracts/{contractId}/settlements/ | 
+[**rejectSettlementById**](SettlementApi.md#rejectSettlementById) | **PUT** /contracts/{contractId}/settlements/{settlementId}/reject/ | 
 [**sendSettlementById**](SettlementApi.md#sendSettlementById) | **PUT** /contracts/{contractId}/settlements/{settlementId}/send/ | 
 
 
@@ -84,6 +85,34 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**String**](../Models/string.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="rejectSettlementById"></a>
+# **rejectSettlementById**
+> Object rejectSettlementById(contractId, settlementId)
+
+
+
+    Set Tag to \&quot;REJECTED\&quot;
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **contractId** | **String**| The contract Id | [default to null]
+ **settlementId** | **String**| The Settlement Id | [default to null]
+
+### Return type
+
+[**Object**](../Models/object.md)
 
 ### Authorization
 

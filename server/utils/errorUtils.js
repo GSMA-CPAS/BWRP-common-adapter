@@ -406,6 +406,42 @@ class ErrorUtils {
     }
   };
 
+  static ERROR_BUSINESS_UPDATE_USAGE_SIGNATURES_ONLY_ALLOWED_IN_STATE_SENT_OR_RECEIVED = {
+    code: 422,
+    error: {
+      internalErrorCode: 2024,
+      message: 'Update signatures not allowed',
+      description: 'It\'s only allowed to update signatures on usages SENT or RECEIVED.'
+    }
+  };
+
+  static ERROR_BUSINESS_UPDATE_SIGNATURES_ON_SENT_USAGE = {
+    code: 422,
+    error: {
+      internalErrorCode: 2025,
+      message: 'Update signatures not allowed',
+      description: 'For SENT usage update signature only allowed on fromMsp'
+    }
+  };
+
+  static ERROR_BUSINESS_UPDATE_SIGNATURES_ON_RECEIVED_USAGE = {
+    code: 422,
+    error: {
+      internalErrorCode: 2026,
+      message: 'Update signatures not allowed',
+      description: 'For RECEIVED usage update signature only allowed on toMsp'
+    }
+  };
+
+  static ERROR_BUSINESS_GET_USAGE_SIGNATURES_ONLY_ALLOWED_IN_STATE_SENT_OR_RECEIVED = {
+    code: 422,
+    error: {
+      internalErrorCode: 2027,
+      message: 'Get signatures not allowed',
+      description: 'It\'s only allowed to get signatures on usages SENT or RECEIVED.'
+    }
+  };
 }
+
 
 module.exports = ErrorUtils;

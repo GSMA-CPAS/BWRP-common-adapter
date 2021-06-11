@@ -72,6 +72,9 @@ class SettlementMapper {
       }
       */
     }
+    if ( settlement.tag) {
+      returnedResponseBody.tag = settlement.tag;
+    }
     return returnedResponseBody;
   }
 
@@ -80,7 +83,7 @@ class SettlementMapper {
     const returnedResponseBody = [];
     if ((settlements !== undefined) && (Array.isArray(settlements))) {
       settlements.forEach((settlement) => {
-        returnedResponseBody.push({
+        const settlementResp = {
           settlementId: settlement.id,
           contractId: settlement.contractId,
           header: {
@@ -91,7 +94,11 @@ class SettlementMapper {
           state: settlement.state,
           creationDate: settlement.creationDate,
           lastModificationDate: settlement.lastModificationDate
-        });
+        };
+        if ( settlement.tag) {
+          settlementResp.tag = settlement.tag;
+        }
+        returnedResponseBody.push(settlementResp);
       });
     }
     return returnedResponseBody;
@@ -110,54 +117,54 @@ class SettlementMapper {
         services: {
           voice: {
             'MOC': {
-              'local': 0,
-              'backHome': 0,
-              'international': 0,
-              'premium': 0,
-              'ROW': 0,
-              'EU': 0,
-              'EEA': 0,
-              'satellite': 0,
-              'videoTelephony': 0,
-              'specialDestinations': 0
+              'local': {dealValue: 0, shortOfCommitment: 0, usage: 0},
+              'backHome': {dealValue: 0, shortOfCommitment: 0, usage: 0},
+              'international': {dealValue: 0, shortOfCommitment: 0, usage: 0},
+              'premium': {dealValue: 0, shortOfCommitment: 0, usage: 0},
+              'ROW': {dealValue: 0, shortOfCommitment: 0, usage: 0},
+              'EU': {dealValue: 0, shortOfCommitment: 0, usage: 0},
+              'EEA': {dealValue: 0, shortOfCommitment: 0, usage: 0},
+              'satellite': {dealValue: 0, shortOfCommitment: 0, usage: 0},
+              'videoTelephony': {dealValue: 0, shortOfCommitment: 0, usage: 0},
+              'specialDestinations': {dealValue: 0, shortOfCommitment: 0, usage: 0}
             },
-            'MTC': 0
+            'MTC': {dealValue: 0, shortOfCommitment: 0, usage: 0}
           },
           SMS: {
-            MO: 0,
-            MT: 0
+            MO: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+            MT: {dealValue: 0, shortOfCommitment: 0, usage: 0}
           },
           data: [
             {
               'name': 'GPRS',
-              'value': 0
+              'value': {dealValue: 0, shortOfCommitment: 0, usage: 0}
             },
             {
               'name': 'M2M',
-              'value': 0.00
+              'value': {dealValue: 0, shortOfCommitment: 0, usage: 0}
             },
             {
               'name': 'NB-IOT',
-              'value': 0
+              'value': {dealValue: 0, shortOfCommitment: 0, usage: 0}
             },
             {
               'name': 'LTE-M',
-              'value': 0
+              'value': {dealValue: 0, shortOfCommitment: 0, usage: 0}
             },
             {
               'name': 'VoLTE',
-              'value': 0
+              'value': {dealValue: 0, shortOfCommitment: 0, usage: 0}
             },
             {
               'name': 'ViLTE',
-              'value': 0
+              'value': {dealValue: 0, shortOfCommitment: 0, usage: 0}
             },
             {
               'name': 'signalling',
-              'value': 0.00
+              'value': {dealValue: 0, shortOfCommitment: 0, usage: 0}
             }],
           access: {
-            networkAccess: 0
+            networkAccess: {dealValue: 0, shortOfCommitment: 0, usage: 0}
           }
         }
       },
@@ -169,54 +176,54 @@ class SettlementMapper {
         services: {
           voice: {
             'MOC': {
-              'local': 0,
-              'backHome': 0,
-              'international': 0,
-              'premium': 0,
-              'ROW': 0,
-              'EU': 0,
-              'EEA': 0,
-              'satellite': 0,
-              'videoTelephony': 0,
-              'specialDestinations': 0
+              'local': {dealValue: 0, shortOfCommitment: 0, usage: 0},
+              'backHome': {dealValue: 0, shortOfCommitment: 0, usage: 0},
+              'international': {dealValue: 0, shortOfCommitment: 0, usage: 0},
+              'premium': {dealValue: 0, shortOfCommitment: 0, usage: 0},
+              'ROW': {dealValue: 0, shortOfCommitment: 0, usage: 0},
+              'EU': {dealValue: 0, shortOfCommitment: 0, usage: 0},
+              'EEA': {dealValue: 0, shortOfCommitment: 0, usage: 0},
+              'satellite': {dealValue: 0, shortOfCommitment: 0, usage: 0},
+              'videoTelephony': {dealValue: 0, shortOfCommitment: 0, usage: 0},
+              'specialDestinations': {dealValue: 0, shortOfCommitment: 0, usage: 0}
             },
-            'MTC': 0
+            'MTC': {dealValue: 0, shortOfCommitment: 0, usage: 0}
           },
           SMS: {
-            MO: 0,
-            MT: 0
+            MO: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+            MT: {dealValue: 0, shortOfCommitment: 0, usage: 0}
           },
           data: [
             {
               'name': 'GPRS',
-              'value': 0
+              'value': {dealValue: 0, shortOfCommitment: 0, usage: 0}
             },
             {
               'name': 'M2M',
-              'value': 0.00
+              'value': {dealValue: 0, shortOfCommitment: 0, usage: 0}
             },
             {
               'name': 'NB-IOT',
-              'value': 0
+              'value': {dealValue: 0, shortOfCommitment: 0, usage: 0}
             },
             {
               'name': 'LTE-M',
-              'value': 0
+              'value': {dealValue: 0, shortOfCommitment: 0, usage: 0}
             },
             {
               'name': 'VoLTE',
-              'value': 0
+              'value': {dealValue: 0, shortOfCommitment: 0, usage: 0}
             },
             {
               'name': 'ViLTE',
-              'value': 0
+              'value': {dealValue: 0, shortOfCommitment: 0, usage: 0}
             },
             {
               'name': 'signalling',
-              'value': 0.00
+              'value': {dealValue: 0, shortOfCommitment: 0, usage: 0}
             }],
           access: {
-            networkAccess: 0
+            networkAccess: {dealValue: 0, shortOfCommitment: 0, usage: 0}
           }
         }
       },
@@ -234,69 +241,111 @@ class SettlementMapper {
       .forEach((intermediateResult) => {
         switch (intermediateResult.service) {
         case 'MOC Back Home':
-          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.backHome += intermediateResult.dealValue;
+          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.backHome.dealValue += intermediateResult.dealValue;
+          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.backHome.shortOfCommitment += intermediateResult.shortOfCommitment;
+          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.backHome.usage += intermediateResult.usage;
           break;
         case 'MOC Local':
-          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.local += intermediateResult.dealValue;
+          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.local.dealValue += intermediateResult.dealValue;
+          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.local.shortOfCommitment += intermediateResult.shortOfCommitment;
+          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.local.usage += intermediateResult.usage;
           break;
         case 'MOC International':
-          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.international += intermediateResult.dealValue;
+          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.international.dealValue += intermediateResult.dealValue;
+          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.international.shortOfCommitment += intermediateResult.shortOfCommitment;
+          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.international.usage += intermediateResult.usage;
           break;
         case 'MOC EU':
-          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.EU += intermediateResult.dealValue;
+          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.EU.dealValue += intermediateResult.dealValue;
+          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.EU.shortOfCommitment += intermediateResult.shortOfCommitment;
+          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.EU.usage += intermediateResult.usage;
           break;
         case 'MOC EEA':
-          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.EEA += intermediateResult.dealValue;
+          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.EEA.dealValue += intermediateResult.dealValue;
+          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.EEA.shortOfCommitment += intermediateResult.shortOfCommitment;
+          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.EEA.usage += intermediateResult.usage;
           break;
         case 'MOC RoW':
-          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.ROW += intermediateResult.dealValue;
+          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.ROW.dealValue += intermediateResult.dealValue;
+          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.ROW.shortOfCommitment += intermediateResult.shortOfCommitment;
+          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.ROW.usage += intermediateResult.usage;
           break;
         case 'MOC Premium':
-          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.premium += intermediateResult.dealValue;
+          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.premium.dealValue += intermediateResult.dealValue;
+          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.premium.shortOfCommitment += intermediateResult.shortOfCommitment;
+          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.premium.usage += intermediateResult.usage;
           break;
         case 'MOC Satellite':
-          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.satellite += intermediateResult.dealValue;
+          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.satellite.dealValue += intermediateResult.dealValue;
+          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.satellite.shortOfCommitment += intermediateResult.shortOfCommitment;
+          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.satellite.usage += intermediateResult.usage;
           break;
         case 'MOC Video Telephony':
-          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.videoTelephony += intermediateResult.dealValue;
+          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.videoTelephony.dealValue += intermediateResult.dealValue;
+          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.videoTelephony.shortOfCommitment += intermediateResult.shortOfCommitment;
+          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.videoTelephony.usage += intermediateResult.usage;
           break;
         case 'MOC Special Destinations':
-          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.specialDestinations += intermediateResult.dealValue;
+          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.specialDestinations.dealValue += intermediateResult.dealValue;
+          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.specialDestinations.shortOfCommitment += intermediateResult.shortOfCommitment;
+          returnedGeneratedResult[intermediateResult.type].services.voice.MOC.specialDestinations.usage += intermediateResult.usage;
           break;
         case 'MTC':
-          returnedGeneratedResult[intermediateResult.type].services.voice.MTC += intermediateResult.dealValue;
+          returnedGeneratedResult[intermediateResult.type].services.voice.MTC.dealValue += intermediateResult.dealValue;
+          returnedGeneratedResult[intermediateResult.type].services.voice.MTC.shortOfCommitment += intermediateResult.shortOfCommitment;
+          returnedGeneratedResult[intermediateResult.type].services.voice.MTC.usage += intermediateResult.usage;
           break;
         case 'SMS MO':
         case 'SMSMO':
-          returnedGeneratedResult[intermediateResult.type].services.SMS.MO += intermediateResult.dealValue;
+          returnedGeneratedResult[intermediateResult.type].services.SMS.MO.dealValue += intermediateResult.dealValue;
+          returnedGeneratedResult[intermediateResult.type].services.SMS.MO.shortOfCommitment += intermediateResult.shortOfCommitment;
+          returnedGeneratedResult[intermediateResult.type].services.SMS.MO.usage += intermediateResult.usage;
           break;
         case 'SMS MT':
         case 'SMSMT':
-          returnedGeneratedResult[intermediateResult.type].services.SMS.MT += intermediateResult.dealValue;
+          returnedGeneratedResult[intermediateResult.type].services.SMS.MT.dealValue += intermediateResult.dealValue;
+          returnedGeneratedResult[intermediateResult.type].services.SMS.MT.shortOfCommitment += intermediateResult.shortOfCommitment;
+          returnedGeneratedResult[intermediateResult.type].services.SMS.MT.usage += intermediateResult.usage;
           break;
         case 'M2M':
-          returnedGeneratedResult[intermediateResult.type].services.data.filter((d) => (d.name === 'M2M'))[0].value += intermediateResult.dealValue;
+          returnedGeneratedResult[intermediateResult.type].services.data.filter((d) => (d.name === 'M2M'))[0].value.dealValue += intermediateResult.dealValue;
+          returnedGeneratedResult[intermediateResult.type].services.data.filter((d) => (d.name === 'M2M'))[0].value.shortOfCommitment += intermediateResult.shortOfCommitment;
+          returnedGeneratedResult[intermediateResult.type].services.data.filter((d) => (d.name === 'M2M'))[0].value.usage += intermediateResult.usage;
           break;
         case 'NB-IoT':
-          returnedGeneratedResult[intermediateResult.type].services.data.filter((d) => (d.name === 'NB-IOT'))[0].value += intermediateResult.dealValue;
+          returnedGeneratedResult[intermediateResult.type].services.data.filter((d) => (d.name === 'NB-IOT'))[0].value.dealValue += intermediateResult.dealValue;
+          returnedGeneratedResult[intermediateResult.type].services.data.filter((d) => (d.name === 'NB-IOT'))[0].value.shortOfCommitment += intermediateResult.shortOfCommitment;
+          returnedGeneratedResult[intermediateResult.type].services.data.filter((d) => (d.name === 'NB-IOT'))[0].value.usage += intermediateResult.usage;
           break;
         case 'LTE-M':
-          returnedGeneratedResult[intermediateResult.type].services.data.filter((d) => (d.name === 'LTE-M'))[0].value += intermediateResult.dealValue;
+          returnedGeneratedResult[intermediateResult.type].services.data.filter((d) => (d.name === 'LTE-M'))[0].value.dealValue += intermediateResult.dealValue;
+          returnedGeneratedResult[intermediateResult.type].services.data.filter((d) => (d.name === 'LTE-M'))[0].value.shortOfCommitment += intermediateResult.shortOfCommitment;
+          returnedGeneratedResult[intermediateResult.type].services.data.filter((d) => (d.name === 'LTE-M'))[0].value.usage += intermediateResult.usage;
           break;
         case 'VoLTE':
-          returnedGeneratedResult[intermediateResult.type].services.data.filter((d) => (d.name === 'VoLTE'))[0].value += intermediateResult.dealValue;
+          returnedGeneratedResult[intermediateResult.type].services.data.filter((d) => (d.name === 'VoLTE'))[0].value.dealValue += intermediateResult.dealValue;
+          returnedGeneratedResult[intermediateResult.type].services.data.filter((d) => (d.name === 'VoLTE'))[0].value.shortOfCommitment += intermediateResult.shortOfCommitment;
+          returnedGeneratedResult[intermediateResult.type].services.data.filter((d) => (d.name === 'VoLTE'))[0].value.usage += intermediateResult.usage;
           break;
         case 'ViLTE':
-          returnedGeneratedResult[intermediateResult.type].services.data.filter((d) => (d.name === 'ViLTE'))[0].value += intermediateResult.dealValue;
+          returnedGeneratedResult[intermediateResult.type].services.data.filter((d) => (d.name === 'ViLTE'))[0].value.dealValue += intermediateResult.dealValue;
+          returnedGeneratedResult[intermediateResult.type].services.data.filter((d) => (d.name === 'ViLTE'))[0].value.shortOfCommitment += intermediateResult.shortOfCommitment;
+          returnedGeneratedResult[intermediateResult.type].services.data.filter((d) => (d.name === 'ViLTE'))[0].value.usage += intermediateResult.usage;
           break;
         case 'IMS Signalling':
-          returnedGeneratedResult[intermediateResult.type].services.data.filter((d) => (d.name === 'signalling'))[0].value += intermediateResult.dealValue;
+          returnedGeneratedResult[intermediateResult.type].services.data.filter((d) => (d.name === 'signalling'))[0].value.dealValue += intermediateResult.dealValue;
+          returnedGeneratedResult[intermediateResult.type].services.data.filter((d) => (d.name === 'signalling'))[0].value.shortOfCommitment += intermediateResult.shortOfCommitment;
+          returnedGeneratedResult[intermediateResult.type].services.data.filter((d) => (d.name === 'signalling'))[0].value.usage += intermediateResult.usage;
           break;
         case 'GPRS':
-          returnedGeneratedResult[intermediateResult.type].services.data.filter((d) => (d.name === 'GPRS'))[0].value += intermediateResult.dealValue;
+          returnedGeneratedResult[intermediateResult.type].services.data.filter((d) => (d.name === 'GPRS'))[0].value.dealValue += intermediateResult.dealValue;
+          returnedGeneratedResult[intermediateResult.type].services.data.filter((d) => (d.name === 'GPRS'))[0].value.shortOfCommitment += intermediateResult.shortOfCommitment;
+          returnedGeneratedResult[intermediateResult.type].services.data.filter((d) => (d.name === 'GPRS'))[0].value.usage += intermediateResult.usage;
           break;
         case 'Network Access':
-          returnedGeneratedResult[intermediateResult.type].services.access.networkAccess += intermediateResult.dealValue;
+          returnedGeneratedResult[intermediateResult.type].services.access.networkAccess.dealValue += intermediateResult.dealValue;
+          returnedGeneratedResult[intermediateResult.type].services.access.networkAccess.shortOfCommitment += intermediateResult.shortOfCommitment;
+          returnedGeneratedResult[intermediateResult.type].services.access.networkAccess.usage += intermediateResult.usage;
           break;
         default:
           returnedGeneratedResult.unexpectedServiceNames.push(intermediateResult.service);
@@ -339,6 +388,12 @@ class SettlementMapper {
   }
 
   static getResponseBodyForSendSettlement(settlement) {
+    // By default, use mapper getResponseBodyForGetSettlement
+    const returnedResponseBody = SettlementMapper.getResponseBodyForGetSettlement(settlement, 'JSON');
+    return returnedResponseBody;
+  }
+
+  static getResponseBodyForRejectSettlement(settlement) {
     // By default, use mapper getResponseBodyForGetSettlement
     const returnedResponseBody = SettlementMapper.getResponseBodyForGetSettlement(settlement, 'JSON');
     return returnedResponseBody;

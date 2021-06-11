@@ -362,14 +362,14 @@ paths:
       description: Get All signatures of a given Contract
       operationId: getSignatures
       parameters:
-      - description: The contract Id
-        explode: false
-        in: path
-        name: contractId
-        required: true
-        schema:
-          type: string
-        style: simple
+        - description: The contract Id
+          explode: false
+          in: path
+          name: contractId
+          required: true
+          schema:
+            type: string
+          style: simple
       responses:
         "200":
           content:
@@ -382,20 +382,20 @@ paths:
           content: {}
           description: Internal Error
       tags:
-      - signature
+        - signature
       x-eov-operation-handler: controllers/SignatureController
     post:
       description: Create/Upload Signature
       operationId: createSignature
       parameters:
-      - description: The contract Id
-        explode: false
-        in: path
-        name: contractId
-        required: true
-        schema:
-          type: string
-        style: simple
+        - description: The contract Id
+          explode: false
+          in: path
+          name: contractId
+          required: true
+          schema:
+            type: string
+          style: simple
       requestBody:
         content:
           application/json:
@@ -420,7 +420,7 @@ paths:
           content: {}
           description: Internal Error
       tags:
-      - signature
+        - signature
       x-codegen-request-body-name: body
       x-eov-operation-handler: controllers/SignatureController
   /contracts/{contractId}/signatures/{signatureId}:
@@ -428,22 +428,22 @@ paths:
       description: Get Signature Object by its Id
       operationId: getSignatureById
       parameters:
-      - description: The contract Id
-        explode: false
-        in: path
-        name: contractId
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: The Signature Id
-        explode: false
-        in: path
-        name: signatureId
-        required: true
-        schema:
-          type: string
-        style: simple
+        - description: The contract Id
+          explode: false
+          in: path
+          name: contractId
+          required: true
+          schema:
+            type: string
+          style: simple
+        - description: The Signature Id
+          explode: false
+          in: path
+          name: signatureId
+          required: true
+          schema:
+            type: string
+          style: simple
       responses:
         "200":
           content:
@@ -463,7 +463,139 @@ paths:
           content: {}
           description: Internal Error
       tags:
-      - signature
+        - signature
+      x-eov-operation-handler: controllers/SignatureController
+  /contracts/{contractId}/usages/{usageId}/signatures/:
+    get:
+      description: Get All signatures of a given Usage
+      operationId: getUsageSignatures
+      parameters:
+        - description: The contract Id
+          explode: false
+          in: path
+          name: contractId
+          required: true
+          schema:
+            type: string
+          style: simple
+        - description: The usage Id
+          explode: false
+          in: path
+          name: usageId
+          required: true
+          schema:
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: string
+                x-content-type: application/json
+          description: List of available Signatures
+        "500":
+          content: {}
+          description: Internal Error
+      tags:
+        - signature
+      x-eov-operation-handler: controllers/SignatureController
+    post:
+      description: Create/Upload Signature
+      operationId: createUsageSignature
+      parameters:
+        - description: The contract Id
+          explode: false
+          in: path
+          name: contractId
+          required: true
+          schema:
+            type: string
+          style: simple
+        - description: The usage Id
+          explode: false
+          in: path
+          name: usageId
+          required: true
+          schema:
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignatureRequest'
+        description: Signature Object Payload
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SignatureResponse'
+          description: Successful operation, returns updated Signature Object
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400ErrorResponse'
+          description: Bad Request
+        "500":
+          content: {}
+          description: Internal Error
+      tags:
+        - signature
+      x-codegen-request-body-name: body
+      x-eov-operation-handler: controllers/SignatureController
+  /contracts/{contractId}/usages/{usageId}/signatures/{signatureId}:
+    get:
+      description: Get Signature Object by its Id
+      operationId: getUsageSignatureById
+      parameters:
+        - description: The contract Id
+          explode: false
+          in: path
+          name: contractId
+          required: true
+          schema:
+            type: string
+          style: simple
+        - description: The usage Id
+          explode: false
+          in: path
+          name: usageId
+          required: true
+          schema:
+            type: string
+          style: simple
+        - description: The Signature Id
+          explode: false
+          in: path
+          name: signatureId
+          required: true
+          schema:
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SignatureResponse'
+                x-content-type: application/json
+          description: The Selected Signature Object
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400ErrorResponse'
+                x-content-type: application/json
+          description: Bad Request
+        "500":
+          content: {}
+          description: Internal Error
+      tags:
+        - signature
       x-eov-operation-handler: controllers/SignatureController
   /contracts/{contractId}/usages/:
     get:
@@ -823,6 +955,48 @@ paths:
       tags:
         - usage
       x-eov-operation-handler: controllers/UsageController
+  /contracts/{contractId}/usages/{usageId}/reject/:
+    put:
+      description: Set Tag to "REJECTED"
+      operationId: rejectUsageById
+      parameters:
+        - description: The contract Id
+          explode: false
+          in: path
+          name: contractId
+          required: true
+          schema:
+            type: string
+          style: simple
+        - description: The Usage Id
+          explode: false
+          in: path
+          name: usageId
+          required: true
+          schema:
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsageResponse'
+                x-content-type: application/json
+          description: Successful operation, returns sent Usage Object
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400ErrorResponse'
+                x-content-type: application/json
+          description: Bad Request
+        "500":
+          content: {}
+          description: Internal Error
+      tags:
+        - usage
+      x-eov-operation-handler: controllers/UsageController
   /contracts/{contractId}/settlements/:
     get:
       description: Get All Settlement of a given Contract
@@ -945,6 +1119,48 @@ paths:
     put:
       description: Set State to "SEND" and POST to Blockchain adapter towards TargetMsp of the Usage
       operationId: sendSettlementById
+      parameters:
+        - description: The contract Id
+          explode: false
+          in: path
+          name: contractId
+          required: true
+          schema:
+            type: string
+          style: simple
+        - description: The Settlement Id
+          explode: false
+          in: path
+          name: settlementId
+          required: true
+          schema:
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Settlement'
+                x-content-type: application/json
+          description: Successful operation, returns sent Settlement Object
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400ErrorResponse'
+                x-content-type: application/json
+          description: Bad Request
+        "500":
+          content: {}
+          description: Internal Error
+      tags:
+        - settlement
+      x-eov-operation-handler: controllers/SettlementController
+  /contracts/{contractId}/settlements/{settlementId}/reject/:
+    put:
+      description: Set Tag to "REJECTED"
+      operationId: rejectSettlementById
       parameters:
         - description: The contract Id
           explode: false
@@ -1143,7 +1359,7 @@ components:
       properties:
         signatureId:
           type: string
-          description: signatureId from \"contract"->\"signature\"->\"\<mspId\>\"[X]->\"id\"
+          description: signatureId from \"signature\"->\"\<mspId\>\"[X]->\"id\"
           example: XXXXXX
 
         algorithm:
@@ -1161,7 +1377,7 @@ components:
           type: string
         extra:
           type: object
-          description: Additional Key/Value from \"contract"->\"signature\"->\"\<mspId\>\"[X]->XXX, eg name, role
+          description: Additional Key/Value from \"signature\"->\"\<mspId\>\"[X]->XXX, eg name, role
           example: '{"name":"john doe", "role":"manager"}'
       additionalProperties: false
       required:

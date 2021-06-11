@@ -37,6 +37,11 @@ const DATE_REGEX = testsUtils.getDateRegexp();
 const SHOW_DISCREPANCY_GENERATION_DETAILS = false;
 
 /* eslint-disable camelcase */
+
+const default_wait_time = 5000;
+const default_try_number = 20;
+const default_timeout = (default_try_number + 1) * default_wait_time;
+
 const DTAG_API = `http://127.0.0.1:3030/api/v1`;
 const TMUS_API = `http://127.0.0.1:3040/api/v1`;
 
@@ -232,6 +237,7 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
 
   it(`Wait this contract on TMUS`, function(done) {
     debugAction(`${this.test.title}`);
+    this.timeout(default_timeout);
     if (DTAG_dynamic_data.contractReferenceId === undefined) {
       expect.fail('This scenario step should use an undefined data');
     }
@@ -253,8 +259,9 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
               debug(`==> TMUS received contract id : ${TMUS_dynamic_data.receivedContractId}`);
               done();
             } else if (tries > 0) {
+              debug(`==> waiting`);
               setTimeout(() => {
-                waitContract(referenceId, (tries - 1));
+                waitContract(referenceId, (tries - 1), default_wait_time);
               }, interval);
             } else {
               done('No more tries');
@@ -267,7 +274,7 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
       }
     };
 
-    waitContract(DTAG_dynamic_data.contractReferenceId, 10, 5000);
+    waitContract(DTAG_dynamic_data.contractReferenceId, default_try_number, default_wait_time);
   });
 
   it(`Get TMUS contract in state RECEIVED`, function(done) {
@@ -400,6 +407,7 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
 
   it(`Wait this usage on TMUS`, function(done) {
     debugAction(`${this.test.title}`);
+    this.timeout(default_timeout);
     if ((TMUS_dynamic_data.receivedContractId === undefined) || (DTAG_dynamic_data.usageReferenceId === undefined)) {
       expect.fail('This scenario step should use an undefined data');
     }
@@ -425,7 +433,7 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
               done();
             } else if (tries > 0) {
               setTimeout(() => {
-                waitSettlement(referenceId, (tries - 1));
+                waitSettlement(referenceId, (tries - 1), default_wait_time);
               }, interval);
             } else {
               done('No more tries');
@@ -438,7 +446,7 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
       }
     };
 
-    waitSettlement(DTAG_dynamic_data.usageReferenceId, 20, 5000);
+    waitSettlement(DTAG_dynamic_data.usageReferenceId, default_try_number, default_wait_time);
   });
 
   it(`Get TMUS usage from DTAG`, function(done) {
@@ -544,6 +552,8 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
 
   it(`Send TMUS usage to DTAG`, function(done) {
     debugAction(`${this.test.title}`);
+    this.timeout(default_timeout);
+
     if ((TMUS_dynamic_data.receivedContractId === undefined) || (TMUS_dynamic_data.usageId === undefined)) {
       expect.fail('This scenario step should use an undefined data');
     }
@@ -583,6 +593,7 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
 
   it(`Wait this usage on DTAG`, function(done) {
     debugAction(`${this.test.title}`);
+    this.timeout(default_timeout);
     if ((DTAG_dynamic_data.contractId === undefined) || (TMUS_dynamic_data.usageReferenceId === undefined)) {
       expect.fail('This scenario step should use an undefined data');
     }
@@ -607,8 +618,9 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
               debug(`==> DTAG received usage id : ${DTAG_dynamic_data.receivedUsageId}`);
               done();
             } else if (tries > 0) {
+              debug(`==> waiting`);
               setTimeout(() => {
-                waitSettlement(referenceId, (tries - 1));
+                waitSettlement(referenceId, (tries - 1), default_wait_time);
               }, interval);
             } else {
               done('No more tries');
@@ -621,7 +633,7 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
       }
     };
 
-    waitSettlement(TMUS_dynamic_data.usageReferenceId, 20, 5000);
+    waitSettlement(TMUS_dynamic_data.usageReferenceId, default_try_number, default_wait_time);
   });
 
   it(`Get DTAG usage from TMUS`, function(done) {
@@ -1068,6 +1080,8 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
   // To return a good reponse on Discrepancy Service requests
   it(`Get TMUS usage discrepancy on DTAG usage with local usage as partnerUsage`, function(done) {
     debugAction(`${this.test.title}`);
+    this.timeout(default_timeout);
+
     if ((TMUS_dynamic_data.receivedContractId === undefined) || (TMUS_dynamic_data.usageId === undefined) || (TMUS_dynamic_data.receivedUsageId === undefined)) {
       expect.fail('This scenario step should use an undefined data');
     }
@@ -1095,6 +1109,8 @@ describe(`Launch scenario 0003_Send_usage_from_DTAG_contract`, function() {
 
   it(`Get TMUS usage discrepancy on local usage with DTAG usage as partnerUsage`, function(done) {
     debugAction(`${this.test.title}`);
+    this.timeout(default_timeout);
+
     if ((TMUS_dynamic_data.receivedContractId === undefined) || (TMUS_dynamic_data.usageId === undefined) || (TMUS_dynamic_data.receivedUsageId === undefined)) {
       expect.fail('This scenario step should use an undefined data');
     }

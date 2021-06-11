@@ -49,6 +49,12 @@ const UsageBodySchema = new Schema({
 }, {_id: false});
 
 const MixUsageBodySchema = Schema.Types.Mixed;
+const SignatureLinkSchema = new Schema({
+  id: {type: String, required: true},
+  msp: {type: String, required: true},
+  index: {type: Number, required: true},
+  txId: {type: String, required: false}
+}, {_id: false});
 
 const UsageSchema = new Schema({
   id: {type: String, required: true},
@@ -58,6 +64,7 @@ const UsageSchema = new Schema({
   contractId: {type: String, required: true},
   contractReferenceId: {type: String, required: false},
   settlementId: {type: String, required: false},
+  partnerUsageId: {type: String, required: false},
   mspOwner: {type: String, required: true},
   mspReceiver: {type: String, required: true},
   body: {type: MixUsageBodySchema, required: true},
@@ -66,9 +73,11 @@ const UsageSchema = new Schema({
   blockchainRef: {type: BlockchainRefSchema, required: false},
   storageKeys: {type: [String], required: false},
   state: {type: String, required: true},
+  tag: {type: String, required: false},
   history: {type: [HistorySchema], required: true},
   creationDate: {type: Date, required: true},
   lastModificationDate: {type: Date, required: true, default: Date.now},
+  signatureLink: {type: [SignatureLinkSchema], required: false}
 });
 
 UsageSchema.index({id: 1}, {unique: true});

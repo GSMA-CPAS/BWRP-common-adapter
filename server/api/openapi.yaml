@@ -462,6 +462,136 @@ paths:
       tags:
       - signature
       x-eov-operation-handler: controllers/SignatureController
+  /contracts/{contractId}/usages/{usageId}/signatures/:
+    get:
+      description: Get All signatures of a given Usage
+      operationId: getUsageSignatures
+      parameters:
+      - description: The contract Id
+        explode: false
+        in: path
+        name: contractId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The usage Id
+        explode: false
+        in: path
+        name: usageId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: string
+                x-content-type: application/json
+          description: List of available Signatures
+        "500":
+          content: {}
+          description: Internal Error
+      tags:
+      - signature
+      x-eov-operation-handler: controllers/SignatureController
+    post:
+      description: Create/Upload Signature
+      operationId: createUsageSignature
+      parameters:
+      - description: The contract Id
+        explode: false
+        in: path
+        name: contractId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The usage Id
+        explode: false
+        in: path
+        name: usageId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignatureRequest'
+        description: Signature Object Payload
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SignatureResponse'
+          description: Successful operation, returns updated Signature Object
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400ErrorResponse'
+          description: Bad Request
+        "500":
+          content: {}
+          description: Internal Error
+      tags:
+      - signature
+      x-codegen-request-body-name: body
+      x-eov-operation-handler: controllers/SignatureController
+  /contracts/{contractId}/usages/{usageId}/signatures/{signatureId}:
+    get:
+      description: Get Signature Object by its Id
+      operationId: getUsageSignatureById
+      parameters:
+      - description: The contract Id
+        explode: false
+        in: path
+        name: contractId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The usage Id
+        explode: false
+        in: path
+        name: usageId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The Signature Id
+        explode: false
+        in: path
+        name: signatureId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SignatureResponse'
+          description: The Selected Signature Object
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400ErrorResponse'
+          description: Bad Request
+        "500":
+          content: {}
+          description: Internal Error
+      tags:
+      - signature
+      x-eov-operation-handler: controllers/SignatureController
   /contracts/{contractId}/usages/:
     get:
       description: Get All usage of a given Contract
@@ -818,6 +948,46 @@ paths:
       tags:
       - usage
       x-eov-operation-handler: controllers/UsageController
+  /contracts/{contractId}/usages/{usageId}/reject/:
+    put:
+      description: Set Tag to "REJECTED"
+      operationId: rejectUsageById
+      parameters:
+      - description: The contract Id
+        explode: false
+        in: path
+        name: contractId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The Usage Id
+        explode: false
+        in: path
+        name: usageId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsageResponse'
+          description: Successful operation, returns sent Usage Object
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400ErrorResponse'
+          description: Bad Request
+        "500":
+          content: {}
+          description: Internal Error
+      tags:
+      - usage
+      x-eov-operation-handler: controllers/UsageController
   /contracts/{contractId}/settlements/:
     get:
       description: Get All Settlement of a given Contract
@@ -938,6 +1108,46 @@ paths:
       description: Set State to "SEND" and POST to Blockchain adapter towards TargetMsp
         of the Usage
       operationId: sendSettlementById
+      parameters:
+      - description: The contract Id
+        explode: false
+        in: path
+        name: contractId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The Settlement Id
+        explode: false
+        in: path
+        name: settlementId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Settlement'
+          description: Successful operation, returns sent Settlement Object
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400ErrorResponse'
+          description: Bad Request
+        "500":
+          content: {}
+          description: Internal Error
+      tags:
+      - settlement
+      x-eov-operation-handler: controllers/SettlementController
+  /contracts/{contractId}/settlements/{settlementId}/reject/:
+    put:
+      description: Set Tag to "REJECTED"
+      operationId: rejectSettlementById
       parameters:
       - description: The contract Id
         explode: false
@@ -1146,7 +1356,7 @@ components:
         algorithm: secp384r1
       properties:
         signatureId:
-          description: signatureId from \"contract"->\"signature\"->\"\<mspId\>\"[X]->\"id\"
+          description: signatureId from \"signature\"->\"\<mspId\>\"[X]->\"id\"
           example: XXXXXX
           type: string
         algorithm:
@@ -1163,7 +1373,7 @@ components:
           description: The digital signature over the document
           type: string
         extra:
-          description: Additional Key/Value from \"contract"->\"signature\"->\"\<mspId\>\"[X]->XXX,
+          description: Additional Key/Value from \"signature\"->\"\<mspId\>\"[X]->XXX,
             eg name, role
           example: '{"name":"john doe", "role":"manager"}'
           type: object

@@ -11,9 +11,9 @@
       "voice": {
         "MOC": {
           "local": {
-            "dealValue": 1500,
+            "dealValue": 0,
             "shortOfCommitment": 0,
-            "usage": 25823
+            "usage": 0
           },
           "backHome": {
             "dealValue": 0,
@@ -36,9 +36,9 @@
             "usage": 0
           },
           "EU": {
-            "dealValue": 256704,
+            "dealValue": 0,
             "shortOfCommitment": 0,
-            "usage": 21392
+            "usage": 0
           },
           "EEA": {
             "dealValue": 0,
@@ -69,9 +69,9 @@
       },
       "SMS": {
         "MO": {
-          "dealValue": 158469.00000000003,
-          "shortOfCommitment": 0,
-          "usage": 51823.00000000001
+          "dealValue": 1058.2350000000001,
+          "shortOfCommitment": 1999788.3530000001,
+          "usage": 211647
         },
         "MT": {
           "dealValue": 0,
@@ -115,9 +115,9 @@
         {
           "name": "VoLTE",
           "value": {
-            "dealValue": 1851840.0000000005,
+            "dealValue": 0,
             "shortOfCommitment": 0,
-            "usage": 123456.00000000003
+            "usage": 0
           }
         },
         {
@@ -155,9 +155,9 @@
       "voice": {
         "MOC": {
           "local": {
-            "dealValue": 3000,
+            "dealValue": 0,
             "shortOfCommitment": 0,
-            "usage": 128351.99999999999
+            "usage": 0
           },
           "backHome": {
             "dealValue": 0,
@@ -180,9 +180,9 @@
             "usage": 0
           },
           "EU": {
-            "dealValue": 1846545,
+            "dealValue": 0,
             "shortOfCommitment": 0,
-            "usage": 123103
+            "usage": 0
           },
           "EEA": {
             "dealValue": 0,
@@ -213,9 +213,9 @@
       },
       "SMS": {
         "MO": {
-          "dealValue": 5000,
-          "shortOfCommitment": 0,
-          "usage": 214234
+          "dealValue": 4120.26,
+          "shortOfCommitment": 1399175.948,
+          "usage": 824052
         },
         "MT": {
           "dealValue": 0,
@@ -259,9 +259,9 @@
         {
           "name": "VoLTE",
           "value": {
-            "dealValue": 2319809.5,
+            "dealValue": 0,
             "shortOfCommitment": 0,
-            "usage": 146235
+            "usage": 0
           }
         },
         {

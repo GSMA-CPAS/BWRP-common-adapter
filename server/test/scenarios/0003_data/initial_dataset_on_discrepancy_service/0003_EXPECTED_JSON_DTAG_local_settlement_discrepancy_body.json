@@ -2,15 +2,26 @@
   "homePerspective": {
     "general_information": [
       {
-        "service": "Voice",
+        "service": "MOC",
         "unit": "min",
-        "own_calculation": 3000,
-        "partner_calculation": 3000,
-        "delta_calculation_percent": 0,
+        "own_calculation": 323990.7036,
+        "partner_calculation": 1849545,
+        "delta_calculation_percent": -470.863601778974,
         "own_usage": 47231.289175,
         "partner_usage": 251455,
         "delta_usage_abs": 204223.71082500002,
         "delta_usage_percent": -432.3907189327741
+      },
+      {
+        "service": "MTC",
+        "unit": "min",
+        "own_calculation": 0,
+        "partner_calculation": 0,
+        "delta_calculation_percent": 0,
+        "own_usage": 0,
+        "partner_usage": 0,
+        "delta_usage_abs": 0,
+        "delta_usage_percent": 0
       },
       {
         "service": "SMS",
@@ -48,6 +59,17 @@
         "delta_usage_percent": -396.8738482431477
       },
       {
+        "service": "MOC EU",
+        "unit": "min",
+        "own_calculation": 320990.7036,
+        "partner_calculation": 1846545,
+        "delta_calculation_percent": -475.2643236363185,
+        "own_usage": 21399.38024,
+        "partner_usage": 123103,
+        "delta_usage_abs": 101703.61976,
+        "delta_usage_percent": -475.2643236363186
+      },
+      {
         "service": "SMSMO",
         "unit": "SMS",
         "own_calculation": 5000,
@@ -74,15 +96,26 @@
   "partnerPerspective": {
     "general_information": [
       {
-        "service": "Voice",
+        "service": "MOC",
         "unit": "min",
-        "own_calculation": 1500,
-        "partner_calculation": 1500,
-        "delta_calculation_percent": 0,
+        "own_calculation": 258204,
+        "partner_calculation": 1479245.64642,
+        "delta_calculation_percent": -472.8980365989682,
         "own_usage": 47215,
         "partner_usage": 251541.751975,
         "delta_usage_abs": 204326.751975,
         "delta_usage_percent": -432.75813189664296
+      },
+      {
+        "service": "MTC",
+        "unit": "min",
+        "own_calculation": 0,
+        "partner_calculation": 0,
+        "delta_calculation_percent": 0,
+        "own_usage": 0,
+        "partner_usage": 0,
+        "delta_usage_abs": 0,
+        "delta_usage_percent": 0
       },
       {
         "service": "SMS",
@@ -120,6 +153,17 @@
         "delta_usage_percent": -397.2167503388452
       },
       {
+        "service": "MOC EU",
+        "unit": "min",
+        "own_calculation": 256704,
+        "partner_calculation": 1477745.64642,
+        "delta_calculation_percent": -475.6613244904637,
+        "own_usage": 21392,
+        "partner_usage": 123145.470535,
+        "delta_usage_abs": 101753.470535,
+        "delta_usage_percent": -475.66132449046376
+      },
+      {
         "service": "SMSMO",
         "unit": "SMS",
         "own_calculation": 158469.00000000003,
@@ -142,5 +186,13 @@
         "delta_usage_percent": -18.491973719381797
       }
     ]
+  },
+  "settlementReport": {
+    "homeCharges": 4434385.43851,
+    "homeDeltaCommitment": 0,
+    "homeRevenue": 2181469.5884000002,
+    "partnerCharges": 4174354.5,
+    "partnerDeltaCommitment": 0,
+    "partnerRevenue": 2268513.0000000005
   }
 }
