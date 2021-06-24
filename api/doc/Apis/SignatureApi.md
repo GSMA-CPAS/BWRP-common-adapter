@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 <a name="createSignature"></a>
 # **createSignature**
-> SignatureResponse createSignature(contractId, body)
+> ContractSignatureResponse createSignature(contractId, body)
 
 
 
@@ -29,7 +29,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SignatureResponse**](../Models/SignatureResponse.md)
+[**ContractSignatureResponse**](../Models/ContractSignatureResponse.md)
 
 ### Authorization
 
@@ -42,7 +42,7 @@ No authorization required
 
 <a name="createUsageSignature"></a>
 # **createUsageSignature**
-> SignatureResponse createUsageSignature(contractId, usageId, body)
+> UsageSignatureResponse createUsageSignature(contractId, usageId, body)
 
 
 
@@ -58,7 +58,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SignatureResponse**](../Models/SignatureResponse.md)
+[**UsageSignatureResponse**](../Models/UsageSignatureResponse.md)
 
 ### Authorization
 
@@ -71,7 +71,7 @@ No authorization required
 
 <a name="getSignatureById"></a>
 # **getSignatureById**
-> SignatureResponse getSignatureById(contractId, signatureId)
+> ContractSignatureResponse getSignatureById(contractId, signatureId)
 
 
 
@@ -86,7 +86,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SignatureResponse**](../Models/SignatureResponse.md)
+[**ContractSignatureResponse**](../Models/ContractSignatureResponse.md)
 
 ### Authorization
 
@@ -126,7 +126,7 @@ No authorization required
 
 <a name="getUsageSignatureById"></a>
 # **getUsageSignatureById**
-> SignatureResponse getUsageSignatureById(contractId, usageId, signatureId)
+> UsageSignatureResponse getUsageSignatureById(contractId, usageId, signatureId)
 
 
 
@@ -142,7 +142,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SignatureResponse**](../Models/SignatureResponse.md)
+[**UsageSignatureResponse**](../Models/UsageSignatureResponse.md)
 
 ### Authorization
 
@@ -155,7 +155,7 @@ No authorization required
 
 <a name="getUsageSignatures"></a>
 # **getUsageSignatures**
-> String getUsageSignatures(contractId, usageId)
+> List getUsageSignatures(contractId, usageId)
 
 
 
@@ -170,7 +170,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**String**](../Models/string.md)
+[**List**](../Models/object.md)
 
 ### Authorization
 

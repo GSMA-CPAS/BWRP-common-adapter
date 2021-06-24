@@ -57,6 +57,7 @@ Class | Method | HTTP request | Description
  - [ContractResponse](./Models/ContractResponse.md)
  - [ContractResponseHeader](./Models/ContractResponseHeader.md)
  - [ContractResponseOrRAWContractResponse](./Models/ContractResponseOrRAWContractResponse.md)
+ - [ContractSignatureResponse](./Models/ContractSignatureResponse.md)
  - [Event](./Models/Event.md)
  - [Msp](./Models/Msp.md)
  - [RAWContractResponse](./Models/RAWContractResponse.md)
@@ -69,6 +70,7 @@ Class | Method | HTTP request | Description
  - [SettlementBodySettlementItemServicesVoice](./Models/SettlementBodySettlementItemServicesVoice.md)
  - [SettlementBodySettlementItemServicesVoiceMOC](./Models/SettlementBodySettlementItemServicesVoiceMOC.md)
  - [SettlementBodySettlementItemTax](./Models/SettlementBodySettlementItemTax.md)
+ - [SettlementBodySettlementValueObject](./Models/SettlementBodySettlementValueObject.md)
  - [SettlementDiscrepancy](./Models/SettlementDiscrepancy.md)
  - [SettlementDiscrepancyDetailsItem](./Models/SettlementDiscrepancyDetailsItem.md)
  - [SettlementDiscrepancyGeneralInformationItem](./Models/SettlementDiscrepancyGeneralInformationItem.md)
@@ -77,7 +79,6 @@ Class | Method | HTTP request | Description
  - [SettlementResponseHeader](./Models/SettlementResponseHeader.md)
  - [SignatureBase](./Models/SignatureBase.md)
  - [SignatureRequest](./Models/SignatureRequest.md)
- - [SignatureResponse](./Models/SignatureResponse.md)
  - [StringOrNumber](./Models/StringOrNumber.md)
  - [UsageBody](./Models/UsageBody.md)
  - [UsageBodyUsageItem](./Models/UsageBodyUsageItem.md)
@@ -88,6 +89,7 @@ Class | Method | HTTP request | Description
  - [UsageRequestHeader](./Models/UsageRequestHeader.md)
  - [UsageResponse](./Models/UsageResponse.md)
  - [UsageResponseHeader](./Models/UsageResponseHeader.md)
+ - [UsageSignatureResponse](./Models/UsageSignatureResponse.md)
 
 
 <a name="documentation-for-authorization"></a>

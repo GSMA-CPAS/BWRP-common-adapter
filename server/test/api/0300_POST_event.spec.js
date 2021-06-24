@@ -1274,7 +1274,8 @@ describe(`Tests POST ${route} API OK`, function() {
             expect(response).to.have.status(200);
             expect(response).to.be.json;
             expect(response.body).to.exist;
-            expect(response.body).to.be.an('object').that.is.empty;
+            expect(response.body).to.be.an('array');
+            expect(response.body.length).to.equal(0);
             expect(blockchainAdapterNock.isDone(), 'Unconsumed nock error').to.be.true;
 
             done();
@@ -1326,7 +1327,8 @@ describe(`Tests POST ${route} API OK`, function() {
             expect(response).to.have.status(200);
             expect(response).to.be.json;
             expect(response.body).to.exist;
-            expect(response.body).to.be.an('object').that.is.empty;
+            expect(response.body).to.be.an('array');
+            expect(response.body.length).to.equal(0);
             // expect(blockchainAdapterNock.isDone(), 'Unconsumed nock error').to.be.true;
 
             done();
@@ -1378,7 +1380,8 @@ describe(`Tests POST ${route} API OK`, function() {
             expect(response).to.have.status(200);
             expect(response).to.be.json;
             expect(response.body).to.exist;
-            expect(response.body).to.be.an('object').that.is.empty;
+            expect(response.body).to.be.an('array');
+            expect(response.body.length).to.equal(0);
             expect(blockchainAdapterNock.isDone(), 'Unconsumed nock error').to.be.true;
 
             // testsDbUtils.verifyContract(receivedContract.id,
@@ -1449,7 +1452,8 @@ describe(`Tests POST ${route} API OK`, function() {
             expect(response).to.have.status(200);
             expect(response).to.be.json;
             expect(response.body).to.exist;
-            expect(response.body).to.be.an('object').that.is.empty;
+            expect(response.body).to.be.an('array');
+            expect(response.body.length).to.equal(0);
             expect(blockchainAdapterNock.isDone(), 'Unconsumed nock error').to.be.true;
 
             // testsDbUtils.verifyContract(receivedContract.id,
@@ -1504,7 +1508,8 @@ describe(`Tests POST ${route} API OK`, function() {
             expect(response).to.have.status(200);
             expect(response).to.be.json;
             expect(response.body).to.exist;
-            expect(response.body).to.be.an('object').that.is.empty;
+            expect(response.body).to.be.an('array');
+            expect(response.body.length).to.equal(0);
             expect(blockchainAdapterNock.isDone(), 'Unconsumed nock error').to.be.true;
 
             done();

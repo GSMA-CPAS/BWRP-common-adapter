@@ -72,11 +72,80 @@ describe(`Tests PUT ${route} API OK`, function() {
       mspReceiver: undefined,
       body: {
         generatedResult: {
-          complexObject: {
-            a: 'a',
-            b: 'b'
+          fromDate: 202001,
+          toDate: 202012,
+          calculationEngineVersion: '0.0.1',
+          inbound: {
+            tax: {rate: ''},
+            currency: 'EUR',
+            services: {
+              voice: {
+                MOC: {
+                  local: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  backHome: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  international: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  premium: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  ROW: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  EU: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  EEA: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  satellite: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  videoTelephony: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  specialDestinations: {dealValue: 0, shortOfCommitment: 0, usage: 0}
+                },
+                MTC: {dealValue: 0, shortOfCommitment: 0, usage: 0}
+              },
+              SMS: {
+                MO: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                MT: {dealValue: 0, shortOfCommitment: 0, usage: 0}
+              },
+              data: [
+                {name: 'GPRS', value: {dealValue: 0, shortOfCommitment: 0, usage: 0}},
+                {name: 'M2M', value: {dealValue: 0, shortOfCommitment: 0, usage: 0}},
+                {name: 'NB-IOT', value: {dealValue: 0, shortOfCommitment: 0, usage: 0}},
+                {name: 'LTE-M', value: {dealValue: 0, shortOfCommitment: 0, usage: 0}},
+                {name: 'VoLTE', value: {dealValue: 0, shortOfCommitment: 0, usage: 0}},
+                {name: 'ViLTE', value: {dealValue: 0, shortOfCommitment: 0, usage: 0}},
+                {name: 'signalling', value: {dealValue: 0, shortOfCommitment: 0, usage: 0}}
+              ],
+              access: {networkAccess: {dealValue: 0, shortOfCommitment: 0, usage: 0}}
+            }
           },
-          otherValue: 'other'
+          outbound: {
+            tax: {rate: ''},
+            currency: 'EUR',
+            services: {
+              voice: {
+                MOC: {
+                  local: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  backHome: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  international: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  premium: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  ROW: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  EU: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  EEA: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  satellite: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  videoTelephony: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  specialDestinations: {dealValue: 0, shortOfCommitment: 0, usage: 0}
+                },
+                MTC: {dealValue: 0, shortOfCommitment: 0, usage: 0}
+              },
+              SMS: {
+                MO: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                MT: {dealValue: 0, shortOfCommitment: 0, usage: 0}
+              },
+              data: [
+                {name: 'GPRS', value: {dealValue: 0, shortOfCommitment: 0, usage: 0}},
+                {name: 'M2M', value: {dealValue: 0, shortOfCommitment: 0, usage: 0}},
+                {name: 'NB-IOT', value: {dealValue: 0, shortOfCommitment: 0, usage: 0}},
+                {name: 'LTE-M', value: {dealValue: 0, shortOfCommitment: 0, usage: 0}},
+                {name: 'VoLTE', value: {dealValue: 0, shortOfCommitment: 0, usage: 0}},
+                {name: 'ViLTE', value: {dealValue: 0, shortOfCommitment: 0, usage: 0}},
+                {name: 'signalling', value: {dealValue: 0, shortOfCommitment: 0, usage: 0}}
+              ],
+              access: {networkAccess: {dealValue: 0, shortOfCommitment: 0, usage: 0}}
+            }
+          },
+          unexpectedServiceNames: []
         },
         usage: {
           name: 'usageName1',
@@ -105,7 +174,82 @@ describe(`Tests PUT ${route} API OK`, function() {
       mspOwner: undefined,
       mspReceiver: undefined,
       body: {
-        generatedResult: 'objectOrString',
+        generatedResult: {
+          fromDate: 202001,
+          toDate: 202012,
+          calculationEngineVersion: '0.0.1',
+          inbound: {
+            tax: {rate: ''},
+            currency: 'EUR',
+            services: {
+              voice: {
+                MOC: {
+                  local: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  backHome: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  international: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  premium: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  ROW: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  EU: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  EEA: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  satellite: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  videoTelephony: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  specialDestinations: {dealValue: 0, shortOfCommitment: 0, usage: 0}
+                },
+                MTC: {dealValue: 0, shortOfCommitment: 0, usage: 0}
+              },
+              SMS: {
+                MO: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                MT: {dealValue: 0, shortOfCommitment: 0, usage: 0}
+              },
+              data: [
+                {name: 'GPRS', value: {dealValue: 0, shortOfCommitment: 0, usage: 0}},
+                {name: 'M2M', value: {dealValue: 0, shortOfCommitment: 0, usage: 0}},
+                {name: 'NB-IOT', value: {dealValue: 0, shortOfCommitment: 0, usage: 0}},
+                {name: 'LTE-M', value: {dealValue: 0, shortOfCommitment: 0, usage: 0}},
+                {name: 'VoLTE', value: {dealValue: 0, shortOfCommitment: 0, usage: 0}},
+                {name: 'ViLTE', value: {dealValue: 0, shortOfCommitment: 0, usage: 0}},
+                {name: 'signalling', value: {dealValue: 0, shortOfCommitment: 0, usage: 0}}
+              ],
+              access: {networkAccess: {dealValue: 0, shortOfCommitment: 0, usage: 0}}
+            }
+          },
+          outbound: {
+            tax: {rate: ''},
+            currency: 'EUR',
+            services: {
+              voice: {
+                MOC: {
+                  local: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  backHome: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  international: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  premium: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  ROW: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  EU: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  EEA: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  satellite: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  videoTelephony: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                  specialDestinations: {dealValue: 0, shortOfCommitment: 0, usage: 0}
+                },
+                MTC: {dealValue: 0, shortOfCommitment: 0, usage: 0}
+              },
+              SMS: {
+                MO: {dealValue: 0, shortOfCommitment: 0, usage: 0},
+                MT: {dealValue: 0, shortOfCommitment: 0, usage: 0}
+              },
+              data: [
+                {name: 'GPRS', value: {dealValue: 0, shortOfCommitment: 0, usage: 0}},
+                {name: 'M2M', value: {dealValue: 0, shortOfCommitment: 0, usage: 0}},
+                {name: 'NB-IOT', value: {dealValue: 0, shortOfCommitment: 0, usage: 0}},
+                {name: 'LTE-M', value: {dealValue: 0, shortOfCommitment: 0, usage: 0}},
+                {name: 'VoLTE', value: {dealValue: 0, shortOfCommitment: 0, usage: 0}},
+                {name: 'ViLTE', value: {dealValue: 0, shortOfCommitment: 0, usage: 0}},
+                {name: 'signalling', value: {dealValue: 0, shortOfCommitment: 0, usage: 0}}
+              ],
+              access: {networkAccess: {dealValue: 0, shortOfCommitment: 0, usage: 0}}
+            }
+          },
+          unexpectedServiceNames: []
+        },
         usage: {
           name: 'usageName1',
           version: 'usageVersion1',

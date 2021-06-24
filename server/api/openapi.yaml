@@ -384,7 +384,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SignatureListResponse'
+                $ref: '#/components/schemas/ContractSignatureListResponse'
           description: List of available Signatures
         "500":
           content: {}
@@ -416,7 +416,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SignatureResponse'
+                $ref: '#/components/schemas/ContractSignatureResponse'
           description: Successful operation, returns updated Signature Object
         "400":
           content:
@@ -457,7 +457,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SignatureResponse'
+                $ref: '#/components/schemas/ContractSignatureResponse'
           description: The Selected Signature Object
         "400":
           content:
@@ -497,8 +497,7 @@ paths:
           content:
             application/json:
               schema:
-                type: string
-                x-content-type: application/json
+                $ref: '#/components/schemas/UsageSignatureListResponse'
           description: List of available Signatures
         "500":
           content: {}
@@ -538,7 +537,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SignatureResponse'
+                $ref: '#/components/schemas/UsageSignatureResponse'
           description: Successful operation, returns updated Signature Object
         "400":
           content:
@@ -587,7 +586,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SignatureResponse'
+                $ref: '#/components/schemas/UsageSignatureResponse'
           description: The Selected Signature Object
         "400":
           content:
@@ -1785,7 +1784,7 @@ components:
         role:
           type: string
       type: object
-    SignatureListResponse:
+    ContractSignatureListResponse:
       example:
       - signatureId: 6086a6e990658f001f8fdf5e40f3
         contractId: 6086ec7f7146de001fefc02004cf
@@ -1814,7 +1813,36 @@ components:
         type: object
       title: List of signatures JSON
       type: array
-    SignatureResponse:
+    UsageSignatureListResponse:
+      example:
+      - signatureId: 6086a6e990658f001f8fdf5e40f3
+        usageId: 6086ec7f7146de001fefc02004cf
+        msp: DTAG
+        state: SIGNED
+      - signatureId: 7196a6e990658f001f8fdf5e40f3
+        usageId: 7196ec7f7146de001fefc02004cf
+        msp: TMUS
+        state: SIGNED
+      items:
+        additionalProperties: false
+        properties:
+          signatureId:
+            type: string
+          usageId:
+            type: string
+          msp:
+            type: string
+          state:
+            type: string
+        required:
+        - msp
+        - signatureId
+        - state
+        - usageId
+        type: object
+      title: List of signatures JSON
+      type: array
+    ContractSignatureResponse:
       additionalProperties: false
       example:
         signatureId: 6086a6e990658f001f8fdf5e40f3
@@ -1858,6 +1886,52 @@ components:
       - msp
       - signatureId
       - state
+      title: Signature JSON
+      type: object
+    UsageSignatureResponse:
+      additionalProperties: false
+      example:
+        signatureId: 6086a6e990658f001f8fdf5e40f3
+        usageId: 6086ec7f7146de001fefc02004cf
+        msp: DTAG
+        state: SIGNED
+        algorithm: secp384r1
+        certificate: |-
+          -----BEGIN CERTIFICATE-----
+          MIICYjCCAemgAwIBA...
+        signature: signature
+        extra: '{"name":"john doe", "role":"manager"}'
+      properties:
+        signatureId:
+          type: string
+        usageId:
+          type: string
+        msp:
+          type: string
+        state:
+          type: string
+        algorithm:
+          description: The algorithm used to sign
+          type: string
+        certificate:
+          description: The certificate of the signer in pem format
+          type: string
+        signature:
+          description: The digital signature over the document
+          type: string
+        extra:
+          description: Additional Key/Value from \"signature\"->\"\<mspId\>\"[X]->XXX,
+            eg name, role
+          type: object
+        blockchainRef:
+          additionalProperties: true
+          title: BlockchainRef object JSON
+          type: object
+      required:
+      - msp
+      - signatureId
+      - state
+      - usageId
       title: Signature JSON
       type: object
     SignatureRequest:
@@ -2019,6 +2093,12 @@ components:
           type: string
         body:
           $ref: '#/components/schemas/UsageBody'
+        partnerUsageId:
+          example: 09552c4c-e52f-4bb5-83d2-f50c86115bc9
+          type: string
+        tag:
+          example: APPROVED
+          type: string
         creationDate:
           example: 2021-01-01T15:30:10.801Z
           title: Formatted date JSON
@@ -2578,6 +2658,9 @@ components:
           type: string
         body:
           $ref: '#/components/schemas/SettlementBody'
+        tag:
+          example: APPROVED
+          type: string
         creationDate:
           example: 2021-01-01T15:30:10.801Z
           title: Formatted date JSON
@@ -3101,6 +3184,20 @@ components:
             $ref: '#/components/schemas/UsageBody_usage_item'
           type: array
       type: object
+    SettlementBody_settlement_value_object:
+      additionalProperties: false
+      properties:
+        dealValue:
+          type: number
+        shortOfCommitment:
+          type: number
+        usage:
+          type: number
+      required:
+      - dealValue
+      - shortOfCommitment
+      - usage
+      type: object
     SettlementBody_settlement_item:
       additionalProperties: true
       properties:
@@ -3333,25 +3430,25 @@ components:
     SettlementBody_settlement_item_services_voice_MOC:
       properties:
         local:
-          type: number
+          $ref: '#/components/schemas/SettlementBody_settlement_value_object'
         backHome:
-          type: number
+          $ref: '#/components/schemas/SettlementBody_settlement_value_object'
         international:
-          type: number
+          $ref: '#/components/schemas/SettlementBody_settlement_value_object'
         premium:
-          type: number
+          $ref: '#/components/schemas/SettlementBody_settlement_value_object'
         ROW:
-          type: number
+          $ref: '#/components/schemas/SettlementBody_settlement_value_object'
         EU:
-          type: number
+          $ref: '#/components/schemas/SettlementBody_settlement_value_object'
         EEA:
-          type: number
+          $ref: '#/components/schemas/SettlementBody_settlement_value_object'
         satellite:
-          type: number
+          $ref: '#/components/schemas/SettlementBody_settlement_value_object'
         videoTelephony:
-          type: number
+          $ref: '#/components/schemas/SettlementBody_settlement_value_object'
         specialDestinations:
-          type: number
+          $ref: '#/components/schemas/SettlementBody_settlement_value_object'
       required:
       - EEA
       - EU
@@ -3369,7 +3466,7 @@ components:
         MOC:
           $ref: '#/components/schemas/SettlementBody_settlement_item_services_voice_MOC'
         MTC:
-          type: number
+          $ref: '#/components/schemas/SettlementBody_settlement_value_object'
       required:
       - MOC
       - MTC
@@ -3377,9 +3474,9 @@ components:
     SettlementBody_settlement_item_services_SMS:
       properties:
         MO:
-          type: number
+          $ref: '#/components/schemas/SettlementBody_settlement_value_object'
         MT:
-          type: number
+          $ref: '#/components/schemas/SettlementBody_settlement_value_object'
       required:
       - MO
       - MT
@@ -3397,7 +3494,7 @@ components:
           - signalling
           type: string
         value:
-          type: number
+          $ref: '#/components/schemas/SettlementBody_settlement_value_object'
       required:
       - name
       - value
@@ -3405,7 +3502,7 @@ components:
     SettlementBody_settlement_item_services_access:
       properties:
         networkAccess:
-          type: number
+          $ref: '#/components/schemas/SettlementBody_settlement_value_object'
       required:
       - networkAccess
       type: object

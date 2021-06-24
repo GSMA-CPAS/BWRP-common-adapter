@@ -12,6 +12,8 @@ Name | Type | Description | Notes
 **blockchainRef** | [**Map**](object.md) |  | [optional] [default to null]
 **settlementId** | [**String**](string.md) |  | [optional] [default to null]
 **body** | [**UsageBody**](UsageBody.md) |  | [default to null]
+**partnerUsageId** | [**String**](string.md) |  | [optional] [default to null]
+**tag** | [**String**](string.md) |  | [optional] [default to null]
 **creationDate** | [**String**](string.md) |  | [optional] [default to null]
 **lastModificationDate** | [**String**](string.md) |  | [optional] [default to null]
 

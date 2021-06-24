@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **blockchainRef** | [**Map**](object.md) |  | [optional] [default to null]
 **usageId** | [**String**](string.md) |  | [optional] [default to null]
 **body** | [**SettlementBody**](SettlementBody.md) |  | [default to null]
+**tag** | [**String**](string.md) |  | [optional] [default to null]
 **creationDate** | [**String**](string.md) |  | [optional] [default to null]
 **lastModificationDate** | [**String**](string.md) |  | [optional] [default to null]
 
