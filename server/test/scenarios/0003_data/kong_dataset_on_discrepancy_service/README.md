@@ -5,6 +5,6 @@ This dataset is sending contract and usages using numbers to define all numerica
 
 This dataset can be executed only on development-setup using :
 
- - Last Calculation Service "main" or "always-discount-result" branches
- - Discrepancy Service "mongo" branch
+ - The last Calculation Service branch
+ - The last Discrepancy Service branch
  - Common-Adapter started with COMMON_ADAPTER_DISCREPANCY_SERVICE_URL env variable

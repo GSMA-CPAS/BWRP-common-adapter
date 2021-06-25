@@ -33,7 +33,7 @@ const skipFlag = (process.env.MOCHA_SCENARIO_FILTER !== '') && (process.env.MOCH
 /* eslint-disable camelcase */
 const CALCULATOR_API = `http://127.0.0.1:6060`;
 
-const datasetName = (process.env.MOCHA_SCENARIO_0003_DATASET !== undefined) && (process.env.MOCHA_SCENARIO_0003_DATASET !== '') ? process.env.MOCHA_SCENARIO_0003_DATASET : 'initial_dataset';
+const datasetName = (process.env.MOCHA_SCENARIO_0003_DATASET !== undefined) && (process.env.MOCHA_SCENARIO_0003_DATASET !== '') ? process.env.MOCHA_SCENARIO_0003_DATASET : 'initial_dataset_on_discrepancy_service';
 const datasetPath = `./0003_data/${datasetName}`;
 
 const configured_JSON_DTAG_contract_body_to_create = require(`${datasetPath}/0003_JSON_DTAG_contract_body_to_create.json`);

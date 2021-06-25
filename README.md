@@ -88,13 +88,13 @@ Initialized with this content by default:
   "COMMON_ADAPTER_BLOCKCHAIN_ADAPTER_URL": "http://127.0.0.1:8081",
   "COMMON_ADAPTER_BLOCKCHAIN_ADAPTER_WEBHOOK_EVENTS": "[\"STORE:PAYLOADLINK\", \"STORE:SIGNATURE\"]",
   "MOCHA_SCENARIO_FILTER": "",
-  "MOCHA_SCENARIO_0003_DATASET": "kong_dataset"
+  "MOCHA_SCENARIO_0003_DATASET": "elira_dataset_on_discrepancy_service"
 }
 ```
 
 Setting "MOCHA_SCENARIO_FILTER" with values "0000", "0001", "0002" or "0003", you can launch only the wanted scenario from "test/scenarios" folder.
 
-Setting "MOCHA_SCENARIO_0003_DATASET" with values "initial_dataset", "initial_dataset_on_discrepancy_service", "kong_dataset", "kong_dataset_on_discrepancy_service", "oswald_dataset", "oswald_dataset_on_main_calculator" or "pascal_dataset", you can choose the dataset from "0003_data" folder to launch during the "0003" scenario. Each of these dataset folders contains a "README.md" file to explain the deployed versions needed to run this dataset. 
+Setting "MOCHA_SCENARIO_0003_DATASET" with values "elira_dataset_on_discrepancy_service", "federico_dataset_on_discrepancy_service", "guillaume_dataset_on_discrepancy_service", "initial_dataset_on_discrepancy_service" or "kong_dataset_on_discrepancy_service", you can choose the dataset from "0003_data" folder to launch during the "0003" scenario. Each of these dataset folders contains a "README.md" file to explain the deployed versions needed to run this dataset. 
 
 ## How to Contribute
 
