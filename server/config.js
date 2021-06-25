@@ -81,6 +81,9 @@ config.FILE_UPLOAD_PATH = path.join(config.PROJECT_DIR, 'uploaded_files');
 // Logger configuration
 config.LOG_LEVEL = process.env.COMMON_ADAPTER_LOG_LEVEL || 'info';
 
+// API responses validation
+config.OPENAPI_VALIDATE_RESPONSES = getAsBoolean(process.env.COMMON_ADAPTER_OPENAPI_VALIDATE_RESPONSES, false);
+
 // Calculation Service configuration
 config.CALCULATION_SERVICE_URL = getAsString(process.env.COMMON_ADAPTER_CALCULATION_SERVICE_URL, 'http://127.0.0.1:8989');
 

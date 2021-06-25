@@ -80,7 +80,7 @@ class ExpressServer {
           });
       });
     new OpenApiValidator({
-      validateResponses: true,
+      validateResponses: config.OPENAPI_VALIDATE_RESPONSES,
       apiSpec: this.openApiPath,
       operationHandlers: path.join(__dirname),
       fileUploader: {dest: config.FILE_UPLOAD_PATH},
