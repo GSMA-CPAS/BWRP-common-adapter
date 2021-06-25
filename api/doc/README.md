@@ -75,6 +75,7 @@ Class | Method | HTTP request | Description
  - [SettlementDiscrepancyDetailsItem](./Models/SettlementDiscrepancyDetailsItem.md)
  - [SettlementDiscrepancyGeneralInformationItem](./Models/SettlementDiscrepancyGeneralInformationItem.md)
  - [SettlementDiscrepancyPerspective](./Models/SettlementDiscrepancyPerspective.md)
+ - [SettlementDiscrepancySettlementReport](./Models/SettlementDiscrepancySettlementReport.md)
  - [SettlementResponse](./Models/SettlementResponse.md)
  - [SettlementResponseHeader](./Models/SettlementResponseHeader.md)
  - [SignatureBase](./Models/SignatureBase.md)

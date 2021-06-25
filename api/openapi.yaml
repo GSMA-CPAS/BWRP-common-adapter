@@ -2340,6 +2340,28 @@ components:
           $ref: '#/components/schemas/SettlementDiscrepancy_perspective'
         partnerPerspective:
           $ref: '#/components/schemas/SettlementDiscrepancy_perspective'
+        settlementReport:
+          type: object
+          required:
+            - homeRevenue
+            - partnerRevenue
+            - homeCharges
+            - partnerCharges
+            - homeDeltaCommitment
+            - partnerDeltaCommitment
+          properties:
+            homeRevenue:
+              type: number
+            partnerRevenue:
+              type: number
+            homeCharges:
+              type: number
+            partnerCharges:
+              type: number
+            homeDeltaCommitment:
+              type: number
+            partnerDeltaCommitment:
+              type: number
       example:
         homePerspective:
           general_information:
@@ -2397,6 +2419,13 @@ components:
             own_calculation: 198984.852
             partner_calculation: 198984.852
             delta_calculation_percent: 0
+        settlementReport:
+          homeRevenue: 0
+          partnerRevenue: 0
+          homeCharges: 0
+          partnerCharges: 0
+          homeDeltaCommitment: 0
+          partnerDeltaCommitment: 0
                   
     SettlementListResponse:
       title: List of settlements JSON
