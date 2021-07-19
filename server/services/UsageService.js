@@ -83,14 +83,20 @@ const deleteUsageById = ({contractId, usageId}) => new Promise(
  *
  * @param {String} contractId The contract Id
  * @param {String} usageId The Usage Id
+ * @param {String} format Response format, defaults to JSON if not passed. (optional)
  * @return {Promise<ServiceResponse>}
  */
-const getUsageById = ({contractId, usageId}) => new Promise(
+const getUsageById = ({contractId, usageId, format}) => new Promise(
   async (resolve, reject) => {
     try {
       const getUsageByIdResp = await LocalStorageProvider.getUsage(contractId, usageId);
-      const returnedResponse = UsageMapper.getResponseBodyForGetUsage(getUsageByIdResp);
-      resolve(Service.successResponse(returnedResponse));
+      const returnedFormat = (format === 'RAW') ? format : 'JSON';
+      if ((returnedFormat === 'RAW') && ((getUsageByIdResp.state === 'DRAFT') || (getUsageByIdResp.rawData === undefined))) {
+        reject(Service.rejectResponse(errorUtils.ERROR_BUSINESS_USAGE_RAW_FORMAT_UNAVAILABLE));
+      } else {
+        const returnedResponse = UsageMapper.getResponseBodyForGetUsage(getUsageByIdResp, returnedFormat);
+        resolve(Service.successResponse(returnedResponse));
+      }
     } catch (e) {
       reject(Service.rejectResponse(e));
     }
