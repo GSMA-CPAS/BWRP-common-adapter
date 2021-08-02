@@ -36,32 +36,45 @@ class UsageMapper {
 
 
   // Map the internal usage to POST usages or GET usages/id response body
-  static getResponseBodyForGetUsage(usage) {
-    const returnedResponseBody = {
-      usageId: usage.id,
-      contractId: usage.contractId,
-      settlementId: usage.settlementId,
-      header: {
-        name: usage.name,
-        type: usage.type,
-        version: usage.version,
-        mspOwner: usage.mspOwner
-      },
-      state: usage.state,
-      referenceId: usage.referenceId,
-      blockchainRef: usage.blockchainRef,
-      mspOwner: usage.mspOwner,
-      body: usage.body,
-      // history: usage.history,
-      creationDate: usage.creationDate,
-      lastModificationDate: usage.lastModificationDate
-    };
+  static getResponseBodyForGetUsage(usage, format = 'JSON') {
+    let returnedResponseBody = {};
+    if (format === 'RAW') {
+      returnedResponseBody = {
+        usageId: usage.id,
+        state: usage.state,
+        referenceId: usage.referenceId,
+        blockchainRef: usage.blockchainRef,
+        raw: usage.rawData,
+        creationDate: usage.creationDate,
+        lastModificationDate: usage.lastModificationDate
+      };
+    } else if (format === 'JSON') {
+      returnedResponseBody = {
+        usageId: usage.id,
+        contractId: usage.contractId,
+        settlementId: usage.settlementId,
+        header: {
+          name: usage.name,
+          type: usage.type,
+          version: usage.version,
+          mspOwner: usage.mspOwner
+        },
+        state: usage.state,
+        referenceId: usage.referenceId,
+        blockchainRef: usage.blockchainRef,
+        mspOwner: usage.mspOwner,
+        body: usage.body,
+        // history: usage.history,
+        creationDate: usage.creationDate,
+        lastModificationDate: usage.lastModificationDate
+      };
 
-    if ( usage.partnerUsageId) {
-      returnedResponseBody.partnerUsageId = usage.partnerUsageId;
-    }
-    if ( usage.tag) {
-      returnedResponseBody.tag = usage.tag;
+      if ( usage.partnerUsageId) {
+        returnedResponseBody.partnerUsageId = usage.partnerUsageId;
+      }
+      if ( usage.tag) {
+        returnedResponseBody.tag = usage.tag;
+      }
     }
     return returnedResponseBody;
   }

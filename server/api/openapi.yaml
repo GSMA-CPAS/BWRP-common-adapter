@@ -738,12 +738,26 @@ paths:
         schema:
           type: string
         style: simple
+      - description: Response format, defaults to JSON if not passed.
+        explode: true
+        in: query
+        name: format
+        required: false
+        schema:
+          enum:
+          - JSON
+          - RAW
+          type: string
+        style: form
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UsageResponse'
+                oneOf:
+                - $ref: '#/components/schemas/UsageResponse'
+                - $ref: '#/components/schemas/RAWUsageResponse'
+                x-content-type: application/json
           description: The Usage Object
         "400":
           content:
@@ -1448,6 +1462,30 @@ components:
       - state
       - usageId
       title: Usage JSON
+      type: object
+    RAWUsageResponse:
+      properties:
+        usageId:
+          description: usageId in GUID format
+          example: 05552c4c-e52f-4bb5-83d2-f50c86115bc8
+          type: string
+        raw:
+          description: Original Base64 encoded RAW payload, Used for Hash calculation
+            or Signing.
+          example: eyJoZWFkZXIiOnsidmVyc2lvbiI6IjEuM....
+          type: string
+        state:
+          description: The State of the Usage.
+          enum:
+          - DRAFT
+          - SENT
+          - RECEIVED
+          type: string
+      required:
+      - raw
+      - state
+      - usageId
+      title: Usage RAW
       type: object
     UsageRequest:
       example:

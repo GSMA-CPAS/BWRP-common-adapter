@@ -50,6 +50,7 @@ Class | Method | HTTP request | Description
  - [ContractRequestHeaderToMsp](./Models/ContractRequestHeaderToMsp.md)
  - [ContractResponse](./Models/ContractResponse.md)
  - [RAWContractResponse](./Models/RAWContractResponse.md)
+ - [RAWUsageResponse](./Models/RAWUsageResponse.md)
  - [SignatureBase](./Models/SignatureBase.md)
  - [SignatureRequest](./Models/SignatureRequest.md)
  - [SignatureResponse](./Models/SignatureResponse.md)

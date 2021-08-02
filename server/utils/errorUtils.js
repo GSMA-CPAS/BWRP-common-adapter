@@ -441,6 +441,15 @@ class ErrorUtils {
       description: 'It\'s only allowed to get signatures on usages SENT or RECEIVED.'
     }
   };
+
+  static ERROR_BUSINESS_USAGE_RAW_FORMAT_UNAVAILABLE = {
+    code: 422,
+    error: {
+      internalErrorCode: 2028,
+      message: 'Unvailable RAW format',
+      description: 'The RAW format of this usage is unavailable.'
+    }
+  };
 }
 
 

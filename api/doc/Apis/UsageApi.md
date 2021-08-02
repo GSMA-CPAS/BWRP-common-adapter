@@ -102,7 +102,7 @@ No authorization required
 
 <a name="getUsageById"></a>
 # **getUsageById**
-> UsageResponse getUsageById(contractId, usageId)
+> oneOf&lt;UsageResponse,RAWUsageResponse&gt; getUsageById(contractId, usageId, format)
 
 
 
@@ -114,10 +114,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **contractId** | **String**| The contract Id | [default to null]
  **usageId** | **String**| The Usage Id | [default to null]
+ **format** | **String**| Response format, defaults to JSON if not passed. | [optional] [default to null] [enum: JSON, RAW]
 
 ### Return type
 
-[**UsageResponse**](../Models/UsageResponse.md)
+[**oneOf&lt;UsageResponse,RAWUsageResponse&gt;**](../Models/oneOf&lt;UsageResponse,RAWUsageResponse&gt;.md)
 
 ### Authorization
 

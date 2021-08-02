@@ -15,13 +15,8 @@
 // specific language governing permissions and limitations
 // under the License.
 
-const dataset = 'initial_dataset';
-// const dataset = 'initial_dataset_on_discrepancy_service';
-// const dataset = 'kong_dataset';
+const dataset = 'initial_dataset_on_discrepancy_service';
 // const dataset = 'kong_dataset_on_discrepancy_service';
-// const dataset = 'oswald_dataset';
-// const dataset = 'oswald_dataset_on_main_calculator';
-// const dataset = 'pascal_dataset';
 // const dataset = 'elira_dataset_on_discrepancy_service';
 // const dataset = 'federico_dataset_on_discrepancy_service';
 

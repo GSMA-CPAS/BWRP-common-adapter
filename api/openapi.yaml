@@ -702,12 +702,23 @@ paths:
         schema:
           type: string
         style: simple
+      - description: Response format, defaults to JSON if not passed.
+        explode: true
+        in: query
+        name: format
+        required: false
+        schema:
+          type: string
+          enum: [JSON, RAW]
+        style: form
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UsageResponse'
+                oneOf:
+                  - $ref: '#/components/schemas/UsageResponse'
+                  - $ref: '#/components/schemas/RAWUsageResponse'
                 x-content-type: application/json
           description: The Usage Object
         "400":
@@ -1436,7 +1447,7 @@ components:
             mspOwner:
               type: string
               description: the Msp which gives the Inbound traffic data
-              additionalProperties: true    
+              additionalProperties: true
           additionalProperties: false
           required:
             - version
@@ -1451,6 +1462,27 @@ components:
         - usageId
         - header
         - body
+        - state
+
+    RAWUsageResponse:
+      title: Usage RAW
+      type: object
+      properties:
+        usageId:
+          type: string
+          description: usageId in GUID format
+          example: 05552c4c-e52f-4bb5-83d2-f50c86115bc8
+        raw:
+          type: string
+          description: Original Base64 encoded RAW payload, Used for Hash calculation or Signing.
+          example: eyJoZWFkZXIiOnsidmVyc2lvbiI6IjEuM....
+        state:
+          type: string
+          description: The State of the Usage.
+          enum: [DRAFT, SENT, RECEIVED]
+      required:
+        - usageId
+        - raw
         - state
 
     UsageRequest:
