@@ -118,6 +118,18 @@ class ContractMapper {
         lastModificationDate: contract.lastModificationDate,
       };
     } else if (format === 'JSON') {
+      let isSigned = false;
+      let totalSignature = 0;
+      let signatureCount = 0;
+      contract.signatureLink.forEach((signature) => {
+        totalSignature++;
+        if (signature.txId != undefined) {
+          signatureCount++;
+        }
+      });
+      if (signatureCount == totalSignature && totalSignature != 0) {
+        isSigned = true;
+      }
       returnedResponseBody = {
         contractId: contract.id,
         header: {
@@ -150,6 +162,7 @@ class ContractMapper {
           }
         },
         body: contract.body,
+        isSigned: isSigned,
         state: contract.state,
         referenceId: contract.referenceId,
         blockchainRef: contract.blockchainRef,
@@ -190,6 +203,18 @@ class ContractMapper {
     const returnedResponseBody = [];
     if ((contracts !== undefined) && (Array.isArray(contracts))) {
       contracts.forEach((contract) => {
+        let isSigned = false;
+        let totalSignature = 0;
+        let signatureCount = 0;
+        contract.signatureLink.forEach((signature) => {
+          totalSignature++;
+          if (signature.txId != undefined) {
+            signatureCount++;
+          }
+        });
+        if (signatureCount == totalSignature && totalSignature != 0) {
+          isSigned = true;
+        }
         returnedResponseBody.push(ContractMapper.convertOldToNew({
           contractId: contract.id,
           header: {
@@ -227,6 +252,7 @@ class ContractMapper {
               partyInformation: this.failsafeGetBodyKey(contract, 'partyInformation')
             }
           },
+          isSigned: isSigned,
           state: contract.state,
           referenceId: contract.referenceId,
           creationDate: contract.creationDate,
