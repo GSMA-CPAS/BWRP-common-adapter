@@ -48,6 +48,7 @@ const createUsage = ({url, contractId, body}) => new Promise(
 
         const createUsageResp = await LocalStorageProvider.createUsage(usageToCreate);
         const returnedResponse = UsageMapper.getResponseBodyForGetUsage(createUsageResp);
+        await LocalStorageProvider.updateContractIsUsageApproved(createUsageResp.contractId, false);
         const returnedHeaders = {
           'Content-Location': `${url.replace(/\/$/, '')}/${createUsageResp.id}`
         };

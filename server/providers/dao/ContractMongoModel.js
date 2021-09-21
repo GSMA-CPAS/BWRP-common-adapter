@@ -69,7 +69,8 @@ const ContractSchema = new Schema({
   history: {type: [HistorySchema], required: true},
   creationDate: {type: Date, required: true},
   lastModificationDate: {type: Date, required: true, default: Date.now},
-  signatureLink: {type: [SignatureLinkSchema], required: false}
+  signatureLink: {type: [SignatureLinkSchema], required: false},
+  isUsageApproved: {type: Boolean, required: false}
 });
 
 ContractSchema.index({id: 1}, {unique: true});
