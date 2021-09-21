@@ -415,6 +415,60 @@ class ContractDAO {
     });
   }
 
+  static findOneAndUpdateIsUssageApproved(contractId, state) {
+    return new Promise((resolve, reject) => {
+      // Verify parameters
+      if (contractId === undefined) {
+        logger.error('[ContractDAO::findOneAndUpdateIsUssageApproved] [FAILED] : contractId undefined');
+        reject(MISSING_MANDATORY_PARAM_ERROR);
+      }
+      if (state === undefined) {
+        logger.error('[ContractDAO::findOneAndUpdateIsUssageApproved] [FAILED] : state undefined');
+        reject(MISSING_MANDATORY_PARAM_ERROR);
+      }
+
+      // Define automatic values
+      const lastModificationDate = Date.now();
+
+      // Defined update condition and update command
+      const condition = {
+        id: contractId,
+        type: 'contract'
+      };
+
+      // Convert "header->from/toMSP->signatures to signatureLink
+      ContractMongoRequester.findOne(condition, (findOneErr, storedContract) => {
+        DAOErrorManager.handleErrorOrNullObject(findOneErr, storedContract)
+          .then((storedObjectReturned) => {
+            
+            const updateCommand = {
+              $set: {
+                isUsageApproved: state              },
+              $push: {
+                history: {date: lastModificationDate, action: 'isUsageApproved_' + state}
+              }
+            };
+
+            // Launch database request
+            ContractMongoRequester.findOneAndUpdate(condition, updateCommand, (err, contract) => {
+              DAOErrorManager.handleErrorOrNullObject(err, contract)
+                .then((objectReturned) => {
+                  resolve(objectReturned);
+                })
+                .catch((errorReturned) => {
+                  logger.error('[ContractDAO::findOneAndUpdateIsUssageApproved] [FAILED] errorReturned:' + typeof errorReturned + ' = ' + JSON.stringify(errorReturned));
+                  reject(errorReturned);
+                });
+            });
+          })
+          .catch((errorReturned) => {
+            logger.error('[ContractDAO::findOneAndUpdateIsUssageApproved] [FAILED] errorReturned:' + typeof errorReturned + ' = ' + JSON.stringify(errorReturned));
+            reject(errorReturned);
+          });
+      });
+    });
+  }
+
   static exists(object) {
     return new Promise((resolve, reject) => {
       // Verify parameters

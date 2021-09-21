@@ -266,6 +266,29 @@ const createUsageSignature = ({url, contractId, usageId, body}) => new Promise(
             const unsignedNumber = signatureLink.filter((signature) => (signature['txId'] === undefined)).length;
             if (unsignedNumber == 0) {
               const updateUsageWithTagResp = await LocalStorageProvider.updateUsageWithTag(usageId, 'APPROVED');
+
+              let signatureSent = 0;
+              let signatureReceived = 0;
+              const sentUsage = await LocalStorageProvider.getUsages(usageToUpdate.contractId, {state: 'SENT'});
+              if ((sentUsage !== undefined) && (Array.isArray(sentUsage))) {
+                sentUsage.forEach((usage) => {
+                  if (usage.tag=='APPROVED') {
+                    signatureSent++;
+                  }
+                });
+              }
+
+              const receivedUsage = await LocalStorageProvider.getUsages(usageToUpdate.contractId, {state: 'RECEIVED'});
+              if ((receivedUsage !== undefined) && (Array.isArray(receivedUsage))) {
+                receivedUsage.forEach((usage) => {
+                  if (usage.tag=='APPROVED') {
+                    signatureReceived++;
+                  }
+                });
+              }
+              if (signatureSent >= 1 && signatureReceived >= 1) {
+                await LocalStorageProvider.updateContractIsUsageApproved(usageToUpdate.contractId, true);
+              }
             }
             resolve(Service.successResponse(mySignature, 201, returnedHeaders));
           }

@@ -160,6 +160,21 @@ class LocalStorageProvider {
   /**
    *
    * @param {String} contractId
+   * @param {Boolean} state
+   * @return {Promise<object>}
+   */
+  static async updateContractIsUsageApproved(contractId, state) {
+    try {
+      return await ContractDAO.findOneAndUpdateIsUssageApproved(contractId, state);
+    } catch (error) {
+      logger.error('[LocalStorageProvider::updateContractIsUsageApproved] failed to update sent contract - %s', error.message);
+      throw error;
+    }
+  }
+
+  /**
+   *
+   * @param {String} contractId
    * @param {Object} matchingConditions
    * @return {Promise<[string]>}
    */
