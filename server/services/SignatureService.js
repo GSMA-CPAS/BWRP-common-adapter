@@ -25,7 +25,9 @@ const BlockchainAdapterProvider = require('../providers/BlockchainAdapterProvide
 const blockchainAdapterConnection = new BlockchainAdapterProvider();
 
 const logger = require('../logger');
+const config = require('../config');
 const errorUtils = require('../utils/errorUtils');
+
 
 /**
  * Get Signature Object by its Id
@@ -263,8 +265,20 @@ const createUsageSignature = ({url, contractId, usageId, body}) => new Promise(
               'Content-Location': `${url.replace(/\/$/, '')}/${signatureId}`
             };
             // BUSINESS rule: if all signatures are signed, set tag to APPROVED
-            const unsignedNumber = signatureLink.filter((signature) => (signature['txId'] === undefined)).length;
-            if (unsignedNumber == 0) {
+            let performUpdate = false;
+            if (config.IS_USAGE_APPROVED_MODE) {
+              const unsignedNumber = signatureLink.filter((signature) => (signature['txId'] === undefined)).length;
+              if (unsignedNumber == 0) {
+                performUpdate = true;
+              }
+            } else {
+              const unsignedNumber = signatureLink.filter((signature) => (signature['txId'] !== undefined)).length;
+              if (unsignedNumber > 0) {
+                performUpdate = true;
+              }
+            }
+            
+            if (performUpdate) {
               const updateUsageWithTagResp = await LocalStorageProvider.updateUsageWithTag(usageId, 'APPROVED');
 
               let signatureSent = 0;

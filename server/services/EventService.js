@@ -280,8 +280,20 @@ const eventSignatureReceived = ({body}) => new Promise(
           const updateUsageResp = await LocalStorageProvider.updateUsage(usageToUpdate);
 
           // BUSINESS rule: if all signatures are signed, set tag to APPROVED
-          const unsignedNumber = updateUsageResp.signatureLink.filter((signature) => (signature['txId'] === undefined)).length;
-          if (unsignedNumber == 0) {
+          let performUpdate = false;
+          if (config.IS_USAGE_APPROVED_MODE) {
+            const unsignedNumber = updateUsageResp.signatureLink.filter((signature) => (signature['txId'] === undefined)).length;
+            if (unsignedNumber == 0) {
+              performUpdate = true;
+            }
+          } else {
+            const unsignedNumber = updateUsageResp.signatureLink.filter((signature) => (signature['txId'] !== undefined)).length;
+            if (unsignedNumber > 0) {
+              performUpdate = true;
+            }
+          }
+
+          if (performUpdate) {
             const updateUsageWithTagResp = await LocalStorageProvider.updateUsageWithTag(updateUsageResp.id, 'APPROVED');
 
             let signatureSent = 0;
