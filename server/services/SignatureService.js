@@ -25,7 +25,9 @@ const BlockchainAdapterProvider = require('../providers/BlockchainAdapterProvide
 const blockchainAdapterConnection = new BlockchainAdapterProvider();
 
 const logger = require('../logger');
+const config = require('../config');
 const errorUtils = require('../utils/errorUtils');
+
 
 /**
  * Get Signature Object by its Id
@@ -263,9 +265,44 @@ const createUsageSignature = ({url, contractId, usageId, body}) => new Promise(
               'Content-Location': `${url.replace(/\/$/, '')}/${signatureId}`
             };
             // BUSINESS rule: if all signatures are signed, set tag to APPROVED
-            const unsignedNumber = signatureLink.filter((signature) => (signature['txId'] === undefined)).length;
-            if (unsignedNumber == 0) {
+            let performUpdate = false;
+            if (config.IS_USAGE_APPROVED_MODE) {
+              const unsignedNumber = signatureLink.filter((signature) => (signature['txId'] === undefined)).length;
+              if (unsignedNumber == 0) {
+                performUpdate = true;
+              }
+            } else {
+              const unsignedNumber = signatureLink.filter((signature) => (signature['txId'] !== undefined)).length;
+              if (unsignedNumber > 0) {
+                performUpdate = true;
+              }
+            }
+            
+            if (performUpdate) {
               const updateUsageWithTagResp = await LocalStorageProvider.updateUsageWithTag(usageId, 'APPROVED');
+
+              let signatureSent = 0;
+              let signatureReceived = 0;
+              const sentUsage = await LocalStorageProvider.getUsages(usageToUpdate.contractId, {state: 'SENT'});
+              if ((sentUsage !== undefined) && (Array.isArray(sentUsage))) {
+                sentUsage.forEach((usage) => {
+                  if (usage.tag=='APPROVED') {
+                    signatureSent++;
+                  }
+                });
+              }
+
+              const receivedUsage = await LocalStorageProvider.getUsages(usageToUpdate.contractId, {state: 'RECEIVED'});
+              if ((receivedUsage !== undefined) && (Array.isArray(receivedUsage))) {
+                receivedUsage.forEach((usage) => {
+                  if (usage.tag=='APPROVED') {
+                    signatureReceived++;
+                  }
+                });
+              }
+              if (signatureSent >= 1 && signatureReceived >= 1) {
+                await LocalStorageProvider.updateContractIsUsageApproved(usageToUpdate.contractId, true);
+              }
             }
             resolve(Service.successResponse(mySignature, 201, returnedHeaders));
           }

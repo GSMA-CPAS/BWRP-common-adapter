@@ -163,6 +163,7 @@ class ContractMapper {
         },
         body: contract.body,
         isSigned: isSigned,
+        isUsageApproved: contract.isUsageApproved,
         state: contract.state,
         referenceId: contract.referenceId,
         blockchainRef: contract.blockchainRef,
@@ -253,6 +254,7 @@ class ContractMapper {
             }
           },
           isSigned: isSigned,
+          isUsageApproved: contract.isUsageApproved,
           state: contract.state,
           referenceId: contract.referenceId,
           creationDate: contract.creationDate,
