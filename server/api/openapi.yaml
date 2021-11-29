@@ -23,6 +23,8 @@ tags:
   name: status
 - description: Access to discovery information
   name: discovery
+- description: Access to certificates functions
+  name: certificate
 paths:
   /discovery/msps:
     get:
@@ -1198,6 +1200,67 @@ paths:
       tags:
       - settlement
       x-eov-operation-handler: controllers/SettlementController
+  /certificate/root:
+    put:
+      description: Upload a root certificate
+      operationId: setCertificateRoot
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                description: BUGBUG openapi does not like string bodies?! Use json
+                  array for now
+                example: '["-----BEGIN CERTIFICATE-----..."]'
+                type: string
+              type: array
+        description: Set the signature root certificate.
+        required: true
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Successful operation
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlockchainAdapterErrorCode'
+          description: Internal Error
+      tags:
+      - certificate
+      x-eov-operation-handler: controllers/CertificateController
+  /certificate/revoke:
+    post:
+      description: Upload a certificate revocation list (CRL), revoked certificates
+        are stored on the ledger and cannot be used for signing thereafter
+      operationId: submitCertificateRevocationList
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CRL'
+        description: Submit a certificate revocation list signed by a CA.
+        required: true
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                type: object
+          description: Successful operation
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlockchainAdapterErrorCode'
+          description: Internal Error
+      tags:
+      - certificate
+      x-codegen-request-body-name: body
+      x-eov-operation-handler: controllers/CertificateController
 components:
   schemas:
     Event:
@@ -1656,6 +1719,49 @@ components:
       - msps
       - type
       - version
+      type: object
+    CRL:
+      example:
+        crl: crl
+        certificateList: '["-----BEGIN CERTIFICATE-----\nMI...PTI=\n-----END CERTIFICATE-----\n-----BEGIN
+          CERTIFICATE-----\nMII...COMI=\n-----END CERTIFICATE-----\n"]'
+      properties:
+        crl:
+          description: A x509 certificate revocation list in PEM format
+          type: string
+        certificateList:
+          description: If the CRL is submitted by an intermediate CA, the certificate
+            list must be submitted in PEM format, the last certificate signs the crl
+          example: '["-----BEGIN CERTIFICATE-----\nMI...PTI=\n-----END CERTIFICATE-----\n-----BEGIN
+            CERTIFICATE-----\nMII...COMI=\n-----END CERTIFICATE-----\n"]'
+          type: string
+      required:
+      - crl
+      type: object
+    BlockchainAdapterErrorCode:
+      properties:
+        code:
+          description: The error code. See chaincode/hybrid/errorcodes/errors.go for
+            a list
+          enum:
+          - ERROR_NON_LOCAL_ACCESS_DENIED
+          - ERROR_OFFCHAIN_DB_CONFIG
+          - ERROR_INTERNAL
+          - ERROR_DOCUMENT_ID_EXISTS
+          - ERROR_DOCUMENT_ID_INVALID
+          - ERROR_DOCUMENT_ID_UNKNOWN
+          - ERROR_TARGET_MSP_INVALID
+          - ERROR_CERT_INVALID
+          - ERROR_SIGNATURE_INVALID
+          - ERROR_BAD_JSON
+          - ERROR_HASH_MISMATCH
+          type: string
+        message:
+          description: The description of the error
+          type: string
+      required:
+      - code
+      - message
       type: object
     UsageResponse_header:
       example:

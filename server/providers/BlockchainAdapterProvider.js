@@ -442,6 +442,41 @@ class BlockchainAdapterProvider {
       throw error;
     }
   }
+
+  /**
+   *
+   * @param {String} certificate
+   * @return {Promise<string>}
+   */
+  async setCertificateRoot(certificate) {
+    try {
+      logger.debug(`[BlockchainAdapterProvider::setCertificateRoot] request data:${typeof certificate} = ${certificate}`);
+      const LocalaxiosInstance = axios.create({responseType: 'text'});
+      const response = await LocalaxiosInstance.put(config.BLOCKCHAIN_ADAPTER_URL + '/certificate/root/', certificate);
+      logger.debug(`[BlockchainAdapterProvider::setCertificateRoot] response data:${typeof response.data} = ${JSON.stringify(response.data)}`);
+      return response.data;
+    } catch (error) {
+      logger.error('[BlockchainAdapterProvider::setCertificateRoot] failed to set root cert - %s', error.response.data);
+      throw error;
+    }
+  }
+
+  /**
+   *
+   * @param {Object} payload
+   * @return {Promise<string>}
+   */
+  async submitCertificateRevocationList(payload) {
+    try {
+      logger.debug(`[BlockchainAdapterProvider::submitCertificateRevocationList] request data:${typeof payload} = ${JSON.stringify(payload)}`);
+      const response = await axiosInstance.post(config.BLOCKCHAIN_ADAPTER_URL + '/certificate/revoke', payload);
+      logger.debug(`[BlockchainAdapterProvider::submitCertificateRevocationList] response data:${typeof response.data} = ${JSON.stringify(response.data)}`);
+      return response.data;
+    } catch (error) {
+      logger.error('[BlockchainAdapterProvider::submitCertificateRevocationList] failed to set CRL - %s', JSON.stringify(error.response.data));
+      throw error;
+    }
+  }
 }
 
 module.exports = BlockchainAdapterProvider;

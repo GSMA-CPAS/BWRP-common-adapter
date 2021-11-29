@@ -22,6 +22,7 @@ const SettlementController = require('./SettlementController');
 const SignatureController = require('./SignatureController');
 const StatusController = require('./StatusController');
 const UsageController = require('./UsageController');
+const CertificateController = require('./CertificateController');
 
 module.exports = {
   ContractController,
@@ -31,4 +32,5 @@ module.exports = {
   SignatureController,
   StatusController,
   UsageController,
+  CertificateController,
 };
