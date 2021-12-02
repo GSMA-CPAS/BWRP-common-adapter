@@ -7,6 +7,8 @@ All URIs are relative to *http://localhost/api/v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*CertificateApi* | [**setCertificateRoot**](Apis/CertificateApi.md#setcertificateroot) | **PUT** /certificate/root | Upload a root certificate
+*CertificateApi* | [**submitCertificateRevocationList**](Apis/CertificateApi.md#submitcertificaterevocationlist) | **POST** /certificate/revoke | Upload a certificate revocation list (CRL), revoked certificates are stored on the ledger and cannot be used for signing thereafter
 *ContractApi* | [**createContract**](Apis/ContractApi.md#createcontract) | **POST** /contracts/ | Create a new Contract
 *ContractApi* | [**deleteContractById**](Apis/ContractApi.md#deletecontractbyid) | **DELETE** /contracts/{contractId} | Delete a Contract By its Id
 *ContractApi* | [**getContractById**](Apis/ContractApi.md#getcontractbyid) | **GET** /contracts/{contractId} | Get a Contract By its Id
@@ -43,6 +45,8 @@ Class | Method | HTTP request | Description
 ## Documentation for Models
 
  - [400ErrorResponse](./Models/400ErrorResponse.md)
+ - [BlockchainAdapterErrorCode](./Models/BlockchainAdapterErrorCode.md)
+ - [CRL](./Models/CRL.md)
  - [ContractRequest](./Models/ContractRequest.md)
  - [ContractRequestHeader](./Models/ContractRequestHeader.md)
  - [ContractRequestHeader2](./Models/ContractRequestHeader2.md)
