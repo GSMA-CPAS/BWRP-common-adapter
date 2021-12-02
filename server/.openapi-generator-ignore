@@ -9,6 +9,7 @@ services/SignatureService.js
 services/UsageService.js
 services/SettlementService.js
 services/Service.js
+services/CertificateService.js
 
 controllers/Controller.js
 

@@ -22,6 +22,7 @@ const SettlementService = require('./SettlementService');
 const SignatureService = require('./SignatureService');
 const StatusService = require('./StatusService');
 const UsageService = require('./UsageService');
+const CertificateService = require('./CertificateService');
 
 module.exports = {
   ContractService,
@@ -31,4 +32,5 @@ module.exports = {
   SignatureService,
   StatusService,
   UsageService,
+  CertificateService,
 };
