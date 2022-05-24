@@ -98,7 +98,7 @@ Setting "MOCHA_SCENARIO_0003_DATASET" with values "elira_dataset_on_discrepancy_
 
 ## How to Contribute
 
-Contribution and feedback is encouraged and always welcome. For more information about how to contribute, the project structure, as well as additional contribution information, see our [Contribution Guidelines](./CONTRIBUTING.md). By participating in this project, you agree to abide by its [Code of Conduct](./CODE_OF_CONDUCT.md) at all times.
+Contribution and feedback is encouraged and always welcome. This project is governed by the Distributed Ledger Technology (DLT) group, which is a GSMA Industry Specifications Issuing Group (DLT ISIG). For more information about how to contribute, the project structure, as well as additional contribution information, see our [Contribution Guidelines](./CONTRIBUTING.md) and the DLT Governance Principles at https://www.gsma.com/newsroom/resources/dlt-01-dlt-governance-principles/. By participating in this project, you agree to abide by its [Code of Conduct](./CODE_OF_CONDUCT.md) at all times.
 
 ## Contributors
 
